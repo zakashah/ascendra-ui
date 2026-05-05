@@ -9,7 +9,6 @@ import { LucideChevronsUpDown } from 'lucide-react';
 
 export function SideBarHeader({
   className,
-  children,
   ...props
 }: React.ComponentProps<'header'>) {
   return (

@@ -20,8 +20,7 @@ const variants = cva(
 export function DropDownChevron({
   variant,
   className,
-  children,
   ...props
 }: React.ComponentProps<typeof LuChevronDown> & VariantProps<typeof variants>) {
-  return <LuChevronDown className={cn(variants({ variant }), className)} />;
+  return <LuChevronDown className={cn(variants({ variant }), className)} {...props}/>;
 }

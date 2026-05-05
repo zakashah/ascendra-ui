@@ -9,7 +9,6 @@ import { LucideChevronsUpDown, PlusIcon } from 'lucide-react';
 
 export function SideBarFooter({
   className,
-  children,
   ...props
 }: React.ComponentProps<'footer'>) {
   return (

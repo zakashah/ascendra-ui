@@ -11,7 +11,6 @@ export function TabTrigger({
   dirty,
   className,
   children,
-  ...props
 }: React.ComponentProps<'button'> & {
   value: string;
   disabled?: boolean;

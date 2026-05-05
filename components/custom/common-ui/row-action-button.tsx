@@ -5,7 +5,6 @@ import { MdOutlineMoreHoriz } from 'react-icons/md';
 export function RowActionButton({
   opaque = false,
   className,
-  children,
   ...props
 }: React.ComponentProps<'button'> & { opaque?: boolean }) {
   return (
