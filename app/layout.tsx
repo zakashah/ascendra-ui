@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from 'next-themes';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { ScrollToTop } from '@/components/custom/util/scroll-to-top';
-import { QueryProvider } from '@/providers/query-provider';
+import { TooltipProvider } from '@/ascendra-ui/shadcn/components/ui/tooltip';
+import { ScrollToTop } from '@/ascendra-ui/components/util/scroll-to-top';
+import { QueryProvider } from '@/ascendra-ui/providers/query-provider';
 
 /* const inter = Inter({ subsets: ['latin'], variable: '--font-sans' }); */
 

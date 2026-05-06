@@ -30,7 +30,7 @@ export default function ShowcasePage() {
         <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
           A reference for all custom components in{' '}
           <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">
-            components/custom/
+            ascendra-ui/components/
           </code>
           . Each entry includes a live preview, copyable code, import path, and props table.
         </p>
@@ -86,7 +86,7 @@ export default function ShowcasePage() {
       {/* Footer note */}
       <p className="mt-12 text-xs text-muted-foreground">
         All components live in{' '}
-        <code className="rounded bg-muted px-1 font-mono">components/custom/</code> and are built
+        <code className="rounded bg-muted px-1 font-mono">ascendra-ui/components/</code> and are built
         on Radix UI + Tailwind CSS v4.
       </p>
     </div>

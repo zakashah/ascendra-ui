@@ -1,4 +1,4 @@
-import { ShowcaseNav } from '@/components/showcase/showcase-nav';
+import { ShowcaseNav } from '@/components/showcase-nav';
 
 export default function ShowcaseLayout({
   children,
