@@ -33,8 +33,8 @@ import {
 const ComboboxChipItem = ComboboxChip as React.ComponentType<
   React.ComponentProps<typeof ComboboxChip> & { value: string }
 >;
-import { DatePicker } from '@/ascendra-ui/components/ui/date-picker';
-import { DateRangePicker } from '@/ascendra-ui/components/ui/date-range-picker';
+import { DatePicker } from '@/ascendra-ui/components/date/date-picker';
+import { DateRangePicker } from '@/ascendra-ui/components/date/date-range-picker';
 import { Checkbox } from '@/ascendra-ui/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/ascendra-ui/components/ui/radio-group';
 import type { FieldDef } from '@/ascendra-ui/lib/query';

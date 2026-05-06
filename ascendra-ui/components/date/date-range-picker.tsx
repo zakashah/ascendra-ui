@@ -3,14 +3,15 @@
 import * as React from 'react';
 import { Popover as PopoverPrimitive } from 'radix-ui';
 import { format } from 'date-fns';
-import { type CalendarProps } from '@/ascendra-ui/components/ui/calendar';
+import { type DateRange } from 'react-day-picker';
+import { type CalendarProps } from '@/ascendra-ui/components/date/calendar';
 import { LuCalendar } from 'react-icons/lu';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
-import { Calendar } from '@/ascendra-ui/components/ui/calendar';
+import { Calendar } from '@/ascendra-ui/components/date/calendar';
 
-interface DatePickerProps {
-  value?: Date;
-  onChange?: (date: Date | undefined) => void;
+interface DateRangePickerProps {
+  value?: DateRange;
+  onChange?: (range: DateRange | undefined) => void;
   onBlur?: () => void;
   placeholder?: string;
   disabled?: boolean;
@@ -18,22 +19,30 @@ interface DatePickerProps {
   className?: string;
   fromYear?: number;
   toYear?: number;
+  numberOfMonths?: number;
   captionLayout?: CalendarProps['captionLayout'];
 }
 
-function DatePicker({
+function DateRangePicker({
   value,
   onChange,
   onBlur,
-  placeholder = 'Pick a date',
+  placeholder = 'Pick a date range',
   disabled,
   invalid,
   className,
   fromYear,
   toYear,
+  numberOfMonths = 2,
   captionLayout,
-}: DatePickerProps) {
+}: DateRangePickerProps) {
   const [open, setOpen] = React.useState(false);
+
+  const label = React.useMemo(() => {
+    if (!value?.from) return null;
+    if (!value.to) return format(value.from, 'MMM d, yyyy');
+    return `${format(value.from, 'MMM d, yyyy')} – ${format(value.to, 'MMM d, yyyy')}`;
+  }, [value]);
 
   return (
     <PopoverPrimitive.Root
@@ -48,7 +57,7 @@ function DatePicker({
           type="button"
           disabled={disabled}
           aria-invalid={invalid || undefined}
-          data-slot="date-picker-trigger"
+          data-slot="date-range-picker-trigger"
           className={cn(
             'flex h-8 w-full items-center gap-2 rounded-[.375rem] bg-white px-3 text-left text-sm transition',
             'dark:bg-secondary ring-1 ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset',
@@ -58,12 +67,12 @@ function DatePicker({
             'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-1',
             'disabled:cursor-not-allowed disabled:opacity-40',
             invalid && 'outline-1 outline-destructive outline-offset-1',
-            !value && 'text-gray-500 dark:text-gray-700',
+            !label && 'text-gray-500 dark:text-gray-700',
             className
           )}
         >
           <LuCalendar className="text-muted-foreground size-4 shrink-0" />
-          {value ? format(value, 'PPP') : placeholder}
+          {label ?? placeholder}
         </button>
       </PopoverPrimitive.Trigger>
       <PopoverPrimitive.Portal>
@@ -84,13 +93,11 @@ function DatePicker({
           )}
         >
           <Calendar
-            mode="single"
+            mode="range"
             selected={value}
-            onSelect={(date) => {
-              onChange?.(date);
-              setOpen(false);
-            }}
-            defaultMonth={value}
+            onSelect={onChange}
+            defaultMonth={value?.from}
+            numberOfMonths={numberOfMonths}
             startMonth={
               fromYear !== undefined ? new Date(fromYear, 0) : undefined
             }
@@ -104,4 +111,5 @@ function DatePicker({
   );
 }
 
-export { DatePicker };
+export { DateRangePicker };
+export type { DateRange };

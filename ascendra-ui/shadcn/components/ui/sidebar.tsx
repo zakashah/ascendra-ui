@@ -6,8 +6,8 @@ import { Slot } from 'radix-ui';
 
 import { useIsMobile } from '@/ascendra-ui/shadcn/hooks/use-mobile';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
-import { Button } from '@/ascendra-ui/shadcn/components/ui/button';
-import { Input } from '@/ascendra-ui/shadcn/components/ui/input';
+import { Button } from '@/ascendra-ui/components/ui/button';
+import { Input } from '@/ascendra-ui/components/ui/input';
 import { Separator } from '@/ascendra-ui/shadcn/components/ui/separator';
 import {
   Sheet,
@@ -15,7 +15,7 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from '@/ascendra-ui/shadcn/components/ui/sheet';
+} from '@/ascendra-ui/components/ui/sheet';
 import { Skeleton } from '@/ascendra-ui/shadcn/components/ui/skeleton';
 import {
   Tooltip,
@@ -262,7 +262,7 @@ function SidebarTrigger({
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
       variant="ghost"
-      size="icon-sm"
+      size="icon"
       className={cn(className)}
       onClick={(event) => {
         onClick?.(event);

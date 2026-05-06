@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/ascendra-ui/components/ui/dropdown-menu';
-import { DropdownMenuSeparator } from '@/ascendra-ui/shadcn/components/ui/dropdown-menu';
+import { DropdownMenuSeparator } from '@/ascendra-ui/components/ui/dropdown-menu';
 import { useDataTableContext } from '@/ascendra-ui/providers/data-table-context';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 import { LuArrowDown, LuArrowUp, LuArrowUpDown } from 'react-icons/lu';

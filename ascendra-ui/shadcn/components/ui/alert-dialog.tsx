@@ -4,7 +4,7 @@ import * as React from "react"
 import { AlertDialog as AlertDialogPrimitive } from "radix-ui"
 
 import { cn } from "@/ascendra-ui/shadcn/lib/utils"
-import { Button } from "@/ascendra-ui/shadcn/components/ui/button"
+import { Button } from "@/ascendra-ui/components/ui/button"
 
 function AlertDialog({
   ...props
@@ -134,7 +134,7 @@ function AlertDialogDescription({
 
 function AlertDialogAction({
   className,
-  variant = "default",
+  variant = "primary",
   size = "default",
   ...props
 }: React.ComponentProps<typeof AlertDialogPrimitive.Action> &
@@ -152,7 +152,7 @@ function AlertDialogAction({
 
 function AlertDialogCancel({
   className,
-  variant = "outline",
+  variant = "secondary",
   size = "default",
   ...props
 }: React.ComponentProps<typeof AlertDialogPrimitive.Cancel> &
