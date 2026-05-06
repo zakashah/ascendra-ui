@@ -73,6 +73,26 @@ export function CheckboxDocContent() {
             </div>
           </ComponentPreview>
         </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Invalid state</h3>
+          <p className="text-xs text-muted-foreground">
+            Pass{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              aria-invalid={"{true}"}
+            </code>{" "}
+            to apply the red ring — unchecked and checked both show it.
+          </p>
+          <ComponentPreview
+            code={`<Checkbox aria-invalid={true} />
+<Checkbox defaultChecked aria-invalid={true} />`}
+          >
+            <div className="flex gap-3">
+              <Checkbox aria-invalid={true} />
+              <Checkbox defaultChecked aria-invalid={true} />
+            </div>
+          </ComponentPreview>
+        </div>
       </div>
 
       <div className="space-y-4">

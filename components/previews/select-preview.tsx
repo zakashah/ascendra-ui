@@ -186,6 +186,41 @@ export function SelectDocContent() {
             </Select>
           </ComponentPreview>
         </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Invalid state</h3>
+          <p className="text-xs text-muted-foreground">
+            Pass{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              aria-invalid={"{true}"}
+            </code>{" "}
+            on{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              SelectTrigger
+            </code>{" "}
+            to apply a destructive outline.
+          </p>
+          <ComponentPreview
+            code={`<Select>
+  <SelectTrigger aria-invalid={true}>
+    <SelectValue placeholder="Select an option" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="a">Option A</SelectItem>
+  </SelectContent>
+</Select>`}
+          >
+            <Select>
+              <SelectTrigger aria-invalid={true}>
+                <SelectValue placeholder="Select an option" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="a">Option A</SelectItem>
+                <SelectItem value="b">Option B</SelectItem>
+              </SelectContent>
+            </Select>
+          </ComponentPreview>
+        </div>
       </div>
 
       <div className="space-y-4">

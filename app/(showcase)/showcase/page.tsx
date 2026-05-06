@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { navConfig } from "@/lib/nav-config";
+import { registry } from "@/lib/registry";
 
 const categoryIcons: Record<string, string> = {
   "Feedback & Status": "🔴",
   "Forms & Inputs": "📋",
+  "Date & Time": "📅",
   Navigation: "🧭",
   Overlays: "🪟",
   "Tables & Data": "📊",
@@ -15,6 +17,8 @@ const categoryIcons: Record<string, string> = {
 
 export default function ShowcasePage() {
   const categories = navConfig.filter((c) => c.title !== "Getting Started");
+  const componentCount = Object.keys(registry).length;
+  const categoryCount = categories.length;
 
   return (
     <div className="mx-auto max-w-3xl px-8 py-12">
@@ -40,8 +44,8 @@ export default function ShowcasePage() {
       {/* Stats row */}
       <div className="mb-12 flex gap-6 border-y py-6">
         {[
-          { value: "30", label: "Components" },
-          { value: "9", label: "Categories" },
+          { value: String(componentCount), label: "Components" },
+          { value: String(categoryCount), label: "Categories" },
           { value: "100%", label: "TypeScript" },
         ].map(({ value, label }) => (
           <div key={label}>
@@ -54,35 +58,38 @@ export default function ShowcasePage() {
       {/* Category grid */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {categories.map((category) => (
-          <Link
+          <div
             key={category.title}
-            href={`/showcase/${category.items[0].slug}`}
-            className="group flex flex-col gap-3 rounded-lg border bg-background p-5 transition-all hover:border-primary/30 hover:shadow-sm"
+            className="flex flex-col gap-3 rounded-lg border bg-background p-5 transition-all hover:border-primary/30 hover:shadow-sm"
           >
-            <div className="flex items-center justify-between">
+            <Link
+              href={`/showcase/${category.items[0].slug}`}
+              className="group flex items-center justify-between"
+            >
               <div className="flex items-center gap-2.5">
                 <span className="text-lg">
                   {categoryIcons[category.title] ?? "📦"}
                 </span>
-                <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                <span className="text-sm font-medium text-foreground transition-colors group-hover:text-primary">
                   {category.title}
                 </span>
               </div>
               <span className="rounded-full bg-muted px-2 py-0.5 text-[0.6875rem] font-medium text-muted-foreground">
                 {category.items.length}
               </span>
-            </div>
+            </Link>
             <div className="flex flex-wrap gap-1.5">
               {category.items.map((item) => (
-                <span
+                <Link
                   key={item.slug}
-                  className="rounded bg-muted px-1.5 py-0.5 text-[0.6875rem] text-muted-foreground"
+                  href={item.slug === "" ? "/showcase" : `/showcase/${item.slug}`}
+                  className="rounded bg-muted px-1.5 py-0.5 text-[0.6875rem] text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
                 >
                   {item.name}
-                </span>
+                </Link>
               ))}
             </div>
-          </Link>
+          </div>
         ))}
       </div>
 

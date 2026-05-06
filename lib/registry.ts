@@ -372,4 +372,137 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'opaque', type: 'boolean', default: 'false', description: 'Show the button without row hover (always visible).' },
     ],
   },
+
+  'field': {
+    slug: 'field',
+    name: 'Field',
+    description: 'Compound form field wrapper with label, description, error display, and orientation variants.',
+    importPath: '@/ascendra-ui/components/ui/field',
+    importNames: ['Field', 'FieldSet', 'FieldLegend', 'FieldGroup', 'FieldContent', 'FieldLabel', 'FieldTitle', 'FieldDescription', 'FieldSeparator', 'FieldError'],
+    props: [
+      { name: 'orientation', type: "'vertical' | 'horizontal' | 'responsive'", default: "'vertical'", description: 'Layout direction of the label and control (on Field).' },
+      { name: 'variant', type: "'legend' | 'label'", default: "'legend'", description: 'Typography style for FieldLegend.' },
+      { name: 'errors', type: 'Array<{ message?: string }>', description: 'Array of error objects — deduplicates and displays messages (on FieldError).' },
+    ],
+  },
+
+  'combobox': {
+    slug: 'combobox',
+    name: 'Combobox',
+    description: 'Searchable dropdown with single and multi-select (chips) modes, built on Base UI.',
+    importPath: '@/ascendra-ui/components/ui/combobox',
+    importNames: ['Combobox', 'ComboboxInput', 'ComboboxContent', 'ComboboxList', 'ComboboxItem', 'ComboboxGroup', 'ComboboxLabel', 'ComboboxEmpty', 'ComboboxSeparator', 'ComboboxChips', 'ComboboxChip', 'ComboboxChipsInput'],
+    props: [
+      { name: 'showTrigger', type: 'boolean', default: 'true', description: 'Show the chevron toggle button (on ComboboxInput).' },
+      { name: 'showClear', type: 'boolean', default: 'false', description: 'Show the × clear button (on ComboboxInput).' },
+      { name: 'showRemove', type: 'boolean', default: 'true', description: 'Show the × remove button on each chip (on ComboboxChip).' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the input (on ComboboxInput).' },
+    ],
+  },
+
+  'nav': {
+    slug: 'nav',
+    name: 'Nav',
+    description: 'Sticky horizontal navigation bar with muted background and horizontally scrollable content area.',
+    importPath: '@/ascendra-ui/components/nav/nav',
+    importNames: ['Nav'],
+    props: [],
+  },
+
+  'unsaved-changes-bar': {
+    slug: 'unsaved-changes-bar',
+    name: 'Unsaved Changes Bar',
+    description: 'Fixed bottom bar that surfaces when a form has unsaved changes, with save/reset actions and status states.',
+    importPath: '@/ascendra-ui/components/common-ui/unsaved-changes-bar',
+    importNames: ['UnsavedChangesBar'],
+    props: [
+      { name: 'isDirty', type: 'boolean', description: 'Shows the bar when true.' },
+      { name: 'isSaving', type: 'boolean', description: 'Shows a loading spinner and hides action buttons.' },
+      { name: 'isValid', type: 'boolean', description: 'When false on Save click, triggers nudge animation and validation message.' },
+      { name: 'onSave', type: '() => boolean | Promise<boolean> | void', description: 'Called on Save; return true for success, false for error.' },
+      { name: 'onReset', type: '() => void', description: 'Called on Reset click.' },
+      { name: 'onInvalid', type: '() => void', description: 'Called when Save is clicked on an invalid form — use to trigger field-level errors.' },
+      { name: 'message', type: 'string', default: "'Unsaved changes'", description: 'Idle state message.' },
+      { name: 'saveLabel', type: 'string', default: "'Save'", description: 'Save button label.' },
+      { name: 'resetLabel', type: 'string', default: "'Reset'", description: 'Reset button label.' },
+      { name: 'className', type: 'string', description: 'Extra classes on the outer wrapper — use to offset centering when a sidebar is present.' },
+    ],
+  },
+
+  'scroll-to-top': {
+    slug: 'scroll-to-top',
+    name: 'Scroll To Top',
+    description: 'Behavior-only component that scrolls the window to the top on every route change and disables browser scroll restoration.',
+    importPath: '@/ascendra-ui/components/util/scroll-to-top',
+    importNames: ['ScrollToTop'],
+    props: [],
+  },
+
+  'calendar': {
+    slug: 'calendar',
+    name: 'Calendar',
+    description: 'Full-featured calendar built on react-day-picker. Supports single, multiple, and range selection with optional month/year dropdowns.',
+    importPath: '@/ascendra-ui/components/date/calendar',
+    importNames: ['Calendar'],
+    props: [
+      { name: 'mode', type: "'single' | 'multiple' | 'range'", description: 'Selection mode.' },
+      { name: 'selected', type: 'Date | Date[] | DateRange | undefined', description: 'Controlled selected value.' },
+      { name: 'onSelect', type: 'function', description: 'Called when the selection changes.' },
+      { name: 'showOutsideDays', type: 'boolean', default: 'true', description: 'Show days from adjacent months.' },
+      { name: 'captionLayout', type: "'label' | 'dropdown' | 'dropdown-months' | 'dropdown-years'", description: "Caption style. Defaults to 'dropdown' when startMonth/endMonth are set." },
+      { name: 'startMonth', type: 'Date', description: 'Earliest month available — also enables the dropdown caption.' },
+      { name: 'endMonth', type: 'Date', description: 'Latest month available.' },
+      { name: 'numberOfMonths', type: 'number', default: '1', description: 'Number of months to display side-by-side.' },
+    ],
+  },
+
+  'date-picker': {
+    slug: 'date-picker',
+    name: 'Date Picker',
+    description: 'Popover-based single date picker with a trigger button and an embedded Calendar.',
+    importPath: '@/ascendra-ui/components/date/date-picker',
+    importNames: ['DatePicker'],
+    props: [
+      { name: 'value', type: 'Date | undefined', description: 'Controlled selected date.' },
+      { name: 'onChange', type: '(date: Date | undefined) => void', description: 'Called when the date changes.' },
+      { name: 'placeholder', type: 'string', default: "'Pick a date'", description: 'Trigger button placeholder text.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the trigger button.' },
+      { name: 'invalid', type: 'boolean', default: 'false', description: 'Applies destructive outline to the trigger.' },
+      { name: 'fromYear', type: 'number', description: 'Enables year/month dropdown starting from this year.' },
+      { name: 'toYear', type: 'number', description: 'Enables year/month dropdown ending at this year.' },
+      { name: 'captionLayout', type: "CalendarProps['captionLayout']", description: 'Caption style passed to the inner Calendar.' },
+    ],
+  },
+
+  'date-range-picker': {
+    slug: 'date-range-picker',
+    name: 'Date Range Picker',
+    description: 'Popover-based date range picker with configurable month count and an embedded range Calendar.',
+    importPath: '@/ascendra-ui/components/date/date-range-picker',
+    importNames: ['DateRangePicker'],
+    props: [
+      { name: 'value', type: 'DateRange | undefined', description: 'Controlled selected range ({ from, to }).' },
+      { name: 'onChange', type: '(range: DateRange | undefined) => void', description: 'Called when the range changes.' },
+      { name: 'placeholder', type: 'string', default: "'Pick a date range'", description: 'Trigger button placeholder text.' },
+      { name: 'numberOfMonths', type: 'number', default: '2', description: 'Number of calendar months shown in the popover.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the trigger button.' },
+      { name: 'invalid', type: 'boolean', default: 'false', description: 'Applies destructive outline to the trigger.' },
+      { name: 'fromYear', type: 'number', description: 'Enables year/month dropdown starting from this year.' },
+      { name: 'toYear', type: 'number', description: 'Enables year/month dropdown ending at this year.' },
+    ],
+  },
+
+  'item': {
+    slug: 'item',
+    name: 'Item',
+    description: 'Flexible list item with media, title, description, actions, header, and footer slots. Supports outline and muted variants.',
+    importPath: '@/ascendra-ui/components/ui/item',
+    importNames: ['Item', 'ItemMedia', 'ItemContent', 'ItemTitle', 'ItemDescription', 'ItemActions', 'ItemGroup', 'ItemSeparator', 'ItemHeader', 'ItemFooter'],
+    props: [
+      { name: 'variant', type: "'default' | 'outline' | 'muted'", default: "'default'", description: 'Border and background style of the item (on Item).' },
+      { name: 'size', type: "'default' | 'sm' | 'xs'", default: "'default'", description: 'Padding and gap size (on Item).' },
+      { name: 'asChild', type: 'boolean', default: 'false', description: 'Render as a child element using Radix Slot (on Item).' },
+      { name: 'variant', type: "'default' | 'icon' | 'image'", default: "'default'", description: 'Media display type (on ItemMedia).' },
+    ],
+  },
 };

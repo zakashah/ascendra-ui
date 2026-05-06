@@ -274,6 +274,39 @@ export function InputGroupDocContent() {
             </div>
           </ComponentPreview>
         </div>
+
+        <div className="space-y-3">
+          <h3 className="text-foreground text-sm font-medium">Invalid state</h3>
+          <p className="text-muted-foreground text-xs">
+            Pass{" "}
+            <code className="bg-muted rounded px-1 font-mono text-xs">
+              aria-invalid={"{true}"}
+            </code>{" "}
+            on{" "}
+            <code className="bg-muted rounded px-1 font-mono text-xs">
+              InputGroupInput
+            </code>{" "}
+            — the group wrapper detects it and applies the red ring.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`<InputGroup>
+  <InputGroupAddon align="inline-start">
+    <LuSearch className="size-4" />
+  </InputGroupAddon>
+  <InputGroupInput aria-invalid={true} placeholder="Search..." />
+</InputGroup>`}
+          >
+            <div className="w-64">
+              <InputGroup>
+                <InputGroupAddon align="inline-start">
+                  <LuSearch className="size-4" />
+                </InputGroupAddon>
+                <InputGroupInput aria-invalid={true} placeholder="Search..." />
+              </InputGroup>
+            </div>
+          </ComponentPreview>
+        </div>
       </div>
 
       <div className="space-y-4">

@@ -3,7 +3,10 @@ import { NavCategory } from './types';
 export const navConfig: NavCategory[] = [
   {
     title: 'Getting Started',
-    items: [{ name: 'Overview', slug: '' }],
+    items: [
+      { name: 'Overview', slug: '' },
+      { name: 'Design Tokens', slug: 'design-tokens' },
+    ],
   },
   {
     title: 'Feedback & Status',
@@ -13,6 +16,7 @@ export const navConfig: NavCategory[] = [
       { name: 'Status Dot', slug: 'status-dot' },
       { name: 'Simple Alert', slug: 'simple-alert' },
       { name: 'Pro Badge', slug: 'pro-badge' },
+      { name: 'Unsaved Changes Bar', slug: 'unsaved-changes-bar' },
     ],
   },
   {
@@ -25,12 +29,23 @@ export const navConfig: NavCategory[] = [
       { name: 'Radio Group', slug: 'radio-group' },
       { name: 'Switch', slug: 'switch' },
       { name: 'Select', slug: 'select' },
+      { name: 'Field', slug: 'field' },
+      { name: 'Combobox', slug: 'combobox' },
+    ],
+  },
+  {
+    title: 'Date & Time',
+    items: [
+      { name: 'Calendar', slug: 'calendar' },
+      { name: 'Date Picker', slug: 'date-picker' },
+      { name: 'Date Range Picker', slug: 'date-range-picker' },
     ],
   },
   {
     title: 'Navigation',
     items: [
       { name: 'Anchor', slug: 'anchor' },
+      { name: 'Nav', slug: 'nav' },
       { name: 'Nav Link', slug: 'nav-link' },
       { name: 'Header', slug: 'header' },
     ],
@@ -57,6 +72,7 @@ export const navConfig: NavCategory[] = [
       { name: 'Page Header', slug: 'page-header' },
       { name: 'Page Bar', slug: 'page-bar' },
       { name: 'Aside Content', slug: 'aside-content' },
+      { name: 'Item', slug: 'item' },
     ],
   },
   {
@@ -75,6 +91,7 @@ export const navConfig: NavCategory[] = [
       { name: 'Theme Toggle', slug: 'theme-toggle' },
       { name: 'Pagination Button', slug: 'pagination-button' },
       { name: 'Row Action Button', slug: 'row-action-button' },
+      { name: 'Scroll To Top', slug: 'scroll-to-top' },
     ],
   },
 ];

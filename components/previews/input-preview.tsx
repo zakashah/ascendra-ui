@@ -82,6 +82,29 @@ export function InputDocContent() {
             </div>
           </ComponentPreview>
         </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Invalid state</h3>
+          <p className="text-xs text-muted-foreground">
+            Pass{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              aria-invalid={"{true}"}
+            </code>{" "}
+            to apply a destructive outline — pair with a{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              FieldError
+            </code>{" "}
+            message below the input.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`<Input aria-invalid={true} defaultValue="invalid@" />`}
+          >
+            <div className="w-64">
+              <Input aria-invalid={true} defaultValue="invalid@" />
+            </div>
+          </ComponentPreview>
+        </div>
       </div>
 
       <div className="space-y-4">

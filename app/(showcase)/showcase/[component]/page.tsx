@@ -1,73 +1,15 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { registry } from "@/lib/registry";
 import { navConfig } from "@/lib/nav-config";
-import { ButtonDocContent } from "@/components/previews/button-preview";
-import { SimpleBadgeDocContent } from "@/components/previews/simple-badge-preview";
-import { BubbleBadgeDocContent } from "@/components/previews/bubble-badge-preview";
-import { StatusDotDocContent } from "@/components/previews/status-dot-preview";
-import { SimpleAlertDocContent } from "@/components/previews/simple-alert-preview";
-import { ProBadgeDocContent } from "@/components/previews/pro-badge-preview";
-import { InputDocContent } from "@/components/previews/input-preview";
-import { InputGroupDocContent } from "@/components/previews/input-group-preview";
-import { CheckboxDocContent } from "@/components/previews/checkbox-preview";
-import { RadioGroupDocContent } from "@/components/previews/radio-group-preview";
-import { SwitchDocContent } from "@/components/previews/switch-preview";
-import { SelectDocContent } from "@/components/previews/select-preview";
-import { AnchorDocContent } from "@/components/previews/anchor-preview";
-import { NavLinkDocContent } from "@/components/previews/nav-link-preview";
-import { HeaderDocContent } from "@/components/previews/header-preview";
-import { DialogDocContent } from "@/components/previews/dialog-preview";
-import { SheetDocContent } from "@/components/previews/sheet-preview";
-import { DropdownMenuDocContent } from "@/components/previews/dropdown-menu-preview";
-import { TableDocContent } from "@/components/previews/table-preview";
-import { EmptyDocContent } from "@/components/previews/empty-preview";
-import { MainSectionDocContent } from "@/components/previews/main-section-preview";
-import { PageHeaderDocContent } from "@/components/previews/page-header-preview";
-import { PageBarDocContent } from "@/components/previews/page-bar-preview";
-import { AsideContentDocContent } from "@/components/previews/aside-content-preview";
-import { TabsDocContent } from "@/components/previews/tabs-preview";
-import { SidebarMenuDocContent } from "@/components/previews/sidebar-menu-preview";
-import { CopyTextDocContent } from "@/components/previews/copy-text-preview";
-import { NameAvatarDocContent } from "@/components/previews/name-avatar-preview";
-import { ThemeToggleDocContent } from "@/components/previews/theme-toggle-preview";
-import { PaginationButtonDocContent } from "@/components/previews/pagination-button-preview";
-import { RowActionButtonDocContent } from "@/components/previews/row-action-button-preview";
+import { docComponents } from "@/lib/doc-components";
+import { PropsTable } from "@/components/props-table";
+import { SectionHeader } from "@/components/section-header";
+import { ImportChip } from "@/components/import-chip";
 
-type DocComponent = React.ComponentType;
-
-const docComponents: Partial<Record<string, DocComponent>> = {
-  button: ButtonDocContent,
-  "simple-badge": SimpleBadgeDocContent,
-  "bubble-badge": BubbleBadgeDocContent,
-  "status-dot": StatusDotDocContent,
-  "simple-alert": SimpleAlertDocContent,
-  "pro-badge": ProBadgeDocContent,
-  input: InputDocContent,
-  "input-group": InputGroupDocContent,
-  checkbox: CheckboxDocContent,
-  "radio-group": RadioGroupDocContent,
-  switch: SwitchDocContent,
-  select: SelectDocContent,
-  anchor: AnchorDocContent,
-  "nav-link": NavLinkDocContent,
-  header: HeaderDocContent,
-  dialog: DialogDocContent,
-  sheet: SheetDocContent,
-  "dropdown-menu": DropdownMenuDocContent,
-  table: TableDocContent,
-  empty: EmptyDocContent,
-  "main-section": MainSectionDocContent,
-  "page-header": PageHeaderDocContent,
-  "page-bar": PageBarDocContent,
-  "aside-content": AsideContentDocContent,
-  tabs: TabsDocContent,
-  "sidebar-menu": SidebarMenuDocContent,
-  "copy-text": CopyTextDocContent,
-  "name-avatar": NameAvatarDocContent,
-  "theme-toggle": ThemeToggleDocContent,
-  "pagination-button": PaginationButtonDocContent,
-  "row-action-button": RowActionButtonDocContent,
-};
+function findCategory(slug: string) {
+  return navConfig.find((c) => c.items.some((i) => i.slug === slug))?.title ?? null;
+}
 
 export async function generateStaticParams() {
   return navConfig
@@ -87,34 +29,59 @@ export default async function ComponentPage({
   if (!meta) notFound();
 
   const DocContent = docComponents[component];
+  const category = findCategory(component);
+  const importStatement = `import { ${meta.importNames.join(", ")} } from "${meta.importPath}"`;
 
   return (
     <div className="mx-auto max-w-3xl px-8 py-12">
+      {/* Breadcrumb */}
+      {category && (
+        <p className="mb-4 text-xs text-muted-foreground">
+          <Link href="/showcase" className="hover:text-foreground transition-colors">
+            Overview
+          </Link>
+          <span className="mx-1.5">/</span>
+          {category}
+          <span className="mx-1.5">/</span>
+          {meta.name}
+        </p>
+      )}
+
       {/* Component heading */}
-      <div className="mb-8">
+      <div className="mb-6">
         <h1 className="text-foreground mb-1.5 text-2xl font-semibold tracking-tight">
           {meta.name}
         </h1>
         <p className="text-muted-foreground text-sm">{meta.description}</p>
       </div>
 
+      {/* Import chip */}
+      <div className="mb-8">
+        <ImportChip importStatement={importStatement} />
+      </div>
+
       {/* Doc content or coming-soon placeholder */}
       {DocContent ? (
         <DocContent />
       ) : (
-        <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed py-16 text-center">
-          <p className="text-foreground text-sm font-medium">
-            Documentation coming soon
-          </p>
-          <p className="text-muted-foreground text-xs">
-            Import from{" "}
-            <code className="bg-muted rounded px-1.5 py-0.5 font-mono">
-              {meta.importPath}
-            </code>
-          </p>
-          <p className="text-muted-foreground/60 font-mono text-xs">
-            {`import { ${meta.importNames.join(", ")} } from "${meta.importPath}"`}
-          </p>
+        <div className="space-y-6">
+          <div className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed py-10 text-center">
+            <p className="text-foreground text-sm font-medium">
+              Live preview coming soon
+            </p>
+            <p className="text-muted-foreground text-xs">
+              Import from{" "}
+              <code className="bg-muted rounded px-1.5 py-0.5 font-mono">
+                {meta.importPath}
+              </code>
+            </p>
+          </div>
+          {meta.props && meta.props.length > 0 && (
+            <div className="space-y-4">
+              <SectionHeader>Props</SectionHeader>
+              <PropsTable props={meta.props} />
+            </div>
+          )}
         </div>
       )}
     </div>
