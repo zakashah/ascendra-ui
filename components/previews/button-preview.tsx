@@ -1,18 +1,17 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
-import { Button } from '@/ascendra-ui/components/ui/button';
-import { registry } from '@/lib/showcase/registry';
-import { LuPlus } from 'react-icons/lu';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
+import { Button } from "@/ascendra-ui/components/ui/button";
+import { registry } from "@/lib/registry";
+import { LuPlus } from "react-icons/lu";
 
-const meta = registry['button'];
+const meta = registry["button"];
 
 export function ButtonDocContent() {
   return (
     <div className="space-y-10">
-
       {/* Hero preview */}
       <ComponentPreview
         code={`import { Button } from "@/ascendra-ui/components/ui/button";
@@ -84,8 +83,12 @@ export function ButtonDocContent() {
 <Button variant="destructive" disabled>Disabled</Button>`}
           >
             <Button disabled>Disabled</Button>
-            <Button variant="secondary" disabled>Disabled</Button>
-            <Button variant="destructive" disabled>Disabled</Button>
+            <Button variant="secondary" disabled>
+              Disabled
+            </Button>
+            <Button variant="destructive" disabled>
+              Disabled
+            </Button>
           </ComponentPreview>
         </div>
 
@@ -93,9 +96,15 @@ export function ButtonDocContent() {
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">As Link</h3>
           <p className="text-xs text-muted-foreground">
-            Use <code className="rounded bg-muted px-1 font-mono text-xs">asChild</code> with a
-            Next.js <code className="rounded bg-muted px-1 font-mono text-xs">Link</code> to render
-            a button-styled anchor.
+            Use{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              asChild
+            </code>{" "}
+            with a Next.js{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              Link
+            </code>{" "}
+            to render a button-styled anchor.
           </p>
           <ComponentPreview
             code={`import Link from 'next/link';

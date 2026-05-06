@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { navConfig } from '@/lib/showcase/nav-config';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { navConfig } from "@/lib/nav-config";
+import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 
 export function ShowcaseNav() {
   const pathname = usePathname();
 
   const isActive = (slug: string) => {
-    if (slug === '') return pathname === '/showcase';
+    if (slug === "") return pathname === "/showcase";
     return pathname === `/showcase/${slug}`;
   };
 
@@ -36,12 +36,14 @@ export function ShowcaseNav() {
               {category.items.map((item) => (
                 <li key={item.slug}>
                   <Link
-                    href={item.slug === '' ? '/showcase' : `/showcase/${item.slug}`}
+                    href={
+                      item.slug === "" ? "/showcase" : `/showcase/${item.slug}`
+                    }
                     className={cn(
-                      'flex h-7 items-center rounded-md px-2 text-sm transition-colors',
+                      "flex h-7 items-center rounded-md px-2 text-sm transition-colors",
                       isActive(item.slug)
-                        ? 'bg-primary/8 font-medium text-primary'
-                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                        ? "bg-primary/8 font-medium text-primary"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground",
                     )}
                   >
                     {item.name}

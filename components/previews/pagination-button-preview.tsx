@@ -1,18 +1,22 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
-import { PaginationButton } from '@/ascendra-ui/components/common-ui/pagination-button';
-import { registry } from '@/lib/showcase/registry';
-import { LuChevronLeft, LuChevronRight, LuChevronFirst, LuChevronLast } from 'react-icons/lu';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
+import { PaginationButton } from "@/ascendra-ui/components/common-ui/pagination-button";
+import { registry } from "@/lib/registry";
+import {
+  LuChevronLeft,
+  LuChevronRight,
+  LuChevronFirst,
+  LuChevronLast,
+} from "react-icons/lu";
 
-const meta = registry['pagination-button'];
+const meta = registry["pagination-button"];
 
 export function PaginationButtonDocContent() {
   return (
     <div className="space-y-10">
-
       <ComponentPreview
         code={`import { PaginationButton } from "@/ascendra-ui/components/common-ui/pagination-button";
 
@@ -29,8 +33,13 @@ export function PaginationButtonDocContent() {
         <SectionHeader>Examples</SectionHeader>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Full Pagination Bar</h3>
-          <p className="text-xs text-muted-foreground">Compose into a complete pagination control group with prev/next and first/last buttons.</p>
+          <h3 className="text-sm font-medium text-foreground">
+            Full Pagination Bar
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Compose into a complete pagination control group with prev/next and
+            first/last buttons.
+          </p>
           <ComponentPreview
             code={`<div className="flex items-center gap-2">
   <PaginationButton>
@@ -55,7 +64,9 @@ export function PaginationButtonDocContent() {
               <PaginationButton>
                 <LuChevronLeft />
               </PaginationButton>
-              <span className="text-xs font-medium text-foreground px-1">1 / 4</span>
+              <span className="text-xs font-medium text-foreground px-1">
+                1 / 4
+              </span>
               <PaginationButton>
                 <LuChevronRight />
               </PaginationButton>

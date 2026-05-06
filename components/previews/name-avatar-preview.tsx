@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
-import { NameAvatar } from '@/ascendra-ui/components/common-ui/name-avatar';
-import { registry } from '@/lib/showcase/registry';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
+import { NameAvatar } from "@/ascendra-ui/components/common-ui/name-avatar";
+import { registry } from "@/lib/registry";
 
-const meta = registry['name-avatar'];
+const meta = registry["name-avatar"];
 
 export function NameAvatarDocContent() {
   return (
@@ -46,10 +46,10 @@ export function NameAvatarDocContent() {
         <div className="space-y-3">
           <h3 className="text-foreground text-sm font-medium">Sizes</h3>
           <p className="text-muted-foreground text-xs">
-            Control diameter in pixels via the{' '}
+            Control diameter in pixels via the{" "}
             <code className="bg-muted rounded px-1 font-mono text-xs">
               size
-            </code>{' '}
+            </code>{" "}
             prop. Font scales proportionally.
           </p>
           <ComponentPreview

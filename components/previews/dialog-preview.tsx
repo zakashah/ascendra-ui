@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
 import {
   Dialog,
   DialogTrigger,
@@ -14,12 +14,12 @@ import {
   DialogFooter,
   DialogActions,
   DialogClose,
-} from '@/ascendra-ui/components/ui/dialog';
-import { Button } from '@/ascendra-ui/components/ui/button';
-import { Checkbox } from '@/ascendra-ui/components/ui/checkbox';
-import { registry } from '@/lib/showcase/registry';
+} from "@/ascendra-ui/components/ui/dialog";
+import { Button } from "@/ascendra-ui/components/ui/button";
+import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
+import { registry } from "@/lib/registry";
 
-const meta = registry['dialog'];
+const meta = registry["dialog"];
 
 export function DialogDocContent() {
   return (
@@ -160,10 +160,10 @@ export function DialogDocContent() {
             With Inner Footer
           </h3>
           <p className="text-muted-foreground text-xs">
-            Use{' '}
+            Use{" "}
             <code className="bg-muted rounded px-1 font-mono text-xs">
               DialogFooter
-            </code>{' '}
+            </code>{" "}
             inside the card for optional content like a checkbox row. It renders
             with a top separator above it.
           </p>

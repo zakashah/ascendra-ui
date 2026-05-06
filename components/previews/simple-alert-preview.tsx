@@ -1,21 +1,22 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
-import { SimpleAlert } from '@/ascendra-ui/components/common-ui/simple-alert';
-import { registry } from '@/lib/showcase/registry';
-import { LuShieldAlert, LuCircleCheck } from 'react-icons/lu';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
+import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
+import { registry } from "@/lib/registry";
+import { LuShieldAlert, LuCircleCheck } from "react-icons/lu";
 
-const meta = registry['simple-alert'];
+const meta = registry["simple-alert"];
 
 export function SimpleAlertDocContent() {
   return (
     <div className="space-y-10">
+      <ComponentPreview
+        code={`import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
 
-      <ComponentPreview code={`import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
-
-<SimpleAlert>Your session will expire in 5 minutes.</SimpleAlert>`}>
+<SimpleAlert>Your session will expire in 5 minutes.</SimpleAlert>`}
+      >
         <SimpleAlert>Your session will expire in 5 minutes.</SimpleAlert>
       </ComponentPreview>
 
@@ -24,7 +25,10 @@ export function SimpleAlertDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Variants</h3>
-          <p className="text-xs text-muted-foreground">Five severity variants: default, secondary, destructive, success, and warning.</p>
+          <p className="text-xs text-muted-foreground">
+            Five severity variants: default, secondary, destructive, success,
+            and warning.
+          </p>
           <ComponentPreview
             align="start"
             code={`<SimpleAlert variant="default">This is an informational alert.</SimpleAlert>
@@ -34,18 +38,34 @@ export function SimpleAlertDocContent() {
 <SimpleAlert variant="warning">Payment is overdue by 3 days.</SimpleAlert>`}
           >
             <div className="flex w-full flex-col gap-3">
-              <SimpleAlert variant="default">This is an informational alert.</SimpleAlert>
-              <SimpleAlert variant="secondary">This is a secondary note.</SimpleAlert>
-              <SimpleAlert variant="destructive">This action cannot be undone.</SimpleAlert>
-              <SimpleAlert variant="success">Your changes have been saved.</SimpleAlert>
-              <SimpleAlert variant="warning">Payment is overdue by 3 days.</SimpleAlert>
+              <SimpleAlert variant="default">
+                This is an informational alert.
+              </SimpleAlert>
+              <SimpleAlert variant="secondary">
+                This is a secondary note.
+              </SimpleAlert>
+              <SimpleAlert variant="destructive">
+                This action cannot be undone.
+              </SimpleAlert>
+              <SimpleAlert variant="success">
+                Your changes have been saved.
+              </SimpleAlert>
+              <SimpleAlert variant="warning">
+                Payment is overdue by 3 days.
+              </SimpleAlert>
             </div>
           </ComponentPreview>
         </div>
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Custom Icon</h3>
-          <p className="text-xs text-muted-foreground">Pass any icon component via the <code className="rounded bg-muted px-1 font-mono text-xs">icon</code> prop to override the default InfoIcon.</p>
+          <p className="text-xs text-muted-foreground">
+            Pass any icon component via the{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              icon
+            </code>{" "}
+            prop to override the default InfoIcon.
+          </p>
           <ComponentPreview
             align="start"
             code={`import { LuShieldAlert, LuCircleCheck } from 'react-icons/lu';

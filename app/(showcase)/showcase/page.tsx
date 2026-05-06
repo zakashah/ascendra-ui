@@ -1,20 +1,20 @@
-import Link from 'next/link';
-import { navConfig } from '@/lib/showcase/nav-config';
+import Link from "next/link";
+import { navConfig } from "@/lib/nav-config";
 
 const categoryIcons: Record<string, string> = {
-  'Feedback & Status': '🔴',
-  'Forms & Inputs': '📋',
-  'Navigation': '🧭',
-  'Overlays': '🪟',
-  'Tables & Data': '📊',
-  'Layout': '⬛',
-  'Tabs': '📑',
-  'Sidebar': '☰',
-  'Utilities': '🔧',
+  "Feedback & Status": "🔴",
+  "Forms & Inputs": "📋",
+  Navigation: "🧭",
+  Overlays: "🪟",
+  "Tables & Data": "📊",
+  Layout: "⬛",
+  Tabs: "📑",
+  Sidebar: "☰",
+  Utilities: "🔧",
 };
 
 export default function ShowcasePage() {
-  const categories = navConfig.filter((c) => c.title !== 'Getting Started');
+  const categories = navConfig.filter((c) => c.title !== "Getting Started");
 
   return (
     <div className="mx-auto max-w-3xl px-8 py-12">
@@ -28,20 +28,21 @@ export default function ShowcasePage() {
           Component Showcase
         </h1>
         <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-          A reference for all custom components in{' '}
+          A reference for all custom components in{" "}
           <code className="rounded bg-muted px-1 py-0.5 font-mono text-xs">
             ascendra-ui/components/
           </code>
-          . Each entry includes a live preview, copyable code, import path, and props table.
+          . Each entry includes a live preview, copyable code, import path, and
+          props table.
         </p>
       </div>
 
       {/* Stats row */}
       <div className="mb-12 flex gap-6 border-y py-6">
         {[
-          { value: '30', label: 'Components' },
-          { value: '9', label: 'Categories' },
-          { value: '100%', label: 'TypeScript' },
+          { value: "30", label: "Components" },
+          { value: "9", label: "Categories" },
+          { value: "100%", label: "TypeScript" },
         ].map(({ value, label }) => (
           <div key={label}>
             <p className="text-2xl font-semibold text-foreground">{value}</p>
@@ -60,7 +61,9 @@ export default function ShowcasePage() {
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <span className="text-lg">{categoryIcons[category.title] ?? '📦'}</span>
+                <span className="text-lg">
+                  {categoryIcons[category.title] ?? "📦"}
+                </span>
                 <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
                   {category.title}
                 </span>
@@ -85,9 +88,11 @@ export default function ShowcasePage() {
 
       {/* Footer note */}
       <p className="mt-12 text-xs text-muted-foreground">
-        All components live in{' '}
-        <code className="rounded bg-muted px-1 font-mono">ascendra-ui/components/</code> and are built
-        on Radix UI + Tailwind CSS v4.
+        All components live in{" "}
+        <code className="rounded bg-muted px-1 font-mono">
+          ascendra-ui/components/
+        </code>{" "}
+        and are built on Radix UI + Tailwind CSS v4.
       </p>
     </div>
   );

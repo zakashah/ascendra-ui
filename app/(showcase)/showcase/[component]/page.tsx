@@ -1,78 +1,78 @@
-import { notFound } from 'next/navigation';
-import { registry } from '@/lib/showcase/registry';
-import { navConfig } from '@/lib/showcase/nav-config';
-import { ButtonDocContent } from '@/components/previews/button-preview';
-import { SimpleBadgeDocContent } from '@/components/previews/simple-badge-preview';
-import { BubbleBadgeDocContent } from '@/components/previews/bubble-badge-preview';
-import { StatusDotDocContent } from '@/components/previews/status-dot-preview';
-import { SimpleAlertDocContent } from '@/components/previews/simple-alert-preview';
-import { ProBadgeDocContent } from '@/components/previews/pro-badge-preview';
-import { InputDocContent } from '@/components/previews/input-preview';
-import { InputGroupDocContent } from '@/components/previews/input-group-preview';
-import { CheckboxDocContent } from '@/components/previews/checkbox-preview';
-import { RadioGroupDocContent } from '@/components/previews/radio-group-preview';
-import { SwitchDocContent } from '@/components/previews/switch-preview';
-import { SelectDocContent } from '@/components/previews/select-preview';
-import { AnchorDocContent } from '@/components/previews/anchor-preview';
-import { NavLinkDocContent } from '@/components/previews/nav-link-preview';
-import { HeaderDocContent } from '@/components/previews/header-preview';
-import { DialogDocContent } from '@/components/previews/dialog-preview';
-import { SheetDocContent } from '@/components/previews/sheet-preview';
-import { DropdownMenuDocContent } from '@/components/previews/dropdown-menu-preview';
-import { TableDocContent } from '@/components/previews/table-preview';
-import { EmptyDocContent } from '@/components/previews/empty-preview';
-import { MainSectionDocContent } from '@/components/previews/main-section-preview';
-import { PageHeaderDocContent } from '@/components/previews/page-header-preview';
-import { PageBarDocContent } from '@/components/previews/page-bar-preview';
-import { AsideContentDocContent } from '@/components/previews/aside-content-preview';
-import { TabsDocContent } from '@/components/previews/tabs-preview';
-import { SidebarMenuDocContent } from '@/components/previews/sidebar-menu-preview';
-import { CopyTextDocContent } from '@/components/previews/copy-text-preview';
-import { NameAvatarDocContent } from '@/components/previews/name-avatar-preview';
-import { ThemeToggleDocContent } from '@/components/previews/theme-toggle-preview';
-import { PaginationButtonDocContent } from '@/components/previews/pagination-button-preview';
-import { RowActionButtonDocContent } from '@/components/previews/row-action-button-preview';
+import { notFound } from "next/navigation";
+import { registry } from "@/lib/registry";
+import { navConfig } from "@/lib/nav-config";
+import { ButtonDocContent } from "@/components/previews/button-preview";
+import { SimpleBadgeDocContent } from "@/components/previews/simple-badge-preview";
+import { BubbleBadgeDocContent } from "@/components/previews/bubble-badge-preview";
+import { StatusDotDocContent } from "@/components/previews/status-dot-preview";
+import { SimpleAlertDocContent } from "@/components/previews/simple-alert-preview";
+import { ProBadgeDocContent } from "@/components/previews/pro-badge-preview";
+import { InputDocContent } from "@/components/previews/input-preview";
+import { InputGroupDocContent } from "@/components/previews/input-group-preview";
+import { CheckboxDocContent } from "@/components/previews/checkbox-preview";
+import { RadioGroupDocContent } from "@/components/previews/radio-group-preview";
+import { SwitchDocContent } from "@/components/previews/switch-preview";
+import { SelectDocContent } from "@/components/previews/select-preview";
+import { AnchorDocContent } from "@/components/previews/anchor-preview";
+import { NavLinkDocContent } from "@/components/previews/nav-link-preview";
+import { HeaderDocContent } from "@/components/previews/header-preview";
+import { DialogDocContent } from "@/components/previews/dialog-preview";
+import { SheetDocContent } from "@/components/previews/sheet-preview";
+import { DropdownMenuDocContent } from "@/components/previews/dropdown-menu-preview";
+import { TableDocContent } from "@/components/previews/table-preview";
+import { EmptyDocContent } from "@/components/previews/empty-preview";
+import { MainSectionDocContent } from "@/components/previews/main-section-preview";
+import { PageHeaderDocContent } from "@/components/previews/page-header-preview";
+import { PageBarDocContent } from "@/components/previews/page-bar-preview";
+import { AsideContentDocContent } from "@/components/previews/aside-content-preview";
+import { TabsDocContent } from "@/components/previews/tabs-preview";
+import { SidebarMenuDocContent } from "@/components/previews/sidebar-menu-preview";
+import { CopyTextDocContent } from "@/components/previews/copy-text-preview";
+import { NameAvatarDocContent } from "@/components/previews/name-avatar-preview";
+import { ThemeToggleDocContent } from "@/components/previews/theme-toggle-preview";
+import { PaginationButtonDocContent } from "@/components/previews/pagination-button-preview";
+import { RowActionButtonDocContent } from "@/components/previews/row-action-button-preview";
 
 type DocComponent = React.ComponentType;
 
 const docComponents: Partial<Record<string, DocComponent>> = {
   button: ButtonDocContent,
-  'simple-badge': SimpleBadgeDocContent,
-  'bubble-badge': BubbleBadgeDocContent,
-  'status-dot': StatusDotDocContent,
-  'simple-alert': SimpleAlertDocContent,
-  'pro-badge': ProBadgeDocContent,
+  "simple-badge": SimpleBadgeDocContent,
+  "bubble-badge": BubbleBadgeDocContent,
+  "status-dot": StatusDotDocContent,
+  "simple-alert": SimpleAlertDocContent,
+  "pro-badge": ProBadgeDocContent,
   input: InputDocContent,
-  'input-group': InputGroupDocContent,
+  "input-group": InputGroupDocContent,
   checkbox: CheckboxDocContent,
-  'radio-group': RadioGroupDocContent,
+  "radio-group": RadioGroupDocContent,
   switch: SwitchDocContent,
   select: SelectDocContent,
   anchor: AnchorDocContent,
-  'nav-link': NavLinkDocContent,
+  "nav-link": NavLinkDocContent,
   header: HeaderDocContent,
   dialog: DialogDocContent,
   sheet: SheetDocContent,
-  'dropdown-menu': DropdownMenuDocContent,
+  "dropdown-menu": DropdownMenuDocContent,
   table: TableDocContent,
   empty: EmptyDocContent,
-  'main-section': MainSectionDocContent,
-  'page-header': PageHeaderDocContent,
-  'page-bar': PageBarDocContent,
-  'aside-content': AsideContentDocContent,
+  "main-section": MainSectionDocContent,
+  "page-header": PageHeaderDocContent,
+  "page-bar": PageBarDocContent,
+  "aside-content": AsideContentDocContent,
   tabs: TabsDocContent,
-  'sidebar-menu': SidebarMenuDocContent,
-  'copy-text': CopyTextDocContent,
-  'name-avatar': NameAvatarDocContent,
-  'theme-toggle': ThemeToggleDocContent,
-  'pagination-button': PaginationButtonDocContent,
-  'row-action-button': RowActionButtonDocContent,
+  "sidebar-menu": SidebarMenuDocContent,
+  "copy-text": CopyTextDocContent,
+  "name-avatar": NameAvatarDocContent,
+  "theme-toggle": ThemeToggleDocContent,
+  "pagination-button": PaginationButtonDocContent,
+  "row-action-button": RowActionButtonDocContent,
 };
 
 export async function generateStaticParams() {
   return navConfig
     .flatMap((c) => c.items)
-    .filter((item) => item.slug !== '')
+    .filter((item) => item.slug !== "")
     .map((item) => ({ component: item.slug }));
 }
 
@@ -107,13 +107,13 @@ export default async function ComponentPage({
             Documentation coming soon
           </p>
           <p className="text-muted-foreground text-xs">
-            Import from{' '}
+            Import from{" "}
             <code className="bg-muted rounded px-1.5 py-0.5 font-mono">
               {meta.importPath}
             </code>
           </p>
           <p className="text-muted-foreground/60 font-mono text-xs">
-            {`import { ${meta.importNames.join(', ')} } from "${meta.importPath}"`}
+            {`import { ${meta.importNames.join(", ")} } from "${meta.importPath}"`}
           </p>
         </div>
       )}

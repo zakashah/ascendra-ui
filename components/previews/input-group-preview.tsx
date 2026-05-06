@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
 import {
   InputGroup,
   InputGroupAddon,
@@ -10,11 +10,11 @@ import {
   InputGroupText,
   InputGroupInput,
   InputGroupTextarea,
-} from '@/ascendra-ui/components/ui/input-group';
-import { registry } from '@/lib/showcase/registry';
-import { LuSearch, LuCopy, LuGlobe } from 'react-icons/lu';
+} from "@/ascendra-ui/components/ui/input-group";
+import { registry } from "@/lib/registry";
+import { LuSearch, LuCopy, LuGlobe } from "react-icons/lu";
 
-const meta = registry['input-group'];
+const meta = registry["input-group"];
 
 export function InputGroupDocContent() {
   return (
@@ -73,10 +73,10 @@ export function InputGroupDocContent() {
         <div className="space-y-3">
           <h3 className="text-foreground text-sm font-medium">Text Prefix</h3>
           <p className="text-muted-foreground text-xs">
-            Use{' '}
+            Use{" "}
             <code className="bg-muted rounded px-1 font-mono text-xs">
               InputGroupText
-            </code>{' '}
+            </code>{" "}
             inside the addon for a text label.
           </p>
           <ComponentPreview
@@ -192,10 +192,10 @@ export function InputGroupDocContent() {
             Text Prefix + Copy Button
           </h3>
           <p className="text-muted-foreground text-xs">
-            Pair a{' '}
+            Pair a{" "}
             <code className="bg-muted rounded px-1 font-mono text-xs">
               InputGroupText
-            </code>{' '}
+            </code>{" "}
             prefix on the left with a copy action button on the right.
           </p>
           <ComponentPreview
@@ -255,10 +255,10 @@ export function InputGroupDocContent() {
         <div className="space-y-3">
           <h3 className="text-foreground text-sm font-medium">Textarea</h3>
           <p className="text-muted-foreground text-xs">
-            Use{' '}
+            Use{" "}
             <code className="bg-muted rounded px-1 font-mono text-xs">
               InputGroupTextarea
-            </code>{' '}
+            </code>{" "}
             for multiline input with the same group styling.
           </p>
           <ComponentPreview

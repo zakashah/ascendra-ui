@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
 import {
   Select,
   SelectTrigger,
@@ -12,15 +12,14 @@ import {
   SelectLabel,
   SelectValue,
   SelectSeparator,
-} from '@/ascendra-ui/components/ui/select';
-import { registry } from '@/lib/showcase/registry';
+} from "@/ascendra-ui/components/ui/select";
+import { registry } from "@/lib/registry";
 
-const meta = registry['select'];
+const meta = registry["select"];
 
 export function SelectDocContent() {
   return (
     <div className="space-y-10">
-
       <ComponentPreview
         code={`import {
   Select, SelectTrigger, SelectContent, SelectItem,
@@ -55,7 +54,9 @@ export function SelectDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Sizes</h3>
-          <p className="text-xs text-muted-foreground">Default (h-8) and small (h-5) trigger sizes.</p>
+          <p className="text-xs text-muted-foreground">
+            Default (h-8) and small (h-5) trigger sizes.
+          </p>
           <ComponentPreview
             code={`<Select>
   <SelectTrigger size="default">
@@ -99,8 +100,20 @@ export function SelectDocContent() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Grouped Options</h3>
-          <p className="text-xs text-muted-foreground">Use <code className="rounded bg-muted px-1 font-mono text-xs">SelectGroup</code> and <code className="rounded bg-muted px-1 font-mono text-xs">SelectLabel</code> to organize related items.</p>
+          <h3 className="text-sm font-medium text-foreground">
+            Grouped Options
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Use{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              SelectGroup
+            </code>{" "}
+            and{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              SelectLabel
+            </code>{" "}
+            to organize related items.
+          </p>
           <ComponentPreview
             code={`<Select>
   <SelectTrigger>
@@ -146,7 +159,13 @@ export function SelectDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Disabled</h3>
-          <p className="text-xs text-muted-foreground">Pass <code className="rounded bg-muted px-1 font-mono text-xs">disabled</code> to the trigger to prevent interaction.</p>
+          <p className="text-xs text-muted-foreground">
+            Pass{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              disabled
+            </code>{" "}
+            to the trigger to prevent interaction.
+          </p>
           <ComponentPreview
             code={`<Select disabled>
   <SelectTrigger>

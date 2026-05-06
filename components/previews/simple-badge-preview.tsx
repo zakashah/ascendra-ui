@@ -1,18 +1,17 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
-import { SimpleBadge } from '@/ascendra-ui/components/common-ui/simple-badge';
-import { registry } from '@/lib/showcase/registry';
-import { LuCircleCheck, LuTriangleAlert } from 'react-icons/lu';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
+import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
+import { registry } from "@/lib/registry";
+import { LuCircleCheck, LuTriangleAlert } from "react-icons/lu";
 
-const meta = registry['simple-badge'];
+const meta = registry["simple-badge"];
 
 export function SimpleBadgeDocContent() {
   return (
     <div className="space-y-10">
-
       {/* Hero preview */}
       <ComponentPreview
         code={`import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
@@ -30,7 +29,8 @@ export function SimpleBadgeDocContent() {
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Variants</h3>
           <p className="text-xs text-muted-foreground">
-            Seven semantic color variants matching the project&apos;s color system.
+            Seven semantic color variants matching the project&apos;s color
+            system.
           </p>
           <ComponentPreview
             code={`<SimpleBadge variant="default">Default</SimpleBadge>
@@ -55,7 +55,8 @@ export function SimpleBadgeDocContent() {
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">With Icon</h3>
           <p className="text-xs text-muted-foreground">
-            Place an icon before the label text. The inner flex container handles alignment.
+            Place an icon before the label text. The inner flex container
+            handles alignment.
           </p>
           <ComponentPreview
             code={`import { LuCircleCheck, LuTriangleAlert } from 'react-icons/lu';
@@ -92,7 +93,9 @@ export function SimpleBadgeDocContent() {
 
         {/* Status labels — practical usage */}
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Invoice Status Labels</h3>
+          <h3 className="text-sm font-medium text-foreground">
+            Invoice Status Labels
+          </h3>
           <p className="text-xs text-muted-foreground">
             Practical usage for invoice or payment status in a table.
           </p>
@@ -115,8 +118,11 @@ export function SimpleBadgeDocContent() {
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">As Child</h3>
           <p className="text-xs text-muted-foreground">
-            Use <code className="rounded bg-muted px-1 font-mono text-xs">asChild</code> to apply
-            badge styles to any element, such as a link or button.
+            Use{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              asChild
+            </code>{" "}
+            to apply badge styles to any element, such as a link or button.
           </p>
           <ComponentPreview
             code={`<SimpleBadge asChild variant="blue">

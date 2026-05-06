@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
 import {
   Table,
   TableWrapper,
@@ -13,16 +13,15 @@ import {
   TableHead,
   TableCell,
   EmptyBody,
-} from '@/ascendra-ui/components/ui/table';
-import { SimpleBadge } from '@/ascendra-ui/components/common-ui/simple-badge';
-import { registry } from '@/lib/showcase/registry';
+} from "@/ascendra-ui/components/ui/table";
+import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
+import { registry } from "@/lib/registry";
 
-const meta = registry['table'];
+const meta = registry["table"];
 
 export function TableDocContent() {
   return (
     <div className="space-y-10">
-
       <ComponentPreview
         align="start"
         code={`import {
@@ -63,7 +62,9 @@ export function TableDocContent() {
                 <TableRow>
                   <TableCell>Ahmed Khan</TableCell>
                   <TableCell>PKR 12,000</TableCell>
-                  <TableCell><SimpleBadge variant="green">Paid</SimpleBadge></TableCell>
+                  <TableCell>
+                    <SimpleBadge variant="green">Paid</SimpleBadge>
+                  </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -75,8 +76,13 @@ export function TableDocContent() {
         <SectionHeader>Examples</SectionHeader>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Multi-Row Table</h3>
-          <p className="text-xs text-muted-foreground">Each row is separated by a bottom border; the last row has no border.</p>
+          <h3 className="text-sm font-medium text-foreground">
+            Multi-Row Table
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Each row is separated by a bottom border; the last row has no
+            border.
+          </p>
           <ComponentPreview
             align="start"
             code={`<TableWrapper>
@@ -128,19 +134,25 @@ export function TableDocContent() {
                       <TableCell>Ahmed Khan</TableCell>
                       <TableCell>INV-001</TableCell>
                       <TableCell>PKR 12,000</TableCell>
-                      <TableCell><SimpleBadge variant="green">Paid</SimpleBadge></TableCell>
+                      <TableCell>
+                        <SimpleBadge variant="green">Paid</SimpleBadge>
+                      </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell>Sara Ali</TableCell>
                       <TableCell>INV-002</TableCell>
                       <TableCell>PKR 8,500</TableCell>
-                      <TableCell><SimpleBadge variant="blue">Pending</SimpleBadge></TableCell>
+                      <TableCell>
+                        <SimpleBadge variant="blue">Pending</SimpleBadge>
+                      </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell>Usman Raza</TableCell>
                       <TableCell>INV-003</TableCell>
                       <TableCell>PKR 15,000</TableCell>
-                      <TableCell><SimpleBadge variant="amber">Overdue</SimpleBadge></TableCell>
+                      <TableCell>
+                        <SimpleBadge variant="amber">Overdue</SimpleBadge>
+                      </TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
@@ -151,7 +163,17 @@ export function TableDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Empty State</h3>
-          <p className="text-xs text-muted-foreground">Use <code className="rounded bg-muted px-1 font-mono text-xs">EmptyBody</code> in place of <code className="rounded bg-muted px-1 font-mono text-xs">TableBody</code> when there is no data.</p>
+          <p className="text-xs text-muted-foreground">
+            Use{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              EmptyBody
+            </code>{" "}
+            in place of{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              TableBody
+            </code>{" "}
+            when there is no data.
+          </p>
           <ComponentPreview
             align="start"
             code={`<TableWrapper>

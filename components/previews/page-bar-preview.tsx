@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { DataTableBarAction } from '@/ascendra-ui/components/layout/data-table-bar-action';
-import { DataTableBarContent } from '@/ascendra-ui/components/layout/data-table-bar-content';
-import { TableBar } from '@/ascendra-ui/components/layout/table-bar';
-import { Button } from '@/ascendra-ui/components/ui/button';
+import { DataTableBarAction } from "@/ascendra-ui/components/layout/data-table-bar-action";
+import { DataTableBarContent } from "@/ascendra-ui/components/layout/data-table-bar-content";
+import { TableBar } from "@/ascendra-ui/components/layout/table-bar";
+import { Button } from "@/ascendra-ui/components/ui/button";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from '@/ascendra-ui/components/ui/input-group';
-import { registry } from '@/lib/showcase/registry';
-import { LuPlus, LuSearch, LuSlidersHorizontal } from 'react-icons/lu';
-import { ComponentPreview } from '../component-preview';
-import { PropsTable } from '../props-table';
-import { SectionHeader } from '../section-header';
+} from "@/ascendra-ui/components/ui/input-group";
+import { registry } from "@/lib/registry";
+import { LuPlus, LuSearch, LuSlidersHorizontal } from "react-icons/lu";
+import { ComponentPreview } from "../component-preview";
+import { PropsTable } from "../props-table";
+import { SectionHeader } from "../section-header";
 
-const meta = registry['page-bar'];
+const meta = registry["page-bar"];
 
 export function PageBarDocContent() {
   return (

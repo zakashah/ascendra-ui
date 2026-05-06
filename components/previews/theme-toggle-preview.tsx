@@ -1,20 +1,21 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
-import { ThemeToggle } from '@/ascendra-ui/components/util/theme-toggle';
-import { registry } from '@/lib/showcase/registry';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
+import { ThemeToggle } from "@/ascendra-ui/components/util/theme-toggle";
+import { registry } from "@/lib/registry";
 
-const meta = registry['theme-toggle'];
+const meta = registry["theme-toggle"];
 
 export function ThemeToggleDocContent() {
   return (
     <div className="space-y-10">
+      <ComponentPreview
+        code={`import { ThemeToggle } from "@/ascendra-ui/components/util/theme-toggle";
 
-      <ComponentPreview code={`import { ThemeToggle } from "@/ascendra-ui/components/util/theme-toggle";
-
-<ThemeToggle />`}>
+<ThemeToggle />`}
+      >
         <ThemeToggle />
       </ComponentPreview>
 
@@ -23,7 +24,9 @@ export function ThemeToggleDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">In a Header</h3>
-          <p className="text-xs text-muted-foreground">Drop into any header or toolbar — no props required.</p>
+          <p className="text-xs text-muted-foreground">
+            Drop into any header or toolbar — no props required.
+          </p>
           <ComponentPreview
             code={`<div className="flex items-center justify-between rounded-lg border px-4 py-2">
   <span className="text-sm font-medium text-foreground">Ascendra Pay</span>
@@ -31,7 +34,9 @@ export function ThemeToggleDocContent() {
 </div>`}
           >
             <div className="flex w-full max-w-sm items-center justify-between rounded-lg border px-4 py-2">
-              <span className="text-sm font-medium text-foreground">Ascendra Pay</span>
+              <span className="text-sm font-medium text-foreground">
+                Ascendra Pay
+              </span>
               <ThemeToggle />
             </div>
           </ComponentPreview>

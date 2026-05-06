@@ -1,20 +1,21 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
-import { Input } from '@/ascendra-ui/components/ui/input';
-import { registry } from '@/lib/showcase/registry';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
+import { Input } from "@/ascendra-ui/components/ui/input";
+import { registry } from "@/lib/registry";
 
-const meta = registry['input'];
+const meta = registry["input"];
 
 export function InputDocContent() {
   return (
     <div className="space-y-10">
+      <ComponentPreview
+        code={`import { Input } from "@/ascendra-ui/components/ui/input";
 
-      <ComponentPreview code={`import { Input } from "@/ascendra-ui/components/ui/input";
-
-<Input placeholder="Enter your email" />`}>
+<Input placeholder="Enter your email" />`}
+      >
         <Input placeholder="Enter your email" />
       </ComponentPreview>
 
@@ -23,7 +24,9 @@ export function InputDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">States</h3>
-          <p className="text-xs text-muted-foreground">Default, with value, disabled, and readonly states.</p>
+          <p className="text-xs text-muted-foreground">
+            Default, with value, disabled, and readonly states.
+          </p>
           <ComponentPreview
             align="start"
             code={`<Input placeholder="Placeholder text" />
@@ -42,7 +45,13 @@ export function InputDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Full Width</h3>
-          <p className="text-xs text-muted-foreground">Use <code className="rounded bg-muted px-1 font-mono text-xs">full</code> to expand to the container width.</p>
+          <p className="text-xs text-muted-foreground">
+            Use{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              full
+            </code>{" "}
+            to expand to the container width.
+          </p>
           <ComponentPreview
             align="start"
             code={`<Input full placeholder="Full-width input" />`}
@@ -55,7 +64,9 @@ export function InputDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Types</h3>
-          <p className="text-xs text-muted-foreground">Supports all native HTML input types.</p>
+          <p className="text-xs text-muted-foreground">
+            Supports all native HTML input types.
+          </p>
           <ComponentPreview
             align="start"
             code={`<Input type="text" placeholder="Text" />

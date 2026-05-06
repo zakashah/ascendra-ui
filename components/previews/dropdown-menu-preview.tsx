@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -15,17 +15,16 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
   DropdownMenuShortcut,
-} from '@/ascendra-ui/components/ui/dropdown-menu';
-import { Button } from '@/ascendra-ui/components/ui/button';
-import { registry } from '@/lib/showcase/registry';
-import { LuPencil, LuTrash2, LuEye, LuEllipsis } from 'react-icons/lu';
+} from "@/ascendra-ui/components/ui/dropdown-menu";
+import { Button } from "@/ascendra-ui/components/ui/button";
+import { registry } from "@/lib/registry";
+import { LuPencil, LuTrash2, LuEye, LuEllipsis } from "react-icons/lu";
 
-const meta = registry['dropdown-menu'];
+const meta = registry["dropdown-menu"];
 
 export function DropdownMenuDocContent() {
   return (
     <div className="space-y-10">
-
       <ComponentPreview
         code={`import {
   DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
@@ -62,8 +61,12 @@ export function DropdownMenuDocContent() {
         <SectionHeader>Examples</SectionHeader>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">With Icons and Shortcuts</h3>
-          <p className="text-xs text-muted-foreground">Add icons and keyboard shortcut hints to menu items.</p>
+          <h3 className="text-sm font-medium text-foreground">
+            With Icons and Shortcuts
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Add icons and keyboard shortcut hints to menu items.
+          </p>
           <ComponentPreview
             code={`<DropdownMenu>
   <DropdownMenuTrigger asChild>
@@ -112,8 +115,16 @@ export function DropdownMenuDocContent() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Checkbox Items</h3>
-          <p className="text-xs text-muted-foreground">Use <code className="rounded bg-muted px-1 font-mono text-xs">DropdownMenuCheckboxItem</code> for multi-select filter menus.</p>
+          <h3 className="text-sm font-medium text-foreground">
+            Checkbox Items
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Use{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              DropdownMenuCheckboxItem
+            </code>{" "}
+            for multi-select filter menus.
+          </p>
           <ComponentPreview
             code={`<DropdownMenu>
   <DropdownMenuTrigger asChild>
@@ -135,8 +146,12 @@ export function DropdownMenuDocContent() {
               <DropdownMenuContent>
                 <DropdownMenuLabel>Toggle Columns</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuCheckboxItem checked>Name</DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem checked>Amount</DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem checked>
+                  Name
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem checked>
+                  Amount
+                </DropdownMenuCheckboxItem>
                 <DropdownMenuCheckboxItem>Due Date</DropdownMenuCheckboxItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -145,7 +160,9 @@ export function DropdownMenuDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Sub-menu</h3>
-          <p className="text-xs text-muted-foreground">Nest additional options inside a sub-menu trigger.</p>
+          <p className="text-xs text-muted-foreground">
+            Nest additional options inside a sub-menu trigger.
+          </p>
           <ComponentPreview
             code={`<DropdownMenu>
   <DropdownMenuTrigger asChild>
@@ -185,7 +202,9 @@ export function DropdownMenuDocContent() {
                   </DropdownMenuSubContent>
                 </DropdownMenuSub>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+                <DropdownMenuItem variant="destructive">
+                  Delete
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </ComponentPreview>

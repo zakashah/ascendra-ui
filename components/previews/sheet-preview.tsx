@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
 import {
   Sheet,
   SheetTrigger,
@@ -15,11 +15,11 @@ import {
   SheetClose,
   SheetSubHeader,
   SheetSubFooter,
-} from '@/ascendra-ui/components/ui/sheet';
-import { Button } from '@/ascendra-ui/components/ui/button';
-import { registry } from '@/lib/showcase/registry';
+} from "@/ascendra-ui/components/ui/sheet";
+import { Button } from "@/ascendra-ui/components/ui/button";
+import { registry } from "@/lib/registry";
 
-const meta = registry['sheet'];
+const meta = registry["sheet"];
 
 export function SheetDocContent() {
   return (

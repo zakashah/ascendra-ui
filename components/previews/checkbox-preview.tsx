@@ -1,20 +1,21 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
-import { Checkbox } from '@/ascendra-ui/components/ui/checkbox';
-import { registry } from '@/lib/showcase/registry';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
+import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
+import { registry } from "@/lib/registry";
 
-const meta = registry['checkbox'];
+const meta = registry["checkbox"];
 
 export function CheckboxDocContent() {
   return (
     <div className="space-y-10">
+      <ComponentPreview
+        code={`import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
 
-      <ComponentPreview code={`import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
-
-<Checkbox />`}>
+<Checkbox />`}
+      >
         <Checkbox />
       </ComponentPreview>
 
@@ -23,7 +24,9 @@ export function CheckboxDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">States</h3>
-          <p className="text-xs text-muted-foreground">Unchecked, checked, indeterminate, and disabled states.</p>
+          <p className="text-xs text-muted-foreground">
+            Unchecked, checked, indeterminate, and disabled states.
+          </p>
           <ComponentPreview
             code={`<Checkbox />
 <Checkbox defaultChecked />
@@ -41,7 +44,9 @@ export function CheckboxDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">With Label</h3>
-          <p className="text-xs text-muted-foreground">Pair with a label element for form use.</p>
+          <p className="text-xs text-muted-foreground">
+            Pair with a label element for form use.
+          </p>
           <ComponentPreview
             code={`<label className="flex items-center gap-2 cursor-pointer">
   <Checkbox defaultChecked />
@@ -55,11 +60,15 @@ export function CheckboxDocContent() {
             <div className="flex flex-col gap-3">
               <label className="flex items-center gap-2 cursor-pointer">
                 <Checkbox defaultChecked />
-                <span className="text-sm text-foreground">Send payment reminders</span>
+                <span className="text-sm text-foreground">
+                  Send payment reminders
+                </span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <Checkbox />
-                <span className="text-sm text-foreground">Enable auto-invoice</span>
+                <span className="text-sm text-foreground">
+                  Enable auto-invoice
+                </span>
               </label>
             </div>
           </ComponentPreview>

@@ -1,12 +1,15 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
-import { RadioGroup, RadioGroupItem } from '@/ascendra-ui/components/ui/radio-group';
-import { registry } from '@/lib/showcase/registry';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from "@/ascendra-ui/components/ui/radio-group";
+import { registry } from "@/lib/registry";
 
-const meta = registry['radio-group'];
+const meta = registry["radio-group"];
 
 export function RadioGroupDocContent() {
   return (
@@ -64,11 +67,11 @@ export function RadioGroupDocContent() {
             With Disabled Item
           </h3>
           <p className="text-muted-foreground text-xs">
-            Disable individual items by passing the{' '}
+            Disable individual items by passing the{" "}
             <code className="bg-muted rounded px-1 font-mono text-xs">
               disabled
-            </code>{' '}
-            prop to{' '}
+            </code>{" "}
+            prop to{" "}
             <code className="bg-muted rounded px-1 font-mono text-xs">
               RadioGroupItem
             </code>

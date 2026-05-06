@@ -1,25 +1,26 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
-import { NavLink } from '@/ascendra-ui/components/nav/nav-link';
-import { NavLinkBadge } from '@/ascendra-ui/components/nav/nav-link-badge';
-import { registry } from '@/lib/showcase/registry';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
+import { NavLink } from "@/ascendra-ui/components/nav/nav-link";
+import { NavLinkBadge } from "@/ascendra-ui/components/nav/nav-link-badge";
+import { registry } from "@/lib/registry";
 
-const meta = registry['nav-link'];
+const meta = registry["nav-link"];
 
 export function NavLinkDocContent() {
   return (
     <div className="space-y-10">
-
       <ComponentPreview
         code={`import { NavLink, NavLinkBadge } from "@/ascendra-ui/components/nav/nav-link";
 
 <NavLink href="/parents" exact>Parents</NavLink>`}
       >
         <div className="border-b pb-1">
-          <NavLink href="#" exact>Parents</NavLink>
+          <NavLink href="#" exact>
+            Parents
+          </NavLink>
         </div>
       </ComponentPreview>
 
@@ -27,9 +28,16 @@ export function NavLinkDocContent() {
         <SectionHeader>Examples</SectionHeader>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Active vs Inactive</h3>
+          <h3 className="text-sm font-medium text-foreground">
+            Active vs Inactive
+          </h3>
           <p className="text-xs text-muted-foreground">
-            Active state is controlled by the <code className="rounded bg-muted px-1 font-mono text-xs">exact</code> prop (static demo — in production, active state is derived from the current pathname).
+            Active state is controlled by the{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              exact
+            </code>{" "}
+            prop (static demo — in production, active state is derived from the
+            current pathname).
           </p>
           <ComponentPreview
             code={`<NavLink href="#" exact>Overview</NavLink>
@@ -37,7 +45,9 @@ export function NavLinkDocContent() {
 <NavLink href="#">Invoices</NavLink>`}
           >
             <div className="flex items-center gap-1 border-b pb-1">
-              <NavLink href="#" exact>Overview</NavLink>
+              <NavLink href="#" exact>
+                Overview
+              </NavLink>
               <NavLink href="#">Parents</NavLink>
               <NavLink href="#">Invoices</NavLink>
             </div>
@@ -45,8 +55,12 @@ export function NavLinkDocContent() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">With NavLinkBadge</h3>
-          <p className="text-xs text-muted-foreground">Attach a dashed badge to flag new or beta features.</p>
+          <h3 className="text-sm font-medium text-foreground">
+            With NavLinkBadge
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Attach a dashed badge to flag new or beta features.
+          </p>
           <ComponentPreview
             code={`<NavLink href="#">
   Analytics

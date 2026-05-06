@@ -1,20 +1,21 @@
-'use client';
+"use client";
 
-import { ComponentPreview } from '../component-preview';
-import { SectionHeader } from '../section-header';
-import { PropsTable } from '../props-table';
-import { StatusDot } from '@/ascendra-ui/components/common-ui/status-dot';
-import { registry } from '@/lib/showcase/registry';
+import { ComponentPreview } from "../component-preview";
+import { SectionHeader } from "../section-header";
+import { PropsTable } from "../props-table";
+import { StatusDot } from "@/ascendra-ui/components/common-ui/status-dot";
+import { registry } from "@/lib/registry";
 
-const meta = registry['status-dot'];
+const meta = registry["status-dot"];
 
 export function StatusDotDocContent() {
   return (
     <div className="space-y-10">
+      <ComponentPreview
+        code={`import { StatusDot } from "@/ascendra-ui/components/common-ui/status-dot";
 
-      <ComponentPreview code={`import { StatusDot } from "@/ascendra-ui/components/common-ui/status-dot";
-
-<StatusDot variant="emerald" />`}>
+<StatusDot variant="emerald" />`}
+      >
         <StatusDot variant="emerald" />
       </ComponentPreview>
 
@@ -23,7 +24,9 @@ export function StatusDotDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Variants</h3>
-          <p className="text-xs text-muted-foreground">Nine semantic color variants with matching halo shadow ring.</p>
+          <p className="text-xs text-muted-foreground">
+            Nine semantic color variants with matching halo shadow ring.
+          </p>
           <ComponentPreview
             code={`<StatusDot variant="orange" />
 <StatusDot variant="emerald" />
@@ -49,7 +52,9 @@ export function StatusDotDocContent() {
 
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">With Label</h3>
-          <p className="text-xs text-muted-foreground">Compose with a span to create labeled status indicators.</p>
+          <p className="text-xs text-muted-foreground">
+            Compose with a span to create labeled status indicators.
+          </p>
           <ComponentPreview
             code={`<div className="flex items-center gap-2">
   <StatusDot variant="emerald" />
