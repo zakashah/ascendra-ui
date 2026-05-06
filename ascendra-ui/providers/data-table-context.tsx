@@ -1,10 +1,10 @@
 'use client';
 
 import { createContext, useContext, useState } from 'react';
-import { type FilterChip, useFilter } from './use-filter';
-import { type PaginationState, usePagination } from './use-pagination';
-import { useSearch } from './use-search';
-import { useSort } from './use-sort';
+import { type FilterChip, useFilter } from '../hooks/use-filter';
+import { type PaginationState, usePagination } from '../hooks/use-pagination';
+import { useSearch } from '../hooks/use-search';
+import { useSort } from '../hooks/use-sort';
 import { type ColumnDef, type SortConfig } from '@/ascendra-ui/lib/table';
 
 // Internal context value — uses `unknown` to avoid requiring generics on createContext

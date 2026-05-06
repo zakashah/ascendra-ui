@@ -22,7 +22,7 @@ export default function ShowcasePage() {
       <div className="mb-12">
         <div className="mb-4 inline-flex items-center gap-2 rounded-full border bg-muted/60 px-3 py-1 text-xs text-muted-foreground">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          Ascendra Pay Design System
+          Ascendra Design System
         </div>
         <h1 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">
           Component Showcase

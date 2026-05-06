@@ -1,3 +1,6 @@
+export const sleep = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
 export function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('en-GB', {
     day: '2-digit',
@@ -6,10 +9,10 @@ export function formatDate(iso: string): string {
   });
 }
 
-export function formatAmount(amount: number): string {
+export function formatAmount(amount: number, currency = 'PKR'): string {
   return new Intl.NumberFormat('en-PK', {
     style: 'currency',
-    currency: 'PKR',
+    currency,
     minimumFractionDigits: 0,
   }).format(amount);
 }

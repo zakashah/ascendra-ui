@@ -1,4 +1,4 @@
-import { useDataTableContext } from '@/ascendra-ui/hooks/use-data-table';
+import { useDataTableContext } from '@/ascendra-ui/providers/data-table-context';
 import { DataTableFilterItem } from './data-table-filter-item';
 
 export function DataTableFilterBar() {

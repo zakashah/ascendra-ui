@@ -11,7 +11,7 @@ import {
   EmptyTitle,
 } from '@/ascendra-ui/components/ui/empty';
 import { EmptyBody } from '@/ascendra-ui/components/ui/table';
-import { useDataTableContext } from '@/ascendra-ui/hooks/use-data-table';
+import { useDataTableContext } from '@/ascendra-ui/providers/data-table-context';
 
 interface DataTableEmptyBodyProps {
   icon?: React.ReactNode;

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useDataTableContext } from '@/ascendra-ui/hooks/use-data-table';
+import { useDataTableContext } from '@/ascendra-ui/providers/data-table-context';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 import { filterChildrenByColumn } from './data-table-filter-by-column';
 
