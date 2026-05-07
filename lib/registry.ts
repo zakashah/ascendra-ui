@@ -492,6 +492,31 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'data-table': {
+    slug: 'data-table',
+    name: 'Data Table',
+    description: 'Feature-rich data table with built-in search, filtering, sorting, column management, and pagination — composed via DataTableProvider and QueryProvider.',
+    importPath: '@/ascendra-ui/components/data-table',
+    importNames: [
+      'DataTable', 'DataTableHeader', 'DataTableHeaderRow', 'DataTableHead',
+      'DataTableBody', 'DataTableRow', 'DataTableCell', 'DataTableHighlight',
+      'DataTableWrapper', 'DataTableFoot', 'DataTableLoadingBody', 'DataTableEmptyBody',
+      'DataTableSearchInput', 'DataTableColumnManager', 'DataTableSortDropdown',
+      'DataTableFilterDropdown', 'DataTableFilterBar',
+    ],
+    props: [
+      { name: 'key',          type: 'keyof T',                  description: 'Data property key for this column.' },
+      { name: 'label',        type: 'string',                   description: 'Column header label.' },
+      { name: 'type',         type: "'string' | 'number' | 'date'", default: "'string'", description: 'Data type — drives sort order and search formatting.' },
+      { name: 'sortable',     type: 'boolean',                  default: 'true',    description: 'Set to false to remove the sort icon and click handler.' },
+      { name: 'freeze',       type: 'boolean',                  default: 'false',   description: 'Always visible; cannot be hidden via the column manager.' },
+      { name: 'locked',       type: 'boolean',                  default: 'false',   description: 'Column position cannot be changed by reordering.' },
+      { name: 'active',       type: 'boolean',                  default: 'true',    description: 'Whether the column is visible by default.' },
+      { name: 'filter',       type: 'boolean',                  default: 'false',   description: 'Whether the column appears in the filter picker.' },
+      { name: 'displayValue', type: '(raw: string) => string',  description: 'Converts raw data values to labels in filter chips and options.' },
+    ],
+  },
+
   'item': {
     slug: 'item',
     name: 'Item',

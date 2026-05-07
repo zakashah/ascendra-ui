@@ -182,13 +182,48 @@ type RadiusToken = {
 };
 
 const radiusTokens: RadiusToken[] = [
-  { name: "sm", cssVar: "--radius-sm", twClass: "rounded-sm", value: "0.375rem (6px)" },
-  { name: "md", cssVar: "--radius-md", twClass: "rounded-md", value: "0.5rem (8px)" },
-  { name: "lg", cssVar: "--radius-lg", twClass: "rounded-lg", value: "0.625rem (10px)" },
-  { name: "xl", cssVar: "--radius-xl", twClass: "rounded-xl", value: "0.875rem (14px)" },
-  { name: "2xl", cssVar: "--radius-2xl", twClass: "rounded-2xl", value: "1.125rem (18px)" },
-  { name: "3xl", cssVar: "--radius-3xl", twClass: "rounded-3xl", value: "1.375rem (22px)" },
-  { name: "4xl", cssVar: "--radius-4xl", twClass: "rounded-4xl", value: "1.625rem (26px)" },
+  {
+    name: "sm",
+    cssVar: "--radius-sm",
+    twClass: "rounded-sm",
+    value: "0.375rem (6px)",
+  },
+  {
+    name: "md",
+    cssVar: "--radius-md",
+    twClass: "rounded-md",
+    value: "0.5rem (8px)",
+  },
+  {
+    name: "lg",
+    cssVar: "--radius-lg",
+    twClass: "rounded-lg",
+    value: "0.625rem (10px)",
+  },
+  {
+    name: "xl",
+    cssVar: "--radius-xl",
+    twClass: "rounded-xl",
+    value: "0.875rem (14px)",
+  },
+  {
+    name: "2xl",
+    cssVar: "--radius-2xl",
+    twClass: "rounded-2xl",
+    value: "1.125rem (18px)",
+  },
+  {
+    name: "3xl",
+    cssVar: "--radius-3xl",
+    twClass: "rounded-3xl",
+    value: "1.375rem (22px)",
+  },
+  {
+    name: "4xl",
+    cssVar: "--radius-4xl",
+    twClass: "rounded-4xl",
+    value: "1.625rem (26px)",
+  },
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────

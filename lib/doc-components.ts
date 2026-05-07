@@ -43,6 +43,7 @@ import { ItemDocContent } from "@/components/previews/item-preview";
 import { CalendarDocContent } from "@/components/previews/calendar-preview";
 import { DatePickerDocContent } from "@/components/previews/date-picker-preview";
 import { DateRangePickerDocContent } from "@/components/previews/date-range-picker-preview";
+import { DataTableDocContent } from "@/components/previews/data-table-preview";
 
 export type DocComponent = React.ComponentType;
 
@@ -87,4 +88,5 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   calendar: CalendarDocContent,
   "date-picker": DatePickerDocContent,
   "date-range-picker": DateRangePickerDocContent,
+  "data-table": DataTableDocContent,
 };

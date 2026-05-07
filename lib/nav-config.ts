@@ -63,6 +63,7 @@ export const navConfig: NavCategory[] = [
     items: [
       { name: 'Table', slug: 'table' },
       { name: 'Empty State', slug: 'empty' },
+      { name: 'Data Table', slug: 'data-table' },
     ],
   },
   {
