@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from '@/ascendra-ui/components/ui/dropdown-menu';
 import { useQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
-import { PRESET_QUERIES, type QueryGroup } from '@/ascendra-ui/lib/query';
+import type { QueryGroup } from '@/ascendra-ui/providers/data-table-query/data-table-query.types';
 
 const GROUP_LABELS: Record<QueryGroup, string> = {
   query: 'Queries',
@@ -23,9 +23,9 @@ const GROUP_LABELS: Record<QueryGroup, string> = {
 const GROUP_ORDER: QueryGroup[] = ['query', 'user-query', 'filter'];
 
 export function QueryBar() {
-  const { confirmedQueryId, setActiveQueryId, isLoading } = useQueryContext();
+  const { queries, confirmedQueryId, setActiveQueryId, isLoading } = useQueryContext();
   const confirmedQuery =
-    PRESET_QUERIES.find((q) => q.id === confirmedQueryId) ?? PRESET_QUERIES[0];
+    queries.find((q) => q.id === confirmedQueryId) ?? queries[0];
 
   return (
     <DropdownMenu>
@@ -68,7 +68,7 @@ export function QueryBar() {
           onValueChange={setActiveQueryId}
         >
           {GROUP_ORDER.map((group, i) => {
-            const items = PRESET_QUERIES.filter((q) => q.group === group);
+            const items = queries.filter((q) => q.group === group);
             if (items.length === 0) return null;
             return (
               <div key={group}>

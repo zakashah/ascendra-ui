@@ -17,8 +17,8 @@ import type {
   FieldDef,
   ParamItem,
   QueryParamValues,
-} from '@/ascendra-ui/lib/query';
-import { isFieldDef } from '@/ascendra-ui/lib/query';
+} from '@/ascendra-ui/providers/data-table-query/data-table-query.types';
+import { isFieldDef } from '@/ascendra-ui/providers/data-table-query/data-table-query.types';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 import { InfoIcon } from 'lucide-react';
 import { IoColorFilterOutline } from 'react-icons/io5';

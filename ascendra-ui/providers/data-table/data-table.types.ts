@@ -1,6 +1,30 @@
 import type { FilterChip } from './use-filter.hook';
 import type { PaginationState } from './use-pagination.hook';
-import type { ColumnDef, SortConfig } from '@/ascendra-ui/lib/table';
+
+export type ColumnType = 'string' | 'number' | 'date';
+export type SortDirection = 'asc' | 'desc';
+
+export interface ColumnDef<T> {
+  key: keyof T;
+  label: string;
+  type?: ColumnType;
+  sortable?: boolean;
+  /** Column is always visible; checkbox is disabled. Implies active. */
+  freeze?: boolean;
+  /** Column position cannot be changed; shows lock icon instead of drag handle. */
+  locked?: boolean;
+  /** Whether the column is currently visible. Defaults to true. */
+  active?: boolean;
+  /** Whether the column appears in the filter picker. Defaults to false. */
+  filter?: boolean;
+  /** Converts a raw data string value to its display label in filter chips/options. */
+  displayValue?: (raw: string) => string;
+}
+
+export interface SortConfig<T> {
+  key: keyof T;
+  direction: SortDirection;
+}
 
 export interface DataTableContextValue {
   columns: ColumnDef<unknown>[];

@@ -2,7 +2,19 @@
 
 import { useMemo, useState } from 'react';
 import Fuse from 'fuse.js';
-import { type ColumnDef, searchValue } from '@/ascendra-ui/lib/table';
+import type { ColumnDef, ColumnType } from './data-table.types';
+
+function searchValue(val: unknown, type: ColumnType): string {
+  if (type === 'date') {
+    return new Date(val as string).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    });
+  }
+  if (type === 'number') return (val as number).toLocaleString();
+  return String(val ?? '');
+}
 
 export function useSearch<T extends object>(
   data: T[],

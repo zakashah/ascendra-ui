@@ -1,12 +1,11 @@
 'use client';
 
 import { createContext, useContext, useState, useCallback, useRef } from 'react';
-import { PRESET_QUERIES } from '@/ascendra-ui/lib/query';
 import type { QueryContextValue, DataTableQueryProviderProps } from './data-table-query.types';
 
 const QueryContext = createContext<QueryContextValue | null>(null);
 
-export function DataTableQueryProvider({ queries = PRESET_QUERIES, children }: DataTableQueryProviderProps) {
+export function DataTableQueryProvider({ queries, children }: DataTableQueryProviderProps) {
   const [activeId, setActiveId] = useState(queries[0].id);
   const [pendingQueryId, setPendingQueryId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -65,6 +64,7 @@ export function DataTableQueryProvider({ queries = PRESET_QUERIES, children }: D
   return (
     <QueryContext.Provider
       value={{
+        queries,
         activeQuery,
         confirmedQueryId: activeId,
         pendingQueryId,

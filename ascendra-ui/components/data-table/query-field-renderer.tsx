@@ -37,7 +37,7 @@ import { DatePicker } from '@/ascendra-ui/components/date/date-picker';
 import { DateRangePicker } from '@/ascendra-ui/components/date/date-range-picker';
 import { Checkbox } from '@/ascendra-ui/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/ascendra-ui/components/ui/radio-group';
-import type { FieldDef } from '@/ascendra-ui/lib/query';
+import type { FieldDef } from '@/ascendra-ui/providers/data-table-query/data-table-query.types';
 
 interface QueryFieldRendererProps {
   field: FieldDef;

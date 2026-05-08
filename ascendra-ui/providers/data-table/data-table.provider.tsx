@@ -5,8 +5,7 @@ import { useFilter } from './use-filter.hook';
 import { usePagination } from './use-pagination.hook';
 import { useSearch } from './use-search.hook';
 import { useSort } from './use-sort.hook';
-import { type ColumnDef, type SortConfig } from '@/ascendra-ui/lib/table';
-import type { DataTableContextValue, DataTableState, DataTableProviderProps } from './data-table.types';
+import type { ColumnDef, SortConfig, DataTableContextValue, DataTableState, DataTableProviderProps } from './data-table.types';
 
 const DataTableContext = createContext<DataTableContextValue | null>(null);
 

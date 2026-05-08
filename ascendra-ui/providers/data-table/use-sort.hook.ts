@@ -1,7 +1,29 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { type ColumnDef, type SortConfig, sortData } from '@/ascendra-ui/lib/table';
+import type { ColumnDef, ColumnType, SortConfig } from './data-table.types';
+
+function sortValue(val: unknown, type: ColumnType): string | number {
+  if (type === 'date') return new Date(val as string).getTime();
+  if (type === 'number') return val as number;
+  return String(val);
+}
+
+function sortData<T>(
+  data: T[],
+  config: SortConfig<T> | null,
+  columns: ColumnDef<T>[],
+): T[] {
+  if (!config) return data;
+  const colType = columns.find((c) => c.key === config.key)?.type ?? 'string';
+  return [...data].sort((a, b) => {
+    const aVal = sortValue(a[config.key], colType);
+    const bVal = sortValue(b[config.key], colType);
+    if (aVal < bVal) return config.direction === 'asc' ? -1 : 1;
+    if (aVal > bVal) return config.direction === 'asc' ? 1 : -1;
+    return 0;
+  });
+}
 
 export function useSort<T>(data: T[], columns: ColumnDef<T>[]) {
   const [sortConfig, setSortConfig] = useState<SortConfig<T> | null>(null);

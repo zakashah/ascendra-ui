@@ -1,6 +1,82 @@
-import type { QueryDef, QueryParamValues } from '@/ascendra-ui/lib/query';
+import type { DateRange } from 'react-day-picker';
+
+export type FieldType =
+  | 'text'
+  | 'number'
+  | 'select'
+  | 'multiselect'
+  | 'date'
+  | 'daterange'
+  | 'checkbox'
+  | 'radio';
+
+export interface SelectOption {
+  value: string;
+  label: string;
+}
+
+export interface ColumnsConfig {
+  sm?: number;
+  md?: number;
+  lg?: number;
+}
+
+export interface FieldDef {
+  name: string;
+  label: string;
+  type: FieldType;
+  placeholder?: string;
+  required?: boolean;
+  /** Subtitle shown below the label in text-xs (above the input) */
+  info?: string;
+  /** Helper text shown below the input */
+  description?: string;
+  /** Shows a red "Mandatory" badge next to the description */
+  mandatory?: boolean;
+  /** Shows a gray "Optional" badge next to the description */
+  optional?: boolean;
+  span?: 1 | 2 | 'full';
+  options?: SelectOption[];
+  min?: number;
+  max?: number;
+  minLength?: number;
+  maxLength?: number;
+}
+
+export interface SectionBreak {
+  _type: 'section';
+  title: string;
+  /** When true, renders a floating pill label on the panel item border */
+  showTitle?: boolean;
+}
+
+export type ParamItem = FieldDef | SectionBreak;
+
+export function isFieldDef(item: ParamItem): item is FieldDef {
+  return !('_type' in item);
+}
+
+export type QueryParamValues = Record<
+  string,
+  string | number | boolean | Date | DateRange | string[] | undefined
+>;
+
+export type QueryGroup = 'query' | 'user-query' | 'filter';
+
+export interface QueryDef {
+  id: string;
+  title: string;
+  description: string;
+  group: QueryGroup;
+  /** Rendered in MainSectionFooter when present */
+  info?: string;
+  /** Grid column count per breakpoint — defaults to sm:1, md:1, lg:1 */
+  columns?: ColumnsConfig;
+  params?: ParamItem[];
+}
 
 export interface QueryContextValue {
+  queries: QueryDef[];
   activeQuery: QueryDef;
   confirmedQueryId: string;
   pendingQueryId: string | null;
@@ -18,6 +94,6 @@ export interface QueryContextValue {
 }
 
 export interface DataTableQueryProviderProps {
-  queries?: QueryDef[];
+  queries: QueryDef[];
   children: React.ReactNode;
 }

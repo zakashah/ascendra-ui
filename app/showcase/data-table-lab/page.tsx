@@ -1,6 +1,7 @@
 "use client";
 
-import { type ColumnDef } from "@/ascendra-ui/lib/table";
+import { type ColumnDef } from "@/ascendra-ui/providers/data-table/data-table.types";
+import { PRESET_QUERIES } from "@/lib/mock/invoice-mock";
 import {
   DataTableQueryProvider,
   useQueryContext,
@@ -212,7 +213,7 @@ export default function DataTableLabPage() {
           </TabList>
           <TabContent value="table-usage">
             <MainContent>
-              <DataTableQueryProvider>
+              <DataTableQueryProvider queries={PRESET_QUERIES}>
                 <QueryBar />
                 <QueryParamPanel />
                 <InvoiceTable />

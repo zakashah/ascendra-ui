@@ -4,7 +4,7 @@ import { ComponentPreview } from '../component-preview';
 import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { registry } from '@/lib/registry';
-import { type ColumnDef } from '@/ascendra-ui/lib/table';
+import { type ColumnDef } from '@/ascendra-ui/providers/data-table/data-table.types';
 import { DataTableProvider } from '@/ascendra-ui/providers/data-table/data-table.provider';
 import { DataTableQueryProvider } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 import { DataTable } from '@/ascendra-ui/components/data-table/data-table';
@@ -180,7 +180,7 @@ export function DataTableDocContent() {
       <ComponentPreview
         align="start"
         minHeight={460}
-        code={`import { ColumnDef } from '@/ascendra-ui/lib/table';
+        code={`import { ColumnDef } from '@/ascendra-ui/providers/data-table/data-table.types';
 import { DataTableProvider } from '@/ascendra-ui/providers/data-table/data-table.provider';
 import { DataTableQueryProvider } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 import { DataTable } from '@/ascendra-ui/components/data-table/data-table';
@@ -427,7 +427,7 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
           <ComponentPreview
             align="start"
             minHeight={100}
-            code={`import { ColumnDef } from '@/ascendra-ui/lib/table';
+            code={`import { ColumnDef } from '@/ascendra-ui/providers/data-table/data-table.types';
 
 const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
   // freeze: always visible; cannot be hidden via the column manager
