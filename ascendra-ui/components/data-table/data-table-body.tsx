@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { TableBody } from '@/ascendra-ui/components/ui/table';
-import { useDataTableContext } from '@/ascendra-ui/providers/data-table-context';
+import { useDataTableContext } from '@/ascendra-ui/providers/data-table/data-table.provider';
 
 interface DataTableBodyProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,7 +1,7 @@
 'use client';
 
 import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
-import { useQueryContext } from '@/ascendra-ui/hooks/use-query-context';
+import { useQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 import { PaginationButton } from '@/ascendra-ui/components/common-ui/pagination-button';
 
 export function BatchNavigator() {

@@ -2,10 +2,10 @@
 
 import { type ColumnDef } from "@/ascendra-ui/lib/table";
 import {
-  QueryProvider,
+  DataTableQueryProvider,
   useQueryContext,
-} from "@/ascendra-ui/hooks/use-query-context";
-import { DataTableProvider } from "@/ascendra-ui/providers/data-table-context";
+} from "@/ascendra-ui/providers/data-table-query/data-table-query.provider";
+import { DataTableProvider } from "@/ascendra-ui/providers/data-table/data-table.provider";
 
 import { DataTable } from "@/ascendra-ui/components/data-table/data-table";
 import { DataTableHeader } from "@/ascendra-ui/components/data-table/data-table-header";
@@ -212,11 +212,11 @@ export default function DataTableLabPage() {
           </TabList>
           <TabContent value="table-usage">
             <MainContent>
-              <QueryProvider>
+              <DataTableQueryProvider>
                 <QueryBar />
                 <QueryParamPanel />
                 <InvoiceTable />
-              </QueryProvider>
+              </DataTableQueryProvider>
             </MainContent>
           </TabContent>
         </Tabs>

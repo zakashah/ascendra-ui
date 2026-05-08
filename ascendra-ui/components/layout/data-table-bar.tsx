@@ -1,6 +1,6 @@
 'use client';
 
-import { useQueryContext } from '@/ascendra-ui/hooks/use-query-context';
+import { useQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 
 export function DataTableBar({

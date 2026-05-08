@@ -12,7 +12,7 @@ import {
 
 import { PaginationButton } from '@/ascendra-ui/components/common-ui/pagination-button';
 import { Separator } from '@/ascendra-ui/shadcn/components/ui/separator';
-import { type PaginationState } from '@/ascendra-ui/hooks/use-pagination';
+import { type PaginationState } from '@/ascendra-ui/providers/data-table/use-pagination.hook';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 import {
   LuChevronFirst,

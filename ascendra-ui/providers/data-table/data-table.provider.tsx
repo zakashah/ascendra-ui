@@ -1,74 +1,14 @@
 'use client';
 
 import { createContext, useContext, useState } from 'react';
-import { type FilterChip, useFilter } from '../hooks/use-filter';
-import { type PaginationState, usePagination } from '../hooks/use-pagination';
-import { useSearch } from '../hooks/use-search';
-import { useSort } from '../hooks/use-sort';
+import { useFilter } from './use-filter.hook';
+import { usePagination } from './use-pagination.hook';
+import { useSearch } from './use-search.hook';
+import { useSort } from './use-sort.hook';
 import { type ColumnDef, type SortConfig } from '@/ascendra-ui/lib/table';
-
-// Internal context value — uses `unknown` to avoid requiring generics on createContext
-interface DataTableContextValue {
-  columns: ColumnDef<unknown>[];
-  toggleColumnActive: (key: string) => void;
-  reorderColumns: (fromKey: string, toKey: string) => void;
-  isLoading: boolean;
-  searchTerm: string;
-  setSearchTerm: (term: string) => void;
-  fuzzy: boolean;
-  setFuzzy: (v: boolean) => void;
-  getRanges: (item: unknown, key: PropertyKey) => [number, number][] | undefined;
-  filters: FilterChip[];
-  filterableColumns: ColumnDef<unknown>[];
-  addFilter: (key: string) => void;
-  setFilterValue: (key: string, value: string) => void;
-  removeFilter: (key: string) => void;
-  clearFilters: () => void;
-  getOptionsFor: (key: string) => string[];
-  sortConfig: SortConfig<unknown> | null;
-  handleSort: (key: PropertyKey) => void;
-  clearSort: () => void;
-  isColSortable: (key: string) => boolean;
-  pagedData: unknown[];
-  totalFiltered: number;
-  pagination: PaginationState;
-}
-
-// Public typed interface — cast to this via useDataTable<T>()
-export interface DataTableState<T extends object> {
-  columns: ColumnDef<T>[];
-  toggleColumnActive: (key: string) => void;
-  reorderColumns: (fromKey: string, toKey: string) => void;
-  isLoading: boolean;
-  searchTerm: string;
-  setSearchTerm: (term: string) => void;
-  fuzzy: boolean;
-  setFuzzy: (v: boolean) => void;
-  getRanges: (item: T, key: keyof T) => [number, number][] | undefined;
-  filters: FilterChip[];
-  filterableColumns: ColumnDef<T>[];
-  addFilter: (key: string) => void;
-  setFilterValue: (key: string, value: string) => void;
-  removeFilter: (key: string) => void;
-  clearFilters: () => void;
-  getOptionsFor: (key: string) => string[];
-  sortConfig: SortConfig<T> | null;
-  handleSort: (key: keyof T) => void;
-  clearSort: () => void;
-  isColSortable: (key: string) => boolean;
-  pagedData: T[];
-  totalFiltered: number;
-  pagination: PaginationState;
-}
+import type { DataTableContextValue, DataTableState, DataTableProviderProps } from './data-table.types';
 
 const DataTableContext = createContext<DataTableContextValue | null>(null);
-
-interface DataTableProviderProps<T extends object> {
-  data: T[];
-  columns: ColumnDef<T>[];
-  isLoading?: boolean;
-  children: React.ReactNode;
-}
 
 export function DataTableProvider<T extends object>({
   data,

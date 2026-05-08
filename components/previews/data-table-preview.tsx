@@ -5,8 +5,8 @@ import { SectionHeader } from '../section-header';
 import { PropsTable } from '../props-table';
 import { registry } from '@/lib/registry';
 import { type ColumnDef } from '@/ascendra-ui/lib/table';
-import { DataTableProvider } from '@/ascendra-ui/providers/data-table-context';
-import { QueryProvider } from '@/ascendra-ui/hooks/use-query-context';
+import { DataTableProvider } from '@/ascendra-ui/providers/data-table/data-table.provider';
+import { DataTableQueryProvider } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 import { DataTable } from '@/ascendra-ui/components/data-table/data-table';
 import { DataTableHeader } from '@/ascendra-ui/components/data-table/data-table-header';
 import { DataTableHeaderRow } from '@/ascendra-ui/components/data-table/data-table-header-row';
@@ -106,7 +106,7 @@ function InvoiceDataTable({
   data?: Invoice[];
 }) {
   return (
-    <QueryProvider>
+    <DataTableQueryProvider>
       <DataTableProvider data={data} columns={INVOICE_COLUMNS} isLoading={isLoading}>
         <DataTableBar>
           <DataTableBarContent>
@@ -164,7 +164,7 @@ function InvoiceDataTable({
           <DataTableFoot />
         </DataTableWrapper>
       </DataTableProvider>
-    </QueryProvider>
+    </DataTableQueryProvider>
   );
 }
 
@@ -181,8 +181,8 @@ export function DataTableDocContent() {
         align="start"
         minHeight={460}
         code={`import { ColumnDef } from '@/ascendra-ui/lib/table';
-import { DataTableProvider } from '@/ascendra-ui/providers/data-table-context';
-import { QueryProvider } from '@/ascendra-ui/hooks/use-query-context';
+import { DataTableProvider } from '@/ascendra-ui/providers/data-table/data-table.provider';
+import { DataTableQueryProvider } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 import { DataTable } from '@/ascendra-ui/components/data-table/data-table';
 import { DataTableHeader } from '@/ascendra-ui/components/data-table/data-table-header';
 import { DataTableHeaderRow } from '@/ascendra-ui/components/data-table/data-table-header-row';
@@ -221,7 +221,7 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
 ];
 
 // 2. Wrap with providers and compose the table
-<QueryProvider>
+<DataTableQueryProvider>
   <DataTableProvider data={invoices} columns={INVOICE_COLUMNS} isLoading={isLoading}>
 
     {/* Toolbar */}
@@ -286,7 +286,7 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
     </DataTableWrapper>
 
   </DataTableProvider>
-</QueryProvider>`}
+</DataTableQueryProvider>`}
       >
         <div className="w-full space-y-3">
           <InvoiceDataTable />
@@ -328,7 +328,7 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
 </DataTableProvider>`}
           >
             <div className="w-full">
-              <QueryProvider>
+              <DataTableQueryProvider>
                 <DataTableProvider data={[]} columns={INVOICE_COLUMNS} isLoading={true}>
                   <DataTableWrapper>
                     <DataTable scrollable horizontal>
@@ -348,7 +348,7 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
                     <DataTableFoot />
                   </DataTableWrapper>
                 </DataTableProvider>
-              </QueryProvider>
+              </DataTableQueryProvider>
             </div>
           </ComponentPreview>
         </div>
@@ -388,7 +388,7 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
 </DataTableProvider>`}
           >
             <div className="w-full">
-              <QueryProvider>
+              <DataTableQueryProvider>
                 <DataTableProvider data={[]} columns={INVOICE_COLUMNS} isLoading={false}>
                   <DataTableWrapper>
                     <DataTable scrollable horizontal>
@@ -411,7 +411,7 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
                     <DataTableFoot />
                   </DataTableWrapper>
                 </DataTableProvider>
-              </QueryProvider>
+              </DataTableQueryProvider>
             </div>
           </ComponentPreview>
         </div>
@@ -503,7 +503,7 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
 <DataTableFilterBar />`}
           >
             <div className="w-full space-y-3">
-              <QueryProvider>
+              <DataTableQueryProvider>
                 <DataTableProvider data={MOCK_INVOICES} columns={INVOICE_COLUMNS}>
                   <DataTableBar>
                     <DataTableBarContent>
@@ -518,7 +518,7 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
                   </DataTableBar>
                   <DataTableFilterBar />
                 </DataTableProvider>
-              </QueryProvider>
+              </DataTableQueryProvider>
             </div>
           </ComponentPreview>
         </div>

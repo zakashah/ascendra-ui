@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/ascendra-ui/components/ui/dropdown-menu';
-import { useQueryContext } from '@/ascendra-ui/hooks/use-query-context';
+import { useQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 import { PRESET_QUERIES, type QueryGroup } from '@/ascendra-ui/lib/query';
 
 const GROUP_LABELS: Record<QueryGroup, string> = {

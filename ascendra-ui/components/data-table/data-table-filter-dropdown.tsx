@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/ascendra-ui/components/ui/dropdown-menu';
-import { useDataTableContext } from '@/ascendra-ui/providers/data-table-context';
+import { useDataTableContext } from '@/ascendra-ui/providers/data-table/data-table.provider';
 import { LuFilter } from 'react-icons/lu';
 
 export function DataTableFilterDropdown() {

@@ -6,7 +6,7 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from '@/ascendra-ui/components/ui/input-group';
-import { useDataTableContext } from '@/ascendra-ui/providers/data-table-context';
+import { useDataTableContext } from '@/ascendra-ui/providers/data-table/data-table.provider';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 import { useRef, useState } from 'react';
 import { LuSearch, LuX } from 'react-icons/lu';

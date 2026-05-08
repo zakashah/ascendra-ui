@@ -9,7 +9,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/ascendra-ui/components/ui/dropdown-menu';
-import { useDataTableContext } from '@/ascendra-ui/providers/data-table-context';
+import { useDataTableContext } from '@/ascendra-ui/providers/data-table/data-table.provider';
 import { LuLock, LuSettings } from 'react-icons/lu';
 import { RiDraggable } from 'react-icons/ri';
 

@@ -11,7 +11,7 @@ import { MainSectionFooter } from '@/ascendra-ui/components/layout/main-section-
 import { MainSectionHeader } from '@/ascendra-ui/components/layout/main-section-header';
 import { MainSectionPanel } from '@/ascendra-ui/components/layout/main-section-panel';
 import { MainSectionPanelItem } from '@/ascendra-ui/components/layout/main-section-panel-item';
-import { useQueryContext } from '@/ascendra-ui/hooks/use-query-context';
+import { useQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 import type {
   ColumnsConfig,
   FieldDef,

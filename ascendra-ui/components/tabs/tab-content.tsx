@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
-import { useTabs } from '@/ascendra-ui/providers/tabs-context';
+import { useTabs } from '@/ascendra-ui/providers/tabs/tabs.provider';
 
 export function TabContent({
   value,

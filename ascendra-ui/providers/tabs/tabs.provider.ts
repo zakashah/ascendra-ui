@@ -1,11 +1,7 @@
 'use client';
 
 import { createContext, useContext } from 'react';
-
-type TabsContextValue = {
-  active: string;
-  setActive: (value: string) => void;
-};
+import type { TabsContextValue } from './tabs.types';
 
 export const TabsContext = createContext<TabsContextValue | null>(null);
 

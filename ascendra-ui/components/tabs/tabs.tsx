@@ -1,6 +1,6 @@
 'use client';
 
-import { TabsContext } from '@/ascendra-ui/providers/tabs-context';
+import { TabsContext } from '@/ascendra-ui/providers/tabs/tabs.provider';
 import { useState } from 'react';
 
 export function Tabs({
