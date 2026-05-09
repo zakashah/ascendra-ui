@@ -6,7 +6,6 @@ import { PropsTable } from '../props-table';
 import { registry } from '@/lib/registry';
 import { type ColumnDef } from '@/ascendra-ui/providers/data-table/data-table.types';
 import { DataTableProvider } from '@/ascendra-ui/providers/data-table/data-table.provider';
-import { DataTableQueryProvider } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 import { DataTable } from '@/ascendra-ui/components/data-table/data-table';
 import { DataTableHeader } from '@/ascendra-ui/components/data-table/data-table-header';
 import { DataTableHeaderRow } from '@/ascendra-ui/components/data-table/data-table-header-row';
@@ -106,65 +105,63 @@ function InvoiceDataTable({
   data?: Invoice[];
 }) {
   return (
-    <DataTableQueryProvider>
-      <DataTableProvider data={data} columns={INVOICE_COLUMNS} isLoading={isLoading}>
-        <DataTableBar>
-          <DataTableBarContent>
-            <DataTableSearchInput />
-            <DataTableColumnManager />
-            <DataTableSortDropdown />
-            <DataTableFilterDropdown />
-          </DataTableBarContent>
-          <DataTableBarAction>
-            <Button size="sm">+ Add Invoice</Button>
-          </DataTableBarAction>
-        </DataTableBar>
-        <DataTableFilterBar />
-        <DataTableWrapper>
-          <DataTable scrollable horizontal height={340}>
-            <DataTableHeader>
-              <DataTableHeaderRow>
-                <DataTableHead column="invoiceNumber" />
-                <DataTableHead column="clientName" />
-                <DataTableHead column="amount" />
-                <DataTableHead column="dueDate" />
-                <DataTableHead column="status" />
-                <DataTableHead column="issuedAt" />
-              </DataTableHeaderRow>
-            </DataTableHeader>
-            <DataTableBody>
-              {(row: Invoice) => (
-                <DataTableRow key={row.id}>
-                  <DataTableCell column="invoiceNumber">
-                    <DataTableHighlight text={row.invoiceNumber} item={row} itemKey="invoiceNumber" />
-                  </DataTableCell>
-                  <DataTableCell column="clientName">
-                    <DataTableHighlight text={row.clientName} item={row} itemKey="clientName" />
-                  </DataTableCell>
-                  <DataTableCell column="amount">
-                    <DataTableHighlight text={formatAmount(row.amount)} item={row} itemKey="amount" />
-                  </DataTableCell>
-                  <DataTableCell column="dueDate">
-                    <DataTableHighlight text={formatDate(row.dueDate)} item={row} itemKey="dueDate" />
-                  </DataTableCell>
-                  <DataTableCell column="status">
-                    <SimpleBadge variant={statusBadgeVariant[row.status]}>
-                      {statusLabel[row.status]}
-                    </SimpleBadge>
-                  </DataTableCell>
-                  <DataTableCell column="issuedAt">
-                    <DataTableHighlight text={formatDate(row.issuedAt)} item={row} itemKey="issuedAt" />
-                  </DataTableCell>
-                </DataTableRow>
-              )}
-            </DataTableBody>
-          </DataTable>
-          <DataTableLoadingBody />
-          <DataTableEmptyBody />
-          <DataTableFoot />
-        </DataTableWrapper>
-      </DataTableProvider>
-    </DataTableQueryProvider>
+    <DataTableProvider data={data} columns={INVOICE_COLUMNS} isLoading={isLoading}>
+      <DataTableBar>
+        <DataTableBarContent>
+          <DataTableSearchInput />
+          <DataTableColumnManager />
+          <DataTableSortDropdown />
+          <DataTableFilterDropdown />
+        </DataTableBarContent>
+        <DataTableBarAction>
+          <Button size="sm">+ Add Invoice</Button>
+        </DataTableBarAction>
+      </DataTableBar>
+      <DataTableFilterBar />
+      <DataTableWrapper>
+        <DataTable scrollable horizontal height={340}>
+          <DataTableHeader>
+            <DataTableHeaderRow>
+              <DataTableHead column="invoiceNumber" />
+              <DataTableHead column="clientName" />
+              <DataTableHead column="amount" />
+              <DataTableHead column="dueDate" />
+              <DataTableHead column="status" />
+              <DataTableHead column="issuedAt" />
+            </DataTableHeaderRow>
+          </DataTableHeader>
+          <DataTableBody>
+            {(row: Invoice) => (
+              <DataTableRow key={row.id}>
+                <DataTableCell column="invoiceNumber">
+                  <DataTableHighlight text={row.invoiceNumber} item={row} itemKey="invoiceNumber" />
+                </DataTableCell>
+                <DataTableCell column="clientName">
+                  <DataTableHighlight text={row.clientName} item={row} itemKey="clientName" />
+                </DataTableCell>
+                <DataTableCell column="amount">
+                  <DataTableHighlight text={formatAmount(row.amount)} item={row} itemKey="amount" />
+                </DataTableCell>
+                <DataTableCell column="dueDate">
+                  <DataTableHighlight text={formatDate(row.dueDate)} item={row} itemKey="dueDate" />
+                </DataTableCell>
+                <DataTableCell column="status">
+                  <SimpleBadge variant={statusBadgeVariant[row.status]}>
+                    {statusLabel[row.status]}
+                  </SimpleBadge>
+                </DataTableCell>
+                <DataTableCell column="issuedAt">
+                  <DataTableHighlight text={formatDate(row.issuedAt)} item={row} itemKey="issuedAt" />
+                </DataTableCell>
+              </DataTableRow>
+            )}
+          </DataTableBody>
+        </DataTable>
+        <DataTableLoadingBody />
+        <DataTableEmptyBody />
+        <DataTableFoot />
+      </DataTableWrapper>
+    </DataTableProvider>
   );
 }
 
@@ -182,7 +179,6 @@ export function DataTableDocContent() {
         minHeight={460}
         code={`import { ColumnDef } from '@/ascendra-ui/providers/data-table/data-table.types';
 import { DataTableProvider } from '@/ascendra-ui/providers/data-table/data-table.provider';
-import { DataTableQueryProvider } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 import { DataTable } from '@/ascendra-ui/components/data-table/data-table';
 import { DataTableHeader } from '@/ascendra-ui/components/data-table/data-table-header';
 import { DataTableHeaderRow } from '@/ascendra-ui/components/data-table/data-table-header-row';
@@ -220,12 +216,11 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
   { key: 'issuedAt', label: 'Issued', type: 'date', active: false },
 ];
 
-// 2. Wrap with providers and compose the table
-<DataTableQueryProvider>
-  <DataTableProvider data={invoices} columns={INVOICE_COLUMNS} isLoading={isLoading}>
+// 2. Compose the table
+<DataTableProvider data={invoices} columns={INVOICE_COLUMNS} isLoading={isLoading}>
 
-    {/* Toolbar */}
-    <DataTableBar>
+  {/* Toolbar */}
+  <DataTableBar>
       <DataTableBarContent>
         <DataTableSearchInput />
         <DataTableColumnManager />
@@ -285,8 +280,7 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
       <DataTableFoot />
     </DataTableWrapper>
 
-  </DataTableProvider>
-</DataTableQueryProvider>`}
+</DataTableProvider>`}
       >
         <div className="w-full space-y-3">
           <InvoiceDataTable />
@@ -328,27 +322,25 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
 </DataTableProvider>`}
           >
             <div className="w-full">
-              <DataTableQueryProvider>
-                <DataTableProvider data={[]} columns={INVOICE_COLUMNS} isLoading={true}>
-                  <DataTableWrapper>
-                    <DataTable scrollable horizontal>
-                      <DataTableHeader>
-                        <DataTableHeaderRow>
-                          <DataTableHead column="invoiceNumber" />
-                          <DataTableHead column="clientName" />
-                          <DataTableHead column="status" />
-                        </DataTableHeaderRow>
-                      </DataTableHeader>
-                      <DataTableBody>
-                        {() => null}
-                      </DataTableBody>
-                    </DataTable>
-                    <DataTableLoadingBody />
-                    <DataTableEmptyBody />
-                    <DataTableFoot />
-                  </DataTableWrapper>
-                </DataTableProvider>
-              </DataTableQueryProvider>
+              <DataTableProvider data={[]} columns={INVOICE_COLUMNS} isLoading={true}>
+                <DataTableWrapper>
+                  <DataTable scrollable horizontal>
+                    <DataTableHeader>
+                      <DataTableHeaderRow>
+                        <DataTableHead column="invoiceNumber" />
+                        <DataTableHead column="clientName" />
+                        <DataTableHead column="status" />
+                      </DataTableHeaderRow>
+                    </DataTableHeader>
+                    <DataTableBody>
+                      {() => null}
+                    </DataTableBody>
+                  </DataTable>
+                  <DataTableLoadingBody />
+                  <DataTableEmptyBody />
+                  <DataTableFoot />
+                </DataTableWrapper>
+              </DataTableProvider>
             </div>
           </ComponentPreview>
         </div>
@@ -388,30 +380,28 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
 </DataTableProvider>`}
           >
             <div className="w-full">
-              <DataTableQueryProvider>
-                <DataTableProvider data={[]} columns={INVOICE_COLUMNS} isLoading={false}>
-                  <DataTableWrapper>
-                    <DataTable scrollable horizontal>
-                      <DataTableHeader>
-                        <DataTableHeaderRow>
-                          <DataTableHead column="invoiceNumber" />
-                          <DataTableHead column="clientName" />
-                          <DataTableHead column="status" />
-                        </DataTableHeaderRow>
-                      </DataTableHeader>
-                      <DataTableBody>
-                        {() => null}
-                      </DataTableBody>
-                    </DataTable>
-                    <DataTableLoadingBody />
-                    <DataTableEmptyBody
-                      title="No invoices found"
-                      description="Add a new invoice to get started."
-                    />
-                    <DataTableFoot />
-                  </DataTableWrapper>
-                </DataTableProvider>
-              </DataTableQueryProvider>
+              <DataTableProvider data={[]} columns={INVOICE_COLUMNS} isLoading={false}>
+                <DataTableWrapper>
+                  <DataTable scrollable horizontal>
+                    <DataTableHeader>
+                      <DataTableHeaderRow>
+                        <DataTableHead column="invoiceNumber" />
+                        <DataTableHead column="clientName" />
+                        <DataTableHead column="status" />
+                      </DataTableHeaderRow>
+                    </DataTableHeader>
+                    <DataTableBody>
+                      {() => null}
+                    </DataTableBody>
+                  </DataTable>
+                  <DataTableLoadingBody />
+                  <DataTableEmptyBody
+                    title="No invoices found"
+                    description="Add a new invoice to get started."
+                  />
+                  <DataTableFoot />
+                </DataTableWrapper>
+              </DataTableProvider>
             </div>
           </ComponentPreview>
         </div>
@@ -503,22 +493,20 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
 <DataTableFilterBar />`}
           >
             <div className="w-full space-y-3">
-              <DataTableQueryProvider>
-                <DataTableProvider data={MOCK_INVOICES} columns={INVOICE_COLUMNS}>
-                  <DataTableBar>
-                    <DataTableBarContent>
-                      <DataTableSearchInput />
-                      <DataTableColumnManager />
-                      <DataTableSortDropdown />
-                      <DataTableFilterDropdown />
-                    </DataTableBarContent>
-                    <DataTableBarAction>
-                      <Button size="sm">+ Add Invoice</Button>
-                    </DataTableBarAction>
-                  </DataTableBar>
-                  <DataTableFilterBar />
-                </DataTableProvider>
-              </DataTableQueryProvider>
+              <DataTableProvider data={MOCK_INVOICES} columns={INVOICE_COLUMNS}>
+                <DataTableBar>
+                  <DataTableBarContent>
+                    <DataTableSearchInput />
+                    <DataTableColumnManager />
+                    <DataTableSortDropdown />
+                    <DataTableFilterDropdown />
+                  </DataTableBarContent>
+                  <DataTableBarAction>
+                    <Button size="sm">+ Add Invoice</Button>
+                  </DataTableBarAction>
+                </DataTableBar>
+                <DataTableFilterBar />
+              </DataTableProvider>
             </div>
           </ComponentPreview>
         </div>

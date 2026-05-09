@@ -91,3 +91,7 @@ export function useQueryContext(): QueryContextValue {
   if (!ctx) throw new Error('useQueryContext must be used within DataTableQueryProvider');
   return ctx;
 }
+
+export function useOptionalQueryContext(): QueryContextValue | null {
+  return useContext(QueryContext);
+}

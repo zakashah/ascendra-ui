@@ -2,11 +2,11 @@
 
 import * as React from 'react';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
-import { useQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
+import { useOptionalQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 
 export function DataTableWrapper({ className, ...props }: React.ComponentProps<'div'>) {
-  const { activeQuery, lastResult } = useQueryContext();
-  const showParamPanel = !!activeQuery.params?.length && lastResult === null;
+  const queryCtx = useOptionalQueryContext();
+  const showParamPanel = !!queryCtx?.activeQuery.params?.length && queryCtx.lastResult === null;
 
   return (
     <div
