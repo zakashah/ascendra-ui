@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import Fuse from 'fuse.js';
 import type { ColumnDef, ColumnType } from './data-table.types';
 
@@ -72,9 +72,11 @@ export function useSearch<T extends object>(
     return { filteredData: filtered, rangesMap: null };
   }, [data, columns, keys, searchTerm, fuzzy, fuse]);
 
-  function getRanges(item: T, key: keyof T): [number, number][] | undefined {
-    return rangesMap?.get(item as object)?.get(String(key));
-  }
+  const getRanges = useCallback(
+    (item: unknown, key: PropertyKey): [number, number][] | undefined =>
+      rangesMap?.get(item as object)?.get(String(key)),
+    [rangesMap]
+  );
 
   return { searchTerm, setSearchTerm, fuzzy, setFuzzy, filteredData, getRanges };
 }

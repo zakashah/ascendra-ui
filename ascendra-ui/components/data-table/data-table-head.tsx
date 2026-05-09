@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useDataTableContext } from '@/ascendra-ui/providers/data-table/data-table.provider';
+import { useDataTableColumns, useDataTableSort } from '@/ascendra-ui/providers/data-table/data-table.provider';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 import { DataTableSortIcon } from './data-table-sort-icon';
 
@@ -12,7 +12,8 @@ interface DataTableHeadProps {
 }
 
 export function DataTableHead({ column, children, className }: DataTableHeadProps) {
-  const { isColSortable, handleSort, columns } = useDataTableContext();
+  const { columns, isColSortable } = useDataTableColumns();
+  const { handleSort } = useDataTableSort();
   const col = columns.find((c) => String(c.key) === column);
   if (col?.active === false) return null;
   const sortable = isColSortable(column);

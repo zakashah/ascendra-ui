@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 export interface PaginationState {
   currentPage: number;
@@ -19,7 +19,7 @@ export interface PaginationState {
 export function usePagination<T>(
   data: T[],
   defaultPageSize = 10,
-): PaginationState & { paginatedData: T[] } {
+): { pagination: PaginationState; paginatedData: T[] } {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSizeState] = useState(defaultPageSize);
   const [prevData, setPrevData] = useState(data);
@@ -44,21 +44,35 @@ export function usePagination<T>(
     [data, startIndex, endIndex],
   );
 
-  return {
-    currentPage: safeCurrentPage,
-    totalPages,
-    totalItems,
-    pageSize,
-    startIndex,
-    endIndex,
-    paginatedData,
-    setPageSize: (size: number) => {
-      setPageSizeState(size);
-      setCurrentPage(1);
-    },
-    goFirst: () => setCurrentPage(1),
-    goPrev: () => setCurrentPage((p) => Math.max(1, p - 1)),
-    goNext: () => setCurrentPage((p) => Math.min(totalPages, p + 1)),
-    goLast: () => setCurrentPage(totalPages),
-  };
+  const setPageSize = useCallback((size: number) => {
+    setPageSizeState(size);
+    setCurrentPage(1);
+  }, []);
+
+  const goFirst = useCallback(() => setCurrentPage(1), []);
+  const goPrev = useCallback(() => setCurrentPage((p) => Math.max(1, p - 1)), []);
+  const goNext = useCallback(
+    () => setCurrentPage((p) => Math.min(totalPages, p + 1)),
+    [totalPages]
+  );
+  const goLast = useCallback(() => setCurrentPage(totalPages), [totalPages]);
+
+  const pagination = useMemo<PaginationState>(
+    () => ({
+      currentPage: safeCurrentPage,
+      totalPages,
+      totalItems,
+      pageSize,
+      startIndex,
+      endIndex,
+      setPageSize,
+      goFirst,
+      goPrev,
+      goNext,
+      goLast,
+    }),
+    [safeCurrentPage, totalPages, totalItems, pageSize, startIndex, endIndex, setPageSize, goFirst, goPrev, goNext, goLast]
+  );
+
+  return { pagination, paginatedData };
 }

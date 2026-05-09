@@ -1,9 +1,9 @@
-import { useDataTableContext } from '@/ascendra-ui/providers/data-table/data-table.provider';
+import { useDataTableColumns, useDataTableFilter } from '@/ascendra-ui/providers/data-table/data-table.provider';
 import { DataTableFilterItem } from './data-table-filter-item';
 
 export function DataTableFilterBar() {
-  const { filters, columns, getOptionsFor, setFilterValue, removeFilter, clearFilters } =
-    useDataTableContext();
+  const { columns } = useDataTableColumns();
+  const { filters, getOptionsFor, setFilterValue, removeFilter, clearFilters } = useDataTableFilter();
 
   if (filters.length === 0) return null;
 

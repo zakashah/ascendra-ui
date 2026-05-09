@@ -1,32 +1,32 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 export type FilterChip = { key: string; value: string | null };
 
 export function useFilter<T>(data: T[]) {
   const [filters, setFilters] = useState<FilterChip[]>([]);
 
-  function addFilter(key: string) {
+  const addFilter = useCallback((key: string) => {
     setFilters((prev) => {
       if (prev.some((f) => f.key === key)) return prev;
       return [...prev, { key, value: null }];
     });
-  }
+  }, []);
 
-  function setFilterValue(key: string, value: string) {
+  const setFilterValue = useCallback((key: string, value: string) => {
     setFilters((prev) =>
       prev.map((f) => (f.key === key ? { ...f, value } : f))
     );
-  }
+  }, []);
 
-  function removeFilter(key: string) {
+  const removeFilter = useCallback((key: string) => {
     setFilters((prev) => prev.filter((f) => f.key !== key));
-  }
+  }, []);
 
-  function clearFilters() {
+  const clearFilters = useCallback(() => {
     setFilters([]);
-  }
+  }, []);
 
   // For each chip, compute options from `data` filtered by every OTHER active filter.
   // This gives faceted drill-down: selecting one filter narrows the options of siblings.
@@ -62,9 +62,10 @@ export function useFilter<T>(data: T[]) {
     );
   }, [data, filters]);
 
-  function getOptionsFor(key: string): string[] {
-    return optionsMap[key] ?? [];
-  }
+  const getOptionsFor = useCallback(
+    (key: string): string[] => optionsMap[key] ?? [],
+    [optionsMap]
+  );
 
   return {
     filters,

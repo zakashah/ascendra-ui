@@ -29,7 +29,7 @@ Inspecting React element props at runtime (`element.props.column`) to decide whe
 
 - **Effort:** Low (useMemo) → High (context split)
 - **Risk of not fixing:** Jank and unnecessary render cycles, harder to diagnose after widespread adoption.
-- **Status:** [ ] Pending (useMemo pass first)
+- **Status:** [x] Done — 5 split contexts (column, search, filter, sort, data) each with `useMemo`. All hook functions wrapped in `useCallback`. `usePagination` now returns a memoized `pagination` object. All 15 components updated to specific hooks. Merged `useDataTableContext` / `useDataTable<T>` kept for backward compat.
 
 ---
 
@@ -122,7 +122,7 @@ The Fuse index is rebuilt whenever `data` changes. Fine for query-driven tables 
 | # | Issue | Priority | Effort | Status |
 |---|-------|----------|--------|--------|
 | 1 | `filterChildrenByColumn` fragility | Critical | Medium | ✅ Done |
-| 2 | Context value instability | High | Low–High | ⬜ Pending |
+| 2 | Context value instability | High | Low–High | ✅ Done |
 | 3 | `as unknown as` type casts | Medium | Small | ⬜ Pending |
 | 4 | Combo wrapper missing props | Medium | Trivial | ⬜ Pending |
 | 5 | Zod schema on every render | Medium | Trivial | ⬜ Pending |

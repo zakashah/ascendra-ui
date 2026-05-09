@@ -1,4 +1,4 @@
-import { useDataTableContext } from '@/ascendra-ui/providers/data-table/data-table.provider';
+import { useDataTableColumns, useDataTableSort } from '@/ascendra-ui/providers/data-table/data-table.provider';
 import { LuArrowDown, LuArrowUp } from 'react-icons/lu';
 
 interface DataTableSortIconProps {
@@ -6,7 +6,8 @@ interface DataTableSortIconProps {
 }
 
 export function DataTableSortIcon({ column }: DataTableSortIconProps) {
-  const { sortConfig, isColSortable } = useDataTableContext();
+  const { isColSortable } = useDataTableColumns();
+  const { sortConfig } = useDataTableSort();
 
   if (!isColSortable(column)) return null;
 

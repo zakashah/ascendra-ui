@@ -24,6 +24,44 @@ export interface SortConfig<T> {
   direction: SortDirection;
 }
 
+export interface DataTableColumnContextValue {
+  columns: ColumnDef<unknown>[];
+  filterableColumns: ColumnDef<unknown>[];
+  toggleColumnActive: (key: string) => void;
+  reorderColumns: (fromKey: string, toKey: string) => void;
+  isColSortable: (key: string) => boolean;
+}
+
+export interface DataTableSearchContextValue {
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
+  fuzzy: boolean;
+  setFuzzy: (v: boolean) => void;
+  getRanges: (item: unknown, key: PropertyKey) => [number, number][] | undefined;
+}
+
+export interface DataTableFilterContextValue {
+  filters: FilterChip[];
+  addFilter: (key: string) => void;
+  setFilterValue: (key: string, value: string) => void;
+  removeFilter: (key: string) => void;
+  clearFilters: () => void;
+  getOptionsFor: (key: string) => string[];
+}
+
+export interface DataTableSortContextValue {
+  sortConfig: SortConfig<unknown> | null;
+  handleSort: (key: PropertyKey) => void;
+  clearSort: () => void;
+}
+
+export interface DataTableDataContextValue {
+  pagedData: unknown[];
+  totalFiltered: number;
+  pagination: PaginationState;
+  isLoading: boolean;
+}
+
 export interface DataTableContextValue {
   columns: ColumnDef<unknown>[];
   toggleColumnActive: (key: string) => void;

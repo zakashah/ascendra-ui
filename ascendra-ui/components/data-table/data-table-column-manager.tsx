@@ -9,7 +9,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/ascendra-ui/components/ui/dropdown-menu';
-import { useDataTableContext } from '@/ascendra-ui/providers/data-table/data-table.provider';
+import { useDataTableColumns } from '@/ascendra-ui/providers/data-table/data-table.provider';
 import { LuLock, LuSettings } from 'react-icons/lu';
 import { RiDraggable } from 'react-icons/ri';
 
@@ -18,7 +18,7 @@ interface DataTableColumnManagerProps {
 }
 
 export function DataTableColumnManager({ icon = false }: DataTableColumnManagerProps) {
-  const { columns, toggleColumnActive, reorderColumns } = useDataTableContext();
+  const { columns, toggleColumnActive, reorderColumns } = useDataTableColumns();
   const dragKeyRef = useRef<string | null>(null);
   const [dragOverKey, setDragOverKey] = useState<string | null>(null);
 

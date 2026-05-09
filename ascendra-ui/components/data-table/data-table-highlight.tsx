@@ -1,6 +1,6 @@
 'use client';
 
-import { useDataTableContext } from '@/ascendra-ui/providers/data-table/data-table.provider';
+import { useDataTableSearch } from '@/ascendra-ui/providers/data-table/data-table.provider';
 
 function escapeRegex(s: string) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -15,7 +15,7 @@ interface DataTableHighlightProps {
 const markClass = 'bg-yellow-200/50 text-inherit dark:bg-yellow-400/30';
 
 export function DataTableHighlight({ text, item, itemKey }: DataTableHighlightProps) {
-  const { searchTerm, getRanges } = useDataTableContext();
+  const { searchTerm, getRanges } = useDataTableSearch();
 
   const ranges = getRanges(item, itemKey);
 

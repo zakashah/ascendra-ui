@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/ascendra-ui/components/ui/dropdown-menu';
 import { DropdownMenuSeparator } from '@/ascendra-ui/components/ui/dropdown-menu';
-import { useDataTableContext } from '@/ascendra-ui/providers/data-table/data-table.provider';
+import { useDataTableColumns, useDataTableSort } from '@/ascendra-ui/providers/data-table/data-table.provider';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 import { LuArrowDown, LuArrowUp, LuArrowUpDown } from 'react-icons/lu';
 
@@ -20,7 +20,8 @@ interface DataTableSortDropdownProps {
 export function DataTableSortDropdown({
   icon = false,
 }: DataTableSortDropdownProps) {
-  const { columns, sortConfig, handleSort, clearSort } = useDataTableContext();
+  const { columns } = useDataTableColumns();
+  const { sortConfig, handleSort, clearSort } = useDataTableSort();
 
   return (
     <DropdownMenu>
