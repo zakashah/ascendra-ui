@@ -1,6 +1,6 @@
 'use client';
 
-import { useFormContext, Controller } from 'react-hook-form';
+import { useFormContext, Controller, useWatch } from 'react-hook-form';
 import type { DateRange } from 'react-day-picker';
 
 import { LuTriangleAlert } from 'react-icons/lu';
@@ -37,7 +37,8 @@ import { DatePicker } from '@/ascendra-ui/components/date/date-picker';
 import { DateRangePicker } from '@/ascendra-ui/components/date/date-range-picker';
 import { Checkbox } from '@/ascendra-ui/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/ascendra-ui/components/ui/radio-group';
-import type { FieldDef } from '@/ascendra-ui/providers/data-table-query/data-table-query.types';
+import type { FieldDef, QueryParamValues, SelectOption } from '@/ascendra-ui/providers/data-table-query/data-table-query.types';
+import { useOptionalQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 
 interface QueryFieldRendererProps {
   field: FieldDef;
@@ -49,6 +50,14 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
     control,
     formState: { errors },
   } = useFormContext();
+  const ctx = useOptionalQueryContext();
+  const allValues = useWatch({ control }) as QueryParamValues;
+
+  const resolvedOptions: SelectOption[] = (() => {
+    const def = ctx?.fieldOptions[ctx.activeQuery.id]?.[field.name];
+    if (!def) return field.options ?? [];
+    return typeof def === 'function' ? def(allValues) : def;
+  })();
 
   const error = errors[field.name];
   const inputId = `qf-${field.name}`;
@@ -114,7 +123,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
                 />
               </SelectTrigger>
               <SelectContent>
-                {field.options?.map((opt) => (
+                {resolvedOptions.map((opt) => (
                   <SelectItem key={opt.value} value={opt.value}>
                     {opt.label}
                   </SelectItem>
@@ -136,7 +145,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
               <Combobox multiple value={selected} onValueChange={f.onChange}>
                 <ComboboxChips aria-invalid={!!error || undefined}>
                   {selected.map((val) => {
-                    const opt = field.options?.find((o) => o.value === val);
+                    const opt = resolvedOptions.find((o) => o.value === val);
                     return (
                       <ComboboxChipItem key={val} value={val}>
                         {opt?.label ?? val}
@@ -154,7 +163,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
                 </ComboboxChips>
                 <ComboboxContent>
                   <ComboboxList>
-                    {field.options?.map((opt) => (
+                    {resolvedOptions.map((opt) => (
                       <ComboboxItem key={opt.value} value={opt.value}>
                         {opt.label}
                       </ComboboxItem>
@@ -242,7 +251,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
               aria-labelledby={labelId}
               className="grid-cols-2 gap-y-1.5"
             >
-              {field.options?.map((opt) => (
+              {resolvedOptions.map((opt) => (
                 <Field
                   key={opt.value}
                   orientation="horizontal"

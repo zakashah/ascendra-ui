@@ -90,6 +90,15 @@ export type QueryFn<T = unknown> = (params: QueryParamValues) => Promise<T[]>;
 /** Map of queryId → fetch function, passed separately from QueryDef for serializability */
 export type QueryFunctionMap<T = unknown> = Record<string, QueryFn<T>>;
 
+/** Resolver function for dynamic options — receives current form values */
+export type FieldOptionsResolver = (currentValues: QueryParamValues) => SelectOption[];
+
+/** Static array or dynamic resolver for a field's options */
+export type FieldOptionsDef = SelectOption[] | FieldOptionsResolver;
+
+/** Map of queryId → fieldName → options, passed separately from QueryDef for serializability */
+export type FieldOptionsMap = Record<string, Record<string, FieldOptionsDef>>;
+
 export interface QueryContextValue {
   queries: QueryDef[];
   activeQuery: QueryDef;
@@ -109,10 +118,12 @@ export interface QueryContextValue {
   setTotalBatches: (n: number) => void;
   goNextBatch: () => void;
   goPrevBatch: () => void;
+  fieldOptions: FieldOptionsMap;
 }
 
 export interface DataTableQueryProviderProps<T = unknown> {
   queries: QueryDef[];
   queryFunctions: QueryFunctionMap<T>;
+  fieldOptions?: FieldOptionsMap;
   children: React.ReactNode;
 }

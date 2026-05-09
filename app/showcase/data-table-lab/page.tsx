@@ -7,7 +7,10 @@ import {
   type Invoice,
   type InvoiceStatus,
 } from "@/lib/mock/invoice-mock";
-import { type QueryFunctionMap } from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
+import {
+  type QueryFunctionMap,
+  type FieldOptionsMap,
+} from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
 import { DataTableQueryProvider } from "@/ascendra-ui/providers/data-table-query/data-table-query.provider";
 import { DataTableProvider } from "@/ascendra-ui/providers/data-table/data-table.provider";
 
@@ -80,6 +83,35 @@ const INVOICE_QUERY_FUNCTIONS: QueryFunctionMap<Invoice> = Object.fromEntries(
   ]),
 );
 
+// Demonstrates dynamic fieldOptions — overrides static options in PRESET_QUERIES
+const INVOICE_FIELD_OPTIONS: FieldOptionsMap = {
+  // Static override: simulates options fetched from a server (adds "Draft" status)
+  "by-status": {
+    statuses: [
+      { value: "Paid", label: "Paid" },
+      { value: "Pending", label: "Pending" },
+      { value: "Overdue", label: "Overdue" },
+      { value: "Cancelled", label: "Cancelled" },
+      { value: "Draft", label: "Draft" },
+    ],
+  },
+  // Reactive resolver: paymentStatus options depend on the selected gradeLevel
+  "by-client": {
+    paymentStatus: (values) => {
+      const base = [
+        { value: "Paid", label: "Paid" },
+        { value: "Pending", label: "Pending" },
+        { value: "Overdue", label: "Overdue" },
+      ];
+      // Class 12 students have no Overdue invoices — remove it when that grade is selected
+      if (values.gradeLevel === "class-12") {
+        return base.filter((o) => o.value !== "Overdue");
+      }
+      return base;
+    },
+  },
+};
+
 export default function DataTableLabPage() {
   return (
     <div className="mx-auto max-w-5xl px-8 py-12">
@@ -102,10 +134,11 @@ export default function DataTableLabPage() {
               <DataTableQueryProvider
                 queries={PRESET_QUERIES}
                 queryFunctions={INVOICE_QUERY_FUNCTIONS}
+                fieldOptions={INVOICE_FIELD_OPTIONS}
               >
-                <QueryBar />
-                <QueryParamPanel />
                 <DataTableProvider columns={INVOICE_COLUMNS}>
+                  <QueryBar />
+                  <QueryParamPanel />
                   <DataTableBar>
                     <DataTableBarContent>
                       <DataTableSearchInput />

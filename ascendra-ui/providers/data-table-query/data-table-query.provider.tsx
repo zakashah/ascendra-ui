@@ -6,7 +6,7 @@ import type { QueryContextValue, DataTableQueryProviderProps, QueryParamValues }
 
 const QueryContext = createContext<QueryContextValue | null>(null);
 
-export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, children }: DataTableQueryProviderProps<T>) {
+export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, fieldOptions = {}, children }: DataTableQueryProviderProps<T>) {
   const [activeId, setActiveId] = useState(queries[0].id);
   const [pendingQueryId, setPendingQueryId] = useState<string | null>(null);
   const [confirmedParamsState, setConfirmedParamsState] = useState<QueryParamValues | null>(null);
@@ -92,6 +92,7 @@ export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, c
         setTotalBatches,
         goNextBatch,
         goPrevBatch,
+        fieldOptions,
       }}
     >
       {children}
