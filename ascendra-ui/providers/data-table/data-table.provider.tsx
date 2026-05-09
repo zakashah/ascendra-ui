@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useMemo, useState } from 'react
 import { useFilter } from './use-filter.hook';
 import { usePagination } from './use-pagination.hook';
 import { useSearch } from './use-search.hook';
+import { useSelection } from './use-selection.hook';
 import { useSort } from './use-sort.hook';
 import { useOptionalQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 import type {
@@ -17,6 +18,7 @@ import type {
   DataTableFilterContextValue,
   DataTableSortContextValue,
   DataTableDataContextValue,
+  DataTableSelectionContextValue,
 } from './data-table.types';
 
 // --- Contexts ---
@@ -26,6 +28,7 @@ const DataTableSearchContext = createContext<DataTableSearchContextValue | null>
 const DataTableFilterContext = createContext<DataTableFilterContextValue | null>(null);
 const DataTableSortContext = createContext<DataTableSortContextValue | null>(null);
 const DataTableDataContext = createContext<DataTableDataContextValue | null>(null);
+const DataTableSelectionContext = createContext<DataTableSelectionContextValue | null>(null);
 
 // --- Provider ---
 
@@ -33,6 +36,7 @@ export function DataTableProvider<T extends object>({
   data: dataProp,
   columns: initialColumns,
   isLoading: isLoadingProp,
+  getRowId,
   children,
 }: DataTableProviderProps<T>) {
   const queryCtx = useOptionalQueryContext();
@@ -94,6 +98,17 @@ export function DataTableProvider<T extends object>({
 
   const { pagination, paginatedData: pagedData } = usePagination(sortedData);
 
+  const {
+    selectedRows,
+    toggleRow,
+    selectAll,
+    clearSelection,
+    isRowSelected,
+    isAllSelected,
+    isIndeterminate,
+    selectionEnabled,
+  } = useSelection(pagedData, getRowId);
+
   // --- Context values (each only changes when its own slice changes) ---
 
   const columnCtx = useMemo<DataTableColumnContextValue>(
@@ -137,13 +152,20 @@ export function DataTableProvider<T extends object>({
     [pagedData, sortedData.length, pagination, isLoading]
   );
 
+  const selectionCtx = useMemo<DataTableSelectionContextValue>(
+    () => ({ selectedRows, isAllSelected, isIndeterminate, isRowSelected, toggleRow, selectAll, clearSelection, selectionEnabled }),
+    [selectedRows, isAllSelected, isIndeterminate, isRowSelected, toggleRow, selectAll, clearSelection, selectionEnabled]
+  );
+
   return (
     <DataTableColumnContext.Provider value={columnCtx}>
       <DataTableSearchContext.Provider value={searchCtx}>
         <DataTableFilterContext.Provider value={filterCtx}>
           <DataTableSortContext.Provider value={sortCtx}>
             <DataTableDataContext.Provider value={dataCtx}>
-              {children}
+              <DataTableSelectionContext.Provider value={selectionCtx}>
+                {children}
+              </DataTableSelectionContext.Provider>
             </DataTableDataContext.Provider>
           </DataTableSortContext.Provider>
         </DataTableFilterContext.Provider>
@@ -184,6 +206,12 @@ export function useDataTableData(): DataTableDataContextValue {
   return ctx;
 }
 
+export function useDataTableSelection(): DataTableSelectionContextValue {
+  const ctx = useContext(DataTableSelectionContext);
+  if (!ctx) throw new Error('useDataTableSelection must be used within DataTableProvider');
+  return ctx;
+}
+
 // --- Merged hooks (backward compat — re-renders on any slice change) ---
 
 export function useDataTableContext(): DataTableContextValue {
@@ -192,9 +220,10 @@ export function useDataTableContext(): DataTableContextValue {
   const filter = useContext(DataTableFilterContext);
   const sort = useContext(DataTableSortContext);
   const data = useContext(DataTableDataContext);
-  if (!col || !search || !filter || !sort || !data)
+  const selection = useContext(DataTableSelectionContext);
+  if (!col || !search || !filter || !sort || !data || !selection)
     throw new Error('useDataTableContext must be used within DataTableProvider');
-  return { ...col, ...search, ...filter, ...sort, ...data };
+  return { ...col, ...search, ...filter, ...sort, ...data, ...selection };
 }
 
 // For page-level consumers that know T (e.g. useDataTable<Invoice>())

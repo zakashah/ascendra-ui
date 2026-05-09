@@ -12,6 +12,7 @@ export interface DataTableWithQueryProviderProps<T extends object> {
   columns: ColumnDef<T>[];
   data?: T[];
   isLoading?: boolean;
+  getRowId?: (row: T) => string;
   children: React.ReactNode;
 }
 
@@ -22,6 +23,7 @@ export function DataTableWithQueryProvider<T extends object>({
   columns,
   data,
   isLoading,
+  getRowId,
   children,
 }: DataTableWithQueryProviderProps<T>) {
   return (
@@ -30,7 +32,7 @@ export function DataTableWithQueryProvider<T extends object>({
       queryFunctions={queryFunctions}
       fieldOptions={fieldOptions}
     >
-      <DataTableProvider columns={columns} data={data} isLoading={isLoading}>
+      <DataTableProvider columns={columns} data={data} isLoading={isLoading} getRowId={getRowId}>
         {children}
       </DataTableProvider>
     </DataTableQueryProvider>

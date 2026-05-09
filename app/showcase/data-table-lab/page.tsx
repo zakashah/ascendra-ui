@@ -20,6 +20,9 @@ import { DataTableHead } from "@/ascendra-ui/components/data-table/data-table-he
 import { DataTableBody } from "@/ascendra-ui/components/data-table/data-table-body";
 import { DataTableRow } from "@/ascendra-ui/components/data-table/data-table-row";
 import { DataTableCell } from "@/ascendra-ui/components/data-table/data-table-cell";
+import { DataTableCheckboxHead } from "@/ascendra-ui/components/data-table/data-table-checkbox-head";
+import { DataTableCheckboxCell } from "@/ascendra-ui/components/data-table/data-table-checkbox-cell";
+import { useDataTableSelection } from "@/ascendra-ui/providers/data-table/data-table.provider";
 import { DataTableHighlight } from "@/ascendra-ui/components/data-table/data-table-highlight";
 import { DataTableFoot } from "@/ascendra-ui/components/data-table/data-table-foot";
 import { DataTableEmptyBody } from "@/ascendra-ui/components/data-table/data-table-empty-body";
@@ -53,6 +56,26 @@ import { TabTrigger } from "@/ascendra-ui/components/tabs/tab-trigger";
 import { TabContent } from "@/ascendra-ui/components/tabs/tab-content";
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 import { formatAmount, formatDate } from "@/ascendra-ui/utils/common.util";
+
+function BulkActionBar() {
+  const { selectedRows, clearSelection } = useDataTableSelection();
+  if (selectedRows.size === 0) return null;
+  return (
+    <div className="flex items-center gap-3 rounded-lg border border-primary/20 bg-primary/5 px-4 py-2 text-sm">
+      <span className="font-medium">{selectedRows.size} selected</span>
+      <span
+        className="text-muted-foreground hover:text-foreground cursor-pointer"
+        onClick={clearSelection}
+      >
+        Clear
+      </span>
+      <div className="ml-auto flex gap-2">
+        <Button size="sm" variant="secondary">Export</Button>
+        <Button size="sm" variant="destructive">Delete</Button>
+      </div>
+    </div>
+  );
+}
 
 const statusVariant: Record<InvoiceStatus, "green" | "amber" | "red"> = {
   Paid: "green",
@@ -135,6 +158,7 @@ export default function DataTableLabPage() {
                 queryFunctions={INVOICE_QUERY_FUNCTIONS}
                 fieldOptions={INVOICE_FIELD_OPTIONS}
                 columns={INVOICE_COLUMNS}
+                getRowId={(row) => String(row.id)}
               >
                   <QueryBar />
                   <QueryParamPanel />
@@ -150,10 +174,12 @@ export default function DataTableLabPage() {
                     </DataTableBarAction>
                   </DataTableBar>
                   <DataTableFilterBar />
+                  <BulkActionBar />
                   <DataTableWrapper>
                     <DataTable scrollable horizontal height={400}>
                       <DataTableHeader>
                         <DataTableHeaderRow>
+                          <DataTableCheckboxHead />
                           <DataTableHead column="invoiceNumber">
                             Invoice #
                           </DataTableHead>
@@ -169,6 +195,7 @@ export default function DataTableLabPage() {
                       <DataTableBody>
                         {(row: Invoice) => (
                           <DataTableRow key={row.id}>
+                            <DataTableCheckboxCell rowId={String(row.id)} />
                             <DataTableCell column="invoiceNumber">
                               <div>
                                 <DataTableHighlight

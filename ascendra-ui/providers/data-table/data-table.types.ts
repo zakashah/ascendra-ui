@@ -62,6 +62,17 @@ export interface DataTableDataContextValue {
   isLoading: boolean;
 }
 
+export interface DataTableSelectionContextValue {
+  selectedRows: Set<string>;
+  isAllSelected: boolean;
+  isIndeterminate: boolean;
+  isRowSelected: (id: string) => boolean;
+  toggleRow: (id: string) => void;
+  selectAll: () => void;
+  clearSelection: () => void;
+  selectionEnabled: boolean;
+}
+
 export interface DataTableContextValue {
   columns: ColumnDef<unknown>[];
   toggleColumnActive: (key: string) => void;
@@ -86,6 +97,14 @@ export interface DataTableContextValue {
   pagedData: unknown[];
   totalFiltered: number;
   pagination: PaginationState;
+  selectedRows: Set<string>;
+  isAllSelected: boolean;
+  isIndeterminate: boolean;
+  isRowSelected: (id: string) => boolean;
+  toggleRow: (id: string) => void;
+  selectAll: () => void;
+  clearSelection: () => void;
+  selectionEnabled: boolean;
 }
 
 export interface DataTableState<T extends object> {
@@ -112,11 +131,20 @@ export interface DataTableState<T extends object> {
   pagedData: T[];
   totalFiltered: number;
   pagination: PaginationState;
+  selectedRows: Set<string>;
+  isAllSelected: boolean;
+  isIndeterminate: boolean;
+  isRowSelected: (id: string) => boolean;
+  toggleRow: (id: string) => void;
+  selectAll: () => void;
+  clearSelection: () => void;
+  selectionEnabled: boolean;
 }
 
 export interface DataTableProviderProps<T extends object> {
   data?: T[];
   columns: ColumnDef<T>[];
   isLoading?: boolean;
+  getRowId?: (row: T) => string;
   children: React.ReactNode;
 }

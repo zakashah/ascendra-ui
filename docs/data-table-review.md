@@ -65,7 +65,7 @@ The dual-type pattern (`DataTableContextValue` internally, `DataTableState<T>` v
 
 - **Effort:** Trivial (one line)
 - **Risk of not fixing:** Wasted computation on every keystroke in the filter panel.
-- **Status:** [ ] Pending
+- **Status:** [x] Done — `buildZodSchema` is already wrapped in `useMemo(() => buildZodSchema(fields), [fields])` inside `QueryParamPanelInner`. `fields` itself is also memoized. No work needed.
 
 ---
 
@@ -77,7 +77,7 @@ Faceted filter option computation scans the dataset and excludes already-active 
 
 - **Effort:** Small (inside the hook)
 - **Risk of not fixing:** Performance degradation on larger datasets — exactly the use case faceted filtering is designed for.
-- **Status:** [ ] Pending
+- **Status:** [x] Done — `optionsMap` is `useMemo`-ed on `[data, filters]` inside `useFilter`; `getOptionsFor` is a `useCallback` that reads from it. Fixed during issue #2 context-split work.
 
 ---
 
@@ -89,7 +89,7 @@ Faceted filter option computation scans the dataset and excludes already-active 
 
 - **Effort:** Types-only change now; implementation later is additive
 - **Risk of not fixing:** Breaking change across all consumers when the requirement arrives.
-- **Status:** [ ] Pending (types only)
+- **Status:** [x] Closed — deliberate product decision. Single-column sort is the permanent design. Multi-column sort UX (3-state cycle per column, sort-priority indicators) adds complexity for marginal benefit in a general-purpose table library.
 
 ---
 
@@ -101,7 +101,7 @@ Adding bulk operations (select all, select row, bulk actions) later means adding
 
 - **Effort:** Design spike
 - **Risk of not fixing:** Consuming projects build a parallel system or fork.
-- **Status:** [ ] Design only
+- **Status:** [x] Done — 6th selection context (`DataTableSelectionContext`) added. Pull model: consumers read `selectedRows: Set<string>` from `useDataTableSelection()` on demand. Opt-in via `getRowId?: (row: T) => string` on provider — omitting it disables selection (components are no-ops). New components: `DataTableCheckboxHead` (select-all with indeterminate state) and `DataTableCheckboxCell` (per-row toggle, takes `rowId: string`). `getRowId` forwarded through `DataTableWithQueryProvider` too.
 
 ---
 
@@ -125,8 +125,8 @@ The Fuse index is rebuilt whenever `data` changes. Fine for query-driven tables 
 | 2 | Context value instability | High | Low–High | ✅ Done |
 | 3 | `as unknown as` type casts | Medium | Small | ✅ Done |
 | 4 | Combo wrapper missing props | Medium | Trivial | ✅ Done |
-| 5 | Zod schema on every render | Medium | Trivial | ⬜ Pending |
-| 6 | `getOptionsFor` not memoized | Medium | Small | ⬜ Pending |
-| 7 | Multi-column sort API | Low | Types only | ⬜ Pending |
-| 8 | Row selection API | Low | Design | ⬜ Pending |
+| 5 | Zod schema on every render | Medium | Trivial | ✅ Done |
+| 6 | `getOptionsFor` not memoized | Medium | Small | ✅ Done |
+| 7 | Multi-column sort API | Low | Types only | 🚫 Closed |
+| 8 | Row selection API | Low | Design | ✅ Done |
 | 9 | Fuse index recreation | Low | Low | ⬜ Deferred |
