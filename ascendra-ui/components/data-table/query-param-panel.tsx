@@ -188,8 +188,8 @@ function getSpanClass(field: FieldDef): string {
 }
 
 export function QueryParamPanel() {
-  const { activeQuery, lastResult } = useQueryContext();
-  const showParamPanel = !!activeQuery.params?.length && lastResult === null;
+  const { activeQuery, confirmedParams } = useQueryContext();
+  const showParamPanel = !!activeQuery.params?.length && confirmedParams === null;
 
   if (!showParamPanel) return null;
 
@@ -199,9 +199,8 @@ export function QueryParamPanel() {
 function QueryParamPanelInner() {
   const {
     activeQuery,
-    setLastResult,
+    setConfirmedParams,
     isLoading,
-    setIsLoading,
     confirmPending,
   } = useQueryContext();
   const params = activeQuery.params!;
@@ -219,19 +218,14 @@ function QueryParamPanelInner() {
   });
 
   const handleRunQuery = async (): Promise<boolean> => {
-    // Trigger all fields so per-field errors surface immediately
     const valid = await methods.trigger();
     if (!valid) return false;
 
     return new Promise<boolean>((resolve) => {
       methods.handleSubmit((data) => {
-        setIsLoading(true);
-        setTimeout(() => {
-          setLastResult(data as QueryParamValues);
-          confirmPending();
-          setIsLoading(false);
-          resolve(true);
-        }, 2000);
+        setConfirmedParams(data as QueryParamValues);
+        confirmPending();
+        resolve(true);
       })();
     });
   };

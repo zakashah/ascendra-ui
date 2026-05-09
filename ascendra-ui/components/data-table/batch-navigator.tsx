@@ -5,10 +5,10 @@ import { useQueryContext } from '@/ascendra-ui/providers/data-table-query/data-t
 import { PaginationButton } from '@/ascendra-ui/components/common-ui/pagination-button';
 
 export function BatchNavigator() {
-  const { lastResult, currentBatch, totalBatches, goNextBatch, goPrevBatch } =
+  const { confirmedParams, currentBatch, totalBatches, goNextBatch, goPrevBatch } =
     useQueryContext();
 
-  if (!lastResult) return null;
+  if (!confirmedParams) return null;
 
   const atFirst = currentBatch === 1;
   const atLast = totalBatches !== null && currentBatch >= totalBatches;

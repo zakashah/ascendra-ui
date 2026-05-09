@@ -9,7 +9,7 @@ export function DataTableBar({
   ...props
 }: React.ComponentProps<'div'>) {
   const queryCtx = useOptionalQueryContext();
-  const showParamPanel = !!queryCtx?.activeQuery.params?.length && queryCtx.lastResult === null;
+  const showParamPanel = !!queryCtx?.activeQuery.params?.length && queryCtx.confirmedParams === null;
   return (
     <div
       data-slot="data-table-bar"

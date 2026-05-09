@@ -1,25 +1,27 @@
 'use client';
 
 import { createContext, useContext, useState, useCallback } from 'react';
-import type { QueryContextValue, DataTableQueryProviderProps } from './data-table-query.types';
+import { useQuery } from '@tanstack/react-query';
+import type { QueryContextValue, DataTableQueryProviderProps, QueryParamValues } from './data-table-query.types';
 
 const QueryContext = createContext<QueryContextValue | null>(null);
 
-export function DataTableQueryProvider({ queries, children }: DataTableQueryProviderProps) {
+export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, children }: DataTableQueryProviderProps<T>) {
   const [activeId, setActiveId] = useState(queries[0].id);
   const [pendingQueryId, setPendingQueryId] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [lastResult, setLastResultState] = useState<QueryContextValue['lastResult']>(null);
+  const [confirmedParamsState, setConfirmedParamsState] = useState<QueryParamValues | null>(null);
   const [currentBatch, setCurrentBatch] = useState(1);
   const [totalBatches, setTotalBatchesState] = useState<number | null>(null);
+
   const displayId = pendingQueryId ?? activeId;
   const activeQuery = queries.find((q) => q.id === displayId) ?? queries[0];
+  const confirmedQuery = queries.find((q) => q.id === activeId) ?? queries[0];
 
   const setActiveQueryId = useCallback((id: string) => {
     const query = queries.find((q) => q.id === id);
     setCurrentBatch(1);
     setTotalBatchesState(null);
-    setLastResultState(null);
+    setConfirmedParamsState(null);
 
     if (query?.group === 'filter') {
       // Filters are not confirmed until Run Query completes
@@ -37,8 +39,8 @@ export function DataTableQueryProvider({ queries, children }: DataTableQueryProv
     }
   }, [pendingQueryId]);
 
-  const setLastResult = useCallback((values: NonNullable<QueryContextValue['lastResult']>) => {
-    setLastResultState(values);
+  const setConfirmedParams = useCallback((values: QueryParamValues) => {
+    setConfirmedParamsState(values);
     setCurrentBatch(1);
   }, []);
 
@@ -56,6 +58,19 @@ export function DataTableQueryProvider({ queries, children }: DataTableQueryProv
     setCurrentBatch((prev) => Math.max(1, prev - 1));
   }, []);
 
+  const queryFn = queryFunctions[activeId];
+  const enabled = confirmedQuery.group !== 'filter' || confirmedParamsState !== null;
+
+  const { data, isLoading, isError, error, refetch } = useQuery<T[], Error>({
+    queryKey: ['data-table', activeId, confirmedParamsState],
+    queryFn: () => queryFn(confirmedParamsState ?? {}),
+    enabled: !!queryFn && enabled,
+    staleTime: confirmedQuery.queryOptions?.staleTime,
+    retry: confirmedQuery.queryOptions?.retry,
+    gcTime: confirmedQuery.queryOptions?.gcTime,
+    refetchOnWindowFocus: confirmedQuery.queryOptions?.refetchOnWindowFocus,
+  });
+
   return (
     <QueryContext.Provider
       value={{
@@ -66,9 +81,12 @@ export function DataTableQueryProvider({ queries, children }: DataTableQueryProv
         setActiveQueryId,
         confirmPending,
         isLoading,
-        setIsLoading,
-        lastResult,
-        setLastResult,
+        isError,
+        error: error ?? null,
+        refetch,
+        data: (data ?? []) as unknown[],
+        confirmedParams: confirmedParamsState,
+        setConfirmedParams,
         currentBatch,
         totalBatches,
         setTotalBatches,

@@ -6,7 +6,7 @@ import { useOptionalQueryContext } from '@/ascendra-ui/providers/data-table-quer
 
 export function DataTableWrapper({ className, ...props }: React.ComponentProps<'div'>) {
   const queryCtx = useOptionalQueryContext();
-  const showParamPanel = !!queryCtx?.activeQuery.params?.length && queryCtx.lastResult === null;
+  const showParamPanel = !!queryCtx?.activeQuery.params?.length && queryCtx.confirmedParams === null;
 
   return (
     <div

@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { useFilter } from './use-filter.hook';
 import { usePagination } from './use-pagination.hook';
 import { useSearch } from './use-search.hook';
@@ -17,14 +17,9 @@ export function DataTableProvider<T extends object>({
   children,
 }: DataTableProviderProps<T>) {
   const queryCtx = useOptionalQueryContext();
-  const data = dataProp ?? [];
+  const data = dataProp ?? (queryCtx?.data as T[] | undefined) ?? [];
   const isLoading = isLoadingProp ?? queryCtx?.isLoading ?? false;
 
-  useEffect(() => {
-    if (isLoadingProp !== undefined && queryCtx) {
-      queryCtx.setIsLoading(isLoadingProp);
-    }
-  }, [isLoadingProp, queryCtx]);
   const [columns, setColumns] = useState<ColumnDef<T>[]>(() => initialColumns);
   function toggleColumnActive(key: string) {
     setColumns((prev) =>

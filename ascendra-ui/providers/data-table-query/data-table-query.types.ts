@@ -63,6 +63,13 @@ export type QueryParamValues = Record<
 
 export type QueryGroup = 'query' | 'user-query' | 'filter';
 
+export interface QueryOptions {
+  staleTime?: number;
+  retry?: number | boolean;
+  gcTime?: number;
+  refetchOnWindowFocus?: boolean;
+}
+
 export interface QueryDef {
   id: string;
   title: string;
@@ -73,7 +80,15 @@ export interface QueryDef {
   /** Grid column count per breakpoint — defaults to sm:1, md:1, lg:1 */
   columns?: ColumnsConfig;
   params?: ParamItem[];
+  /** React Query cache/retry options for this query */
+  queryOptions?: QueryOptions;
 }
+
+/** Function that fetches rows for a query, receiving confirmed param values */
+export type QueryFn<T = unknown> = (params: QueryParamValues) => Promise<T[]>;
+
+/** Map of queryId → fetch function, passed separately from QueryDef for serializability */
+export type QueryFunctionMap<T = unknown> = Record<string, QueryFn<T>>;
 
 export interface QueryContextValue {
   queries: QueryDef[];
@@ -83,9 +98,12 @@ export interface QueryContextValue {
   setActiveQueryId: (id: string) => void;
   confirmPending: () => void;
   isLoading: boolean;
-  setIsLoading: (loading: boolean) => void;
-  lastResult: QueryParamValues | null;
-  setLastResult: (values: QueryParamValues) => void;
+  isError: boolean;
+  error: Error | null;
+  refetch: () => void;
+  data: unknown[];
+  confirmedParams: QueryParamValues | null;
+  setConfirmedParams: (values: QueryParamValues) => void;
   currentBatch: number;
   totalBatches: number | null;
   setTotalBatches: (n: number) => void;
@@ -93,7 +111,8 @@ export interface QueryContextValue {
   goPrevBatch: () => void;
 }
 
-export interface DataTableQueryProviderProps {
+export interface DataTableQueryProviderProps<T = unknown> {
   queries: QueryDef[];
+  queryFunctions: QueryFunctionMap<T>;
   children: React.ReactNode;
 }
