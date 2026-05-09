@@ -52,18 +52,11 @@ import { TabContent } from "@/ascendra-ui/components/tabs/tab-content";
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 import { formatAmount, formatDate } from "@/ascendra-ui/utils/common.util";
 
-const statusLabel: Record<InvoiceStatus, string> = {
-  paid: "Paid",
-  pending: "Pending",
-  overdue: "Overdue",
-  cancelled: "Cancelled",
-};
-
 const statusVariant: Record<InvoiceStatus, "green" | "amber" | "red"> = {
-  paid: "green",
-  pending: "amber",
-  overdue: "red",
-  cancelled: "red",
+  Paid: "green",
+  Pending: "amber",
+  Overdue: "red",
+  Cancelled: "red",
 };
 
 const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
@@ -76,7 +69,6 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
     label: "Status",
     sortable: false,
     filter: true,
-    displayValue: (raw) => statusLabel[raw as InvoiceStatus] ?? raw,
   },
   { key: "issuedAt", label: "Issued", type: "date", active: false },
 ];
@@ -85,7 +77,7 @@ const INVOICE_QUERY_FUNCTIONS: QueryFunctionMap<Invoice> = Object.fromEntries(
   PRESET_QUERIES.map((q) => [
     q.id,
     () => fetchMockInvoices(q.id).then((r) => r.data),
-  ])
+  ]),
 );
 
 export default function DataTableLabPage() {
@@ -130,8 +122,12 @@ export default function DataTableLabPage() {
                     <DataTable scrollable horizontal height={400}>
                       <DataTableHeader>
                         <DataTableHeaderRow>
-                          <DataTableHead column="invoiceNumber">Invoice #</DataTableHead>
-                          <DataTableHead column="clientName">Client</DataTableHead>
+                          <DataTableHead column="invoiceNumber">
+                            Invoice #
+                          </DataTableHead>
+                          <DataTableHead column="clientName">
+                            Client
+                          </DataTableHead>
                           <DataTableHead column="status" />
                           <DataTableHead column="amount" />
                           <DataTableHead column="dueDate" />
@@ -166,7 +162,7 @@ export default function DataTableLabPage() {
                             </DataTableCell>
                             <DataTableCell column="status">
                               <SimpleBadge variant={statusVariant[row.status]}>
-                                {statusLabel[row.status]}
+                                {row.status}
                               </SimpleBadge>
                             </DataTableCell>
                             <DataTableCell column="amount">

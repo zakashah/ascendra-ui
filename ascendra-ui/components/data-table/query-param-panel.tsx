@@ -209,7 +209,6 @@ function QueryParamPanelInner() {
 
   const schema = useMemo(() => buildZodSchema(fields), [fields]);
   const defaultValues = useMemo(() => buildDefaultValues(fields), [fields]);
-  console.log('defaultValues are: ', defaultValues);
 
   const methods = useForm({
     resolver: zodResolver(schema),

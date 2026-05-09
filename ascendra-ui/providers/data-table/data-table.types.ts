@@ -17,8 +17,6 @@ export interface ColumnDef<T> {
   active?: boolean;
   /** Whether the column appears in the filter picker. Defaults to false. */
   filter?: boolean;
-  /** Converts a raw data string value to its display label in filter chips/options. */
-  displayValue?: (raw: string) => string;
 }
 
 export interface SortConfig<T> {

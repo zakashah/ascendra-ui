@@ -15,7 +15,6 @@ interface DataTableFilterItemProps {
   label: string;
   options: string[];
   value: string | null;
-  displayValue?: (raw: string) => string;
   onChange: (key: string, value: string) => void;
   onRemove: (key: string) => void;
 }
@@ -25,12 +24,9 @@ export function DataTableFilterItem({
   label,
   options,
   value,
-  displayValue,
   onChange,
   onRemove,
 }: DataTableFilterItemProps) {
-  const display = (raw: string) => (displayValue ? displayValue(raw) : raw);
-
   return (
     <div className="bg-muted flex items-center rounded-full border border-dashed border-gray-700/30 py-0.75 text-xs">
       <div
@@ -44,7 +40,7 @@ export function DataTableFilterItem({
         <DropdownMenuTrigger asChild>
           <div className="flex cursor-pointer items-center gap-1 border-l px-1.5">
             <span className={cn(!value && 'text-muted-foreground')}>
-              {value ? display(value) : 'Enter Value'}
+              {value ?? 'Enter Value'}
             </span>
             <DropDownChevron />
           </div>
@@ -59,7 +55,7 @@ export function DataTableFilterItem({
                 className={cn(value === opt && 'font-medium')}
                 onClick={() => onChange(columnKey, opt)}
               >
-                {display(opt)}
+                {opt}
               </DropdownMenuItem>
             ))
           )}

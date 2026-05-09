@@ -18,7 +18,6 @@ export function DataTableFilterBar() {
             label={col?.label ?? f.key}
             options={getOptionsFor(f.key)}
             value={f.value}
-            displayValue={col?.displayValue}
             onChange={setFilterValue}
             onRemove={removeFilter}
           />
