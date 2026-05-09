@@ -41,7 +41,7 @@ The dual-type pattern (`DataTableContextValue` internally, `DataTableState<T>` v
 
 - **Effort:** Small (types only)
 - **Risk of not fixing:** Silent type regression in future refactors.
-- **Status:** [ ] Pending
+- **Status:** [x] Done — widened `handleSort` to `(key: PropertyKey)` and `getRanges` to `(item: unknown, key: PropertyKey)` in hooks so they match context types exactly. Replaced `as unknown as` double casts in provider with single casts for `columns`, `filterableColumns`, and `sortConfig`. The only remaining double cast is `useDataTableContext() as unknown as DataTableState<T>` in `useDataTable<T>()` — the correct single re-introduction boundary.
 
 ---
 
@@ -53,7 +53,7 @@ The dual-type pattern (`DataTableContextValue` internally, `DataTableState<T>` v
 
 - **Effort:** Trivial
 - **Risk of not fixing:** Consuming projects work around it by abandoning the combo wrapper.
-- **Status:** [ ] Pending
+- **Status:** [x] Done — added `data?: T[]` and `isLoading?: boolean` to `DataTableWithQueryProviderProps` and forwarded both to `DataTableProvider`.
 
 ---
 
@@ -123,8 +123,8 @@ The Fuse index is rebuilt whenever `data` changes. Fine for query-driven tables 
 |---|-------|----------|--------|--------|
 | 1 | `filterChildrenByColumn` fragility | Critical | Medium | ✅ Done |
 | 2 | Context value instability | High | Low–High | ✅ Done |
-| 3 | `as unknown as` type casts | Medium | Small | ⬜ Pending |
-| 4 | Combo wrapper missing props | Medium | Trivial | ⬜ Pending |
+| 3 | `as unknown as` type casts | Medium | Small | ✅ Done |
+| 4 | Combo wrapper missing props | Medium | Trivial | ✅ Done |
 | 5 | Zod schema on every render | Medium | Trivial | ⬜ Pending |
 | 6 | `getOptionsFor` not memoized | Medium | Small | ⬜ Pending |
 | 7 | Multi-column sort API | Low | Types only | ⬜ Pending |
