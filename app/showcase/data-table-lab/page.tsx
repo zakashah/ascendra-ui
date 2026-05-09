@@ -56,6 +56,17 @@ import { TabTrigger } from "@/ascendra-ui/components/tabs/tab-trigger";
 import { TabContent } from "@/ascendra-ui/components/tabs/tab-content";
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 import { formatAmount, formatDate } from "@/ascendra-ui/utils/common.util";
+import { DataTableGuide } from "./_guide";
+import { TableCell, TableHead } from "@/ascendra-ui/components/ui/table";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/ascendra-ui/components/ui/dropdown-menu";
+import { RowActionButton } from "@/ascendra-ui/components/common-ui/row-action-button";
+import { LuNotebookPen, LuTicketCheck, LuTrash2 } from "react-icons/lu";
 
 function BulkActionBar() {
   const { selectedRows, clearSelection } = useDataTableSelection();
@@ -70,8 +81,12 @@ function BulkActionBar() {
         Clear
       </span>
       <div className="ml-auto flex gap-2">
-        <Button size="sm" variant="secondary">Export</Button>
-        <Button size="sm" variant="destructive">Delete</Button>
+        <Button size="sm" variant="secondary">
+          Export
+        </Button>
+        <Button size="sm" variant="destructive">
+          Delete
+        </Button>
       </div>
     </div>
   );
@@ -150,6 +165,7 @@ export default function DataTableLabPage() {
         <Tabs defaultValue="table-usage">
           <TabList>
             <TabTrigger value="table-usage">Table usage</TabTrigger>
+            <TabTrigger value="developer-guide">Developer guide</TabTrigger>
           </TabList>
           <TabContent value="table-usage">
             <MainContent>
@@ -160,102 +176,157 @@ export default function DataTableLabPage() {
                 columns={INVOICE_COLUMNS}
                 getRowId={(row) => String(row.id)}
               >
-                  <QueryBar />
-                  <QueryParamPanel />
-                  <DataTableBar>
-                    <DataTableBarContent>
-                      <DataTableSearchInput />
-                      <DataTableColumnManager />
-                      <DataTableSortDropdown />
-                      <DataTableFilterDropdown />
-                    </DataTableBarContent>
-                    <DataTableBarAction>
-                      <Button size="sm">+ Add Invoice</Button>
-                    </DataTableBarAction>
-                  </DataTableBar>
-                  <DataTableFilterBar />
-                  <BulkActionBar />
-                  <DataTableWrapper>
-                    <DataTable scrollable horizontal height={400}>
-                      <DataTableHeader>
-                        <DataTableHeaderRow>
-                          <DataTableCheckboxHead />
-                          <DataTableHead column="invoiceNumber">
-                            Invoice #
-                          </DataTableHead>
-                          <DataTableHead column="clientName">
-                            Client
-                          </DataTableHead>
-                          <DataTableHead column="status" />
-                          <DataTableHead column="amount" />
-                          <DataTableHead column="dueDate" />
-                          <DataTableHead column="issuedAt" />
-                        </DataTableHeaderRow>
-                      </DataTableHeader>
-                      <DataTableBody>
-                        {(row: Invoice) => (
-                          <DataTableRow key={row.id}>
-                            <DataTableCheckboxCell rowId={String(row.id)} />
-                            <DataTableCell column="invoiceNumber">
-                              <div>
+                <QueryBar />
+                <QueryParamPanel />
+                <DataTableBar>
+                  <DataTableBarContent>
+                    <DataTableSearchInput />
+                    <DataTableColumnManager />
+                    <DataTableSortDropdown />
+                    <DataTableFilterDropdown />
+                  </DataTableBarContent>
+                  <DataTableBarAction>
+                    <Button size="sm">+ Add Invoice</Button>
+                  </DataTableBarAction>
+                </DataTableBar>
+                <DataTableFilterBar />
+                <BulkActionBar />
+                <DataTableWrapper>
+                  <DataTable scrollable horizontal height={400}>
+                    <DataTableHeader>
+                      <DataTableHeaderRow>
+                        <DataTableCheckboxHead />
+                        <DataTableHead column="invoiceNumber">
+                          Invoice #
+                        </DataTableHead>
+                        <DataTableHead column="clientName">
+                          Client
+                        </DataTableHead>
+                        <DataTableHead column="status" />
+                        <DataTableHead column="amount" />
+                        <DataTableHead column="dueDate" />
+                        <DataTableHead column="issuedAt" />
+                        <TableHead>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <RowActionButton />
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent
+                              sideOffset={8}
+                              className="w-64"
+                              align="end"
+                              onCloseAutoFocus={(e) => e.preventDefault()}
+                            >
+                              <DropdownMenuItem>
+                                <LuTicketCheck /> Set as default role set
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <LuNotebookPen />
+                                Edit role set
+                              </DropdownMenuItem>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem variant="destructive">
+                                <LuTrash2 /> Delete role set
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableHead>
+                      </DataTableHeaderRow>
+                    </DataTableHeader>
+                    <DataTableBody>
+                      {(row: Invoice) => (
+                        <DataTableRow key={row.id}>
+                          <DataTableCheckboxCell rowId={String(row.id)} />
+                          <DataTableCell column="invoiceNumber">
+                            <div>
+                              <DataTableHighlight
+                                text={row.invoiceNumber}
+                                item={row}
+                                itemKey="invoiceNumber"
+                              />
+                              <div className="text-muted-foreground text-xs">
                                 <DataTableHighlight
-                                  text={row.invoiceNumber}
+                                  text={row.title}
                                   item={row}
-                                  itemKey="invoiceNumber"
+                                  itemKey="title"
                                 />
-                                <div className="text-muted-foreground text-xs">
-                                  <DataTableHighlight
-                                    text={row.title}
-                                    item={row}
-                                    itemKey="title"
-                                  />
-                                </div>
                               </div>
-                            </DataTableCell>
-                            <DataTableCell column="clientName">
-                              <DataTableHighlight
-                                text={row.clientName}
-                                item={row}
-                                itemKey="clientName"
-                              />
-                            </DataTableCell>
-                            <DataTableCell column="status">
-                              <SimpleBadge variant={statusVariant[row.status]}>
-                                {row.status}
-                              </SimpleBadge>
-                            </DataTableCell>
-                            <DataTableCell column="amount">
-                              <DataTableHighlight
-                                text={formatAmount(row.amount)}
-                                item={row}
-                                itemKey="amount"
-                              />
-                            </DataTableCell>
-                            <DataTableCell column="dueDate">
-                              <DataTableHighlight
-                                text={formatDate(row.dueDate)}
-                                item={row}
-                                itemKey="dueDate"
-                              />
-                            </DataTableCell>
-                            <DataTableCell column="issuedAt">
-                              <DataTableHighlight
-                                text={formatDate(row.issuedAt)}
-                                item={row}
-                                itemKey="issuedAt"
-                              />
-                            </DataTableCell>
-                          </DataTableRow>
-                        )}
-                      </DataTableBody>
-                    </DataTable>
-                    <DataTableLoadingBody />
-                    <DataTableErrorBody />
-                    <DataTableEmptyBody />
-                    <DataTableFoot />
-                  </DataTableWrapper>
-                  <BatchNavigator />
+                            </div>
+                          </DataTableCell>
+                          <DataTableCell column="clientName">
+                            <DataTableHighlight
+                              text={row.clientName}
+                              item={row}
+                              itemKey="clientName"
+                            />
+                          </DataTableCell>
+                          <DataTableCell column="status">
+                            <SimpleBadge variant={statusVariant[row.status]}>
+                              {row.status}
+                            </SimpleBadge>
+                          </DataTableCell>
+                          <DataTableCell column="amount">
+                            <DataTableHighlight
+                              text={formatAmount(row.amount)}
+                              item={row}
+                              itemKey="amount"
+                            />
+                          </DataTableCell>
+                          <DataTableCell column="dueDate">
+                            <DataTableHighlight
+                              text={formatDate(row.dueDate)}
+                              item={row}
+                              itemKey="dueDate"
+                            />
+                          </DataTableCell>
+                          <DataTableCell column="issuedAt">
+                            <DataTableHighlight
+                              text={formatDate(row.issuedAt)}
+                              item={row}
+                              itemKey="issuedAt"
+                            />
+                          </DataTableCell>
+                          <TableCell>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <RowActionButton />
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent
+                                sideOffset={8}
+                                className="w-64"
+                                align="end"
+                                onCloseAutoFocus={(e) => e.preventDefault()}
+                              >
+                                <DropdownMenuItem>
+                                  <LuTicketCheck /> Set as default role set
+                                </DropdownMenuItem>
+                                <DropdownMenuItem>
+                                  <LuNotebookPen />
+                                  Edit role set
+                                </DropdownMenuItem>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem variant="destructive">
+                                  <LuTrash2 /> Delete role set
+                                </DropdownMenuItem>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                          </TableCell>
+                        </DataTableRow>
+                      )}
+                    </DataTableBody>
+                  </DataTable>
+                  <DataTableLoadingBody />
+                  <DataTableErrorBody />
+                  <DataTableEmptyBody />
+                  <DataTableFoot />
+                </DataTableWrapper>
+                <BatchNavigator />
               </DataTableWithQueryProvider>
+            </MainContent>
+          </TabContent>
+          <TabContent value="developer-guide">
+            <MainContent>
+              <DataTableGuide />
             </MainContent>
           </TabContent>
         </Tabs>
