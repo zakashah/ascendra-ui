@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useCallback, useRef } from 'react';
+import { createContext, useContext, useState, useCallback } from 'react';
 import type { QueryContextValue, DataTableQueryProviderProps } from './data-table-query.types';
 
 const QueryContext = createContext<QueryContextValue | null>(null);
@@ -12,8 +12,6 @@ export function DataTableQueryProvider({ queries, children }: DataTableQueryProv
   const [lastResult, setLastResultState] = useState<QueryContextValue['lastResult']>(null);
   const [currentBatch, setCurrentBatch] = useState(1);
   const [totalBatches, setTotalBatchesState] = useState<number | null>(null);
-  const loadingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
   const displayId = pendingQueryId ?? activeId;
   const activeQuery = queries.find((q) => q.id === displayId) ?? queries[0];
 
@@ -29,9 +27,6 @@ export function DataTableQueryProvider({ queries, children }: DataTableQueryProv
     } else {
       setActiveId(id);
       setPendingQueryId(null);
-      if (loadingTimer.current) clearTimeout(loadingTimer.current);
-      setIsLoading(true);
-      loadingTimer.current = setTimeout(() => setIsLoading(false), 1200);
     }
   }, [queries]);
 

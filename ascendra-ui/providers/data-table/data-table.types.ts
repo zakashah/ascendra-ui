@@ -79,7 +79,7 @@ export interface DataTableState<T extends object> {
 }
 
 export interface DataTableProviderProps<T extends object> {
-  data: T[];
+  data?: T[];
   columns: ColumnDef<T>[];
   isLoading?: boolean;
   children: React.ReactNode;

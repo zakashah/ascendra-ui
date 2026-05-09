@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchMockInvoices, type InvoiceListData } from '@/lib/mock/invoice-mock';
 
-export function useMockInvoiceList(queryId: string) {
+export function   useMockInvoiceList(queryId: string) {
   return useQuery<InvoiceListData, Error>({
     queryKey: ['mock-invoices', queryId],
     queryFn: () => fetchMockInvoices(queryId),

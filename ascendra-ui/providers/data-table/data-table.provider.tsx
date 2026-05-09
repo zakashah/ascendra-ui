@@ -1,20 +1,30 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import { useFilter } from './use-filter.hook';
 import { usePagination } from './use-pagination.hook';
 import { useSearch } from './use-search.hook';
 import { useSort } from './use-sort.hook';
+import { useOptionalQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 import type { ColumnDef, SortConfig, DataTableContextValue, DataTableState, DataTableProviderProps } from './data-table.types';
 
 const DataTableContext = createContext<DataTableContextValue | null>(null);
 
 export function DataTableProvider<T extends object>({
-  data,
+  data: dataProp,
   columns: initialColumns,
-  isLoading = false,
+  isLoading: isLoadingProp,
   children,
 }: DataTableProviderProps<T>) {
+  const queryCtx = useOptionalQueryContext();
+  const data = dataProp ?? [];
+  const isLoading = isLoadingProp ?? queryCtx?.isLoading ?? false;
+
+  useEffect(() => {
+    if (isLoadingProp !== undefined && queryCtx) {
+      queryCtx.setIsLoading(isLoadingProp);
+    }
+  }, [isLoadingProp, queryCtx]);
   const [columns, setColumns] = useState<ColumnDef<T>[]>(() => initialColumns);
   function toggleColumnActive(key: string) {
     setColumns((prev) =>
