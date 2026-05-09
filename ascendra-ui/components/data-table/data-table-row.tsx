@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { useDataTableContext } from '@/ascendra-ui/providers/data-table/data-table.provider';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
-import { filterChildrenByColumn } from './data-table-filter-by-column';
+import { orderChildrenByColumn } from './data-table-order-children';
 
 export function DataTableRow({ className, children, ...props }: React.ComponentProps<'tr'>) {
   const { columns } = useDataTableContext();
@@ -17,7 +17,7 @@ export function DataTableRow({ className, children, ...props }: React.ComponentP
       )}
       {...props}
     >
-      {filterChildrenByColumn(columns, children)}
+      {orderChildrenByColumn(columns, children)}
     </tr>
   );
 }

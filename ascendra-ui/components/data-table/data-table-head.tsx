@@ -13,8 +13,10 @@ interface DataTableHeadProps {
 
 export function DataTableHead({ column, children, className }: DataTableHeadProps) {
   const { isColSortable, handleSort, columns } = useDataTableContext();
+  const col = columns.find((c) => String(c.key) === column);
+  if (col?.active === false) return null;
   const sortable = isColSortable(column);
-  const label = children ?? columns.find((c) => String(c.key) === column)?.label;
+  const label = children ?? col?.label;
 
   return (
     <th

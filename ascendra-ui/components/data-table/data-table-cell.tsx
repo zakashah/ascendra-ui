@@ -1,13 +1,17 @@
 'use client';
 
 import * as React from 'react';
+import { useDataTableContext } from '@/ascendra-ui/providers/data-table/data-table.provider';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 
 interface DataTableCellProps extends Omit<React.ComponentProps<'td'>, 'column'> {
   column: string;
 }
 
-export function DataTableCell({ column: _, className, children, ...props }: DataTableCellProps) {
+export function DataTableCell({ column, className, children, ...props }: DataTableCellProps) {
+  const { columns } = useDataTableContext();
+  if (columns.find((c) => String(c.key) === column)?.active === false) return null;
+
   return (
     <td
       data-slot="table-cell"
