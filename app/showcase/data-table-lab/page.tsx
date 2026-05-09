@@ -11,8 +11,7 @@ import {
   type QueryFunctionMap,
   type FieldOptionsMap,
 } from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
-import { DataTableQueryProvider } from "@/ascendra-ui/providers/data-table-query/data-table-query.provider";
-import { DataTableProvider } from "@/ascendra-ui/providers/data-table/data-table.provider";
+import { DataTableWithQueryProvider } from "@/ascendra-ui/providers/data-table-query/data-table-with-query.provider";
 
 import { DataTable } from "@/ascendra-ui/components/data-table/data-table";
 import { DataTableHeader } from "@/ascendra-ui/components/data-table/data-table-header";
@@ -131,12 +130,12 @@ export default function DataTableLabPage() {
           </TabList>
           <TabContent value="table-usage">
             <MainContent>
-              <DataTableQueryProvider
+              <DataTableWithQueryProvider
                 queries={PRESET_QUERIES}
                 queryFunctions={INVOICE_QUERY_FUNCTIONS}
                 fieldOptions={INVOICE_FIELD_OPTIONS}
+                columns={INVOICE_COLUMNS}
               >
-                <DataTableProvider columns={INVOICE_COLUMNS}>
                   <QueryBar />
                   <QueryParamPanel />
                   <DataTableBar>
@@ -229,8 +228,7 @@ export default function DataTableLabPage() {
                     <DataTableFoot />
                   </DataTableWrapper>
                   <BatchNavigator />
-                </DataTableProvider>
-              </DataTableQueryProvider>
+              </DataTableWithQueryProvider>
             </MainContent>
           </TabContent>
         </Tabs>
