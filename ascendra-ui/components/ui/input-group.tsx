@@ -51,12 +51,12 @@ function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
         'has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_4px_4px_-2px_rgba(0,0,0,0.06)]',
         'dark:has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.32),0_4px_4px_-2px_rgba(0,0,0,0.32)]',
 
-        // FOCUS
-        'has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:ring-1',
-        'has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:ring-(--color-umbra)/12',
-        'dark:has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:ring-black/88',
-        'has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:shadow-[0_0_0_3px_rgba(0,0,0,0.08),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.04)]',
-        'dark:has-[[data-slot=input-group-control][data-focused]:not(:read-only)]:shadow-[0_0_0_3px_rgba(61,61,74,0.4),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.16)]',
+        // FOCUS (mouse/pointer — ring + shadow only)
+        'has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:ring-1',
+        'has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:ring-(--color-umbra)/12',
+        'dark:has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:ring-black/88',
+        'has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:shadow-[0_0_0_3px_rgba(0,0,0,0.08),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.04)]',
+        'dark:has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:shadow-[0_0_0_3px_rgba(61,61,74,0.4),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.16)]',
 
         // INVALID
         'has-[[data-slot=input-group-control][aria-invalid=true]]:ring-red-700',
@@ -64,11 +64,11 @@ function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
         'has-[[data-slot=input-group-control][aria-invalid=true]]:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_0_0_1px_#e02e2e,0_4px_4px_-2px_rgba(0,0,0,0.06)]',
         'dark:has-[[data-slot=input-group-control][aria-invalid=true]]:shadow-[0_-1px_1px_rgba(255,255,255,0.12),0_0_0_1px_#f73d3d,0_0_0_2px_rgba(0,0,0,0.16)]',
 
-        // FOCUS VISIBLE SHADOW — suppressed when field has an error
-        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only):not([aria-invalid=true])]:outline',
-        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only):not([aria-invalid=true])]:outline-2',
-        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only):not([aria-invalid=true])]:outline-primary',
-        'has-[[data-slot=input-group-control][data-focused][data-focus-visible]:not(:read-only):not([aria-invalid=true])]:outline-offset-1',
+        // FOCUS VISIBLE (keyboard — primary outline, suppressed on pointer and on error)
+        'has-[[data-slot=input-group-control]:focus-visible:not([data-pointer]):not(:read-only):not([aria-invalid=true])]:outline',
+        'has-[[data-slot=input-group-control]:focus-visible:not([data-pointer]):not(:read-only):not([aria-invalid=true])]:outline-2',
+        'has-[[data-slot=input-group-control]:focus-visible:not([data-pointer]):not(:read-only):not([aria-invalid=true])]:outline-primary',
+        'has-[[data-slot=input-group-control]:focus-visible:not([data-pointer]):not(:read-only):not([aria-invalid=true])]:outline-offset-1',
         className
       )}
       {...props}
@@ -182,6 +182,8 @@ const InputGroupInput = React.forwardRef<
       readOnly,
       onFocus,
       onBlur,
+      onKeyDown,
+      onMouseDown,
       onMouseEnter,
       onMouseLeave,
       ...props
@@ -190,7 +192,7 @@ const InputGroupInput = React.forwardRef<
   ) => {
     const [focused, setFocused] = React.useState(false);
     const [hovered, setHovered] = React.useState(false);
-    const [focusVisible, setFocusVisible] = React.useState(false);
+    const [isPointer, setIsPointer] = React.useState(false);
 
     return (
       <input
@@ -199,7 +201,7 @@ const InputGroupInput = React.forwardRef<
         data-focused={focused || undefined}
         data-hovered={hovered || undefined}
         data-disabled={disabled || undefined}
-        data-focus-visible={focusVisible || undefined}
+        data-pointer={isPointer || undefined}
         disabled={disabled}
         readOnly={readOnly}
         onFocus={(e) => {
@@ -208,13 +210,17 @@ const InputGroupInput = React.forwardRef<
         }}
         onBlur={(e) => {
           setFocused(false);
-          setFocusVisible(false);
+          setIsPointer(false);
           onBlur?.(e);
         }}
-        onKeyUp={(e) => {
-          if (e.key === 'Tab') setFocusVisible(true);
+        onKeyDown={(e) => {
+          setIsPointer(false);
+          onKeyDown?.(e);
         }}
-        onMouseDown={() => setFocusVisible(false)}
+        onMouseDown={(e) => {
+          setIsPointer(true);
+          onMouseDown?.(e);
+        }}
         onMouseEnter={(e) => {
           setHovered(true);
           onMouseEnter?.(e);
@@ -249,6 +255,8 @@ const InputGroupTextarea = React.forwardRef<
       readOnly,
       onFocus,
       onBlur,
+      onKeyDown,
+      onMouseDown,
       onMouseEnter,
       onMouseLeave,
       ...props
@@ -257,7 +265,7 @@ const InputGroupTextarea = React.forwardRef<
   ) => {
     const [focused, setFocused] = React.useState(false);
     const [hovered, setHovered] = React.useState(false);
-    const [focusVisible, setFocusVisible] = React.useState(false);
+    const [isPointer, setIsPointer] = React.useState(false);
 
     return (
       <textarea
@@ -266,7 +274,7 @@ const InputGroupTextarea = React.forwardRef<
         data-focused={focused || undefined}
         data-hovered={hovered || undefined}
         data-disabled={disabled || undefined}
-        data-focus-visible={focusVisible || undefined}
+        data-pointer={isPointer || undefined}
         disabled={disabled}
         readOnly={readOnly}
         onFocus={(e) => {
@@ -275,13 +283,17 @@ const InputGroupTextarea = React.forwardRef<
         }}
         onBlur={(e) => {
           setFocused(false);
-          setFocusVisible(false);
+          setIsPointer(false);
           onBlur?.(e);
         }}
-        onKeyUp={(e) => {
-          if (e.key === 'Tab') setFocusVisible(true);
+        onKeyDown={(e) => {
+          setIsPointer(false);
+          onKeyDown?.(e);
         }}
-        onMouseDown={() => setFocusVisible(false)}
+        onMouseDown={(e) => {
+          setIsPointer(true);
+          onMouseDown?.(e);
+        }}
         onMouseEnter={(e) => {
           setHovered(true);
           onMouseEnter?.(e);
