@@ -65,11 +65,14 @@ export interface DataTableDataContextValue {
 export interface DataTableSelectionContextValue {
   selectedRows: Set<string>;
   isAllSelected: boolean;
+  isAllDataSelected: boolean;
   isIndeterminate: boolean;
   isRowSelected: (id: string) => boolean;
   toggleRow: (id: string) => void;
   selectAll: () => void;
+  selectAllData: () => void;
   clearSelection: () => void;
+  clearPage: () => void;
   selectionEnabled: boolean;
 }
 

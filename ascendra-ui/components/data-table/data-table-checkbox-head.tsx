@@ -4,7 +4,7 @@ import { Checkbox } from '@/ascendra-ui/components/ui/checkbox';
 import { useDataTableSelection } from '@/ascendra-ui/providers/data-table/data-table.provider';
 
 export function DataTableCheckboxHead() {
-  const { isAllSelected, isIndeterminate, selectAll, clearSelection, selectionEnabled } =
+  const { isAllSelected, isIndeterminate, selectAll, clearPage, selectionEnabled } =
     useDataTableSelection();
 
   if (!selectionEnabled) return null;
@@ -18,7 +18,7 @@ export function DataTableCheckboxHead() {
     >
       <Checkbox
         checked={checked}
-        onCheckedChange={() => (isAllSelected || isIndeterminate ? clearSelection() : selectAll())}
+        onCheckedChange={() => (isAllSelected || isIndeterminate ? clearPage() : selectAll())}
       />
     </th>
   );

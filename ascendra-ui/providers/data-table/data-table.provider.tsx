@@ -102,12 +102,15 @@ export function DataTableProvider<T extends object>({
     selectedRows,
     toggleRow,
     selectAll,
+    selectAllData,
     clearSelection,
+    clearPage,
     isRowSelected,
     isAllSelected,
+    isAllDataSelected,
     isIndeterminate,
     selectionEnabled,
-  } = useSelection(pagedData, getRowId);
+  } = useSelection(pagedData, sortedData, getRowId);
 
   // --- Context values (each only changes when its own slice changes) ---
 
@@ -153,8 +156,8 @@ export function DataTableProvider<T extends object>({
   );
 
   const selectionCtx = useMemo<DataTableSelectionContextValue>(
-    () => ({ selectedRows, isAllSelected, isIndeterminate, isRowSelected, toggleRow, selectAll, clearSelection, selectionEnabled }),
-    [selectedRows, isAllSelected, isIndeterminate, isRowSelected, toggleRow, selectAll, clearSelection, selectionEnabled]
+    () => ({ selectedRows, isAllSelected, isAllDataSelected, isIndeterminate, isRowSelected, toggleRow, selectAll, selectAllData, clearSelection, clearPage, selectionEnabled }),
+    [selectedRows, isAllSelected, isAllDataSelected, isIndeterminate, isRowSelected, toggleRow, selectAll, selectAllData, clearSelection, clearPage, selectionEnabled]
   );
 
   return (

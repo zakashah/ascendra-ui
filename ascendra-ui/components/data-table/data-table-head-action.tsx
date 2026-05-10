@@ -11,7 +11,7 @@ import {
 } from "@/ascendra-ui/components/ui/dropdown-menu";
 import { RowActionButton } from "@/ascendra-ui/components/common-ui/row-action-button";
 import { useDataTableSelection } from "@/ascendra-ui/providers/data-table/data-table.provider";
-import { LuDownload, LuRefreshCw, LuSettings2, LuTrash2 } from "react-icons/lu";
+import { LuDownload, LuRefreshCw, LuSettings2, LuSquareCheck, LuSquareMinus, LuTrash2 } from "react-icons/lu";
 
 export type HeadActionVariant = "ghost" | "visible";
 export type HeadActionItemVariant = "default" | "destructive";
@@ -39,9 +39,10 @@ export function DataTableHeadAction({
   variant = "ghost",
   onAction,
 }: DataTableHeadActionProps) {
-  const { selectedRows, selectionEnabled } = useDataTableSelection();
+  const { selectedRows, selectionEnabled, isAllDataSelected, selectAllData, clearSelection } = useDataTableSelection();
   const selectedRowIds = selectionEnabled ? [...selectedRows] : [];
   const selectionCount = selectionEnabled ? selectedRows.size : 0;
+  const hasChildren = React.Children.count(children) > 0;
 
   return (
     <HeadActionContext.Provider value={{ onAction, selectedRowIds }}>
@@ -62,6 +63,25 @@ export function DataTableHeadAction({
                 selected
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
+              {selectionEnabled && (
+                <>
+                  <DropdownMenuItem
+                    disabled={isAllDataSelected}
+                    onSelect={selectAllData}
+                  >
+                    <LuSquareCheck />
+                    Select all
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    disabled={selectionCount === 0}
+                    onSelect={clearSelection}
+                  >
+                    <LuSquareMinus />
+                    Clear all
+                  </DropdownMenuItem>
+                  {hasChildren && <DropdownMenuSeparator />}
+                </>
+              )}
               {children}
             </DropdownMenuContent>
           </DropdownMenu>
