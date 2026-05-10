@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useFilter } from './use-filter.hook';
 import { usePagination } from './use-pagination.hook';
 import { useSearch } from './use-search.hook';
@@ -111,6 +111,12 @@ export function DataTableProvider<T extends object>({
     isIndeterminate,
     selectionEnabled,
   } = useSelection(pagedData, sortedData, getRowId);
+
+  // Clear stale selections whenever the search/filter query changes.
+  // filteredData identity only changes on search or filter updates, not on sort or page navigation.
+  useEffect(() => {
+    clearSelection();
+  }, [filteredData, clearSelection]);
 
   // --- Context values (each only changes when its own slice changes) ---
 
