@@ -506,10 +506,22 @@ function SelectionSection() {
   getRowId={(row) => String(row.id)}
 >
 
-  // 2. Add checkboxes in the table structure
+  // 2. Add checkboxes + bulk actions in the header
   <DataTableHeaderRow>
-    <DataTableCheckboxHead />          // select-all with indeterminate state
+    <DataTableCheckboxHead />
     <DataTableHead column="name" />
+    {/* 3. DataTableHeadAction reads selection internally and shows
+           "X rows selected" at the top of its dropdown when rows are selected.
+           Items are auto-disabled when selectedRows is empty. */}
+    <DataTableHeadAction
+      onAction={(id, selectedRowIds) => {
+        if (id === "bulk-export") exportRows(selectedRowIds);
+        if (id === "bulk-delete") deleteRows(selectedRowIds);
+      }}
+    >
+      <DataTableBulkExportHeadAction />
+      <DataTableBulkDeleteHeadAction />
+    </DataTableHeadAction>
   </DataTableHeaderRow>
 
   <DataTableBody>
@@ -521,26 +533,7 @@ function SelectionSection() {
     )}
   </DataTableBody>
 
-  // 3. Consume selected rows anywhere in the tree — pull model
-  <BulkActionBar />
-
-</DataTableProvider>
-
-// ─── BulkActionBar — reads selection on demand ───────────────────────────────
-
-import { useDataTableSelection } from "@/ascendra-ui/providers/data-table/data-table.provider";
-
-function BulkActionBar() {
-  const { selectedRows, clearSelection } = useDataTableSelection();
-  if (selectedRows.size === 0) return null;
-  return (
-    <div>
-      {selectedRows.size} selected
-      <button onClick={clearSelection}>Clear</button>
-      <button onClick={() => doExport([...selectedRows])}>Export</button>
-    </div>
-  );
-}`}</CodeBlock>
+</DataTableProvider>`}</CodeBlock>
 
       <div className="space-y-2">
         <p className="text-xs font-medium text-foreground">
@@ -566,6 +559,172 @@ function BulkActionBar() {
         the server and populate <Code>selectedRows</Code> via a custom context
         wrapper.
       </Note>
+    </div>
+  );
+}
+
+function ActionsSection() {
+  return (
+    <div className="space-y-6">
+      <SectionHeader>Row & Head Actions</SectionHeader>
+      <p className="text-sm text-muted-foreground leading-relaxed">
+        Two action column components slot into the table header and body. Each
+        renders a three-dot button that opens a dropdown of items.{" "}
+        <Code>DataTableHeadAction</Code> sits in the header and is
+        selection-aware; <Code>DataTableRowAction</Code> sits in each body row
+        and operates on that single row.
+      </p>
+
+      {/* DataTableHeadAction */}
+      <div className="space-y-3">
+        <h3 className="text-sm font-medium text-foreground">DataTableHeadAction</h3>
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          Renders a <Code>&lt;th&gt;</Code> with a dropdown trigger. Internally
+          calls <Code>useDataTableSelection()</Code> — no props needed to wire up
+          selection. When rows are selected, a <em>"X rows selected"</em> label
+          appears at the top of the dropdown. The column is automatically placed
+          last by <Code>orderChildrenByColumn</Code>.
+        </p>
+        <PropTable>
+          <PropRow
+            name="onAction"
+            type="(actionId: string, selectedRowIds: string[]) => void"
+            description="Called when a menu item is selected. Receives the item's id and the array of currently selected row IDs at click time."
+          />
+          <PropRow
+            name="variant"
+            type="'ghost' | 'visible'"
+            defaultVal="'ghost'"
+            description="'ghost' hides the trigger button until the row is hovered. 'visible' always shows it."
+          />
+          <PropRow
+            name="children"
+            type="React.ReactNode"
+            description="DataTableHeadActionItem elements (or preset components) to show in the dropdown."
+          />
+        </PropTable>
+      </div>
+
+      {/* DataTableHeadActionItem */}
+      <div className="space-y-3">
+        <h3 className="text-sm font-medium text-foreground">DataTableHeadActionItem</h3>
+        <PropTable>
+          <PropRow name="id" type="string" required description="Passed as the first argument to onAction when this item is selected." />
+          <PropRow name="icon" type="React.ReactNode" description="Optional icon rendered before the label." />
+          <PropRow name="variant" type="'default' | 'destructive'" defaultVal="'default'" description="'destructive' renders the item in red." />
+          <PropRow name="disabled" type="boolean" description="Explicitly disable the item. Takes precedence over the auto-disable behaviour." />
+          <PropRow
+            name="selectionIndependent"
+            type="boolean"
+            defaultVal="false"
+            description="When false (default), the item is automatically disabled when no rows are selected. Set to true for actions that don't operate on the selection (e.g. Refresh, Manage columns)."
+          />
+        </PropTable>
+      </div>
+
+      {/* Head action presets */}
+      <div className="space-y-3">
+        <h3 className="text-sm font-medium text-foreground">Head action presets</h3>
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          All presets accept the same props as <Code>DataTableHeadActionItem</Code> and forward them via spread, so you can override any default.
+        </p>
+        <div className="rounded-lg border divide-y">
+          {[
+            { name: "DataTableBulkExportHeadAction", id: "bulk-export", label: "Export selected rows", note: "Disabled when no rows selected." },
+            { name: "DataTableBulkDeleteHeadAction", id: "bulk-delete", label: "Delete selected rows", note: "Destructive. Disabled when no rows selected." },
+            { name: "DataTableExportHeadAction", id: "export", label: "Export", note: "Selection-independent — always enabled." },
+            { name: "DataTableRefreshHeadAction", id: "refresh", label: "Refresh", note: "Selection-independent — always enabled." },
+            { name: "DataTableManageColumnsHeadAction", id: "manage-columns", label: "Manage columns", note: "Selection-independent — always enabled." },
+          ].map(({ name, id, label, note }) => (
+            <div key={name} className="px-4 py-3 space-y-0.5">
+              <code className="font-mono text-xs font-medium text-foreground">{name}</code>
+              <p className="text-xs text-muted-foreground">
+                id: <Code>{id}</Code> · default label: <em>{label}</em> · {note}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* DataTableRowAction */}
+      <div className="space-y-3">
+        <h3 className="text-sm font-medium text-foreground">DataTableRowAction</h3>
+        <p className="text-xs text-muted-foreground leading-relaxed">
+          Renders a <Code>&lt;td&gt;</Code> with a dropdown trigger. Operates on
+          a single row — the caller closes over the row in <Code>onAction</Code>.
+          Place it as the last child of <Code>DataTableRow</Code>; it carries the
+          same <Code>isLastColumn</Code> marker as <Code>DataTableHeadAction</Code>.
+        </p>
+        <PropTable>
+          <PropRow
+            name="onAction"
+            type="(actionId: string) => void"
+            description="Called when a menu item is selected. Close over the row to get its data."
+          />
+          <PropRow
+            name="variant"
+            type="'ghost' | 'visible'"
+            defaultVal="'ghost'"
+            description="Controls trigger button visibility."
+          />
+        </PropTable>
+      </div>
+
+      {/* Row action presets */}
+      <div className="space-y-3">
+        <h3 className="text-sm font-medium text-foreground">Row action presets</h3>
+        <div className="rounded-lg border divide-y">
+          {[
+            { name: "DataTableViewRowAction", id: "view", label: "View details" },
+            { name: "DataTableEditRowAction", id: "edit", label: "Edit" },
+            { name: "DataTableDuplicateRowAction", id: "duplicate", label: "Duplicate" },
+            { name: "DataTableDeleteRowAction", id: "delete", label: "Delete", note: "Destructive." },
+          ].map(({ name, id, label, note }) => (
+            <div key={name} className="px-4 py-3 space-y-0.5">
+              <code className="font-mono text-xs font-medium text-foreground">{name}</code>
+              <p className="text-xs text-muted-foreground">
+                id: <Code>{id}</Code> · default label: <em>{label}</em>
+                {note && <> · {note}</>}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Full example */}
+      <CodeBlock>{`import {
+  DataTableHeadAction,
+  DataTableBulkExportHeadAction,
+  DataTableBulkDeleteHeadAction,
+  DataTableRefreshHeadAction,
+} from "@/ascendra-ui/components/data-table/data-table-head-action";
+import {
+  DataTableRowAction,
+  DataTableEditRowAction,
+  DataTableDeleteRowAction,
+} from "@/ascendra-ui/components/data-table/data-table-row-action";
+
+// In the header row:
+<DataTableHeadAction
+  variant="visible"
+  onAction={(id, selectedRowIds) => {
+    if (id === "bulk-export") exportRows(selectedRowIds);
+    if (id === "bulk-delete") deleteRows(selectedRowIds);
+    if (id === "refresh") refetch();
+  }}
+>
+  <DataTableBulkExportHeadAction />
+  <DataTableBulkDeleteHeadAction />
+  <DropdownMenuSeparator />
+  {/* selectionIndependent — enabled even with no rows selected */}
+  <DataTableRefreshHeadAction selectionIndependent />
+</DataTableHeadAction>
+
+// In each body row:
+<DataTableRowAction onAction={(id) => handleRowAction(id, row)}>
+  <DataTableEditRowAction />
+  <DataTableDeleteRowAction />
+</DataTableRowAction>`}</CodeBlock>
     </div>
   );
 }
@@ -1019,6 +1178,7 @@ export function DataTableGuide() {
       <TableStructureSection />
       <ToolbarSection />
       <SelectionSection />
+      <ActionsSection />
       <HighlightSection />
       <StateDisplaySection />
       <QuerySystemSection />
