@@ -581,7 +581,7 @@ function ActionsSection() {
         <p className="text-xs text-muted-foreground leading-relaxed">
           Renders a <Code>&lt;th&gt;</Code> with a dropdown trigger. Internally
           calls <Code>useDataTableSelection()</Code> — no props needed to wire up
-          selection. When rows are selected, a <em>"X rows selected"</em> label
+          selection. When rows are selected, a <em>&quot;X rows selected&quot;</em> label
           appears at the top of the dropdown. The column is automatically placed
           last by <Code>orderChildrenByColumn</Code>.
         </p>

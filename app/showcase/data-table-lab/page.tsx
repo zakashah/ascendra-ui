@@ -99,7 +99,11 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
 const INVOICE_QUERY_FUNCTIONS: QueryFunctionMap<Invoice> = Object.fromEntries(
   PRESET_QUERIES.map((q) => [
     q.id,
-    () => fetchMockInvoices(q.id).then((r) => r.data),
+    async (params, batch) => {
+      console.log("params are: ", params, "batch:", batch);
+      const result = await fetchMockInvoices(q.id, batch);
+      return { data: result.data, totalBatches: result.meta.totalPages };
+    },
   ]),
 );
 

@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import type { QueryContextValue, DataTableQueryProviderProps, QueryParamValues } from './data-table-query.types';
+import type { QueryContextValue, DataTableQueryProviderProps, QueryParamValues, QueryResult } from './data-table-query.types';
 
 const QueryContext = createContext<QueryContextValue | null>(null);
 
@@ -11,7 +11,6 @@ export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, f
   const [pendingQueryId, setPendingQueryId] = useState<string | null>(null);
   const [confirmedParamsState, setConfirmedParamsState] = useState<QueryParamValues | null>(null);
   const [currentBatch, setCurrentBatch] = useState(1);
-  const [totalBatches, setTotalBatchesState] = useState<number | null>(null);
 
   const displayId = pendingQueryId ?? activeId;
   const activeQuery = queries.find((q) => q.id === displayId) ?? queries[0];
@@ -20,7 +19,6 @@ export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, f
   const setActiveQueryId = useCallback((id: string) => {
     const query = queries.find((q) => q.id === id);
     setCurrentBatch(1);
-    setTotalBatchesState(null);
     setConfirmedParamsState(null);
 
     if (query?.group === 'filter') {
@@ -44,9 +42,20 @@ export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, f
     setCurrentBatch(1);
   }, []);
 
-  const setTotalBatches = useCallback((n: number) => {
-    setTotalBatchesState(n);
-  }, []);
+  const queryFn = queryFunctions[activeId];
+  const enabled = confirmedQuery.group !== 'filter' || confirmedParamsState !== null;
+
+  const { data, isLoading, isError, error, refetch } = useQuery<QueryResult<T>, Error>({
+    queryKey: ['data-table', activeId, confirmedParamsState, currentBatch],
+    queryFn: () => queryFn(confirmedParamsState ?? {}, currentBatch),
+    enabled: !!queryFn && enabled,
+    staleTime: confirmedQuery.queryOptions?.staleTime,
+    retry: confirmedQuery.queryOptions?.retry,
+    gcTime: confirmedQuery.queryOptions?.gcTime,
+    refetchOnWindowFocus: confirmedQuery.queryOptions?.refetchOnWindowFocus,
+  });
+
+  const totalBatches = data?.totalBatches ?? null;
 
   const goNextBatch = useCallback(() => {
     setCurrentBatch((prev) =>
@@ -57,19 +66,6 @@ export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, f
   const goPrevBatch = useCallback(() => {
     setCurrentBatch((prev) => Math.max(1, prev - 1));
   }, []);
-
-  const queryFn = queryFunctions[activeId];
-  const enabled = confirmedQuery.group !== 'filter' || confirmedParamsState !== null;
-
-  const { data, isLoading, isError, error, refetch } = useQuery<T[], Error>({
-    queryKey: ['data-table', activeId, confirmedParamsState],
-    queryFn: () => queryFn(confirmedParamsState ?? {}),
-    enabled: !!queryFn && enabled,
-    staleTime: confirmedQuery.queryOptions?.staleTime,
-    retry: confirmedQuery.queryOptions?.retry,
-    gcTime: confirmedQuery.queryOptions?.gcTime,
-    refetchOnWindowFocus: confirmedQuery.queryOptions?.refetchOnWindowFocus,
-  });
 
   return (
     <QueryContext.Provider
@@ -84,12 +80,11 @@ export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, f
         isError,
         error: error ?? null,
         refetch,
-        data: (data ?? []) as unknown[],
+        data: (data?.data ?? []) as unknown[],
         confirmedParams: confirmedParamsState,
         setConfirmedParams,
         currentBatch,
         totalBatches,
-        setTotalBatches,
         goNextBatch,
         goPrevBatch,
         fieldOptions,

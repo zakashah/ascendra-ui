@@ -84,8 +84,17 @@ export interface QueryDef {
   queryOptions?: QueryOptions;
 }
 
-/** Function that fetches rows for a query, receiving confirmed param values */
-export type QueryFn<T = unknown> = (params: QueryParamValues) => Promise<T[]>;
+/** Response shape returned by every QueryFn */
+export type QueryResult<T = unknown> = {
+  data: T[];
+  totalBatches: number;
+};
+
+/** Function that fetches rows for a query, receiving confirmed param values and the requested batch */
+export type QueryFn<T = unknown> = (
+  params: QueryParamValues,
+  batch: number,
+) => Promise<QueryResult<T>>;
 
 /** Map of queryId → fetch function, passed separately from QueryDef for serializability */
 export type QueryFunctionMap<T = unknown> = Record<string, QueryFn<T>>;
@@ -115,7 +124,6 @@ export interface QueryContextValue {
   setConfirmedParams: (values: QueryParamValues) => void;
   currentBatch: number;
   totalBatches: number | null;
-  setTotalBatches: (n: number) => void;
   goNextBatch: () => void;
   goPrevBatch: () => void;
   fieldOptions: FieldOptionsMap;

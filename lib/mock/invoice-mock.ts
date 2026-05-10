@@ -143,27 +143,36 @@ function filterByQuery(queryId: string): Invoice[] {
   }
 }
 
-function makeMeta(data: Invoice[]): PaginationMeta {
-  return { page: 1, limit: data.length, total: data.length, totalPages: 1 };
-}
-
 // ─── Mock fetch ───────────────────────────────────────────────────────────────
 
 const ERROR_RATE = 0.08;
+const PAGE_SIZE = 5;
 
 function delay(ms: number) {
   return new Promise<void>((res) => setTimeout(res, ms));
 }
 
-export async function fetchMockInvoices(queryId: string): Promise<InvoiceListData> {
+export async function fetchMockInvoices(
+  queryId: string,
+  batch = 1,
+  pageSize = PAGE_SIZE,
+): Promise<InvoiceListData> {
   await delay(700 + Math.random() * 600);
 
   if (Math.random() < ERROR_RATE) {
     throw new Error('Failed to load invoices. The mock service rolled a bad number.');
   }
 
-  const data = filterByQuery(queryId);
-  return { data, meta: makeMeta(data) };
+  const allRows = filterByQuery(queryId);
+  const totalPages = Math.max(1, Math.ceil(allRows.length / pageSize));
+  const safeBatch = Math.min(Math.max(1, batch), totalPages);
+  const start = (safeBatch - 1) * pageSize;
+  const pageRows = allRows.slice(start, start + pageSize);
+
+  return {
+    data: pageRows,
+    meta: { page: safeBatch, limit: pageSize, total: allRows.length, totalPages },
+  };
 }
 
 // ─── Invoice Queries ───────────────────────────────────────────────────────────
