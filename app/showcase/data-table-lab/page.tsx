@@ -57,15 +57,15 @@ import { TabContent } from "@/ascendra-ui/components/tabs/tab-content";
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 import { formatAmount, formatDate } from "@/ascendra-ui/utils/common.util";
 import { DataTableGuide } from "./_guide";
-import { TableCell, TableHead } from "@/ascendra-ui/components/ui/table";
+import { DropdownMenuSeparator } from "@/ascendra-ui/components/ui/dropdown-menu";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/ascendra-ui/components/ui/dropdown-menu";
-import { RowActionButton } from "@/ascendra-ui/components/common-ui/row-action-button";
+  DataTableHeadAction,
+  DataTableHeadActionItem,
+} from "@/ascendra-ui/components/data-table/data-table-head-action";
+import {
+  DataTableRowAction,
+  DataTableRowActionItem,
+} from "@/ascendra-ui/components/data-table/data-table-row-action";
 import { LuNotebookPen, LuTicketCheck, LuTrash2 } from "react-icons/lu";
 
 function BulkActionBar() {
@@ -206,31 +206,31 @@ export default function DataTableLabPage() {
                         <DataTableHead column="amount" />
                         <DataTableHead column="dueDate" />
                         <DataTableHead column="issuedAt" />
-                        <TableHead>
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <RowActionButton />
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent
-                              sideOffset={8}
-                              className="w-64"
-                              align="end"
-                              onCloseAutoFocus={(e) => e.preventDefault()}
-                            >
-                              <DropdownMenuItem>
-                                <LuTicketCheck /> Set as default role set
-                              </DropdownMenuItem>
-                              <DropdownMenuItem>
-                                <LuNotebookPen />
-                                Edit role set
-                              </DropdownMenuItem>
-                              <DropdownMenuSeparator />
-                              <DropdownMenuItem variant="destructive">
-                                <LuTrash2 /> Delete role set
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </TableHead>
+                        <DataTableHeadAction
+                          variant="visible"
+                          onAction={(id) => console.log("head action:", id)}
+                        >
+                          <DataTableHeadActionItem
+                            id="set-default"
+                            icon={<LuTicketCheck />}
+                          >
+                            Set as default role set
+                          </DataTableHeadActionItem>
+                          <DataTableHeadActionItem
+                            id="edit"
+                            icon={<LuNotebookPen />}
+                          >
+                            Edit role set
+                          </DataTableHeadActionItem>
+                          <DropdownMenuSeparator />
+                          <DataTableHeadActionItem
+                            id="delete"
+                            icon={<LuTrash2 />}
+                            variant="destructive"
+                          >
+                            Delete role set
+                          </DataTableHeadActionItem>
+                        </DataTableHeadAction>
                       </DataTableHeaderRow>
                     </DataTableHeader>
                     <DataTableBody>
@@ -286,31 +286,33 @@ export default function DataTableLabPage() {
                               itemKey="issuedAt"
                             />
                           </DataTableCell>
-                          <TableCell>
-                            <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <RowActionButton />
-                              </DropdownMenuTrigger>
-                              <DropdownMenuContent
-                                sideOffset={8}
-                                className="w-64"
-                                align="end"
-                                onCloseAutoFocus={(e) => e.preventDefault()}
-                              >
-                                <DropdownMenuItem>
-                                  <LuTicketCheck /> Set as default role set
-                                </DropdownMenuItem>
-                                <DropdownMenuItem>
-                                  <LuNotebookPen />
-                                  Edit role set
-                                </DropdownMenuItem>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem variant="destructive">
-                                  <LuTrash2 /> Delete role set
-                                </DropdownMenuItem>
-                              </DropdownMenuContent>
-                            </DropdownMenu>
-                          </TableCell>
+                          <DataTableRowAction
+                            variant="visible"
+                            onAction={(id) =>
+                              console.log("row action:", id, row.id)
+                            }
+                          >
+                            <DataTableRowActionItem
+                              id="set-default"
+                              icon={<LuTicketCheck />}
+                            >
+                              Set as default role set
+                            </DataTableRowActionItem>
+                            <DataTableRowActionItem
+                              id="edit"
+                              icon={<LuNotebookPen />}
+                            >
+                              Edit role set
+                            </DataTableRowActionItem>
+                            <DropdownMenuSeparator />
+                            <DataTableRowActionItem
+                              id="delete"
+                              icon={<LuTrash2 />}
+                              variant="destructive"
+                            >
+                              Delete role set
+                            </DataTableRowActionItem>
+                          </DataTableRowAction>
                         </DataTableRow>
                       )}
                     </DataTableBody>
