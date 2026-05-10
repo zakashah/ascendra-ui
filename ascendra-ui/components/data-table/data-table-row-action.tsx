@@ -8,8 +8,12 @@ import {
   DropdownMenuTrigger,
 } from '@/ascendra-ui/components/ui/dropdown-menu';
 import { RowActionButton } from '@/ascendra-ui/components/common-ui/row-action-button';
-import { DataTableActionContext } from './data-table-action-context';
 import { LuCopy, LuEye, LuPencil, LuTrash2 } from 'react-icons/lu';
+
+interface RowActionContextValue {
+  onAction?: (actionId: string) => void;
+}
+const RowActionContext = React.createContext<RowActionContextValue>({});
 
 export type RowActionVariant = 'ghost' | 'visible';
 export type RowActionItemVariant = 'default' | 'destructive';
@@ -30,7 +34,7 @@ export function DataTableRowAction({
   onAction,
 }: DataTableRowActionProps) {
   return (
-    <DataTableActionContext.Provider value={{ onAction }}>
+    <RowActionContext.Provider value={{ onAction }}>
       <td data-slot="table-cell" className="px-5 py-4 last:pr-6 w-12">
         <div className="flex justify-end">
           <DropdownMenu>
@@ -48,7 +52,7 @@ export function DataTableRowAction({
           </DropdownMenu>
         </div>
       </td>
-    </DataTableActionContext.Provider>
+    </RowActionContext.Provider>
   );
 }
 
@@ -73,7 +77,7 @@ export function DataTableRowActionItem({
   variant,
   disabled,
 }: DataTableRowActionItemProps) {
-  const { onAction } = React.useContext(DataTableActionContext);
+  const { onAction } = React.useContext(RowActionContext);
   return (
     <DropdownMenuItem
       variant={variant === 'destructive' ? 'destructive' : 'default'}

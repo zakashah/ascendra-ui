@@ -5,14 +5,24 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/ascendra-ui/components/ui/dropdown-menu";
 import { RowActionButton } from "@/ascendra-ui/components/common-ui/row-action-button";
-import { DataTableActionContext } from "./data-table-action-context";
+import { useDataTableSelection } from "@/ascendra-ui/providers/data-table/data-table.provider";
 import { LuDownload, LuRefreshCw, LuSettings2, LuTrash2 } from "react-icons/lu";
 
 export type HeadActionVariant = "ghost" | "visible";
 export type HeadActionItemVariant = "default" | "destructive";
+
+interface HeadActionContextValue {
+  onAction?: (actionId: string, selectedRowIds: string[]) => void;
+  selectedRowIds: string[];
+}
+const HeadActionContext = React.createContext<HeadActionContextValue>({
+  selectedRowIds: [],
+});
 
 // ─── Container ────────────────────────────────────────────────────────────────
 
@@ -20,8 +30,8 @@ interface DataTableHeadActionProps {
   children?: React.ReactNode;
   /** Controls trigger button visibility. 'ghost' hides until hover; 'visible' always shows. */
   variant?: HeadActionVariant;
-  /** Called with the action id when a menu item is selected. */
-  onAction?: (actionId: string) => void;
+  /** Called with the action id and the currently selected row ids when a menu item is selected. */
+  onAction?: (actionId: string, selectedRowIds: string[]) => void;
 }
 
 export function DataTableHeadAction({
@@ -29,8 +39,12 @@ export function DataTableHeadAction({
   variant = "ghost",
   onAction,
 }: DataTableHeadActionProps) {
+  const { selectedRows, selectionEnabled } = useDataTableSelection();
+  const selectedRowIds = selectionEnabled ? [...selectedRows] : [];
+  const selectionCount = selectionEnabled ? selectedRows.size : 0;
+
   return (
-    <DataTableActionContext.Provider value={{ onAction }}>
+    <HeadActionContext.Provider value={{ onAction, selectedRowIds }}>
       <th data-slot="table-head" className="py-3 pr-6 pl-5 w-12">
         <div className="flex justify-end">
           <DropdownMenu>
@@ -43,12 +57,17 @@ export function DataTableHeadAction({
               align="end"
               onCloseAutoFocus={(e) => e.preventDefault()}
             >
+              <DropdownMenuLabel>
+                {selectionCount} {selectionCount === 1 ? "row" : "rows"}{" "}
+                selected
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
               {children}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </th>
-    </DataTableActionContext.Provider>
+    </HeadActionContext.Provider>
   );
 }
 
@@ -64,6 +83,8 @@ export interface DataTableHeadActionItemProps {
   children: React.ReactNode;
   variant?: HeadActionItemVariant;
   disabled?: boolean;
+  /** When true, the item is not auto-disabled when no rows are selected. */
+  selectionIndependent?: boolean;
 }
 
 export function DataTableHeadActionItem({
@@ -72,13 +93,15 @@ export function DataTableHeadActionItem({
   children,
   variant,
   disabled,
+  selectionIndependent = false,
 }: DataTableHeadActionItemProps) {
-  const { onAction } = React.useContext(DataTableActionContext);
+  const { onAction, selectedRowIds } = React.useContext(HeadActionContext);
+  const noSelection = selectedRowIds.length === 0;
   return (
     <DropdownMenuItem
       variant={variant === "destructive" ? "destructive" : "default"}
-      disabled={disabled}
-      onSelect={() => onAction?.(id)}
+      disabled={disabled ?? (!selectionIndependent && noSelection)}
+      onSelect={() => onAction?.(id, selectedRowIds)}
     >
       {icon}
       {children}
@@ -122,6 +145,16 @@ export function DataTableManageColumnsHeadAction(
   );
 }
 
+export function DataTableBulkExportHeadAction(
+  props: Partial<DataTableHeadActionItemProps>,
+) {
+  return (
+    <DataTableHeadActionItem id="bulk-export" icon={<LuDownload />} {...props}>
+      {props.children ?? "Export selected rows"}
+    </DataTableHeadActionItem>
+  );
+}
+
 export function DataTableBulkDeleteHeadAction(
   props: Partial<DataTableHeadActionItemProps>,
 ) {
@@ -132,7 +165,7 @@ export function DataTableBulkDeleteHeadAction(
       variant="destructive"
       {...props}
     >
-      {props.children ?? "Delete all"}
+      {props.children ?? "Delete selected rows"}
     </DataTableHeadActionItem>
   );
 }

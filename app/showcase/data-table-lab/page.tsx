@@ -22,7 +22,6 @@ import { DataTableRow } from "@/ascendra-ui/components/data-table/data-table-row
 import { DataTableCell } from "@/ascendra-ui/components/data-table/data-table-cell";
 import { DataTableCheckboxHead } from "@/ascendra-ui/components/data-table/data-table-checkbox-head";
 import { DataTableCheckboxCell } from "@/ascendra-ui/components/data-table/data-table-checkbox-cell";
-import { useDataTableSelection } from "@/ascendra-ui/providers/data-table/data-table.provider";
 import { DataTableHighlight } from "@/ascendra-ui/components/data-table/data-table-highlight";
 import { DataTableFoot } from "@/ascendra-ui/components/data-table/data-table-foot";
 import { DataTableEmptyBody } from "@/ascendra-ui/components/data-table/data-table-empty-body";
@@ -57,40 +56,24 @@ import { TabContent } from "@/ascendra-ui/components/tabs/tab-content";
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 import { formatAmount, formatDate } from "@/ascendra-ui/utils/common.util";
 import { DataTableGuide } from "./_guide";
-import { DropdownMenuSeparator } from "@/ascendra-ui/components/ui/dropdown-menu";
+import {
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from "@/ascendra-ui/components/ui/dropdown-menu";
 import {
   DataTableHeadAction,
-  DataTableHeadActionItem,
+  DataTableBulkExportHeadAction,
+  DataTableBulkDeleteHeadAction,
 } from "@/ascendra-ui/components/data-table/data-table-head-action";
 import {
+  DataTableDeleteRowAction,
+  DataTableDuplicateRowAction,
+  DataTableEditRowAction,
   DataTableRowAction,
   DataTableRowActionItem,
+  DataTableViewRowAction,
 } from "@/ascendra-ui/components/data-table/data-table-row-action";
 import { LuNotebookPen, LuTicketCheck, LuTrash2 } from "react-icons/lu";
-
-function BulkActionBar() {
-  const { selectedRows, clearSelection } = useDataTableSelection();
-  if (selectedRows.size === 0) return null;
-  return (
-    <div className="flex items-center gap-3 rounded-lg border border-primary/20 bg-primary/5 px-4 py-2 text-sm">
-      <span className="font-medium">{selectedRows.size} selected</span>
-      <span
-        className="text-muted-foreground hover:text-foreground cursor-pointer"
-        onClick={clearSelection}
-      >
-        Clear
-      </span>
-      <div className="ml-auto flex gap-2">
-        <Button size="sm" variant="secondary">
-          Export
-        </Button>
-        <Button size="sm" variant="destructive">
-          Delete
-        </Button>
-      </div>
-    </div>
-  );
-}
 
 const statusVariant: Record<InvoiceStatus, "green" | "amber" | "red"> = {
   Paid: "green",
@@ -186,11 +169,10 @@ export default function DataTableLabPage() {
                     <DataTableFilterDropdown />
                   </DataTableBarContent>
                   <DataTableBarAction>
-                    <Button size="sm">+ Add Invoice</Button>
+                    <Button>+ Add Invoice</Button>
                   </DataTableBarAction>
                 </DataTableBar>
                 <DataTableFilterBar />
-                <BulkActionBar />
                 <DataTableWrapper>
                   <DataTable scrollable horizontal height={400}>
                     <DataTableHeader>
@@ -208,28 +190,13 @@ export default function DataTableLabPage() {
                         <DataTableHead column="issuedAt" />
                         <DataTableHeadAction
                           variant="visible"
-                          onAction={(id) => console.log("head action:", id)}
+                          onAction={(id, selectedRowIds) =>
+                            console.log("head action:", id, selectedRowIds)
+                          }
                         >
-                          <DataTableHeadActionItem
-                            id="set-default"
-                            icon={<LuTicketCheck />}
-                          >
-                            Set as default role set
-                          </DataTableHeadActionItem>
-                          <DataTableHeadActionItem
-                            id="edit"
-                            icon={<LuNotebookPen />}
-                          >
-                            Edit role set
-                          </DataTableHeadActionItem>
+                          <DataTableBulkExportHeadAction />
                           <DropdownMenuSeparator />
-                          <DataTableHeadActionItem
-                            id="delete"
-                            icon={<LuTrash2 />}
-                            variant="destructive"
-                          >
-                            Delete role set
-                          </DataTableHeadActionItem>
+                          <DataTableBulkDeleteHeadAction />
                         </DataTableHeadAction>
                       </DataTableHeaderRow>
                     </DataTableHeader>
@@ -292,6 +259,15 @@ export default function DataTableLabPage() {
                               console.log("row action:", id, row.id)
                             }
                           >
+                            <DropdownMenuLabel>
+                              Default row actions
+                            </DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DataTableViewRowAction />
+                            <DataTableEditRowAction />
+                            <DataTableDuplicateRowAction />
+                            <DataTableDeleteRowAction />
+                            <DropdownMenuSeparator />
                             <DataTableRowActionItem
                               id="set-default"
                               icon={<LuTicketCheck />}
