@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { useFormContext, Controller, useWatch } from 'react-hook-form';
-import type { DateRange } from 'react-day-picker';
+import { useFormContext, Controller, useWatch } from "react-hook-form";
+import type { DateRange } from "react-day-picker";
 
-import { LuTriangleAlert } from 'react-icons/lu';
+import { LuTriangleAlert } from "react-icons/lu";
 
 import {
   Field,
   FieldLabel,
   FieldDescription,
-} from '@/ascendra-ui/components/ui/field';
-import { SimpleBadge } from '@/ascendra-ui/components/common-ui/simple-badge';
-import { Input } from '@/ascendra-ui/components/ui/input';
+} from "@/ascendra-ui/components/ui/field";
+import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
+import { Input } from "@/ascendra-ui/components/ui/input";
 import {
   Select,
   SelectTrigger,
   SelectValue,
   SelectContent,
   SelectItem,
-} from '@/ascendra-ui/components/ui/select';
+} from "@/ascendra-ui/components/ui/select";
 import {
   Combobox,
   ComboboxChips,
@@ -27,18 +27,25 @@ import {
   ComboboxContent,
   ComboboxList,
   ComboboxItem,
-} from '@/ascendra-ui/components/ui/combobox';
+} from "@/ascendra-ui/components/ui/combobox";
 
 // Base UI's Chip uses a `value` prop at runtime but the TS type doesn't expose it
 const ComboboxChipItem = ComboboxChip as React.ComponentType<
   React.ComponentProps<typeof ComboboxChip> & { value: string }
 >;
-import { DatePicker } from '@/ascendra-ui/components/date/date-picker';
-import { DateRangePicker } from '@/ascendra-ui/components/date/date-range-picker';
-import { Checkbox } from '@/ascendra-ui/components/ui/checkbox';
-import { RadioGroup, RadioGroupItem } from '@/ascendra-ui/components/ui/radio-group';
-import type { FieldDef, QueryParamValues, SelectOption } from '@/ascendra-ui/providers/data-table-query/data-table-query.types';
-import { useOptionalQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
+import { DatePicker } from "@/ascendra-ui/components/date/date-picker";
+import { DateRangePicker } from "@/ascendra-ui/components/date/date-range-picker";
+import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from "@/ascendra-ui/components/ui/radio-group";
+import type {
+  FieldDef,
+  QueryParamValues,
+  SelectOption,
+} from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
+import { useOptionalQueryContext } from "@/ascendra-ui/providers/data-table-query/data-table-query.provider";
 
 interface QueryFieldRendererProps {
   field: FieldDef;
@@ -56,7 +63,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
   const resolvedOptions: SelectOption[] = (() => {
     const def = ctx?.fieldOptions[ctx.activeQuery.id]?.[field.name];
     if (!def) return field.options ?? [];
-    return typeof def === 'function' ? def(allValues) : def;
+    return typeof def === "function" ? def(allValues) : def;
   })();
 
   const error = errors[field.name];
@@ -66,7 +73,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
   return (
     <Field>
       {/* Label + optional subtitle — checkbox renders its own inline label */}
-      {field.type !== 'checkbox' && (
+      {field.type !== "checkbox" && (
         <div>
           <FieldLabel id={labelId} htmlFor={inputId}>
             {field.label}
@@ -76,7 +83,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
       )}
 
       {/* ── text ─────────────────────────────────────────────────────── */}
-      {field.type === 'text' && (
+      {field.type === "text" && (
         <Input
           id={inputId}
           full
@@ -87,7 +94,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
       )}
 
       {/* ── number ───────────────────────────────────────────────────── */}
-      {field.type === 'number' && (
+      {field.type === "number" && (
         <Input
           id={inputId}
           full
@@ -95,19 +102,19 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
           placeholder={field.placeholder}
           aria-invalid={!!error}
           {...register(field.name, {
-            setValueAs: (v: string) => (v === '' ? undefined : Number(v)),
+            setValueAs: (v: string) => (v === "" ? undefined : Number(v)),
           })}
         />
       )}
 
       {/* ── select ───────────────────────────────────────────────────── */}
-      {field.type === 'select' && (
+      {field.type === "select" && (
         <Controller
           name={field.name}
           control={control}
           render={({ field: f }) => (
             <Select
-              value={f.value ?? ''}
+              value={f.value ?? ""}
               onValueChange={f.onChange}
               onOpenChange={(open) => {
                 if (!open) f.onBlur();
@@ -135,7 +142,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
       )}
 
       {/* ── multiselect ──────────────────────────────────────────────── */}
-      {field.type === 'multiselect' && (
+      {field.type === "multiselect" && (
         <Controller
           name={field.name}
           control={control}
@@ -155,7 +162,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
                   <ComboboxChipsInput
                     placeholder={
                       selected.length
-                        ? ''
+                        ? ""
                         : (field.placeholder ?? `Select ${field.label}…`)
                     }
                     onBlur={f.onBlur}
@@ -177,7 +184,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
       )}
 
       {/* ── date ─────────────────────────────────────────────────────── */}
-      {field.type === 'date' && (
+      {field.type === "date" && (
         <Controller
           name={field.name}
           control={control}
@@ -186,7 +193,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
               value={f.value as Date | undefined}
               onChange={f.onChange}
               onBlur={f.onBlur}
-              placeholder={field.placeholder ?? 'Pick a date'}
+              placeholder={field.placeholder ?? "Pick a date"}
               invalid={!!error}
             />
           )}
@@ -194,7 +201,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
       )}
 
       {/* ── daterange ────────────────────────────────────────────────── */}
-      {field.type === 'daterange' && (
+      {field.type === "daterange" && (
         <Controller
           name={field.name}
           control={control}
@@ -203,7 +210,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
               value={f.value as DateRange | undefined}
               onChange={f.onChange}
               onBlur={f.onBlur}
-              placeholder={field.placeholder ?? 'Pick a date range'}
+              placeholder={field.placeholder ?? "Pick a date range"}
               invalid={!!error}
             />
           )}
@@ -211,7 +218,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
       )}
 
       {/* ── checkbox ─────────────────────────────────────────────────── */}
-      {field.type === 'checkbox' && (
+      {field.type === "checkbox" && (
         <Controller
           name={field.name}
           control={control}
@@ -236,13 +243,13 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
       )}
 
       {/* ── radio ────────────────────────────────────────────────────── */}
-      {field.type === 'radio' && (
+      {field.type === "radio" && (
         <Controller
           name={field.name}
           control={control}
           render={({ field: f }) => (
             <RadioGroup
-              value={f.value ?? ''}
+              value={f.value ?? ""}
               onValueChange={f.onChange}
               onBlurCapture={(e: React.FocusEvent) => {
                 if (!e.currentTarget.contains(e.relatedTarget as Node))
@@ -277,23 +284,33 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
       {(error || field.description || field.mandatory || field.optional) && (
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0 flex-1">
-            {error ? (
-              <p className="text-destructive flex items-start gap-1 text-xs font-normal">
-                <LuTriangleAlert
-                  className="mt-0.75 size-2.5 shrink-0"
-                  aria-hidden
-                />
-                {(error as { message?: string }).message}
-              </p>
-            ) : field.description ? (
-              <FieldDescription>{field.description}</FieldDescription>
-            ) : null}
+            <div className="flex items-baseline gap-1 justify-between">
+              {error ? (
+                <FieldDescription className="text-destructive flex items-baseline gap-1">
+                  <LuTriangleAlert
+                    className="mt-0.75 size-2.5 shrink-0"
+                    aria-hidden
+                  />
+                  {(error as { message?: string }).message}
+                </FieldDescription>
+              ) : field.description ? (
+                <FieldDescription>{field.description}</FieldDescription>
+              ) : (
+                <FieldDescription />
+              )}
+              <div>
+                {(field.mandatory || field.optional) && (
+                  <SimpleBadge
+                    variant="secondary"
+                    size="tiny"
+                    className="mt-0.5"
+                  >
+                    {field.mandatory ? "Mandatory" : "Optional"}
+                  </SimpleBadge>
+                )}
+              </div>
+            </div>
           </div>
-          {(field.mandatory || field.optional) && (
-            <SimpleBadge variant="secondary" size="tiny" className="mt-1">
-              {field.mandatory ? 'Mandatory' : 'Optional'}
-            </SimpleBadge>
-          )}
         </div>
       )}
     </Field>

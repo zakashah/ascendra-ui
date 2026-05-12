@@ -38,7 +38,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             'has-[input:focus:not(:read-only)]:shadow-[0_0_0_3px_rgba(0,0,0,0.08),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.04)] has-[input:focus:not(:read-only)]:ring-1 has-[input:focus:not(:read-only)]:ring-(--color-umbra)/12 dark:has-[input:focus:not(:read-only)]:shadow-[0_0_0_3px_rgba(61,61,74,0.4),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.16)] dark:has-[input:focus:not(:read-only)]:ring-black/88',
           // FOCUS VISIBLE (keyboard focus) — suppressed when field has an error
           !isPointer &&
-            'has-[input:not([aria-invalid=true]):focus-visible:not(:active)]:outline-primary has-[input:not([aria-invalid=true]):focus-visible:not(:active)]:outline-2 has-[input:not([aria-invalid=true]):focus-visible:not(:active)]:outline-offset-1',
+            'has-[input:focus-visible:not(:active)]:outline-primary! has-[input:focus-visible:not(:active)]:outline-2! has-[input:focus-visible:not(:active)]:outline-offset-1!',
           full ? 'w-full' : 'w-fit'
         )}
       >

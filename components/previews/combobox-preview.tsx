@@ -60,7 +60,7 @@ const [value, setValue] = useState<string | null>(null);
   </ComboboxContent>
 </Combobox>`}
       >
-        <Combobox value={single} onValueChange={(v) => setSingle(v as string)}>
+        <Combobox items={frameworks} value={single} onValueChange={(v) => setSingle(v as string)}>
           <ComboboxInput placeholder="Search framework..." />
           <ComboboxContent>
             <ComboboxList>
@@ -101,7 +101,7 @@ const [value, setValue] = useState<string | null>(null);
   ...
 </Combobox>`}
           >
-            <Combobox>
+            <Combobox items={frameworks}>
               <ComboboxInput placeholder="Pick one..." showClear />
               <ComboboxContent>
                 <ComboboxList>
@@ -151,7 +151,7 @@ const [value, setValue] = useState<string | null>(null);
   </ComboboxGroup>
 </ComboboxList>`}
           >
-            <Combobox>
+            <Combobox items={Object.values(groupedOptions).flat()}>
               <ComboboxInput placeholder="Search..." />
               <ComboboxContent>
                 <ComboboxList>
@@ -214,6 +214,7 @@ const [value, setValue] = useState<string | null>(null);
           >
             <div className="w-72">
               <Combobox
+                items={frameworks}
                 multiple
                 value={multi}
                 onValueChange={(v) => setMulti(v as string[])}
@@ -250,7 +251,7 @@ const [value, setValue] = useState<string | null>(null);
   ...
 </Combobox>`}
           >
-            <Combobox>
+            <Combobox items={frameworks}>
               <ComboboxInput placeholder="Disabled" disabled />
               <ComboboxContent>
                 <ComboboxList>
@@ -285,7 +286,7 @@ const [value, setValue] = useState<string | null>(null);
   ...
 </Combobox>`}
           >
-            <Combobox>
+            <Combobox items={frameworks}>
               <ComboboxInput placeholder="Pick one..." aria-invalid={true} />
               <ComboboxContent>
                 <ComboboxList>
