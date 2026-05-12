@@ -102,6 +102,7 @@ const INVOICE_QUERY_FUNCTIONS: QueryFunctionMap<Invoice> = Object.fromEntries(
     async (params, batch) => {
       console.log("params are: ", params, "batch:", batch);
       const result = await fetchMockInvoices(q.id, batch);
+      console.log("result is: ", result);
       return { data: result.data, totalBatches: result.meta.totalPages };
     },
   ]),

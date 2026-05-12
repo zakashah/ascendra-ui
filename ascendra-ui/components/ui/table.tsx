@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 
 import {
   Select,
@@ -8,18 +8,18 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/ascendra-ui/components/ui/select';
+} from "@/ascendra-ui/components/ui/select";
 
-import { PaginationButton } from '@/ascendra-ui/components/common-ui/pagination-button';
-import { Separator } from '@/ascendra-ui/shadcn/components/ui/separator';
-import { type PaginationState } from '@/ascendra-ui/providers/data-table/use-pagination.hook';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { PaginationButton } from "@/ascendra-ui/components/common-ui/pagination-button";
+import { Separator } from "@/ascendra-ui/shadcn/components/ui/separator";
+import { type PaginationState } from "@/ascendra-ui/providers/data-table/use-pagination.hook";
+import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 import {
   LuChevronFirst,
   LuChevronLast,
   LuChevronLeft,
   LuChevronRight,
-} from 'react-icons/lu';
+} from "react-icons/lu";
 
 export type ColVisibility = { key: PropertyKey; active?: boolean };
 
@@ -47,12 +47,12 @@ const TableScrollContext = React.createContext({
   vscroll: false,
 });
 
-function TableWrapper({ className, ...props }: React.ComponentProps<'div'>) {
+function TableWrapper({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="table-container"
       data-table-container
-      className={cn('bg-muted flex flex-col rounded-xl py-1', className)}
+      className={cn("bg-muted flex flex-col rounded-xl py-1", className)}
       {...props}
     />
   );
@@ -65,7 +65,7 @@ function Table({
   height,
   className,
   ...props
-}: React.ComponentProps<'table'> & {
+}: React.ComponentProps<"table"> & {
   scrollable?: boolean;
   vertical?: boolean;
   horizontal?: boolean;
@@ -78,8 +78,8 @@ function Table({
     const el = ref.current;
     if (!el || !vertical) return;
     const handler = () => setScrolled(el.scrollTop > 0);
-    el.addEventListener('scroll', handler, { passive: true });
-    return () => el.removeEventListener('scroll', handler);
+    el.addEventListener("scroll", handler, { passive: true });
+    return () => el.removeEventListener("scroll", handler);
   }, [vertical]);
   return (
     <TableScrollContext.Provider
@@ -89,15 +89,15 @@ function Table({
         ref={ref}
         data-slot="table-wrapper"
         className={cn(
-          '',
-          scrollable && horizontal && '-mb-px overflow-x-auto pb-px',
-          scrollable && vertical && height && 'overflow-y-auto',
-          scrollable && vertical && height && `h-${height}`
+          "",
+          scrollable && horizontal && "-mb-px overflow-x-auto pb-px",
+          scrollable && vertical && height && "overflow-y-auto",
+          scrollable && vertical && height && `h-${height}`,
         )}
       >
         <table
           data-slot="table"
-          className={cn('w-full border-separate border-spacing-0', className)}
+          className={cn("w-full border-separate border-spacing-0", className)}
           {...props}
         />
       </div>
@@ -109,16 +109,16 @@ function TableHeader({
   sticky = false,
   className,
   ...props
-}: React.ComponentProps<'thead'> & { sticky?: boolean }) {
+}: React.ComponentProps<"thead"> & { sticky?: boolean }) {
   const { scrolled, vscroll } = React.useContext(TableScrollContext);
   return (
     <thead
       data-slot="table-header"
       className={cn(
-        '',
-        vscroll && sticky && 'sticky top-0 z-10',
-        vscroll && sticky && scrolled && 'bg-muted',
-        className
+        "",
+        vscroll && sticky && "sticky top-0 z-10",
+        vscroll && sticky && scrolled && "bg-muted",
+        className,
       )}
       {...props}
     />
@@ -130,12 +130,14 @@ function TableHeaderRow({
   className,
   children,
   ...props
-}: React.ComponentProps<'tr'> & { columns?: ColVisibility[] }) {
-  const content = columns ? filterChildrenByColumns(columns, children) : children;
+}: React.ComponentProps<"tr"> & { columns?: ColVisibility[] }) {
+  const content = columns
+    ? filterChildrenByColumns(columns, children)
+    : children;
   return (
     <tr
       data-slot="table-header-row"
-      className={cn('text-secondary-foreground text-left text-xs', className)}
+      className={cn("text-secondary-foreground text-left text-xs", className)}
       {...props}
     >
       {content}
@@ -143,49 +145,49 @@ function TableHeaderRow({
   );
 }
 
-function TableBody({ className, ...props }: React.ComponentProps<'tbody'>) {
+function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
   return (
     <tbody
       data-slot="table-body"
       className={cn(
-        'relative isolate',
-        'before:bg-background before:absolute before:inset-0 before:-z-10 before:mx-1 before:rounded-lg',
-        'before:ring-1 before:ring-(--color-umbra)/4 dark:before:ring-black/20',
-        'before:shadow-[0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)]',
-        'dark:before:shadow-[inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,2),0_0_3px_0_rgba(0,0,0,0.2)',
-        '[&>tr:not(:last-child)>td]:border-border [&>tr:not(:last-child)>td]:border-b',
-        className
+        "relative isolate",
+        "before:bg-background before:absolute before:inset-0 before:-z-10 before:mx-1 before:rounded-lg",
+        "before:ring-1 before:ring-(--color-umbra)/4 dark:before:ring-black/20",
+        "before:shadow-[0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)]",
+        "dark:before:shadow-[inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,2),0_0_3px_0_rgba(0,0,0,0.2)",
+        "[&>tr:not(:last-child)>td]:border-border [&>tr:not(:last-child)>td]:border-b",
+        className,
       )}
       {...props}
     />
   );
 }
 
-function EmptyBody({ className, ...props }: React.ComponentProps<'div'>) {
+function EmptyBody({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="table-empty-body"
       className={cn(
-        'relative isolate',
-        'before:bg-background before:absolute before:inset-0 before:-z-10 before:mx-1 before:rounded-lg',
-        'before:ring-1 before:ring-(--color-umbra)/4 dark:before:ring-black/20',
-        'before:shadow-[0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)]',
-        'dark:before:shadow-[inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,2),0_0_3px_0_rgba(0,0,0,0.2)',
-        '[&>tr:not(:last-child)>td]:border-border [&>tr:not(:last-child)>td]:border-b',
-        className
+        "relative isolate",
+        "before:bg-background before:absolute before:inset-0 before:-z-10 before:mx-1 before:rounded-lg",
+        "before:ring-1 before:ring-(--color-umbra)/4 dark:before:ring-black/20",
+        "before:shadow-[0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)]",
+        "dark:before:shadow-[inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,2),0_0_3px_0_rgba(0,0,0,0.2)",
+        "[&>tr:not(:last-child)>td]:border-border [&>tr:not(:last-child)>td]:border-b",
+        className,
       )}
       {...props}
     />
   );
 }
 
-function TableFooter({ className, ...props }: React.ComponentProps<'tfoot'>) {
+function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
   return (
     <tfoot
       data-slot="table-footer"
       className={cn(
-        'bg-muted/50 border-t font-medium [&>tr]:last:border-b-0',
-        className
+        "bg-muted/50 border-t font-medium [&>tr]:last:border-b-0",
+        className,
       )}
       {...props}
     />
@@ -197,14 +199,16 @@ function TableRow({
   className,
   children,
   ...props
-}: React.ComponentProps<'tr'> & { columns?: ColVisibility[] }) {
-  const content = columns ? filterChildrenByColumns(columns, children) : children;
+}: React.ComponentProps<"tr"> & { columns?: ColVisibility[] }) {
+  const content = columns
+    ? filterChildrenByColumns(columns, children)
+    : children;
   return (
     <tr
       data-slot="table-row"
       className={cn(
-        'group/row transition-colors [clip-path:inset(0_4px)] first:[clip-path:inset(0_4px_0_4px_round_8px_8px_0_0)] last:[clip-path:inset(0_4px_0_4px_round_0_0_8px_8px)] first:last:[clip-path:inset(0_4px_round_8px)] hover:bg-gray-700/4',
-        className
+        "group/row transition-colors [clip-path:inset(0_4px)] first:[clip-path:inset(0_4px_0_4px_round_8px_8px_0_0)] last:[clip-path:inset(0_4px_0_4px_round_0_0_8px_8px)] first:last:[clip-path:inset(0_4px_round_8px)] hover:bg-gray-700/4",
+        className,
       )}
       {...props}
     >
@@ -213,21 +217,21 @@ function TableRow({
   );
 }
 
-function TableHead({ className, ...props }: React.ComponentProps<'th'>) {
+function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   return (
     <th
       data-slot="table-head"
-      className={cn('py-3 pr-5 pl-5 first:pl-6', className)}
+      className={cn("py-3 pr-5 pl-5 first:pl-6", className)}
       {...props}
     />
   );
 }
 
-function TableCell({ className, ...props }: React.ComponentProps<'td'>) {
+function TableCell({ className, ...props }: React.ComponentProps<"td">) {
   return (
     <td
       data-slot="table-cell"
-      className={cn('px-5 py-4 first:pl-6 last:pr-6', className)}
+      className={cn("px-5 py-4 first:pl-6 last:pr-6", className)}
       {...props}
     />
   );
@@ -236,11 +240,11 @@ function TableCell({ className, ...props }: React.ComponentProps<'td'>) {
 function TableCaption({
   className,
   ...props
-}: React.ComponentProps<'caption'>) {
+}: React.ComponentProps<"caption">) {
   return (
     <caption
       data-slot="table-caption"
-      className={cn('text-muted-foreground mt-4 text-sm', className)}
+      className={cn("text-muted-foreground mt-4 text-sm", className)}
       {...props}
     />
   );
@@ -250,30 +254,33 @@ function TableFoot({
   className,
   pagination,
   ...props
-}: React.ComponentProps<'footer'> & { pagination?: PaginationState }) {
+}: React.ComponentProps<"footer"> & { pagination?: PaginationState }) {
   const atFirst = !pagination || pagination.currentPage === 1;
-  const atLast = !pagination || pagination.currentPage === pagination.totalPages;
+  const atLast =
+    !pagination || pagination.currentPage === pagination.totalPages;
 
   const rangeStart = pagination ? pagination.startIndex + 1 : 1;
   const rangeEnd = pagination ? pagination.endIndex : 1;
   const total = pagination ? pagination.totalItems : 1;
   const pageLabel = pagination
     ? `${pagination.currentPage}/${pagination.totalPages}`
-    : '1/1';
+    : "1/1";
 
   return (
     <footer
       data-slot="table-foot"
       className={cn(
-        'text-muted-foreground flex flex-col text-xs sm:flex-row sm:items-center sm:justify-between',
-        className
+        "text-muted-foreground flex flex-col text-xs sm:flex-row sm:items-center sm:justify-between",
+        className,
       )}
       {...props}
     >
       <div className="mx-1 px-5 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           <div className="flex gap-1">
-            <span>{rangeStart}–{rangeEnd}</span>
+            <span>
+              {rangeStart}–{rangeEnd}
+            </span>
             <span>of</span>
             <span>{total}</span>
           </div>
@@ -285,14 +292,14 @@ function TableFoot({
             <span className="sm:hidden">Show</span>
             <span className="hidden sm:block">Results per page</span>
             <Select
-              value={pagination ? String(pagination.pageSize) : '10'}
+              value={pagination ? String(pagination.pageSize) : "10"}
               onValueChange={(v) => pagination?.setPageSize(Number(v))}
             >
               <SelectTrigger className="ml-2" size="sm">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent side="bottom">
-                {['5', '10', '15', '20', '100'].map((item) => (
+                {["5", "10", "15", "20", "100"].map((item) => (
                   <SelectItem key={item} value={item}>
                     {item}
                   </SelectItem>

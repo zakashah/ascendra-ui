@@ -1,14 +1,12 @@
-'use client';
+"use client";
 
-import { LuChevronLeft, LuChevronRight } from 'react-icons/lu';
-import { useQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
-import { PaginationButton } from '@/ascendra-ui/components/common-ui/pagination-button';
+import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
+import { useQueryContext } from "@/ascendra-ui/providers/data-table-query/data-table-query.provider";
+import { PaginationButton } from "@/ascendra-ui/components/common-ui/pagination-button";
 
 export function BatchNavigator() {
-  const { confirmedParams, currentBatch, totalBatches, goNextBatch, goPrevBatch } =
+  const { currentBatch, totalBatches, goNextBatch, goPrevBatch } =
     useQueryContext();
-
-  if (!confirmedParams) return null;
 
   const atFirst = currentBatch === 1;
   const atLast = totalBatches !== null && currentBatch >= totalBatches;
