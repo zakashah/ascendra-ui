@@ -26,6 +26,7 @@ export function MainSectionPanel({
         )}
       >
         <div
+        
           className={cn(
             'bg-background mx-1 rounded-lg ring-1 ring-(--color-umbra)/4 dark:ring-black/20',
             'shadow-[0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)]',
