@@ -113,9 +113,7 @@ function ComboboxInput({
         !isPointer &&
           "has-[input:focus-visible]:outline-primary! has-[input:focus-visible]:outline-2! has-[input:focus-visible]:outline-offset-1!",
         /* Invalid */
-        "has-aria-invalid:ring-red-700 dark:has-aria-invalid:ring-red-600",
-        "has-aria-invalid:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_0_0_1px_#e02e2e,0_4px_4px_-2px_rgba(0,0,0,0.06)]",
-        "dark:has-aria-invalid:shadow-[0_-1px_1px_rgba(255,255,255,0.12),0_0_0_1px_#f73d3d,0_0_0_2px_rgba(0,0,0,0.16)]",
+        "has-aria-invalid:outline-2 has-aria-invalid:outline-destructive has-aria-invalid:outline-offset-1",
         "h-8",
         className,
       )}
