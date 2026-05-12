@@ -38,7 +38,6 @@ import { DataTableFilterDropdown } from "@/ascendra-ui/components/data-table/dat
 import { DataTableFilterBar } from "@/ascendra-ui/components/data-table/data-table-filter-bar";
 import { QueryBar } from "@/ascendra-ui/components/data-table/query-bar";
 import { QueryParamPanel } from "@/ascendra-ui/components/data-table/query-param-panel";
-import { BatchNavigator } from "@/ascendra-ui/components/data-table/batch-navigator";
 
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
@@ -303,7 +302,6 @@ export default function DataTableLabPage() {
                   <DataTableEmptyBody />
                   <DataTableFoot />
                 </DataTableWrapper>
-                <BatchNavigator />
               </DataTableWithQueryProvider>
             </MainContent>
           </TabContent>

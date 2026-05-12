@@ -23,6 +23,13 @@ import {
 
 export type ColVisibility = { key: PropertyKey; active?: boolean };
 
+export type BatchState = {
+  currentBatch: number;
+  totalBatches: number | null;
+  goNextBatch: () => void;
+  goPrevBatch: () => void;
+};
+
 function filterChildrenByColumns(
   columns: ColVisibility[],
   children: React.ReactNode,
@@ -253,8 +260,12 @@ function TableCaption({
 function TableFoot({
   className,
   pagination,
+  batch,
   ...props
-}: React.ComponentProps<"footer"> & { pagination?: PaginationState }) {
+}: React.ComponentProps<"footer"> & {
+  pagination?: PaginationState;
+  batch?: BatchState;
+}) {
   const atFirst = !pagination || pagination.currentPage === 1;
   const atLast =
     !pagination || pagination.currentPage === pagination.totalPages;
@@ -265,6 +276,17 @@ function TableFoot({
   const pageLabel = pagination
     ? `${pagination.currentPage}/${pagination.totalPages}`
     : "1/1";
+
+  const atFirstBatch = !batch || batch.currentBatch <= 1;
+  const atLastBatch =
+    !!batch &&
+    batch.totalBatches !== null &&
+    batch.currentBatch >= batch.totalBatches;
+  const batchLabel = batch
+    ? batch.totalBatches !== null
+      ? `${batch.currentBatch} / ${batch.totalBatches}`
+      : `${batch.currentBatch}`
+    : "";
 
   return (
     <footer
@@ -284,6 +306,31 @@ function TableFoot({
             <span>of</span>
             <span>{total}</span>
           </div>
+          {batch && (
+            <div className="flex items-center">
+              <Separator
+                orientation="vertical"
+                className="mx-3 hidden sm:block"
+              />
+              <div className="flex items-center gap-1">
+                <PaginationButton
+                  disabled={atFirstBatch}
+                  className="border-0 bg-transparent disabled:opacity-40"
+                  onClick={batch.goPrevBatch}
+                >
+                  <LuChevronLeft />
+                </PaginationButton>
+                <span className="font-medium">{batchLabel}</span>
+                <PaginationButton
+                  disabled={atLastBatch}
+                  className="border-0 bg-transparent disabled:opacity-40"
+                  onClick={batch.goNextBatch}
+                >
+                  <LuChevronRight />
+                </PaginationButton>
+              </div>
+            </div>
+          )}
           <div className="flex items-center">
             <Separator
               orientation="vertical"
