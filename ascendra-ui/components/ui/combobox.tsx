@@ -109,7 +109,7 @@ function ComboboxInput({
         "has-disabled:cursor-not-allowed has-disabled:opacity-40",
         /* Focus */
         !isPointer &&
-          "has-[input:focus-visible]:outline-primary has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-offset-1",
+          "has-[input:not([aria-invalid=true]):focus-visible]:outline-primary has-[input:not([aria-invalid=true]):focus-visible]:outline-2 has-[input:not([aria-invalid=true]):focus-visible]:outline-offset-1",
         /* Invalid */
         "has-aria-invalid:ring-red-700 dark:has-aria-invalid:ring-red-600",
         "has-aria-invalid:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_0_0_1px_#e02e2e,0_4px_4px_-2px_rgba(0,0,0,0.06)]",
@@ -368,9 +368,9 @@ function ComboboxChips({
         "has-disabled:cursor-not-allowed has-disabled:opacity-40",
         /* Focus */
         !isPointer &&
-          "has-[input:focus-visible]:outline-primary has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-offset-1",
+          "not-[aria-invalid=true]:has-[input:focus-visible]:outline-primary not-[aria-invalid=true]:has-[input:focus-visible]:outline-2 not-[aria-invalid=true]:has-[input:focus-visible]:outline-offset-1",
         /* Invalid */
-        "aria-invalid:outline-1 aria-invalid:outline-destructive aria-invalid:outline-offset-1",
+        "aria-invalid:outline-2 aria-invalid:outline-destructive aria-invalid:outline-offset-1",
         className,
       )}
       {...props}

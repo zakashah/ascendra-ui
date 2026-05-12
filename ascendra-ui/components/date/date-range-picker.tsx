@@ -64,9 +64,9 @@ function DateRangePicker({
             'shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04)]',
             'dark:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24)]',
             'hover:ring-(--color-umbra)/24',
-            'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-1',
+            'not-[aria-invalid=true]:focus-visible:outline-primary not-[aria-invalid=true]:focus-visible:outline-2 not-[aria-invalid=true]:focus-visible:outline-offset-1',
             'disabled:cursor-not-allowed disabled:opacity-40',
-            invalid && 'outline-1 outline-destructive outline-offset-1',
+            invalid && 'outline-2 outline-destructive outline-offset-1',
             !label && 'text-gray-500 dark:text-gray-700',
             className
           )}

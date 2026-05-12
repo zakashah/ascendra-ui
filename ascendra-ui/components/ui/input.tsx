@@ -32,7 +32,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           'has-[input:not(:read-only):not(:disabled):not(:focus)]:hover:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_4px_4px_-2px_rgba(0,0,0,0.06)]',
           'dark:has-[input:not(:read-only):not(:disabled):not(:focus)]:hover:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.32),0_4px_4px_-2px_rgba(0,0,0,0.32)]',
           // INVALID
-          'has-[input[aria-invalid=true]]:outline-1 has-[input[aria-invalid=true]]:outline-destructive has-[input[aria-invalid=true]]:outline-offset-1',
+          'has-[input[aria-invalid=true]]:outline-2 has-[input[aria-invalid=true]]:outline-destructive has-[input[aria-invalid=true]]:outline-offset-1',
           // FOCUS
           isPointer &&
             'has-[input:focus:not(:read-only)]:shadow-[0_0_0_3px_rgba(0,0,0,0.08),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.04)] has-[input:focus:not(:read-only)]:ring-1 has-[input:focus:not(:read-only)]:ring-(--color-umbra)/12 dark:has-[input:focus:not(:read-only)]:shadow-[0_0_0_3px_rgba(61,61,74,0.4),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.16)] dark:has-[input:focus:not(:read-only)]:ring-black/88',

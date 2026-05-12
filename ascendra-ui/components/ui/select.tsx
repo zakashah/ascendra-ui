@@ -69,9 +69,9 @@ function SelectTrigger({
         'dark:hover:bg-secondary',
         'disabled:cursor-not-allowed disabled:opacity-40',
         /* Focus */
-        'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-1',
+        'not-[aria-invalid=true]:focus-visible:outline-primary not-[aria-invalid=true]:focus-visible:outline-2 not-[aria-invalid=true]:focus-visible:outline-offset-1',
         /* Invalid */
-        'aria-invalid:outline-destructive aria-invalid:outline-1 aria-invalid:outline-offset-1',
+        'aria-invalid:outline-destructive aria-invalid:outline-2 aria-invalid:outline-offset-1',
         size === 'sm' && 'h-5',
         size === 'default' && 'h-8',
         className
