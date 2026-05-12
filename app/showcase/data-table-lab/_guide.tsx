@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { codeToHtml } from "shiki";
 import { SectionHeader } from "@/components/section-header";
 
 // ─── Shared primitives ────────────────────────────────────────────────────────
@@ -20,8 +19,15 @@ function CodeBlock({ children, lang = "tsx" }: { children: string; lang?: string
   const [html, setHtml] = useState<string>("");
 
   useEffect(() => {
+    let active = true;
     const theme = resolvedTheme === "dark" ? "github-dark" : "github-light";
-    codeToHtml(children, { lang, theme }).then(setHtml);
+    import("shiki").then(({ codeToHtml }) => {
+      if (!active) return;
+      codeToHtml(children, { lang, theme }).then((result) => {
+        if (active) setHtml(result);
+      });
+    });
+    return () => { active = false; };
   }, [children, lang, resolvedTheme]);
 
   if (!html) {

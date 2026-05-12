@@ -80,7 +80,6 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
     label: 'Status',
     sortable: false,
     filter: true,
-    displayValue: (raw) => statusLabel[raw as InvoiceStatus] ?? raw,
   },
   { key: 'issuedAt', label: 'Issued', type: 'date', active: false },
 ];

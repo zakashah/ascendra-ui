@@ -320,7 +320,7 @@ function TableFoot({
                 >
                   <LuChevronLeft />
                 </PaginationButton>
-                <span className="font-medium">{batchLabel}</span>
+                <span>{batchLabel}</span>
                 <PaginationButton
                   disabled={atLastBatch}
                   className="border-0 bg-transparent disabled:opacity-40"
