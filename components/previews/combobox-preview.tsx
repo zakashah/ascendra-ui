@@ -11,6 +11,7 @@ import {
   ComboboxList,
   ComboboxItem,
   ComboboxEmpty,
+  ComboboxCollection,
   ComboboxSeparator,
   ComboboxGroup,
   ComboboxLabel,
@@ -31,10 +32,10 @@ const frameworks = [
   "Angular",
 ];
 
-const groupedOptions = {
-  Frontend: ["React", "Vue", "Svelte", "Angular"],
-  Backend: ["Node.js", "Deno", "Bun", "Go"],
-};
+const groupedItems = [
+  { label: "Frontend", items: ["React", "Vue", "Svelte", "Angular"] },
+  { label: "Backend", items: ["Node.js", "Deno", "Bun", "Go"] },
+];
 
 export function ComboboxDocContent() {
   const [single, setSingle] = useState<string | null>(null);
@@ -64,12 +65,14 @@ const [value, setValue] = useState<string | null>(null);
           <ComboboxInput placeholder="Search framework..." />
           <ComboboxContent>
             <ComboboxList>
-              {frameworks.map((f) => (
-                <ComboboxItem key={f} value={f}>
-                  {f}
-                </ComboboxItem>
-              ))}
               <ComboboxEmpty>No results found.</ComboboxEmpty>
+              <ComboboxCollection>
+                {(f: string) => (
+                  <ComboboxItem key={f} value={f}>
+                    {f}
+                  </ComboboxItem>
+                )}
+              </ComboboxCollection>
             </ComboboxList>
           </ComboboxContent>
         </Combobox>
@@ -105,12 +108,14 @@ const [value, setValue] = useState<string | null>(null);
               <ComboboxInput placeholder="Pick one..." showClear />
               <ComboboxContent>
                 <ComboboxList>
-                  {frameworks.map((f) => (
-                    <ComboboxItem key={f} value={f}>
-                      {f}
-                    </ComboboxItem>
-                  ))}
                   <ComboboxEmpty>No results found.</ComboboxEmpty>
+                  <ComboboxCollection>
+                    {(f: string) => (
+                      <ComboboxItem key={f} value={f}>
+                        {f}
+                      </ComboboxItem>
+                    )}
+                  </ComboboxCollection>
                 </ComboboxList>
               </ComboboxContent>
             </Combobox>
@@ -151,24 +156,26 @@ const [value, setValue] = useState<string | null>(null);
   </ComboboxGroup>
 </ComboboxList>`}
           >
-            <Combobox items={Object.values(groupedOptions).flat()}>
+            <Combobox items={groupedItems}>
               <ComboboxInput placeholder="Search..." />
               <ComboboxContent>
                 <ComboboxList>
-                  {Object.entries(groupedOptions).map(([group, items], i) => (
-                    <ComboboxGroup key={group}>
-                      <ComboboxLabel>{group}</ComboboxLabel>
-                      {items.map((item) => (
-                        <ComboboxItem key={item} value={item}>
-                          {item}
-                        </ComboboxItem>
-                      ))}
-                      {i < Object.keys(groupedOptions).length - 1 && (
-                        <ComboboxSeparator />
-                      )}
-                    </ComboboxGroup>
-                  ))}
                   <ComboboxEmpty>No results found.</ComboboxEmpty>
+                  <ComboboxCollection>
+                    {(group: { label: string; items: string[] }, i: number) => (
+                      <ComboboxGroup key={group.label} items={group.items}>
+                        {i > 0 && <ComboboxSeparator />}
+                        <ComboboxLabel>{group.label}</ComboboxLabel>
+                        <ComboboxCollection>
+                          {(item: string) => (
+                            <ComboboxItem key={item} value={item}>
+                              {item}
+                            </ComboboxItem>
+                          )}
+                        </ComboboxCollection>
+                      </ComboboxGroup>
+                    )}
+                  </ComboboxCollection>
                 </ComboboxList>
               </ComboboxContent>
             </Combobox>
@@ -229,12 +236,14 @@ const [value, setValue] = useState<string | null>(null);
                 </ComboboxChips>
                 <ComboboxContent>
                   <ComboboxList>
-                    {frameworks.map((f) => (
-                      <ComboboxItem key={f} value={f}>
-                        {f}
-                      </ComboboxItem>
-                    ))}
                     <ComboboxEmpty>No results found.</ComboboxEmpty>
+                    <ComboboxCollection>
+                      {(f: string) => (
+                        <ComboboxItem key={f} value={f}>
+                          {f}
+                        </ComboboxItem>
+                      )}
+                    </ComboboxCollection>
                   </ComboboxList>
                 </ComboboxContent>
               </Combobox>
@@ -255,11 +264,13 @@ const [value, setValue] = useState<string | null>(null);
               <ComboboxInput placeholder="Disabled" disabled />
               <ComboboxContent>
                 <ComboboxList>
-                  {frameworks.map((f) => (
-                    <ComboboxItem key={f} value={f}>
-                      {f}
-                    </ComboboxItem>
-                  ))}
+                  <ComboboxCollection>
+                    {(f: string) => (
+                      <ComboboxItem key={f} value={f}>
+                        {f}
+                      </ComboboxItem>
+                    )}
+                  </ComboboxCollection>
                 </ComboboxList>
               </ComboboxContent>
             </Combobox>
@@ -290,12 +301,14 @@ const [value, setValue] = useState<string | null>(null);
               <ComboboxInput placeholder="Pick one..." aria-invalid={true} />
               <ComboboxContent>
                 <ComboboxList>
-                  {frameworks.map((f) => (
-                    <ComboboxItem key={f} value={f}>
-                      {f}
-                    </ComboboxItem>
-                  ))}
                   <ComboboxEmpty>No results found.</ComboboxEmpty>
+                  <ComboboxCollection>
+                    {(f: string) => (
+                      <ComboboxItem key={f} value={f}>
+                        {f}
+                      </ComboboxItem>
+                    )}
+                  </ComboboxCollection>
                 </ComboboxList>
               </ComboboxContent>
             </Combobox>

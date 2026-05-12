@@ -11,7 +11,9 @@ const ComboboxAnchorContext = React.createContext<{
   setAnchor: (node: HTMLElement | null) => void;
 } | null>(null);
 
-function ComboboxWrapper<Value, Multiple extends boolean | undefined = false>({ ...props }: ComboboxPrimitive.Root.Props<Value, Multiple>) {
+function ComboboxWrapper<Value, Multiple extends boolean | undefined = false>({
+  ...props
+}: ComboboxPrimitive.Root.Props<Value, Multiple>) {
   const [anchor, setAnchor] = React.useState<HTMLElement | null>(null);
   return (
     <ComboboxAnchorContext.Provider value={{ anchor, setAnchor }}>
@@ -301,7 +303,7 @@ function ComboboxEmpty({ className, ...props }: ComboboxPrimitive.Empty.Props) {
     <ComboboxPrimitive.Empty
       data-slot="combobox-empty"
       className={cn(
-        "text-muted-foreground hidden w-full justify-center py-6 text-center text-sm",
+        "text-muted-foreground hidden w-full justify-center py-1 text-center text-sm",
         "group-data-empty/combobox-content:flex",
         className,
       )}
