@@ -214,7 +214,6 @@ const InputGroupInput = React.forwardRef<
           onBlur?.(e);
         }}
         onKeyDown={(e) => {
-          setIsPointer(false);
           onKeyDown?.(e);
         }}
         onMouseDown={(e) => {
@@ -287,7 +286,6 @@ const InputGroupTextarea = React.forwardRef<
           onBlur?.(e);
         }}
         onKeyDown={(e) => {
-          setIsPointer(false);
           onKeyDown?.(e);
         }}
         onMouseDown={(e) => {

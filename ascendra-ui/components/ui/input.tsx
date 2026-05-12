@@ -47,7 +47,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           data-slot="input-control"
           type={type}
           onMouseDown={() => setIsPointer(true)}
-          onKeyDown={() => setIsPointer(false)}
           onBlur={(e) => {
             setIsPointer(false);
             onBlur?.(e);
