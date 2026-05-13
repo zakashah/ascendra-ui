@@ -40,15 +40,25 @@ function NavContent({
     <>
       {/* Search */}
       <div className="px-3 pt-3 pb-1">
-        <div className="relative">
+        <div className="group relative">
           <LuSearch className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search components…"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full rounded-md border bg-muted/40 py-1.5 pl-8 pr-3 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
+            className="w-full rounded-sm border bg-muted/40 py-1.5 pl-8 pr-7 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
           />
+          {query && (
+            <button
+              onClick={() => setQuery("")}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity hover:text-foreground"
+              aria-label="Clear search"
+              tabIndex={-1}
+            >
+              <LuX className="size-3.5" />
+            </button>
+          )}
         </div>
       </div>
 
@@ -69,11 +79,13 @@ function NavContent({
                   <li key={item.slug}>
                     <Link
                       href={
-                        item.slug === "" ? "/showcase" : `/showcase/${item.slug}`
+                        item.slug === ""
+                          ? "/showcase"
+                          : `/showcase/${item.slug}`
                       }
                       onClick={onNavigate}
                       className={cn(
-                        "flex h-7 items-center rounded-md px-2 text-sm transition-colors",
+                        "flex h-7 items-center rounded-sm px-2 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                         isActive(item.slug)
                           ? "bg-primary/8 font-medium text-primary"
                           : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -96,16 +108,12 @@ export function ShowcaseNav() {
   const [query, setQuery] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Close drawer on route change
-  const pathname = usePathname();
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
-
   // Lock body scroll when drawer is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
   return (
@@ -115,7 +123,7 @@ export function ShowcaseNav() {
         <div className="flex h-14 shrink-0 items-center justify-between border-b px-4">
           <Link
             href="/showcase"
-            className="text-sm font-semibold text-foreground hover:text-primary transition-colors"
+            className="text-sm font-semibold text-foreground hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
           >
             Component Showcase
           </Link>
@@ -127,7 +135,7 @@ export function ShowcaseNav() {
       {/* Mobile menu button */}
       <button
         onClick={() => setMobileOpen(true)}
-        className="fixed top-3 left-3 z-40 flex items-center justify-center rounded-md border bg-background p-1.5 shadow-sm text-foreground lg:hidden"
+        className="fixed top-3 left-3 z-40 flex items-center justify-center rounded-sm border bg-background p-1.5 shadow-sm text-foreground lg:hidden"
         aria-label="Open menu"
       >
         <LuMenu className="size-4" />
@@ -151,7 +159,7 @@ export function ShowcaseNav() {
         <div className="flex h-14 shrink-0 items-center justify-between border-b px-4">
           <Link
             href="/showcase"
-            className="text-sm font-semibold text-foreground hover:text-primary transition-colors"
+            className="text-sm font-semibold text-foreground hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
           >
             Component Showcase
           </Link>
@@ -159,7 +167,7 @@ export function ShowcaseNav() {
             <ThemeToggle />
             <button
               onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center rounded-md p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              className="flex items-center justify-center rounded-sm p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               aria-label="Close menu"
             >
               <LuX className="size-4" />

@@ -95,6 +95,8 @@ function SelectContent({
   align = 'start',
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Content>) {
+  const wasPointerDown = React.useRef(false);
+
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
@@ -102,6 +104,15 @@ function SelectContent({
         data-align-trigger={position === 'item-aligned'}
         position={position}
         align={align}
+        onPointerDown={() => {
+          wasPointerDown.current = true;
+        }}
+        onCloseAutoFocus={(e) => {
+          if (wasPointerDown.current) {
+            e.preventDefault();
+            wasPointerDown.current = false;
+          }
+        }}
         className={cn(
           `bg-secondary data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 isolate flex max-w-[calc(100vw-(--spacing(4))*2)] origin-(--radix-select-content-transform-origin) flex-col overflow-clip shadow-[0_16px_36px_-6px_rgba(0,0,0,.07),0_6px_16px_-2px_rgba(0,0,0,.2)] ring-1 duration-100 dark:shadow-[0_16px_36px_-6px_rgba(0,0,0,.07),0_6px_16px_-2px_rgba(0,0,0,.2)] dark:after:pointer-events-none dark:after:absolute dark:after:inset-0 dark:after:z-50 dark:after:size-full dark:after:rounded-[inherit] dark:after:ring-1 dark:after:ring-white/4 dark:after:ring-inset [:where(&)]:relative [:where(&)]:min-w-[--trigger-width] [:where(&)]:rounded-md [:where(&)]:bg-white [:where(&)]:ring-[#191c21]/8 [:where(&)]:dark:ring-[#111113]/32`,
           position === 'popper' &&

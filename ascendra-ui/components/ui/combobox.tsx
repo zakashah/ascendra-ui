@@ -81,7 +81,7 @@ function ComboboxInput({
     <div
       ref={ctx?.setAnchor}
       onMouseDown={() => setIsPointer(true)}
-      onKeyDown={() => setIsPointer(false)}
+      onKeyDown={(e) => { if (e.key === 'Tab') setIsPointer(false); }}
       className={cn(
         "group/input-group py-0.75",
         "group relative flex items-center px-1",
@@ -340,7 +340,7 @@ function ComboboxChips({
         props.onMouseDown?.(e);
       }}
       onKeyDown={(e) => {
-        setIsPointer(false);
+        if (e.key === 'Tab') setIsPointer(false);
         props.onKeyDown?.(e);
       }}
       className={cn(

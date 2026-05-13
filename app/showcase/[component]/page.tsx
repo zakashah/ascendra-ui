@@ -39,7 +39,7 @@ export default async function ComponentPage({
       {/* Breadcrumb */}
       {category && (
         <p className="mb-4 text-xs text-muted-foreground">
-          <Link href="/showcase" className="hover:text-foreground transition-colors">
+          <Link href="/showcase" className="hover:text-foreground transition-colors rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
             Overview
           </Link>
           <span className="mx-1.5">/</span>

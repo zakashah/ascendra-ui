@@ -30,7 +30,7 @@ export function ComponentPreview({
             key={tab}
             onClick={() => setView(tab)}
             className={cn(
-              'rounded-md px-2.5 py-1 text-xs font-medium capitalize transition-colors',
+              'rounded-sm px-2.5 py-1 text-xs font-medium capitalize transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary',
               view === tab
                 ? 'bg-background text-foreground shadow-sm'
                 : 'text-muted-foreground hover:text-foreground'

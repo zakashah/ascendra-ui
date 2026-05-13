@@ -64,7 +64,7 @@ export default function ShowcasePage() {
           >
             <Link
               href={`/showcase/${category.items[0].slug}`}
-              className="group flex items-center justify-between"
+              className="group flex items-center justify-between rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <div className="flex items-center gap-2.5">
                 <span className="text-lg">
@@ -83,7 +83,7 @@ export default function ShowcasePage() {
                 <Link
                   key={item.slug}
                   href={item.slug === "" ? "/showcase" : `/showcase/${item.slug}`}
-                  className="rounded bg-muted px-1.5 py-0.5 text-[0.6875rem] text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                  className="rounded-sm bg-muted px-1.5 py-0.5 text-[0.6875rem] text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   {item.name}
                 </Link>
