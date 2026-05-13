@@ -402,6 +402,7 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'onChange', type: '(value: T | T[] | null) => void', description: 'Called when the selection changes.' },
       { name: 'placeholder', type: 'string', description: 'Placeholder text shown when nothing is selected.' },
       { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the trigger and prevents the popup from opening.' },
+      { name: 'invalid', type: 'boolean', default: 'false', description: 'Applies a destructive outline to the trigger to signal a validation error.' },
     ],
   },
 

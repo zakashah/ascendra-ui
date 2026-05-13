@@ -28,7 +28,6 @@ import {
   SelectValue,
 } from "@/ascendra-ui/components/ui/select";
 import {
-  EmptyBody,
   Table,
   TableBody,
   TableCell,
@@ -41,6 +40,7 @@ import {
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 import { ArrowUpIcon, ChevronDownIcon, XIcon } from "lucide-react";
 import { LuLoader, LuTextSearch } from "react-icons/lu";
+import { useQuery } from "@tanstack/react-query";
 import * as React from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -64,7 +64,9 @@ export type TableLookupProps<T extends Record<string, unknown>> = {
   placeholder?: string;
   title?: string;
   disabled?: boolean;
+  invalid?: boolean;
   className?: string;
+  dialogClassName?: string;
 };
 
 // ─── Trigger chip (inside the multi-mode trigger) ────────────────────────────
@@ -198,6 +200,7 @@ const MultiTrigger = React.forwardRef<
         "hover:before:opacity-0 hover:bg-gray-50 dark:hover:bg-secondary",
         disabled && "cursor-not-allowed opacity-40",
         "focus-visible:outline-primary! focus-visible:outline-2! focus-visible:outline-offset-1!",
+        "aria-invalid:outline-destructive aria-invalid:outline-2 aria-invalid:outline-offset-1",
         className,
       )}
       {...props}
@@ -242,11 +245,12 @@ function TableLookup<T extends Record<string, unknown>>({
   placeholder,
   title,
   disabled,
+  invalid,
   className,
+  dialogClassName,
 }: TableLookupProps<T>) {
   const [open, setOpen] = React.useState(false);
-  const [rows, setRows] = React.useState<T[]>([]);
-  const [loading, setLoading] = React.useState(false);
+  const instanceKey = React.useRef(`table-lookup-${Math.random()}`);
 
   const searchableColumns = React.useMemo(
     () => columns.filter((col) => col.searchable),
@@ -254,48 +258,50 @@ function TableLookup<T extends Record<string, unknown>>({
   );
 
   const [searchQuery, setSearchQuery] = React.useState("");
-  const [searchField, setSearchField] = React.useState<string>(
-    () => columns.find((col) => col.searchable)?.key ?? "",
-  );
-
-  const runSearch = React.useCallback(
-    async (query: string, field: string) => {
-      setLoading(true);
-      try {
-        const results = await Promise.resolve(
-          onSearch(query, field || undefined),
-        );
-        setRows(results);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [onSearch],
-  );
-
-  React.useEffect(() => {
-    if (!open) return;
-    runSearch(searchQuery, searchField);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
-
-  const handleSearch = React.useCallback(() => {
-    runSearch(searchQuery, searchField);
-  }, [runSearch, searchQuery, searchField]);
-
-  const handleFieldChange = React.useCallback(
-    (field: string) => {
-      setSearchField(field);
-      runSearch(searchQuery, field);
-    },
-    [runSearch, searchQuery],
-  );
+  const [searchField, setSearchField] = React.useState("all");
 
   const selectedItems = React.useMemo<T[]>(() => {
     if (!value) return [];
     if (Array.isArray(value)) return value;
     return [value];
   }, [value]);
+
+  const [committedSearch, setCommittedSearch] = React.useState<{
+    query: string;
+    field: string;
+  } | null>(null);
+
+  const { data: rows = [], isFetching: loading } = useQuery({
+    queryKey: [instanceKey.current, committedSearch?.query, committedSearch?.field],
+    queryFn: () =>
+      Promise.resolve(
+        onSearch(
+          committedSearch!.query,
+          committedSearch!.field === "all" ? undefined : committedSearch!.field,
+        ),
+      ),
+    enabled: committedSearch !== null,
+    staleTime: Infinity,
+  });
+
+  React.useEffect(() => {
+    if (!open) return;
+    if (selectedItems.length > 0) return;
+    setCommittedSearch({ query: searchQuery, field: searchField });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  const handleSearch = React.useCallback(() => {
+    setCommittedSearch({ query: searchQuery, field: searchField });
+  }, [searchQuery, searchField]);
+
+  const handleFieldChange = React.useCallback(
+    (field: string) => {
+      setSearchField(field);
+      setCommittedSearch({ query: searchQuery, field });
+    },
+    [searchQuery],
+  );
 
   const handleRemove = React.useCallback(
     (itemValue: unknown) => {
@@ -340,6 +346,7 @@ function TableLookup<T extends Record<string, unknown>>({
             label={singleLabel}
             placeholder={placeholder}
             disabled={disabled}
+            aria-invalid={invalid || undefined}
             className={className}
           />
         ) : (
@@ -349,6 +356,7 @@ function TableLookup<T extends Record<string, unknown>>({
             valueKey={valueKey}
             placeholder={placeholder}
             disabled={disabled}
+            aria-invalid={invalid || undefined}
             onRemove={handleRemove}
             open={open}
             className={className}
@@ -356,7 +364,7 @@ function TableLookup<T extends Record<string, unknown>>({
         )}
       </DialogTrigger>
 
-      <DialogContent className="max-w-3xl">
+      <DialogContent className={cn("max-w-3xl", dialogClassName)}>
         {/* ── Header ── */}
         <DialogHeader className="flex-row items-center justify-between py-3.5">
           <DialogTitle className="text-sm">
@@ -387,12 +395,7 @@ function TableLookup<T extends Record<string, unknown>>({
         {/* ── Table area ── */}
         <div className="p-4">
           <TableWrapper>
-            <Table
-              scrollable
-              horizontal
-              vertical={rows.length > 0}
-              height={rows.length > 0 ? 280 : undefined}
-            >
+            <Table scrollable horizontal vertical height={280} minHeight={280}>
               <TableHeader>
                 <TableHeaderRow>
                   {columns.map((col) => (
@@ -405,9 +408,48 @@ function TableLookup<T extends Record<string, unknown>>({
                   ))}
                 </TableHeaderRow>
               </TableHeader>
-              {rows.length > 0 && (
-                <TableBody>
-                  {rows.map((row) => {
+              <TableBody>
+                {loading ? (
+                  <tr>
+                    <td colSpan={columns.length} className="p-0">
+                      <div className="flex h-60 items-center justify-center">
+                        <Empty>
+                          <EmptyHeader>
+                            <EmptyMedia variant="icon">
+                              <LuLoader
+                                className="animate-spin"
+                                strokeWidth={2}
+                              />
+                            </EmptyMedia>
+                            <EmptyTitle>Loading…</EmptyTitle>
+                            <EmptyDescription>
+                              Please wait while data is being fetched.
+                            </EmptyDescription>
+                          </EmptyHeader>
+                        </Empty>
+                      </div>
+                    </td>
+                  </tr>
+                ) : rows.length === 0 ? (
+                  <tr>
+                    <td colSpan={columns.length} className="p-0">
+                      <div className="flex h-60 items-center justify-center">
+                        <Empty>
+                          <EmptyHeader>
+                            <EmptyMedia variant="icon">
+                              <LuTextSearch strokeWidth={2} />
+                            </EmptyMedia>
+                            <EmptyTitle>No results found</EmptyTitle>
+                            <EmptyDescription>
+                              Try adjusting your search terms.
+                            </EmptyDescription>
+                          </EmptyHeader>
+                        </Empty>
+                      </div>
+                    </td>
+                  </tr>
+                ) : (
+                  rows.map((row) => {
                     const isSelected = selectedItems.some(
                       (s) => s[valueKey] === row[valueKey],
                     );
@@ -430,7 +472,11 @@ function TableLookup<T extends Record<string, unknown>>({
                               {isLast ? (
                                 <div
                                   className="truncate"
-                                  style={col.width ? { maxWidth: col.width } : undefined}
+                                  style={
+                                    col.width
+                                      ? { maxWidth: col.width }
+                                      : undefined
+                                  }
                                 >
                                   {content}
                                 </div>
@@ -442,40 +488,10 @@ function TableLookup<T extends Record<string, unknown>>({
                         })}
                       </TableRow>
                     );
-                  })}
-                </TableBody>
-              )}
+                  })
+                )}
+              </TableBody>
             </Table>
-            {loading && (
-              <EmptyBody>
-                <Empty>
-                  <EmptyHeader>
-                    <EmptyMedia variant="icon">
-                      <LuLoader className="animate-spin" strokeWidth={2} />
-                    </EmptyMedia>
-                    <EmptyTitle>Loading…</EmptyTitle>
-                    <EmptyDescription>
-                      Please wait while data is being fetched.
-                    </EmptyDescription>
-                  </EmptyHeader>
-                </Empty>
-              </EmptyBody>
-            )}
-            {!loading && rows.length === 0 && (
-              <EmptyBody>
-                <Empty>
-                  <EmptyHeader>
-                    <EmptyMedia variant="icon">
-                      <LuTextSearch strokeWidth={2} />
-                    </EmptyMedia>
-                    <EmptyTitle>No results found</EmptyTitle>
-                    <EmptyDescription>
-                      Try adjusting your search terms.
-                    </EmptyDescription>
-                  </EmptyHeader>
-                </Empty>
-              </EmptyBody>
-            )}
           </TableWrapper>
         </div>
 
@@ -509,7 +525,8 @@ function TableLookup<T extends Record<string, unknown>>({
                   >
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="z-[1001]">
+                  <SelectContent side="top" className="z-1001">
+                    <SelectItem value="all">All</SelectItem>
                     {searchableColumns.map((col) => (
                       <SelectItem key={col.key} value={col.key}>
                         {col.label}
@@ -524,9 +541,9 @@ function TableLookup<T extends Record<string, unknown>>({
               )}
               <InputGroupButton
                 variant="primary"
-                size="icon-sm"
                 onClick={handleSearch}
                 disabled={loading}
+                className="size-7"
               >
                 {loading ? (
                   <LuLoader className="animate-spin" strokeWidth={2} />

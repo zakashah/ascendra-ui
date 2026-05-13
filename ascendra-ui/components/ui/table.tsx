@@ -70,6 +70,7 @@ function Table({
   vertical = false,
   horizontal = true,
   height,
+  minHeight,
   className,
   ...props
 }: React.ComponentProps<"table"> & {
@@ -77,6 +78,7 @@ function Table({
   vertical?: boolean;
   horizontal?: boolean;
   height?: number;
+  minHeight?: number;
 }) {
   const [scrolled, setScrolled] = React.useState(false);
   const ref = React.useRef<HTMLDivElement>(null);
@@ -88,6 +90,11 @@ function Table({
     el.addEventListener("scroll", handler, { passive: true });
     return () => el.removeEventListener("scroll", handler);
   }, [vertical]);
+
+  const wrapperStyle: React.CSSProperties = {};
+  if (scrollable && vertical && height) wrapperStyle.maxHeight = `${height}px`;
+  if (minHeight) wrapperStyle.minHeight = `${minHeight}px`;
+
   return (
     <TableScrollContext.Provider
       value={{ scrolled, vscroll: scrollable && vertical && !!height }}
@@ -100,11 +107,7 @@ function Table({
           scrollable && horizontal && "-mb-px overflow-x-auto pb-px",
           scrollable && vertical && height && "overflow-y-auto",
         )}
-        style={
-          scrollable && vertical && height
-            ? { maxHeight: `${height}px` }
-            : undefined
-        }
+        style={Object.keys(wrapperStyle).length ? wrapperStyle : undefined}
       >
         <table
           data-slot="table"
