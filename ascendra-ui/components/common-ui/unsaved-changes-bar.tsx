@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useRef } from 'react';
-import { InfoIcon, Loader2 } from 'lucide-react';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
-import { Button } from '@/ascendra-ui/components/ui/button';
+import { useState, useRef } from "react";
+import { InfoIcon, Loader2 } from "lucide-react";
+import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { Button } from "@/ascendra-ui/components/ui/button";
 
 interface UnsavedChangesBarProps {
   isDirty: boolean;
@@ -36,21 +36,22 @@ export function UnsavedChangesBar({
   onSave,
   onReset,
   onInvalid,
-  saveLabel = 'Save',
-  resetLabel = 'Reset',
-  message = 'Unsaved changes',
-  validationMessage = 'Please check the form for errors',
-  savingMessage = 'Saving changes…',
-  successMessage = 'Saved successfully',
-  errorMessage = 'Failed to save. Please try again.',
+  saveLabel = "Save",
+  resetLabel = "Reset",
+  message = "Unsaved changes",
+  validationMessage = "Please check the form for errors",
+  savingMessage = "Saving changes…",
+  successMessage = "Saved successfully",
+  errorMessage = "Failed to save. Please try again.",
   isSaving = false,
   isValid = true,
   className,
 }: UnsavedChangesBarProps) {
+  "use no memo";
   const barRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState(message);
-  const [iconClass, setIconClass] = useState('text-white');
+  const [iconClass, setIconClass] = useState("text-white");
   const [saveButtonLabel, setSaveButtonLabel] = useState(saveLabel);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -59,13 +60,13 @@ export function UnsavedChangesBar({
   function triggerNudge() {
     const el = barRef.current;
     if (!el) return;
-    el.classList.remove('animate-nudge-strong');
+    el.classList.remove("animate-nudge-strong");
     void el.offsetWidth; // force reflow to restart the animation
-    el.classList.add('animate-nudge-strong');
+    el.classList.add("animate-nudge-strong");
   }
 
   function reset() {
-    setIconClass('text-white');
+    setIconClass("text-white");
     setTitle(message);
     setIsOpen(false);
     setSaveButtonLabel(saveLabel);
@@ -76,11 +77,11 @@ export function UnsavedChangesBar({
   return (
     <div
       className={cn(
-        'fixed bottom-8 left-1/2 z-50 min-w-85 -translate-x-1/2 transition-all duration-300',
+        "fixed bottom-8 left-1/2 z-50 min-w-85 -translate-x-1/2 transition-all duration-300",
         isOpen || isDirty
-          ? 'pointer-events-auto translate-y-0 opacity-100'
-          : 'pointer-events-none translate-y-3 opacity-0',
-        className ?? 'lg:left-[calc(50%+7.75rem)]'
+          ? "pointer-events-auto translate-y-0 opacity-100"
+          : "pointer-events-none translate-y-3 opacity-0",
+        className ?? "lg:left-[calc(50%+7.75rem)]",
       )}
     >
       <div
@@ -89,13 +90,13 @@ export function UnsavedChangesBar({
       >
         <span
           className={cn(
-            'flex items-center gap-1.5 text-sm font-normal whitespace-nowrap',
-            'text-white'
+            "flex items-center gap-1.5 text-sm font-normal whitespace-nowrap",
+            "text-white",
           )}
         >
           {isSaving && <Loader2 className="size-3.5 shrink-0 animate-spin" />}
           {!isSaving && (
-            <InfoIcon className={cn('size-3.5 shrink-0 stroke-3', iconClass)} />
+            <InfoIcon className={cn("size-3.5 shrink-0 stroke-3", iconClass)} />
           )}
           {title}
         </span>
@@ -120,11 +121,11 @@ export function UnsavedChangesBar({
               onClick={async () => {
                 if (isValid) {
                   setTitle(savingMessage);
-                  setIconClass('text-white');
+                  setIconClass("text-white");
                   const isSuccess = await onSave?.();
                   if (isSuccess) {
                     setTitle(successMessage);
-                    setIconClass('text-green-400');
+                    setIconClass("text-green-400");
                     setIsSuccess(true);
                     setTimeout(() => {
                       reset();
@@ -132,7 +133,7 @@ export function UnsavedChangesBar({
                     }, 4000);
                   } else {
                     setTitle(errorMessage);
-                    setIconClass('text-red-500');
+                    setIconClass("text-red-500");
                     setIsError(true);
                     setTimeout(() => {
                       reset();
@@ -140,12 +141,12 @@ export function UnsavedChangesBar({
                     }, 4000);
                   }
                 } else {
-                  setIconClass('text-red-500');
+                  setIconClass("text-red-500");
                   setTitle(validationMessage);
                   triggerNudge();
                   onInvalid?.();
                   setTimeout(() => {
-                    setSaveButtonLabel('Try again');
+                    setSaveButtonLabel("Try again");
                   }, 200);
                 }
               }}

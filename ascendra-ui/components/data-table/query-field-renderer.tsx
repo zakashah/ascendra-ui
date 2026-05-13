@@ -52,6 +52,7 @@ interface QueryFieldRendererProps {
 }
 
 export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
+  "use no memo";
   const {
     register,
     control,
