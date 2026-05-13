@@ -36,6 +36,7 @@ import { PaginationButtonDocContent } from "@/components/previews/pagination-but
 import { RowActionButtonDocContent } from "@/components/previews/row-action-button-preview";
 import { FieldDocContent } from "@/components/previews/field-preview";
 import { ComboboxDocContent } from "@/components/previews/combobox-preview";
+import { TableLookupDocContent } from "@/components/previews/table-lookup-preview";
 import { NavDocContent } from "@/components/previews/nav-preview";
 import { UnsavedChangesBarDocContent } from "@/components/previews/unsaved-changes-bar-preview";
 import { ScrollToTopDocContent } from "@/components/previews/scroll-to-top-preview";
@@ -81,6 +82,7 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   "row-action-button": RowActionButtonDocContent,
   field: FieldDocContent,
   combobox: ComboboxDocContent,
+  "table-lookup": TableLookupDocContent,
   nav: NavDocContent,
   "unsaved-changes-bar": UnsavedChangesBarDocContent,
   "scroll-to-top": ScrollToTopDocContent,

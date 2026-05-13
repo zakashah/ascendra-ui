@@ -386,6 +386,25 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'table-lookup': {
+    slug: 'table-lookup',
+    name: 'Table Lookup',
+    description: 'Table-based lookup field for large datasets — supports single and multi-select with chips, async search, and configurable multi-column display.',
+    importPath: '@/ascendra-ui/components/ui/table-lookup',
+    importNames: ['TableLookup'],
+    props: [
+      { name: 'columns', type: 'TableLookupColumn<T>[]', description: 'Column definitions — drives table headers and searchable field list.' },
+      { name: 'valueKey', type: 'keyof T & string', description: 'Key used as the unique identifier for each record.' },
+      { name: 'labelKey', type: 'keyof T & string', description: 'Key whose value is shown in chips and the single-mode trigger.' },
+      { name: 'mode', type: "'single' | 'multiple'", default: "'single'", description: 'Single replaces the selection on each pick; multiple accumulates chips.' },
+      { name: 'onSearch', type: '(query: string, field?: string) => Promise<T[]> | T[]', description: 'Called to load or filter data. Receives the search string and optional field key.' },
+      { name: 'value', type: 'T | T[] | null', description: 'Controlled selected value(s).' },
+      { name: 'onChange', type: '(value: T | T[] | null) => void', description: 'Called when the selection changes.' },
+      { name: 'placeholder', type: 'string', description: 'Placeholder text shown when nothing is selected.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables the trigger and prevents the popup from opening.' },
+    ],
+  },
+
   'combobox': {
     slug: 'combobox',
     name: 'Combobox',

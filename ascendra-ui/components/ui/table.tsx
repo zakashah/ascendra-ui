@@ -99,8 +99,12 @@ function Table({
           "",
           scrollable && horizontal && "-mb-px overflow-x-auto pb-px",
           scrollable && vertical && height && "overflow-y-auto",
-          scrollable && vertical && height && `h-${height}`,
         )}
+        style={
+          scrollable && vertical && height
+            ? { maxHeight: `${height}px` }
+            : undefined
+        }
       >
         <table
           data-slot="table"

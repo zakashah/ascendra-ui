@@ -31,6 +31,7 @@ export const navConfig: NavCategory[] = [
       { name: 'Select', slug: 'select' },
       { name: 'Field', slug: 'field' },
       { name: 'Combobox', slug: 'combobox' },
+      { name: 'Table Lookup', slug: 'table-lookup' },
     ],
   },
   {
