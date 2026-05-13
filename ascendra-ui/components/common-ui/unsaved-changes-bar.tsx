@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { InfoIcon, Loader2 } from "lucide-react";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 import { Button } from "@/ascendra-ui/components/ui/button";
@@ -47,7 +47,6 @@ export function UnsavedChangesBar({
   isValid = true,
   className,
 }: UnsavedChangesBarProps) {
-  "use no memo";
   const barRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState(message);
@@ -55,14 +54,21 @@ export function UnsavedChangesBar({
   const [saveButtonLabel, setSaveButtonLabel] = useState(saveLabel);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [nudgeCount, setNudgeCount] = useState(0);
   const showButtons = !(isSaving || isError || isSuccess);
 
-  function triggerNudge() {
+  useEffect(() => {
+    if (nudgeCount === 0) return;
     const el = barRef.current;
     if (!el) return;
-    el.classList.remove("animate-nudge-strong");
-    void el.offsetWidth; // force reflow to restart the animation
     el.classList.add("animate-nudge-strong");
+    const onEnd = () => el.classList.remove("animate-nudge-strong");
+    el.addEventListener("animationend", onEnd, { once: true });
+    return () => el.removeEventListener("animationend", onEnd);
+  }, [nudgeCount]);
+
+  function triggerNudge() {
+    setNudgeCount((c) => c + 1);
   }
 
   function reset() {
