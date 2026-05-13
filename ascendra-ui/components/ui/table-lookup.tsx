@@ -459,7 +459,9 @@ function TableLookup<T extends Record<string, unknown>>({
                         onClick={() => handleSelect(row)}
                         className={cn(
                           "cursor-pointer",
-                          isSelected && "bg-primary/5",
+                          isSelected
+                            ? "bg-primary/5 hover:bg-primary/5"
+                            : "",
                         )}
                       >
                         {columns.map((col, colIdx) => {

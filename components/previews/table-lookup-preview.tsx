@@ -202,7 +202,7 @@ const ALL_PORTS: Port[] = [
 ];
 
 const mockOnSearch = async (query: string, field?: string): Promise<Port[]> => {
-  await new Promise((r) => setTimeout(r, 300));
+  await new Promise((r) => setTimeout(r, 3000));
   if (!query.trim()) return ALL_PORTS;
   const q = query.toLowerCase();
   return ALL_PORTS.filter((p) => {
