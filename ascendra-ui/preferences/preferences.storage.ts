@@ -86,7 +86,6 @@ export function writeQueryRunPreferences(
       ...existing,
       lastConfirmedQueryId: queryId,
       lastRunParams: {
-        ...(existing.lastRunParams ?? {}),
         [queryId]: serializeParamValues(params),
       },
     },
