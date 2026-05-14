@@ -21,6 +21,9 @@ export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, f
 
   // In-memory draft cache: keyed by queryId, stores typed-but-not-yet-confirmed param values.
   const draftCacheRef = useRef<Record<string, QueryParamValues>>({});
+  // In-memory confirmed cache: keyed by queryId, stores last-run params for every filter this session.
+  // Only the most-recently-run filter goes to localStorage; all others live here (tab-switch safe).
+  const confirmedParamsCacheRef = useRef<Record<string, QueryParamValues>>({});
 
   // Read localStorage after mount. Running this in useEffect (not useState lazy init) ensures
   // server and client render the same initial HTML, avoiding hydration mismatches.
@@ -79,6 +82,7 @@ export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, f
     const confirmedId = pendingQueryId ?? activeId;
     setConfirmedParamsState(values);
     setCurrentBatch(1);
+    confirmedParamsCacheRef.current[confirmedId] = values;
     if (tableId) writeQueryRunPreferences(tableId, confirmedId, values);
   }, [tableId, activeId, pendingQueryId]);
 
@@ -86,10 +90,12 @@ export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, f
     draftCacheRef.current[queryId] = values;
   }, []);
 
-  // Returns in-memory draft first; falls back to last-run params from localStorage.
+  // Returns in-memory draft first; then in-memory confirmed params; then last-run from localStorage.
   const getDraftValues = useCallback((queryId: string): QueryParamValues | null => {
     const draft = draftCacheRef.current[queryId];
     if (draft) return draft;
+    const confirmed = confirmedParamsCacheRef.current[queryId];
+    if (confirmed) return confirmed;
     if (!tableId) return null;
     const stored = readTablePreferences(tableId);
     const raw = stored?.queryState?.lastRunParams?.[queryId];

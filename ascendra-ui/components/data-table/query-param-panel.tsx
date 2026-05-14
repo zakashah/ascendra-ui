@@ -301,7 +301,7 @@ function QueryParamPanelInner() {
       </MainSection>
 
       <UnsavedChangesBar
-        isDirty={methods.formState.isDirty}
+        isDirty
         isSaving={isLoading}
         isValid={methods.formState.isValid}
         onSave={handleRunQuery}
