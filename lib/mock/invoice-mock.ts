@@ -192,18 +192,6 @@ export const PRESET_QUERIES: QueryDef[] = [
     title: 'Last 3 Months',
     description: 'Invoices from the past 90 days',
   },
-  {
-    id: 'user-high-value',
-    group: 'user-query',
-    title: 'High Value Invoices',
-    description: 'Invoices above PKR 50,000',
-  },
-  {
-    id: 'user-class-10',
-    group: 'user-query',
-    title: 'Class 10 Fees',
-    description: 'All fee invoices for class 10 students',
-  },
   // ── 1-column filters ─────────────────────────────────────────────────────
   {
     id: 'by-status',

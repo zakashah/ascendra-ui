@@ -1,72 +1,193 @@
 'use client';
 
-import { createContext, useContext, useState, useCallback, useRef, useEffect } from 'react';
+import { createContext, useContext, useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { readTablePreferences, writeQueryRunPreferences, deserializeParamValues } from '@/ascendra-ui/preferences/preferences.storage';
-import type { QueryContextValue, DataTableQueryProviderProps, QueryParamValues, QueryResult } from './data-table-query.types';
+import {
+  readTablePreferences,
+  writeQueryRunPreferences,
+  deserializeParamValues,
+  readSavedUserQueries,
+  writeSavedUserQueries,
+  readPresetQueryPrefs,
+  writePresetQueryPrefs,
+} from '@/ascendra-ui/preferences/preferences.storage';
+import type {
+  QueryContextValue,
+  DataTableQueryProviderProps,
+  QueryParamValues,
+  QueryResult,
+  SavedUserQuery,
+  QueryDef,
+  QueryGroup,
+} from './data-table-query.types';
 
 const QueryContext = createContext<QueryContextValue | null>(null);
 
-export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, fieldOptions = {}, tableId, children }: DataTableQueryProviderProps<T>) {
-  // Always start with queries[0] so server and client first-render match (avoids hydration mismatch).
-  // The useEffect below replaces this with the stored last-run query after mount.
-  const [activeId, setActiveId] = useState(queries[0].id);
+/** Apply a stored ordering to a list of queries within their group. New items not in the order are appended. */
+function applyGroupOrder(items: QueryDef[], order: string[]): QueryDef[] {
+  if (!order.length) return items;
+  const map = new Map(items.map((q) => [q.id, q]));
+  const result: QueryDef[] = [];
+  for (const id of order) {
+    const item = map.get(id);
+    if (item) result.push(item);
+  }
+  for (const item of items) {
+    if (!result.includes(item)) result.push(item);
+  }
+  return result;
+}
+
+export function DataTableQueryProvider<T = unknown>({
+  queries: propQueries,
+  queryFunctions,
+  fieldOptions = {},
+  tableId,
+  children,
+}: DataTableQueryProviderProps<T>) {
+  const [activeId, setActiveId] = useState(propQueries[0].id);
   const [pendingQueryId, setPendingQueryId] = useState<string | null>(null);
   const [confirmedParamsState, setConfirmedParamsState] = useState<QueryParamValues | null>(null);
   const [currentBatch, setCurrentBatch] = useState(1);
-
-  // True while the first-mount useEffect is reading localStorage.
-  // Blocks query execution and query-specific UI so queries[0] never flickers in.
   const [isInitializing, setIsInitializing] = useState(!!tableId);
 
-  // In-memory draft cache: keyed by queryId, stores typed-but-not-yet-confirmed param values.
+  // Saved user queries
+  const savedUserQueriesRef = useRef<SavedUserQuery[]>([]);
+  const [savedUserQueries, setSavedUserQueriesRaw] = useState<SavedUserQuery[]>([]);
+
+  // Preset query preferences — disabled IDs and custom group ordering
+  const disabledPresetIdsRef = useRef<string[]>([]);
+  const [disabledPresetIds, setDisabledPresetIdsRaw] = useState<string[]>([]);
+  const presetGroupOrdersRef = useRef<Record<string, string[]>>({});
+  const [presetGroupOrders, setPresetGroupOrdersRaw] = useState<Record<string, string[]>>({});
+
+  function setSavedUserQueries(updated: SavedUserQuery[]) {
+    savedUserQueriesRef.current = updated;
+    setSavedUserQueriesRaw(updated);
+  }
+  function setDisabledPresetIds(updated: string[]) {
+    disabledPresetIdsRef.current = updated;
+    setDisabledPresetIdsRaw(updated);
+  }
+  function setPresetGroupOrders(updated: Record<string, string[]>) {
+    presetGroupOrdersRef.current = updated;
+    setPresetGroupOrdersRaw(updated);
+  }
+
   const draftCacheRef = useRef<Record<string, QueryParamValues>>({});
-  // In-memory confirmed cache: keyed by queryId, stores last-run params for every filter this session.
-  // Only the most-recently-run filter goes to localStorage; all others live here (tab-switch safe).
   const confirmedParamsCacheRef = useRef<Record<string, QueryParamValues>>({});
 
-  // Read localStorage after mount. Running this in useEffect (not useState lazy init) ensures
-  // server and client render the same initial HTML, avoiding hydration mismatches.
+  // All preset queries with custom group ordering applied (does not filter disabled)
+  const orderedPresetQueries = useMemo<QueryDef[]>(() => {
+    const groups = [...new Set(propQueries.map((q) => q.group))] as QueryGroup[];
+    const result: QueryDef[] = [];
+    for (const group of groups) {
+      const groupItems = propQueries.filter((q) => q.group === group);
+      result.push(...applyGroupOrder(groupItems, presetGroupOrders[group] ?? []));
+    }
+    return result;
+  }, [propQueries, presetGroupOrders]);
+
+  // allQueries: every query including disabled ones — for the manage dialog
+  const allQueries = useMemo<QueryDef[]>(() => {
+    const userQueryDefs: QueryDef[] = savedUserQueries
+      .sort((a, b) => a.order - b.order)
+      .map((q) => ({
+        id: q.id,
+        title: q.name,
+        description: q.description,
+        group: 'user-query' as const,
+      }));
+    return [...orderedPresetQueries, ...userQueryDefs];
+  }, [orderedPresetQueries, savedUserQueries]);
+
+  // mergedQueries: only enabled queries — shown in dropdown and used for active query lookup
+  const mergedQueries = useMemo<QueryDef[]>(() => {
+    const disabledSet = new Set(disabledPresetIds);
+    const enabledPreset = orderedPresetQueries.filter((q) => !disabledSet.has(q.id));
+    const enabledUserDefs: QueryDef[] = savedUserQueries
+      .filter((q) => q.enabled)
+      .sort((a, b) => a.order - b.order)
+      .map((q) => ({
+        id: q.id,
+        title: q.name,
+        description: q.description,
+        group: 'user-query' as const,
+      }));
+    return [...enabledPreset, ...enabledUserDefs];
+  }, [orderedPresetQueries, savedUserQueries, disabledPresetIds]);
+
+  // disabledQueryIds: union of disabled preset IDs and disabled user query IDs
+  const disabledQueryIds = useMemo<string[]>(() => [
+    ...disabledPresetIds,
+    ...savedUserQueries.filter((q) => !q.enabled).map((q) => q.id),
+  ], [disabledPresetIds, savedUserQueries]);
+
+  // Read localStorage after mount
   useEffect(() => {
-    if (!tableId) return; // isInitializing was already false; nothing to load
+    if (!tableId) return;
 
     const stored = readTablePreferences(tableId);
-    const lastId = stored?.queryState?.lastConfirmedQueryId;
 
-    if (lastId && queries.some((q) => q.id === lastId)) {
-      const lastQuery = queries.find((q) => q.id === lastId);
-      // For filter queries: also restore confirmed params so the query auto-runs
-      if (lastQuery?.group === 'filter') {
-        const raw = stored?.queryState?.lastRunParams?.[lastId];
-        if (raw) setConfirmedParamsState(deserializeParamValues(raw));
+    const loadedUserQueries = readSavedUserQueries(tableId);
+    setSavedUserQueries(loadedUserQueries);
+
+    const presetPrefs = readPresetQueryPrefs(tableId);
+    setDisabledPresetIds(presetPrefs.disabledIds ?? []);
+    setPresetGroupOrders(presetPrefs.groupOrder ?? {});
+
+    const lastId = stored?.queryState?.lastConfirmedQueryId;
+    const userQueryIds = new Set(loadedUserQueries.map((q) => q.id));
+    const presetIds = new Set(propQueries.map((q) => q.id));
+    const allIds = new Set([...presetIds, ...userQueryIds]);
+
+    if (lastId && allIds.has(lastId)) {
+      if (userQueryIds.has(lastId)) {
+        const savedQ = loadedUserQueries.find((q) => q.id === lastId);
+        if (savedQ) setConfirmedParamsState(savedQ.params);
+      } else {
+        const lastQuery = propQueries.find((q) => q.id === lastId);
+        if (lastQuery?.group === 'filter') {
+          const raw = stored?.queryState?.lastRunParams?.[lastId];
+          if (raw) setConfirmedParamsState(deserializeParamValues(raw));
+        }
       }
       setActiveId(lastId);
     }
 
-    // All three state updates above are batched by React 18 into a single re-render
     setIsInitializing(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const displayId = pendingQueryId ?? activeId;
-  const activeQuery = queries.find((q) => q.id === displayId) ?? queries[0];
-  const confirmedQuery = queries.find((q) => q.id === activeId) ?? queries[0];
+  const activeQuery = allQueries.find((q) => q.id === displayId) ?? allQueries[0];
+  const confirmedQuery = allQueries.find((q) => q.id === activeId) ?? allQueries[0];
 
   const setActiveQueryId = useCallback((id: string) => {
-    const query = queries.find((q) => q.id === id);
     setCurrentBatch(1);
     setConfirmedParamsState(null);
 
-    if (query?.group === 'filter') {
-      // Filters are not confirmed until Run Query is clicked
-      setPendingQueryId(id);
-    } else {
+    // User query (enabled or disabled — run regardless)
+    const savedQ = savedUserQueriesRef.current.find((q) => q.id === id);
+    if (savedQ) {
+      const params = savedQ.params ?? {};
+      setConfirmedParamsState(params);
       setActiveId(id);
       setPendingQueryId(null);
-      // Non-filter queries run immediately on selection — persist as last confirmed
+      if (tableId) writeQueryRunPreferences(tableId, id, params);
+      return;
+    }
+
+    // Preset query
+    const presetQ = propQueries.find((q) => q.id === id);
+    if (presetQ?.group === 'filter') {
+      setPendingQueryId(id);
+    } else if (presetQ) {
+      setActiveId(id);
+      setPendingQueryId(null);
       if (tableId) writeQueryRunPreferences(tableId, id, {});
     }
-  }, [queries, tableId]);
+  }, [propQueries, tableId]);
 
   const confirmPending = useCallback(() => {
     if (pendingQueryId) {
@@ -76,9 +197,6 @@ export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, f
   }, [pendingQueryId]);
 
   const setConfirmedParams = useCallback((values: QueryParamValues) => {
-    // For filter queries, pendingQueryId is the actual filter being confirmed.
-    // activeId still points to the previous non-filter query at this point (confirmPending
-    // hasn't fired yet), so we must use pendingQueryId as the key.
     const confirmedId = pendingQueryId ?? activeId;
     setConfirmedParamsState(values);
     setCurrentBatch(1);
@@ -90,7 +208,6 @@ export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, f
     draftCacheRef.current[queryId] = values;
   }, []);
 
-  // Returns in-memory draft first; then in-memory confirmed params; then last-run from localStorage.
   const getDraftValues = useCallback((queryId: string): QueryParamValues | null => {
     const draft = draftCacheRef.current[queryId];
     if (draft) return draft;
@@ -102,13 +219,119 @@ export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, f
     return raw ? deserializeParamValues(raw) : null;
   }, [tableId]);
 
-  const queryFn = queryFunctions[activeId];
-  // Don't run any query while localStorage is being read — prevents the queries[0] fetch
+  const saveAsUserQuery = useCallback((
+    sourceQueryId: string,
+    name: string,
+    description: string,
+    params: QueryParamValues,
+  ) => {
+    const newQuery: SavedUserQuery = {
+      id: `user-query-${Date.now()}`,
+      name,
+      description,
+      sourceQueryId,
+      params,
+      enabled: true,
+      order: savedUserQueriesRef.current.length,
+      createdAt: new Date().toISOString(),
+    };
+    const updated = [...savedUserQueriesRef.current, newQuery];
+    setSavedUserQueries(updated);
+    if (tableId) writeSavedUserQueries(tableId, updated);
+  }, [tableId]);
+
+  const removeUserQuery = useCallback((id: string) => {
+    const filtered = savedUserQueriesRef.current.filter((q) => q.id !== id);
+    const reordered = filtered.map((q, i) => ({ ...q, order: i }));
+    setSavedUserQueries(reordered);
+    if (tableId) writeSavedUserQueries(tableId, reordered);
+    if (activeId === id) {
+      setActiveId(propQueries[0].id);
+      setConfirmedParamsState(null);
+    }
+  }, [tableId, activeId, propQueries]);
+
+  const updateUserQueries = useCallback((updated: SavedUserQuery[]) => {
+    setSavedUserQueries(updated);
+    if (tableId) writeSavedUserQueries(tableId, updated);
+    const activeUserQuery = updated.find((q) => q.id === activeId);
+    if (activeUserQuery && !activeUserQuery.enabled) {
+      setActiveId(propQueries[0].id);
+      setConfirmedParamsState(null);
+      setPendingQueryId(null);
+    }
+  }, [tableId, activeId, propQueries]);
+
+  const toggleQueryEnabled = useCallback((id: string) => {
+    // User query toggle
+    const userQuery = savedUserQueriesRef.current.find((q) => q.id === id);
+    if (userQuery) {
+      const updated = savedUserQueriesRef.current.map((q) =>
+        q.id === id ? { ...q, enabled: !q.enabled } : q
+      );
+      setSavedUserQueries(updated);
+      if (tableId) writeSavedUserQueries(tableId, updated);
+      // Fall back if the now-disabled query was active
+      if (userQuery.enabled && activeId === id) {
+        setActiveId(propQueries[0].id);
+        setConfirmedParamsState(null);
+        setPendingQueryId(null);
+      }
+      return;
+    }
+
+    // Preset query toggle
+    const isDisabled = disabledPresetIdsRef.current.includes(id);
+    const updated = isDisabled
+      ? disabledPresetIdsRef.current.filter((d) => d !== id)
+      : [...disabledPresetIdsRef.current, id];
+    setDisabledPresetIds(updated);
+    if (tableId) writePresetQueryPrefs(tableId, { disabledIds: updated, groupOrder: presetGroupOrdersRef.current });
+    // Fall back if the now-disabled query was active
+    if (!isDisabled && (activeId === id || pendingQueryId === id)) {
+      const firstEnabled = propQueries.find((q) => !updated.includes(q.id));
+      setActiveId(firstEnabled?.id ?? propQueries[0].id);
+      setConfirmedParamsState(null);
+      setPendingQueryId(null);
+    }
+  }, [tableId, activeId, pendingQueryId, propQueries]);
+
+  const reorderQueriesInGroup = useCallback((group: QueryGroup, orderedIds: string[]) => {
+    if (group === 'user-query') {
+      const updated = orderedIds
+        .map((id, i) => {
+          const q = savedUserQueriesRef.current.find((q) => q.id === id);
+          return q ? { ...q, order: i } : null;
+        })
+        .filter(Boolean) as SavedUserQuery[];
+      // Append any user queries that weren't in the orderedIds list
+      const inSet = new Set(orderedIds);
+      for (const q of savedUserQueriesRef.current) {
+        if (!inSet.has(q.id)) updated.push({ ...q, order: updated.length });
+      }
+      setSavedUserQueries(updated);
+      if (tableId) writeSavedUserQueries(tableId, updated);
+    } else {
+      const updated = { ...presetGroupOrdersRef.current, [group]: orderedIds };
+      setPresetGroupOrders(updated);
+      if (tableId) writePresetQueryPrefs(tableId, { disabledIds: disabledPresetIdsRef.current, groupOrder: updated });
+    }
+  }, [tableId]);
+
+  // Resolve query function — user queries delegate to their source filter's function
+  const queryFn = (() => {
+    if (confirmedQuery.group === 'user-query') {
+      const savedQ = savedUserQueriesRef.current.find((q) => q.id === activeId);
+      return savedQ ? queryFunctions[savedQ.sourceQueryId] : undefined;
+    }
+    return queryFunctions[activeId];
+  })();
+
   const enabled = !isInitializing && (confirmedQuery.group !== 'filter' || confirmedParamsState !== null);
 
   const { data, isLoading, isError, error, refetch } = useQuery<QueryResult<T>, Error>({
     queryKey: ['data-table', activeId, confirmedParamsState, currentBatch],
-    queryFn: () => queryFn(confirmedParamsState ?? {}, currentBatch),
+    queryFn: () => queryFn!(confirmedParamsState ?? {}, currentBatch),
     enabled: !!queryFn && enabled,
     staleTime: confirmedQuery.queryOptions?.staleTime,
     retry: confirmedQuery.queryOptions?.retry,
@@ -131,7 +354,7 @@ export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, f
   return (
     <QueryContext.Provider
       value={{
-        queries,
+        queries: mergedQueries,
         activeQuery,
         confirmedQueryId: activeId,
         pendingQueryId,
@@ -152,6 +375,14 @@ export function DataTableQueryProvider<T = unknown>({ queries, queryFunctions, f
         fieldOptions,
         saveDraftValues,
         getDraftValues,
+        savedUserQueries,
+        saveAsUserQuery,
+        removeUserQuery,
+        updateUserQueries,
+        allQueries,
+        disabledQueryIds,
+        toggleQueryEnabled,
+        reorderQueriesInGroup,
       }}
     >
       {children}

@@ -108,6 +108,17 @@ export type FieldOptionsDef = SelectOption[] | FieldOptionsResolver;
 /** Map of queryId → fieldName → options, passed separately from QueryDef for serializability */
 export type FieldOptionsMap = Record<string, Record<string, FieldOptionsDef>>;
 
+export interface SavedUserQuery {
+  id: string;
+  name: string;
+  description: string;
+  sourceQueryId: string;
+  params: QueryParamValues;
+  enabled: boolean;
+  order: number;
+  createdAt: string;
+}
+
 export interface QueryContextValue {
   queries: QueryDef[];
   activeQuery: QueryDef;
@@ -131,6 +142,18 @@ export interface QueryContextValue {
   fieldOptions: FieldOptionsMap;
   saveDraftValues: (queryId: string, values: QueryParamValues) => void;
   getDraftValues: (queryId: string) => QueryParamValues | null;
+  savedUserQueries: SavedUserQuery[];
+  saveAsUserQuery: (sourceQueryId: string, name: string, description: string, params: QueryParamValues) => void;
+  removeUserQuery: (id: string) => void;
+  updateUserQueries: (updated: SavedUserQuery[]) => void;
+  /** All queries including disabled ones — used by the manage dialog. */
+  allQueries: QueryDef[];
+  /** IDs of all currently disabled queries (preset and user). */
+  disabledQueryIds: string[];
+  /** Toggle the enabled state of any query by ID. */
+  toggleQueryEnabled: (id: string) => void;
+  /** Reorder queries within a group by providing the new ordered list of IDs. */
+  reorderQueriesInGroup: (group: QueryGroup, orderedIds: string[]) => void;
 }
 
 export interface DataTableQueryProviderProps<T = unknown> {

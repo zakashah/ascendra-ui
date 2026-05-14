@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -11,6 +11,7 @@ import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-
 import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
 import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
 import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+import { Button } from "@/ascendra-ui/components/ui/button";
 import { useQueryContext } from "@/ascendra-ui/providers/data-table-query/data-table-query.provider";
 import type {
   ColumnsConfig,
@@ -20,8 +21,9 @@ import type {
 } from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
 import { isFieldDef } from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
-import { InfoIcon } from "lucide-react";
+import { BookmarkPlus, InfoIcon } from "lucide-react";
 import { IoColorFilterOutline } from "react-icons/io5";
+import { SaveQueryDialog } from "./save-query-dialog";
 import { QueryFieldRenderer } from "./query-field-renderer";
 
 function buildZodSchema(
@@ -199,7 +201,7 @@ export function QueryParamPanel() {
 
 function QueryParamPanelInner() {
   "use no memo";
-  const { activeQuery, setConfirmedParams, isLoading, confirmPending, getDraftValues, saveDraftValues } =
+  const { activeQuery, setConfirmedParams, isLoading, confirmPending, getDraftValues, saveDraftValues, saveAsUserQuery } =
     useQueryContext();
   const params = activeQuery.params!;
   const fields = useMemo(() => params.filter(isFieldDef), [params]);
@@ -207,6 +209,8 @@ function QueryParamPanelInner() {
 
   const schema = useMemo(() => buildZodSchema(fields), [fields]);
   const defaultValues = useMemo(() => buildDefaultValues(fields), [fields]);
+
+  const [saveDialogOpen, setSaveDialogOpen] = useState(false);
 
   const methods = useForm({
     resolver: zodResolver(schema),
@@ -228,8 +232,6 @@ function QueryParamPanelInner() {
   }, []);
 
   const handleRunQuery = async (): Promise<boolean> => {
-    console.log("in run query");
-
     const valid = await methods.trigger();
     if (!valid) return false;
 
@@ -242,20 +244,44 @@ function QueryParamPanelInner() {
     });
   };
 
+  const { isValid } = methods.formState;
+
   return (
     <>
       <MainSection>
         <MainSectionHeader>
-          <div className="flex items-center gap-2">
-            <IoColorFilterOutline className="text-muted-foreground size-5" />
-            <div className="flex flex-col">
-              <span className="text-sm font-medium">{activeQuery.title}</span>
-              <p className="text-muted-foreground mt-0.5 text-xs">
-                {activeQuery.description}
-              </p>
+          <div className="flex w-full items-center justify-between gap-2">
+            <div className="flex min-w-0 items-center gap-2">
+              <IoColorFilterOutline className="text-muted-foreground size-5 shrink-0" />
+              <div className="flex flex-col">
+                <span className="text-sm font-medium">{activeQuery.title}</span>
+                <p className="text-muted-foreground mt-0.5 text-xs">
+                  {activeQuery.description}
+                </p>
+              </div>
             </div>
+            {isValid && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="text-muted-foreground hover:text-foreground shrink-0 gap-1.5 text-xs"
+                onClick={() => setSaveDialogOpen(true)}
+              >
+                <BookmarkPlus className="size-3.5" />
+                Save as My Query
+              </Button>
+            )}
           </div>
         </MainSectionHeader>
+
+        <SaveQueryDialog
+          open={saveDialogOpen}
+          onOpenChange={setSaveDialogOpen}
+          onSave={(name, description) => {
+            saveAsUserQuery(activeQuery.id, name, description, methods.getValues() as QueryParamValues);
+          }}
+        />
         <MainSectionPanel>
           <FormProvider {...methods}>
             <form noValidate>

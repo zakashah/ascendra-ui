@@ -1,6 +1,6 @@
 import type { DateRange } from 'react-day-picker';
-import type { QueryParamValues } from '@/ascendra-ui/providers/data-table-query/data-table-query.types';
-import type { TablePreferences, UserPreferences } from './preferences.types';
+import type { QueryParamValues, SavedUserQuery } from '@/ascendra-ui/providers/data-table-query/data-table-query.types';
+import type { PresetQueryPrefs, StoredSavedUserQuery, TablePreferences, UserPreferences } from './preferences.types';
 
 const STORAGE_KEY = 'ascendra:user-preferences';
 
@@ -69,6 +69,32 @@ export function deserializeParamValues(raw: Record<string, unknown>): QueryParam
     }
   }
   return result;
+}
+
+export function readPresetQueryPrefs(tableId: string): PresetQueryPrefs {
+  const table = readTablePreferences(tableId);
+  return table?.presetQueryPrefs ?? {};
+}
+
+export function writePresetQueryPrefs(tableId: string, prefs: PresetQueryPrefs): void {
+  writeTablePreferences(tableId, { presetQueryPrefs: prefs });
+}
+
+export function readSavedUserQueries(tableId: string): SavedUserQuery[] {
+  const table = readTablePreferences(tableId);
+  if (!table?.savedUserQueries?.length) return [];
+  return table.savedUserQueries.map((q) => ({
+    ...q,
+    params: deserializeParamValues(q.params),
+  }));
+}
+
+export function writeSavedUserQueries(tableId: string, queries: SavedUserQuery[]): void {
+  const serialized: StoredSavedUserQuery[] = queries.map((q) => ({
+    ...q,
+    params: serializeParamValues(q.params),
+  }));
+  writeTablePreferences(tableId, { savedUserQueries: serialized });
 }
 
 /** Deep-merges a single query run into the table's queryState without clobbering other keys. */

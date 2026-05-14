@@ -1,6 +1,7 @@
 "use client";
 
-import { Sparkles, ChevronDown, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { Sparkles, ChevronDown, Loader2, Settings2 } from "lucide-react";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import {
   DropdownMenu,
@@ -13,6 +14,7 @@ import {
 } from "@/ascendra-ui/components/ui/dropdown-menu";
 import { useQueryContext } from "@/ascendra-ui/providers/data-table-query/data-table-query.provider";
 import type { QueryGroup } from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
+import { ManageQueriesDialog } from "./manage-queries-dialog";
 
 const GROUP_LABELS: Record<QueryGroup, string> = {
   query: "Queries",
@@ -33,72 +35,88 @@ export function QueryBar() {
   const confirmedQuery =
     queries.find((q) => q.id === confirmedQueryId) ?? queries[0];
 
+  const [manageOpen, setManageOpen] = useState(false);
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="secondary"
-          className="w-full justify-start gap-2 px-3 font-normal"
+    <div className="flex items-center gap-1">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="secondary"
+            className="min-w-0 flex-1 justify-start gap-2 px-3 font-normal"
+          >
+            {isLoading ? (
+              <Loader2
+                className="text-muted-foreground size-3 shrink-0 animate-spin"
+                strokeWidth={2}
+              />
+            ) : (
+              <Sparkles
+                className="text-muted-foreground size-3 shrink-0"
+                strokeWidth={2}
+              />
+            )}
+            {!isInitializing && (
+              <span className="flex min-w-0 flex-1 items-center gap-2">
+                <span className="text-foreground shrink-0 font-medium">
+                  {confirmedQuery.title}
+                </span>
+                <span className="text-muted-foreground/60 shrink-0">·</span>
+                <span className="text-muted-foreground truncate">
+                  {confirmedQuery.description}
+                </span>
+              </span>
+            )}
+            <ChevronDown
+              className="text-muted-foreground ml-auto size-3.5 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180"
+              strokeWidth={2}
+            />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent
+          sideOffset={4}
+          align="start"
+          onCloseAutoFocus={(e) => e.preventDefault()}
         >
-          {isLoading ? (
-            <Loader2
-              className="text-muted-foreground size-3 shrink-0 animate-spin"
-              strokeWidth={2}
-            />
-          ) : (
-            <Sparkles
-              className="text-muted-foreground size-3 shrink-0"
-              strokeWidth={2}
-            />
-          )}
-          {!isInitializing && (
-            <span className="flex min-w-0 flex-1 items-center gap-2">
-              <span className="text-foreground shrink-0 font-medium">
-                {confirmedQuery.title}
-              </span>
-              <span className="text-muted-foreground/60 shrink-0">·</span>
-              <span className="text-muted-foreground truncate">
-                {confirmedQuery.description}
-              </span>
-            </span>
-          )}
-          <ChevronDown
-            className="text-muted-foreground ml-auto size-3.5 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180"
-            strokeWidth={2}
-          />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent
-        sideOffset={4}
-        align="start"
-        onCloseAutoFocus={(e) => e.preventDefault()}
+          <DropdownMenuRadioGroup
+            value={confirmedQueryId}
+            onValueChange={setActiveQueryId}
+          >
+            {GROUP_ORDER.map((group, i) => {
+              const items = queries.filter((q) => q.group === group);
+              if (items.length === 0) return null;
+              return (
+                <div key={group}>
+                  {i > 0 && <DropdownMenuSeparator />}
+                  <DropdownMenuLabel>{GROUP_LABELS[group]}</DropdownMenuLabel>
+                  {items.map((query) => (
+                    <DropdownMenuRadioItem key={query.id} value={query.id}>
+                      <div className="flex flex-col">
+                        <span className="font-medium">{query.title}</span>
+                        <span className="text-muted-foreground text-xs">
+                          {query.description}
+                        </span>
+                      </div>
+                    </DropdownMenuRadioItem>
+                  ))}
+                </div>
+              );
+            })}
+          </DropdownMenuRadioGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <Button
+        variant="secondary"
+        size="icon"
+        className="size-9 shrink-0"
+        onClick={() => setManageOpen(true)}
+        aria-label="Manage queries"
       >
-        <DropdownMenuRadioGroup
-          value={confirmedQueryId}
-          onValueChange={setActiveQueryId}
-        >
-          {GROUP_ORDER.map((group, i) => {
-            const items = queries.filter((q) => q.group === group);
-            if (items.length === 0) return null;
-            return (
-              <div key={group}>
-                {i > 0 && <DropdownMenuSeparator />}
-                <DropdownMenuLabel>{GROUP_LABELS[group]}</DropdownMenuLabel>
-                {items.map((query) => (
-                  <DropdownMenuRadioItem key={query.id} value={query.id}>
-                    <div className="flex flex-col">
-                      <span className="font-medium">{query.title}</span>
-                      <span className="text-muted-foreground text-xs">
-                        {query.description}
-                      </span>
-                    </div>
-                  </DropdownMenuRadioItem>
-                ))}
-              </div>
-            );
-          })}
-        </DropdownMenuRadioGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
+        <Settings2 className="size-3.5" strokeWidth={2} />
+      </Button>
+
+      <ManageQueriesDialog open={manageOpen} onOpenChange={setManageOpen} />
+    </div>
   );
 }
