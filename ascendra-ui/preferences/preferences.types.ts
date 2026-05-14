@@ -3,8 +3,15 @@ export type ColumnPreferences = {
   visibility: Record<string, boolean>;
 };
 
+export type QueryStatePreferences = {
+  lastConfirmedQueryId?: string;
+  /** Serialized QueryParamValues keyed by queryId. Use serializeParamValues/deserializeParamValues. */
+  lastRunParams?: Record<string, Record<string, unknown>>;
+};
+
 export type TablePreferences = {
   columns?: ColumnPreferences;
+  queryState?: QueryStatePreferences;
   // future: savedQueries?: SavedQuery[];
 };
 

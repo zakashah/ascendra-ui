@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -199,7 +199,7 @@ export function QueryParamPanel() {
 
 function QueryParamPanelInner() {
   "use no memo";
-  const { activeQuery, setConfirmedParams, isLoading, confirmPending } =
+  const { activeQuery, setConfirmedParams, isLoading, confirmPending, getDraftValues, saveDraftValues } =
     useQueryContext();
   const params = activeQuery.params!;
   const fields = useMemo(() => params.filter(isFieldDef), [params]);
@@ -213,6 +213,19 @@ function QueryParamPanelInner() {
     defaultValues,
     mode: "all",
   });
+
+  // Restore draft or last-run params on mount
+  useEffect(() => {
+    const saved = getDraftValues(activeQuery.id);
+    if (saved) methods.reset(saved);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Save current form state to draft cache on unmount
+  useEffect(() => {
+    return () => { saveDraftValues(activeQuery.id, methods.getValues() as QueryParamValues); };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleRunQuery = async (): Promise<boolean> => {
     console.log("in run query");

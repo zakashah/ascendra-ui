@@ -35,6 +35,7 @@ export function DataTableWithQueryProvider<T extends object>({
       queries={queries}
       queryFunctions={queryFunctions}
       fieldOptions={fieldOptions}
+      tableId={tableId}
     >
       <DataTableProvider columns={columns} data={data} isLoading={isLoading} getRowId={getRowId} tableId={tableId}>
         {children}

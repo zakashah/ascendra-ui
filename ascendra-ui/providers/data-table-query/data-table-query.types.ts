@@ -115,6 +115,8 @@ export interface QueryContextValue {
   pendingQueryId: string | null;
   setActiveQueryId: (id: string) => void;
   confirmPending: () => void;
+  /** True on the first render while localStorage preferences are being read. Use to suppress query-specific UI. */
+  isInitializing: boolean;
   isLoading: boolean;
   isError: boolean;
   error: Error | null;
@@ -127,11 +129,16 @@ export interface QueryContextValue {
   goNextBatch: () => void;
   goPrevBatch: () => void;
   fieldOptions: FieldOptionsMap;
+  saveDraftValues: (queryId: string, values: QueryParamValues) => void;
+  getDraftValues: (queryId: string) => QueryParamValues | null;
 }
 
 export interface DataTableQueryProviderProps<T = unknown> {
   queries: QueryDef[];
   queryFunctions: QueryFunctionMap<T>;
   fieldOptions?: FieldOptionsMap;
+  /** Unique key used to persist last-run query params and last active query to localStorage.
+   *  Omit to disable query state persistence. */
+  tableId?: string;
   children: React.ReactNode;
 }

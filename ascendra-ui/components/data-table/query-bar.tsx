@@ -23,7 +23,7 @@ const GROUP_LABELS: Record<QueryGroup, string> = {
 const GROUP_ORDER: QueryGroup[] = ['query', 'user-query', 'filter'];
 
 export function QueryBar() {
-  const { queries, confirmedQueryId, setActiveQueryId, isLoading } = useQueryContext();
+  const { queries, confirmedQueryId, setActiveQueryId, isLoading, isInitializing } = useQueryContext();
   const confirmedQuery =
     queries.find((q) => q.id === confirmedQueryId) ?? queries[0];
 
@@ -45,13 +45,19 @@ export function QueryBar() {
               strokeWidth={2}
             />
           )}
-          <span className="text-foreground font-medium">
-            {confirmedQuery.title}
-          </span>
-          <span className="text-muted-foreground/60">·</span>
-          <span className="text-muted-foreground">
-            {confirmedQuery.description}
-          </span>
+          {isInitializing ? (
+            <span className="bg-muted-foreground/15 h-3 w-48 animate-pulse rounded-full" />
+          ) : (
+            <>
+              <span className="text-foreground font-medium">
+                {confirmedQuery.title}
+              </span>
+              <span className="text-muted-foreground/60">·</span>
+              <span className="text-muted-foreground">
+                {confirmedQuery.description}
+              </span>
+            </>
+          )}
           <ChevronDown
             className="text-muted-foreground ml-auto size-3.5 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180"
             strokeWidth={2}
