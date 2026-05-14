@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Sparkles, ChevronDown, Loader2 } from 'lucide-react';
-import { Button } from '@/ascendra-ui/components/ui/button';
+import { Sparkles, ChevronDown, Loader2 } from "lucide-react";
+import { Button } from "@/ascendra-ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,20 +10,26 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/ascendra-ui/components/ui/dropdown-menu';
-import { useQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
-import type { QueryGroup } from '@/ascendra-ui/providers/data-table-query/data-table-query.types';
+} from "@/ascendra-ui/components/ui/dropdown-menu";
+import { useQueryContext } from "@/ascendra-ui/providers/data-table-query/data-table-query.provider";
+import type { QueryGroup } from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
 
 const GROUP_LABELS: Record<QueryGroup, string> = {
-  query: 'Queries',
-  'user-query': 'My Queries',
-  filter: 'Filters',
+  query: "Queries",
+  "user-query": "My Queries",
+  filter: "Filters",
 };
 
-const GROUP_ORDER: QueryGroup[] = ['query', 'user-query', 'filter'];
+const GROUP_ORDER: QueryGroup[] = ["query", "user-query", "filter"];
 
 export function QueryBar() {
-  const { queries, confirmedQueryId, setActiveQueryId, isLoading, isInitializing } = useQueryContext();
+  const {
+    queries,
+    confirmedQueryId,
+    setActiveQueryId,
+    isLoading,
+    isInitializing,
+  } = useQueryContext();
   const confirmedQuery =
     queries.find((q) => q.id === confirmedQueryId) ?? queries[0];
 
@@ -45,18 +51,16 @@ export function QueryBar() {
               strokeWidth={2}
             />
           )}
-          {isInitializing ? (
-            <span className="bg-muted-foreground/15 h-3 w-48 animate-pulse rounded-full" />
-          ) : (
-            <>
-              <span className="text-foreground font-medium">
+          {!isInitializing && (
+            <span className="flex min-w-0 flex-1 items-center gap-2">
+              <span className="text-foreground shrink-0 font-medium">
                 {confirmedQuery.title}
               </span>
-              <span className="text-muted-foreground/60">·</span>
-              <span className="text-muted-foreground">
+              <span className="text-muted-foreground/60 shrink-0">·</span>
+              <span className="text-muted-foreground truncate">
                 {confirmedQuery.description}
               </span>
-            </>
+            </span>
           )}
           <ChevronDown
             className="text-muted-foreground ml-auto size-3.5 shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180"
