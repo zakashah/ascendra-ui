@@ -7,6 +7,7 @@ import { useSearch } from './use-search.hook';
 import { useSelection } from './use-selection.hook';
 import { useSort } from './use-sort.hook';
 import { useOptionalQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
+import { useColumnPersistence } from '@/ascendra-ui/preferences/use-column-preferences';
 import type {
   ColumnDef,
   SortConfig,
@@ -37,6 +38,7 @@ export function DataTableProvider<T extends object>({
   columns: initialColumns,
   isLoading: isLoadingProp,
   getRowId,
+  tableId,
   children,
 }: DataTableProviderProps<T>) {
   const queryCtx = useOptionalQueryContext();
@@ -44,6 +46,7 @@ export function DataTableProvider<T extends object>({
   const isLoading = isLoadingProp ?? queryCtx?.isLoading ?? false;
 
   const [columns, setColumns] = useState<ColumnDef<T>[]>(() => initialColumns);
+  const { save: saveColumnPreferences, isDirty: isColumnPreferencesDirty } = useColumnPersistence<T>(tableId, columns, setColumns, initialColumns);
 
   const toggleColumnActive = useCallback((key: string) => {
     setColumns((prev) =>
@@ -127,8 +130,10 @@ export function DataTableProvider<T extends object>({
       toggleColumnActive,
       reorderColumns,
       isColSortable,
+      saveColumnPreferences: tableId ? saveColumnPreferences : undefined,
+      isColumnPreferencesDirty,
     }),
-    [columns, filterableColumns, toggleColumnActive, reorderColumns, isColSortable]
+    [columns, filterableColumns, toggleColumnActive, reorderColumns, isColSortable, tableId, saveColumnPreferences, isColumnPreferencesDirty]
   );
 
   const searchCtx = useMemo<DataTableSearchContextValue>(

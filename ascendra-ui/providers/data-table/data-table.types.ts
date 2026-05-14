@@ -30,6 +30,11 @@ export interface DataTableColumnContextValue {
   toggleColumnActive: (key: string) => void;
   reorderColumns: (fromKey: string, toKey: string) => void;
   isColSortable: (key: string) => boolean;
+  /** Persist current column order and visibility to localStorage.
+   *  Undefined when the provider was mounted without a tableId. */
+  saveColumnPreferences: (() => void) | undefined;
+  /** True when the current column state differs from the last saved (or loaded) state. */
+  isColumnPreferencesDirty: boolean;
 }
 
 export interface DataTableSearchContextValue {
@@ -149,5 +154,8 @@ export interface DataTableProviderProps<T extends object> {
   columns: ColumnDef<T>[];
   isLoading?: boolean;
   getRowId?: (row: T) => string;
+  /** Unique key used to persist column order and visibility to localStorage.
+   *  Omit to disable persistence (columns reset on page reload). */
+  tableId?: string;
   children: React.ReactNode;
 }

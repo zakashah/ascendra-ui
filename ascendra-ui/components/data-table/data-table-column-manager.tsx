@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { DropDownChevron } from '@/ascendra-ui/components/common-ui/drop-down-chevron';
 import { Button } from '@/ascendra-ui/components/ui/button';
 import { Checkbox } from '@/ascendra-ui/components/ui/checkbox';
@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from '@/ascendra-ui/components/ui/dropdown-menu';
 import { useDataTableColumns } from '@/ascendra-ui/providers/data-table/data-table.provider';
-import { LuLock, LuSettings } from 'react-icons/lu';
+import { LuCheck, LuLock, LuSave, LuSettings } from 'react-icons/lu';
 import { RiDraggable } from 'react-icons/ri';
 
 interface DataTableColumnManagerProps {
@@ -18,9 +18,20 @@ interface DataTableColumnManagerProps {
 }
 
 export function DataTableColumnManager({ icon = false }: DataTableColumnManagerProps) {
-  const { columns, toggleColumnActive, reorderColumns } = useDataTableColumns();
+  const { columns, toggleColumnActive, reorderColumns, saveColumnPreferences, isColumnPreferencesDirty } = useDataTableColumns();
   const dragKeyRef = useRef<string | null>(null);
   const [dragOverKey, setDragOverKey] = useState<string | null>(null);
+  const [justSaved, setJustSaved] = useState(false);
+  const savedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => { if (savedTimerRef.current) clearTimeout(savedTimerRef.current); }, []);
+
+  function handleSave() {
+    saveColumnPreferences?.();
+    setJustSaved(true);
+    if (savedTimerRef.current) clearTimeout(savedTimerRef.current);
+    savedTimerRef.current = setTimeout(() => setJustSaved(false), 1500);
+  }
 
   return (
     <DropdownMenu modal={false}>
@@ -89,6 +100,29 @@ export function DataTableColumnManager({ icon = false }: DataTableColumnManagerP
             </div>
           );
         })}
+        {saveColumnPreferences && (
+          <div className="border-t px-3 py-2">
+            <Button
+              variant="secondary"
+              size="sm"
+              className="w-full gap-1.5"
+              disabled={!isColumnPreferencesDirty && !justSaved}
+              onClick={handleSave}
+            >
+              {justSaved ? (
+                <>
+                  <LuCheck className="size-3.5" />
+                  Saved
+                </>
+              ) : (
+                <>
+                  <LuSave className="size-3.5" />
+                  Save preferences
+                </>
+              )}
+            </Button>
+          </div>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
