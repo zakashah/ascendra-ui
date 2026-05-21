@@ -29,21 +29,21 @@ export function DataTableSortDropdown({
         <Button
           variant="secondary"
           size={icon ? 'icon' : 'default'}
-          className={icon ? undefined : 'w-8 px-0 sm:w-auto sm:px-3'}
+          className={icon ? undefined : 'w-8 px-0 lg:w-auto lg:px-3'}
         >
           {icon ? (
             <LuArrowUpDown />
           ) : (
             <>
-              <LuArrowUpDown className="sm:hidden" />
-              <span className="hidden font-normal sm:inline">Sort by:</span>
-              <span className={cn('hidden font-medium sm:inline')}>
+              <LuArrowUpDown className="lg:hidden" />
+              <span className="hidden font-normal lg:inline">Sort by:</span>
+              <span className={cn('hidden font-medium lg:inline')}>
                 {sortConfig
                   ? (columns.find((c) => c.key === sortConfig.key)?.label ??
                     String(sortConfig.key))
                   : 'None'}
               </span>
-              <DropDownChevron className="hidden sm:block" />
+              <DropDownChevron className="hidden lg:block" />
             </>
           )}
         </Button>

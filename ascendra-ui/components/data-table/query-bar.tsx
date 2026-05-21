@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { Sparkles, ChevronDown, Loader2, Settings2 } from "lucide-react";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
@@ -14,6 +13,9 @@ import {
 } from "@/ascendra-ui/components/ui/dropdown-menu";
 import { useQueryContext } from "@/ascendra-ui/providers/data-table-query/data-table-query.provider";
 import type { QueryGroup } from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
+import { ChevronDown, Loader2, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { LuLayoutList } from "react-icons/lu";
 import { ManageQueriesDialog } from "./manage-queries-dialog";
 
 const GROUP_LABELS: Record<QueryGroup, string> = {
@@ -103,18 +105,13 @@ export function QueryBar() {
               );
             })}
           </DropdownMenuRadioGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onSelect={() => setManageOpen(true)}>
+            <LuLayoutList className="size-3.5" strokeWidth={2} />
+            Manage Queries
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-
-      <Button
-        variant="secondary"
-        size="icon"
-        className="size-9 shrink-0"
-        onClick={() => setManageOpen(true)}
-        aria-label="Manage queries"
-      >
-        <Settings2 className="size-3.5" strokeWidth={2} />
-      </Button>
 
       <ManageQueriesDialog open={manageOpen} onOpenChange={setManageOpen} />
     </div>

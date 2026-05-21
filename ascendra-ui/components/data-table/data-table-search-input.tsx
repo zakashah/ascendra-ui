@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from '@/ascendra-ui/components/ui/input-group';
-import { useDataTableSearch } from '@/ascendra-ui/providers/data-table/data-table.provider';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
-import { useRef, useState } from 'react';
-import { LuSearch, LuX } from 'react-icons/lu';
-import { VscSearchFuzzy } from 'react-icons/vsc';
+} from "@/ascendra-ui/components/ui/input-group";
+import { useDataTableContext } from "@/ascendra-ui/providers/data-table/data-table.provider";
+import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { useRef, useState } from "react";
+import { LuSearch, LuX } from "react-icons/lu";
+import { VscSearchFuzzy } from "react-icons/vsc";
 
 export function DataTableSearchInput() {
-  const { searchTerm, setSearchTerm, fuzzy, setFuzzy } = useDataTableSearch();
+  const { searchTerm, setSearchTerm, fuzzy, setFuzzy } = useDataTableContext();
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchHovered, setSearchHovered] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
@@ -27,7 +27,10 @@ export function DataTableSearchInput() {
       <InputGroupAddon>
         <InputGroupButton
           className="text-muted-foreground"
-          onClick={() => { setFuzzy(!fuzzy); inputRef.current?.focus(); }}
+          onClick={() => {
+            setFuzzy(!fuzzy);
+            inputRef.current?.focus();
+          }}
         >
           {fuzzy ? (
             <VscSearchFuzzy className="size-3.5 rotate-y-180" />
@@ -48,13 +51,13 @@ export function DataTableSearchInput() {
       <InputGroupAddon
         align="inline-end"
         className={cn(
-          'transition-opacity',
+          "transition-opacity",
           searchTerm && searchHovered && !searchFocused
-            ? 'opacity-100'
-            : 'pointer-events-none opacity-0'
+            ? "opacity-100"
+            : "pointer-events-none opacity-0",
         )}
       >
-        <InputGroupButton onClick={() => setSearchTerm('')}>
+        <InputGroupButton onClick={() => setSearchTerm("")}>
           <LuX className="text-muted-foreground size-3.5" />
         </InputGroupButton>
       </InputGroupAddon>

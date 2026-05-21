@@ -39,11 +39,11 @@ export function DataTableColumnManager({ icon = false }: DataTableColumnManagerP
         <Button
           variant="secondary"
           size={icon ? 'icon' : 'default'}
-          className={icon ? undefined : 'w-8 px-0 sm:w-auto sm:px-3'}
+          className={icon ? undefined : 'w-8 px-0 lg:w-auto lg:px-3'}
         >
           <LuSettings />
-          {!icon && <span className="hidden sm:inline">Columns</span>}
-          {!icon && <DropDownChevron className="hidden sm:block" />}
+          {!icon && <span className="hidden lg:inline">Columns</span>}
+          {!icon && <DropDownChevron className="hidden lg:block" />}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
