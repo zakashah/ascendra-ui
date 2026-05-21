@@ -5,9 +5,11 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import {
   Dialog,
+  DialogActions,
+  DialogBody,
+  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/ascendra-ui/components/ui/dialog";
@@ -55,7 +57,21 @@ export function SaveQueryDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent
+        className="sm:max-w-md"
+        actions={
+          <DialogActions>
+            <DialogClose asChild>
+              <Button type="button" variant="secondary">
+                Cancel
+              </Button>
+            </DialogClose>
+            <Button type="submit" form="save-query-form" disabled={!isValid}>
+              Save Query
+            </Button>
+          </DialogActions>
+        }
+      >
         <DialogHeader>
           <DialogTitle>Save as My Query</DialogTitle>
           <DialogDescription>
@@ -63,56 +79,51 @@ export function SaveQueryDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <form
-          noValidate
-          onSubmit={(e) => void handleSubmit(handleSave)(e)}
-          className="space-y-4 py-2"
-        >
-          <div className="space-y-1.5">
-            <label className="text-sm font-medium" htmlFor="query-name">
-              Name
-            </label>
-            <Input
-              id="query-name"
-              placeholder="e.g. Overdue invoices over $10k"
-              {...register("name", { required: "Name is required" })}
-            />
-            {errors.name && (
-              <p className="text-destructive text-xs">{errors.name.message}</p>
-            )}
-          </div>
+        <DialogBody>
+          <form
+            id="save-query-form"
+            noValidate
+            onSubmit={(e) => void handleSubmit(handleSave)(e)}
+            className="space-y-4"
+          >
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium" htmlFor="query-name">
+                Name
+              </label>
+              <Input
+                id="query-name"
+                placeholder="e.g. Overdue invoices over $10k"
+                {...register("name", { required: "Name is required" })}
+              />
+              {errors.name && (
+                <p className="text-destructive text-xs">
+                  {errors.name.message}
+                </p>
+              )}
+            </div>
 
-          <div className="space-y-1.5">
-            <label className="text-sm font-medium" htmlFor="query-description">
-              Description
-            </label>
-            <Input
-              id="query-description"
-              placeholder="e.g. Filters invoices past due date with amount above $10,000"
-              {...register("description", {
-                required: "Description is required",
-              })}
-            />
-            {errors.description && (
-              <p className="text-destructive text-xs">
-                {errors.description.message}
-              </p>
-            )}
-          </div>
-
-          <DialogFooter>
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={() => onOpenChange(false)}
-            >
-              Cancel
-            </Button>
-            <Button type="submit" disabled={!isValid}>
-              Save Query
-            </Button>
-          </DialogFooter>
-        </form>
+            <div className="space-y-1.5">
+              <label
+                className="text-sm font-medium"
+                htmlFor="query-description"
+              >
+                Description
+              </label>
+              <Input
+                id="query-description"
+                placeholder="e.g. Filters invoices past due date with amount above $10,000"
+                {...register("description", {
+                  required: "Description is required",
+                })}
+              />
+              {errors.description && (
+                <p className="text-destructive text-xs">
+                  {errors.description.message}
+                </p>
+              )}
+            </div>
+          </form>
+        </DialogBody>
       </DialogContent>
     </Dialog>
   );
