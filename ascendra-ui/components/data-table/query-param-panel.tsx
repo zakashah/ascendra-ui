@@ -201,8 +201,15 @@ export function QueryParamPanel() {
 
 function QueryParamPanelInner() {
   "use no memo";
-  const { activeQuery, setConfirmedParams, isLoading, confirmPending, getDraftValues, saveDraftValues, saveAsUserQuery } =
-    useQueryContext();
+  const {
+    activeQuery,
+    setConfirmedParams,
+    isLoading,
+    confirmPending,
+    getDraftValues,
+    saveDraftValues,
+    saveAsUserQuery,
+  } = useQueryContext();
   const params = activeQuery.params!;
   const fields = useMemo(() => params.filter(isFieldDef), [params]);
   const groups = useMemo(() => groupParamSections(params), [params]);
@@ -222,13 +229,15 @@ function QueryParamPanelInner() {
   useEffect(() => {
     const saved = getDraftValues(activeQuery.id);
     if (saved) methods.reset(saved);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Save current form state to draft cache on unmount
   useEffect(() => {
-    return () => { saveDraftValues(activeQuery.id, methods.getValues() as QueryParamValues); };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {
+      saveDraftValues(activeQuery.id, methods.getValues() as QueryParamValues);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleRunQuery = async (): Promise<boolean> => {
@@ -265,7 +274,7 @@ function QueryParamPanelInner() {
                 type="button"
                 variant="ghost"
                 size="sm"
-                className="text-muted-foreground hover:text-foreground shrink-0 gap-1.5 text-xs"
+                className="text-muted-foreground hover:text-foreground shrink-0 gap-1.5"
                 onClick={() => setSaveDialogOpen(true)}
               >
                 <BookmarkPlus className="size-3.5" />
@@ -279,7 +288,12 @@ function QueryParamPanelInner() {
           open={saveDialogOpen}
           onOpenChange={setSaveDialogOpen}
           onSave={(name, description) => {
-            saveAsUserQuery(activeQuery.id, name, description, methods.getValues() as QueryParamValues);
+            saveAsUserQuery(
+              activeQuery.id,
+              name,
+              description,
+              methods.getValues() as QueryParamValues,
+            );
           }}
         />
         <MainSectionPanel>
