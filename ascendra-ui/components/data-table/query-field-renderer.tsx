@@ -3,14 +3,11 @@
 import { useFormContext, Controller, useWatch } from "react-hook-form";
 import type { DateRange } from "react-day-picker";
 
-import { LuTriangleAlert } from "react-icons/lu";
-
 import {
   Field,
   FieldLabel,
-  FieldDescription,
+  FieldHint,
 } from "@/ascendra-ui/components/ui/field";
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import { Input } from "@/ascendra-ui/components/ui/input";
 import {
   Select,
@@ -282,38 +279,12 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
         />
       )}
 
-      {(error || field.description || field.mandatory || field.optional) && (
-        <div className="flex items-start justify-between gap-2">
-          <div className="min-w-0 flex-1">
-            <div className="flex items-baseline gap-1 justify-between">
-              {error ? (
-                <FieldDescription className="text-destructive flex items-baseline gap-1">
-                  <LuTriangleAlert
-                    className="mt-0.75 size-2.5 shrink-0"
-                    aria-hidden
-                  />
-                  {(error as { message?: string }).message}
-                </FieldDescription>
-              ) : field.description ? (
-                <FieldDescription>{field.description}</FieldDescription>
-              ) : (
-                <FieldDescription />
-              )}
-              <div>
-                {(field.mandatory || field.optional) && (
-                  <SimpleBadge
-                    variant="secondary"
-                    size="tiny"
-                    className="mt-0.5"
-                  >
-                    {field.mandatory ? "Mandatory" : "Optional"}
-                  </SimpleBadge>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <FieldHint
+        error={error as { message?: string } | undefined}
+        description={field.description}
+        mandatory={field.mandatory}
+        optional={field.optional}
+      />
     </Field>
   );
 }

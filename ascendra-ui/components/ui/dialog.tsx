@@ -51,11 +51,16 @@ function DialogClose({
 function DialogContent({
   className,
   children,
-  actions,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content> & {
-  actions?: React.ReactNode;
-}) {
+}: React.ComponentProps<typeof DialogPrimitive.Content>) {
+  const childArray = React.Children.toArray(children);
+  const isFooter = (c: React.ReactNode) =>
+    React.isValidElement(c) &&
+    (c.type as { displayName?: string }).displayName === 'DialogFooter';
+
+  const footerChild = childArray.find(isFooter);
+  const innerChildren = childArray.filter((c) => !isFooter(c));
+
   return (
     <DialogPrimitive.Portal>
       <DialogOverlay />
@@ -94,13 +99,13 @@ function DialogContent({
             'shadow-[0_1px_2px_rgba(0,0,0,0.08),0_0_2px_rgba(0,0,0,0.06)]'
           )}
         >
-          {children}
+          {innerChildren}
         </div>
 
-        {/* buttons live outside the raised card, flat in the gray shell */}
-        {actions && (
-          <div data-slot="dialog-actions-wrapper" className="p-4">
-            {actions}
+        {/* DialogFooter renders outside the raised card, flat in the gray shell */}
+        {footerChild && (
+          <div data-slot="dialog-footer-wrapper" className="p-4">
+            {footerChild}
           </div>
         )}
       </DialogPrimitive.Content>
@@ -161,27 +166,12 @@ function DialogBody({ className, ...props }: React.ComponentProps<'div'>) {
   );
 }
 
-/* ── Footer — optional inner section with top separator (e.g. checkbox row) ─ */
+/* ── Footer — button grid, rendered outside the raised card in the gray shell */
 
 function DialogFooter({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="dialog-footer"
-      className={cn(
-        'border-border flex items-center gap-2 border-t p-5 text-sm',
-        className
-      )}
-      {...props}
-    />
-  );
-}
-
-/* ── Actions — button grid, passed via the `actions` prop on DialogContent ── */
-
-function DialogActions({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="dialog-actions"
       className={cn(
         'grid auto-cols-fr grid-flow-col gap-3',
         '[&_button]:justify-center',
@@ -191,6 +181,7 @@ function DialogActions({ className, ...props }: React.ComponentProps<'div'>) {
     />
   );
 }
+DialogFooter.displayName = 'DialogFooter';
 
 export {
   Dialog,
@@ -202,5 +193,4 @@ export {
   DialogDescription,
   DialogBody,
   DialogFooter,
-  DialogActions,
 };

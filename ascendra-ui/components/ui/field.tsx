@@ -2,10 +2,12 @@
 
 import { useMemo } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { LuTriangleAlert } from 'react-icons/lu';
 
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 import { Label } from '@/ascendra-ui/shadcn/components/ui/label';
 import { Separator } from '@/ascendra-ui/shadcn/components/ui/separator';
+import { SimpleBadge } from '@/ascendra-ui/components/common-ui/simple-badge';
 
 function FieldSet({ className, ...props }: React.ComponentProps<'fieldset'>) {
   return (
@@ -224,11 +226,53 @@ function FieldError({
   );
 }
 
+function FieldHint({
+  error,
+  description,
+  mandatory,
+  optional,
+}: {
+  error?: { message?: string };
+  description?: string;
+  mandatory?: boolean;
+  optional?: boolean;
+}) {
+  if (!error && !description && !mandatory && !optional) return null;
+
+  return (
+    <div className="flex items-start justify-between gap-2">
+      <div className="min-w-0 flex-1">
+        <div className="flex items-baseline gap-1 justify-between">
+          {error ? (
+            <FieldDescription className="text-destructive flex items-baseline gap-1">
+              <LuTriangleAlert
+                className="mt-0.75 size-2.5 shrink-0"
+                aria-hidden
+              />
+              {error.message}
+            </FieldDescription>
+          ) : description ? (
+            <FieldDescription>{description}</FieldDescription>
+          ) : (
+            <FieldDescription />
+          )}
+          {(mandatory || optional) && (
+            <SimpleBadge variant="secondary" size="tiny" className="mt-0.5">
+              {mandatory ? 'Mandatory' : 'Optional'}
+            </SimpleBadge>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export {
   Field,
   FieldLabel,
   FieldDescription,
   FieldError,
+  FieldHint,
   FieldGroup,
   FieldLegend,
   FieldSeparator,
