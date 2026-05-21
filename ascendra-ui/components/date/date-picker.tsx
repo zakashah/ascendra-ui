@@ -9,6 +9,7 @@ import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 import { Calendar } from '@/ascendra-ui/components/date/calendar';
 
 interface DatePickerProps {
+  id?: string;
   value?: Date;
   onChange?: (date: Date | undefined) => void;
   onBlur?: () => void;
@@ -22,6 +23,7 @@ interface DatePickerProps {
 }
 
 function DatePicker({
+  id,
   value,
   onChange,
   onBlur,
@@ -45,6 +47,7 @@ function DatePicker({
     >
       <PopoverPrimitive.Trigger asChild>
         <button
+          id={id}
           type="button"
           disabled={disabled}
           aria-invalid={invalid || undefined}

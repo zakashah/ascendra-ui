@@ -188,6 +188,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
           control={control}
           render={({ field: f }) => (
             <DatePicker
+              id={inputId}
               value={f.value as Date | undefined}
               onChange={f.onChange}
               onBlur={f.onBlur}
@@ -205,6 +206,7 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
           control={control}
           render={({ field: f }) => (
             <DateRangePicker
+              id={inputId}
               value={f.value as DateRange | undefined}
               onChange={f.onChange}
               onBlur={f.onBlur}

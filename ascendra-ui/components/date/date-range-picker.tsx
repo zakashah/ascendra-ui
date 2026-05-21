@@ -10,6 +10,7 @@ import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 import { Calendar } from '@/ascendra-ui/components/date/calendar';
 
 interface DateRangePickerProps {
+  id?: string;
   value?: DateRange;
   onChange?: (range: DateRange | undefined) => void;
   onBlur?: () => void;
@@ -24,6 +25,7 @@ interface DateRangePickerProps {
 }
 
 function DateRangePicker({
+  id,
   value,
   onChange,
   onBlur,
@@ -54,6 +56,7 @@ function DateRangePicker({
     >
       <PopoverPrimitive.Trigger asChild>
         <button
+          id={id}
           type="button"
           disabled={disabled}
           aria-invalid={invalid || undefined}
