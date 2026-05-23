@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { LuChevronDown, LuInfo, LuEye, LuCode, LuShieldCheck } from "react-icons/lu";
+import {
+  LuChevronDown,
+  LuInfo,
+  LuEye,
+  LuCode,
+  LuShieldCheck,
+} from "react-icons/lu";
 
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
@@ -36,7 +42,7 @@ import {
   DropdownMenuTrigger,
 } from "@/ascendra-ui/components/ui/dropdown-menu";
 
-import { BackLink } from "@/components/back-link";
+import { BackLink } from "@/ascendra-ui/components/forms/back-link";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 
 // ─── Guide primitives ─────────────────────────────────────────────────────────
@@ -81,9 +87,7 @@ function Variant({
         <p className="text-[0.6875rem] font-semibold uppercase tracking-wider text-muted-foreground/70">
           {label}
         </p>
-        {note && (
-          <p className="text-muted-foreground text-xs mt-0.5">{note}</p>
-        )}
+        {note && <p className="text-muted-foreground text-xs mt-0.5">{note}</p>}
       </div>
       <div className={cn("overflow-hidden rounded-xl border", !noPad && "p-6")}>
         {children}
@@ -100,14 +104,13 @@ export default function LayoutGuidePage() {
 
   return (
     <div className="mx-auto max-w-4xl px-8 py-12 flex flex-col gap-14">
-
       {/* ── Intro ─────────────────────────────────────────────────────────── */}
       <div className="flex flex-col gap-1.5">
         <h1 className="text-2xl font-semibold tracking-tight">Layout System</h1>
         <p className="text-muted-foreground text-sm">
-          A composition guide showing how Ascendra&apos;s layout components assemble into
-          full pages. These patterns are the canonical structure for all new pages,
-          including forms.
+          A composition guide showing how Ascendra&apos;s layout components
+          assemble into full pages. These patterns are the canonical structure
+          for all new pages, including forms.
         </p>
       </div>
 
@@ -136,7 +139,9 @@ export default function LayoutGuidePage() {
           <PageHeader>
             <PageHeaderGroup>
               <PageTitle>Settings</PageTitle>
-              <PageSubtitle>Manage your account preferences and security settings</PageSubtitle>
+              <PageSubtitle>
+                Manage your account preferences and security settings
+              </PageSubtitle>
             </PageHeaderGroup>
           </PageHeader>
         </Variant>
@@ -154,7 +159,9 @@ export default function LayoutGuidePage() {
           <PageHeader>
             <PageHeaderGroup>
               <PageTitle>Connections</PageTitle>
-              <PageSubtitle>Manage integrations connected to your workspace</PageSubtitle>
+              <PageSubtitle>
+                Manage integrations connected to your workspace
+              </PageSubtitle>
             </PageHeaderGroup>
             <PageHeaderAction>
               <Button>Add connection</Button>
@@ -166,7 +173,9 @@ export default function LayoutGuidePage() {
           <PageHeader>
             <PageHeaderGroup>
               <PageTitle>Authentication</PageTitle>
-              <PageSubtitle>Configure sign-in methods for your users</PageSubtitle>
+              <PageSubtitle>
+                Configure sign-in methods for your users
+              </PageSubtitle>
             </PageHeaderGroup>
             <PageHeaderAction>
               <DropdownMenu>
@@ -206,7 +215,9 @@ export default function LayoutGuidePage() {
               <PageHeader>
                 <PageHeaderGroup>
                   <PageTitle>Team Settings</PageTitle>
-                  <PageSubtitle>Configure preferences and access for your team</PageSubtitle>
+                  <PageSubtitle>
+                    Configure preferences and access for your team
+                  </PageSubtitle>
                 </PageHeaderGroup>
               </PageHeader>
             </div>
@@ -218,11 +229,15 @@ export default function LayoutGuidePage() {
                   <MainSection>
                     <MainSectionHeader>
                       <MainSectionHeaderTitle>General</MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>Basic team information</MainSectionHeaderSubtitle>
+                      <MainSectionHeaderSubtitle>
+                        Basic team information
+                      </MainSectionHeaderSubtitle>
                     </MainSectionHeader>
                     <MainSectionPanel>
                       <MainSectionPanelItem>
-                        <p className="text-sm text-muted-foreground">Panel items go here</p>
+                        <p className="text-sm text-muted-foreground">
+                          Panel items go here
+                        </p>
                       </MainSectionPanelItem>
                     </MainSectionPanel>
                   </MainSection>
@@ -241,7 +256,9 @@ export default function LayoutGuidePage() {
             <PageHeader>
               <PageHeaderGroup>
                 <PageTitle>User Profile</PageTitle>
-                <PageSubtitle>Manage your personal information and preferences</PageSubtitle>
+                <PageSubtitle>
+                  Manage your personal information and preferences
+                </PageSubtitle>
               </PageHeaderGroup>
             </PageHeader>
           </div>
@@ -250,18 +267,24 @@ export default function LayoutGuidePage() {
               <TabList>
                 <TabTrigger value="general">General</TabTrigger>
                 <TabTrigger value="security">Security</TabTrigger>
-                <TabTrigger value="notifications" dirty>Notifications</TabTrigger>
+                <TabTrigger value="notifications" dirty>
+                  Notifications
+                </TabTrigger>
               </TabList>
               <TabContent value="general">
                 <div className="px-6 pb-6">
                   <MainContent>
                     <MainSection>
                       <MainSectionHeader>
-                        <MainSectionHeaderTitle>Personal details</MainSectionHeaderTitle>
+                        <MainSectionHeaderTitle>
+                          Personal details
+                        </MainSectionHeaderTitle>
                       </MainSectionHeader>
                       <MainSectionPanel>
                         <MainSectionPanelItem>
-                          <p className="text-sm text-muted-foreground">Fields here</p>
+                          <p className="text-sm text-muted-foreground">
+                            Fields here
+                          </p>
                         </MainSectionPanelItem>
                       </MainSectionPanel>
                     </MainSection>
@@ -273,7 +296,9 @@ export default function LayoutGuidePage() {
                   <MainContent>
                     <MainSection>
                       <MainSectionHeader>
-                        <MainSectionHeaderTitle>Password &amp; 2FA</MainSectionHeaderTitle>
+                        <MainSectionHeaderTitle>
+                          Password &amp; 2FA
+                        </MainSectionHeaderTitle>
                       </MainSectionHeader>
                     </MainSection>
                   </MainContent>
@@ -284,7 +309,9 @@ export default function LayoutGuidePage() {
                   <MainContent>
                     <MainSection>
                       <MainSectionHeader>
-                        <MainSectionHeaderTitle>Notification preferences</MainSectionHeaderTitle>
+                        <MainSectionHeaderTitle>
+                          Notification preferences
+                        </MainSectionHeaderTitle>
                       </MainSectionHeader>
                     </MainSection>
                   </MainContent>
@@ -304,7 +331,9 @@ export default function LayoutGuidePage() {
           <MainSection>
             <MainSectionHeader>
               <MainSectionHeaderTitle>Section title</MainSectionHeaderTitle>
-              <MainSectionHeaderSubtitle>Optional subtitle that describes the section purpose</MainSectionHeaderSubtitle>
+              <MainSectionHeaderSubtitle>
+                Optional subtitle that describes the section purpose
+              </MainSectionHeaderSubtitle>
             </MainSectionHeader>
           </MainSection>
         </Variant>
@@ -312,13 +341,18 @@ export default function LayoutGuidePage() {
         <Variant label="Header + footer">
           <MainSection>
             <MainSectionHeader>
-              <MainSectionHeaderTitle>Email authentication</MainSectionHeaderTitle>
+              <MainSectionHeaderTitle>
+                Email authentication
+              </MainSectionHeaderTitle>
               <MainSectionHeaderSubtitle>
                 Allow users to sign in with their email address
               </MainSectionHeaderSubtitle>
             </MainSectionHeader>
             <MainSectionFooter>
-              <LuInfo className="mt-0.5 mr-2 size-3 shrink-0" strokeWidth={2.5} />
+              <LuInfo
+                className="mt-0.5 mr-2 size-3 shrink-0"
+                strokeWidth={2.5}
+              />
               Footer text for additional context, caveats, or related links.
             </MainSectionFooter>
           </MainSection>
@@ -330,7 +364,8 @@ export default function LayoutGuidePage() {
         >
           <div className="flex flex-col gap-6">
             <SimpleAlert>
-              You are viewing a read-only snapshot. Contact your admin to make changes.
+              You are viewing a read-only snapshot. Contact your admin to make
+              changes.
             </SimpleAlert>
             <MainSection>
               <MainSectionHeader>
@@ -407,14 +442,19 @@ export default function LayoutGuidePage() {
         >
           <MainSection>
             <MainSectionHeader>
-              <MainSectionHeaderTitle>Sign-up restrictions</MainSectionHeaderTitle>
+              <MainSectionHeaderTitle>
+                Sign-up restrictions
+              </MainSectionHeaderTitle>
             </MainSectionHeader>
             <MainSectionPanel>
               <MainSectionPanelItem>
                 <MainSectionPanelItemGroup>
-                  <p className="text-sm">Restrict sign-up to specific email domains</p>
+                  <p className="text-sm">
+                    Restrict sign-up to specific email domains
+                  </p>
                   <SimpleAlert>
-                    Existing users outside the allowed domains retain their access.
+                    Existing users outside the allowed domains retain their
+                    access.
                   </SimpleAlert>
                 </MainSectionPanelItemGroup>
               </MainSectionPanelItem>
@@ -472,7 +512,9 @@ export default function LayoutGuidePage() {
             <MainContent>
               <MainSection>
                 <MainSectionHeader>
-                  <MainSectionHeaderTitle>Password sign-in</MainSectionHeaderTitle>
+                  <MainSectionHeaderTitle>
+                    Password sign-in
+                  </MainSectionHeaderTitle>
                   <MainSectionHeaderSubtitle>
                     Require users to authenticate with a password
                   </MainSectionHeaderSubtitle>
@@ -490,15 +532,21 @@ export default function LayoutGuidePage() {
             <AsideContent dimmed={asideDimmed}>
               <div className="flex min-w-48 flex-col gap-3 text-sm">
                 <div className="border-border border-b pb-3">
-                  <p className="text-xs text-muted-foreground mb-0.5">Min. password length</p>
+                  <p className="text-xs text-muted-foreground mb-0.5">
+                    Min. password length
+                  </p>
                   <p>8 characters</p>
                 </div>
                 <div className="border-border border-b pb-3">
-                  <p className="text-xs text-muted-foreground mb-0.5">Compromised passwords</p>
+                  <p className="text-xs text-muted-foreground mb-0.5">
+                    Compromised passwords
+                  </p>
                   <p>Rejected</p>
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground mb-0.5">Password rules</p>
+                  <p className="text-xs text-muted-foreground mb-0.5">
+                    Password rules
+                  </p>
                   <p>None</p>
                 </div>
               </div>
@@ -506,7 +554,6 @@ export default function LayoutGuidePage() {
           </div>
         </Variant>
       </GuideSection>
-
     </div>
   );
 }

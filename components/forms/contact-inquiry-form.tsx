@@ -4,26 +4,27 @@ import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { LuLock } from "react-icons/lu";
 
-import {
-  FormPageLayout,
-  FormSection,
-  FormSectionHeader,
-  FormSectionPanel,
-  FormSectionBlock,
-  FormSectionBlockTitle,
-  FormSectionFooter,
-} from "@/components/forms/form-page-layout";
+import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
+import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
+import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
+import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
+import { MainSection } from "@/ascendra-ui/components/layout/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
+import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
+import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
 
 import {
   Field,
   FieldGroup,
   FieldSet,
   FieldLegend,
-  FieldTitle,
   FieldLabel,
+  FieldTitle,
   FieldHint,
 } from "@/ascendra-ui/components/ui/field";
-
 import { Input } from "@/ascendra-ui/components/ui/input";
 import {
   Select,
@@ -38,6 +39,8 @@ import {
 } from "@/ascendra-ui/components/ui/radio-group";
 import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
 import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
+import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar";
+import { BackLink } from "@/ascendra-ui/components/forms/back-link";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
@@ -56,7 +59,6 @@ interface ContactValues {
 
 // ─── Textarea ──────────────────────────────────────────────────────────────────
 // NOTE: A reusable Textarea component would be a good addition to the design system.
-// This inline version mirrors the Input component's visual treatment.
 
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   invalid?: boolean;
@@ -72,7 +74,7 @@ function StyledTextarea({ className, invalid, ...props }: TextareaProps) {
         "dark:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24)]",
         "has-[textarea:not(:disabled):not(:focus)]:hover:ring-(--color-umbra)/24",
         "has-[textarea:disabled]:cursor-not-allowed has-[textarea:disabled]:opacity-40",
-        invalid && "outline-2 outline-destructive outline-offset-1"
+        invalid && "outline-2 outline-destructive outline-offset-1",
       )}
     >
       <textarea
@@ -80,7 +82,7 @@ function StyledTextarea({ className, invalid, ...props }: TextareaProps) {
           "w-full resize-none bg-transparent px-3 py-2 text-sm leading-relaxed",
           "outline-none placeholder:text-gray-500 dark:placeholder:text-gray-700",
           "disabled:cursor-not-allowed",
-          className
+          className,
         )}
         {...props}
       />
@@ -88,7 +90,7 @@ function StyledTextarea({ className, invalid, ...props }: TextareaProps) {
   );
 }
 
-// ─── Form ──────────────────────────────────────────────────────────────────────
+// ─── Data ──────────────────────────────────────────────────────────────────────
 
 const SUBJECTS = [
   { value: "general", label: "General Inquiry" },
@@ -114,6 +116,8 @@ const REFERRAL_SOURCES = [
   { value: "advertisement", label: "Advertisement" },
   { value: "other", label: "Other" },
 ];
+
+// ─── Form ──────────────────────────────────────────────────────────────────────
 
 export default function ContactInquiryForm() {
   const [isSaving, setIsSaving] = useState(false);
@@ -146,300 +150,301 @@ export default function ContactInquiryForm() {
     setIsSaving(true);
     await new Promise((r) => setTimeout(r, 1400));
     setIsSaving(false);
-    // Mark form as pristine after save
     reset(getValues());
     return true;
   }
 
   return (
-    <FormPageLayout
-      backHref="/showcase/forms"
-      backLabel="Forms Gallery"
-      title="Contact & Inquiry"
-      description="Get in touch with our team. We typically respond within one business day."
-      isDirty={isDirty}
-      isValid={isValid}
-      isSaving={isSaving}
-      onSave={handleSave}
-      onReset={() => reset()}
-      onInvalid={() => trigger()}
-    >
-      {/* ── Section ──────────────────────────────────────────────────────────── */}
-      <FormSection>
-        <FormSectionHeader
-          title="Send us a message"
-          description="Fill in the form below and a member of our team will be in touch."
-        />
+    <>
+      <div className="app-container mt-8 pb-24 lg:mt-10 lg:pb-28">
+        <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
+          <BackLink href="/showcase/forms">Forms Gallery</BackLink>
 
-        <FormSectionPanel>
+          <PageHeader>
+            <PageHeaderGroup>
+              <PageTitle>Contact &amp; Inquiry</PageTitle>
+              <PageSubtitle>
+                Get in touch with our team. We typically respond within one
+                business day.
+              </PageSubtitle>
+            </PageHeaderGroup>
+          </PageHeader>
 
-          {/* ── Block 1: Contact details ────────────────────────────────────── */}
-          <FormSectionBlock>
-            <FormSectionBlockTitle>Contact Details</FormSectionBlockTitle>
-            <FieldGroup>
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <MainSection>
+            <MainSectionHeader>
+              <MainSectionHeaderTitle>Send us a message</MainSectionHeaderTitle>
+              <MainSectionHeaderSubtitle>
+                Fill in the form below and a member of our team will be in
+                touch.
+              </MainSectionHeaderSubtitle>
+            </MainSectionHeader>
 
-                {/* Full Name — mandatory */}
-                <Field>
-                  <FieldTitle>Full Name</FieldTitle>
-                  <Input
-                    full
-                    placeholder="Jane Smith"
-                    autoComplete="name"
-                    aria-invalid={!!errors.fullName}
-                    {...register("fullName", {
-                      required: "Full name is required",
-                    })}
-                  />
-                  <FieldHint
-                    error={errors.fullName as { message?: string }}
-                    mandatory
-                  />
-                </Field>
+            <MainSectionPanel>
+              {/* ── Contact Details ──────────────────────────────────────────── */}
+              <MainSectionPanelItem>
+                <p className="text-sm font-medium">Contact Details</p>
+                <FieldGroup>
+                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                    <Field>
+                      <FieldTitle>Full Name</FieldTitle>
+                      <Input
+                        full
+                        placeholder="Jane Smith"
+                        autoComplete="name"
+                        aria-invalid={!!errors.fullName}
+                        {...register("fullName", {
+                          required: "Full name is required",
+                        })}
+                      />
+                      <FieldHint
+                        error={errors.fullName as { message?: string }}
+                        mandatory
+                      />
+                    </Field>
 
-                {/* Email — mandatory */}
-                <Field>
-                  <FieldTitle>Email Address</FieldTitle>
-                  <Input
-                    full
-                    type="email"
-                    placeholder="jane@example.com"
-                    autoComplete="email"
-                    aria-invalid={!!errors.email}
-                    {...register("email", {
-                      required: "Email address is required",
-                      pattern: {
-                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                        message: "Enter a valid email address",
-                      },
-                    })}
-                  />
-                  <FieldHint
-                    error={errors.email as { message?: string }}
-                    mandatory
-                  />
-                </Field>
+                    <Field>
+                      <FieldTitle>Email Address</FieldTitle>
+                      <Input
+                        full
+                        type="email"
+                        placeholder="jane@example.com"
+                        autoComplete="email"
+                        aria-invalid={!!errors.email}
+                        {...register("email", {
+                          required: "Email address is required",
+                          pattern: {
+                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                            message: "Enter a valid email address",
+                          },
+                        })}
+                      />
+                      <FieldHint
+                        error={errors.email as { message?: string }}
+                        mandatory
+                      />
+                    </Field>
 
-                {/* Phone — optional */}
-                <Field>
-                  <FieldTitle>Phone Number</FieldTitle>
-                  <Input
-                    full
-                    type="tel"
-                    placeholder="+1 (555) 000-0000"
-                    autoComplete="tel"
-                    {...register("phone")}
-                  />
-                  <FieldHint optional />
-                </Field>
+                    <Field>
+                      <FieldTitle>Phone Number</FieldTitle>
+                      <Input
+                        full
+                        type="tel"
+                        placeholder="+1 (555) 000-0000"
+                        autoComplete="tel"
+                        {...register("phone")}
+                      />
+                      <FieldHint optional />
+                    </Field>
 
-                {/* Company — optional */}
-                <Field>
-                  <FieldTitle>Company / Organization</FieldTitle>
-                  <Input
-                    full
-                    placeholder="Acme Inc."
-                    autoComplete="organization"
-                    {...register("company")}
-                  />
-                  <FieldHint optional />
-                </Field>
+                    <Field>
+                      <FieldTitle>Company / Organization</FieldTitle>
+                      <Input
+                        full
+                        placeholder="Acme Inc."
+                        autoComplete="organization"
+                        {...register("company")}
+                      />
+                      <FieldHint optional />
+                    </Field>
+                  </div>
+                </FieldGroup>
+              </MainSectionPanelItem>
 
-              </div>
-            </FieldGroup>
-          </FormSectionBlock>
+              {/* ── Your Message ─────────────────────────────────────────────── */}
+              <MainSectionPanelItem>
+                <p className="text-sm font-medium">Your Message</p>
+                <FieldGroup>
+                  <SimpleAlert>
+                    Our team responds to all inquiries within{" "}
+                    <strong>1 business day</strong>. For urgent matters, include
+                    &ldquo;Urgent&rdquo; in your subject line.
+                  </SimpleAlert>
 
-          {/* ── Block 2: Message ────────────────────────────────────────────── */}
-          <FormSectionBlock>
-            <FormSectionBlockTitle>Your Message</FormSectionBlockTitle>
-            <FieldGroup>
-
-              <SimpleAlert>
-                Our team responds to all inquiries within{" "}
-                <strong>1 business day</strong>. For urgent matters, include
-                &ldquo;Urgent&rdquo; in your subject line.
-              </SimpleAlert>
-
-              {/* Subject — mandatory */}
-              <Field>
-                <FieldTitle>Subject</FieldTitle>
-                <Controller
-                  name="subject"
-                  control={control}
-                  rules={{ required: "Please select a subject" }}
-                  render={({ field: f }) => (
-                    <Select
-                      value={f.value}
-                      onValueChange={f.onChange}
-                      onOpenChange={(open) => {
-                        if (!open) f.onBlur();
-                      }}
-                    >
-                      <SelectTrigger
-                        className="w-full"
-                        aria-invalid={!!errors.subject || undefined}
-                      >
-                        <SelectValue placeholder="Select a subject…" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {SUBJECTS.map((s) => (
-                          <SelectItem key={s.value} value={s.value}>
-                            {s.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )}
-                />
-                <FieldHint
-                  error={errors.subject as { message?: string }}
-                  mandatory
-                />
-              </Field>
-
-              {/* Inquiry type — optional */}
-              <FieldSet>
-                <FieldLegend variant="label">Inquiry Type</FieldLegend>
-                <Controller
-                  name="inquiryType"
-                  control={control}
-                  render={({ field: f }) => (
-                    <RadioGroup
-                      value={f.value}
-                      onValueChange={f.onChange}
-                      onBlurCapture={(e: React.FocusEvent) => {
-                        if (!e.currentTarget.contains(e.relatedTarget as Node))
-                          f.onBlur();
-                      }}
-                      className="grid-cols-2 gap-y-1.5"
-                    >
-                      {INQUIRY_TYPES.map((opt) => (
-                        <Field
-                          key={opt.value}
-                          orientation="horizontal"
-                          className="items-center"
+                  <Field>
+                    <FieldTitle>Subject</FieldTitle>
+                    <Controller
+                      name="subject"
+                      control={control}
+                      rules={{ required: "Please select a subject" }}
+                      render={({ field: f }) => (
+                        <Select
+                          value={f.value}
+                          onValueChange={f.onChange}
+                          onOpenChange={(open) => {
+                            if (!open) f.onBlur();
+                          }}
                         >
-                          <RadioGroupItem
-                            value={opt.value}
-                            id={`inquiry-type-${opt.value}`}
-                          />
-                          <FieldLabel
-                            htmlFor={`inquiry-type-${opt.value}`}
-                            className="cursor-pointer font-normal"
+                          <SelectTrigger
+                            className="w-full"
+                            aria-invalid={!!errors.subject || undefined}
                           >
-                            {opt.label}
-                          </FieldLabel>
-                        </Field>
-                      ))}
-                    </RadioGroup>
-                  )}
-                />
-                <FieldHint optional />
-              </FieldSet>
-
-              {/* Message — mandatory */}
-              <Field>
-                <FieldTitle>Message</FieldTitle>
-                <StyledTextarea
-                  rows={5}
-                  placeholder="Describe your inquiry in detail…"
-                  invalid={!!errors.message}
-                  aria-invalid={!!errors.message}
-                  {...register("message", {
-                    required: "Please enter your message",
-                    minLength: {
-                      value: 20,
-                      message: "Message must be at least 20 characters",
-                    },
-                  })}
-                />
-                <FieldHint
-                  error={errors.message as { message?: string }}
-                  mandatory
-                />
-              </Field>
-
-            </FieldGroup>
-          </FormSectionBlock>
-
-          {/* ── Block 3: Additional info ─────────────────────────────────────── */}
-          <FormSectionBlock>
-            <FormSectionBlockTitle>Additional Information</FormSectionBlockTitle>
-            <FieldGroup>
-
-              {/* Referral source — optional */}
-              <Field>
-                <FieldTitle>How did you hear about us?</FieldTitle>
-                <Controller
-                  name="referralSource"
-                  control={control}
-                  render={({ field: f }) => (
-                    <Select
-                      value={f.value}
-                      onValueChange={f.onChange}
-                      onOpenChange={(open) => {
-                        if (!open) f.onBlur();
-                      }}
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select a source…" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {REFERRAL_SOURCES.map((s) => (
-                          <SelectItem key={s.value} value={s.value}>
-                            {s.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  )}
-                />
-                <FieldHint optional />
-              </Field>
-
-              {/* Marketing consent — optional */}
-              <Controller
-                name="marketingConsent"
-                control={control}
-                render={({ field: f }) => (
-                  <Field orientation="horizontal">
-                    <Checkbox
-                      id="marketing-consent"
-                      checked={f.value}
-                      onCheckedChange={f.onChange}
-                      onBlur={f.onBlur}
+                            <SelectValue placeholder="Select a subject…" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {SUBJECTS.map((s) => (
+                              <SelectItem key={s.value} value={s.value}>
+                                {s.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      )}
                     />
-                    <FieldLabel
-                      htmlFor="marketing-consent"
-                      className="cursor-pointer font-normal"
-                    >
-                      I&apos;d like to receive occasional product updates and
-                      news from Ascendra
-                    </FieldLabel>
+                    <FieldHint
+                      error={errors.subject as { message?: string }}
+                      mandatory
+                    />
                   </Field>
-                )}
-              />
 
-            </FieldGroup>
-          </FormSectionBlock>
+                  <FieldSet>
+                    <FieldLegend variant="label">Inquiry Type</FieldLegend>
+                    <Controller
+                      name="inquiryType"
+                      control={control}
+                      render={({ field: f }) => (
+                        <RadioGroup
+                          value={f.value}
+                          onValueChange={f.onChange}
+                          onBlurCapture={(e: React.FocusEvent) => {
+                            if (
+                              !e.currentTarget.contains(e.relatedTarget as Node)
+                            )
+                              f.onBlur();
+                          }}
+                          className="grid-cols-2 gap-y-1.5"
+                        >
+                          {INQUIRY_TYPES.map((opt) => (
+                            <Field
+                              key={opt.value}
+                              orientation="horizontal"
+                              className="items-center"
+                            >
+                              <RadioGroupItem
+                                value={opt.value}
+                                id={`inquiry-type-${opt.value}`}
+                              />
+                              <FieldLabel
+                                htmlFor={`inquiry-type-${opt.value}`}
+                                className="cursor-pointer font-normal"
+                              >
+                                {opt.label}
+                              </FieldLabel>
+                            </Field>
+                          ))}
+                        </RadioGroup>
+                      )}
+                    />
+                    <FieldHint optional />
+                  </FieldSet>
 
-        </FormSectionPanel>
+                  <Field>
+                    <FieldTitle>Message</FieldTitle>
+                    <StyledTextarea
+                      rows={5}
+                      placeholder="Describe your inquiry in detail…"
+                      invalid={!!errors.message}
+                      aria-invalid={!!errors.message}
+                      {...register("message", {
+                        required: "Please enter your message",
+                        minLength: {
+                          value: 20,
+                          message: "Message must be at least 20 characters",
+                        },
+                      })}
+                    />
+                    <FieldHint
+                      error={errors.message as { message?: string }}
+                      mandatory
+                    />
+                  </Field>
+                </FieldGroup>
+              </MainSectionPanelItem>
 
-        <FormSectionFooter>
-          <LuLock className="mt-0.5 size-3 shrink-0" />
-          <span>
-            By submitting this form you agree to our{" "}
-            <a
-              href="#"
-              className="underline underline-offset-2 hover:text-foreground transition-colors"
-            >
-              Privacy Policy
-            </a>
-            . We&apos;ll never share your contact details with third parties.
-          </span>
-        </FormSectionFooter>
+              {/* ── Additional Information ───────────────────────────────────── */}
+              <MainSectionPanelItem>
+                <p className="text-sm font-medium">Additional Information</p>
+                <FieldGroup>
+                  <Field>
+                    <FieldTitle>How did you hear about us?</FieldTitle>
+                    <Controller
+                      name="referralSource"
+                      control={control}
+                      render={({ field: f }) => (
+                        <Select
+                          value={f.value}
+                          onValueChange={f.onChange}
+                          onOpenChange={(open) => {
+                            if (!open) f.onBlur();
+                          }}
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select a source…" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {REFERRAL_SOURCES.map((s) => (
+                              <SelectItem key={s.value} value={s.value}>
+                                {s.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                    <FieldHint optional />
+                  </Field>
 
-      </FormSection>
-    </FormPageLayout>
+                  <Controller
+                    name="marketingConsent"
+                    control={control}
+                    render={({ field: f }) => (
+                      <Field orientation="horizontal">
+                        <Checkbox
+                          id="marketing-consent"
+                          checked={f.value}
+                          onCheckedChange={f.onChange}
+                          onBlur={f.onBlur}
+                        />
+                        <FieldLabel
+                          htmlFor="marketing-consent"
+                          className="cursor-pointer font-normal"
+                        >
+                          I&apos;d like to receive occasional product updates
+                          and news from Ascendra
+                        </FieldLabel>
+                      </Field>
+                    )}
+                  />
+                </FieldGroup>
+              </MainSectionPanelItem>
+            </MainSectionPanel>
+
+            <MainSectionFooter>
+              <LuLock className="mt-0.5 mr-2 size-3 shrink-0" />
+              <span>
+                By submitting this form you agree to our{" "}
+                <a
+                  href="#"
+                  className="underline underline-offset-2 hover:text-foreground transition-colors"
+                >
+                  Privacy Policy
+                </a>
+                . We&apos;ll never share your contact details with third
+                parties.
+              </span>
+            </MainSectionFooter>
+          </MainSection>
+        </div>
+      </div>
+
+      <UnsavedChangesBar
+        isDirty={isDirty}
+        isValid={isValid}
+        isSaving={isSaving}
+        onSave={handleSave}
+        onReset={() => reset()}
+        onInvalid={() => trigger()}
+        className="lg:left-[calc(50%+7rem)]"
+      />
+    </>
   );
 }
