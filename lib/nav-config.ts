@@ -87,6 +87,7 @@ export const navConfig: NavCategory[] = [
   {
     title: 'Layout',
     items: [
+      { name: 'Layout Guide', slug: 'layout-guide' },
       { name: 'Main Section', slug: 'main-section' },
       { name: 'Page Header', slug: 'page-header' },
       { name: 'Page Bar', slug: 'page-bar' },
