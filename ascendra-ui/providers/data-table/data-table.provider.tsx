@@ -7,7 +7,7 @@ import { useSearch } from './use-search.hook';
 import { useSelection } from './use-selection.hook';
 import { useSort } from './use-sort.hook';
 import { useOptionalQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
-import { useColumnPersistence } from '@/ascendra-ui/preferences/use-column-preferences';
+import { useColumnPersistence } from '@/ascendra-ui/preferences/use-column-preferences.hook';
 import type {
   ColumnDef,
   SortConfig,
