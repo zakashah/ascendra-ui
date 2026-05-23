@@ -28,9 +28,9 @@ import { DataTableEmptyBody } from "@/ascendra-ui/components/data-table/data-tab
 import { DataTableErrorBody } from "@/ascendra-ui/components/data-table/data-table-error-body";
 import { DataTableLoadingBody } from "@/ascendra-ui/components/data-table/data-table-loading-body";
 import { DataTableWrapper } from "@/ascendra-ui/components/data-table/data-table-wrapper";
-import { DataTableBar } from "@/ascendra-ui/components/layout/data-table-bar";
-import { DataTableBarContent } from "@/ascendra-ui/components/layout/data-table-bar-content";
-import { DataTableBarAction } from "@/ascendra-ui/components/layout/data-table-bar-action";
+import { DataTableBar } from "@/ascendra-ui/components/data-table/data-table-bar";
+import { DataTableBarContent } from "@/ascendra-ui/components/data-table/data-table-bar-content";
+import { DataTableBarAction } from "@/ascendra-ui/components/data-table/data-table-bar-action";
 import { DataTableSearchInput } from "@/ascendra-ui/components/data-table/data-table-search-input";
 import { DataTableColumnManager } from "@/ascendra-ui/components/data-table/data-table-column-manager";
 import { DataTableSortDropdown } from "@/ascendra-ui/components/data-table/data-table-sort-dropdown";

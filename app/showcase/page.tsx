@@ -82,7 +82,9 @@ export default function ShowcasePage() {
               {category.items.map((item) => (
                 <Link
                   key={item.slug}
-                  href={item.slug === "" ? "/showcase" : `/showcase/${item.slug}`}
+                  href={
+                    item.slug === "" ? "/showcase" : `/showcase/${item.slug}`
+                  }
                   className="rounded-sm bg-muted px-1.5 py-0.5 text-[0.6875rem] text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   {item.name}

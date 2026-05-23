@@ -1,7 +1,7 @@
 "use client";
 
-import { DataTableBarAction } from "@/ascendra-ui/components/layout/data-table-bar-action";
-import { DataTableBarContent } from "@/ascendra-ui/components/layout/data-table-bar-content";
+import { DataTableBarAction } from "@/ascendra-ui/components/data-table/data-table-bar-action";
+import { DataTableBarContent } from "@/ascendra-ui/components/data-table/data-table-bar-content";
 import { TableBar } from "@/ascendra-ui/components/layout/table-bar";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import {
