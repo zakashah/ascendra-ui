@@ -13,7 +13,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div
         data-slot="input"
         className={cn(
-          'dark:bg-secondary flex items-center rounded-[.375rem] bg-white transition',
+          'dark:bg-secondary flex items-center rounded-[.375rem] bg-white transition overflow-hidden',
           // BASE
           'ring-1 ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset',
           // BASE SHADOW
