@@ -23,3 +23,16 @@ export type NavCategory = {
   title: string;
   items: NavItem[];
 };
+
+export type FormComplexity = 'Simple' | 'Medium' | 'Complex';
+
+export type FormMeta = {
+  slug: string;
+  name: string;
+  description: string;
+  domain: string;
+  complexity: FormComplexity;
+  layout: string;
+  components: string[];
+  hasEditMode?: boolean;
+};

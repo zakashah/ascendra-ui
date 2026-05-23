@@ -9,6 +9,22 @@ export const navConfig: NavCategory[] = [
     ],
   },
   {
+    title: 'Sample Forms',
+    items: [
+      { name: 'Forms Gallery', slug: 'forms' },
+      { name: 'Contact & Inquiry', slug: 'forms/contact-inquiry' },
+      { name: 'User Profile Settings', slug: 'forms/user-profile' },
+      { name: 'Support Ticket', slug: 'forms/support-ticket' },
+      { name: 'Appointment Booking', slug: 'forms/appointment-booking' },
+      { name: 'Job Application', slug: 'forms/job-application' },
+      { name: 'Financial Transaction', slug: 'forms/financial-transaction' },
+      { name: 'Create Product', slug: 'forms/create-product' },
+      { name: 'Project Kickoff', slug: 'forms/project-kickoff' },
+      { name: 'Search & Filter Panel', slug: 'forms/search-filter' },
+      { name: 'Employee Onboarding', slug: 'forms/employee-onboarding' },
+    ],
+  },
+  {
     title: 'Feedback & Status',
     items: [
       { name: 'Simple Badge', slug: 'simple-badge' },
