@@ -255,6 +255,11 @@ interface FormPageLayoutProps {
   backLabel: string;
   title: string;
   description?: string;
+  /**
+   * Tailwind max-width class for the form content — defaults to max-w-3xl.
+   * Use max-w-4xl / max-w-5xl for wider layouts (multi-column, wizard, etc.)
+   */
+  maxWidth?: string;
   /** Sidebar offset class passed to UnsavedChangesBar — default matches the showcase sidebar width */
   unsavedBarClassName?: string;
   /** Controlled UnsavedChangesBar state */
@@ -272,6 +277,7 @@ export function FormPageLayout({
   backLabel,
   title,
   description,
+  maxWidth = "max-w-3xl",
   unsavedBarClassName,
   isDirty,
   isValid,
@@ -283,7 +289,7 @@ export function FormPageLayout({
 }: FormPageLayoutProps) {
   return (
     <div className="app-container mt-8 pb-24 lg:mt-10 lg:pb-28">
-      <div className="flex flex-col gap-6">
+      <div className={cn("mx-auto w-full flex flex-col gap-6", maxWidth)}>
         <FormPageBack href={backHref} label={backLabel} />
         <FormPageHeader title={title} description={description} />
         <div className="flex flex-col gap-6">{children}</div>
