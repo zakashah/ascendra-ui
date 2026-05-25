@@ -21,7 +21,8 @@ import type {
 } from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
 import { isFieldDef } from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
-import { BookmarkPlus, InfoIcon } from "lucide-react";
+import { BookmarkPlus } from "lucide-react";
+import { MainSectionFooterIcon } from "@/ascendra-ui/components/layout/main-section-footer-icon";
 import { IoColorFilterOutline } from "react-icons/io5";
 import { SaveQueryDialog } from "./save-query-dialog";
 import { QueryFieldRenderer } from "./query-field-renderer";
@@ -331,10 +332,7 @@ function QueryParamPanelInner() {
         </MainSectionPanel>
         {activeQuery.info && (
           <MainSectionFooter>
-            <InfoIcon
-              className="mt-0.5 mr-2 size-3 shrink-0"
-              strokeWidth={2.5}
-            />
+            <MainSectionFooterIcon />
             {activeQuery.info}
           </MainSectionFooter>
         )}

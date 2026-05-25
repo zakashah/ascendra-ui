@@ -1,51 +1,46 @@
 "use client";
 
 import { useState } from "react";
-import {
-  LuChevronDown,
-  LuInfo,
-  LuEye,
-  LuCode,
-  LuShieldCheck,
-} from "react-icons/lu";
+import { LuChevronDown, LuCode, LuEye, LuShieldCheck } from "react-icons/lu";
 
-import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { PageHeaderAction } from "@/ascendra-ui/components/layout/page-header-action";
-import { PageMain } from "@/ascendra-ui/components/layout/page-main";
-import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
+import { AsideContent } from "@/ascendra-ui/components/layout/aside-content";
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 import { MainSection } from "@/ascendra-ui/components/layout/main-section";
+import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
 import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
 import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
 import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
 import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
-import { MainSectionPanelItemGroup } from "@/ascendra-ui/components/layout/main-section-panel-item-group";
 import { MainSectionPanelItemCrown } from "@/ascendra-ui/components/layout/main-section-panel-item-crown";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
-import { AsideContent } from "@/ascendra-ui/components/layout/aside-content";
+import { MainSectionPanelItemGroup } from "@/ascendra-ui/components/layout/main-section-panel-item-group";
+import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
+import { PageHeaderAction } from "@/ascendra-ui/components/layout/page-header-action";
+import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
+import { PageMain } from "@/ascendra-ui/components/layout/page-main";
+import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
+import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
+import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
 
-import { Tabs } from "@/ascendra-ui/components/tabs/tabs";
+import { TabContent } from "@/ascendra-ui/components/tabs/tab-content";
 import { TabList } from "@/ascendra-ui/components/tabs/tab-list";
 import { TabTrigger } from "@/ascendra-ui/components/tabs/tab-trigger";
-import { TabContent } from "@/ascendra-ui/components/tabs/tab-content";
+import { Tabs } from "@/ascendra-ui/components/tabs/tabs";
 
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { Switch } from "@/ascendra-ui/components/ui/switch";
 import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
+import { Button } from "@/ascendra-ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/ascendra-ui/components/ui/dropdown-menu";
+import { Switch } from "@/ascendra-ui/components/ui/switch";
 
 import { BackLink } from "@/ascendra-ui/components/forms/back-link";
-import { CodeBlock } from "@/components/code-block";
+import { MainSectionFooterIcon } from "@/ascendra-ui/components/layout/main-section-footer-icon";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { CodeBlock } from "@/components/code-block";
 
 // ─── Guide primitives ─────────────────────────────────────────────────────────
 
@@ -604,7 +599,7 @@ import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-
     </MainSectionHeaderSubtitle>
   </MainSectionHeader>
   <MainSectionFooter>
-    <LuInfo className="mt-0.5 mr-2 size-3 shrink-0" strokeWidth={2.5} />
+    <MainSectionFooterIcon />
     Footer text for additional context, caveats, or related links.
   </MainSectionFooter>
 </MainSection>`}
@@ -619,10 +614,7 @@ import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-
               </MainSectionHeaderSubtitle>
             </MainSectionHeader>
             <MainSectionFooter>
-              <LuInfo
-                className="mt-0.5 mr-2 size-3 shrink-0"
-                strokeWidth={2.5}
-              />
+              <MainSectionFooterIcon />
               Footer text for additional context, caveats, or related links.
             </MainSectionFooter>
           </MainSection>
@@ -889,7 +881,7 @@ export function CollapsibleSection() {
         </MainSectionPanelItem>
       </MainSectionPanel>
       <MainSectionFooter>
-        <LuShieldCheck className="mt-0.5 mr-2 size-3 shrink-0" />
+        <MainSectionFooterIcon icon={LuShieldCheck} />
         These settings apply to new sign-ups only.
       </MainSectionFooter>
     </MainSection>
@@ -918,7 +910,7 @@ export function CollapsibleSection() {
               </MainSectionPanelItem>
             </MainSectionPanel>
             <MainSectionFooter>
-              <LuShieldCheck className="mt-0.5 mr-2 size-3 shrink-0" />
+              <MainSectionFooterIcon icon={LuShieldCheck} />
               These settings apply to new sign-ups only.
             </MainSectionFooter>
           </MainSection>
