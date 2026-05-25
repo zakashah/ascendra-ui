@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { LuLock } from "react-icons/lu";
+import { z } from "zod";
 
 import { MainSection } from "@/ascendra-ui/components/layout/main-section";
 import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
@@ -54,19 +56,21 @@ import {
 } from "@/ascendra-ui/components/ui/select";
 import { MainSectionPanelItemCrown } from "@/ascendra-ui/components/layout/main-section-panel-item-crown";
 
-// ─── Types ─────────────────────────────────────────────────────────────────────
+// ─── Schema ────────────────────────────────────────────────────────────────────
 
-interface ContactValues {
-  fullName: string;
-  email: string;
-  phone: string;
-  company: string;
-  subject: string;
-  inquiryType: string;
-  message: string;
-  referralSource: string;
-  marketingConsent: boolean;
-}
+const schema = z.object({
+  fullName: z.string().min(1, "Full name is required"),
+  email: z.string().min(1, "Email address is required").regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Enter a valid email address"),
+  phone: z.string(),
+  company: z.string(),
+  subject: z.string().min(1, "Please select a subject"),
+  inquiryType: z.string(),
+  message: z.string().min(1, "Please enter your message").min(20, "Message must be at least 20 characters"),
+  referralSource: z.string(),
+  marketingConsent: z.boolean(),
+});
+
+type ContactValues = z.infer<typeof schema>;
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
 
@@ -101,13 +105,13 @@ export default function ContactInquiryForm() {
   const [isSaving, setIsSaving] = useState(false);
 
   const {
-    register,
     control,
     trigger,
     reset,
     getValues,
     formState: { isDirty, isValid, errors },
   } = useForm<ContactValues>({
+    resolver: zodResolver(schema),
     defaultValues: {
       fullName: "",
       email: "",
@@ -170,15 +174,21 @@ export default function ContactInquiryForm() {
                               <FieldLabel htmlFor="full-name">
                                 Full Name
                               </FieldLabel>
-                              <Input
-                                id="full-name"
-                                full
-                                placeholder="Jane Smith"
-                                autoComplete="name"
-                                aria-invalid={!!errors.fullName}
-                                {...register("fullName", {
-                                  required: "Full name is required",
-                                })}
+                              <Controller
+                                name="fullName"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <Input
+                                    id="full-name"
+                                    full
+                                    placeholder="Jane Smith"
+                                    autoComplete="name"
+                                    value={f.value}
+                                    onChange={f.onChange}
+                                    onBlur={f.onBlur}
+                                    aria-invalid={!!errors.fullName}
+                                  />
+                                )}
                               />
                               <FieldHint
                                 error={errors.fullName as { message?: string }}
@@ -190,20 +200,22 @@ export default function ContactInquiryForm() {
                               <FieldLabel htmlFor="email">
                                 Email Address
                               </FieldLabel>
-                              <Input
-                                id="email"
-                                full
-                                type="email"
-                                placeholder="jane@example.com"
-                                autoComplete="email"
-                                aria-invalid={!!errors.email}
-                                {...register("email", {
-                                  required: "Email address is required",
-                                  pattern: {
-                                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                    message: "Enter a valid email address",
-                                  },
-                                })}
+                              <Controller
+                                name="email"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <Input
+                                    id="email"
+                                    full
+                                    type="email"
+                                    placeholder="jane@example.com"
+                                    autoComplete="email"
+                                    value={f.value}
+                                    onChange={f.onChange}
+                                    onBlur={f.onBlur}
+                                    aria-invalid={!!errors.email}
+                                  />
+                                )}
                               />
                               <FieldHint
                                 error={errors.email as { message?: string }}
@@ -215,13 +227,21 @@ export default function ContactInquiryForm() {
                               <FieldLabel htmlFor="phone">
                                 Phone Number
                               </FieldLabel>
-                              <Input
-                                id="phone"
-                                full
-                                type="tel"
-                                placeholder="+1 (555) 000-0000"
-                                autoComplete="tel"
-                                {...register("phone")}
+                              <Controller
+                                name="phone"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <Input
+                                    id="phone"
+                                    full
+                                    type="tel"
+                                    placeholder="+1 (555) 000-0000"
+                                    autoComplete="tel"
+                                    value={f.value}
+                                    onChange={f.onChange}
+                                    onBlur={f.onBlur}
+                                  />
+                                )}
                               />
                               <FieldHint optional />
                             </Field>
@@ -230,12 +250,20 @@ export default function ContactInquiryForm() {
                               <FieldLabel htmlFor="company">
                                 Company / Organization
                               </FieldLabel>
-                              <Input
-                                id="company"
-                                full
-                                placeholder="Acme Inc."
-                                autoComplete="organization"
-                                {...register("company")}
+                              <Controller
+                                name="company"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <Input
+                                    id="company"
+                                    full
+                                    placeholder="Acme Inc."
+                                    autoComplete="organization"
+                                    value={f.value}
+                                    onChange={f.onChange}
+                                    onBlur={f.onBlur}
+                                  />
+                                )}
                               />
                               <FieldHint mandatory />
                             </Field>
@@ -260,7 +288,6 @@ export default function ContactInquiryForm() {
                               <Controller
                                 name="subject"
                                 control={control}
-                                rules={{ required: "Please select a subject" }}
                                 render={({ field: f }) => (
                                   <Select
                                     value={f.value}
@@ -346,22 +373,24 @@ export default function ContactInquiryForm() {
 
                             <Field>
                               <FieldLabel htmlFor="message">Message</FieldLabel>
-                              <InputGroup>
-                                <InputGroupTextarea
-                                  id="message"
-                                  rows={5}
-                                  placeholder="Describe your inquiry in detail…"
-                                  aria-invalid={!!errors.message}
-                                  {...register("message", {
-                                    required: "Please enter your message",
-                                    minLength: {
-                                      value: 20,
-                                      message:
-                                        "Message must be at least 20 characters",
-                                    },
-                                  })}
-                                />
-                              </InputGroup>
+                              <Controller
+                                name="message"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <InputGroup>
+                                    <InputGroupTextarea
+                                      id="message"
+                                      rows={5}
+                                      placeholder="Describe your inquiry in detail…"
+                                      value={f.value}
+                                      onChange={f.onChange}
+                                      onBlur={f.onBlur}
+                                      aria-invalid={!!errors.message}
+                                      maxLength={200}
+                                    />
+                                  </InputGroup>
+                                )}
+                              />
                               <FieldHint
                                 error={errors.message as { message?: string }}
                                 mandatory

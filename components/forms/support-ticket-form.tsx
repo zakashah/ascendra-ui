@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { LuInfo } from "react-icons/lu";
+import { z } from "zod";
 
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 import { MainSection } from "@/ascendra-ui/components/layout/main-section";
@@ -62,24 +64,26 @@ import {
 } from "@/ascendra-ui/components/ui/select";
 import { Switch } from "@/ascendra-ui/components/ui/switch";
 
-// ─── Types ─────────────────────────────────────────────────────────────────────
+// ─── Schema ────────────────────────────────────────────────────────────────────
 
-interface SupportTicketValues {
-  summary: string;
-  product: string;
-  priority: string;
-  issueType: string;
-  description: string;
-  attachLogs: boolean;
-  affectedUsers: string;
-  stepsToReproduce: string;
-  os: string;
-  browser: string;
-  appVersion: string;
-  screenResolution: string;
-  errorCode: string;
-  firstOccurred: Date | undefined;
-}
+const schema = z.object({
+  summary: z.string().min(1, "Summary is required").max(120, "Summary must be 120 characters or fewer"),
+  product: z.string().min(1, "Please select a product"),
+  priority: z.string().min(1, "Priority is required"),
+  issueType: z.string().min(1, "Please select an issue type"),
+  description: z.string().min(1, "Please describe the issue").min(30, "Description must be at least 30 characters"),
+  attachLogs: z.boolean(),
+  affectedUsers: z.string(),
+  stepsToReproduce: z.string(),
+  os: z.string(),
+  browser: z.string(),
+  appVersion: z.string(),
+  screenResolution: z.string(),
+  errorCode: z.string(),
+  firstOccurred: z.date().optional(),
+});
+
+type SupportTicketValues = z.infer<typeof schema>;
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
 
@@ -143,6 +147,7 @@ export default function SupportTicketForm() {
     getValues,
     formState: { isDirty, isValid, errors },
   } = useForm<SupportTicketValues>({
+    resolver: zodResolver(schema),
     defaultValues: {
       summary: "",
       product: "",
@@ -222,14 +227,6 @@ export default function SupportTicketForm() {
                             <Controller
                               name="summary"
                               control={control}
-                              rules={{
-                                required: "Summary is required",
-                                maxLength: {
-                                  value: 120,
-                                  message:
-                                    "Summary must be 120 characters or fewer",
-                                },
-                              }}
                               render={({ field: f }) => (
                                 <Input
                                   id="summary"
@@ -255,7 +252,6 @@ export default function SupportTicketForm() {
                             <Controller
                               name="product"
                               control={control}
-                              rules={{ required: "Please select a product" }}
                               render={({ field: f }) => (
                                 <Select
                                   value={f.value}
@@ -302,7 +298,6 @@ export default function SupportTicketForm() {
                             <Controller
                               name="priority"
                               control={control}
-                              rules={{ required: "Priority is required" }}
                               render={({ field: f }) => (
                                 <RadioGroup
                                   value={f.value}
@@ -351,9 +346,6 @@ export default function SupportTicketForm() {
                             <Controller
                               name="issueType"
                               control={control}
-                              rules={{
-                                required: "Please select an issue type",
-                              }}
                               render={({ field: f }) => (
                                 <Select
                                   value={f.value}
@@ -404,14 +396,6 @@ export default function SupportTicketForm() {
                             <Controller
                               name="description"
                               control={control}
-                              rules={{
-                                required: "Please describe the issue",
-                                minLength: {
-                                  value: 30,
-                                  message:
-                                    "Description must be at least 30 characters",
-                                },
-                              }}
                               render={({ field: f }) => (
                                 <InputGroup>
                                   <InputGroupTextarea
