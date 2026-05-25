@@ -660,6 +660,7 @@ export default function FinancialTransactionForm() {
                                 onChange={f.onChange}
                                 onBlur={f.onBlur}
                                 placeholder="Select date range…"
+                                readOnly
                               />
                             )}
                           />

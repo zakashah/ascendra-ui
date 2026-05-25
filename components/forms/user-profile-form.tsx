@@ -291,9 +291,12 @@ export default function UserProfileForm() {
                             </Field>
 
                             <Field>
-                              <FieldLabel htmlFor="last-name">
-                                Last Name
-                              </FieldLabel>
+                              <FieldLabelGroup>
+                                <FieldLabel htmlFor="last-name">
+                                  Last Name
+                                </FieldLabel>
+                                <FieldInfo />
+                              </FieldLabelGroup>
                               <Controller
                                 name="lastName"
                                 control={control}
@@ -604,6 +607,7 @@ export default function UserProfileForm() {
                                   onOpenChange={(open) => {
                                     if (!open) f.onBlur();
                                   }}
+                                  readOnly
                                 >
                                   <SelectTrigger
                                     id="date-format"
@@ -611,7 +615,6 @@ export default function UserProfileForm() {
                                     aria-invalid={
                                       !!errors.dateFormat || undefined
                                     }
-                                    readOnly
                                   >
                                     <SelectValue placeholder="Select a format…" />
                                   </SelectTrigger>

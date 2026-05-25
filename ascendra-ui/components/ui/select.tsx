@@ -79,6 +79,7 @@ function SelectTrigger({
           'bg-gray-100 dark:bg-white/5',
           'shadow-[0_0_0_1px_#d1d5db] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.1)]',
           'cursor-default',
+          'focus-visible:outline-none',
         ] : [
           'bg-secondary',
           'shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04),0_0_0_1px_rgba(0,0,0,0.1)]',

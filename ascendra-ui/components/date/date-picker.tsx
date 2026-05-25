@@ -68,6 +68,7 @@ function DatePicker({
               'ring-gray-300 dark:ring-white/10',
               'shadow-none',
               'cursor-default',
+              'focus-visible:outline-none',
             ] : [
               'bg-white dark:bg-secondary',
               'ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset',

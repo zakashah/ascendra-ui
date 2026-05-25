@@ -16,6 +16,7 @@ interface DateRangePickerProps {
   onBlur?: () => void;
   placeholder?: string;
   disabled?: boolean;
+  readOnly?: boolean;
   invalid?: boolean;
   className?: string;
   fromYear?: number;
@@ -31,6 +32,7 @@ function DateRangePicker({
   onBlur,
   placeholder = 'Pick a date range',
   disabled,
+  readOnly,
   invalid,
   className,
   fromYear,
@@ -48,8 +50,9 @@ function DateRangePicker({
 
   return (
     <PopoverPrimitive.Root
-      open={open}
+      open={readOnly ? false : open}
       onOpenChange={(next) => {
+        if (readOnly) return;
         setOpen(next);
         if (!next) onBlur?.();
       }}
@@ -62,15 +65,25 @@ function DateRangePicker({
           aria-invalid={invalid || undefined}
           data-slot="date-range-picker-trigger"
           className={cn(
-            'flex h-8 w-full items-center gap-2 rounded-[.375rem] bg-white px-3 text-left text-sm transition',
-            'dark:bg-secondary ring-1 ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset',
+            'flex h-8 w-full items-center gap-2 rounded-[.375rem] px-3 text-left text-sm transition',
+            'ring-1',
             'shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04)]',
             'dark:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24)]',
-            'hover:ring-(--color-umbra)/24',
-            'focus-visible:outline-primary! focus-visible:outline-2! focus-visible:outline-offset-1!',
             'disabled:cursor-not-allowed disabled:opacity-40',
             invalid && 'outline-2 outline-destructive outline-offset-1',
             !label && 'text-gray-500 dark:text-gray-700',
+            readOnly ? [
+              'bg-gray-100 dark:bg-white/5',
+              'ring-gray-300 dark:ring-white/10',
+              'shadow-none',
+              'cursor-default',
+              'focus-visible:outline-none',
+            ] : [
+              'bg-white dark:bg-secondary',
+              'ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset',
+              'hover:ring-(--color-umbra)/24',
+              'focus-visible:outline-primary! focus-visible:outline-2! focus-visible:outline-offset-1!',
+            ],
             className
           )}
         >
