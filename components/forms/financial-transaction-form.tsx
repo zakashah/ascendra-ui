@@ -250,13 +250,15 @@ export default function FinancialTransactionForm() {
                         <FieldGroup>
                           <Field
                             orientation="horizontal"
-                            className="flex items-center"
+                            className="flex items-baseline"
                           >
-                            <FieldLabelGroup>
+                            <FieldLabelGroup className="max-w-60">
                               <FieldLabel htmlFor="transaction-date">
                                 Transaction Date
                               </FieldLabel>
-                              <FieldInfo>This is field info and this can be very long</FieldInfo>
+                              {/* <FieldInfo>
+                                This is field info and this can be very long
+                              </FieldInfo> */}
                             </FieldLabelGroup>
                             <div className="flex-1">
                               <Controller
@@ -273,8 +275,71 @@ export default function FinancialTransactionForm() {
                                 )}
                               />
                               <FieldHint
+                                className="mt-2"
                                 error={
                                   errors.transactionDate as {
+                                    message?: string;
+                                  }
+                                }
+                                mandatory
+                                description="This is the description of the field"
+                              />
+                            </div>
+                          </Field>
+
+                          <Field
+                            orientation="horizontal"
+                            className="items-baseline"
+                          >
+                            <FieldLabelGroup>
+                              <FieldLabel htmlFor="transaction-date">
+                                Transaction Type
+                              </FieldLabel>
+                              <FieldInfo>This is field info </FieldInfo>
+                            </FieldLabelGroup>
+                            <div className="ml-auto">
+                              <Controller
+                                name="transactionType"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <RadioGroup
+                                    value={f.value}
+                                    onValueChange={f.onChange}
+                                    onBlurCapture={(e: React.FocusEvent) => {
+                                      if (
+                                        !e.currentTarget.contains(
+                                          e.relatedTarget as Node,
+                                        )
+                                      )
+                                        f.onBlur();
+                                    }}
+                                    className="flex gap-4"
+                                  >
+                                    {TRANSACTION_TYPES.map((opt) => (
+                                      <Field
+                                        key={opt.value}
+                                        orientation="horizontal"
+                                        className="w-auto items-baseline"
+                                      >
+                                        <RadioGroupItem
+                                          value={opt.value}
+                                          id={`tx-type-${opt.value}`}
+                                        />
+                                        <FieldLabel
+                                          htmlFor={`tx-type-${opt.value}`}
+                                          className="cursor-pointer font-normal"
+                                        >
+                                          {opt.label}
+                                        </FieldLabel>
+                                      </Field>
+                                    ))}
+                                  </RadioGroup>
+                                )}
+                              />
+                              <FieldHint
+                                className="mt-2"
+                                error={
+                                  errors.transactionType as {
                                     message?: string;
                                   }
                                 }
@@ -282,70 +347,15 @@ export default function FinancialTransactionForm() {
                               />
                             </div>
                           </Field>
-
-                          <FieldSet>
-                            <Field orientation="horizontal">
-                              <FieldLabelGroup>
-                                <FieldLabel htmlFor="transaction-date">
-                                  Transaction Type
-                                </FieldLabel>
-                              </FieldLabelGroup>
-                              <div className="flex-1">
-                                <Controller
-                                  name="transactionType"
-                                  control={control}
-                                  render={({ field: f }) => (
-                                    <RadioGroup
-                                      value={f.value}
-                                      onValueChange={f.onChange}
-                                      onBlurCapture={(e: React.FocusEvent) => {
-                                        if (
-                                          !e.currentTarget.contains(
-                                            e.relatedTarget as Node,
-                                          )
-                                        )
-                                          f.onBlur();
-                                      }}
-                                      className="flex gap-4"
-                                    >
-                                      {TRANSACTION_TYPES.map((opt) => (
-                                        <Field
-                                          key={opt.value}
-                                          orientation="horizontal"
-                                          className="w-auto items-baseline"
-                                        >
-                                          <RadioGroupItem
-                                            value={opt.value}
-                                            id={`tx-type-${opt.value}`}
-                                          />
-                                          <FieldLabel
-                                            htmlFor={`tx-type-${opt.value}`}
-                                            className="cursor-pointer font-normal"
-                                          >
-                                            {opt.label}
-                                          </FieldLabel>
-                                        </Field>
-                                      ))}
-                                    </RadioGroup>
-                                  )}
-                                />
-                                <FieldHint
-                                  error={
-                                    errors.transactionType as {
-                                      message?: string;
-                                    }
-                                  }
-                                  mandatory
-                                />
-                              </div>
-                            </Field>
-                          </FieldSet>
-
-                          <Field orientation="horizontal">
+                          <Field
+                            orientation="horizontal"
+                            className=" items-baseline"
+                          >
                             <FieldLabelGroup>
                               <FieldLabel htmlFor="transaction-date">
                                 Form Account
                               </FieldLabel>
+                              <FieldInfo>info this is long info</FieldInfo>
                             </FieldLabelGroup>
                             <div className="flex-1">
                               <Controller
@@ -372,6 +382,7 @@ export default function FinancialTransactionForm() {
                                 )}
                               />
                               <FieldHint
+                                className="mt-2"
                                 error={
                                   errors.fromAccount as { message?: string }
                                 }
@@ -379,8 +390,10 @@ export default function FinancialTransactionForm() {
                               />
                             </div>
                           </Field>
-
-                          <Field orientation="horizontal">
+                          <Field
+                            orientation="horizontal"
+                            className="items-baseline"
+                          >
                             <FieldLabelGroup>
                               <FieldLabel htmlFor="payee">
                                 To Account / Payee
@@ -420,22 +433,25 @@ export default function FinancialTransactionForm() {
                                 )}
                               />
                               <FieldHint
+                                className="mt-2"
                                 error={errors.payee as { message?: string }}
                                 mandatory
                               />
                             </div>
                           </Field>
-
-                          <Field orientation="horizontal">
+                          <Field
+                            orientation="horizontal"
+                            className="items-baseline"
+                          >
                             <FieldLabelGroup>
                               <FieldLabel htmlFor="amount">Amount</FieldLabel>
                             </FieldLabelGroup>
-                            <div className="flex-1">
+                            <div className="ml-auto">
                               <Controller
                                 name="amount"
                                 control={control}
                                 render={({ field: f }) => (
-                                  <InputGroup className="max-w-48">
+                                  <InputGroup className="max-w-60 ml-auto">
                                     <InputGroupAddon align="inline-start">
                                       <InputGroupText>USD</InputGroupText>
                                     </InputGroupAddon>
@@ -454,13 +470,16 @@ export default function FinancialTransactionForm() {
                                 )}
                               />
                               <FieldHint
+                                className="mt-2"
                                 error={errors.amount as { message?: string }}
                                 mandatory
                               />
                             </div>
                           </Field>
-
-                          <Field orientation="horizontal">
+                          <Field
+                            orientation="horizontal"
+                            className="items-baseline"
+                          >
                             <FieldLabelGroup>
                               <FieldLabel htmlFor="category">
                                 Category
@@ -503,6 +522,7 @@ export default function FinancialTransactionForm() {
                                 )}
                               />
                               <FieldHint
+                                className="mt-2"
                                 error={errors.category as { message?: string }}
                                 mandatory
                               />
@@ -514,7 +534,10 @@ export default function FinancialTransactionForm() {
                       {/* Panel Item 2 — Supporting details */}
                       <MainSectionPanelItem>
                         <FieldGroup>
-                          <Field orientation="horizontal">
+                          <Field
+                            orientation="horizontal"
+                            className="items-baseline"
+                          >
                             <FieldLabelGroup>
                               <FieldLabel htmlFor="reference">
                                 Reference Number
@@ -535,11 +558,13 @@ export default function FinancialTransactionForm() {
                                   />
                                 )}
                               />
-                              <FieldHint optional />
+                              <FieldHint optional className="mt-2" />
                             </div>
                           </Field>
-
-                          <Field orientation="horizontal">
+                          <Field
+                            orientation="horizontal"
+                            className="items-baseline"
+                          >
                             <FieldLabelGroup>
                               <FieldLabel htmlFor="memo">
                                 Memo / Description
@@ -560,17 +585,19 @@ export default function FinancialTransactionForm() {
                                   />
                                 )}
                               />
-                              <FieldHint optional />
+                              <FieldHint optional className="mt-2" />
                             </div>
                           </Field>
-
-                          <Field orientation="horizontal">
+                          <Field
+                            orientation="horizontal"
+                            className="items-baseline"
+                          >
                             <FieldLabelGroup>
                               <FieldLabel htmlFor="tax-deductible">
                                 Tax Deductible
                               </FieldLabel>
                             </FieldLabelGroup>
-                            <div className="flex-1">
+                            <div className="ml-auto">
                               <Controller
                                 name="taxDeductible"
                                 control={control}
