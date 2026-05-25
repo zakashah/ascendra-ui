@@ -24,6 +24,7 @@ import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-
 import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
 import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
 import { MainSectionPanelItemGroup } from "@/ascendra-ui/components/layout/main-section-panel-item-group";
+import { MainSectionPanelItemCrown } from "@/ascendra-ui/components/layout/main-section-panel-item-crown";
 import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
 import { AsideContent } from "@/ascendra-ui/components/layout/aside-content";
 
@@ -105,7 +106,7 @@ function Variant({
                   "rounded-sm px-2.5 py-1 text-xs font-medium capitalize transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                   view === tab
                     ? "bg-background text-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
+                    : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {tab}
@@ -114,7 +115,10 @@ function Variant({
           </div>
         )}
         {view === "code" && code ? (
-          <CodeBlock code={code} className="[&>div]:rounded-none [&>div]:border-0" />
+          <CodeBlock
+            code={code}
+            className="[&>div]:rounded-none [&>div]:border-0"
+          />
         ) : (
           <div className={cn(!noPad && "p-6")}>{children}</div>
         )}
@@ -779,7 +783,11 @@ import { Button } from "@/ascendra-ui/components/ui/button";
               <MainSectionPanelItem>
                 Require a minimum of 8 characters
               </MainSectionPanelItem>
-              <MainSectionPanelItem>
+              <MainSectionPanelItem className="relative">
+                <MainSectionPanelItemCrown variant={"default"}>
+                  Authenticator application must be enabled to generate backup
+                  codes
+                </MainSectionPanelItemCrown>
                 Reject known compromised passwords
               </MainSectionPanelItem>
               <MainSectionPanelItem>

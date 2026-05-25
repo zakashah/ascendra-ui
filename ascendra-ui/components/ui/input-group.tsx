@@ -1,75 +1,75 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
-import { Button } from '@/ascendra-ui/components/ui/button';
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { Button } from "@/ascendra-ui/components/ui/button";
 
 // ─── InputGroup ────────────────────────────────────────────────────────────────
 // All the ring/shadow/hover/focus styles from your Input wrapper live here now
 
-function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
+function InputGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="input-group"
       role="group"
       className={cn(
-        'group/input-group relative flex w-full min-w-0 items-center',
-        'has-[>textarea]:h-auto',
-        'has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:flex-col',
-        'has-[>[data-align=inline-end]]:*:data-[slot=input-group-control]:pr-1.5',
-        'has-[>[data-align=inline-start]]:*:data-[slot=input-group-control]:pl-2.5',
+        "group/input-group relative flex w-full min-w-0 items-center",
+        "has-[textarea]:h-auto",
+        "has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:flex-col",
+        "has-[>[data-align=inline-end]]:*:data-[slot=input-group-control]:pr-1.5",
+        "has-[>[data-align=inline-start]]:*:data-[slot=input-group-control]:pl-2.5",
 
         // Shape + background
-        'dark:bg-secondary rounded-[.375rem] bg-white',
+        "dark:bg-secondary rounded-[.375rem] bg-white",
 
         // Transition
-        'transition',
+        "transition",
 
         // BASE RING
-        'ring-1 ring-(--color-umbra)/12',
-        'dark:ring-(--color-gray-1000)/88 dark:ring-inset',
+        "ring-1 ring-(--color-umbra)/12",
+        "dark:ring-(--color-gray-1000)/88 dark:ring-inset",
 
         // BASE SHADOW
-        'shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04)]',
-        'dark:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24)]',
+        "shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04)]",
+        "dark:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24)]",
 
         // DISABLED
-        'has-[[data-slot=input-group-control][data-disabled]]:cursor-not-allowed',
-        'has-[[data-slot=input-group-control][data-disabled]]:opacity-40',
+        "has-[[data-slot=input-group-control][data-disabled]]:cursor-not-allowed",
+        "has-[[data-slot=input-group-control][data-disabled]]:opacity-40",
 
         // READ ONLY
-        'has-[[data-slot=input-group-control]:read-only]:bg-gray-100',
-        'dark:has-[[data-slot=input-group-control]:read-only]:bg-white/5',
-        'has-[[data-slot=input-group-control]:read-only]:ring-gray-300',
-        'dark:has-[[data-slot=input-group-control]:read-only]:ring-white/10',
-        'has-[[data-slot=input-group-control]:read-only]:shadow-none',
+        "has-[[data-slot=input-group-control]:read-only]:bg-gray-100",
+        "dark:has-[[data-slot=input-group-control]:read-only]:bg-white/5",
+        "has-[[data-slot=input-group-control]:read-only]:ring-gray-300",
+        "dark:has-[[data-slot=input-group-control]:read-only]:ring-white/10",
+        "has-[[data-slot=input-group-control]:read-only]:shadow-none",
 
         // HOVER
-        'has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:ring-(--color-umbra)/24',
-        'dark:has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:ring-gray-950',
-        'has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_4px_4px_-2px_rgba(0,0,0,0.06)]',
-        'dark:has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.32),0_4px_4px_-2px_rgba(0,0,0,0.32)]',
+        "has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:ring-(--color-umbra)/24",
+        "dark:has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:ring-gray-950",
+        "has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_4px_4px_-2px_rgba(0,0,0,0.06)]",
+        "dark:has-[[data-slot=input-group-control][data-hovered]:not(:read-only):not([data-focused]):not([data-disabled])]:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.32),0_4px_4px_-2px_rgba(0,0,0,0.32)]",
 
         // FOCUS (mouse/pointer — ring + shadow only)
-        'has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:ring-1',
-        'has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:ring-(--color-umbra)/12',
-        'dark:has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:ring-black/88',
-        'has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:shadow-[0_0_0_3px_rgba(0,0,0,0.08),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.04)]',
-        'dark:has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:shadow-[0_0_0_3px_rgba(61,61,74,0.4),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.16)]',
+        "has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:ring-1",
+        "has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:ring-(--color-umbra)/12",
+        "dark:has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:ring-black/88",
+        "has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:shadow-[0_0_0_3px_rgba(0,0,0,0.08),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.04)]",
+        "dark:has-[[data-slot=input-group-control][data-focused][data-pointer]:not(:read-only)]:shadow-[0_0_0_3px_rgba(61,61,74,0.4),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.16)]",
 
         // INVALID
-        'has-[[data-slot=input-group-control][aria-invalid=true]]:ring-red-700',
-        'dark:has-[[data-slot=input-group-control][aria-invalid=true]]:ring-red-600',
-        'has-[[data-slot=input-group-control][aria-invalid=true]]:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_0_0_1px_#e02e2e,0_4px_4px_-2px_rgba(0,0,0,0.06)]',
-        'dark:has-[[data-slot=input-group-control][aria-invalid=true]]:shadow-[0_-1px_1px_rgba(255,255,255,0.12),0_0_0_1px_#f73d3d,0_0_0_2px_rgba(0,0,0,0.16)]',
+        "has-[[data-slot=input-group-control][aria-invalid=true]]:ring-red-700",
+        "dark:has-[[data-slot=input-group-control][aria-invalid=true]]:ring-red-600",
+        "has-[[data-slot=input-group-control][aria-invalid=true]]:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_0_0_1px_#e02e2e,0_4px_4px_-2px_rgba(0,0,0,0.06)]",
+        "dark:has-[[data-slot=input-group-control][aria-invalid=true]]:shadow-[0_-1px_1px_rgba(255,255,255,0.12),0_0_0_1px_#f73d3d,0_0_0_2px_rgba(0,0,0,0.16)]",
 
         // FOCUS VISIBLE (keyboard — primary outline, suppressed on pointer and on error)
-        'has-[[data-slot=input-group-control]:focus-visible:not([data-pointer]):not(:read-only):not([aria-invalid=true])]:outline',
-        'has-[[data-slot=input-group-control]:focus-visible:not([data-pointer]):not(:read-only):not([aria-invalid=true])]:outline-2',
-        'has-[[data-slot=input-group-control]:focus-visible:not([data-pointer]):not(:read-only):not([aria-invalid=true])]:outline-primary',
-        'has-[[data-slot=input-group-control]:focus-visible:not([data-pointer]):not(:read-only):not([aria-invalid=true])]:outline-offset-1',
-        className
+        "has-[[data-slot=input-group-control]:focus-visible:not([data-pointer]):not(:read-only):not([aria-invalid=true])]:outline",
+        "has-[[data-slot=input-group-control]:focus-visible:not([data-pointer]):not(:read-only):not([aria-invalid=true])]:outline-2",
+        "has-[[data-slot=input-group-control]:focus-visible:not([data-pointer]):not(:read-only):not([aria-invalid=true])]:outline-primary",
+        "has-[[data-slot=input-group-control]:focus-visible:not([data-pointer]):not(:read-only):not([aria-invalid=true])]:outline-offset-1",
+        className,
       )}
       {...props}
     />
@@ -83,23 +83,23 @@ const inputGroupAddonVariants = cva(
   {
     variants: {
       align: {
-        'inline-start':
-          'pl-2.5 has-[>button]:ml-[-0.3rem] has-[>kbd]:ml-[-0.15rem] order-first',
-        'inline-end':
-          'pr-2 has-[>button]:mr-[-0.3rem] has-[>kbd]:mr-[-0.15rem] order-last',
-        'block-start': 'px-2.5 pt-2 order-first w-full justify-start',
-        'block-end': 'px-2.5 pb-2 order-last w-full justify-start',
+        "inline-start":
+          "pl-2.5 has-[>button]:ml-[-0.3rem] has-[>kbd]:ml-[-0.15rem] order-first",
+        "inline-end":
+          "pr-2 has-[>button]:mr-[-0.3rem] has-[>kbd]:mr-[-0.15rem] order-last",
+        "block-start": "px-2.5 pt-2 order-first w-full justify-start",
+        "block-end": "px-2.5 pb-2 order-last w-full justify-start",
       },
     },
-    defaultVariants: { align: 'inline-start' },
-  }
+    defaultVariants: { align: "inline-start" },
+  },
 );
 
 function InputGroupAddon({
   className,
-  align = 'inline-start',
+  align = "inline-start",
   ...props
-}: React.ComponentProps<'div'> & VariantProps<typeof inputGroupAddonVariants>) {
+}: React.ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>) {
   return (
     <div
       role="group"
@@ -107,8 +107,8 @@ function InputGroupAddon({
       data-align={align}
       className={cn(inputGroupAddonVariants({ align }), className)}
       onClick={(e) => {
-        if ((e.target as HTMLElement).closest('button')) return;
-        e.currentTarget.parentElement?.querySelector('input')?.focus();
+        if ((e.target as HTMLElement).closest("button")) return;
+        e.currentTarget.parentElement?.querySelector("input")?.focus();
       }}
       {...props}
     />
@@ -117,13 +117,13 @@ function InputGroupAddon({
 
 // ─── InputGroupText ────────────────────────────────────────────────────────────
 
-function InputGroupText({ className, ...props }: React.ComponentProps<'span'>) {
+function InputGroupText({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       data-slot="input-group-text"
       className={cn(
         "text-muted-foreground flex items-center gap-2 text-sm [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
-        className
+        className,
       )}
       {...props}
     />
@@ -133,28 +133,28 @@ function InputGroupText({ className, ...props }: React.ComponentProps<'span'>) {
 // ─── InputGroupButton ──────────────────────────────────────────────────────────
 
 const inputGroupButtonVariants = cva(
-  'gap-2 text-sm shadow-none flex items-center',
+  "gap-2 text-sm shadow-none flex items-center",
   {
     variants: {
       size: {
         xs: "h-6 gap-1 rounded-[calc(var(--radius)-3px)] px-1.5 [&>svg:not([class*='size-'])]:size-3.5",
-        sm: '',
-        'icon-xs':
-          'size-6 rounded-[calc(var(--radius)-3px)] p-0 has-[>svg]:p-0',
-        'icon-sm': 'size-8 p-0 has-[>svg]:p-0',
+        sm: "",
+        "icon-xs":
+          "size-6 rounded-[calc(var(--radius)-3px)] p-0 has-[>svg]:p-0",
+        "icon-sm": "size-8 p-0 has-[>svg]:p-0",
       },
     },
-    defaultVariants: { size: 'xs' },
-  }
+    defaultVariants: { size: "xs" },
+  },
 );
 
 function InputGroupButton({
   className,
-  type = 'button',
-  variant = 'ghost',
-  size = 'xs',
+  type = "button",
+  variant = "ghost",
+  size = "xs",
   ...props
-}: Omit<React.ComponentProps<typeof Button>, 'size'> &
+}: Omit<React.ComponentProps<typeof Button>, "size"> &
   VariantProps<typeof inputGroupButtonVariants>) {
   return (
     <Button
@@ -173,7 +173,7 @@ function InputGroupButton({
 
 const InputGroupInput = React.forwardRef<
   HTMLInputElement,
-  React.ComponentProps<'input'>
+  React.ComponentProps<"input">
 >(
   (
     {
@@ -188,7 +188,7 @@ const InputGroupInput = React.forwardRef<
       onMouseLeave,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [focused, setFocused] = React.useState(false);
     const [hovered, setHovered] = React.useState(false);
@@ -229,29 +229,33 @@ const InputGroupInput = React.forwardRef<
           onMouseLeave?.(e);
         }}
         className={cn(
-          'h-8 w-full flex-1 bg-transparent px-3 py-1 text-sm',
-          'border-0 ring-0 outline-none',
-          'placeholder:text-gray-500 dark:placeholder:text-gray-700',
-          className
+          "h-8 w-full flex-1 bg-transparent px-3 py-1 text-sm",
+          "border-0 ring-0 outline-none",
+          "placeholder:text-gray-500 dark:placeholder:text-gray-700",
+          className,
         )}
         {...props}
       />
     );
-  }
+  },
 );
-InputGroupInput.displayName = 'InputGroupInput';
+InputGroupInput.displayName = "InputGroupInput";
 
 // ─── InputGroupTextarea ────────────────────────────────────────────────────────
 
 const InputGroupTextarea = React.forwardRef<
   HTMLTextAreaElement,
-  React.ComponentProps<'textarea'>
+  React.ComponentProps<"textarea">
 >(
   (
     {
       className,
       disabled,
       readOnly,
+      maxLength,
+      value,
+      defaultValue,
+      onChange,
       onFocus,
       onBlur,
       onKeyDown,
@@ -260,13 +264,20 @@ const InputGroupTextarea = React.forwardRef<
       onMouseLeave,
       ...props
     },
-    ref
+    ref,
   ) => {
     const [focused, setFocused] = React.useState(false);
     const [hovered, setHovered] = React.useState(false);
     const [isPointer, setIsPointer] = React.useState(false);
+    const [charCount, setCharCount] = React.useState(() => {
+      if (value !== undefined) return String(value).length;
+      if (defaultValue !== undefined) return String(defaultValue).length;
+      return 0;
+    });
 
-    return (
+    const displayCount = value !== undefined ? String(value).length : charCount;
+
+    const textarea = (
       <textarea
         ref={ref}
         data-slot="input-group-control"
@@ -276,6 +287,13 @@ const InputGroupTextarea = React.forwardRef<
         data-pointer={isPointer || undefined}
         disabled={disabled}
         readOnly={readOnly}
+        maxLength={maxLength}
+        value={value}
+        defaultValue={defaultValue}
+        onChange={(e) => {
+          setCharCount(e.target.value.length);
+          onChange?.(e);
+        }}
         onFocus={(e) => {
           setFocused(true);
           onFocus?.(e);
@@ -301,17 +319,29 @@ const InputGroupTextarea = React.forwardRef<
           onMouseLeave?.(e);
         }}
         className={cn(
-          'w-full flex-1 resize-none bg-transparent px-3 py-2 text-sm',
-          'border-0 ring-0 outline-none',
-          'placeholder:text-gray-500',
-          className
+          "w-full flex-1 resize-none bg-transparent px-3 py-2 text-sm",
+          maxLength !== undefined && "pb-6",
+          "border-0 ring-0 outline-none",
+          "placeholder:text-gray-500",
+          className,
         )}
         {...props}
       />
     );
-  }
+
+    if (maxLength === undefined) return textarea;
+
+    return (
+      <div className="relative min-w-0 flex-1">
+        {textarea}
+        <span className="pointer-events-none absolute bottom-2 left-3 select-none text-[10px] text-muted-foreground">
+          {displayCount}/{maxLength}
+        </span>
+      </div>
+    );
+  },
 );
-InputGroupTextarea.displayName = 'InputGroupTextarea';
+InputGroupTextarea.displayName = "InputGroupTextarea";
 
 // ─── Exports ───────────────────────────────────────────────────────────────────
 
