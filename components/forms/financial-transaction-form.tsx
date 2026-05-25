@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import type { DateRange } from "react-day-picker";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
-import type { DateRange } from "react-day-picker";
 
+import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 import { MainSection } from "@/ascendra-ui/components/layout/main-section";
 import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
 import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
@@ -13,20 +14,19 @@ import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-
 import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
 import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
 import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+import { PageContent } from "@/ascendra-ui/components/layout/page-content";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
 import { PageMain } from "@/ascendra-ui/components/layout/page-main";
 import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
 import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageContent } from "@/ascendra-ui/components/layout/page-content";
 import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
-import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 
 import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
 import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar";
-import { BackLink } from "@/ascendra-ui/components/forms/back-link";
 import { DatePicker } from "@/ascendra-ui/components/date/date-picker";
 import { DateRangePicker } from "@/ascendra-ui/components/date/date-range-picker";
+import { BackLink } from "@/ascendra-ui/components/forms/back-link";
 import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
 import {
   Combobox,
@@ -41,7 +41,9 @@ import {
   Field,
   FieldGroup,
   FieldHint,
+  FieldInfo,
   FieldLabel,
+  FieldLabelGroup,
   FieldLegend,
   FieldSet,
 } from "@/ascendra-ui/components/ui/field";
@@ -246,10 +248,16 @@ export default function FinancialTransactionForm() {
                       {/* Panel Item 1 — Core fields (horizontal layout) */}
                       <MainSectionPanelItem>
                         <FieldGroup>
-                          <Field orientation="horizontal">
-                            <FieldLabel htmlFor="transaction-date">
-                              Transaction Date
-                            </FieldLabel>
+                          <Field
+                            orientation="horizontal"
+                            className="flex items-center"
+                          >
+                            <FieldLabelGroup>
+                              <FieldLabel htmlFor="transaction-date">
+                                Transaction Date
+                              </FieldLabel>
+                              <FieldInfo>This is field info and this can be very long</FieldInfo>
+                            </FieldLabelGroup>
                             <div className="flex-1">
                               <Controller
                                 name="transactionDate"
@@ -277,9 +285,11 @@ export default function FinancialTransactionForm() {
 
                           <FieldSet>
                             <Field orientation="horizontal">
-                              <FieldLegend variant="label" className="mb-0">
-                                Transaction Type
-                              </FieldLegend>
+                              <FieldLabelGroup>
+                                <FieldLabel htmlFor="transaction-date">
+                                  Transaction Type
+                                </FieldLabel>
+                              </FieldLabelGroup>
                               <div className="flex-1">
                                 <Controller
                                   name="transactionType"
@@ -332,9 +342,11 @@ export default function FinancialTransactionForm() {
                           </FieldSet>
 
                           <Field orientation="horizontal">
-                            <FieldLabel htmlFor="from-account">
-                              From Account
-                            </FieldLabel>
+                            <FieldLabelGroup>
+                              <FieldLabel htmlFor="transaction-date">
+                                Form Account
+                              </FieldLabel>
+                            </FieldLabelGroup>
                             <div className="flex-1">
                               <Controller
                                 name="fromAccount"
@@ -369,9 +381,11 @@ export default function FinancialTransactionForm() {
                           </Field>
 
                           <Field orientation="horizontal">
-                            <FieldLabel htmlFor="payee">
-                              To Account / Payee
-                            </FieldLabel>
+                            <FieldLabelGroup>
+                              <FieldLabel htmlFor="payee">
+                                To Account / Payee
+                              </FieldLabel>
+                            </FieldLabelGroup>
                             <div className="flex-1">
                               <Controller
                                 name="payee"
@@ -413,7 +427,9 @@ export default function FinancialTransactionForm() {
                           </Field>
 
                           <Field orientation="horizontal">
-                            <FieldLabel htmlFor="amount">Amount</FieldLabel>
+                            <FieldLabelGroup>
+                              <FieldLabel htmlFor="amount">Amount</FieldLabel>
+                            </FieldLabelGroup>
                             <div className="flex-1">
                               <Controller
                                 name="amount"
@@ -445,7 +461,11 @@ export default function FinancialTransactionForm() {
                           </Field>
 
                           <Field orientation="horizontal">
-                            <FieldLabel htmlFor="category">Category</FieldLabel>
+                            <FieldLabelGroup>
+                              <FieldLabel htmlFor="category">
+                                Category
+                              </FieldLabel>
+                            </FieldLabelGroup>
                             <div className="flex-1">
                               <Controller
                                 name="category"
@@ -495,9 +515,11 @@ export default function FinancialTransactionForm() {
                       <MainSectionPanelItem>
                         <FieldGroup>
                           <Field orientation="horizontal">
-                            <FieldLabel htmlFor="reference">
-                              Reference Number
-                            </FieldLabel>
+                            <FieldLabelGroup>
+                              <FieldLabel htmlFor="reference">
+                                Reference Number
+                              </FieldLabel>
+                            </FieldLabelGroup>
                             <div className="flex-1">
                               <Controller
                                 name="reference"
@@ -518,9 +540,11 @@ export default function FinancialTransactionForm() {
                           </Field>
 
                           <Field orientation="horizontal">
-                            <FieldLabel htmlFor="memo">
-                              Memo / Description
-                            </FieldLabel>
+                            <FieldLabelGroup>
+                              <FieldLabel htmlFor="memo">
+                                Memo / Description
+                              </FieldLabel>
+                            </FieldLabelGroup>
                             <div className="flex-1">
                               <Controller
                                 name="memo"
@@ -541,9 +565,11 @@ export default function FinancialTransactionForm() {
                           </Field>
 
                           <Field orientation="horizontal">
-                            <FieldLabel htmlFor="tax-deductible">
-                              Tax Deductible
-                            </FieldLabel>
+                            <FieldLabelGroup>
+                              <FieldLabel htmlFor="tax-deductible">
+                                Tax Deductible
+                              </FieldLabel>
+                            </FieldLabelGroup>
                             <div className="flex-1">
                               <Controller
                                 name="taxDeductible"

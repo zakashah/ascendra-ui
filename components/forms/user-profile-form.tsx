@@ -63,9 +63,9 @@ import {
 } from "@/ascendra-ui/components/ui/select";
 import { Switch } from "@/ascendra-ui/components/ui/switch";
 
-// ─── Schema ────────────────────────────────────────────────────────────────────
+// ─── Schemas ───────────────────────────────────────────────────────────────────
 
-const schema = z.object({
+const generalSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
   displayName: z.string(),
@@ -79,11 +79,17 @@ const schema = z.object({
   phone: z.string(),
   bio: z.string().max(200, "Bio must be 200 characters or fewer"),
   website: z.string(),
+});
+
+const preferencesSchema = z.object({
   language: z.string().min(1, "Language is required"),
   timezone: z.string().min(1, "Timezone is required"),
   dateFormat: z.string().min(1, "Date format is required"),
   timeFormat: z.string().min(1, "Time format is required"),
   theme: z.string().min(1, "Theme is required"),
+});
+
+const notificationsSchema = z.object({
   notifyComment: z.boolean(),
   notifyMention: z.boolean(),
   notifyDM: z.boolean(),
@@ -92,7 +98,9 @@ const schema = z.object({
   notifyTeamActivity: z.boolean(),
 });
 
-type UserProfileValues = z.infer<typeof schema>;
+type GeneralValues = z.infer<typeof generalSchema>;
+type PreferencesValues = z.infer<typeof preferencesSchema>;
+type NotificationsValues = z.infer<typeof notificationsSchema>;
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
 
@@ -176,16 +184,12 @@ const IN_APP_NOTIFICATION_FIELDS = [
 // ─── Form ──────────────────────────────────────────────────────────────────────
 
 export default function UserProfileForm() {
-  const [isSaving, setIsSaving] = useState(false);
+  const [isSavingGeneral, setIsSavingGeneral] = useState(false);
+  const [isSavingPreferences, setIsSavingPreferences] = useState(false);
+  const [isSavingNotifications, setIsSavingNotifications] = useState(false);
 
-  const {
-    control,
-    trigger,
-    reset,
-    getValues,
-    formState: { isDirty, isValid, errors },
-  } = useForm<UserProfileValues>({
-    resolver: zodResolver(schema),
+  const generalForm = useForm<GeneralValues>({
+    resolver: zodResolver(generalSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -195,11 +199,25 @@ export default function UserProfileForm() {
       phone: "",
       bio: "",
       website: "",
+    },
+    mode: "onTouched",
+  });
+
+  const preferencesForm = useForm<PreferencesValues>({
+    resolver: zodResolver(preferencesSchema),
+    defaultValues: {
       language: "",
       timezone: "",
       dateFormat: "",
       timeFormat: "",
       theme: "system",
+    },
+    mode: "onTouched",
+  });
+
+  const notificationsForm = useForm<NotificationsValues>({
+    resolver: zodResolver(notificationsSchema),
+    defaultValues: {
       notifyComment: false,
       notifyMention: false,
       notifyDM: false,
@@ -210,15 +228,39 @@ export default function UserProfileForm() {
     mode: "onTouched",
   });
 
-  async function handleSave(): Promise<boolean> {
-    const ok = await trigger();
+  async function handleSaveGeneral(): Promise<boolean> {
+    const ok = await generalForm.trigger();
     if (!ok) return false;
-    setIsSaving(true);
+    setIsSavingGeneral(true);
     await new Promise((r) => setTimeout(r, 1400));
-    setIsSaving(false);
-    reset(getValues());
+    setIsSavingGeneral(false);
+    generalForm.reset(generalForm.getValues());
     return true;
   }
+
+  async function handleSavePreferences(): Promise<boolean> {
+    const ok = await preferencesForm.trigger();
+    if (!ok) return false;
+    setIsSavingPreferences(true);
+    await new Promise((r) => setTimeout(r, 1400));
+    setIsSavingPreferences(false);
+    preferencesForm.reset(preferencesForm.getValues());
+    return true;
+  }
+
+  async function handleSaveNotifications(): Promise<boolean> {
+    const ok = await notificationsForm.trigger();
+    if (!ok) return false;
+    setIsSavingNotifications(true);
+    await new Promise((r) => setTimeout(r, 1400));
+    setIsSavingNotifications(false);
+    notificationsForm.reset(notificationsForm.getValues());
+    return true;
+  }
+
+  const { control: gc, formState: { isDirty: generalDirty, isValid: generalValid, errors: ge } } = generalForm;
+  const { control: pc, formState: { isDirty: preferencesDirty, isValid: preferencesValid, errors: pe } } = preferencesForm;
+  const { control: nc, formState: { isDirty: notificationsDirty, isValid: notificationsValid } } = notificationsForm;
 
   return (
     <>
@@ -238,9 +280,15 @@ export default function UserProfileForm() {
           <PageMain>
             <Tabs defaultValue="general">
               <TabList>
-                <TabTrigger value="general">General</TabTrigger>
-                <TabTrigger value="preferences">Preferences</TabTrigger>
-                <TabTrigger value="notifications">Notifications</TabTrigger>
+                <TabTrigger value="general" dirty={generalDirty}>
+                  General
+                </TabTrigger>
+                <TabTrigger value="preferences" dirty={preferencesDirty}>
+                  Preferences
+                </TabTrigger>
+                <TabTrigger value="notifications" dirty={notificationsDirty}>
+                  Notifications
+                </TabTrigger>
               </TabList>
 
               {/* ── Tab: General ──────────────────────────────────────────── */}
@@ -270,7 +318,7 @@ export default function UserProfileForm() {
                               </FieldLabelGroup>
                               <Controller
                                 name="firstName"
-                                control={control}
+                                control={gc}
                                 render={({ field: f }) => (
                                   <Input
                                     id="first-name"
@@ -280,12 +328,12 @@ export default function UserProfileForm() {
                                     value={f.value}
                                     onChange={f.onChange}
                                     onBlur={f.onBlur}
-                                    aria-invalid={!!errors.firstName}
+                                    aria-invalid={!!ge.firstName}
                                   />
                                 )}
                               />
                               <FieldHint
-                                error={errors.firstName as { message?: string }}
+                                error={ge.firstName as { message?: string }}
                                 mandatory
                               />
                             </Field>
@@ -299,7 +347,7 @@ export default function UserProfileForm() {
                               </FieldLabelGroup>
                               <Controller
                                 name="lastName"
-                                control={control}
+                                control={gc}
                                 render={({ field: f }) => (
                                   <Input
                                     id="last-name"
@@ -309,12 +357,12 @@ export default function UserProfileForm() {
                                     value={f.value}
                                     onChange={f.onChange}
                                     onBlur={f.onBlur}
-                                    aria-invalid={!!errors.lastName}
+                                    aria-invalid={!!ge.lastName}
                                   />
                                 )}
                               />
                               <FieldHint
-                                error={errors.lastName as { message?: string }}
+                                error={ge.lastName as { message?: string }}
                                 mandatory
                               />
                             </Field>
@@ -325,7 +373,7 @@ export default function UserProfileForm() {
                               </FieldLabel>
                               <Controller
                                 name="displayName"
-                                control={control}
+                                control={gc}
                                 render={({ field: f }) => (
                                   <Input
                                     id="display-name"
@@ -346,7 +394,7 @@ export default function UserProfileForm() {
                               </FieldLabel>
                               <Controller
                                 name="username"
-                                control={control}
+                                control={gc}
                                 render={({ field: f }) => (
                                   <Input
                                     id="username"
@@ -356,12 +404,12 @@ export default function UserProfileForm() {
                                     value={f.value}
                                     onChange={f.onChange}
                                     onBlur={f.onBlur}
-                                    aria-invalid={!!errors.username}
+                                    aria-invalid={!!ge.username}
                                   />
                                 )}
                               />
                               <FieldHint
-                                error={errors.username as { message?: string }}
+                                error={ge.username as { message?: string }}
                               />
                             </Field>
                           </div>
@@ -380,7 +428,7 @@ export default function UserProfileForm() {
                             </FieldLabelGroup>
                             <Controller
                               name="email"
-                              control={control}
+                              control={gc}
                               render={({ field: f }) => (
                                 <Input
                                   id="email"
@@ -400,7 +448,7 @@ export default function UserProfileForm() {
                             </FieldLabel>
                             <Controller
                               name="phone"
-                              control={control}
+                              control={gc}
                               render={({ field: f }) => (
                                 <Input
                                   id="phone"
@@ -426,7 +474,7 @@ export default function UserProfileForm() {
                             <FieldLabel htmlFor="bio">Bio / About</FieldLabel>
                             <Controller
                               name="bio"
-                              control={control}
+                              control={gc}
                               render={({ field: f }) => (
                                 <InputGroup>
                                   <InputGroupTextarea
@@ -436,14 +484,14 @@ export default function UserProfileForm() {
                                     value={f.value}
                                     onChange={f.onChange}
                                     onBlur={f.onBlur}
-                                    aria-invalid={!!errors.bio}
+                                    aria-invalid={!!ge.bio}
                                     maxLength={200}
                                   />
                                 </InputGroup>
                               )}
                             />
                             <FieldHint
-                              error={errors.bio as { message?: string }}
+                              error={ge.bio as { message?: string }}
                             />
                           </Field>
 
@@ -451,7 +499,7 @@ export default function UserProfileForm() {
                             <FieldLabel htmlFor="website">Website</FieldLabel>
                             <Controller
                               name="website"
-                              control={control}
+                              control={gc}
                               render={({ field: f }) => (
                                 <Input
                                   id="website"
@@ -476,6 +524,16 @@ export default function UserProfileForm() {
                     </MainSectionFooter>
                   </MainSection>
                 </div>
+
+                <UnsavedChangesBar
+                  isDirty={generalDirty}
+                  isValid={generalValid}
+                  isSaving={isSavingGeneral}
+                  onSave={handleSaveGeneral}
+                  onReset={() => generalForm.reset()}
+                  onInvalid={() => generalForm.trigger()}
+                  className="lg:left-[calc(50%+7rem)]"
+                />
               </TabContent>
 
               {/* ── Tab: Preferences ──────────────────────────────────────── */}
@@ -504,7 +562,7 @@ export default function UserProfileForm() {
                               </FieldLabel>
                               <Controller
                                 name="language"
-                                control={control}
+                                control={pc}
                                 render={({ field: f }) => (
                                   <Combobox
                                     items={LANGUAGES}
@@ -538,7 +596,7 @@ export default function UserProfileForm() {
                                 )}
                               />
                               <FieldHint
-                                error={errors.language as { message?: string }}
+                                error={pe.language as { message?: string }}
                                 mandatory
                               />
                             </Field>
@@ -549,7 +607,7 @@ export default function UserProfileForm() {
                               </FieldLabel>
                               <Controller
                                 name="timezone"
-                                control={control}
+                                control={pc}
                                 render={({ field: f }) => (
                                   <Combobox
                                     items={TIMEZONES}
@@ -580,7 +638,7 @@ export default function UserProfileForm() {
                                 )}
                               />
                               <FieldHint
-                                error={errors.timezone as { message?: string }}
+                                error={pe.timezone as { message?: string }}
                                 mandatory
                               />
                             </Field>
@@ -597,7 +655,7 @@ export default function UserProfileForm() {
                             </FieldLabel>
                             <Controller
                               name="dateFormat"
-                              control={control}
+                              control={pc}
                               render={({ field: f }) => (
                                 <Select
                                   value={f.value}
@@ -611,7 +669,7 @@ export default function UserProfileForm() {
                                     id="date-format"
                                     className="w-full"
                                     aria-invalid={
-                                      !!errors.dateFormat || undefined
+                                      !!pe.dateFormat || undefined
                                     }
                                   >
                                     <SelectValue placeholder="Select a format…" />
@@ -632,7 +690,7 @@ export default function UserProfileForm() {
                               )}
                             />
                             <FieldHint
-                              error={errors.dateFormat as { message?: string }}
+                              error={pe.dateFormat as { message?: string }}
                               mandatory
                             />
                           </Field>
@@ -643,7 +701,7 @@ export default function UserProfileForm() {
                             </FieldLegend>
                             <Controller
                               name="timeFormat"
-                              control={control}
+                              control={pc}
                               render={({ field: f }) => (
                                 <RadioGroup
                                   value={f.value}
@@ -680,7 +738,7 @@ export default function UserProfileForm() {
                               )}
                             />
                             <FieldHint
-                              error={errors.timeFormat as { message?: string }}
+                              error={pe.timeFormat as { message?: string }}
                               mandatory
                             />
                           </FieldSet>
@@ -706,7 +764,7 @@ export default function UserProfileForm() {
                           <FieldLegend variant="label">Theme</FieldLegend>
                           <Controller
                             name="theme"
-                            control={control}
+                            control={pc}
                             render={({ field: f }) => (
                               <RadioGroup
                                 value={f.value}
@@ -743,13 +801,23 @@ export default function UserProfileForm() {
                             )}
                           />
                           <FieldHint
-                            error={errors.theme as { message?: string }}
+                            error={pe.theme as { message?: string }}
                           />
                         </FieldSet>
                       </MainSectionPanelItem>
                     </MainSectionPanel>
                   </MainSection>
                 </div>
+
+                <UnsavedChangesBar
+                  isDirty={preferencesDirty}
+                  isValid={preferencesValid}
+                  isSaving={isSavingPreferences}
+                  onSave={handleSavePreferences}
+                  onReset={() => preferencesForm.reset()}
+                  onInvalid={() => preferencesForm.trigger()}
+                  className="lg:left-[calc(50%+7rem)]"
+                />
               </TabContent>
 
               {/* ── Tab: Notifications ────────────────────────────────────── */}
@@ -774,7 +842,7 @@ export default function UserProfileForm() {
                               <Controller
                                 key={id}
                                 name={name}
-                                control={control}
+                                control={nc}
                                 render={({ field: f }) => (
                                   <Field
                                     orientation="horizontal"
@@ -839,7 +907,7 @@ export default function UserProfileForm() {
                               <Controller
                                 key={id}
                                 name={name}
-                                control={control}
+                                control={nc}
                                 render={({ field: f }) => (
                                   <Field
                                     orientation="horizontal"
@@ -872,21 +940,21 @@ export default function UserProfileForm() {
                     </MainSectionFooter>
                   </MainSection>
                 </div>
+
+                <UnsavedChangesBar
+                  isDirty={notificationsDirty}
+                  isValid={notificationsValid}
+                  isSaving={isSavingNotifications}
+                  onSave={handleSaveNotifications}
+                  onReset={() => notificationsForm.reset()}
+                  onInvalid={() => notificationsForm.trigger()}
+                  className="lg:left-[calc(50%+7rem)]"
+                />
               </TabContent>
             </Tabs>
           </PageMain>
         </div>
       </div>
-
-      <UnsavedChangesBar
-        isDirty={isDirty}
-        isValid={isValid}
-        isSaving={isSaving}
-        onSave={handleSave}
-        onReset={() => reset()}
-        onInvalid={() => trigger()}
-        className="lg:left-[calc(50%+7rem)]"
-      />
     </>
   );
 }

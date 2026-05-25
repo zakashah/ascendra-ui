@@ -388,6 +388,58 @@ import { Input } from "@/ascendra-ui/components/ui/input";
             </div>
           </ComponentPreview>
         </div>
+
+        {/* Help tooltip */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Help tooltip</h3>
+          <p className="text-xs text-muted-foreground">
+            Pass a{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              help
+            </code>{" "}
+            string to render a{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">?</code>{" "}
+            badge that reveals extended guidance in a tooltip. Combine with{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              description
+            </code>
+            ,{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              mandatory
+            </code>
+            , or{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              optional
+            </code>{" "}
+            — the{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">?</code>{" "}
+            badge always appears last in the badge row.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`<Field>
+  <FieldLabel htmlFor="workspace">Workspace name</FieldLabel>
+  <Input id="workspace" placeholder="acme" full />
+  <FieldHint
+    description="Shown in all notifications and shared links."
+    mandatory
+    help="Pick something short and memorable. You can change it later in workspace settings."
+  />
+</Field>`}
+          >
+            <div className="w-72">
+              <Field>
+                <FieldLabel htmlFor="fh-workspace">Workspace name</FieldLabel>
+                <Input id="fh-workspace" placeholder="acme" full />
+                <FieldHint
+                  description="Shown in all notifications and shared links."
+                  mandatory
+                  help="Pick something short and memorable. You can change it later in workspace settings."
+                />
+              </Field>
+            </div>
+          </ComponentPreview>
+        </div>
       </div>
 
       {/* ── Forms & Input ────────────────────────────────────────────────── */}

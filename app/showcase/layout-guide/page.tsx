@@ -703,6 +703,95 @@ import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-
             </MainSection>
           </div>
         </Variant>
+
+        <Variant
+          label="Collapseable section"
+          note="Pass collapseable=&quot;expanded&quot; or collapseable=&quot;collapsed&quot; to MainSection. State is managed internally — the header renders a minimize/maximize toggle. Add hasError to draw a destructive outline when collapsed fields have validation errors."
+          code={`import { MainSection } from "@/ascendra-ui/components/layout/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
+import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
+import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+
+// Starts expanded
+<MainSection collapseable="expanded">
+  <MainSectionHeader>
+    <MainSectionHeaderTitle>Notification preferences</MainSectionHeaderTitle>
+    <MainSectionHeaderSubtitle>
+      Choose when and how you receive notifications
+    </MainSectionHeaderSubtitle>
+  </MainSectionHeader>
+  <MainSectionPanel>
+    <MainSectionPanelItem>Panel content</MainSectionPanelItem>
+  </MainSectionPanel>
+</MainSection>
+
+// Starts collapsed
+<MainSection collapseable="collapsed">
+  <MainSectionHeader>
+    <MainSectionHeaderTitle>Advanced settings</MainSectionHeaderTitle>
+  </MainSectionHeader>
+  <MainSectionPanel>
+    <MainSectionPanelItem>Panel content</MainSectionPanelItem>
+  </MainSectionPanel>
+</MainSection>
+
+// With validation error outline (when collapsed fields fail submit)
+<MainSection collapseable="expanded" hasError={!!errors.notificationEmail}>
+  ...
+</MainSection>`}
+        >
+          <div className="flex flex-col gap-4">
+            <MainSection collapseable="expanded">
+              <MainSectionHeader>
+                <MainSectionHeaderTitle>
+                  Notification preferences
+                </MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Choose when and how you receive notifications
+                </MainSectionHeaderSubtitle>
+              </MainSectionHeader>
+              <MainSectionPanel>
+                <MainSectionPanelItem>
+                  <p className="text-sm text-muted-foreground">
+                    Panel content goes here
+                  </p>
+                </MainSectionPanelItem>
+              </MainSectionPanel>
+            </MainSection>
+            <MainSection collapseable="collapsed">
+              <MainSectionHeader>
+                <MainSectionHeaderTitle>Advanced settings</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  These settings are collapsed by default
+                </MainSectionHeaderSubtitle>
+              </MainSectionHeader>
+              <MainSectionPanel>
+                <MainSectionPanelItem>
+                  <p className="text-sm text-muted-foreground">
+                    Panel content goes here
+                  </p>
+                </MainSectionPanelItem>
+              </MainSectionPanel>
+            </MainSection>
+            <MainSection collapseable="collapsed" hasError>
+              <MainSectionHeader>
+                <MainSectionHeaderTitle>Billing details</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Collapsed with a validation error outline
+                </MainSectionHeaderSubtitle>
+              </MainSectionHeader>
+              <MainSectionPanel>
+                <MainSectionPanelItem>
+                  <p className="text-sm text-muted-foreground">
+                    Panel content goes here
+                  </p>
+                </MainSectionPanelItem>
+              </MainSectionPanel>
+            </MainSection>
+          </div>
+        </Variant>
       </GuideSection>
 
       {/* ── 5. Section Panels ─────────────────────────────────────────────── */}
