@@ -84,7 +84,9 @@ const schema = z.object({
     .min(1, "Cover letter is required")
     .min(50, "Cover letter must be at least 50 characters"),
   declarationAccurate: z.literal(true, { error: "Please confirm accuracy" }),
-  declarationPrivacy: z.literal(true, { error: "Please accept the privacy policy" }),
+  declarationPrivacy: z.literal(true, {
+    error: "Please accept the privacy policy",
+  }),
 });
 
 type JobApplicationValues = z.infer<typeof schema>;
@@ -251,10 +253,8 @@ export default function JobApplicationForm() {
                                 )}
                               />
                               <FieldHint
-                                error={
-                                  errors.firstName as { message?: string }
-                                }
-                                mandatory
+                                error={errors.firstName as { message?: string }}
+                                mandatory help="This is help text"
                               />
                             </Field>
 
@@ -338,7 +338,7 @@ export default function JobApplicationForm() {
                                   />
                                 )}
                               />
-                              <FieldHint optional />
+                              <FieldHint />
                             </Field>
                           </div>
                         </FieldSet>
@@ -367,7 +367,7 @@ export default function JobApplicationForm() {
                                   />
                                 )}
                               />
-                              <FieldHint optional />
+                              <FieldHint />
                             </Field>
 
                             <Field>
@@ -389,7 +389,7 @@ export default function JobApplicationForm() {
                                   />
                                 )}
                               />
-                              <FieldHint optional />
+                              <FieldHint />
                             </Field>
                           </div>
                         </FieldSet>
@@ -492,7 +492,7 @@ export default function JobApplicationForm() {
                                   </Select>
                                 )}
                               />
-                              <FieldHint optional />
+                              <FieldHint />
                             </Field>
                           </div>
                         </FieldSet>
@@ -637,7 +637,7 @@ export default function JobApplicationForm() {
                                 )}
                               />
                             </div>
-                            <FieldHint optional />
+                            <FieldHint />
                           </Field>
                         </FieldGroup>
                       </MainSectionPanelItem>
@@ -750,9 +750,7 @@ export default function JobApplicationForm() {
                                 )}
                               />
                               <FieldHint
-                                error={
-                                  errors.education as { message?: string }
-                                }
+                                error={errors.education as { message?: string }}
                                 mandatory
                               />
                             </Field>
@@ -782,7 +780,7 @@ export default function JobApplicationForm() {
                                   />
                                 )}
                               />
-                              <FieldHint optional />
+                              <FieldHint />
                             </Field>
 
                             <Field>
@@ -821,7 +819,7 @@ export default function JobApplicationForm() {
                                   </Select>
                                 )}
                               />
-                              <FieldHint optional />
+                              <FieldHint />
                             </Field>
                           </div>
                         </FieldSet>
@@ -859,7 +857,7 @@ export default function JobApplicationForm() {
 
                       {/* Panel Item 4 — Declarations */}
                       <MainSectionPanelItem>
-                        <FieldGroup>
+                        <FieldGroup className="gap-1">
                           <Controller
                             name="declarationAccurate"
                             control={control}
@@ -903,7 +901,7 @@ export default function JobApplicationForm() {
                             render={({ field: f }) => (
                               <Field
                                 orientation="horizontal"
-                                className="items-baseline"
+                                className="items-baseline mt-2"
                               >
                                 <Checkbox
                                   id="declaration-privacy"

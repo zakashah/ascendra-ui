@@ -8,6 +8,11 @@ import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 import { Label } from "@/ascendra-ui/shadcn/components/ui/label";
 import { Separator } from "@/ascendra-ui/shadcn/components/ui/separator";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/ascendra-ui/shadcn/components/ui/tooltip";
 
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (
@@ -127,13 +132,47 @@ function FieldLabelGroup({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function FieldInfo({ className, ...props }: React.ComponentProps<"p">) {
+const fieldInfoBreakpointClasses: Record<string, string> = {
+  sm: "hidden sm:block",
+  md: "hidden md:block",
+  lg: "hidden lg:block",
+  xl: "hidden xl:block",
+  "2xl": "hidden 2xl:block",
+};
+
+function FieldInfo({
+  className,
+  children,
+  breakPoint,
+  ...props
+}: React.ComponentProps<"p"> & {
+  breakPoint?: "sm" | "md" | "lg" | "xl" | "2xl";
+}) {
+  if (!children && breakPoint) {
+    return (
+      <p
+        aria-hidden
+        data-slot="field-info"
+        className={cn(
+          "mt-0.5 text-xs",
+          fieldInfoBreakpointClasses[breakPoint],
+          className,
+        )}
+        {...props}
+      >
+        &nbsp;
+      </p>
+    );
+  }
+
   return (
     <p
       data-slot="field-info"
       className={cn("mt-0.5 text-xs", className)}
       {...props}
-    />
+    >
+      {children}
+    </p>
   );
 }
 
@@ -251,16 +290,23 @@ function FieldHint({
   description,
   mandatory,
   optional,
-}: {
+  help,
+  className,
+  ...props
+}: React.ComponentProps<"div"> & {
   error?: { message?: string };
   description?: string;
   mandatory?: boolean;
   optional?: boolean;
+  help?: string;
 }) {
   if (!error && !description && !mandatory && !optional) return null;
 
   return (
-    <div className="flex items-start justify-between gap-2">
+    <div
+      className={cn("flex items-start justify-between gap-2", className)}
+      {...props}
+    >
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline gap-1 justify-between">
           {error ? (
@@ -274,10 +320,30 @@ function FieldHint({
           ) : (
             <FieldDescription>{description || " "}</FieldDescription>
           )}
-          {(mandatory || optional) && (
-            <SimpleBadge variant="secondary" size="tiny" className="mt-0.5">
-              {mandatory ? "Mandatory" : "Optional"}
-            </SimpleBadge>
+          {(mandatory || optional || help) && (
+            <div className="flex gap-1">
+              {(mandatory || optional) && (
+                <SimpleBadge variant="secondary" size="tiny" className="mt-0.5">
+                  {mandatory ? "Mandatory" : "Optional"}
+                </SimpleBadge>
+              )}
+              {help && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <SimpleBadge
+                      variant="secondary"
+                      size="tiny"
+                      className="mt-0.5 cursor-default"
+                    >
+                      ?
+                    </SimpleBadge>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom">
+                    <p>{help}</p>
+                  </TooltipContent>
+                </Tooltip>
+              )}
+            </div>
           )}
         </div>
       </div>

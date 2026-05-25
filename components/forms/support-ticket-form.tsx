@@ -67,11 +67,17 @@ import { Switch } from "@/ascendra-ui/components/ui/switch";
 // ─── Schema ────────────────────────────────────────────────────────────────────
 
 const schema = z.object({
-  summary: z.string().min(1, "Summary is required").max(120, "Summary must be 120 characters or fewer"),
+  summary: z
+    .string()
+    .min(1, "Summary is required")
+    .max(120, "Summary must be 120 characters or fewer"),
   product: z.string().min(1, "Please select a product"),
   priority: z.string().min(1, "Priority is required"),
   issueType: z.string().min(1, "Please select an issue type"),
-  description: z.string().min(1, "Please describe the issue").min(30, "Description must be at least 30 characters"),
+  description: z
+    .string()
+    .min(1, "Please describe the issue")
+    .min(30, "Description must be at least 30 characters"),
   attachLogs: z.boolean(),
   affectedUsers: z.string(),
   stepsToReproduce: z.string(),
@@ -526,20 +532,23 @@ export default function SupportTicketForm() {
 
                   {/* ── Section 2: System Information (collapsible) ───────── */}
                   <MainSection>
-                    <MainSectionHeader>
-                      <div className="flex items-center gap-2">
-                        <Switch
-                          checked={includeSystemInfo}
-                          onCheckedChange={setIncludeSystemInfo}
-                        />
-                        <MainSectionHeaderTitle>
-                          Include system information
-                        </MainSectionHeaderTitle>
+                    <MainSectionHeader className="flex items-center justify-between">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <Switch
+                            checked={includeSystemInfo}
+                            onCheckedChange={setIncludeSystemInfo}
+                          />
+                          <MainSectionHeaderTitle>
+                            Include system information
+                          </MainSectionHeaderTitle>
+                        </div>
+                        <MainSectionHeaderSubtitle className="ml-8">
+                          Helps our team diagnose environment-specific issues
+                          faster.
+                        </MainSectionHeaderSubtitle>
                       </div>
-                      <MainSectionHeaderSubtitle className="ml-8">
-                        Helps our team diagnose environment-specific issues
-                        faster.
-                      </MainSectionHeaderSubtitle>
+                      <div>coll</div>
                     </MainSectionHeader>
 
                     <MainSectionPanel collapsed={!includeSystemInfo}>
@@ -583,7 +592,7 @@ export default function SupportTicketForm() {
                                   </Combobox>
                                 )}
                               />
-                              <FieldHint mandatory/>
+                              <FieldHint mandatory />
                             </Field>
 
                             <Field>

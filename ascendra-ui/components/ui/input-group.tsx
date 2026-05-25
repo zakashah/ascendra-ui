@@ -333,7 +333,7 @@ const InputGroupTextarea = React.forwardRef<
     return (
       <div className="relative min-w-0 flex-1">
         {textarea}
-        <span className="pointer-events-none absolute bottom-2 left-3 select-none font-mono text-[10px] font-medium tabular-nums text-muted-foreground">
+        <span className="pointer-events-none absolute bottom-2 left-3 select-none font-mono text-xs font-medium tabular-nums text-muted-foreground">
           {displayCount}/{maxLength}
         </span>
       </div>

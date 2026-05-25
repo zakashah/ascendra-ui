@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { LuShieldCheck } from "react-icons/lu";
 import { z } from "zod";
 
+import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 import { MainSection } from "@/ascendra-ui/components/layout/main-section";
 import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
 import { MainSectionFooterIcon } from "@/ascendra-ui/components/layout/main-section-footer-icon";
@@ -14,19 +15,18 @@ import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-
 import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
 import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
 import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+import { PageContent } from "@/ascendra-ui/components/layout/page-content";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
 import { PageMain } from "@/ascendra-ui/components/layout/page-main";
 import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
 import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageContent } from "@/ascendra-ui/components/layout/page-content";
 import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
-import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 
 import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
 import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar";
-import { BackLink } from "@/ascendra-ui/components/forms/back-link";
 import { DatePicker } from "@/ascendra-ui/components/date/date-picker";
+import { BackLink } from "@/ascendra-ui/components/forms/back-link";
 import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
 import {
   Combobox,
@@ -241,7 +241,6 @@ export default function AppointmentBookingForm() {
                           />
                           <FieldHint
                             error={errors.service as { message?: string }}
-                            mandatory
                           />
                         </FieldSet>
                       </MainSectionPanelItem>
@@ -289,7 +288,6 @@ export default function AppointmentBookingForm() {
                               />
                               <FieldHint
                                 error={errors.provider as { message?: string }}
-                                mandatory
                               />
                             </Field>
 
@@ -335,7 +333,6 @@ export default function AppointmentBookingForm() {
                               />
                               <FieldHint
                                 error={errors.location as { message?: string }}
-                                mandatory
                               />
                             </Field>
                           </div>
@@ -388,13 +385,12 @@ export default function AppointmentBookingForm() {
                     </MainSectionHeader>
 
                     <MainSectionPanel>
-                      <SimpleAlert variant="secondary">
-                        Available slots shown are for the selected provider and
-                        location.
-                      </SimpleAlert>
-
                       {/* Panel Item 1 — Date */}
                       <MainSectionPanelItem>
+                        <SimpleAlert variant="secondary">
+                          Available slots shown are for the selected provider
+                          and location.
+                        </SimpleAlert>
                         <Field>
                           <FieldLabel htmlFor="appointment-date">
                             Appointment Date
@@ -418,7 +414,6 @@ export default function AppointmentBookingForm() {
                             error={
                               errors.appointmentDate as { message?: string }
                             }
-                            mandatory
                           />
                         </Field>
                       </MainSectionPanelItem>
@@ -468,7 +463,6 @@ export default function AppointmentBookingForm() {
                             />
                             <FieldHint
                               error={errors.timeSlot as { message?: string }}
-                              mandatory
                             />
                           </FieldSet>
 
@@ -511,7 +505,6 @@ export default function AppointmentBookingForm() {
                             />
                             <FieldHint
                               error={errors.duration as { message?: string }}
-                              mandatory
                             />
                           </Field>
                         </FieldGroup>
@@ -558,7 +551,6 @@ export default function AppointmentBookingForm() {
                               />
                               <FieldHint
                                 error={errors.fullName as { message?: string }}
-                                mandatory
                               />
                             </Field>
 
@@ -585,7 +577,6 @@ export default function AppointmentBookingForm() {
                                 error={
                                   errors.dateOfBirth as { message?: string }
                                 }
-                                mandatory
                               />
                             </Field>
                           </div>
@@ -619,7 +610,6 @@ export default function AppointmentBookingForm() {
                               />
                               <FieldHint
                                 error={errors.phone as { message?: string }}
-                                mandatory
                               />
                             </Field>
 
@@ -753,8 +743,8 @@ export default function AppointmentBookingForm() {
                           />
                           {errors.consent && (
                             <FieldHint
+                              className="-mt-3"
                               error={errors.consent as { message?: string }}
-                              mandatory
                             />
                           )}
                         </FieldGroup>

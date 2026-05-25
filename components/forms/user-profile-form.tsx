@@ -266,7 +266,7 @@ export default function UserProfileForm() {
                                 <FieldLabel htmlFor="first-name">
                                   First Name
                                 </FieldLabel>
-                                <FieldInfo>info</FieldInfo>
+                                <FieldInfo>First name info</FieldInfo>
                               </FieldLabelGroup>
                               <Controller
                                 name="firstName"
@@ -295,7 +295,7 @@ export default function UserProfileForm() {
                                 <FieldLabel htmlFor="last-name">
                                   Last Name
                                 </FieldLabel>
-                                <FieldInfo />
+                                <FieldInfo breakPoint="sm" />
                               </FieldLabelGroup>
                               <Controller
                                 name="lastName"
@@ -337,10 +337,7 @@ export default function UserProfileForm() {
                                   />
                                 )}
                               />
-                              <FieldHint
-                                description="Shown publicly to other team members."
-                                optional
-                              />
+                              <FieldHint description="Shown publicly to other team members." />
                             </Field>
 
                             <Field>
@@ -365,7 +362,6 @@ export default function UserProfileForm() {
                               />
                               <FieldHint
                                 error={errors.username as { message?: string }}
-                                optional
                               />
                             </Field>
                           </div>
@@ -376,9 +372,12 @@ export default function UserProfileForm() {
                       <MainSectionPanelItem>
                         <FieldGroup>
                           <Field>
-                            <FieldLabel htmlFor="email">
-                              Email Address
-                            </FieldLabel>
+                            <FieldLabelGroup>
+                              <FieldLabel htmlFor="email">
+                                Email Address
+                              </FieldLabel>
+                              <FieldInfo>Required for account login</FieldInfo>
+                            </FieldLabelGroup>
                             <Controller
                               name="email"
                               control={control}
@@ -392,7 +391,7 @@ export default function UserProfileForm() {
                                 />
                               )}
                             />
-                            <FieldHint description="Contact support to change your email." />
+                            <FieldHint />
                           </Field>
 
                           <Field>
@@ -415,7 +414,7 @@ export default function UserProfileForm() {
                                 />
                               )}
                             />
-                            <FieldHint optional />
+                            <FieldHint />
                           </Field>
                         </FieldGroup>
                       </MainSectionPanelItem>
@@ -445,7 +444,6 @@ export default function UserProfileForm() {
                             />
                             <FieldHint
                               error={errors.bio as { message?: string }}
-                              optional
                             />
                           </Field>
 
@@ -466,7 +464,7 @@ export default function UserProfileForm() {
                                 />
                               )}
                             />
-                            <FieldHint optional />
+                            <FieldHint />
                           </Field>
                         </FieldGroup>
                       </MainSectionPanelItem>
