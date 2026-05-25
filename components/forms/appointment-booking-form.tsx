@@ -374,7 +374,14 @@ export default function AppointmentBookingForm() {
                   </MainSection>
 
                   {/* ── Section 2: Date & Time ─────────────────────────────── */}
-                  <MainSection>
+                  <MainSection
+                    collapseable="collapsed"
+                    hasError={
+                      !!errors.appointmentDate ||
+                      !!errors.timeSlot ||
+                      !!errors.duration
+                    }
+                  >
                     <MainSectionHeader>
                       <MainSectionHeaderTitle>
                         Date &amp; Time
@@ -513,7 +520,7 @@ export default function AppointmentBookingForm() {
                   </MainSection>
 
                   {/* ── Section 3: Patient Details ─────────────────────────── */}
-                  <MainSection>
+                  <MainSection collapseable="collapsed">
                     <MainSectionHeader>
                       <MainSectionHeaderTitle>
                         Patient Details

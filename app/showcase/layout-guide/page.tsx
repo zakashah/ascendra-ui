@@ -758,7 +758,10 @@ import { Button } from "@/ascendra-ui/components/ui/button";
     <MainSectionPanelItem>
       Require a minimum of 8 characters
     </MainSectionPanelItem>
-    <MainSectionPanelItem>
+    <MainSectionPanelItem className="relative">
+      <MainSectionPanelItemCrown variant={"default"}>
+        Authenticator application must be enabled to generate backup codes
+      </MainSectionPanelItemCrown>
       Reject known compromised passwords
     </MainSectionPanelItem>
     <MainSectionPanelItem>

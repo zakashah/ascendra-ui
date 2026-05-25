@@ -211,7 +211,7 @@ export default function SupportTicketForm() {
                   </SimpleAlert>
 
                   {/* ── Section 1: Issue Details ──────────────────────────── */}
-                  <MainSection>
+                  <MainSection collapseable="expanded">
                     <MainSectionHeader>
                       <MainSectionHeaderTitle>
                         Issue Details
@@ -532,23 +532,20 @@ export default function SupportTicketForm() {
 
                   {/* ── Section 2: System Information (collapsible) ───────── */}
                   <MainSection>
-                    <MainSectionHeader className="flex items-center justify-between">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <Switch
-                            checked={includeSystemInfo}
-                            onCheckedChange={setIncludeSystemInfo}
-                          />
-                          <MainSectionHeaderTitle>
-                            Include system information
-                          </MainSectionHeaderTitle>
-                        </div>
-                        <MainSectionHeaderSubtitle className="ml-8">
-                          Helps our team diagnose environment-specific issues
-                          faster.
-                        </MainSectionHeaderSubtitle>
+                    <MainSectionHeader>
+                      <div className="flex items-center gap-2">
+                        <Switch
+                          checked={includeSystemInfo}
+                          onCheckedChange={setIncludeSystemInfo}
+                        />
+                        <MainSectionHeaderTitle>
+                          Include system information
+                        </MainSectionHeaderTitle>
                       </div>
-                      <div>coll</div>
+                      <MainSectionHeaderSubtitle className="ml-8">
+                        Helps our team diagnose environment-specific issues
+                        faster.
+                      </MainSectionHeaderSubtitle>
                     </MainSectionHeader>
 
                     <MainSectionPanel collapsed={!includeSystemInfo}>
