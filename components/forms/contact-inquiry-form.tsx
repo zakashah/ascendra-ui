@@ -42,6 +42,10 @@ import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
 import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar";
 import { BackLink } from "@/ascendra-ui/components/forms/back-link";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { PageMain } from "@/ascendra-ui/components/layout/page-main";
+import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
+import { MainContent } from "@/ascendra-ui/components/layout/main-content";
+import { PageContent } from "@/ascendra-ui/components/layout/page-content";
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -157,9 +161,8 @@ export default function ContactInquiryForm() {
   return (
     <>
       <div className="app-container mt-8 pb-24 lg:mt-10 lg:pb-28">
-        <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
+        <div className="mx-auto flex w-full max-w-3xl flex-col">
           <BackLink href="/showcase/forms">Forms Gallery</BackLink>
-
           <PageHeader>
             <PageHeaderGroup>
               <PageTitle>Contact &amp; Inquiry</PageTitle>
@@ -169,270 +172,286 @@ export default function ContactInquiryForm() {
               </PageSubtitle>
             </PageHeaderGroup>
           </PageHeader>
+          <PageMain>
+            <PageWrapper>
+              <PageContent>
+                <MainContent>
+                  <MainSection>
+                    <MainSectionHeader>
+                      <MainSectionHeaderTitle>
+                        Send us a message
+                      </MainSectionHeaderTitle>
+                      <MainSectionHeaderSubtitle>
+                        Fill in the form below and a member of our team will be
+                        in touch.
+                      </MainSectionHeaderSubtitle>
+                    </MainSectionHeader>
 
-          <MainSection>
-            <MainSectionHeader>
-              <MainSectionHeaderTitle>Send us a message</MainSectionHeaderTitle>
-              <MainSectionHeaderSubtitle>
-                Fill in the form below and a member of our team will be in
-                touch.
-              </MainSectionHeaderSubtitle>
-            </MainSectionHeader>
-
-            <MainSectionPanel>
-              {/* ── Contact Details ──────────────────────────────────────────── */}
-              <MainSectionPanelItem>
-                <p className="text-sm font-medium">Contact Details</p>
-                <FieldGroup>
-                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                    <Field>
-                      <FieldTitle>Full Name</FieldTitle>
-                      <Input
-                        full
-                        placeholder="Jane Smith"
-                        autoComplete="name"
-                        aria-invalid={!!errors.fullName}
-                        {...register("fullName", {
-                          required: "Full name is required",
-                        })}
-                      />
-                      <FieldHint
-                        error={errors.fullName as { message?: string }}
-                        mandatory
-                      />
-                    </Field>
-
-                    <Field>
-                      <FieldTitle>Email Address</FieldTitle>
-                      <Input
-                        full
-                        type="email"
-                        placeholder="jane@example.com"
-                        autoComplete="email"
-                        aria-invalid={!!errors.email}
-                        {...register("email", {
-                          required: "Email address is required",
-                          pattern: {
-                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                            message: "Enter a valid email address",
-                          },
-                        })}
-                      />
-                      <FieldHint
-                        error={errors.email as { message?: string }}
-                        mandatory
-                      />
-                    </Field>
-
-                    <Field>
-                      <FieldTitle>Phone Number</FieldTitle>
-                      <Input
-                        full
-                        type="tel"
-                        placeholder="+1 (555) 000-0000"
-                        autoComplete="tel"
-                        {...register("phone")}
-                      />
-                      <FieldHint optional />
-                    </Field>
-
-                    <Field>
-                      <FieldTitle>Company / Organization</FieldTitle>
-                      <Input
-                        full
-                        placeholder="Acme Inc."
-                        autoComplete="organization"
-                        {...register("company")}
-                      />
-                      <FieldHint optional />
-                    </Field>
-                  </div>
-                </FieldGroup>
-              </MainSectionPanelItem>
-
-              {/* ── Your Message ─────────────────────────────────────────────── */}
-              <MainSectionPanelItem>
-                <p className="text-sm font-medium">Your Message</p>
-                <FieldGroup>
-                  <SimpleAlert>
-                    Our team responds to all inquiries within{" "}
-                    <strong>1 business day</strong>. For urgent matters, include
-                    &ldquo;Urgent&rdquo; in your subject line.
-                  </SimpleAlert>
-
-                  <Field>
-                    <FieldTitle>Subject</FieldTitle>
-                    <Controller
-                      name="subject"
-                      control={control}
-                      rules={{ required: "Please select a subject" }}
-                      render={({ field: f }) => (
-                        <Select
-                          value={f.value}
-                          onValueChange={f.onChange}
-                          onOpenChange={(open) => {
-                            if (!open) f.onBlur();
-                          }}
-                        >
-                          <SelectTrigger
-                            className="w-full"
-                            aria-invalid={!!errors.subject || undefined}
-                          >
-                            <SelectValue placeholder="Select a subject…" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {SUBJECTS.map((s) => (
-                              <SelectItem key={s.value} value={s.value}>
-                                {s.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      )}
-                    />
-                    <FieldHint
-                      error={errors.subject as { message?: string }}
-                      mandatory
-                    />
-                  </Field>
-
-                  <FieldSet>
-                    <FieldLegend variant="label">Inquiry Type</FieldLegend>
-                    <Controller
-                      name="inquiryType"
-                      control={control}
-                      render={({ field: f }) => (
-                        <RadioGroup
-                          value={f.value}
-                          onValueChange={f.onChange}
-                          onBlurCapture={(e: React.FocusEvent) => {
-                            if (
-                              !e.currentTarget.contains(e.relatedTarget as Node)
-                            )
-                              f.onBlur();
-                          }}
-                          className="grid-cols-2 gap-y-1.5"
-                        >
-                          {INQUIRY_TYPES.map((opt) => (
-                            <Field
-                              key={opt.value}
-                              orientation="horizontal"
-                              className="items-center"
-                            >
-                              <RadioGroupItem
-                                value={opt.value}
-                                id={`inquiry-type-${opt.value}`}
+                    <MainSectionPanel>
+                      {/* ── Contact Details ──────────────────────────────────────────── */}
+                      <MainSectionPanelItem>
+                        <p className="text-sm font-medium">Contact Details</p>
+                        <FieldGroup>
+                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <Field>
+                              <FieldTitle>Full Name</FieldTitle>
+                              <Input
+                                full
+                                placeholder="Jane Smith"
+                                autoComplete="name"
+                                aria-invalid={!!errors.fullName}
+                                {...register("fullName", {
+                                  required: "Full name is required",
+                                })}
                               />
-                              <FieldLabel
-                                htmlFor={`inquiry-type-${opt.value}`}
-                                className="cursor-pointer font-normal"
-                              >
-                                {opt.label}
-                              </FieldLabel>
+                              <FieldHint
+                                error={errors.fullName as { message?: string }}
+                                mandatory
+                              />
                             </Field>
-                          ))}
-                        </RadioGroup>
-                      )}
-                    />
-                    <FieldHint optional />
-                  </FieldSet>
 
-                  <Field>
-                    <FieldTitle>Message</FieldTitle>
-                    <StyledTextarea
-                      rows={5}
-                      placeholder="Describe your inquiry in detail…"
-                      invalid={!!errors.message}
-                      aria-invalid={!!errors.message}
-                      {...register("message", {
-                        required: "Please enter your message",
-                        minLength: {
-                          value: 20,
-                          message: "Message must be at least 20 characters",
-                        },
-                      })}
-                    />
-                    <FieldHint
-                      error={errors.message as { message?: string }}
-                      mandatory
-                    />
-                  </Field>
-                </FieldGroup>
-              </MainSectionPanelItem>
+                            <Field>
+                              <FieldTitle>Email Address</FieldTitle>
+                              <Input
+                                full
+                                type="email"
+                                placeholder="jane@example.com"
+                                autoComplete="email"
+                                aria-invalid={!!errors.email}
+                                {...register("email", {
+                                  required: "Email address is required",
+                                  pattern: {
+                                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                    message: "Enter a valid email address",
+                                  },
+                                })}
+                              />
+                              <FieldHint
+                                error={errors.email as { message?: string }}
+                                mandatory
+                              />
+                            </Field>
 
-              {/* ── Additional Information ───────────────────────────────────── */}
-              <MainSectionPanelItem>
-                <p className="text-sm font-medium">Additional Information</p>
-                <FieldGroup>
-                  <Field>
-                    <FieldTitle>How did you hear about us?</FieldTitle>
-                    <Controller
-                      name="referralSource"
-                      control={control}
-                      render={({ field: f }) => (
-                        <Select
-                          value={f.value}
-                          onValueChange={f.onChange}
-                          onOpenChange={(open) => {
-                            if (!open) f.onBlur();
-                          }}
+                            <Field>
+                              <FieldTitle>Phone Number</FieldTitle>
+                              <Input
+                                full
+                                type="tel"
+                                placeholder="+1 (555) 000-0000"
+                                autoComplete="tel"
+                                {...register("phone")}
+                              />
+                              <FieldHint optional />
+                            </Field>
+
+                            <Field>
+                              <FieldTitle>Company / Organization</FieldTitle>
+                              <Input
+                                full
+                                placeholder="Acme Inc."
+                                autoComplete="organization"
+                                {...register("company")}
+                              />
+                              <FieldHint optional />
+                            </Field>
+                          </div>
+                        </FieldGroup>
+                      </MainSectionPanelItem>
+
+                      {/* ── Your Message ─────────────────────────────────────────────── */}
+                      <MainSectionPanelItem>
+                        <p className="text-sm font-medium">Your Message</p>
+                        <FieldGroup>
+                          <SimpleAlert>
+                            Our team responds to all inquiries within{" "}
+                            <strong>1 business day</strong>. For urgent matters,
+                            include &ldquo;Urgent&rdquo; in your subject line.
+                          </SimpleAlert>
+
+                          <Field>
+                            <FieldTitle>Subject</FieldTitle>
+                            <Controller
+                              name="subject"
+                              control={control}
+                              rules={{ required: "Please select a subject" }}
+                              render={({ field: f }) => (
+                                <Select
+                                  value={f.value}
+                                  onValueChange={f.onChange}
+                                  onOpenChange={(open) => {
+                                    if (!open) f.onBlur();
+                                  }}
+                                >
+                                  <SelectTrigger
+                                    className="w-full"
+                                    aria-invalid={!!errors.subject || undefined}
+                                  >
+                                    <SelectValue placeholder="Select a subject…" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {SUBJECTS.map((s) => (
+                                      <SelectItem key={s.value} value={s.value}>
+                                        {s.label}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                              )}
+                            />
+                            <FieldHint
+                              error={errors.subject as { message?: string }}
+                              mandatory
+                            />
+                          </Field>
+
+                          <FieldSet>
+                            <FieldLegend variant="label">
+                              Inquiry Type
+                            </FieldLegend>
+                            <Controller
+                              name="inquiryType"
+                              control={control}
+                              render={({ field: f }) => (
+                                <RadioGroup
+                                  value={f.value}
+                                  onValueChange={f.onChange}
+                                  onBlurCapture={(e: React.FocusEvent) => {
+                                    if (
+                                      !e.currentTarget.contains(
+                                        e.relatedTarget as Node,
+                                      )
+                                    )
+                                      f.onBlur();
+                                  }}
+                                  className="grid-cols-2 gap-y-1.5"
+                                >
+                                  {INQUIRY_TYPES.map((opt) => (
+                                    <Field
+                                      key={opt.value}
+                                      orientation="horizontal"
+                                      className="items-center"
+                                    >
+                                      <RadioGroupItem
+                                        value={opt.value}
+                                        id={`inquiry-type-${opt.value}`}
+                                      />
+                                      <FieldLabel
+                                        htmlFor={`inquiry-type-${opt.value}`}
+                                        className="cursor-pointer font-normal"
+                                      >
+                                        {opt.label}
+                                      </FieldLabel>
+                                    </Field>
+                                  ))}
+                                </RadioGroup>
+                              )}
+                            />
+                            <FieldHint optional />
+                          </FieldSet>
+
+                          <Field>
+                            <FieldTitle>Message</FieldTitle>
+                            <StyledTextarea
+                              rows={5}
+                              placeholder="Describe your inquiry in detail…"
+                              invalid={!!errors.message}
+                              aria-invalid={!!errors.message}
+                              {...register("message", {
+                                required: "Please enter your message",
+                                minLength: {
+                                  value: 20,
+                                  message:
+                                    "Message must be at least 20 characters",
+                                },
+                              })}
+                            />
+                            <FieldHint
+                              error={errors.message as { message?: string }}
+                              mandatory
+                            />
+                          </Field>
+                        </FieldGroup>
+                      </MainSectionPanelItem>
+
+                      {/* ── Additional Information ───────────────────────────────────── */}
+                      <MainSectionPanelItem>
+                        <p className="text-sm font-medium">
+                          Additional Information
+                        </p>
+                        <FieldGroup>
+                          <Field>
+                            <FieldTitle>How did you hear about us?</FieldTitle>
+                            <Controller
+                              name="referralSource"
+                              control={control}
+                              render={({ field: f }) => (
+                                <Select
+                                  value={f.value}
+                                  onValueChange={f.onChange}
+                                  onOpenChange={(open) => {
+                                    if (!open) f.onBlur();
+                                  }}
+                                >
+                                  <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Select a source…" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {REFERRAL_SOURCES.map((s) => (
+                                      <SelectItem key={s.value} value={s.value}>
+                                        {s.label}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                              )}
+                            />
+                            <FieldHint optional />
+                          </Field>
+
+                          <Controller
+                            name="marketingConsent"
+                            control={control}
+                            render={({ field: f }) => (
+                              <Field orientation="horizontal">
+                                <Checkbox
+                                  id="marketing-consent"
+                                  checked={f.value}
+                                  onCheckedChange={f.onChange}
+                                  onBlur={f.onBlur}
+                                />
+                                <FieldLabel
+                                  htmlFor="marketing-consent"
+                                  className="cursor-pointer font-normal"
+                                >
+                                  I&apos;d like to receive occasional product
+                                  updates and news from Ascendra
+                                </FieldLabel>
+                              </Field>
+                            )}
+                          />
+                        </FieldGroup>
+                      </MainSectionPanelItem>
+                    </MainSectionPanel>
+
+                    <MainSectionFooter>
+                      <LuLock className="mt-0.5 mr-2 size-3 shrink-0" />
+                      <span>
+                        By submitting this form you agree to our{" "}
+                        <a
+                          href="#"
+                          className="underline underline-offset-2 hover:text-foreground transition-colors"
                         >
-                          <SelectTrigger className="w-full">
-                            <SelectValue placeholder="Select a source…" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {REFERRAL_SOURCES.map((s) => (
-                              <SelectItem key={s.value} value={s.value}>
-                                {s.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      )}
-                    />
-                    <FieldHint optional />
-                  </Field>
-
-                  <Controller
-                    name="marketingConsent"
-                    control={control}
-                    render={({ field: f }) => (
-                      <Field orientation="horizontal">
-                        <Checkbox
-                          id="marketing-consent"
-                          checked={f.value}
-                          onCheckedChange={f.onChange}
-                          onBlur={f.onBlur}
-                        />
-                        <FieldLabel
-                          htmlFor="marketing-consent"
-                          className="cursor-pointer font-normal"
-                        >
-                          I&apos;d like to receive occasional product updates
-                          and news from Ascendra
-                        </FieldLabel>
-                      </Field>
-                    )}
-                  />
-                </FieldGroup>
-              </MainSectionPanelItem>
-            </MainSectionPanel>
-
-            <MainSectionFooter>
-              <LuLock className="mt-0.5 mr-2 size-3 shrink-0" />
-              <span>
-                By submitting this form you agree to our{" "}
-                <a
-                  href="#"
-                  className="underline underline-offset-2 hover:text-foreground transition-colors"
-                >
-                  Privacy Policy
-                </a>
-                . We&apos;ll never share your contact details with third
-                parties.
-              </span>
-            </MainSectionFooter>
-          </MainSection>
+                          Privacy Policy
+                        </a>
+                        . We&apos;ll never share your contact details with third
+                        parties.
+                      </span>
+                    </MainSectionFooter>
+                  </MainSection>
+                </MainContent>
+              </PageContent>
+            </PageWrapper>
+          </PageMain>
         </div>
       </div>
 

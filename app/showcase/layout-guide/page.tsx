@@ -262,7 +262,7 @@ export default function LayoutGuidePage() {
               </PageHeaderGroup>
             </PageHeader>
           </div>
-          <PageMain>
+          <PageMain className="p-6">
             <Tabs defaultValue="general">
               <TabList>
                 <TabTrigger value="general">General</TabTrigger>
@@ -272,50 +272,44 @@ export default function LayoutGuidePage() {
                 </TabTrigger>
               </TabList>
               <TabContent value="general">
-                <div className="px-6 pb-6">
-                  <MainContent>
-                    <MainSection>
-                      <MainSectionHeader>
-                        <MainSectionHeaderTitle>
-                          Personal details
-                        </MainSectionHeaderTitle>
-                      </MainSectionHeader>
-                      <MainSectionPanel>
-                        <MainSectionPanelItem>
-                          <p className="text-sm text-muted-foreground">
-                            Fields here
-                          </p>
-                        </MainSectionPanelItem>
-                      </MainSectionPanel>
-                    </MainSection>
-                  </MainContent>
-                </div>
+                <MainContent>
+                  <MainSection>
+                    <MainSectionHeader>
+                      <MainSectionHeaderTitle>
+                        Personal details
+                      </MainSectionHeaderTitle>
+                    </MainSectionHeader>
+                    <MainSectionPanel>
+                      <MainSectionPanelItem>
+                        <p className="text-sm text-muted-foreground">
+                          Fields here
+                        </p>
+                      </MainSectionPanelItem>
+                    </MainSectionPanel>
+                  </MainSection>
+                </MainContent>
               </TabContent>
               <TabContent value="security">
-                <div className="px-6 pb-6">
-                  <MainContent>
-                    <MainSection>
-                      <MainSectionHeader>
-                        <MainSectionHeaderTitle>
-                          Password &amp; 2FA
-                        </MainSectionHeaderTitle>
-                      </MainSectionHeader>
-                    </MainSection>
-                  </MainContent>
-                </div>
+                <MainContent>
+                  <MainSection>
+                    <MainSectionHeader>
+                      <MainSectionHeaderTitle>
+                        Password &amp; 2FA
+                      </MainSectionHeaderTitle>
+                    </MainSectionHeader>
+                  </MainSection>
+                </MainContent>
               </TabContent>
               <TabContent value="notifications">
-                <div className="px-6 pb-6">
-                  <MainContent>
-                    <MainSection>
-                      <MainSectionHeader>
-                        <MainSectionHeaderTitle>
-                          Notification preferences
-                        </MainSectionHeaderTitle>
-                      </MainSectionHeader>
-                    </MainSection>
-                  </MainContent>
-                </div>
+                <MainContent>
+                  <MainSection>
+                    <MainSectionHeader>
+                      <MainSectionHeaderTitle>
+                        Notification preferences
+                      </MainSectionHeaderTitle>
+                    </MainSectionHeader>
+                  </MainSection>
+                </MainContent>
               </TabContent>
             </Tabs>
           </PageMain>
