@@ -7,6 +7,8 @@ import {
   Field,
   FieldLabel,
   FieldHint,
+  FieldLabelGroup,
+  FieldInfo,
 } from "@/ascendra-ui/components/ui/field";
 import { Input } from "@/ascendra-ui/components/ui/input";
 import {
@@ -72,12 +74,12 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
     <Field>
       {/* Label + optional subtitle — checkbox renders its own inline label */}
       {field.type !== "checkbox" && (
-        <div>
+        <FieldLabelGroup>
           <FieldLabel id={labelId} htmlFor={inputId}>
             {field.label}
           </FieldLabel>
-          <p className="mt-0.5 text-xs">{field.info}</p>
-        </div>
+          <FieldInfo>{field.info}</FieldInfo>
+        </FieldLabelGroup>
       )}
 
       {/* ── text ─────────────────────────────────────────────────────── */}
@@ -206,7 +208,6 @@ export function QueryFieldRenderer({ field }: QueryFieldRendererProps) {
           control={control}
           render={({ field: f }) => (
             <DateRangePicker
-              id={inputId}
               value={f.value as DateRange | undefined}
               onChange={f.onChange}
               onBlur={f.onBlur}
