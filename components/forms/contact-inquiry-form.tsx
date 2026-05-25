@@ -1,51 +1,58 @@
 "use client";
 
 import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { LuLock } from "react-icons/lu";
 
-import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
 import { MainSection } from "@/ascendra-ui/components/layout/main-section";
+import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
+import { MainSectionFooterIcon } from "@/ascendra-ui/components/layout/main-section-footer-icon";
 import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
 import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
 import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
 import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
+import { MainSectionPanelItemGroup } from "@/ascendra-ui/components/layout/main-section-panel-item-group";
+import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
+import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
+import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
+import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
 
+import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
+import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar";
+import { BackLink } from "@/ascendra-ui/components/forms/back-link";
+import { MainContent } from "@/ascendra-ui/components/layout/main-content";
+import { PageContent } from "@/ascendra-ui/components/layout/page-content";
+import { PageMain } from "@/ascendra-ui/components/layout/page-main";
+import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
+import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
 import {
   Field,
+  FieldDescription,
   FieldGroup,
-  FieldSet,
-  FieldLegend,
-  FieldLabel,
-  FieldTitle,
   FieldHint,
+  FieldLabel,
+  FieldLegend,
+  FieldSet,
 } from "@/ascendra-ui/components/ui/field";
 import { Input } from "@/ascendra-ui/components/ui/input";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/ascendra-ui/components/ui/select";
+  InputGroup,
+  InputGroupTextarea,
+} from "@/ascendra-ui/components/ui/input-group";
 import {
   RadioGroup,
   RadioGroupItem,
 } from "@/ascendra-ui/components/ui/radio-group";
-import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
-import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
-import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar";
-import { BackLink } from "@/ascendra-ui/components/forms/back-link";
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
-import { PageMain } from "@/ascendra-ui/components/layout/page-main";
-import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
-import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { PageContent } from "@/ascendra-ui/components/layout/page-content";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/ascendra-ui/components/ui/select";
+import { MainSectionPanelItemCrown } from "@/ascendra-ui/components/layout/main-section-panel-item-crown";
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 
@@ -59,39 +66,6 @@ interface ContactValues {
   message: string;
   referralSource: string;
   marketingConsent: boolean;
-}
-
-// ─── Textarea ──────────────────────────────────────────────────────────────────
-// NOTE: A reusable Textarea component would be a good addition to the design system.
-
-interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  invalid?: boolean;
-}
-
-function StyledTextarea({ className, invalid, ...props }: TextareaProps) {
-  return (
-    <div
-      className={cn(
-        "dark:bg-secondary flex w-full rounded-[.375rem] bg-white transition overflow-hidden",
-        "ring-1 ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset",
-        "shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04)]",
-        "dark:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24)]",
-        "has-[textarea:not(:disabled):not(:focus)]:hover:ring-(--color-umbra)/24",
-        "has-[textarea:disabled]:cursor-not-allowed has-[textarea:disabled]:opacity-40",
-        invalid && "outline-2 outline-destructive outline-offset-1",
-      )}
-    >
-      <textarea
-        className={cn(
-          "w-full resize-none bg-transparent px-3 py-2 text-sm leading-relaxed",
-          "outline-none placeholder:text-gray-500 dark:placeholder:text-gray-700",
-          "disabled:cursor-not-allowed",
-          className,
-        )}
-        {...props}
-      />
-    </div>
-  );
 }
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
@@ -190,12 +164,14 @@ export default function ContactInquiryForm() {
                     <MainSectionPanel>
                       {/* ── Contact Details ──────────────────────────────────────────── */}
                       <MainSectionPanelItem>
-                        <p className="text-sm font-medium">Contact Details</p>
-                        <FieldGroup>
+                        <FieldSet>
                           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                             <Field>
-                              <FieldTitle>Full Name</FieldTitle>
+                              <FieldLabel htmlFor="full-name">
+                                Full Name
+                              </FieldLabel>
                               <Input
+                                id="full-name"
                                 full
                                 placeholder="Jane Smith"
                                 autoComplete="name"
@@ -211,8 +187,11 @@ export default function ContactInquiryForm() {
                             </Field>
 
                             <Field>
-                              <FieldTitle>Email Address</FieldTitle>
+                              <FieldLabel htmlFor="email">
+                                Email Address
+                              </FieldLabel>
                               <Input
+                                id="email"
                                 full
                                 type="email"
                                 placeholder="jane@example.com"
@@ -233,8 +212,11 @@ export default function ContactInquiryForm() {
                             </Field>
 
                             <Field>
-                              <FieldTitle>Phone Number</FieldTitle>
+                              <FieldLabel htmlFor="phone">
+                                Phone Number
+                              </FieldLabel>
                               <Input
+                                id="phone"
                                 full
                                 type="tel"
                                 placeholder="+1 (555) 000-0000"
@@ -245,142 +227,162 @@ export default function ContactInquiryForm() {
                             </Field>
 
                             <Field>
-                              <FieldTitle>Company / Organization</FieldTitle>
+                              <FieldLabel htmlFor="company">
+                                Company / Organization
+                              </FieldLabel>
                               <Input
+                                id="company"
                                 full
                                 placeholder="Acme Inc."
                                 autoComplete="organization"
                                 {...register("company")}
                               />
-                              <FieldHint optional />
+                              <FieldHint mandatory />
                             </Field>
                           </div>
-                        </FieldGroup>
+                        </FieldSet>
                       </MainSectionPanelItem>
 
                       {/* ── Your Message ─────────────────────────────────────────────── */}
-                      <MainSectionPanelItem>
-                        <p className="text-sm font-medium">Your Message</p>
-                        <FieldGroup>
-                          <SimpleAlert>
+                      <MainSectionPanelItem className="relative">
+                        <MainSectionPanelItemCrown>
+                          Provide your message details below
+                        </MainSectionPanelItemCrown>
+                        <MainSectionPanelItemGroup>
+                          <SimpleAlert variant="secondary">
                             Our team responds to all inquiries within{" "}
                             <strong>1 business day</strong>. For urgent matters,
                             include &ldquo;Urgent&rdquo; in your subject line.
                           </SimpleAlert>
-
-                          <Field>
-                            <FieldTitle>Subject</FieldTitle>
-                            <Controller
-                              name="subject"
-                              control={control}
-                              rules={{ required: "Please select a subject" }}
-                              render={({ field: f }) => (
-                                <Select
-                                  value={f.value}
-                                  onValueChange={f.onChange}
-                                  onOpenChange={(open) => {
-                                    if (!open) f.onBlur();
-                                  }}
-                                >
-                                  <SelectTrigger
-                                    className="w-full"
-                                    aria-invalid={!!errors.subject || undefined}
+                          <FieldGroup>
+                            <Field>
+                              <FieldLabel htmlFor="subject">Subject</FieldLabel>
+                              <Controller
+                                name="subject"
+                                control={control}
+                                rules={{ required: "Please select a subject" }}
+                                render={({ field: f }) => (
+                                  <Select
+                                    value={f.value}
+                                    onValueChange={f.onChange}
+                                    onOpenChange={(open) => {
+                                      if (!open) f.onBlur();
+                                    }}
                                   >
-                                    <SelectValue placeholder="Select a subject…" />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    {SUBJECTS.map((s) => (
-                                      <SelectItem key={s.value} value={s.value}>
-                                        {s.label}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectContent>
-                                </Select>
-                              )}
-                            />
-                            <FieldHint
-                              error={errors.subject as { message?: string }}
-                              mandatory
-                            />
-                          </Field>
-
-                          <FieldSet>
-                            <FieldLegend variant="label">
-                              Inquiry Type
-                            </FieldLegend>
-                            <Controller
-                              name="inquiryType"
-                              control={control}
-                              render={({ field: f }) => (
-                                <RadioGroup
-                                  value={f.value}
-                                  onValueChange={f.onChange}
-                                  onBlurCapture={(e: React.FocusEvent) => {
-                                    if (
-                                      !e.currentTarget.contains(
-                                        e.relatedTarget as Node,
-                                      )
-                                    )
-                                      f.onBlur();
-                                  }}
-                                  className="grid-cols-2 gap-y-1.5"
-                                >
-                                  {INQUIRY_TYPES.map((opt) => (
-                                    <Field
-                                      key={opt.value}
-                                      orientation="horizontal"
-                                      className="items-center"
+                                    <SelectTrigger
+                                      id="subject"
+                                      className="w-full"
+                                      aria-invalid={
+                                        !!errors.subject || undefined
+                                      }
                                     >
-                                      <RadioGroupItem
-                                        value={opt.value}
-                                        id={`inquiry-type-${opt.value}`}
-                                      />
-                                      <FieldLabel
-                                        htmlFor={`inquiry-type-${opt.value}`}
-                                        className="cursor-pointer font-normal"
-                                      >
-                                        {opt.label}
-                                      </FieldLabel>
-                                    </Field>
-                                  ))}
-                                </RadioGroup>
-                              )}
-                            />
-                            <FieldHint optional />
-                          </FieldSet>
+                                      <SelectValue placeholder="Select a subject…" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      <SelectGroup>
+                                        {SUBJECTS.map((s) => (
+                                          <SelectItem
+                                            key={s.value}
+                                            value={s.value}
+                                          >
+                                            {s.label}
+                                          </SelectItem>
+                                        ))}
+                                      </SelectGroup>
+                                    </SelectContent>
+                                  </Select>
+                                )}
+                              />
+                              <FieldHint
+                                error={errors.subject as { message?: string }}
+                                mandatory
+                              />
+                            </Field>
 
-                          <Field>
-                            <FieldTitle>Message</FieldTitle>
-                            <StyledTextarea
-                              rows={5}
-                              placeholder="Describe your inquiry in detail…"
-                              invalid={!!errors.message}
-                              aria-invalid={!!errors.message}
-                              {...register("message", {
-                                required: "Please enter your message",
-                                minLength: {
-                                  value: 20,
-                                  message:
-                                    "Message must be at least 20 characters",
-                                },
-                              })}
-                            />
-                            <FieldHint
-                              error={errors.message as { message?: string }}
-                              mandatory
-                            />
-                          </Field>
-                        </FieldGroup>
+                            <FieldSet>
+                              <FieldLegend variant="label">
+                                Inquiry Type
+                              </FieldLegend>
+                              <Controller
+                                name="inquiryType"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <RadioGroup
+                                    value={f.value}
+                                    onValueChange={f.onChange}
+                                    onBlurCapture={(e: React.FocusEvent) => {
+                                      if (
+                                        !e.currentTarget.contains(
+                                          e.relatedTarget as Node,
+                                        )
+                                      )
+                                        f.onBlur();
+                                    }}
+                                    className="grid-cols-2 gap-y-1.5"
+                                  >
+                                    {INQUIRY_TYPES.map((opt) => (
+                                      <Field
+                                        key={opt.value}
+                                        orientation="horizontal"
+                                        className="items-baseline"
+                                      >
+                                        <RadioGroupItem
+                                          value={opt.value}
+                                          id={`inquiry-type-${opt.value}`}
+                                        />
+                                        <FieldLabel
+                                          htmlFor={`inquiry-type-${opt.value}`}
+                                          className="cursor-pointer font-normal"
+                                        >
+                                          {opt.label}
+                                        </FieldLabel>
+                                      </Field>
+                                    ))}
+                                  </RadioGroup>
+                                )}
+                              />
+                              <FieldHint />
+                            </FieldSet>
+
+                            <Field>
+                              <FieldLabel htmlFor="message">Message</FieldLabel>
+                              <InputGroup>
+                                <InputGroupTextarea
+                                  id="message"
+                                  rows={5}
+                                  placeholder="Describe your inquiry in detail…"
+                                  aria-invalid={!!errors.message}
+                                  {...register("message", {
+                                    required: "Please enter your message",
+                                    minLength: {
+                                      value: 20,
+                                      message:
+                                        "Message must be at least 20 characters",
+                                    },
+                                  })}
+                                />
+                              </InputGroup>
+                              <FieldHint
+                                error={errors.message as { message?: string }}
+                                mandatory
+                              />
+                            </Field>
+                          </FieldGroup>
+                        </MainSectionPanelItemGroup>
                       </MainSectionPanelItem>
 
                       {/* ── Additional Information ───────────────────────────────────── */}
                       <MainSectionPanelItem>
-                        <p className="text-sm font-medium">
-                          Additional Information
-                        </p>
+                        <FieldLegend>Additional Information</FieldLegend>
+                        <FieldDescription>
+                          Please provide any additional information that may
+                          help us better assist you.
+                        </FieldDescription>
                         <FieldGroup>
                           <Field>
-                            <FieldTitle>How did you hear about us?</FieldTitle>
+                            <FieldLabel htmlFor="referral-source">
+                              How did you hear about us?
+                            </FieldLabel>
                             <Controller
                               name="referralSource"
                               control={control}
@@ -392,27 +394,38 @@ export default function ContactInquiryForm() {
                                     if (!open) f.onBlur();
                                   }}
                                 >
-                                  <SelectTrigger className="w-full">
+                                  <SelectTrigger
+                                    id="referral-source"
+                                    className="w-full"
+                                  >
                                     <SelectValue placeholder="Select a source…" />
                                   </SelectTrigger>
                                   <SelectContent>
-                                    {REFERRAL_SOURCES.map((s) => (
-                                      <SelectItem key={s.value} value={s.value}>
-                                        {s.label}
-                                      </SelectItem>
-                                    ))}
+                                    <SelectGroup>
+                                      {REFERRAL_SOURCES.map((s) => (
+                                        <SelectItem
+                                          key={s.value}
+                                          value={s.value}
+                                        >
+                                          {s.label}
+                                        </SelectItem>
+                                      ))}
+                                    </SelectGroup>
                                   </SelectContent>
                                 </Select>
                               )}
                             />
-                            <FieldHint optional />
+                            <FieldHint />
                           </Field>
 
                           <Controller
                             name="marketingConsent"
                             control={control}
                             render={({ field: f }) => (
-                              <Field orientation="horizontal">
+                              <Field
+                                orientation="horizontal"
+                                className="items-baseline"
+                              >
                                 <Checkbox
                                   id="marketing-consent"
                                   checked={f.value}
@@ -434,7 +447,7 @@ export default function ContactInquiryForm() {
                     </MainSectionPanel>
 
                     <MainSectionFooter>
-                      <LuLock className="mt-0.5 mr-2 size-3 shrink-0" />
+                      <MainSectionFooterIcon icon={LuLock} />
                       <span>
                         By submitting this form you agree to our{" "}
                         <a
