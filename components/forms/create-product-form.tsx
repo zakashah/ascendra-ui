@@ -1,0 +1,1048 @@
+"use client";
+
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
+import { z } from "zod";
+
+import { MainSection } from "@/ascendra-ui/components/layout/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
+import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
+import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
+import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
+import { PageMain } from "@/ascendra-ui/components/layout/page-main";
+import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
+import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
+
+import { TabContent } from "@/ascendra-ui/components/tabs/tab-content";
+import { TabList } from "@/ascendra-ui/components/tabs/tab-list";
+import { TabTrigger } from "@/ascendra-ui/components/tabs/tab-trigger";
+import { Tabs } from "@/ascendra-ui/components/tabs/tabs";
+
+import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
+import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar";
+import { BackLink } from "@/ascendra-ui/components/forms/back-link";
+import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
+import {
+  Combobox,
+  ComboboxCollection,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "@/ascendra-ui/components/ui/combobox";
+import {
+  Field,
+  FieldGroup,
+  FieldHint,
+  FieldLabel,
+  FieldSet,
+} from "@/ascendra-ui/components/ui/field";
+import { Input } from "@/ascendra-ui/components/ui/input";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+  InputGroupTextarea,
+} from "@/ascendra-ui/components/ui/input-group";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/ascendra-ui/components/ui/select";
+import { Switch } from "@/ascendra-ui/components/ui/switch";
+
+// ─── Schema ────────────────────────────────────────────────────────────────────
+
+const schema = z.object({
+  name: z.string().min(1, "Product name is required"),
+  sku: z.string(),
+  category: z.string().min(1, "Category is required"),
+  subCategory: z.string(),
+  brand: z.string(),
+  status: z.string().min(1, "Status is required"),
+  description: z
+    .string()
+    .min(1, "Description is required")
+    .min(20, "Description must be at least 20 characters"),
+  tags: z.string(),
+  price: z.string().min(1, "Price is required"),
+  compareAtPrice: z.string(),
+  costPerItem: z.string(),
+  quantity: z.string(),
+  lowStockThreshold: z.string(),
+  allowBackorders: z.boolean(),
+  barcode: z.string(),
+  isPhysical: z.boolean(),
+  weight: z.string(),
+  length: z.string(),
+  width: z.string(),
+  height: z.string(),
+  shippingClass: z.string(),
+  countryOfOrigin: z.string(),
+  hsTariffCode: z.string(),
+  requiresCustoms: z.boolean(),
+});
+
+type ProductValues = z.infer<typeof schema>;
+
+// ─── Data ──────────────────────────────────────────────────────────────────────
+
+const CATEGORIES = [
+  "Clothing",
+  "Electronics",
+  "Home & Garden",
+  "Sports",
+  "Books",
+  "Other",
+];
+
+const BRANDS = [
+  "Ascendra",
+  "NovaBrand",
+  "Apex",
+  "Prime",
+  "CoreLine",
+  "Other",
+];
+
+const STATUSES = [
+  { value: "draft", label: "Draft" },
+  { value: "active", label: "Active" },
+  { value: "archived", label: "Archived" },
+];
+
+const SHIPPING_CLASSES = [
+  { value: "standard", label: "Standard" },
+  { value: "express", label: "Express" },
+  { value: "fragile", label: "Fragile" },
+  { value: "bulky", label: "Bulky" },
+  { value: "digital", label: "Digital" },
+];
+
+const COUNTRIES = [
+  "United States",
+  "United Kingdom",
+  "Canada",
+  "Germany",
+  "France",
+  "Japan",
+  "China",
+  "Australia",
+  "India",
+  "Brazil",
+];
+
+// ─── Form ──────────────────────────────────────────────────────────────────────
+
+export default function CreateProductForm() {
+  const [isSaving, setIsSaving] = useState(false);
+  const [trackInventory, setTrackInventory] = useState(false);
+  const [isPhysicalState, setIsPhysicalState] = useState(true);
+
+  const {
+    control,
+    trigger,
+    reset,
+    getValues,
+    formState: { isDirty, isValid, errors },
+  } = useForm<ProductValues>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      name: "",
+      sku: "",
+      category: "",
+      subCategory: "",
+      brand: "",
+      status: "draft",
+      description: "",
+      tags: "",
+      price: "",
+      compareAtPrice: "",
+      costPerItem: "",
+      quantity: "",
+      lowStockThreshold: "",
+      allowBackorders: false,
+      barcode: "",
+      isPhysical: true,
+      weight: "",
+      length: "",
+      width: "",
+      height: "",
+      shippingClass: "",
+      countryOfOrigin: "",
+      hsTariffCode: "",
+      requiresCustoms: false,
+    },
+    mode: "onTouched",
+  });
+
+  async function handleSave(): Promise<boolean> {
+    const ok = await trigger();
+    if (!ok) return false;
+    setIsSaving(true);
+    await new Promise((r) => setTimeout(r, 1400));
+    setIsSaving(false);
+    reset(getValues());
+    return true;
+  }
+
+  return (
+    <>
+      <div className="app-container mt-8 pb-24 lg:mt-10 lg:pb-28">
+        <div className="mx-auto flex w-full max-w-3xl flex-col">
+          <BackLink href="/showcase/forms">Forms Gallery</BackLink>
+
+          <PageHeader>
+            <PageHeaderGroup>
+              <PageTitle>Create Product</PageTitle>
+              <PageSubtitle>
+                Add a new product to your catalog. Fill in all required fields
+                before publishing.
+              </PageSubtitle>
+            </PageHeaderGroup>
+          </PageHeader>
+
+          <PageMain>
+            <Tabs defaultValue="details">
+              <TabList>
+                <TabTrigger value="details">Details</TabTrigger>
+                <TabTrigger value="pricing">Pricing &amp; Inventory</TabTrigger>
+                <TabTrigger value="shipping">Shipping</TabTrigger>
+              </TabList>
+
+              {/* ── Tab: Details ──────────────────────────────────────────── */}
+              <TabContent value="details">
+                <div className="w-full pb-6 flex flex-col gap-6">
+                  <SimpleAlert>
+                    Products in <strong>Draft</strong> status are not visible
+                    to customers.
+                  </SimpleAlert>
+
+                  <MainSection>
+                    <MainSectionHeader>
+                      <MainSectionHeaderTitle>
+                        Basic Information
+                      </MainSectionHeaderTitle>
+                      <MainSectionHeaderSubtitle>
+                        Enter the product name, category, and description.
+                      </MainSectionHeaderSubtitle>
+                    </MainSectionHeader>
+
+                    <MainSectionPanel>
+                      {/* Panel Item 1 — Identification */}
+                      <MainSectionPanelItem>
+                        <FieldSet>
+                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <Field>
+                              <FieldLabel htmlFor="product-name">
+                                Product Name
+                              </FieldLabel>
+                              <Controller
+                                name="name"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <Input
+                                    id="product-name"
+                                    full
+                                    placeholder="e.g. Premium Wireless Headphones"
+                                    value={f.value}
+                                    onChange={f.onChange}
+                                    onBlur={f.onBlur}
+                                    aria-invalid={!!errors.name}
+                                  />
+                                )}
+                              />
+                              <FieldHint
+                                error={errors.name as { message?: string }}
+                                mandatory
+                              />
+                            </Field>
+
+                            <Field>
+                              <FieldLabel htmlFor="sku">SKU</FieldLabel>
+                              <Controller
+                                name="sku"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <Input
+                                    id="sku"
+                                    full
+                                    placeholder="Auto-generated if left blank"
+                                    value={f.value}
+                                    onChange={f.onChange}
+                                    onBlur={f.onBlur}
+                                  />
+                                )}
+                              />
+                              <FieldHint optional />
+                            </Field>
+                          </div>
+                        </FieldSet>
+                      </MainSectionPanelItem>
+
+                      {/* Panel Item 2 — Classification */}
+                      <MainSectionPanelItem>
+                        <FieldSet>
+                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <Field>
+                              <FieldLabel htmlFor="category">
+                                Category
+                              </FieldLabel>
+                              <Controller
+                                name="category"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <Combobox
+                                    items={CATEGORIES}
+                                    value={f.value}
+                                    onValueChange={(v) => f.onChange(v)}
+                                  >
+                                    <ComboboxInput
+                                      id="category"
+                                      placeholder="Search category…"
+                                      onBlur={f.onBlur}
+                                      className="w-full"
+                                    />
+                                    <ComboboxContent>
+                                      <ComboboxList>
+                                        <ComboboxEmpty>
+                                          No results found.
+                                        </ComboboxEmpty>
+                                        <ComboboxCollection>
+                                          {(c: string) => (
+                                            <ComboboxItem key={c} value={c}>
+                                              {c}
+                                            </ComboboxItem>
+                                          )}
+                                        </ComboboxCollection>
+                                      </ComboboxList>
+                                    </ComboboxContent>
+                                  </Combobox>
+                                )}
+                              />
+                              <FieldHint
+                                error={errors.category as { message?: string }}
+                                mandatory
+                              />
+                            </Field>
+
+                            <Field>
+                              <FieldLabel htmlFor="sub-category">
+                                Sub-category
+                              </FieldLabel>
+                              <Controller
+                                name="subCategory"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <Input
+                                    id="sub-category"
+                                    full
+                                    placeholder="e.g. Over-ear"
+                                    value={f.value}
+                                    onChange={f.onChange}
+                                    onBlur={f.onBlur}
+                                  />
+                                )}
+                              />
+                              <FieldHint optional />
+                            </Field>
+                          </div>
+                        </FieldSet>
+                      </MainSectionPanelItem>
+
+                      {/* Panel Item 3 — Brand & Status */}
+                      <MainSectionPanelItem>
+                        <FieldSet>
+                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <Field>
+                              <FieldLabel htmlFor="brand">Brand</FieldLabel>
+                              <Controller
+                                name="brand"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <Combobox
+                                    items={BRANDS}
+                                    value={f.value}
+                                    onValueChange={(v) => f.onChange(v)}
+                                  >
+                                    <ComboboxInput
+                                      id="brand"
+                                      placeholder="Search brand…"
+                                      onBlur={f.onBlur}
+                                      className="w-full"
+                                    />
+                                    <ComboboxContent>
+                                      <ComboboxList>
+                                        <ComboboxEmpty>
+                                          No results found.
+                                        </ComboboxEmpty>
+                                        <ComboboxCollection>
+                                          {(b: string) => (
+                                            <ComboboxItem key={b} value={b}>
+                                              {b}
+                                            </ComboboxItem>
+                                          )}
+                                        </ComboboxCollection>
+                                      </ComboboxList>
+                                    </ComboboxContent>
+                                  </Combobox>
+                                )}
+                              />
+                              <FieldHint optional />
+                            </Field>
+
+                            <Field>
+                              <FieldLabel htmlFor="status">Status</FieldLabel>
+                              <Controller
+                                name="status"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <Select
+                                    value={f.value}
+                                    onValueChange={f.onChange}
+                                    onOpenChange={(open) => {
+                                      if (!open) f.onBlur();
+                                    }}
+                                  >
+                                    <SelectTrigger
+                                      id="status"
+                                      className="w-full"
+                                      aria-invalid={
+                                        !!errors.status || undefined
+                                      }
+                                    >
+                                      <SelectValue placeholder="Select status…" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      <SelectGroup>
+                                        {STATUSES.map((s) => (
+                                          <SelectItem
+                                            key={s.value}
+                                            value={s.value}
+                                          >
+                                            {s.label}
+                                          </SelectItem>
+                                        ))}
+                                      </SelectGroup>
+                                    </SelectContent>
+                                  </Select>
+                                )}
+                              />
+                              <FieldHint
+                                error={errors.status as { message?: string }}
+                                mandatory
+                              />
+                            </Field>
+                          </div>
+                        </FieldSet>
+                      </MainSectionPanelItem>
+
+                      {/* Panel Item 4 — Description */}
+                      <MainSectionPanelItem>
+                        <Field>
+                          <FieldLabel htmlFor="description">
+                            Description
+                          </FieldLabel>
+                          <Controller
+                            name="description"
+                            control={control}
+                            render={({ field: f }) => (
+                              <InputGroup>
+                                <InputGroupTextarea
+                                  id="description"
+                                  rows={5}
+                                  placeholder="Describe the product in detail…"
+                                  value={f.value}
+                                  onChange={f.onChange}
+                                  onBlur={f.onBlur}
+                                  aria-invalid={!!errors.description}
+                                />
+                              </InputGroup>
+                            )}
+                          />
+                          <FieldHint
+                            error={errors.description as { message?: string }}
+                            mandatory
+                          />
+                        </Field>
+                      </MainSectionPanelItem>
+
+                      {/* Panel Item 5 — Tags */}
+                      <MainSectionPanelItem>
+                        <Field>
+                          <FieldLabel htmlFor="tags">Tags</FieldLabel>
+                          <Controller
+                            name="tags"
+                            control={control}
+                            render={({ field: f }) => (
+                              <Input
+                                id="tags"
+                                full
+                                placeholder="e.g. wireless, audio, premium"
+                                value={f.value}
+                                onChange={f.onChange}
+                                onBlur={f.onBlur}
+                              />
+                            )}
+                          />
+                          <FieldHint
+                            description="Comma-separated tags for search and filtering."
+                            optional
+                          />
+                        </Field>
+                      </MainSectionPanelItem>
+                    </MainSectionPanel>
+                  </MainSection>
+                </div>
+              </TabContent>
+
+              {/* ── Tab: Pricing & Inventory ──────────────────────────────── */}
+              <TabContent value="pricing">
+                <div className="w-full pb-6 flex flex-col gap-6">
+                  {/* Section: Pricing */}
+                  <MainSection>
+                    <MainSectionHeader>
+                      <MainSectionHeaderTitle>Pricing</MainSectionHeaderTitle>
+                      <MainSectionHeaderSubtitle>
+                        Set the selling price and cost for this product.
+                      </MainSectionHeaderSubtitle>
+                    </MainSectionHeader>
+
+                    <MainSectionPanel>
+                      {/* Panel Item 1 — Price */}
+                      <MainSectionPanelItem>
+                        <FieldSet>
+                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <Field>
+                              <FieldLabel htmlFor="price">Price</FieldLabel>
+                              <Controller
+                                name="price"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <InputGroup>
+                                    <InputGroupAddon align="inline-start">
+                                      <InputGroupText>USD</InputGroupText>
+                                    </InputGroupAddon>
+                                    <InputGroupInput
+                                      id="price"
+                                      type="number"
+                                      placeholder="0.00"
+                                      value={f.value}
+                                      onChange={f.onChange}
+                                      onBlur={f.onBlur}
+                                      aria-invalid={
+                                        !!errors.price || undefined
+                                      }
+                                    />
+                                  </InputGroup>
+                                )}
+                              />
+                              <FieldHint
+                                error={errors.price as { message?: string }}
+                                mandatory
+                              />
+                            </Field>
+
+                            <Field>
+                              <FieldLabel htmlFor="compare-at-price">
+                                Compare-at Price
+                              </FieldLabel>
+                              <Controller
+                                name="compareAtPrice"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <InputGroup>
+                                    <InputGroupAddon align="inline-start">
+                                      <InputGroupText>USD</InputGroupText>
+                                    </InputGroupAddon>
+                                    <InputGroupInput
+                                      id="compare-at-price"
+                                      type="number"
+                                      placeholder="0.00"
+                                      value={f.value}
+                                      onChange={f.onChange}
+                                      onBlur={f.onBlur}
+                                    />
+                                  </InputGroup>
+                                )}
+                              />
+                              <FieldHint
+                                description="Shown as strikethrough to customers."
+                                optional
+                              />
+                            </Field>
+                          </div>
+                        </FieldSet>
+                      </MainSectionPanelItem>
+
+                      {/* Panel Item 2 — Cost */}
+                      <MainSectionPanelItem>
+                        <Field>
+                          <FieldLabel htmlFor="cost-per-item">
+                            Cost Per Item
+                          </FieldLabel>
+                          <Controller
+                            name="costPerItem"
+                            control={control}
+                            render={({ field: f }) => (
+                              <InputGroup className="max-w-48">
+                                <InputGroupAddon align="inline-start">
+                                  <InputGroupText>USD</InputGroupText>
+                                </InputGroupAddon>
+                                <InputGroupInput
+                                  id="cost-per-item"
+                                  type="number"
+                                  placeholder="0.00"
+                                  value={f.value}
+                                  onChange={f.onChange}
+                                  onBlur={f.onBlur}
+                                />
+                              </InputGroup>
+                            )}
+                          />
+                          <FieldHint
+                            description="Used to calculate margin. Not visible to customers."
+                            optional
+                          />
+                        </Field>
+                      </MainSectionPanelItem>
+                    </MainSectionPanel>
+                  </MainSection>
+
+                  {/* Section: Inventory (collapsible) */}
+                  <MainSection>
+                    <MainSectionHeader>
+                      <div className="flex items-center gap-2">
+                        <Switch
+                          checked={trackInventory}
+                          onCheckedChange={setTrackInventory}
+                        />
+                        <MainSectionHeaderTitle>
+                          Track inventory
+                        </MainSectionHeaderTitle>
+                      </div>
+                      <MainSectionHeaderSubtitle className="ml-8">
+                        Monitor stock levels and get low-stock alerts.
+                      </MainSectionHeaderSubtitle>
+                    </MainSectionHeader>
+
+                    <MainSectionPanel collapsed={!trackInventory}>
+                      <MainSectionPanelItem>
+                        <FieldGroup>
+                          <FieldSet>
+                            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                              <Field>
+                                <FieldLabel htmlFor="quantity">
+                                  Quantity on Hand
+                                </FieldLabel>
+                                <Controller
+                                  name="quantity"
+                                  control={control}
+                                  render={({ field: f }) => (
+                                    <Input
+                                      id="quantity"
+                                      full
+                                      type="number"
+                                      placeholder="0"
+                                      value={f.value}
+                                      onChange={f.onChange}
+                                      onBlur={f.onBlur}
+                                    />
+                                  )}
+                                />
+                                <FieldHint />
+                              </Field>
+
+                              <Field>
+                                <FieldLabel htmlFor="low-stock-threshold">
+                                  Low-stock Threshold
+                                </FieldLabel>
+                                <Controller
+                                  name="lowStockThreshold"
+                                  control={control}
+                                  render={({ field: f }) => (
+                                    <Input
+                                      id="low-stock-threshold"
+                                      full
+                                      type="number"
+                                      placeholder="Alert when stock falls below…"
+                                      value={f.value}
+                                      onChange={f.onChange}
+                                      onBlur={f.onBlur}
+                                    />
+                                  )}
+                                />
+                                <FieldHint optional />
+                              </Field>
+                            </div>
+                          </FieldSet>
+
+                          <Controller
+                            name="allowBackorders"
+                            control={control}
+                            render={({ field: f }) => (
+                              <Field
+                                orientation="horizontal"
+                                className="items-baseline"
+                              >
+                                <Checkbox
+                                  id="allow-backorders"
+                                  checked={f.value}
+                                  onCheckedChange={f.onChange}
+                                  onBlur={f.onBlur}
+                                />
+                                <FieldLabel
+                                  htmlFor="allow-backorders"
+                                  className="cursor-pointer font-normal"
+                                >
+                                  Allow backorders
+                                </FieldLabel>
+                              </Field>
+                            )}
+                          />
+                        </FieldGroup>
+                      </MainSectionPanelItem>
+                    </MainSectionPanel>
+
+                    {/* Barcode — always visible */}
+                    <MainSectionPanel>
+                      <MainSectionPanelItem>
+                        <Field>
+                          <FieldLabel htmlFor="barcode">
+                            Barcode (ISBN, UPC, GTIN)
+                          </FieldLabel>
+                          <Controller
+                            name="barcode"
+                            control={control}
+                            render={({ field: f }) => (
+                              <Input
+                                id="barcode"
+                                full
+                                placeholder="e.g. 978-3-16-148410-0"
+                                value={f.value}
+                                onChange={f.onChange}
+                                onBlur={f.onBlur}
+                              />
+                            )}
+                          />
+                          <FieldHint optional />
+                        </Field>
+                      </MainSectionPanelItem>
+                    </MainSectionPanel>
+                  </MainSection>
+                </div>
+              </TabContent>
+
+              {/* ── Tab: Shipping ─────────────────────────────────────────── */}
+              <TabContent value="shipping">
+                <div className="w-full pb-6 flex flex-col gap-6">
+                  <MainSection>
+                    <MainSectionHeader>
+                      <MainSectionHeaderTitle>
+                        Physical Details
+                      </MainSectionHeaderTitle>
+                      <MainSectionHeaderSubtitle>
+                        Specify shipping dimensions and customs information.
+                      </MainSectionHeaderSubtitle>
+                    </MainSectionHeader>
+
+                    <MainSectionPanel>
+                      {/* Panel Item 1 — Physical product toggle */}
+                      <MainSectionPanelItem>
+                        <Field orientation="horizontal" className="items-center">
+                          <Controller
+                            name="isPhysical"
+                            control={control}
+                            render={({ field: f }) => (
+                              <Switch
+                                id="is-physical"
+                                checked={f.value}
+                                onCheckedChange={(v) => {
+                                  f.onChange(v);
+                                  setIsPhysicalState(v);
+                                }}
+                              />
+                            )}
+                          />
+                          <FieldLabel
+                            htmlFor="is-physical"
+                            className="cursor-pointer font-normal"
+                          >
+                            This is a physical product
+                          </FieldLabel>
+                        </Field>
+                      </MainSectionPanelItem>
+
+                      {/* Panel Item 2 — Weight & Dimensions (shown when physical) */}
+                      {isPhysicalState && (
+                        <MainSectionPanelItem>
+                          <FieldGroup>
+                            <FieldSet>
+                              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                                <Field>
+                                  <FieldLabel htmlFor="weight">
+                                    Weight
+                                  </FieldLabel>
+                                  <Controller
+                                    name="weight"
+                                    control={control}
+                                    render={({ field: f }) => (
+                                      <InputGroup>
+                                        <InputGroupInput
+                                          id="weight"
+                                          type="number"
+                                          placeholder="0.0"
+                                          value={f.value}
+                                          onChange={f.onChange}
+                                          onBlur={f.onBlur}
+                                        />
+                                        <InputGroupAddon align="inline-end">
+                                          <InputGroupText>kg</InputGroupText>
+                                        </InputGroupAddon>
+                                      </InputGroup>
+                                    )}
+                                  />
+                                  <FieldHint optional />
+                                </Field>
+                              </div>
+                            </FieldSet>
+
+                            <FieldSet>
+                              <div className="flex items-center gap-3">
+                                <Field>
+                                  <FieldLabel htmlFor="dim-length">
+                                    Length (cm)
+                                  </FieldLabel>
+                                  <Controller
+                                    name="length"
+                                    control={control}
+                                    render={({ field: f }) => (
+                                      <Input
+                                        id="dim-length"
+                                        type="number"
+                                        placeholder="0"
+                                        value={f.value}
+                                        onChange={f.onChange}
+                                        onBlur={f.onBlur}
+                                        className="w-24"
+                                      />
+                                    )}
+                                  />
+                                </Field>
+                                <span className="mt-5 text-muted-foreground">
+                                  ×
+                                </span>
+                                <Field>
+                                  <FieldLabel htmlFor="dim-width">
+                                    Width (cm)
+                                  </FieldLabel>
+                                  <Controller
+                                    name="width"
+                                    control={control}
+                                    render={({ field: f }) => (
+                                      <Input
+                                        id="dim-width"
+                                        type="number"
+                                        placeholder="0"
+                                        value={f.value}
+                                        onChange={f.onChange}
+                                        onBlur={f.onBlur}
+                                        className="w-24"
+                                      />
+                                    )}
+                                  />
+                                </Field>
+                                <span className="mt-5 text-muted-foreground">
+                                  ×
+                                </span>
+                                <Field>
+                                  <FieldLabel htmlFor="dim-height">
+                                    Height (cm)
+                                  </FieldLabel>
+                                  <Controller
+                                    name="height"
+                                    control={control}
+                                    render={({ field: f }) => (
+                                      <Input
+                                        id="dim-height"
+                                        type="number"
+                                        placeholder="0"
+                                        value={f.value}
+                                        onChange={f.onChange}
+                                        onBlur={f.onBlur}
+                                        className="w-24"
+                                      />
+                                    )}
+                                  />
+                                </Field>
+                              </div>
+                              <FieldHint optional />
+                            </FieldSet>
+                          </FieldGroup>
+                        </MainSectionPanelItem>
+                      )}
+
+                      {/* Panel Item 3 — Shipping class */}
+                      <MainSectionPanelItem>
+                        <FieldSet>
+                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <Field>
+                              <FieldLabel htmlFor="shipping-class">
+                                Shipping Class
+                              </FieldLabel>
+                              <Controller
+                                name="shippingClass"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <Select
+                                    value={f.value}
+                                    onValueChange={f.onChange}
+                                    onOpenChange={(open) => {
+                                      if (!open) f.onBlur();
+                                    }}
+                                  >
+                                    <SelectTrigger
+                                      id="shipping-class"
+                                      className="w-full"
+                                    >
+                                      <SelectValue placeholder="Select class…" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      <SelectGroup>
+                                        {SHIPPING_CLASSES.map((s) => (
+                                          <SelectItem
+                                            key={s.value}
+                                            value={s.value}
+                                          >
+                                            {s.label}
+                                          </SelectItem>
+                                        ))}
+                                      </SelectGroup>
+                                    </SelectContent>
+                                  </Select>
+                                )}
+                              />
+                              <FieldHint optional />
+                            </Field>
+
+                            <Field>
+                              <FieldLabel htmlFor="country-of-origin">
+                                Country of Origin
+                              </FieldLabel>
+                              <Controller
+                                name="countryOfOrigin"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <Combobox
+                                    items={COUNTRIES}
+                                    value={f.value}
+                                    onValueChange={(v) => f.onChange(v)}
+                                  >
+                                    <ComboboxInput
+                                      id="country-of-origin"
+                                      placeholder="Search country…"
+                                      onBlur={f.onBlur}
+                                      className="w-full"
+                                    />
+                                    <ComboboxContent>
+                                      <ComboboxList>
+                                        <ComboboxEmpty>
+                                          No results found.
+                                        </ComboboxEmpty>
+                                        <ComboboxCollection>
+                                          {(c: string) => (
+                                            <ComboboxItem key={c} value={c}>
+                                              {c}
+                                            </ComboboxItem>
+                                          )}
+                                        </ComboboxCollection>
+                                      </ComboboxList>
+                                    </ComboboxContent>
+                                  </Combobox>
+                                )}
+                              />
+                              <FieldHint optional />
+                            </Field>
+                          </div>
+                        </FieldSet>
+                      </MainSectionPanelItem>
+
+                      {/* Panel Item 4 — Customs */}
+                      <MainSectionPanelItem>
+                        <FieldGroup>
+                          <Field>
+                            <FieldLabel htmlFor="hs-tariff-code">
+                              HS Tariff Code
+                            </FieldLabel>
+                            <Controller
+                              name="hsTariffCode"
+                              control={control}
+                              render={({ field: f }) => (
+                                <Input
+                                  id="hs-tariff-code"
+                                  full
+                                  placeholder="e.g. 8518.30"
+                                  value={f.value}
+                                  onChange={f.onChange}
+                                  onBlur={f.onBlur}
+                                />
+                              )}
+                            />
+                            <FieldHint optional />
+                          </Field>
+
+                          <Controller
+                            name="requiresCustoms"
+                            control={control}
+                            render={({ field: f }) => (
+                              <Field
+                                orientation="horizontal"
+                                className="items-baseline"
+                              >
+                                <Checkbox
+                                  id="requires-customs"
+                                  checked={f.value}
+                                  onCheckedChange={f.onChange}
+                                  onBlur={f.onBlur}
+                                />
+                                <FieldLabel
+                                  htmlFor="requires-customs"
+                                  className="cursor-pointer font-normal"
+                                >
+                                  Requires customs declaration
+                                </FieldLabel>
+                              </Field>
+                            )}
+                          />
+                        </FieldGroup>
+                      </MainSectionPanelItem>
+                    </MainSectionPanel>
+                  </MainSection>
+                </div>
+              </TabContent>
+            </Tabs>
+          </PageMain>
+        </div>
+      </div>
+
+      <UnsavedChangesBar
+        isDirty={isDirty}
+        isValid={isValid}
+        isSaving={isSaving}
+        onSave={handleSave}
+        onReset={() => reset()}
+        onInvalid={() => trigger()}
+        className="lg:left-[calc(50%+7rem)]"
+      />
+    </>
+  );
+}
