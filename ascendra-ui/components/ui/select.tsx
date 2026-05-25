@@ -6,10 +6,24 @@ import { Select as SelectPrimitive } from 'radix-ui';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from 'lucide-react';
 
+const SelectContext = React.createContext<{ readOnly?: boolean }>({});
+
 function Select({
+  readOnly,
+  open,
+  onOpenChange,
   ...props
-}: React.ComponentProps<typeof SelectPrimitive.Root>) {
-  return <SelectPrimitive.Root data-slot="select" {...props} />;
+}: React.ComponentProps<typeof SelectPrimitive.Root> & { readOnly?: boolean }) {
+  return (
+    <SelectContext.Provider value={{ readOnly }}>
+      <SelectPrimitive.Root
+        data-slot="select"
+        open={readOnly ? false : open}
+        onOpenChange={readOnly ? () => {} : onOpenChange}
+        {...props}
+      />
+    </SelectContext.Provider>
+  );
 }
 
 function SelectGroup({
@@ -35,10 +49,15 @@ function SelectTrigger({
   className,
   size = 'default',
   children,
+  readOnly: readOnlyProp,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
   size?: 'sm' | 'default';
+  readOnly?: boolean;
 }) {
+  const { readOnly: readOnlyCtx } = React.useContext(SelectContext);
+  const readOnly = readOnlyProp ?? readOnlyCtx;
+
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
@@ -47,33 +66,32 @@ function SelectTrigger({
         'py-0.75',
         'group relative inline-flex items-center px-1',
         'min-w-fit overflow-hidden rounded-[0.25rem]',
-        /* Base Colors */
         'text-foreground text-sm font-medium',
         'data-placeholder:text-muted-foreground data-placeholder:font-normal',
-        'bg-secondary',
-        /* Layered Shadow System */
-        'shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04),0_0_0_1px_rgba(0,0,0,0.1)]',
-        'dark:shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_rgba(0,0,0,0.1)]',
-        /* Gradient Overlay */
-        'before:pointer-events-none before:absolute before:inset-0',
-        'before:bg-linear-to-b',
-        'before:from-black/0',
-        'before:to-black/2',
-        'before:from-30%',
-        'before:transition-opacity',
-        'dark:before:to-black/12',
-        /* Interaction */
-        'cursor-pointer transition-all',
-        'hover:before:opacity-0',
-        'hover:bg-gray-50',
-        'dark:hover:bg-secondary',
+        'transition-all',
         'disabled:cursor-not-allowed disabled:opacity-40',
-        /* Focus */
-        'focus-visible:outline-primary! focus-visible:outline-2! focus-visible:outline-offset-1!',
         /* Invalid */
         'aria-invalid:outline-destructive aria-invalid:outline-2 aria-invalid:outline-offset-1',
         size === 'sm' && 'h-5',
         size === 'default' && 'h-8',
+        /* State-dependent: readonly vs normal */
+        readOnly ? [
+          'bg-gray-100 dark:bg-white/5',
+          'shadow-[0_0_0_1px_#d1d5db] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.1)]',
+          'cursor-default',
+        ] : [
+          'bg-secondary',
+          'shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04),0_0_0_1px_rgba(0,0,0,0.1)]',
+          'dark:shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_rgba(0,0,0,0.1)]',
+          'before:pointer-events-none before:absolute before:inset-0',
+          'before:bg-linear-to-b before:from-black/0 before:to-black/2 before:from-30%',
+          'before:transition-opacity dark:before:to-black/12',
+          'cursor-pointer',
+          'hover:before:opacity-0',
+          'hover:bg-gray-50',
+          'dark:hover:bg-secondary',
+          'focus-visible:outline-primary! focus-visible:outline-2! focus-visible:outline-offset-1!',
+        ],
         className
       )}
       {...props}

@@ -611,6 +611,7 @@ export default function UserProfileForm() {
                                     aria-invalid={
                                       !!errors.dateFormat || undefined
                                     }
+                                    readOnly
                                   >
                                     <SelectValue placeholder="Select a format…" />
                                   </SelectTrigger>
@@ -644,7 +645,6 @@ export default function UserProfileForm() {
                               control={control}
                               render={({ field: f }) => (
                                 <RadioGroup
-                                
                                   value={f.value}
                                   onValueChange={f.onChange}
                                   onBlurCapture={(e: React.FocusEvent) => {

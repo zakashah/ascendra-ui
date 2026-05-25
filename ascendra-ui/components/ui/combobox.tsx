@@ -9,20 +9,34 @@ import { ChevronDownIcon, XIcon, CheckIcon } from "lucide-react";
 const ComboboxAnchorContext = React.createContext<{
   anchor: HTMLElement | null;
   setAnchor: (node: HTMLElement | null) => void;
+  readOnly?: boolean;
 } | null>(null);
 
+type ComboboxRootType = {
+  <Value, Multiple extends boolean | undefined = false>(
+    props: ComboboxPrimitive.Root.Props<Value, Multiple> & { readOnly?: boolean }
+  ): React.ReactNode;
+};
+
 function ComboboxWrapper<Value, Multiple extends boolean | undefined = false>({
+  readOnly,
+  open,
+  onOpenChange,
   ...props
-}: ComboboxPrimitive.Root.Props<Value, Multiple>) {
+}: ComboboxPrimitive.Root.Props<Value, Multiple> & { readOnly?: boolean }) {
   const [anchor, setAnchor] = React.useState<HTMLElement | null>(null);
   return (
-    <ComboboxAnchorContext.Provider value={{ anchor, setAnchor }}>
-      <ComboboxPrimitive.Root {...props} />
+    <ComboboxAnchorContext.Provider value={{ anchor, setAnchor, readOnly }}>
+      <ComboboxPrimitive.Root
+        open={readOnly ? false : open}
+        onOpenChange={readOnly ? () => {} : onOpenChange}
+        {...props}
+      />
     </ComboboxAnchorContext.Provider>
   );
 }
 
-const Combobox = ComboboxWrapper as typeof ComboboxPrimitive.Root;
+const Combobox = ComboboxWrapper as ComboboxRootType;
 
 function ComboboxValue({ ...props }: ComboboxPrimitive.Value.Props) {
   return <ComboboxPrimitive.Value data-slot="combobox-value" {...props} />;
@@ -76,11 +90,12 @@ function ComboboxInput({
 }) {
   const [isPointer, setIsPointer] = React.useState(false);
   const ctx = React.useContext(ComboboxAnchorContext);
+  const readOnly = ctx?.readOnly;
 
   return (
     <div
       ref={ctx?.setAnchor}
-      onMouseDown={() => setIsPointer(true)}
+      onMouseDown={() => !readOnly && setIsPointer(true)}
       onKeyDown={(e) => { if (e.key === 'Tab') setIsPointer(false); }}
       className={cn(
         "group/input-group py-0.75",
@@ -89,32 +104,31 @@ function ComboboxInput({
         "has-[>[data-align=inline-end]]:*:data-[slot=input-group-control]:pr-1.5",
         "has-[>[data-align=inline-start]]:*:data-[slot=input-group-control]:pl-2.5",
         "w-auto min-w-fit overflow-hidden rounded-[0.25rem]",
-        /* Base Colors */
         "text-foreground font-medium",
-        "bg-secondary",
-        /* Layered Shadow System */
-        "shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04),0_0_0_1px_rgba(0,0,0,0.1)]",
-        "dark:shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_rgba(0,0,0,0.1)]",
-        /* Gradient Overlay */
-        "before:pointer-events-none before:absolute before:inset-0",
-        "before:bg-linear-to-b",
-        "before:from-black/0",
-        "before:to-black/2",
-        "before:from-30%",
-        "before:transition-opacity",
-        "dark:before:to-black/12",
-        /* Interaction */
-        "cursor-text transition-all",
-        "hover:before:opacity-0",
-        "hover:bg-gray-50",
-        "dark:hover:bg-secondary",
+        "transition-all",
         "has-disabled:cursor-not-allowed has-disabled:opacity-40",
-        /* Focus */
-        !isPointer &&
-          "has-[input:focus-visible]:outline-primary! has-[input:focus-visible]:outline-2! has-[input:focus-visible]:outline-offset-1!",
         /* Invalid */
         "has-aria-invalid:outline-2 has-aria-invalid:outline-destructive has-aria-invalid:outline-offset-1",
         "h-8",
+        /* State-dependent: readonly vs normal */
+        readOnly ? [
+          "bg-gray-100 dark:bg-white/5",
+          "shadow-[0_0_0_1px_#d1d5db] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.1)]",
+          "cursor-default",
+        ] : [
+          "bg-secondary",
+          "shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04),0_0_0_1px_rgba(0,0,0,0.1)]",
+          "dark:shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_rgba(0,0,0,0.1)]",
+          "before:pointer-events-none before:absolute before:inset-0",
+          "before:bg-linear-to-b before:from-black/0 before:to-black/2 before:from-30%",
+          "before:transition-opacity dark:before:to-black/12",
+          "cursor-text",
+          "hover:before:opacity-0",
+          "hover:bg-gray-50",
+          "dark:hover:bg-secondary",
+          !isPointer &&
+            "has-[input:focus-visible]:outline-primary! has-[input:focus-visible]:outline-2! has-[input:focus-visible]:outline-offset-1!",
+        ],
         className,
       )}
     >
@@ -127,21 +141,24 @@ function ComboboxInput({
           "placeholder:text-gray-500 dark:placeholder:text-gray-700",
         )}
         disabled={disabled}
+        readOnly={readOnly}
         {...props}
       />
-      <div className="group/actions flex items-center gap-1 opacity-70">
-        {showClear && <ComboboxClear disabled={disabled} />}
-        {showTrigger && (
-          <ComboboxTrigger
-            disabled={disabled}
-            className={cn(
-              "hover:bg-transparent",
-              showClear &&
-                "group-has-[[data-slot=combobox-clear]:not([hidden])]:hidden",
-            )}
-          />
-        )}
-      </div>
+      {!readOnly && (
+        <div className="group/actions flex items-center gap-1 opacity-70">
+          {showClear && <ComboboxClear disabled={disabled} />}
+          {showTrigger && (
+            <ComboboxTrigger
+              disabled={disabled}
+              className={cn(
+                "hover:bg-transparent",
+                showClear &&
+                  "group-has-[[data-slot=combobox-clear]:not([hidden])]:hidden",
+              )}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -330,13 +347,14 @@ function ComboboxChips({
   ComboboxPrimitive.Chips.Props) {
   const [isPointer, setIsPointer] = React.useState(false);
   const ctx = React.useContext(ComboboxAnchorContext);
+  const readOnly = ctx?.readOnly;
 
   return (
     <ComboboxPrimitive.Chips
       ref={ctx?.setAnchor}
       data-slot="combobox-chips"
       onMouseDown={(e) => {
-        setIsPointer(true);
+        if (!readOnly) setIsPointer(true);
         props.onMouseDown?.(e);
       }}
       onKeyDown={(e) => {
@@ -346,31 +364,30 @@ function ComboboxChips({
       className={cn(
         "group/input-group relative flex min-h-8 flex-wrap items-center gap-1.5 px-1 py-1",
         "w-full overflow-hidden rounded-[0.25rem]",
-        /* Base Colors */
         "text-foreground font-medium",
-        "bg-secondary",
-        /* Layered Shadow System */
-        "shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04),0_0_0_1px_rgba(0,0,0,0.1)]",
-        "dark:shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_rgba(0,0,0,0.1)]",
-        /* Gradient Overlay */
-        "before:pointer-events-none before:absolute before:inset-0",
-        "before:bg-linear-to-b",
-        "before:from-black/0",
-        "before:to-black/2",
-        "before:from-30%",
-        "before:transition-opacity",
-        "dark:before:to-black/12",
-        /* Interaction */
-        "cursor-text transition-all",
-        "hover:before:opacity-0",
-        "hover:bg-gray-50",
-        "dark:hover:bg-secondary",
+        "transition-all",
         "has-disabled:cursor-not-allowed has-disabled:opacity-40",
-        /* Focus */
-        !isPointer &&
-          "has-[input:focus-visible]:outline-primary! has-[input:focus-visible]:outline-2! has-[input:focus-visible]:outline-offset-1!",
         /* Invalid */
         "aria-invalid:outline-2 aria-invalid:outline-destructive aria-invalid:outline-offset-1",
+        /* State-dependent: readonly vs normal */
+        readOnly ? [
+          "bg-gray-100 dark:bg-white/5",
+          "shadow-[0_0_0_1px_#d1d5db] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.1)]",
+          "cursor-default",
+        ] : [
+          "bg-secondary",
+          "shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04),0_0_0_1px_rgba(0,0,0,0.1)]",
+          "dark:shadow-[inset_0_1px_0.5px_0_rgba(255,255,255,0.05),0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24),0_0_0_1px_rgba(0,0,0,0.1)]",
+          "before:pointer-events-none before:absolute before:inset-0",
+          "before:bg-linear-to-b before:from-black/0 before:to-black/2 before:from-30%",
+          "before:transition-opacity dark:before:to-black/12",
+          "cursor-text",
+          "hover:before:opacity-0",
+          "hover:bg-gray-50",
+          "dark:hover:bg-secondary",
+          !isPointer &&
+            "has-[input:focus-visible]:outline-primary! has-[input:focus-visible]:outline-2! has-[input:focus-visible]:outline-offset-1!",
+        ],
         className,
       )}
       {...props}

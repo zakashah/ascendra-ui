@@ -262,6 +262,7 @@ export default function AppointmentBookingForm() {
                                     items={PROVIDERS}
                                     value={f.value}
                                     onValueChange={(v) => f.onChange(v)}
+                                    readOnly
                                   >
                                     <ComboboxInput
                                       id="provider"
@@ -306,6 +307,7 @@ export default function AppointmentBookingForm() {
                                     onOpenChange={(open) => {
                                       if (!open) f.onBlur();
                                     }}
+                                    readOnly
                                   >
                                     <SelectTrigger
                                       id="location"
@@ -358,6 +360,7 @@ export default function AppointmentBookingForm() {
                                   value={f.value}
                                   onChange={f.onChange}
                                   onBlur={f.onBlur}
+                                  readOnly
                                 />
                               </InputGroup>
                             )}
@@ -407,6 +410,7 @@ export default function AppointmentBookingForm() {
                                 onBlur={f.onBlur}
                                 placeholder="Pick a date"
                                 fromYear={new Date().getFullYear()}
+                                readOnly
                               />
                             )}
                           />
@@ -548,6 +552,7 @@ export default function AppointmentBookingForm() {
                                     onChange={f.onChange}
                                     onBlur={f.onBlur}
                                     aria-invalid={!!errors.fullName}
+                                    readOnly
                                   />
                                 )}
                               />
