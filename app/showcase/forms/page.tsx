@@ -18,9 +18,9 @@ export default function FormsGalleryPage() {
       {/* Back */}
       <Link
         href="/showcase"
-        className="text-muted-foreground hover:text-foreground mb-8 flex w-fit items-center gap-1.5 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
+        className="text-muted-foreground hover:text-foreground mb-8 flex w-fit items-center gap-1.5 text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
       >
-        <LuArrowLeft className="size-3.5" />
+        <LuArrowLeft className="size-3 stroke-2" />
         Component Showcase
       </Link>
 
@@ -35,10 +35,12 @@ export default function FormsGalleryPage() {
         </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           A curated set of{" "}
-          <span className="text-foreground font-medium">{formsConfig.length} production-grade forms</span>{" "}
-          spanning multiple business domains and layouts — from a simple contact form
-          to a multi-step onboarding wizard. Each form is fully interactive and built
-          exclusively with components from this design system.
+          <span className="text-foreground font-medium">
+            {formsConfig.length} production-grade forms
+          </span>{" "}
+          spanning multiple business domains and layouts — from a simple contact
+          form to a multi-step onboarding wizard. Each form is fully interactive
+          and built exclusively with components from this design system.
         </p>
       </div>
 
@@ -60,7 +62,9 @@ export default function FormsGalleryPage() {
           },
         ].map(({ label, value }) => (
           <div key={label} className="flex flex-col gap-0.5">
-            <span className="text-2xl font-semibold text-foreground">{value}</span>
+            <span className="text-2xl font-semibold text-foreground">
+              {value}
+            </span>
             <span className="text-xs text-muted-foreground">{label}</span>
           </div>
         ))}
@@ -78,7 +82,9 @@ export default function FormsGalleryPage() {
             <div className="flex items-start justify-between gap-3">
               <div className="flex flex-col gap-1">
                 <span className="font-medium text-foreground">{form.name}</span>
-                <span className="text-xs text-muted-foreground">{form.domain}</span>
+                <span className="text-xs text-muted-foreground">
+                  {form.domain}
+                </span>
               </div>
               <div className="flex shrink-0 items-center gap-2">
                 <span
