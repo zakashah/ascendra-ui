@@ -271,10 +271,8 @@ function FieldHint({
               />
               {error.message}
             </FieldDescription>
-          ) : description ? (
-            <FieldDescription>{description}</FieldDescription>
           ) : (
-            <FieldDescription />
+            <FieldDescription>{description || " "}</FieldDescription>
           )}
           {(mandatory || optional) && (
             <SimpleBadge variant="secondary" size="tiny" className="mt-0.5">
