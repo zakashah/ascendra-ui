@@ -38,7 +38,7 @@ export function MainSectionPanel({
             "dark:shadow-[inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,0.4),0_0_3px_0_rgba(0,0,0,0.2)]",
           )}
         >
-          <div>{children}</div>
+          {children}
         </div>
       </div>
     </div>

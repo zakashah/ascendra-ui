@@ -1,20 +1,30 @@
+"use client";
+
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 
 export function MainSectionPanelItem({
+  collapsed,
   className,
   children,
   ...props
-}: React.ComponentProps<'div'>) {
+}: React.ComponentProps<'div'> & { collapsed?: boolean }) {
   return (
     <div
       data-slot="main-section-panel-item"
+      data-collapsed={collapsed ? "true" : "false"}
+      inert={collapsed}
       className={cn(
-        'border-border space-y-5 border-t px-5 py-6 first:border-none',
+        'grid transition-all duration-300 border-border border-t first:border-none',
+        collapsed ? 'grid-rows-[0fr] border-none' : 'grid-rows-[1fr]',
         className
       )}
       {...props}
     >
-      {children}
+      <div className="overflow-hidden transition-all duration-300">
+        <div className="space-y-5 px-5 py-6">
+          {children}
+        </div>
+      </div>
     </div>
   );
 }

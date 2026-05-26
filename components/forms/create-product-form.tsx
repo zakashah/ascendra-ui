@@ -918,113 +918,112 @@ export default function CreateProductForm() {
                       </MainSectionPanelItem>
 
                       {/* Panel Item 2 — Weight & Dimensions (shown when physical) */}
-                      {isPhysicalState && (
-                        <MainSectionPanelItem>
-                          <FieldGroup>
-                            <FieldSet>
-                              <FieldGrid>
-                                <Field>
-                                  <FieldLabel htmlFor="weight">
-                                    Weight
-                                  </FieldLabel>
-                                  <Controller
-                                    name="weight"
-                                    control={control}
-                                    render={({ field: f }) => (
-                                      <InputGroup>
-                                        <InputGroupInput
-                                          id="weight"
-                                          type="number"
-                                          placeholder="0.0"
-                                          value={f.value}
-                                          onChange={f.onChange}
-                                          onBlur={f.onBlur}
-                                        />
-                                        <InputGroupAddon align="inline-end">
-                                          <InputGroupText>kg</InputGroupText>
-                                        </InputGroupAddon>
-                                      </InputGroup>
-                                    )}
-                                  />
-                                  <FieldHint />
-                                </Field>
-                              </FieldGrid>
-                            </FieldSet>
+                      <MainSectionPanelItem collapsed={!isPhysicalState}>
+                        <FieldGroup>
+                          <FieldSet>
+                            <FieldGrid>
+                              <Field>
+                                <FieldLabel htmlFor="weight">Weight</FieldLabel>
+                                <Controller
+                                  name="weight"
+                                  control={control}
+                                  render={({ field: f }) => (
+                                    <InputGroup>
+                                      <InputGroupInput
+                                        id="weight"
+                                        type="number"
+                                        placeholder="0.0"
+                                        value={f.value}
+                                        onChange={f.onChange}
+                                        onBlur={f.onBlur}
+                                      />
+                                      <InputGroupAddon align="inline-end">
+                                        <InputGroupText>kg</InputGroupText>
+                                      </InputGroupAddon>
+                                    </InputGroup>
+                                  )}
+                                />
+                                <FieldHint />
+                              </Field>
+                            </FieldGrid>
+                          </FieldSet>
 
-                            <FieldSet>
-                              <div className="flex items-center gap-3">
-                                <Field>
-                                  <FieldLabel htmlFor="dim-length">
-                                    Length (cm)
-                                  </FieldLabel>
-                                  <Controller
-                                    name="length"
-                                    control={control}
-                                    render={({ field: f }) => (
-                                      <Input
-                                        id="dim-length"
-                                        type="number"
-                                        placeholder="0"
-                                        value={f.value}
-                                        onChange={f.onChange}
-                                        onBlur={f.onBlur}
-                                        className="w-24"
-                                      />
-                                    )}
-                                  />
-                                </Field>
-                                <span className="mt-5 text-muted-foreground">
-                                  ×
-                                </span>
-                                <Field>
-                                  <FieldLabel htmlFor="dim-width">
-                                    Width (cm)
-                                  </FieldLabel>
-                                  <Controller
-                                    name="width"
-                                    control={control}
-                                    render={({ field: f }) => (
-                                      <Input
-                                        id="dim-width"
-                                        type="number"
-                                        placeholder="0"
-                                        value={f.value}
-                                        onChange={f.onChange}
-                                        onBlur={f.onBlur}
-                                        className="w-24"
-                                      />
-                                    )}
-                                  />
-                                </Field>
-                                <span className="mt-5 text-muted-foreground">
-                                  ×
-                                </span>
-                                <Field>
-                                  <FieldLabel htmlFor="dim-height">
-                                    Height (cm)
-                                  </FieldLabel>
-                                  <Controller
-                                    name="height"
-                                    control={control}
-                                    render={({ field: f }) => (
-                                      <Input
-                                        id="dim-height"
-                                        type="number"
-                                        placeholder="0"
-                                        value={f.value}
-                                        onChange={f.onChange}
-                                        onBlur={f.onBlur}
-                                        className="w-24"
-                                      />
-                                    )}
-                                  />
-                                </Field>
-                              </div>
-                              <FieldHint />
-                            </FieldSet>
-                          </FieldGroup>
-                        </MainSectionPanelItem>
-                      )}
+                          <FieldSet>
+                            <div className="flex items-center gap-3">
+                              <Field>
+                                <FieldLabel htmlFor="dim-length">
+                                  Length (cm)
+                                </FieldLabel>
+                                <Controller
+                                  name="length"
+                                  control={control}
+                                  render={({ field: f }) => (
+                                    <Input
+                                      id="dim-length"
+                                      type="number"
+                                      placeholder="0"
+                                      value={f.value}
+                                      onChange={f.onChange}
+                                      onBlur={f.onBlur}
+                                      className="w-24"
+                                    />
+                                  )}
+                                />
+                              </Field>
+                              <span className="mt-5 text-muted-foreground">
+                                ×
+                              </span>
+                              <Field>
+                                <FieldLabel htmlFor="dim-width">
+                                  Width (cm)
+                                </FieldLabel>
+                                <Controller
+                                  name="width"
+                                  control={control}
+                                  render={({ field: f }) => (
+                                    <Input
+                                      id="dim-width"
+                                      type="number"
+                                      placeholder="0"
+                                      value={f.value}
+                                      onChange={f.onChange}
+                                      onBlur={f.onBlur}
+                                      className="w-24"
+                                    />
+                                  )}
+                                />
+                              </Field>
+                              <span className="mt-5 text-muted-foreground">
+                                ×
+                              </span>
+                              <Field>
+                                <FieldLabel htmlFor="dim-height">
+                                  Height (cm)
+                                </FieldLabel>
+                                <Controller
+                                  name="height"
+                                  control={control}
+                                  render={({ field: f }) => (
+                                    <Input
+                                      id="dim-height"
+                                      type="number"
+                                      placeholder="0"
+                                      value={f.value}
+                                      onChange={f.onChange}
+                                      onBlur={f.onBlur}
+                                      className="w-24"
+                                    />
+                                  )}
+                                />
+                              </Field>
+                            </div>
+                            <FieldHint />
+                          </FieldSet>
+                        </FieldGroup>
+                      </MainSectionPanelItem>
+                      <MainSectionPanelItem>
+                        This is an other panel item that is here to show the spacing between items. It has no content.
+                      </MainSectionPanelItem>
                     </MainSectionPanel>
                   </MainSection>
                 </MainContent>
