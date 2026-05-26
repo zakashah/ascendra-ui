@@ -103,6 +103,7 @@ export default function SearchFilterForm() {
       statusArchived: false,
       sortBy: "newest",
     },
+    mode:"onTouched"
   });
 
   function onApply(data: FilterValues) {
