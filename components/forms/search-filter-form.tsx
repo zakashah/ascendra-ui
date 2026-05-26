@@ -36,7 +36,6 @@ import {
 } from "@/ascendra-ui/components/ui/combobox";
 import {
   Field,
-  FieldGroup,
   FieldHint,
   FieldLabel,
   FieldLegend,
@@ -107,7 +106,7 @@ export default function SearchFilterForm() {
   });
 
   function onApply(data: FilterValues) {
-    const count = Math.floor(Math.random() * 120) + 1;
+    const count = 21;
     setResultCount(count);
   }
 
@@ -229,7 +228,7 @@ export default function SearchFilterForm() {
 
                     {/* Panel Item 4 — Status checkboxes */}
                     <MainSectionPanelItem>
-                      <FieldGroup>
+                      <FieldSet>
                         <FieldLegend variant="label">Status</FieldLegend>
                         {STATUS_FILTERS.map(({ name, label }) => (
                           <Controller
@@ -257,7 +256,7 @@ export default function SearchFilterForm() {
                             )}
                           />
                         ))}
-                      </FieldGroup>
+                      </FieldSet>
                     </MainSectionPanelItem>
 
                     {/* Panel Item 5 — Sort by */}
@@ -279,7 +278,7 @@ export default function SearchFilterForm() {
                                 )
                                   f.onBlur();
                               }}
-                              className="flex flex-col gap-y-1.5"
+                              className="flex flex-col"
                             >
                               {SORT_OPTIONS.map((opt) => (
                                 <Field

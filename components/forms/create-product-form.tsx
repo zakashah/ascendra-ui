@@ -603,6 +603,28 @@ export default function CreateProductForm() {
                           <FieldHint description="Used to calculate margin. Not visible to customers." />
                         </Field>
                       </MainSectionPanelItem>
+                      <MainSectionPanelItem>
+                        <Field>
+                          <FieldLabel htmlFor="barcode">
+                            Barcode (ISBN, UPC, GTIN)
+                          </FieldLabel>
+                          <Controller
+                            name="barcode"
+                            control={control}
+                            render={({ field: f }) => (
+                              <Input
+                                id="barcode"
+                                full
+                                placeholder="e.g. 978-3-16-148410-0"
+                                value={f.value}
+                                onChange={f.onChange}
+                                onBlur={f.onBlur}
+                              />
+                            )}
+                          />
+                          <FieldHint />
+                        </Field>
+                      </MainSectionPanelItem>
                     </MainSectionPanel>
                   </MainSection>
 
@@ -700,32 +722,6 @@ export default function CreateProductForm() {
                         </FieldGroup>
                       </MainSectionPanelItem>
                     </MainSectionPanel>
-
-                    {/* Barcode — always visible */}
-                    <MainSectionPanel>
-                      <MainSectionPanelItem>
-                        <Field>
-                          <FieldLabel htmlFor="barcode">
-                            Barcode (ISBN, UPC, GTIN)
-                          </FieldLabel>
-                          <Controller
-                            name="barcode"
-                            control={control}
-                            render={({ field: f }) => (
-                              <Input
-                                id="barcode"
-                                full
-                                placeholder="e.g. 978-3-16-148410-0"
-                                value={f.value}
-                                onChange={f.onChange}
-                                onBlur={f.onBlur}
-                              />
-                            )}
-                          />
-                          <FieldHint />
-                        </Field>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
                   </MainSection>
                 </MainContent>
               </TabContent>
@@ -733,6 +729,154 @@ export default function CreateProductForm() {
               {/* ── Tab: Shipping ─────────────────────────────────────────── */}
               <TabContent value="shipping">
                 <MainContent>
+                  <MainSection>
+                    <MainSectionHeader>
+                      <MainSectionHeaderTitle>
+                        Shipping Details
+                      </MainSectionHeaderTitle>
+                      <MainSectionHeaderSubtitle>
+                        Specify shipping dimensions and customs information.
+                      </MainSectionHeaderSubtitle>
+                    </MainSectionHeader>
+
+                    <MainSectionPanel>
+                      {/* Panel Item 3 — Shipping class */}
+                      <MainSectionPanelItem>
+                        <FieldSet>
+                          <FieldGrid>
+                            <Field>
+                              <FieldLabel htmlFor="shipping-class">
+                                Shipping Class
+                              </FieldLabel>
+                              <Controller
+                                name="shippingClass"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <Select
+                                    value={f.value}
+                                    onValueChange={f.onChange}
+                                    onOpenChange={(open) => {
+                                      if (!open) f.onBlur();
+                                    }}
+                                  >
+                                    <SelectTrigger
+                                      id="shipping-class"
+                                      className="w-full"
+                                    >
+                                      <SelectValue placeholder="Select class…" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      <SelectGroup>
+                                        {SHIPPING_CLASSES.map((s) => (
+                                          <SelectItem
+                                            key={s.value}
+                                            value={s.value}
+                                          >
+                                            {s.label}
+                                          </SelectItem>
+                                        ))}
+                                      </SelectGroup>
+                                    </SelectContent>
+                                  </Select>
+                                )}
+                              />
+                              <FieldHint />
+                            </Field>
+
+                            <Field>
+                              <FieldLabel htmlFor="country-of-origin">
+                                Country of Origin
+                              </FieldLabel>
+                              <Controller
+                                name="countryOfOrigin"
+                                control={control}
+                                render={({ field: f }) => (
+                                  <Combobox
+                                    items={COUNTRIES}
+                                    value={f.value}
+                                    onValueChange={(v) => f.onChange(v)}
+                                  >
+                                    <ComboboxInput
+                                      id="country-of-origin"
+                                      placeholder="Search country…"
+                                      onBlur={f.onBlur}
+                                      className="w-full"
+                                    />
+                                    <ComboboxContent>
+                                      <ComboboxList>
+                                        <ComboboxEmpty>
+                                          No results found.
+                                        </ComboboxEmpty>
+                                        <ComboboxCollection>
+                                          {(c: string) => (
+                                            <ComboboxItem key={c} value={c}>
+                                              {c}
+                                            </ComboboxItem>
+                                          )}
+                                        </ComboboxCollection>
+                                      </ComboboxList>
+                                    </ComboboxContent>
+                                  </Combobox>
+                                )}
+                              />
+                              <FieldHint />
+                            </Field>
+                          </FieldGrid>
+                        </FieldSet>
+                      </MainSectionPanelItem>
+
+                      {/* Panel Item 4 — Customs */}
+                      <MainSectionPanelItem>
+                        <FieldGroup>
+                          <Field>
+                            <FieldLabel htmlFor="hs-tariff-code">
+                              HS Tariff Code
+                            </FieldLabel>
+                            <Controller
+                              name="hsTariffCode"
+                              control={control}
+                              render={({ field: f }) => (
+                                <Input
+                                  id="hs-tariff-code"
+                                  full
+                                  placeholder="e.g. 8518.30"
+                                  value={f.value}
+                                  onChange={f.onChange}
+                                  onBlur={f.onBlur}
+                                />
+                              )}
+                            />
+                            <FieldHint />
+                          </Field>
+
+                          <Controller
+                            name="requiresCustoms"
+                            control={control}
+                            render={({ field: f }) => (
+                              <Field
+                                orientation="horizontal"
+                                className="items-baseline"
+                              >
+                                <Checkbox
+                                  id="requires-customs"
+                                  checked={f.value}
+                                  onCheckedChange={f.onChange}
+                                  onBlur={f.onBlur}
+                                />
+                                <FieldLabel
+                                  htmlFor="requires-customs"
+                                  className="cursor-pointer font-normal"
+                                >
+                                  Requires customs declaration
+                                </FieldLabel>
+                              </Field>
+                            )}
+                          />
+                        </FieldGroup>
+                      </MainSectionPanelItem>
+                    </MainSectionPanel>
+                  </MainSection>
+
                   <MainSection>
                     <MainSectionHeader>
                       <MainSectionHeaderTitle>
@@ -881,141 +1025,6 @@ export default function CreateProductForm() {
                           </FieldGroup>
                         </MainSectionPanelItem>
                       )}
-
-                      {/* Panel Item 3 — Shipping class */}
-                      <MainSectionPanelItem>
-                        <FieldSet>
-                          <FieldGrid>
-                            <Field>
-                              <FieldLabel htmlFor="shipping-class">
-                                Shipping Class
-                              </FieldLabel>
-                              <Controller
-                                name="shippingClass"
-                                control={control}
-                                render={({ field: f }) => (
-                                  <Select
-                                    value={f.value}
-                                    onValueChange={f.onChange}
-                                    onOpenChange={(open) => {
-                                      if (!open) f.onBlur();
-                                    }}
-                                  >
-                                    <SelectTrigger
-                                      id="shipping-class"
-                                      className="w-full"
-                                    >
-                                      <SelectValue placeholder="Select class…" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                      <SelectGroup>
-                                        {SHIPPING_CLASSES.map((s) => (
-                                          <SelectItem
-                                            key={s.value}
-                                            value={s.value}
-                                          >
-                                            {s.label}
-                                          </SelectItem>
-                                        ))}
-                                      </SelectGroup>
-                                    </SelectContent>
-                                  </Select>
-                                )}
-                              />
-                              <FieldHint />
-                            </Field>
-
-                            <Field>
-                              <FieldLabel htmlFor="country-of-origin">
-                                Country of Origin
-                              </FieldLabel>
-                              <Controller
-                                name="countryOfOrigin"
-                                control={control}
-                                render={({ field: f }) => (
-                                  <Combobox
-                                    items={COUNTRIES}
-                                    value={f.value}
-                                    onValueChange={(v) => f.onChange(v)}
-                                  >
-                                    <ComboboxInput
-                                      id="country-of-origin"
-                                      placeholder="Search country…"
-                                      onBlur={f.onBlur}
-                                      className="w-full"
-                                    />
-                                    <ComboboxContent>
-                                      <ComboboxList>
-                                        <ComboboxEmpty>
-                                          No results found.
-                                        </ComboboxEmpty>
-                                        <ComboboxCollection>
-                                          {(c: string) => (
-                                            <ComboboxItem key={c} value={c}>
-                                              {c}
-                                            </ComboboxItem>
-                                          )}
-                                        </ComboboxCollection>
-                                      </ComboboxList>
-                                    </ComboboxContent>
-                                  </Combobox>
-                                )}
-                              />
-                              <FieldHint />
-                            </Field>
-                          </FieldGrid>
-                        </FieldSet>
-                      </MainSectionPanelItem>
-
-                      {/* Panel Item 4 — Customs */}
-                      <MainSectionPanelItem>
-                        <FieldGroup>
-                          <Field>
-                            <FieldLabel htmlFor="hs-tariff-code">
-                              HS Tariff Code
-                            </FieldLabel>
-                            <Controller
-                              name="hsTariffCode"
-                              control={control}
-                              render={({ field: f }) => (
-                                <Input
-                                  id="hs-tariff-code"
-                                  full
-                                  placeholder="e.g. 8518.30"
-                                  value={f.value}
-                                  onChange={f.onChange}
-                                  onBlur={f.onBlur}
-                                />
-                              )}
-                            />
-                            <FieldHint />
-                          </Field>
-
-                          <Controller
-                            name="requiresCustoms"
-                            control={control}
-                            render={({ field: f }) => (
-                              <Field
-                                orientation="horizontal"
-                                className="items-baseline"
-                              >
-                                <Checkbox
-                                  id="requires-customs"
-                                  checked={f.value}
-                                  onCheckedChange={f.onChange}
-                                  onBlur={f.onBlur}
-                                />
-                                <FieldLabel
-                                  htmlFor="requires-customs"
-                                  className="cursor-pointer font-normal"
-                                >
-                                  Requires customs declaration
-                                </FieldLabel>
-                              </Field>
-                            )}
-                          />
-                        </FieldGroup>
-                      </MainSectionPanelItem>
                     </MainSectionPanel>
                   </MainSection>
                 </MainContent>
