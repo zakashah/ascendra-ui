@@ -69,6 +69,7 @@ import {
   SelectValue,
 } from "@/ascendra-ui/components/ui/select";
 import { Switch } from "@/ascendra-ui/components/ui/switch";
+import { MainSectionPanelField } from "@/ascendra-ui/components/layout/main-section-panel-field";
 
 // ─── Schema ────────────────────────────────────────────────────────────────────
 
@@ -1178,8 +1179,8 @@ export default function EmployeeOnboardingForm() {
                               </Field>
                             )}
                           />
-                          {enroll401k && (
-                            <Field>
+                          <MainSectionPanelField collapsed={!enroll401k}>
+                            <Field className="pl-px">
                               <FieldLabel htmlFor="s3-contribution">
                                 Contribution %
                               </FieldLabel>
@@ -1204,7 +1205,7 @@ export default function EmployeeOnboardingForm() {
                               />
                               <FieldHint optional />
                             </Field>
-                          )}
+                          </MainSectionPanelField>
                         </FieldSet>
                       </MainSectionPanelItem>
                     </MainSectionPanel>

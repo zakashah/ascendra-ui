@@ -8,7 +8,10 @@ export function WizardSteps() {
   const { steps, currentStep, goToStep } = useWizardContext();
 
   return (
-    <div className="mt-6 flex items-center gap-1 overflow-x-auto pb-2 no-scrollbar">
+    <div
+      data-slot="wizard-steps"
+      className="mt-6 flex items-center gap-1 overflow-x-auto pb-2 no-scrollbar"
+    >
       {steps.map((step, i) => (
         <div key={i} className="flex items-center gap-1 shrink-0 p-1">
           <button
