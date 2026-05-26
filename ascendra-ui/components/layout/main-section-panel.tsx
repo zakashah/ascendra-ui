@@ -2,6 +2,7 @@
 
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 import { useMainSectionContext } from "@/ascendra-ui/components/layout/main-section";
+import { useWizardContextSafe } from "@/ascendra-ui/providers/wizard/wizard.hook";
 
 export function MainSectionPanel({
   collapsed,
@@ -9,8 +10,13 @@ export function MainSectionPanel({
   children,
   ...props
 }: React.ComponentProps<"div"> & { collapsed?: boolean }) {
-  const { collapseable, collapsed: contextCollapsed } = useMainSectionContext();
-  const isCollapsed = collapsed ?? (collapseable ? contextCollapsed : false);
+  const { collapseable, collapsed: contextCollapsed, step } = useMainSectionContext();
+  const wizard = useWizardContextSafe();
+
+  const isCollapsed =
+    step !== undefined && wizard !== null
+      ? wizard.currentStep !== step
+      : (collapsed ?? (collapseable ? contextCollapsed : false));
 
   return (
     <div

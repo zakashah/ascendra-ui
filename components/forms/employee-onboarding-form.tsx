@@ -1,11 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { LuCheck, LuShieldCheck } from "react-icons/lu";
+import { LuShieldCheck } from "react-icons/lu";
 import { z } from "zod";
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 
 import { MainSection } from "@/ascendra-ui/components/layout/main-section";
 import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
@@ -24,10 +22,14 @@ import { PageContent } from "@/ascendra-ui/components/layout/page-content";
 import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 
+import { WizardProvider } from "@/ascendra-ui/providers/wizard/wizard.provider";
+import type { WizardStep } from "@/ascendra-ui/providers/wizard/wizard.types";
+import { WizardSteps } from "@/ascendra-ui/components/wizard/wizard-steps";
+import { WizardNavigator } from "@/ascendra-ui/components/wizard/wizard-navigator";
+
 import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
 import { BackLink } from "@/ascendra-ui/components/forms/back-link";
 import { DatePicker } from "@/ascendra-ui/components/date/date-picker";
-import { Button } from "@/ascendra-ui/components/ui/button";
 import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
 import {
   Combobox,
@@ -210,7 +212,6 @@ const ACCESS_LEVELS = [
   { value: "admin", label: "Admin" },
 ];
 
-// Step field groups for validation
 const STEP_FIELDS: (keyof OnboardingValues)[][] = [
   [
     "firstName",
@@ -237,19 +238,9 @@ const STEP_FIELDS: (keyof OnboardingValues)[][] = [
   ["laptopType", "operatingSystem", "licenseTier", "accessLevel"],
 ];
 
-const STEP_LABELS = [
-  "Personal Information",
-  "Employment Details",
-  "Compensation & Benefits",
-  "IT & System Access",
-];
-
 // ─── Form ──────────────────────────────────────────────────────────────────────
 
 export default function EmployeeOnboardingForm() {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [isSaving, setIsSaving] = useState(false);
-
   const {
     control,
     trigger,
@@ -303,25 +294,25 @@ export default function EmployeeOnboardingForm() {
   const accessLevel = watch("accessLevel");
   const enroll401k = watch("enroll401k");
 
-  async function handleNext() {
-    const ok = await trigger(STEP_FIELDS[currentStep]);
-    if (ok) setCurrentStep((s) => s + 1);
-  }
+  const WIZARD_STEPS: WizardStep[] = [
+    { label: "Personal Information", onNext: () => trigger(STEP_FIELDS[0]) },
+    { label: "Employment Details", onNext: () => trigger(STEP_FIELDS[1]) },
+    { label: "Compensation & Benefits", onNext: () => trigger(STEP_FIELDS[2]) },
+    { label: "IT & System Access" },
+  ];
 
   async function handleSave(): Promise<boolean> {
     const ok = await trigger();
     if (!ok) return false;
-    setIsSaving(true);
     await new Promise((r) => setTimeout(r, 1400));
-    setIsSaving(false);
     reset(getValues());
     return true;
   }
 
   return (
-    <>
-      <div className="app-container mt-8 pb-24 lg:mt-10 lg:pb-28">
-        <div className="mx-auto flex w-full max-w-3xl flex-col">
+    <div className="app-container mt-8 pb-24 lg:mt-10 lg:pb-28">
+      <div className="mx-auto flex w-full max-w-3xl flex-col">
+        <WizardProvider steps={WIZARD_STEPS} onSubmit={handleSave}>
           <BackLink href="/showcase/forms">Forms Gallery</BackLink>
           <PageHeader>
             <PageHeaderGroup>
@@ -332,70 +323,23 @@ export default function EmployeeOnboardingForm() {
               </PageSubtitle>
             </PageHeaderGroup>
           </PageHeader>
-
-          {/* Step indicator */}
-          <div className="mt-6 flex items-center gap-1 overflow-x-auto pb-2 no-scrollbar">
-            {STEP_LABELS.map((label, i) => (
-              <div key={i} className="flex items-center gap-1 shrink-0 p-1">
-                <button
-                  type="button"
-                  onClick={() => currentStep > i && setCurrentStep(i)}
-                  className={cn(
-                    "flex size-5 shrink-0 items-center justify-center rounded-full text-xs font-semibold transition-colors",
-                    i < currentStep
-                      ? "bg-primary text-primary-foreground cursor-pointer"
-                      : i === currentStep
-                        ? "bg-primary text-primary-foreground ring-2 ring-primary/40 ring-offset-2 mr-1"
-                        : "bg-muted text-muted-foreground cursor-default",
-                  )}
-                >
-                  {i < currentStep ? <LuCheck className="size-3.5" /> : i + 1}
-                </button>
-                <span
-                  onClick={() => i < currentStep && setCurrentStep(i)}
-                  className={cn(
-                    "text-sm whitespace-nowrap",
-                    i === currentStep
-                      ? "font-medium text-foreground"
-                      : i < currentStep
-                        ? "text-muted-foreground cursor-pointer hover:text-foreground"
-                        : "text-muted-foreground",
-                  )}
-                >
-                  {label}
-                </span>
-                {i < STEP_LABELS.length - 1 && (
-                  <div className="mx-1 h-px w-6 shrink-0 bg-border" />
-                )}
-              </div>
-            ))}
-          </div>
-
+          <WizardSteps />
           <PageMain>
             <PageWrapper>
               <PageContent>
                 <MainContent>
                   {/* ── Step 1: Personal Information ──────────────────────── */}
-                  <MainSection>
+                  <MainSection step={0}>
                     <MainSectionHeader>
-                      <MainSectionHeaderTitle
-                        onClick={() => currentStep > 0 && setCurrentStep(0)}
-                        className={
-                          currentStep > 0
-                            ? "cursor-pointer hover:opacity-70"
-                            : undefined
-                        }
-                      >
+                      <MainSectionHeaderTitle>
                         Step 1 — Personal Information
                       </MainSectionHeaderTitle>
-                      {currentStep === 0 && (
-                        <MainSectionHeaderSubtitle>
-                          Enter the employee&apos;s personal details and home
-                          address.
-                        </MainSectionHeaderSubtitle>
-                      )}
+                      <MainSectionHeaderSubtitle>
+                        Enter the employee&apos;s personal details and home
+                        address.
+                      </MainSectionHeaderSubtitle>
                     </MainSectionHeader>
-                    <MainSectionPanel collapsed={currentStep !== 0}>
+                    <MainSectionPanel>
                       <MainSectionPanelItem>
                         <FieldSet>
                           <FieldGrid>
@@ -718,26 +662,17 @@ export default function EmployeeOnboardingForm() {
                   </MainSection>
 
                   {/* ── Step 2: Employment Details ─────────────────────────── */}
-                  <MainSection>
+                  <MainSection step={1}>
                     <MainSectionHeader>
-                      <MainSectionHeaderTitle
-                        onClick={() => currentStep > 1 && setCurrentStep(1)}
-                        className={
-                          currentStep > 1
-                            ? "cursor-pointer hover:opacity-70"
-                            : undefined
-                        }
-                      >
+                      <MainSectionHeaderTitle>
                         Step 2 — Employment Details
                       </MainSectionHeaderTitle>
-                      {currentStep === 1 && (
-                        <MainSectionHeaderSubtitle>
-                          Define the role, reporting structure, and start date.
-                        </MainSectionHeaderSubtitle>
-                      )}
+                      <MainSectionHeaderSubtitle>
+                        Define the role, reporting structure, and start date.
+                      </MainSectionHeaderSubtitle>
                     </MainSectionHeader>
 
-                    <MainSectionPanel collapsed={currentStep !== 1}>
+                    <MainSectionPanel>
                       <MainSectionPanelItem>
                         <FieldSet>
                           <FieldGrid>
@@ -1025,26 +960,17 @@ export default function EmployeeOnboardingForm() {
                   </MainSection>
 
                   {/* ── Step 3: Compensation & Benefits ───────────────────── */}
-                  <MainSection>
+                  <MainSection step={2}>
                     <MainSectionHeader>
-                      <MainSectionHeaderTitle
-                        onClick={() => currentStep > 2 && setCurrentStep(2)}
-                        className={
-                          currentStep > 2
-                            ? "cursor-pointer hover:opacity-70"
-                            : undefined
-                        }
-                      >
+                      <MainSectionHeaderTitle>
                         Step 3 — Compensation &amp; Benefits
                       </MainSectionHeaderTitle>
-                      {currentStep === 2 && (
-                        <MainSectionHeaderSubtitle>
-                          Set salary, equity, and benefits enrollment.
-                        </MainSectionHeaderSubtitle>
-                      )}
+                      <MainSectionHeaderSubtitle>
+                        Set salary, equity, and benefits enrollment.
+                      </MainSectionHeaderSubtitle>
                     </MainSectionHeader>
 
-                    <MainSectionPanel collapsed={currentStep !== 2}>
+                    <MainSectionPanel>
                       <MainSectionPanelItem>
                         <FieldSet>
                           <FieldGrid>
@@ -1285,19 +1211,17 @@ export default function EmployeeOnboardingForm() {
                   </MainSection>
 
                   {/* ── Step 4: IT & System Access ─────────────────────────── */}
-                  <MainSection>
+                  <MainSection step={3}>
                     <MainSectionHeader>
                       <MainSectionHeaderTitle>
                         Step 4 — IT &amp; System Access
                       </MainSectionHeaderTitle>
-                      {currentStep === 3 && (
-                        <MainSectionHeaderSubtitle>
-                          Provision hardware, software, and access permissions.
-                        </MainSectionHeaderSubtitle>
-                      )}
+                      <MainSectionHeaderSubtitle>
+                        Provision hardware, software, and access permissions.
+                      </MainSectionHeaderSubtitle>
                     </MainSectionHeader>
 
-                    <MainSectionPanel collapsed={currentStep !== 3}>
+                    <MainSectionPanel>
                       <MainSectionPanelItem>
                         <FieldGroup>
                           <FieldSet>
@@ -1555,11 +1479,11 @@ export default function EmployeeOnboardingForm() {
                                 />
                                 <FieldLabel
                                   htmlFor="s4-admin-console"
-                                  className={cn(
-                                    "font-normal",
-                                    accessLevel !== "admin" &&
-                                      "cursor-default opacity-50",
-                                  )}
+                                  className={
+                                    accessLevel !== "admin"
+                                      ? "font-normal cursor-default opacity-50"
+                                      : "font-normal"
+                                  }
                                 >
                                   Admin console access
                                 </FieldLabel>
@@ -1620,47 +1544,22 @@ export default function EmployeeOnboardingForm() {
                       </MainSectionPanelItem>
                     </MainSectionPanel>
 
-                    {currentStep === 3 && (
-                      <MainSectionFooter>
-                        <MainSectionFooterIcon icon={LuShieldCheck} />
-                        <span>
-                          IT provisioning typically takes 1–2 business days
-                          before the start date.
-                        </span>
-                      </MainSectionFooter>
-                    )}
+                    <MainSectionFooter>
+                      <MainSectionFooterIcon icon={LuShieldCheck} />
+                      <span>
+                        IT provisioning typically takes 1–2 business days before
+                        the start date.
+                      </span>
+                    </MainSectionFooter>
                   </MainSection>
 
-                  {/* Navigation */}
-                  <div className="flex items-center justify-between pt-2">
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      onClick={() => setCurrentStep((s) => s - 1)}
-                      disabled={currentStep === 0}
-                    >
-                      Previous
-                    </Button>
-                    {currentStep < 3 ? (
-                      <Button type="button" onClick={handleNext}>
-                        Next
-                      </Button>
-                    ) : (
-                      <Button
-                        type="button"
-                        onClick={handleSave}
-                        disabled={isSaving}
-                      >
-                        {isSaving ? "Submitting…" : "Submit"}
-                      </Button>
-                    )}
-                  </div>
+                  <WizardNavigator />
                 </MainContent>
               </PageContent>
             </PageWrapper>
           </PageMain>
-        </div>
+        </WizardProvider>
       </div>
-    </>
+    </div>
   );
 }

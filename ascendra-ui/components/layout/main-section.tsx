@@ -8,12 +8,14 @@ type MainSectionContextValue = {
   collapseable: boolean;
   collapsed: boolean;
   onToggle: () => void;
+  step?: number;
 };
 
 const MainSectionContext = createContext<MainSectionContextValue>({
   collapseable: false,
   collapsed: false,
   onToggle: () => {},
+  step: undefined,
 });
 
 export function useMainSectionContext() {
@@ -24,6 +26,7 @@ export function MainSection({
   danger = false,
   collapseable,
   hasError = false,
+  step,
   className,
   children,
   ...props
@@ -31,6 +34,7 @@ export function MainSection({
   danger?: boolean;
   collapseable?: "expanded" | "collapsed";
   hasError?: boolean;
+  step?: number;
 }) {
   const [collapsed, setCollapsed] = useState(collapseable === "collapsed");
 
@@ -40,6 +44,7 @@ export function MainSection({
         collapseable: !!collapseable,
         collapsed,
         onToggle: () => setCollapsed((prev) => !prev),
+        step,
       }}
     >
       <section
