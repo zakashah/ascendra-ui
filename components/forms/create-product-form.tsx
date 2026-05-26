@@ -37,6 +37,7 @@ import {
 } from "@/ascendra-ui/components/ui/combobox";
 import {
   Field,
+  FieldGrid,
   FieldGroup,
   FieldHint,
   FieldLabel,
@@ -59,6 +60,8 @@ import {
   SelectValue,
 } from "@/ascendra-ui/components/ui/select";
 import { Switch } from "@/ascendra-ui/components/ui/switch";
+import { MainSectionPanelItemCrown } from "@/ascendra-ui/components/layout/main-section-panel-item-crown";
+import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 
 // ─── Schema ────────────────────────────────────────────────────────────────────
 
@@ -105,14 +108,7 @@ const CATEGORIES = [
   "Other",
 ];
 
-const BRANDS = [
-  "Ascendra",
-  "NovaBrand",
-  "Apex",
-  "Prime",
-  "CoreLine",
-  "Other",
-];
+const BRANDS = ["Ascendra", "NovaBrand", "Apex", "Prime", "CoreLine", "Other"];
 
 const STATUSES = [
   { value: "draft", label: "Draft" },
@@ -221,10 +217,10 @@ export default function CreateProductForm() {
 
               {/* ── Tab: Details ──────────────────────────────────────────── */}
               <TabContent value="details">
-                <div className="w-full pb-6 flex flex-col gap-6">
+                <MainContent>
                   <SimpleAlert>
-                    Products in <strong>Draft</strong> status are not visible
-                    to customers.
+                    Products in <strong>Draft</strong> status are not visible to
+                    customers.
                   </SimpleAlert>
 
                   <MainSection>
@@ -241,7 +237,7 @@ export default function CreateProductForm() {
                       {/* Panel Item 1 — Identification */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="product-name">
                                 Product Name
@@ -266,7 +262,6 @@ export default function CreateProductForm() {
                                 mandatory
                               />
                             </Field>
-
                             <Field>
                               <FieldLabel htmlFor="sku">SKU</FieldLabel>
                               <Controller
@@ -283,16 +278,16 @@ export default function CreateProductForm() {
                                   />
                                 )}
                               />
-                              <FieldHint optional />
+                              <FieldHint help="What is SKU, this is the explanation" />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
                       {/* Panel Item 2 — Classification */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="category">
                                 Category
@@ -334,7 +329,6 @@ export default function CreateProductForm() {
                                 mandatory
                               />
                             </Field>
-
                             <Field>
                               <FieldLabel htmlFor="sub-category">
                                 Sub-category
@@ -353,16 +347,16 @@ export default function CreateProductForm() {
                                   />
                                 )}
                               />
-                              <FieldHint optional />
+                              <FieldHint />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
                       {/* Panel Item 3 — Brand & Status */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="brand">Brand</FieldLabel>
                               <Controller
@@ -397,7 +391,7 @@ export default function CreateProductForm() {
                                   </Combobox>
                                 )}
                               />
-                              <FieldHint optional />
+                              <FieldHint />
                             </Field>
 
                             <Field>
@@ -442,7 +436,7 @@ export default function CreateProductForm() {
                                 mandatory
                               />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
@@ -465,6 +459,7 @@ export default function CreateProductForm() {
                                   onChange={f.onChange}
                                   onBlur={f.onBlur}
                                   aria-invalid={!!errors.description}
+                                  maxLength={250}
                                 />
                               </InputGroup>
                             )}
@@ -477,9 +472,13 @@ export default function CreateProductForm() {
                       </MainSectionPanelItem>
 
                       {/* Panel Item 5 — Tags */}
-                      <MainSectionPanelItem>
+                      <MainSectionPanelItem className="relative">
+                        <MainSectionPanelItemCrown variant="default">
+                          Specify the relvant for product tags to improve
+                          searchability. These tags will not be visible to
+                          customers.
+                        </MainSectionPanelItemCrown>
                         <Field>
-                          <FieldLabel htmlFor="tags">Tags</FieldLabel>
                           <Controller
                             name="tags"
                             control={control}
@@ -494,20 +493,17 @@ export default function CreateProductForm() {
                               />
                             )}
                           />
-                          <FieldHint
-                            description="Comma-separated tags for search and filtering."
-                            optional
-                          />
+                          <FieldHint description="Comma-separated tags for search and filtering." />
                         </Field>
                       </MainSectionPanelItem>
                     </MainSectionPanel>
                   </MainSection>
-                </div>
+                </MainContent>
               </TabContent>
 
               {/* ── Tab: Pricing & Inventory ──────────────────────────────── */}
               <TabContent value="pricing">
-                <div className="w-full pb-6 flex flex-col gap-6">
+                <MainContent>
                   {/* Section: Pricing */}
                   <MainSection>
                     <MainSectionHeader>
@@ -521,7 +517,7 @@ export default function CreateProductForm() {
                       {/* Panel Item 1 — Price */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="price">Price</FieldLabel>
                               <Controller
@@ -539,9 +535,7 @@ export default function CreateProductForm() {
                                       value={f.value}
                                       onChange={f.onChange}
                                       onBlur={f.onBlur}
-                                      aria-invalid={
-                                        !!errors.price || undefined
-                                      }
+                                      aria-invalid={!!errors.price || undefined}
                                     />
                                   </InputGroup>
                                 )}
@@ -575,12 +569,9 @@ export default function CreateProductForm() {
                                   </InputGroup>
                                 )}
                               />
-                              <FieldHint
-                                description="Shown as strikethrough to customers."
-                                optional
-                              />
+                              <FieldHint description="Shown as strikethrough to customers." />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
@@ -609,10 +600,7 @@ export default function CreateProductForm() {
                               </InputGroup>
                             )}
                           />
-                          <FieldHint
-                            description="Used to calculate margin. Not visible to customers."
-                            optional
-                          />
+                          <FieldHint description="Used to calculate margin. Not visible to customers." />
                         </Field>
                       </MainSectionPanelItem>
                     </MainSectionPanel>
@@ -639,7 +627,7 @@ export default function CreateProductForm() {
                       <MainSectionPanelItem>
                         <FieldGroup>
                           <FieldSet>
-                            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <FieldGrid>
                               <Field>
                                 <FieldLabel htmlFor="quantity">
                                   Quantity on Hand
@@ -681,9 +669,9 @@ export default function CreateProductForm() {
                                     />
                                   )}
                                 />
-                                <FieldHint optional />
+                                <FieldHint />
                               </Field>
-                            </div>
+                            </FieldGrid>
                           </FieldSet>
 
                           <Controller
@@ -734,17 +722,17 @@ export default function CreateProductForm() {
                               />
                             )}
                           />
-                          <FieldHint optional />
+                          <FieldHint />
                         </Field>
                       </MainSectionPanelItem>
                     </MainSectionPanel>
                   </MainSection>
-                </div>
+                </MainContent>
               </TabContent>
 
               {/* ── Tab: Shipping ─────────────────────────────────────────── */}
               <TabContent value="shipping">
-                <div className="w-full pb-6 flex flex-col gap-6">
+                <MainContent>
                   <MainSection>
                     <MainSectionHeader>
                       <MainSectionHeaderTitle>
@@ -758,7 +746,10 @@ export default function CreateProductForm() {
                     <MainSectionPanel>
                       {/* Panel Item 1 — Physical product toggle */}
                       <MainSectionPanelItem>
-                        <Field orientation="horizontal" className="items-center">
+                        <Field
+                          orientation="horizontal"
+                          className="items-center"
+                        >
                           <Controller
                             name="isPhysical"
                             control={control}
@@ -787,7 +778,7 @@ export default function CreateProductForm() {
                         <MainSectionPanelItem>
                           <FieldGroup>
                             <FieldSet>
-                              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                              <FieldGrid>
                                 <Field>
                                   <FieldLabel htmlFor="weight">
                                     Weight
@@ -811,9 +802,9 @@ export default function CreateProductForm() {
                                       </InputGroup>
                                     )}
                                   />
-                                  <FieldHint optional />
+                                  <FieldHint />
                                 </Field>
-                              </div>
+                              </FieldGrid>
                             </FieldSet>
 
                             <FieldSet>
@@ -885,7 +876,7 @@ export default function CreateProductForm() {
                                   />
                                 </Field>
                               </div>
-                              <FieldHint optional />
+                              <FieldHint />
                             </FieldSet>
                           </FieldGroup>
                         </MainSectionPanelItem>
@@ -894,7 +885,7 @@ export default function CreateProductForm() {
                       {/* Panel Item 3 — Shipping class */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="shipping-class">
                                 Shipping Class
@@ -931,7 +922,7 @@ export default function CreateProductForm() {
                                   </Select>
                                 )}
                               />
-                              <FieldHint optional />
+                              <FieldHint />
                             </Field>
 
                             <Field>
@@ -970,9 +961,9 @@ export default function CreateProductForm() {
                                   </Combobox>
                                 )}
                               />
-                              <FieldHint optional />
+                              <FieldHint />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
@@ -997,7 +988,7 @@ export default function CreateProductForm() {
                                 />
                               )}
                             />
-                            <FieldHint optional />
+                            <FieldHint />
                           </Field>
 
                           <Controller
@@ -1027,7 +1018,7 @@ export default function CreateProductForm() {
                       </MainSectionPanelItem>
                     </MainSectionPanel>
                   </MainSection>
-                </div>
+                </MainContent>
               </TabContent>
             </Tabs>
           </PageMain>

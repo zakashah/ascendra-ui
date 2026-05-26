@@ -36,6 +36,7 @@ import {
 } from "@/ascendra-ui/components/ui/combobox";
 import {
   Field,
+  FieldGrid,
   FieldGroup,
   FieldHint,
   FieldInfo,
@@ -62,6 +63,7 @@ import {
   SelectValue,
 } from "@/ascendra-ui/components/ui/select";
 import { Switch } from "@/ascendra-ui/components/ui/switch";
+import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 
 // ─── Schemas ───────────────────────────────────────────────────────────────────
 
@@ -293,7 +295,7 @@ export default function UserProfileForm() {
 
               {/* ── Tab: General ──────────────────────────────────────────── */}
               <TabContent value="general">
-                <div className="w-full pb-6 flex flex-col gap-6">
+                <MainContent>
                   <MainSection>
                     <MainSectionHeader>
                       <MainSectionHeaderTitle>
@@ -308,7 +310,7 @@ export default function UserProfileForm() {
                       {/* Panel Item 1 — Identity */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabelGroup>
                                 <FieldLabel htmlFor="first-name">
@@ -412,7 +414,7 @@ export default function UserProfileForm() {
                                 error={ge.username as { message?: string }}
                               />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
@@ -523,7 +525,7 @@ export default function UserProfileForm() {
                       members immediately.
                     </MainSectionFooter>
                   </MainSection>
-                </div>
+                </MainContent>
 
                 <UnsavedChangesBar
                   isDirty={generalDirty}
@@ -538,7 +540,7 @@ export default function UserProfileForm() {
 
               {/* ── Tab: Preferences ──────────────────────────────────────── */}
               <TabContent value="preferences">
-                <div className="w-full pb-6 flex flex-col gap-6">
+                <MainContent>
                   {/* Section: Regional Settings */}
                   <MainSection>
                     <MainSectionHeader>
@@ -555,7 +557,7 @@ export default function UserProfileForm() {
                       {/* Panel Item 1 — Locale */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="language">
                                 Language
@@ -642,7 +644,7 @@ export default function UserProfileForm() {
                                 mandatory
                               />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
@@ -807,7 +809,7 @@ export default function UserProfileForm() {
                       </MainSectionPanelItem>
                     </MainSectionPanel>
                   </MainSection>
-                </div>
+                </MainContent>
 
                 <UnsavedChangesBar
                   isDirty={preferencesDirty}
@@ -822,7 +824,7 @@ export default function UserProfileForm() {
 
               {/* ── Tab: Notifications ────────────────────────────────────── */}
               <TabContent value="notifications">
-                <div className="w-full pb-6 flex flex-col gap-6">
+                <MainContent>
                   {/* Section: Email Notifications */}
                   <MainSection>
                     <MainSectionHeader>
@@ -939,7 +941,7 @@ export default function UserProfileForm() {
                       your account.
                     </MainSectionFooter>
                   </MainSection>
-                </div>
+                </MainContent>
 
                 <UnsavedChangesBar
                   isDirty={notificationsDirty}

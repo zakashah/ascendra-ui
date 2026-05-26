@@ -41,6 +41,7 @@ import {
 } from "@/ascendra-ui/components/ui/combobox";
 import {
   Field,
+  FieldGrid,
   FieldGroup,
   FieldHint,
   FieldLabel,
@@ -332,7 +333,7 @@ export default function EmployeeOnboardingForm() {
                     <MainSectionPanel collapsed={currentStep !== 0}>
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="s1-first-name">First Name</FieldLabel>
                               <Controller name="firstName" control={control}
@@ -373,13 +374,13 @@ export default function EmployeeOnboardingForm() {
                                 )} />
                               <FieldHint error={errors.nationalId as { message?: string }} />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="s1-email">Personal Email</FieldLabel>
                               <Controller name="personalEmail" control={control}
@@ -400,7 +401,7 @@ export default function EmployeeOnboardingForm() {
                                 )} />
                               <FieldHint error={errors.personalPhone as { message?: string }} />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
@@ -417,7 +418,7 @@ export default function EmployeeOnboardingForm() {
                             <FieldHint error={errors.street as { message?: string }} />
                           </Field>
                           <FieldSet>
-                            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <FieldGrid>
                               <Field>
                                 <FieldLabel htmlFor="s1-city">City</FieldLabel>
                                 <Controller name="city" control={control}
@@ -474,7 +475,7 @@ export default function EmployeeOnboardingForm() {
                                   )} />
                                 <FieldHint error={errors.country as { message?: string }} />
                               </Field>
-                            </div>
+                            </FieldGrid>
                           </FieldSet>
                         </FieldGroup>
                       </MainSectionPanelItem>
@@ -497,7 +498,7 @@ export default function EmployeeOnboardingForm() {
                     <MainSectionPanel collapsed={currentStep !== 1}>
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="s2-job-title">Job Title</FieldLabel>
                               <Controller name="jobTitle" control={control}
@@ -587,13 +588,13 @@ export default function EmployeeOnboardingForm() {
                                 )} />
                               <FieldHint error={errors.employmentType as { message?: string }} />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="s2-work-email">Work Email</FieldLabel>
                               <Controller name="workEmail" control={control}
@@ -612,7 +613,7 @@ export default function EmployeeOnboardingForm() {
                                 )} />
                               <FieldHint description="Assigned automatically." optional />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
@@ -639,7 +640,7 @@ export default function EmployeeOnboardingForm() {
                     <MainSectionPanel collapsed={currentStep !== 2}>
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="s3-salary">Base Salary</FieldLabel>
                               <Controller name="baseSalary" control={control}
@@ -672,7 +673,7 @@ export default function EmployeeOnboardingForm() {
                                 )} />
                               <FieldHint error={errors.payFrequency as { message?: string }} />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
@@ -774,7 +775,7 @@ export default function EmployeeOnboardingForm() {
                       <MainSectionPanelItem>
                         <FieldGroup>
                           <FieldSet>
-                            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <FieldGrid>
                               <Field>
                                 <FieldLabel htmlFor="s4-laptop">Laptop Type</FieldLabel>
                                 <Controller name="laptopType" control={control}
@@ -792,7 +793,7 @@ export default function EmployeeOnboardingForm() {
                                   )} />
                                 <FieldHint error={errors.laptopType as { message?: string }} />
                               </Field>
-                            </div>
+                            </FieldGrid>
                           </FieldSet>
 
                           <FieldSet>

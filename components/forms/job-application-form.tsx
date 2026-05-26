@@ -35,6 +35,7 @@ import {
 } from "@/ascendra-ui/components/ui/combobox";
 import {
   Field,
+  FieldGrid,
   FieldGroup,
   FieldHint,
   FieldLabel,
@@ -231,7 +232,7 @@ export default function JobApplicationForm() {
                       {/* Panel Item 1 — Name */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="first-name">
                                 First Name
@@ -283,14 +284,14 @@ export default function JobApplicationForm() {
                                 mandatory
                               />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
                       {/* Panel Item 2 — Contact */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="email">
                                 Email Address
@@ -340,14 +341,14 @@ export default function JobApplicationForm() {
                               />
                               <FieldHint />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
                       {/* Panel Item 3 — Online presence */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="linkedin">
                                 LinkedIn URL
@@ -391,7 +392,7 @@ export default function JobApplicationForm() {
                               />
                               <FieldHint />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
                     </MainSectionPanel>
@@ -413,7 +414,7 @@ export default function JobApplicationForm() {
                       {/* Panel Item 1 — Role */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="position">
                                 Position
@@ -494,14 +495,14 @@ export default function JobApplicationForm() {
                               />
                               <FieldHint />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
                       {/* Panel Item 2 — Availability & arrangement */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="available-from">
                                 Available From
@@ -576,7 +577,7 @@ export default function JobApplicationForm() {
                                 mandatory
                               />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
@@ -660,7 +661,7 @@ export default function JobApplicationForm() {
                       {/* Panel Item 1 — Experience */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="years-experience">
                                 Years of Experience
@@ -754,14 +755,14 @@ export default function JobApplicationForm() {
                                 mandatory
                               />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
                       {/* Panel Item 2 — Current situation */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="current-employer">
                                 Current Employer
@@ -821,7 +822,7 @@ export default function JobApplicationForm() {
                               />
                               <FieldHint />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
@@ -844,6 +845,7 @@ export default function JobApplicationForm() {
                                   onChange={f.onChange}
                                   onBlur={f.onBlur}
                                   aria-invalid={!!errors.coverLetter}
+                                  maxLength={300}
                                 />
                               </InputGroup>
                             )}

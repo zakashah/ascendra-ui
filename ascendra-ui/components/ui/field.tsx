@@ -27,6 +27,20 @@ function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   );
 }
 
+function FieldGrid({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="field-grid"
+      className={cn(
+        "grid grid-cols-1 gap-5 sm:grid-cols-2",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+
 function FieldLegend({
   className,
   variant = "legend",
@@ -300,7 +314,7 @@ function FieldHint({
   optional?: boolean;
   help?: string;
 }) {
-  if (!error && !description && !mandatory && !optional) return null;
+  if (!error && !description && !mandatory && !optional && !help) return null;
 
   return (
     <div
@@ -363,6 +377,7 @@ export {
   FieldLegend,
   FieldSeparator,
   FieldSet,
+  FieldGrid,
   FieldContent,
   FieldTitle,
 };

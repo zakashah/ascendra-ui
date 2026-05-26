@@ -40,6 +40,7 @@ import {
 } from "@/ascendra-ui/components/ui/combobox";
 import {
   Field,
+  FieldGrid,
   FieldGroup,
   FieldHint,
   FieldLabel,
@@ -52,6 +53,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
   InputGroupText,
+  InputGroupTextarea,
 } from "@/ascendra-ui/components/ui/input-group";
 import {
   RadioGroup,
@@ -237,7 +239,7 @@ export default function ProjectKickoffForm() {
                       {/* Panel Item 1 — Identity */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="project-name">
                                 Project Name
@@ -283,7 +285,7 @@ export default function ProjectKickoffForm() {
                               />
                               <FieldHint />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
@@ -298,14 +300,14 @@ export default function ProjectKickoffForm() {
                             control={control}
                             render={({ field: f }) => (
                               <InputGroup>
-                                <textarea
+                                <InputGroupTextarea
                                   id="description"
                                   rows={3}
-                                  placeholder="Brief description of the project goals and scope…"
+                                  placeholder="Brief reason for your visit…"
                                   value={f.value}
                                   onChange={f.onChange}
                                   onBlur={f.onBlur}
-                                  className="w-full flex-1 resize-none bg-transparent px-3 py-2 text-sm border-0 ring-0 outline-none placeholder:text-gray-500"
+                                  maxLength={240}
                                 />
                               </InputGroup>
                             )}
@@ -317,7 +319,7 @@ export default function ProjectKickoffForm() {
                       {/* Panel Item 3 — Classification */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="proj-status">
                                 Status
@@ -407,7 +409,7 @@ export default function ProjectKickoffForm() {
                                 mandatory
                               />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
@@ -415,7 +417,7 @@ export default function ProjectKickoffForm() {
                       <MainSectionPanelItem>
                         <FieldGroup>
                           <FieldSet>
-                            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <FieldGrid>
                               <Field>
                                 <FieldLabel htmlFor="client">
                                   Client / Company
@@ -454,11 +456,13 @@ export default function ProjectKickoffForm() {
                                 />
                                 <FieldHint />
                               </Field>
-                            </div>
+                            </FieldGrid>
                           </FieldSet>
 
                           <FieldSet>
-                            <FieldLegend variant="label">Visibility</FieldLegend>
+                            <FieldLegend variant="label">
+                              Visibility
+                            </FieldLegend>
                             <Controller
                               name="visibility"
                               control={control}
@@ -520,9 +524,7 @@ export default function ProjectKickoffForm() {
                       {/* Panel Item 1 — Ownership */}
                       <MainSectionPanelItem>
                         <Field>
-                          <FieldLabel htmlFor="owner">
-                            Project Owner
-                          </FieldLabel>
+                          <FieldLabel htmlFor="owner">Project Owner</FieldLabel>
                           <Controller
                             name="owner"
                             control={control}
@@ -658,7 +660,7 @@ export default function ProjectKickoffForm() {
                       {/* Panel Item 2 — Budget */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="budget">
                                 Total Budget
@@ -723,7 +725,7 @@ export default function ProjectKickoffForm() {
                               />
                               <FieldHint />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 

@@ -38,6 +38,7 @@ import {
 } from "@/ascendra-ui/components/ui/combobox";
 import {
   Field,
+  FieldGrid,
   FieldGroup,
   FieldHint,
   FieldLabel,
@@ -552,7 +553,7 @@ export default function SupportTicketForm() {
                       {/* Panel Item 1 — Environment */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="os">
                                 Operating System
@@ -670,7 +671,7 @@ export default function SupportTicketForm() {
                               />
                               <FieldHint />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 

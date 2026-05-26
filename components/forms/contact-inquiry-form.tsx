@@ -31,6 +31,7 @@ import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
 import {
   Field,
   FieldDescription,
+  FieldGrid,
   FieldGroup,
   FieldHint,
   FieldLabel,
@@ -169,7 +170,7 @@ export default function ContactInquiryForm() {
                       {/* ── Contact Details ──────────────────────────────────────────── */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="full-name">
                                 Full Name
@@ -267,7 +268,7 @@ export default function ContactInquiryForm() {
                               />
                               <FieldHint mandatory />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 

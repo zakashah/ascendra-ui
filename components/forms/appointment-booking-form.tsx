@@ -39,6 +39,7 @@ import {
 } from "@/ascendra-ui/components/ui/combobox";
 import {
   Field,
+  FieldGrid,
   FieldGroup,
   FieldHint,
   FieldLabel,
@@ -248,7 +249,7 @@ export default function AppointmentBookingForm() {
                       {/* Panel Item 2 — Provider & Location */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="provider">
                                 Provider
@@ -335,7 +336,7 @@ export default function AppointmentBookingForm() {
                                 error={errors.location as { message?: string }}
                               />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
@@ -358,6 +359,7 @@ export default function AppointmentBookingForm() {
                                   onChange={f.onChange}
                                   onBlur={f.onBlur}
                                   readOnly
+                                  maxLength={240}
                                 />
                               </InputGroup>
                             )}
@@ -534,7 +536,7 @@ export default function AppointmentBookingForm() {
                       {/* Panel Item 1 — Personal */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="full-name">
                                 Full Name
@@ -586,14 +588,14 @@ export default function AppointmentBookingForm() {
                                 }
                               />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
                       {/* Panel Item 2 — Contact */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="patient-phone">
                                 Phone
@@ -642,14 +644,14 @@ export default function AppointmentBookingForm() {
                               />
                               <FieldHint optional />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
                       {/* Panel Item 3 — Insurance */}
                       <MainSectionPanelItem>
                         <FieldSet>
-                          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                          <FieldGrid>
                             <Field>
                               <FieldLabel htmlFor="insurance-provider">
                                 Insurance Provider
@@ -691,7 +693,7 @@ export default function AppointmentBookingForm() {
                               />
                               <FieldHint optional />
                             </Field>
-                          </div>
+                          </FieldGrid>
                         </FieldSet>
                       </MainSectionPanelItem>
 
@@ -714,6 +716,7 @@ export default function AppointmentBookingForm() {
                                     value={f.value}
                                     onChange={f.onChange}
                                     onBlur={f.onBlur}
+                                    maxLength={200}
                                   />
                                 </InputGroup>
                               )}

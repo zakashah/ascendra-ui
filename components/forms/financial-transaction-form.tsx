@@ -414,6 +414,7 @@ export default function FinancialTransactionForm() {
                                       placeholder="Search payee…"
                                       onBlur={f.onBlur}
                                       className="w-full"
+                                      aria-invalid={!!errors.payee}
                                     />
                                     <ComboboxContent>
                                       <ComboboxList>
