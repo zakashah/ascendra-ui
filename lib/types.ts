@@ -36,3 +36,13 @@ export type FormMeta = {
   components: string[];
   hasEditMode?: boolean;
 };
+
+export type DialogType = 'Confirmation' | 'Destructive' | 'Input' | 'Alert' | 'Feature';
+
+export type DialogMeta = {
+  slug: string;
+  name: string;
+  description: string;
+  type: DialogType;
+  components: string[];
+};

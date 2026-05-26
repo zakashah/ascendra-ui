@@ -9,6 +9,12 @@ export const navConfig: NavCategory[] = [
     ],
   },
   {
+    title: 'Sample Dialogs',
+    items: [
+      { name: 'Dialog Gallery', slug: 'dialogs' },
+    ],
+  },
+  {
     title: 'Sample Forms',
     items: [
       { name: 'Forms Gallery', slug: 'forms' },
