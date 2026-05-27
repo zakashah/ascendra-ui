@@ -15,6 +15,12 @@ export const navConfig: NavCategory[] = [
     ],
   },
   {
+    title: 'Sample Sheets',
+    items: [
+      { name: 'Sheet Gallery', slug: 'sheets' },
+    ],
+  },
+  {
     title: 'Sample Forms',
     items: [
       { name: 'Forms Gallery', slug: 'forms' },

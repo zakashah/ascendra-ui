@@ -46,3 +46,14 @@ export type DialogMeta = {
   type: DialogType;
   components: string[];
 };
+
+export type SheetType = 'Detail' | 'Preview' | 'Activity' | 'Settings';
+
+export type SheetMeta = {
+  slug: string;
+  name: string;
+  description: string;
+  type: SheetType;
+  domain: string;
+  components: string[];
+};
