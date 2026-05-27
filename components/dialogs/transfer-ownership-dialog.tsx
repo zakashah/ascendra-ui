@@ -39,7 +39,7 @@ export default function TransferOwnershipDialog() {
             Once transferred, Sarah will become the sole owner and you will be
             downgraded to an admin.
           </p>
-          <div className="border-border flex items-start gap-2.5 border-t pt-4">
+          <div className="border-border flex items-baseline gap-2.5 border-t pt-4">
             <Checkbox
               id="transfer-ack"
               checked={acknowledged}

@@ -317,6 +317,10 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html,
+  body {
+    overflow-x: hidden;
+  }
   body {
     @apply bg-background text-foreground;
   }
@@ -399,6 +403,13 @@
 .animate-nudge-strong {
   animation: nudge-strong 0.3s ease-in-out;
   will-change: transform;
+}
+
+/* Prevent iOS zoom on input focus (triggered when font-size < 16px) */
+input,
+textarea,
+select {
+  font-size: max(16px, 1em);
 }
 
 /* table */

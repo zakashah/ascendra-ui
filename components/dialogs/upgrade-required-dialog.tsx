@@ -45,7 +45,7 @@ export default function UpgradeRequiredDialog() {
               </li>
             ))}
           </ul>
-          <div className="border-border flex items-center gap-2 border-t pt-4">
+          <div className="border-border flex items-baseline gap-2 border-t pt-4">
             <Checkbox
               id="dont-show-upgrade"
               checked={dontShow}
