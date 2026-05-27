@@ -21,6 +21,12 @@ export const navConfig: NavCategory[] = [
     ],
   },
   {
+    title: 'Sample Drawers',
+    items: [
+      { name: 'Drawer Gallery', slug: 'drawers' },
+    ],
+  },
+  {
     title: 'Sample Forms',
     items: [
       { name: 'Forms Gallery', slug: 'forms' },

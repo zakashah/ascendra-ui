@@ -49,11 +49,22 @@ export type DialogMeta = {
 
 export type SheetType = 'Detail' | 'Preview' | 'Activity' | 'Settings';
 
+export type DrawerType = 'Action' | 'Panel' | 'Preview' | 'Input';
+
 export type SheetMeta = {
   slug: string;
   name: string;
   description: string;
   type: SheetType;
+  domain: string;
+  components: string[];
+};
+
+export type DrawerMeta = {
+  slug: string;
+  name: string;
+  description: string;
+  type: DrawerType;
   domain: string;
   components: string[];
 };
