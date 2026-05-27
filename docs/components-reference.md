@@ -1,21 +1,21 @@
 # Ascendra UI — Component Reference
 
-> Auto-generated on 2026-05-06 from `lib/registry.ts`.  
+> Auto-generated on 2026-05-27 from `lib/registry.ts`.  
 > Run `npm run docs:generate` after any registry change to keep this file current.
 
 ---
 
 ## Overview
 
-**Total components:** 40
+**Total components:** 42
 
 | Category | Components |
 |---|---|
 | Feedback & Status | Simple Badge, Bubble Badge, Status Dot, Simple Alert, Pro Badge, Unsaved Changes Bar |
-| Forms & Inputs | Button, Input, Input Group, Checkbox, Radio Group, Switch, Select, Field, Combobox |
+| Forms & Inputs | Button, Input, Input Group, Checkbox, Radio Group, Switch, Select, Field, Table Lookup, Combobox |
 | Navigation | Anchor, Nav Link, Header, Nav |
 | Overlays | Dialog, Sheet, Dropdown Menu |
-| Tables & Data | Table, Empty State |
+| Tables & Data | Table, Empty State, Data Table |
 | Layout | Main Section, Page Header, Page Bar, Aside Content, Item |
 | Tabs | Tabs |
 | Sidebar | Sidebar Menu |
@@ -302,6 +302,31 @@ Searchable dropdown with single and multi-select (chips) modes, built on Base UI
 
 ---
 
+#### Table Lookup
+
+Table-based lookup field for large datasets — supports single and multi-select with chips, async search, and configurable multi-column display.
+
+- **Slug:** `table-lookup`
+- **Import:** `import { TableLookup } from "@/ascendra-ui/components/ui/table-lookup"`
+- **Showcase:** `/showcase/table-lookup`
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `columns` | `TableLookupColumn<T>[]` | — | Column definitions — drives table headers and searchable field list. |
+| `valueKey` | `keyof T & string` | — | Key used as the unique identifier for each record. |
+| `labelKey` | `keyof T & string` | — | Key whose value is shown in chips and the single-mode trigger. |
+| `mode` | `'single' \| 'multiple'` | `'single'` | Single replaces the selection on each pick; multiple accumulates chips. |
+| `onSearch` | `(query: string, field?: string) => Promise<T[]> \| T[]` | — | Called to load or filter data. Receives the search string and optional field key. |
+| `value` | `T \| T[] \| null` | — | Controlled selected value(s). |
+| `onChange` | `(value: T \| T[] \| null) => void` | — | Called when the selection changes. |
+| `placeholder` | `string` | — | Placeholder text shown when nothing is selected. |
+| `disabled` | `boolean` | `false` | Disables the trigger and prevents the popup from opening. |
+| `invalid` | `boolean` | `false` | Applies a destructive outline to the trigger to signal a validation error. |
+
+---
+
 ### Date & Time
 
 #### Calendar
@@ -524,6 +549,30 @@ Placeholder for empty content areas with optional icon media and call-to-action.
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `variant` | `'default' \| 'icon'` | `'default'` | Media display style (on EmptyMedia). |
+
+---
+
+#### Data Table
+
+Feature-rich data table with built-in search, filtering, sorting, column management, and pagination — composed via DataTableProvider and QueryProvider.
+
+- **Slug:** `data-table`
+- **Import:** `import { DataTable, DataTableHeader, DataTableHeaderRow, DataTableHead, DataTableBody, DataTableRow, DataTableCell, DataTableHighlight, DataTableWrapper, DataTableFoot, DataTableLoadingBody, DataTableEmptyBody, DataTableSearchInput, DataTableColumnManager, DataTableSortDropdown, DataTableFilterDropdown, DataTableFilterBar } from "@/ascendra-ui/components/data-table"`
+- **Showcase:** `/showcase/data-table`
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `key` | `keyof T` | — | Data property key for this column. |
+| `label` | `string` | — | Column header label. |
+| `type` | `'string' \| 'number' \| 'date'` | `'string'` | Data type — drives sort order and search formatting. |
+| `sortable` | `boolean` | `true` | Set to false to remove the sort icon and click handler. |
+| `freeze` | `boolean` | `false` | Always visible; cannot be hidden via the column manager. |
+| `locked` | `boolean` | `false` | Column position cannot be changed by reordering. |
+| `active` | `boolean` | `true` | Whether the column is visible by default. |
+| `filter` | `boolean` | `false` | Whether the column appears in the filter picker. |
+| `displayValue` | `(raw: string) => string` | — | Converts raw data values to labels in filter chips and options. |
 
 ---
 
