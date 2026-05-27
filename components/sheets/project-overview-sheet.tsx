@@ -58,7 +58,7 @@ export default function ProjectOverviewSheet() {
       <SheetTrigger asChild>
         <Button variant="secondary">View Project</Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent showCloseButton={false}>
         <SheetHeader>
           <div className="flex items-start justify-between gap-3">
             <SheetTitle>Atlas Dashboard Redesign</SheetTitle>
@@ -76,7 +76,7 @@ export default function ProjectOverviewSheet() {
                 onClick={() => setTab(t)}
                 className={`relative px-3 py-2.5 text-sm capitalize transition-colors ${
                   tab === t
-                    ? "text-foreground after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-foreground after:content-['']"
+                    ? "text-foreground after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-foreground after:content-['']"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -85,7 +85,7 @@ export default function ProjectOverviewSheet() {
             ))}
           </div>
         </SheetSubHeader>
-        <SheetBody className="py-5">
+        <SheetBody>
           {tab === "overview" && (
             <div className="flex flex-col gap-5">
               <dl className="grid grid-cols-[140px_1fr] gap-x-4 gap-y-3">

@@ -34,18 +34,22 @@ export default function OrderDetailsSheet() {
       <SheetTrigger asChild>
         <Button variant="secondary">View Order</Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent showCloseButton={false}>
         <SheetHeader>
           <div className="flex items-center justify-between">
             <SheetTitle>Order #ORD-5892</SheetTitle>
             <SimpleBadge variant="amber">Processing</SimpleBadge>
           </div>
-          <SheetDescription>Placed on May 14, 2025 · Web store</SheetDescription>
+          <SheetDescription>
+            Placed on May 14, 2025 · Web store
+          </SheetDescription>
         </SheetHeader>
-        <SheetBody className="py-5">
+        <SheetBody>
           <div className="flex flex-col gap-5">
             <div>
-              <p className="mb-3 text-xs font-medium text-muted-foreground">Order Info</p>
+              <p className="mb-3 text-xs font-medium text-muted-foreground">
+                Order Info
+              </p>
               <dl className="grid grid-cols-[140px_1fr] gap-x-4 gap-y-3">
                 <dt className="text-sm text-muted-foreground">Customer</dt>
                 <dd className="text-sm text-foreground">Marcus Webb</dd>
@@ -59,7 +63,9 @@ export default function OrderDetailsSheet() {
             </div>
             <div className="border-t border-border" />
             <div>
-              <p className="mb-3 text-xs font-medium text-muted-foreground">Line Items</p>
+              <p className="mb-3 text-xs font-medium text-muted-foreground">
+                Line Items
+              </p>
               <ItemGroup>
                 {lineItems.map((item) => (
                   <Item key={item.name}>
@@ -68,7 +74,9 @@ export default function OrderDetailsSheet() {
                       <ItemDescription>{item.qty}</ItemDescription>
                     </ItemContent>
                     <ItemActions>
-                      <span className="text-sm font-medium text-foreground">{item.price}</span>
+                      <span className="text-sm font-medium text-foreground">
+                        {item.price}
+                      </span>
                     </ItemActions>
                   </Item>
                 ))}
@@ -76,12 +84,20 @@ export default function OrderDetailsSheet() {
             </div>
             <div className="border-t border-border" />
             <div>
-              <p className="mb-3 text-xs font-medium text-muted-foreground">Shipping Address</p>
+              <p className="mb-3 text-xs font-medium text-muted-foreground">
+                Shipping Address
+              </p>
               <div className="flex flex-col gap-0.5">
                 <span className="text-sm text-foreground">Marcus Webb</span>
-                <span className="text-sm text-muted-foreground">412 Oak Street, Apt 3B</span>
-                <span className="text-sm text-muted-foreground">Austin, TX 78701</span>
-                <span className="text-sm text-muted-foreground">United States</span>
+                <span className="text-sm text-muted-foreground">
+                  412 Oak Street, Apt 3B
+                </span>
+                <span className="text-sm text-muted-foreground">
+                  Austin, TX 78701
+                </span>
+                <span className="text-sm text-muted-foreground">
+                  United States
+                </span>
               </div>
             </div>
             <div className="border-t border-border" />

@@ -45,7 +45,7 @@ export default function SupportTicketSheet() {
       <SheetTrigger asChild>
         <Button variant="secondary">Open Ticket</Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent showCloseButton={false}>
         <SheetHeader>
           <div className="flex items-start justify-between gap-3">
             <SheetTitle>File upload fails after session timeout</SheetTitle>
@@ -53,9 +53,11 @@ export default function SupportTicketSheet() {
               Critical
             </SimpleBadge>
           </div>
-          <SheetDescription>TKT-1042 · Reported by Marcus Webb</SheetDescription>
+          <SheetDescription>
+            TKT-1042 · Reported by Marcus Webb
+          </SheetDescription>
         </SheetHeader>
-        <SheetBody className="py-5">
+        <SheetBody>
           <div className="flex flex-col gap-5">
             <dl className="grid grid-cols-[120px_1fr] gap-x-4 gap-y-3">
               <dt className="text-sm text-muted-foreground">Priority</dt>
@@ -79,19 +81,34 @@ export default function SupportTicketSheet() {
             </dl>
             <div className="border-t border-border" />
             <div>
-              <p className="mb-4 text-xs font-medium text-muted-foreground">Activity</p>
+              <p className="mb-4 text-xs font-medium text-muted-foreground">
+                Activity
+              </p>
               <div className="flex flex-col gap-5">
                 {activity.map((item) => (
                   <div key={item.time} className="flex gap-3">
-                    <NameAvatar name={item.actor} size={28} href="#" className="mt-0.5 shrink-0" />
+                    <NameAvatar
+                      name={item.actor}
+                      size={28}
+                      href="#"
+                      className="mt-0.5 shrink-0"
+                    />
                     <div className="flex flex-col gap-0.5">
                       <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-                        <span className="text-sm font-medium text-foreground">{item.actor}</span>
-                        <span className="text-xs text-muted-foreground">{item.action}</span>
+                        <span className="text-sm font-medium text-foreground">
+                          {item.actor}
+                        </span>
+                        <span className="text-xs text-muted-foreground">
+                          {item.action}
+                        </span>
                         <span className="text-xs text-muted-foreground">·</span>
-                        <span className="text-xs text-muted-foreground">{item.time}</span>
+                        <span className="text-xs text-muted-foreground">
+                          {item.time}
+                        </span>
                       </div>
-                      <p className="text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
+                      <p className="text-sm leading-relaxed text-muted-foreground">
+                        {item.detail}
+                      </p>
                     </div>
                   </div>
                 ))}

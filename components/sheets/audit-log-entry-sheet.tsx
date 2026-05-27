@@ -36,7 +36,7 @@ export default function AuditLogEntrySheet() {
       <SheetTrigger asChild>
         <Button variant="secondary">View Log Entry</Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent showCloseButton={false}>
         <SheetHeader>
           <div className="flex items-start justify-between gap-3">
             <SheetTitle>Permission Change</SheetTitle>
@@ -44,9 +44,11 @@ export default function AuditLogEntrySheet() {
               High
             </SimpleBadge>
           </div>
-          <SheetDescription>Audit event · May 27, 2025 at 09:14 UTC</SheetDescription>
+          <SheetDescription>
+            Audit event · May 27, 2025 at 09:14 UTC
+          </SheetDescription>
         </SheetHeader>
-        <SheetBody className="py-5">
+        <SheetBody>
           <div className="flex flex-col gap-5">
             <dl className="grid grid-cols-[130px_1fr] gap-x-4 gap-y-3">
               <dt className="text-sm text-muted-foreground">Event Type</dt>
@@ -54,24 +56,35 @@ export default function AuditLogEntrySheet() {
               <dt className="text-sm text-muted-foreground">Actor</dt>
               <dd className="text-sm text-foreground">admin@company.com</dd>
               <dt className="text-sm text-muted-foreground">Actor ID</dt>
-              <dd className="font-mono text-sm text-muted-foreground">usr_9d3b2f</dd>
+              <dd className="font-mono text-sm text-muted-foreground">
+                usr_9d3b2f
+              </dd>
               <dt className="text-sm text-muted-foreground">Target User</dt>
-              <dd className="text-sm text-foreground">priya.nair@company.com</dd>
+              <dd className="text-sm text-foreground">
+                priya.nair@company.com
+              </dd>
               <dt className="text-sm text-muted-foreground">Resource</dt>
               <dd className="text-sm text-foreground">role:admin</dd>
               <dt className="text-sm text-muted-foreground">IP Address</dt>
-              <dd className="font-mono text-sm text-muted-foreground">104.28.55.12</dd>
+              <dd className="font-mono text-sm text-muted-foreground">
+                104.28.55.12
+              </dd>
               <dt className="text-sm text-muted-foreground">Timestamp</dt>
-              <dd className="text-sm text-foreground">2025-05-27 09:14:32 UTC</dd>
+              <dd className="text-sm text-foreground">
+                2025-05-27 09:14:32 UTC
+              </dd>
               <dt className="text-sm text-muted-foreground">Method</dt>
               <dd className="text-sm text-foreground">Dashboard (Web)</dd>
             </dl>
             <div className="border-t border-border" />
             <SimpleAlert variant="warning" icon={LuCircleAlert}>
-              This action granted elevated permissions and triggered a compliance notification.
+              This action granted elevated permissions and triggered a
+              compliance notification.
             </SimpleAlert>
             <div>
-              <p className="mb-2 text-xs font-medium text-muted-foreground">Event Payload</p>
+              <p className="mb-2 text-xs font-medium text-muted-foreground">
+                Event Payload
+              </p>
               <pre className="overflow-x-auto rounded-lg border border-border bg-muted/50 px-4 py-3 font-mono text-xs leading-relaxed text-muted-foreground">
                 {payload}
               </pre>

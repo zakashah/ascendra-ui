@@ -24,7 +24,7 @@ export default function ProductDetailsSheet() {
       <SheetTrigger asChild>
         <Button variant="secondary">View Product</Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent showCloseButton={false}>
         <SheetHeader>
           <div className="flex items-start justify-between gap-3">
             <SheetTitle>Pro Wireless Headphones</SheetTitle>
@@ -34,7 +34,7 @@ export default function ProductDetailsSheet() {
           </div>
           <SheetDescription>SKU: HDN-PRO-BLK-001 · Audio Equipment</SheetDescription>
         </SheetHeader>
-        <SheetBody className="py-5">
+        <SheetBody>
           <div className="flex flex-col gap-5">
             <div className="flex h-40 w-full items-center justify-center rounded-xl border border-dashed border-border bg-muted/40">
               <div className="flex flex-col items-center gap-2 text-muted-foreground/50">

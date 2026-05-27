@@ -49,7 +49,7 @@ export default function CustomerProfileSheet() {
             </div>
           </div>
         </SheetHeader>
-        <SheetBody className="py-5">
+        <SheetBody>
           <div className="flex flex-col gap-5">
             <div>
               <p className="mb-3 text-xs font-medium text-muted-foreground">Contact</p>

@@ -50,7 +50,7 @@ function SheetTabBar({ tab, setTab }: { tab: Tab; setTab: (t: Tab) => void }) {
           onClick={() => setTab(t)}
           className={`relative px-3 py-2.5 text-sm capitalize transition-colors ${
             tab === t
-              ? "text-foreground after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-foreground after:content-['']"
+              ? "text-foreground after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-foreground after:content-['']"
               : "text-muted-foreground hover:text-foreground"
           }`}
         >
@@ -90,7 +90,7 @@ export default function EmployeeProfileSheet() {
         <SheetSubHeader>
           <SheetTabBar tab={tab} setTab={setTab} />
         </SheetSubHeader>
-        <SheetBody className="py-5">
+        <SheetBody>
           {tab === "overview" && (
             <div className="flex flex-col gap-5">
               <div className="flex items-center justify-between">

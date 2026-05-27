@@ -36,7 +36,7 @@ export default function InvoicePreviewSheet() {
       <SheetTrigger asChild>
         <Button variant="secondary">Preview Invoice</Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent showCloseButton={false}>
         <SheetHeader>
           <div className="flex items-center justify-between">
             <SheetTitle>INV-2025-089</SheetTitle>
@@ -44,7 +44,7 @@ export default function InvoicePreviewSheet() {
           </div>
           <SheetDescription>Issued May 1, 2025 · Due May 15, 2025</SheetDescription>
         </SheetHeader>
-        <SheetBody className="py-5">
+        <SheetBody>
           <div className="flex flex-col gap-5">
             <SimpleAlert variant="destructive" icon={LuCircleAlert}>
               This invoice is 12 days overdue. A late fee of $50 may apply.
