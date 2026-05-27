@@ -4,6 +4,10 @@ import * as React from "react";
 import { Dialog as SheetPrimitive } from "radix-ui";
 import { X } from "lucide-react";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import {
+  TabsContext,
+  useTabs,
+} from "@/ascendra-ui/providers/tabs/tabs.provider";
 
 /* ── Overlay ──────────────────────────────────────────────────────────────── */
 
@@ -186,6 +190,141 @@ function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
+/* ── Tabs ─────────────────────────────────────────────────────────────────── */
+
+function SheetTabs({
+  defaultTab,
+  children,
+}: {
+  defaultTab: string;
+  children: React.ReactNode;
+}) {
+  const [active, setActive] = React.useState(defaultTab);
+  return (
+    <TabsContext.Provider value={{ active, setActive }}>
+      {children}
+    </TabsContext.Provider>
+  );
+}
+
+function SheetTabList({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="sheet-tab-list"
+      className={cn("flex border-b border-border", className)}
+      {...props}
+    />
+  );
+}
+
+function SheetTabTrigger({
+  value,
+  className,
+  children,
+  ...props
+}: React.ComponentProps<"button"> & { value: string }) {
+  const { active, setActive } = useTabs();
+  const isActive = active === value;
+  return (
+    <button
+      data-slot="sheet-tab-trigger"
+      data-active={isActive || undefined}
+      onClick={() => setActive(value)}
+      className={cn(
+        "relative px-3 py-2.5 text-sm capitalize transition-colors",
+        isActive
+          ? "text-foreground after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-foreground after:content-['']"
+          : "text-muted-foreground hover:text-foreground",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+}
+
+function SheetTabContent({
+  value,
+  className,
+  ...props
+}: React.ComponentProps<"div"> & { value: string }) {
+  const { active } = useTabs();
+  if (active !== value) return null;
+  return (
+    <div data-slot="sheet-tab-content" className={cn(className)} {...props} />
+  );
+}
+
+/* ── Section ──────────────────────────────────────────────────────────────── */
+
+function SheetSection({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="sheet-section"
+      className={cn(
+        "not-first:mt-5 not-first:border-t not-first:border-border not-first:pt-5",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function SheetSectionHeader({
+  className,
+  ...props
+}: React.ComponentProps<"p">) {
+  return (
+    <p
+      data-slot="sheet-section-header"
+      className={cn(
+        "mb-4 text-xs tracking-wide text-muted-foreground",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+/* ── Properties ───────────────────────────────────────────────────────────── */
+
+function SheetProperties({
+  keyWidth = "140px",
+  className,
+  style,
+  ...props
+}: React.ComponentProps<"dl"> & { keyWidth?: string }) {
+  return (
+    <dl
+      data-slot="sheet-properties"
+      className={cn("grid gap-x-4 gap-y-3", className)}
+      style={{ gridTemplateColumns: `${keyWidth} 1fr`, ...style }}
+      {...props}
+    />
+  );
+}
+
+function SheetKey({ className, ...props }: React.ComponentProps<"dt">) {
+  return (
+    <dt
+      data-slot="sheet-key"
+      className={cn("text-sm text-muted-foreground", className)}
+      {...props}
+    />
+  );
+}
+
+function SheetValue({ className, ...props }: React.ComponentProps<"dd">) {
+  return (
+    <dd
+      data-slot="sheet-value"
+      className={cn("text-sm text-foreground", className)}
+      {...props}
+    />
+  );
+}
+
 export {
   Sheet,
   SheetTrigger,
@@ -198,4 +337,13 @@ export {
   SheetBody,
   SheetFooter,
   SheetSubFooter,
+  SheetTabs,
+  SheetTabList,
+  SheetTabTrigger,
+  SheetTabContent,
+  SheetSection,
+  SheetSectionHeader,
+  SheetProperties,
+  SheetKey,
+  SheetValue,
 };

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   Sheet,
   SheetTrigger,
@@ -12,6 +11,15 @@ import {
   SheetDescription,
   SheetBody,
   SheetFooter,
+  SheetTabs,
+  SheetTabList,
+  SheetTabTrigger,
+  SheetTabContent,
+  SheetSection,
+  SheetSectionHeader,
+  SheetProperties,
+  SheetKey,
+  SheetValue,
 } from "@/ascendra-ui/components/ui/sheet";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import { NameAvatar } from "@/ascendra-ui/components/common-ui/name-avatar";
@@ -47,112 +55,104 @@ const milestoneStatus = {
   upcoming: { dot: "gray" as const },
 };
 
-const TABS = ["overview", "members"] as const;
-type Tab = (typeof TABS)[number];
-
 export default function ProjectOverviewSheet() {
-  const [tab, setTab] = useState<Tab>("overview");
-
   return (
-    <Sheet onOpenChange={() => setTab("overview")}>
+    <Sheet>
       <SheetTrigger asChild>
         <Button variant="secondary">View Project</Button>
       </SheetTrigger>
       <SheetContent showCloseButton={false}>
-        <SheetHeader>
-          <div className="flex items-start justify-between gap-3">
-            <SheetTitle>Atlas Dashboard Redesign</SheetTitle>
-            <SimpleBadge variant="blue" className="mt-0.5 shrink-0">
-              Active
-            </SimpleBadge>
-          </div>
-          <SheetDescription>Product Design · Q2 2025</SheetDescription>
-        </SheetHeader>
-        <SheetSubHeader>
-          <div className="flex border-b border-border">
-            {TABS.map((t) => (
-              <button
-                key={t}
-                onClick={() => setTab(t)}
-                className={`relative px-3 py-2.5 text-sm capitalize transition-colors ${
-                  tab === t
-                    ? "text-foreground after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-foreground after:content-['']"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {t === "overview" ? "Overview" : "Members"}
-              </button>
-            ))}
-          </div>
-        </SheetSubHeader>
-        <SheetBody>
-          {tab === "overview" && (
-            <div className="flex flex-col gap-5">
-              <dl className="grid grid-cols-[140px_1fr] gap-x-4 gap-y-3">
-                <dt className="text-sm text-muted-foreground">Owner</dt>
-                <dd className="text-sm text-foreground">David Chen</dd>
-                <dt className="text-sm text-muted-foreground">Status</dt>
-                <dd className="flex items-center gap-1.5">
-                  <StatusDot variant="emerald" />
-                  <span className="text-sm text-foreground">On Track</span>
-                </dd>
-                <dt className="text-sm text-muted-foreground">Start Date</dt>
-                <dd className="text-sm text-foreground">Apr 1, 2025</dd>
-                <dt className="text-sm text-muted-foreground">Target</dt>
-                <dd className="text-sm text-foreground">Jun 15, 2025</dd>
-                <dt className="text-sm text-muted-foreground">Budget</dt>
-                <dd className="text-sm text-foreground">$48,000</dd>
-                <dt className="text-sm text-muted-foreground">Team Size</dt>
-                <dd className="text-sm text-foreground">5 members</dd>
-              </dl>
-              <div className="border-t border-border" />
-              <div>
-                <p className="mb-3 text-xs font-medium text-muted-foreground">Milestones</p>
+        <SheetTabs defaultTab="overview">
+          <SheetHeader>
+            <div className="flex items-start justify-between gap-3">
+              <SheetTitle>Atlas Dashboard Redesign</SheetTitle>
+              <SimpleBadge variant="blue" className="mt-0.5 shrink-0">
+                Active
+              </SimpleBadge>
+            </div>
+            <SheetDescription>Product Design · Q2 2025</SheetDescription>
+          </SheetHeader>
+          <SheetSubHeader>
+            <SheetTabList>
+              <SheetTabTrigger value="overview">Overview</SheetTabTrigger>
+              <SheetTabTrigger value="members">Members</SheetTabTrigger>
+            </SheetTabList>
+          </SheetSubHeader>
+          <SheetBody>
+            <SheetTabContent value="overview">
+              <SheetSection>
+                <SheetProperties>
+                  <SheetKey>Owner</SheetKey>
+                  <SheetValue>David Chen</SheetValue>
+                  <SheetKey>Status</SheetKey>
+                  <SheetValue className="flex items-center gap-1.5">
+                    <StatusDot variant="emerald" />
+                    <span>On Track</span>
+                  </SheetValue>
+                  <SheetKey>Start Date</SheetKey>
+                  <SheetValue>Apr 1, 2025</SheetValue>
+                  <SheetKey>Target</SheetKey>
+                  <SheetValue>Jun 15, 2025</SheetValue>
+                  <SheetKey>Budget</SheetKey>
+                  <SheetValue>$48,000</SheetValue>
+                  <SheetKey>Team Size</SheetKey>
+                  <SheetValue>5 members</SheetValue>
+                </SheetProperties>
+              </SheetSection>
+              <SheetSection>
+                <SheetSectionHeader>Milestones</SheetSectionHeader>
+                {milestones.map((m) => (
+                  <Item key={m.name} className="px-0 first-of-type:pt-0">
+                    <ItemContent>
+                      <div className="flex items-center gap-2">
+                        <StatusDot
+                          variant={
+                            milestoneStatus[
+                              m.status as keyof typeof milestoneStatus
+                            ].dot
+                          }
+                        />
+                        <ItemTitle>{m.name}</ItemTitle>
+                      </div>
+                    </ItemContent>
+                    <ItemActions>
+                      <span className="text-xs text-muted-foreground">
+                        {m.date}
+                      </span>
+                    </ItemActions>
+                  </Item>
+                ))}
+              </SheetSection>
+            </SheetTabContent>
+            <SheetTabContent value="members">
+              <SheetSection>
+                <SheetSectionHeader>Team ({members.length})</SheetSectionHeader>
                 <ItemGroup>
-                  {milestones.map((m) => (
-                    <Item key={m.name}>
+                  {members.map((m) => (
+                    <Item key={m.name} variant="outline">
+                      <NameAvatar
+                        name={m.name}
+                        size={28}
+                        href="#"
+                        className="shrink-0"
+                      />
                       <ItemContent>
-                        <div className="flex items-center gap-2">
-                          <StatusDot
-                            variant={milestoneStatus[m.status as keyof typeof milestoneStatus].dot}
-                          />
-                          <ItemTitle>{m.name}</ItemTitle>
-                        </div>
+                        <ItemTitle>{m.name}</ItemTitle>
+                        <ItemDescription>{m.role}</ItemDescription>
                       </ItemContent>
-                      <ItemActions>
-                        <span className="text-xs text-muted-foreground">{m.date}</span>
-                      </ItemActions>
                     </Item>
                   ))}
                 </ItemGroup>
-              </div>
-            </div>
-          )}
-          {tab === "members" && (
-            <div className="flex flex-col gap-3">
-              <p className="text-xs font-medium text-muted-foreground">
-                Team ({members.length})
-              </p>
-              <ItemGroup>
-                {members.map((m) => (
-                  <Item key={m.name} variant="outline">
-                    <NameAvatar name={m.name} size={28} href="#" className="shrink-0" />
-                    <ItemContent>
-                      <ItemTitle>{m.name}</ItemTitle>
-                      <ItemDescription>{m.role}</ItemDescription>
-                    </ItemContent>
-                  </Item>
-                ))}
-              </ItemGroup>
-            </div>
-          )}
-        </SheetBody>
-        <SheetFooter>
-          <SheetClose asChild>
-            <Button variant="secondary">Close</Button>
-          </SheetClose>
-          <Button>Open Project</Button>
-        </SheetFooter>
+              </SheetSection>
+            </SheetTabContent>
+          </SheetBody>
+          <SheetFooter>
+            <SheetClose asChild>
+              <Button variant="secondary">Close</Button>
+            </SheetClose>
+            <Button>Open Project</Button>
+          </SheetFooter>
+        </SheetTabs>
       </SheetContent>
     </Sheet>
   );

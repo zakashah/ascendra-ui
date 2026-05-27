@@ -10,13 +10,17 @@ import {
   SheetDescription,
   SheetBody,
   SheetFooter,
+  SheetSection,
+  SheetSectionHeader,
+  SheetProperties,
+  SheetKey,
+  SheetValue,
 } from "@/ascendra-ui/components/ui/sheet";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import { NameAvatar } from "@/ascendra-ui/components/common-ui/name-avatar";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import { StatusDot } from "@/ascendra-ui/components/common-ui/status-dot";
 import {
-  ItemGroup,
   Item,
   ItemContent,
   ItemTitle,
@@ -50,54 +54,50 @@ export default function CustomerProfileSheet() {
           </div>
         </SheetHeader>
         <SheetBody>
-          <div className="flex flex-col gap-5">
-            <div>
-              <p className="mb-3 text-xs font-medium text-muted-foreground">Contact</p>
-              <dl className="grid grid-cols-[120px_1fr] gap-x-4 gap-y-3">
-                <dt className="text-sm text-muted-foreground">Email</dt>
-                <dd className="truncate text-sm text-foreground">j.hartwell@acme.com</dd>
-                <dt className="text-sm text-muted-foreground">Phone</dt>
-                <dd className="text-sm text-foreground">+1 (312) 555-0117</dd>
-                <dt className="text-sm text-muted-foreground">Location</dt>
-                <dd className="text-sm text-foreground">Chicago, IL</dd>
-              </dl>
-            </div>
-            <div className="border-t border-border" />
-            <div>
-              <p className="mb-3 text-xs font-medium text-muted-foreground">Account</p>
-              <dl className="grid grid-cols-[120px_1fr] gap-x-4 gap-y-3">
-                <dt className="text-sm text-muted-foreground">Plan</dt>
-                <dd className="text-sm text-foreground">Pro (Annual)</dd>
-                <dt className="text-sm text-muted-foreground">Customer since</dt>
-                <dd className="text-sm text-foreground">Jan 2023</dd>
-                <dt className="text-sm text-muted-foreground">ARR</dt>
-                <dd className="text-sm font-medium text-foreground">$2,400</dd>
-                <dt className="text-sm text-muted-foreground">Seats</dt>
-                <dd className="text-sm text-foreground">12 / 20</dd>
-                <dt className="text-sm text-muted-foreground">Status</dt>
-                <dd className="flex items-center gap-1.5">
-                  <StatusDot variant="emerald" />
-                  <span className="text-sm text-foreground">Active</span>
-                </dd>
-              </dl>
-            </div>
-            <div className="border-t border-border" />
-            <div>
-              <p className="mb-3 text-xs font-medium text-muted-foreground">Recent Activity</p>
-              <ItemGroup>
-                {recentActivity.map((item) => (
-                  <Item key={item.event}>
-                    <ItemContent>
-                      <ItemTitle>{item.event}</ItemTitle>
-                    </ItemContent>
-                    <ItemActions>
-                      <span className="shrink-0 text-xs text-muted-foreground">{item.time}</span>
-                    </ItemActions>
-                  </Item>
-                ))}
-              </ItemGroup>
-            </div>
-          </div>
+          <SheetSection>
+            <SheetSectionHeader>Contact</SheetSectionHeader>
+            <SheetProperties keyWidth="120px">
+              <SheetKey>Email</SheetKey>
+              <SheetValue className="truncate">j.hartwell@acme.com</SheetValue>
+              <SheetKey>Phone</SheetKey>
+              <SheetValue>+1 (312) 555-0117</SheetValue>
+              <SheetKey>Location</SheetKey>
+              <SheetValue>Chicago, IL</SheetValue>
+            </SheetProperties>
+          </SheetSection>
+          <SheetSection>
+            <SheetSectionHeader>Account</SheetSectionHeader>
+            <SheetProperties keyWidth="120px">
+              <SheetKey>Plan</SheetKey>
+              <SheetValue>Pro (Annual)</SheetValue>
+              <SheetKey>Customer since</SheetKey>
+              <SheetValue>Jan 2023</SheetValue>
+              <SheetKey>ARR</SheetKey>
+              <SheetValue className="font-medium">$2,400</SheetValue>
+              <SheetKey>Seats</SheetKey>
+              <SheetValue>12 / 20</SheetValue>
+              <SheetKey>Status</SheetKey>
+              <SheetValue className="flex items-center gap-1.5">
+                <StatusDot variant="emerald" />
+                <span>Active</span>
+              </SheetValue>
+            </SheetProperties>
+          </SheetSection>
+          <SheetSection>
+            <SheetSectionHeader>Recent Activity</SheetSectionHeader>
+            {recentActivity.map((item) => (
+              <Item key={item.event} className="px-0 pb-0 first-of-type:pt-0">
+                <ItemContent>
+                  <ItemTitle>{item.event}</ItemTitle>
+                </ItemContent>
+                <ItemActions>
+                  <span className="shrink-0 text-xs text-muted-foreground">
+                    {item.time}
+                  </span>
+                </ItemActions>
+              </Item>
+            ))}
+          </SheetSection>
         </SheetBody>
         <SheetFooter>
           <SheetClose asChild>

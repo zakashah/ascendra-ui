@@ -11,6 +11,11 @@ import {
   SheetDescription,
   SheetBody,
   SheetFooter,
+  SheetSection,
+  SheetSectionHeader,
+  SheetProperties,
+  SheetKey,
+  SheetValue,
 } from "@/ascendra-ui/components/ui/sheet";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
@@ -32,49 +37,50 @@ export default function ProductDetailsSheet() {
               In Stock
             </SimpleBadge>
           </div>
-          <SheetDescription>SKU: HDN-PRO-BLK-001 · Audio Equipment</SheetDescription>
+          <SheetDescription>
+            SKU: HDN-PRO-BLK-001 · Audio Equipment
+          </SheetDescription>
         </SheetHeader>
         <SheetBody>
-          <div className="flex flex-col gap-5">
+          <SheetSection className="flex flex-col gap-5">
             <div className="flex h-40 w-full items-center justify-center rounded-xl border border-dashed border-border bg-muted/40">
               <div className="flex flex-col items-center gap-2 text-muted-foreground/50">
                 <LuPackage className="size-8 stroke-1" />
                 <span className="text-xs">Product image</span>
               </div>
             </div>
-            <dl className="grid grid-cols-[130px_1fr] gap-x-4 gap-y-3">
-              <dt className="text-sm text-muted-foreground">Category</dt>
-              <dd className="text-sm text-foreground">Audio Equipment</dd>
-              <dt className="text-sm text-muted-foreground">Price</dt>
-              <dd className="text-sm font-medium text-foreground">$249.00</dd>
-              <dt className="text-sm text-muted-foreground">Stock</dt>
-              <dd className="flex items-center gap-1.5">
+            <SheetProperties keyWidth="130px">
+              <SheetKey>Category</SheetKey>
+              <SheetValue>Audio Equipment</SheetValue>
+              <SheetKey>Price</SheetKey>
+              <SheetValue className="font-medium">$249.00</SheetValue>
+              <SheetKey>Stock</SheetKey>
+              <SheetValue className="flex items-center gap-1.5">
                 <StatusDot variant="emerald" />
-                <span className="text-sm text-foreground">142 units</span>
-              </dd>
-              <dt className="text-sm text-muted-foreground">Weight</dt>
-              <dd className="text-sm text-foreground">250g</dd>
-              <dt className="text-sm text-muted-foreground">Connectivity</dt>
-              <dd className="text-sm text-foreground">Bluetooth 5.3</dd>
-              <dt className="text-sm text-muted-foreground">Battery Life</dt>
-              <dd className="text-sm text-foreground">30 hours</dd>
-              <dt className="text-sm text-muted-foreground">Vendor</dt>
-              <dd className="text-sm text-foreground">SoundWave Inc.</dd>
-              <dt className="text-sm text-muted-foreground">Added</dt>
-              <dd className="text-sm text-foreground">Feb 12, 2025</dd>
-            </dl>
-            <div className="border-t border-border" />
-            <div>
-              <p className="mb-2.5 text-xs font-medium text-muted-foreground">Tags</p>
-              <div className="flex flex-wrap gap-1.5">
-                {tags.map((tag) => (
-                  <SimpleBadge key={tag} variant="secondary">
-                    {tag}
-                  </SimpleBadge>
-                ))}
-              </div>
+                <span>142 units</span>
+              </SheetValue>
+              <SheetKey>Weight</SheetKey>
+              <SheetValue>250g</SheetValue>
+              <SheetKey>Connectivity</SheetKey>
+              <SheetValue>Bluetooth 5.3</SheetValue>
+              <SheetKey>Battery Life</SheetKey>
+              <SheetValue>30 hours</SheetValue>
+              <SheetKey>Vendor</SheetKey>
+              <SheetValue>SoundWave Inc.</SheetValue>
+              <SheetKey>Added</SheetKey>
+              <SheetValue>Feb 12, 2025</SheetValue>
+            </SheetProperties>
+          </SheetSection>
+          <SheetSection>
+            <SheetSectionHeader>Tags</SheetSectionHeader>
+            <div className="flex flex-wrap gap-1.5">
+              {tags.map((tag) => (
+                <SimpleBadge key={tag} variant="secondary">
+                  {tag}
+                </SimpleBadge>
+              ))}
             </div>
-          </div>
+          </SheetSection>
         </SheetBody>
         <SheetFooter>
           <SheetClose asChild>

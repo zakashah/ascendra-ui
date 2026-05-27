@@ -10,11 +10,15 @@ import {
   SheetDescription,
   SheetBody,
   SheetFooter,
+  SheetSection,
+  SheetSectionHeader,
+  SheetProperties,
+  SheetKey,
+  SheetValue,
 } from "@/ascendra-ui/components/ui/sheet";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import {
-  ItemGroup,
   Item,
   ItemContent,
   ItemTitle,
@@ -45,81 +49,67 @@ export default function OrderDetailsSheet() {
           </SheetDescription>
         </SheetHeader>
         <SheetBody>
-          <div className="flex flex-col gap-5">
-            <div>
-              <p className="mb-3 text-xs font-medium text-muted-foreground">
-                Order Info
-              </p>
-              <dl className="grid grid-cols-[140px_1fr] gap-x-4 gap-y-3">
-                <dt className="text-sm text-muted-foreground">Customer</dt>
-                <dd className="text-sm text-foreground">Marcus Webb</dd>
-                <dt className="text-sm text-muted-foreground">Payment</dt>
-                <dd className="text-sm text-foreground">Visa •••• 4242</dd>
-                <dt className="text-sm text-muted-foreground">Shipping</dt>
-                <dd className="text-sm text-foreground">Standard (5–7 days)</dd>
-                <dt className="text-sm text-muted-foreground">Order Date</dt>
-                <dd className="text-sm text-foreground">May 14, 2025</dd>
-              </dl>
+          <SheetSection>
+            <SheetSectionHeader>Order Info</SheetSectionHeader>
+            <SheetProperties>
+              <SheetKey>Customer</SheetKey>
+              <SheetValue>Marcus Webb</SheetValue>
+              <SheetKey>Payment</SheetKey>
+              <SheetValue>Visa •••• 4242</SheetValue>
+              <SheetKey>Shipping</SheetKey>
+              <SheetValue>Standard (5–7 days)</SheetValue>
+              <SheetKey>Order Date</SheetKey>
+              <SheetValue>May 14, 2025</SheetValue>
+            </SheetProperties>
+          </SheetSection>
+          <SheetSection>
+            <SheetSectionHeader>Line Items</SheetSectionHeader>
+            {lineItems.map((item) => (
+              <Item
+                key={item.name}
+                className="px-0 pb-0 first-of-type:pt-0 items-end"
+              >
+                <ItemContent>
+                  <ItemTitle className="font-normal">{item.name}</ItemTitle>
+                  <ItemDescription className="font-medium">
+                    {item.qty}
+                  </ItemDescription>
+                </ItemContent>
+                <ItemActions>
+                  <span className="text-sm font-medium text-foreground">
+                    {item.price}
+                  </span>
+                </ItemActions>
+              </Item>
+            ))}
+          </SheetSection>
+          <SheetSection>
+            <SheetSectionHeader>Shipping Address</SheetSectionHeader>
+            <div className="flex flex-col gap-0.5 text-sm text-muted-foreground">
+              <span className="text-foreground font-medium">Marcus Webb</span>
+              <span>412 Oak Street, Apt 3B</span>
+              <span>Austin, TX 78701</span>
+              <span>United States</span>
             </div>
-            <div className="border-t border-border" />
-            <div>
-              <p className="mb-3 text-xs font-medium text-muted-foreground">
-                Line Items
-              </p>
-              <ItemGroup>
-                {lineItems.map((item) => (
-                  <Item key={item.name}>
-                    <ItemContent>
-                      <ItemTitle>{item.name}</ItemTitle>
-                      <ItemDescription>{item.qty}</ItemDescription>
-                    </ItemContent>
-                    <ItemActions>
-                      <span className="text-sm font-medium text-foreground">
-                        {item.price}
-                      </span>
-                    </ItemActions>
-                  </Item>
-                ))}
-              </ItemGroup>
+          </SheetSection>
+          <SheetSection className="flex flex-col gap-2">
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">Subtotal</span>
+              <span className="text-foreground">$386.00</span>
             </div>
-            <div className="border-t border-border" />
-            <div>
-              <p className="mb-3 text-xs font-medium text-muted-foreground">
-                Shipping Address
-              </p>
-              <div className="flex flex-col gap-0.5">
-                <span className="text-sm text-foreground">Marcus Webb</span>
-                <span className="text-sm text-muted-foreground">
-                  412 Oak Street, Apt 3B
-                </span>
-                <span className="text-sm text-muted-foreground">
-                  Austin, TX 78701
-                </span>
-                <span className="text-sm text-muted-foreground">
-                  United States
-                </span>
-              </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">Shipping</span>
+              <span className="text-foreground">$12.00</span>
             </div>
-            <div className="border-t border-border" />
-            <div className="flex flex-col gap-2">
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Subtotal</span>
-                <span className="text-foreground">$386.00</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Shipping</span>
-                <span className="text-foreground">$12.00</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Tax</span>
-                <span className="text-foreground">$31.84</span>
-              </div>
-              <div className="mt-1 flex justify-between border-t border-border pt-2 text-sm font-semibold">
-                <span className="text-foreground">Total</span>
-                <span className="text-foreground">$429.84</span>
-              </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-muted-foreground">Tax</span>
+              <span className="text-foreground">$31.84</span>
             </div>
-          </div>
+            <div className="mt-1 flex justify-between border-t border-border pt-2 text-sm font-medium">
+              <span className="text-foreground">Total</span>
+              <span className="text-foreground">$429.84</span>
+            </div>
+          </SheetSection>
         </SheetBody>
         <SheetFooter>
           <SheetClose asChild>

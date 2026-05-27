@@ -12,6 +12,15 @@ import {
   SheetDescription,
   SheetBody,
   SheetFooter,
+  SheetTabs,
+  SheetTabList,
+  SheetTabTrigger,
+  SheetTabContent,
+  SheetSection,
+  SheetSectionHeader,
+  SheetProperties,
+  SheetKey,
+  SheetValue,
 } from "@/ascendra-ui/components/ui/sheet";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import { NameAvatar } from "@/ascendra-ui/components/common-ui/name-avatar";
@@ -38,151 +47,116 @@ const experience = [
   { role: "UX Designer", company: "Bright Labs", period: "2015 – 2018" },
 ];
 
-const TABS = ["overview", "experience"] as const;
-type Tab = (typeof TABS)[number];
-
-function SheetTabBar({ tab, setTab }: { tab: Tab; setTab: (t: Tab) => void }) {
-  return (
-    <div className="flex border-b border-border">
-      {TABS.map((t) => (
-        <button
-          key={t}
-          onClick={() => setTab(t)}
-          className={`relative px-3 py-2.5 text-sm capitalize transition-colors ${
-            tab === t
-              ? "text-foreground after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-foreground after:content-['']"
-              : "text-muted-foreground hover:text-foreground"
-          }`}
-        >
-          {t}
-        </button>
-      ))}
-    </div>
-  );
-}
-
 export default function EmployeeProfileSheet() {
-  const [tab, setTab] = useState<Tab>("overview");
   const [isActive, setIsActive] = useState(true);
 
   return (
-    <Sheet
-      onOpenChange={() => {
-        setTab("overview");
-        setIsActive(true);
-      }}
-    >
+    <Sheet onOpenChange={() => setIsActive(true)}>
       <SheetTrigger asChild>
         <Button variant="secondary">View Profile</Button>
       </SheetTrigger>
       <SheetContent>
-        <SheetHeader>
-          <div className="flex items-center gap-3">
-            <NameAvatar name="Sarah Mitchell" size={36} href="#" />
-            <div>
-              <SheetTitle>Sarah Mitchell</SheetTitle>
-              <SheetDescription>
-                Senior Product Designer · Design
-              </SheetDescription>
+        <SheetTabs defaultTab="overview">
+          <SheetHeader>
+            <div className="flex items-center gap-3">
+              <NameAvatar name="Sarah Mitchell" size={36} href="#" />
+              <div>
+                <SheetTitle>Sarah Mitchell</SheetTitle>
+                <SheetDescription>
+                  Senior Product Designer · Design
+                </SheetDescription>
+              </div>
             </div>
-          </div>
-        </SheetHeader>
-        <SheetSubHeader>
-          <SheetTabBar tab={tab} setTab={setTab} />
-        </SheetSubHeader>
-        <SheetBody>
-          {tab === "overview" && (
-            <div className="flex flex-col gap-5">
-              <div className="flex items-center justify-between">
-                <p className="text-xs font-medium text-muted-foreground">
-                  Employment Status
-                </p>
-                <div className="flex items-center gap-2">
-                  <Switch
-                    checked={isActive}
-                    onCheckedChange={setIsActive}
-                    id="emp-status"
-                  />
-                  <label
-                    htmlFor="emp-status"
-                    className="cursor-pointer text-sm text-muted-foreground"
-                  >
-                    {isActive ? "Active" : "Inactive"}
-                  </label>
+          </SheetHeader>
+          <SheetSubHeader>
+            <SheetTabList>
+              <SheetTabTrigger value="overview">Overview</SheetTabTrigger>
+              <SheetTabTrigger value="experience">Experience</SheetTabTrigger>
+            </SheetTabList>
+          </SheetSubHeader>
+          <SheetBody>
+            <SheetTabContent value="overview">
+              <SheetSection>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs font-medium text-muted-foreground">
+                    Employment Status
+                  </p>
+                  <div className="flex items-center gap-2">
+                    <Switch
+                      checked={isActive}
+                      onCheckedChange={setIsActive}
+                      id="emp-status"
+                    />
+                    <label
+                      htmlFor="emp-status"
+                      className="cursor-pointer text-sm text-muted-foreground"
+                    >
+                      {isActive ? "Active" : "Inactive"}
+                    </label>
+                  </div>
                 </div>
-              </div>
-              <div className="border-t border-border" />
-              <div>
-                <p className="mb-3 text-xs font-medium text-muted-foreground">
-                  Employment
-                </p>
-                <dl className="grid grid-cols-[140px_1fr] gap-x-4 gap-y-3">
-                  <dt className="text-sm text-muted-foreground">Department</dt>
-                  <dd className="text-sm text-foreground">Product Design</dd>
-                  <dt className="text-sm text-muted-foreground">Location</dt>
-                  <dd className="text-sm text-foreground">San Francisco, CA</dd>
-                  <dt className="text-sm text-muted-foreground">Start Date</dt>
-                  <dd className="text-sm text-foreground">Mar 12, 2021</dd>
-                  <dt className="text-sm text-muted-foreground">Manager</dt>
-                  <dd className="text-sm text-foreground">David Chen</dd>
-                  <dt className="text-sm text-muted-foreground">Employee ID</dt>
-                  <dd className="text-sm text-foreground">EMP-0842</dd>
-                </dl>
-              </div>
-              <div className="border-t border-border" />
-              <div>
-                <p className="mb-3 text-xs font-medium text-muted-foreground">
-                  Contact
-                </p>
-                <dl className="grid grid-cols-[140px_1fr] gap-x-4 gap-y-3">
-                  <dt className="text-sm text-muted-foreground">Email</dt>
-                  <dd className="truncate text-sm text-foreground">
+              </SheetSection>
+              <SheetSection>
+                <SheetSectionHeader>Employment</SheetSectionHeader>
+                <SheetProperties>
+                  <SheetKey>Department</SheetKey>
+                  <SheetValue>Product Design</SheetValue>
+                  <SheetKey>Location</SheetKey>
+                  <SheetValue>San Francisco, CA</SheetValue>
+                  <SheetKey>Start Date</SheetKey>
+                  <SheetValue>Mar 12, 2021</SheetValue>
+                  <SheetKey>Manager</SheetKey>
+                  <SheetValue>David Chen</SheetValue>
+                  <SheetKey>Employee ID</SheetKey>
+                  <SheetValue>EMP-0842</SheetValue>
+                </SheetProperties>
+              </SheetSection>
+              <SheetSection>
+                <SheetSectionHeader>Contact</SheetSectionHeader>
+                <SheetProperties>
+                  <SheetKey>Email</SheetKey>
+                  <SheetValue className="truncate">
                     sarah.m@company.com
-                  </dd>
-                  <dt className="text-sm text-muted-foreground">Phone</dt>
-                  <dd className="text-sm text-foreground">+1 (415) 555-0183</dd>
-                </dl>
-              </div>
-              <div className="border-t border-border" />
-              <div>
-                <p className="mb-2 text-xs font-medium text-muted-foreground">
-                  Bio
-                </p>
+                  </SheetValue>
+                  <SheetKey>Phone</SheetKey>
+                  <SheetValue>+1 (415) 555-0183</SheetValue>
+                </SheetProperties>
+              </SheetSection>
+              <SheetSection>
+                <SheetSectionHeader>Bio</SheetSectionHeader>
                 <p className="text-sm leading-relaxed text-muted-foreground">
                   Sarah is a seasoned product designer with 10+ years of
                   experience across B2B SaaS and consumer products. She leads
                   design systems and mentors junior designers on the team.
                 </p>
-              </div>
-            </div>
-          )}
-          {tab === "experience" && (
-            <div className="flex flex-col gap-3">
-              <p className="text-xs font-medium text-muted-foreground">
-                Work History
-              </p>
-              <ItemGroup>
-                {experience.map((job) => (
-                  <Item key={job.role} variant="outline">
-                    <ItemContent>
-                      <ItemTitle>{job.role}</ItemTitle>
-                      <ItemDescription>{job.company}</ItemDescription>
-                    </ItemContent>
-                    <span className="shrink-0 text-xs text-muted-foreground">
-                      {job.period}
-                    </span>
-                  </Item>
-                ))}
-              </ItemGroup>
-            </div>
-          )}
-        </SheetBody>
-        <SheetFooter>
-          <SheetClose asChild>
-            <Button variant="secondary">Close</Button>
-          </SheetClose>
-          <Button>Edit Profile</Button>
-        </SheetFooter>
+              </SheetSection>
+            </SheetTabContent>
+            <SheetTabContent value="experience">
+              <SheetSection>
+                <SheetSectionHeader>Work History</SheetSectionHeader>
+                <ItemGroup>
+                  {experience.map((job) => (
+                    <Item key={job.role} variant="outline">
+                      <ItemContent>
+                        <ItemTitle>{job.role}</ItemTitle>
+                        <ItemDescription>{job.company}</ItemDescription>
+                      </ItemContent>
+                      <span className="shrink-0 text-xs text-muted-foreground">
+                        {job.period}
+                      </span>
+                    </Item>
+                  ))}
+                </ItemGroup>
+              </SheetSection>
+            </SheetTabContent>
+          </SheetBody>
+          <SheetFooter>
+            <SheetClose asChild>
+              <Button variant="secondary">Close</Button>
+            </SheetClose>
+            <Button>Edit Profile</Button>
+          </SheetFooter>
+        </SheetTabs>
       </SheetContent>
     </Sheet>
   );
