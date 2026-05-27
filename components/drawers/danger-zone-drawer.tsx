@@ -7,9 +7,8 @@ import {
   DrawerTrigger,
   DrawerClose,
   DrawerContent,
-  DrawerBody,
   DrawerFooter,
-} from "@/ascendra-ui/components/ui/drawer";
+} from "@/ascendra-ui/shadcn/components/ui/drawer";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import { Input } from "@/ascendra-ui/components/ui/input";
 import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
@@ -34,7 +33,7 @@ export default function DangerZoneDrawer() {
         <Button variant="secondary">Delete Workspace</Button>
       </DrawerTrigger>
       <DrawerContent>
-        <DrawerBody className="py-5">
+        <div className="flex-1 overflow-y-auto px-6 py-5">
           <div className="flex flex-col gap-5">
             <div className="flex flex-col items-center gap-3 text-center">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10">
@@ -74,8 +73,8 @@ export default function DangerZoneDrawer() {
               />
             </div>
           </div>
-        </DrawerBody>
-        <DrawerFooter>
+        </div>
+        <DrawerFooter className="flex-row items-center justify-end gap-3 border-t border-border px-6 py-4">
           <DrawerClose asChild>
             <Button variant="secondary">Cancel</Button>
           </DrawerClose>

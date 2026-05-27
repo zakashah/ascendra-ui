@@ -6,9 +6,8 @@ import {
   DrawerTrigger,
   DrawerClose,
   DrawerContent,
-  DrawerBody,
   DrawerFooter,
-} from "@/ascendra-ui/components/ui/drawer";
+} from "@/ascendra-ui/shadcn/components/ui/drawer";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import { BubbleBadge } from "@/ascendra-ui/components/common-ui/bubble-badge";
 import { StatusDot } from "@/ascendra-ui/components/common-ui/status-dot";
@@ -74,7 +73,7 @@ export default function NotificationCenterDrawer() {
           )}
         </Button>
       </DrawerTrigger>
-      <DrawerContent side="right">
+      <DrawerContent>
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border px-6 py-4">
           <div>
@@ -92,7 +91,7 @@ export default function NotificationCenterDrawer() {
             </button>
           )}
         </div>
-        <DrawerBody className="py-2">
+        <div className="flex-1 overflow-y-auto px-6 py-2">
           <div className="flex flex-col divide-y divide-border">
             {notifications.map((n) => (
               <div
@@ -118,8 +117,8 @@ export default function NotificationCenterDrawer() {
               </div>
             ))}
           </div>
-        </DrawerBody>
-        <DrawerFooter>
+        </div>
+        <DrawerFooter className="border-t border-border px-6 py-4">
           <DrawerClose asChild>
             <Button variant="secondary" className="w-full">
               Close

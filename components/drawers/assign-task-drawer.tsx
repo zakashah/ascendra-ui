@@ -10,9 +10,8 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerDescription,
-  DrawerBody,
   DrawerFooter,
-} from "@/ascendra-ui/components/ui/drawer";
+} from "@/ascendra-ui/shadcn/components/ui/drawer";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import { Input } from "@/ascendra-ui/components/ui/input";
 import { NameAvatar } from "@/ascendra-ui/components/common-ui/name-avatar";
@@ -56,11 +55,11 @@ export default function AssignTaskDrawer() {
         <Button variant="secondary">Assign To</Button>
       </DrawerTrigger>
       <DrawerContent>
-        <DrawerHeader>
+        <DrawerHeader className="text-left px-6 pt-4 pb-3 gap-1">
           <DrawerTitle>Assign Task</DrawerTitle>
           <DrawerDescription>Select a team member to assign this task.</DrawerDescription>
         </DrawerHeader>
-        <DrawerBody className="pb-4">
+        <div className="flex-1 overflow-y-auto px-6 pb-4">
           <div className="flex flex-col gap-3">
             <Input
               placeholder="Search by name or role…"
@@ -91,8 +90,8 @@ export default function AssignTaskDrawer() {
               )}
             </ItemGroup>
           </div>
-        </DrawerBody>
-        <DrawerFooter>
+        </div>
+        <DrawerFooter className="flex-row items-center justify-end gap-3 border-t border-border px-6 py-4">
           <DrawerClose asChild>
             <Button variant="secondary">Cancel</Button>
           </DrawerClose>

@@ -12,9 +12,8 @@ import {
   DrawerTrigger,
   DrawerClose,
   DrawerContent,
-  DrawerBody,
   DrawerFooter,
-} from "@/ascendra-ui/components/ui/drawer";
+} from "@/ascendra-ui/shadcn/components/ui/drawer";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import {
   ItemGroup,
@@ -39,7 +38,7 @@ export default function QuickActionsDrawer() {
         <Button variant="secondary">More Options</Button>
       </DrawerTrigger>
       <DrawerContent>
-        <DrawerBody className="py-4">
+        <div className="flex-1 overflow-y-auto px-6 py-4">
           <ItemGroup>
             {actions.map(({ label, icon: Icon, destructive }) => (
               <DrawerClose key={label} asChild>
@@ -66,8 +65,8 @@ export default function QuickActionsDrawer() {
               </DrawerClose>
             ))}
           </ItemGroup>
-        </DrawerBody>
-        <DrawerFooter>
+        </div>
+        <DrawerFooter className="flex-row items-center justify-end border-t border-border px-6 py-4">
           <DrawerClose asChild>
             <Button variant="secondary" className="w-full">
               Cancel

@@ -18,8 +18,7 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerDescription,
-  DrawerBody,
-} from "@/ascendra-ui/components/ui/drawer";
+} from "@/ascendra-ui/shadcn/components/ui/drawer";
 import { Button } from "@/ascendra-ui/components/ui/button";
 
 const destinations = [
@@ -45,11 +44,11 @@ export default function ShareSheetDrawer() {
         <Button variant="secondary">Share</Button>
       </DrawerTrigger>
       <DrawerContent>
-        <DrawerHeader>
+        <DrawerHeader className="text-left px-6 pt-4 pb-3 gap-1">
           <DrawerTitle>Share</DrawerTitle>
           <DrawerDescription>Choose how to share this item.</DrawerDescription>
         </DrawerHeader>
-        <DrawerBody className="pb-6">
+        <div className="flex-1 overflow-y-auto px-6 pb-6">
           <div className="grid grid-cols-3 gap-4">
             {destinations.map(({ id, label, icon: Icon }) => {
               const isCopy = id === "link";
@@ -82,7 +81,7 @@ export default function ShareSheetDrawer() {
               );
             })}
           </div>
-        </DrawerBody>
+        </div>
       </DrawerContent>
     </Drawer>
   );

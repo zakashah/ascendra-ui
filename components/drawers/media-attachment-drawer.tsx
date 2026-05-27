@@ -9,9 +9,8 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerDescription,
-  DrawerBody,
   DrawerFooter,
-} from "@/ascendra-ui/components/ui/drawer";
+} from "@/ascendra-ui/shadcn/components/ui/drawer";
 import { Button } from "@/ascendra-ui/components/ui/button";
 
 export default function MediaAttachmentDrawer() {
@@ -21,11 +20,11 @@ export default function MediaAttachmentDrawer() {
         <Button variant="secondary">View Attachment</Button>
       </DrawerTrigger>
       <DrawerContent>
-        <DrawerHeader>
+        <DrawerHeader className="text-left px-6 pt-4 pb-3 gap-1">
           <DrawerTitle>dashboard-hero-v4.png</DrawerTitle>
           <DrawerDescription>Image · Uploaded by Sarah Mitchell</DrawerDescription>
         </DrawerHeader>
-        <DrawerBody className="pb-6">
+        <div className="flex-1 overflow-y-auto px-6 pb-6">
           <div className="flex flex-col gap-5">
             <div className="flex h-44 w-full items-center justify-center rounded-xl border border-dashed border-border bg-muted/40">
               <div className="flex flex-col items-center gap-2 text-muted-foreground/40">
@@ -48,8 +47,8 @@ export default function MediaAttachmentDrawer() {
               <dd className="text-sm text-foreground">May 22, 2025</dd>
             </dl>
           </div>
-        </DrawerBody>
-        <DrawerFooter>
+        </div>
+        <DrawerFooter className="flex-row items-center justify-end gap-3 border-t border-border px-6 py-4">
           <DrawerClose asChild>
             <Button variant="secondary">Copy URL</Button>
           </DrawerClose>
