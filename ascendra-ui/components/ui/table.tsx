@@ -353,7 +353,7 @@ function TableFoot({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent side="bottom">
-                {["5", "10", "15", "20", "100"].map((item) => (
+                {["1", "5", "10", "15", "20", "100"].map((item) => (
                   <SelectItem key={item} value={item}>
                     {item}
                   </SelectItem>

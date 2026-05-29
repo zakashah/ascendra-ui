@@ -179,7 +179,7 @@ export default function DataTableLabPage() {
                 </DataTableBar>
                 <DataTableFilterBar />
                 <DataTableWrapper>
-                  <DataTable scrollable vertical horizontal height={200}>
+                  <DataTable scrollable horizontal height={200}>
                     <DataTableHeader>
                       <DataTableHeaderRow>
                         <DataTableCheckboxHead />
