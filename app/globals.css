@@ -319,7 +319,8 @@
   }
   html,
   body {
-    overflow-x: hidden;
+    overflow-x: hidden; /* fallback for older browsers */
+    overflow-x: clip; /* modern: doesn't create a scroll container, inner overflow-x:auto works correctly on iOS */
   }
   body {
     @apply bg-background text-foreground;
@@ -406,10 +407,12 @@
 }
 
 /* Prevent iOS zoom on input focus (triggered when font-size < 16px) */
-input,
-textarea,
-select {
-  font-size: max(16px, 1em);
+@media (max-width: 768px) {
+  input,
+  textarea,
+  select {
+    font-size: max(16px, 1em);
+  }
 }
 
 /* table */

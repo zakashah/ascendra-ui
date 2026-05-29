@@ -179,7 +179,7 @@ export default function DataTableLabPage() {
                 </DataTableBar>
                 <DataTableFilterBar />
                 <DataTableWrapper>
-                  <DataTable scrollable horizontal height={200}>
+                  <DataTable scrollable vertical horizontal height={200}>
                     <DataTableHeader>
                       <DataTableHeaderRow>
                         <DataTableCheckboxHead />
@@ -301,7 +301,7 @@ export default function DataTableLabPage() {
                   <DataTableLoadingBody />
                   <DataTableErrorBody />
                   <DataTableEmptyBody />
-                  <DataTableFoot />
+                  {/* <DataTableFoot /> */}
                 </DataTableWrapper>
               </DataTableWithQueryProvider>
             </MainContent>

@@ -1,11 +1,11 @@
-"use client";
+import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 
 export default function Page() {
   return (
     <div className="p-10">
       <div
         className="grid transition-[grid-template-rows] duration-300 ease-in-out"
-        style={{ gridTemplateRows: "auto 1fr" }}
+        style={{ gridTemplateRows: "1fr" }}
       >
         <div className="min-h-0 overflow-hidden">
           <div
@@ -35,10 +35,10 @@ export default function Page() {
                         <svg
                           stroke="currentColor"
                           fill="none"
-                          strokeWidth="2"
+                          stroke-width="2"
                           viewBox="0 0 24 24"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
                           className="text-muted-foreground size-3 shrink-0 opacity-0 transition-opacity group-hover/sort:opacity-100"
                           height="1em"
                           width="1em"
@@ -58,10 +58,10 @@ export default function Page() {
                         <svg
                           stroke="currentColor"
                           fill="none"
-                          strokeWidth="2"
+                          stroke-width="2"
                           viewBox="0 0 24 24"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
                           className="text-muted-foreground size-3 shrink-0 opacity-0 transition-opacity group-hover/sort:opacity-100"
                           height="1em"
                           width="1em"
@@ -76,11 +76,19 @@ export default function Page() {
                 </thead>
                 <tbody
                   data-slot="table-body"
-                  className="relative isolate before:bg-background before:absolute before:inset-0 before:-z-10 before:mx-1 before:rounded-lg before:ring-1 before:ring-(--color-umbra)/4 dark:before:ring-black/20 before:shadow-[0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)] dark:before:shadow-[inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,2),0_0_3px_0_rgba(0,0,0,0.2)] before:[will-change:transform] [&>tr:not(:last-child)>td]:border-border [&>tr:not(:last-child)>td]:border-b"
+                  className={cn(
+                    "",
+                    "relative isolate transform-[translateZ(0)] before:bg-background",
+                    "before:absolute before:inset-0",
+                    "before:-z-10 before:mx-1 before:rounded-lg",
+                    "before:ring-1 before:ring-(--color-umbra)/4",
+                    "before:shadow-[0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)]",
+                    "[&amp;&gt;tr:not(:last-child)&gt;td]:border-border [&amp;&gt;tr:not(:last-child)&gt;td]:border-b",
+                  )}
                 >
                   <tr
                     data-slot="table-row"
-                    className="group/row transition-colors [clip-path:inset(0_4px)] first:[clip-path:inset(0_4px_0_4px_round_8px_8px_0_0)] last:[clip-path:inset(0_4px_0_4px_round_0_0_8px_8px)] first:last:[clip-path:inset(0_4px_round_8px)] hover:bg-gray-700/4 transform-[translateZ(0)]"
+                    className="group/row transition-colors [clip-path:inset(0_4px)] first:[clip-path:inset(0_4px_0_4px_round_8px_8px_0_0)] last:[clip-path:inset(0_4px_0_4px_round_0_0_8px_8px)] first:last:[clip-path:inset(0_4px_round_8px)] hover:bg-gray-700/4"
                   >
                     <td
                       data-slot="table-cell"
@@ -121,7 +129,7 @@ export default function Page() {
                     <button
                       type="button"
                       role="combobox"
-                      aria-controls="radix-_r_l_"
+                      aria-controls="radix-_r_6_"
                       aria-expanded="false"
                       aria-autocomplete="none"
                       dir="ltr"
@@ -146,9 +154,9 @@ export default function Page() {
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
                           className="lucide lucide-chevron-down text-muted-foreground pointer-events-none size-4 transition-transform duration-150 group-data-[state=open]:rotate-180"
                           aria-hidden="true"
                         >
@@ -171,10 +179,10 @@ export default function Page() {
                       <svg
                         stroke="currentColor"
                         fill="none"
-                        strokeWidth="2"
+                        stroke-width="2"
                         viewBox="0 0 24 24"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
                         height="1em"
                         width="1em"
                         xmlns="http://www.w3.org/2000/svg"
@@ -192,10 +200,10 @@ export default function Page() {
                       <svg
                         stroke="currentColor"
                         fill="none"
-                        strokeWidth="2"
+                        stroke-width="2"
                         viewBox="0 0 24 24"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
                         height="1em"
                         width="1em"
                         xmlns="http://www.w3.org/2000/svg"
@@ -217,10 +225,10 @@ export default function Page() {
                       <svg
                         stroke="currentColor"
                         fill="none"
-                        strokeWidth="2"
+                        stroke-width="2"
                         viewBox="0 0 24 24"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
                         height="1em"
                         width="1em"
                         xmlns="http://www.w3.org/2000/svg"
@@ -237,10 +245,10 @@ export default function Page() {
                       <svg
                         stroke="currentColor"
                         fill="none"
-                        strokeWidth="2"
+                        stroke-width="2"
                         viewBox="0 0 24 24"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
                         height="1em"
                         width="1em"
                         xmlns="http://www.w3.org/2000/svg"
