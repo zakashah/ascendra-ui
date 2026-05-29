@@ -189,7 +189,6 @@ export default function SupportTicketForm() {
       <div className="app-container mt-8 pb-24 lg:mt-10 lg:pb-28">
         <div className="mx-auto flex w-full max-w-3xl flex-col">
           <BackLink href="/showcase/forms">Forms Gallery</BackLink>
-
           <PageHeader>
             <PageHeaderGroup>
               <PageTitle>Submit a Support Ticket</PageTitle>
@@ -205,10 +204,12 @@ export default function SupportTicketForm() {
               <PageContent>
                 <MainContent>
                   <SimpleAlert>
-                    Response SLAs: <strong>Critical → 2 h</strong> &middot;{" "}
-                    <strong>High → 8 h</strong> &middot;{" "}
-                    <strong>Medium → 24 h</strong> &middot;{" "}
-                    <strong>Low → 72 h</strong>
+                    <span>
+                      Response SLAs: <strong>Critical → 2 h</strong> &middot;{" "}
+                      <strong>High → 8 h</strong> &middot;{" "}
+                      <strong>Medium → 24 h</strong> &middot;{" "}
+                      <strong>Low → 72 h</strong>
+                    </span>
                   </SimpleAlert>
 
                   {/* ── Section 1: Issue Details ──────────────────────────── */}
@@ -323,11 +324,12 @@ export default function SupportTicketForm() {
                                     <Field
                                       key={opt.value}
                                       orientation="horizontal"
-                                      className="items-baseline"
+                                      className="items-center"
                                     >
                                       <RadioGroupItem
                                         value={opt.value}
                                         id={`priority-${opt.value}`}
+                                        className="mb-1"
                                       />
                                       <FieldLabel
                                         htmlFor={`priority-${opt.value}`}

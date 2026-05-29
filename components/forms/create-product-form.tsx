@@ -219,8 +219,10 @@ export default function CreateProductForm() {
               <TabContent value="details">
                 <MainContent>
                   <SimpleAlert>
-                    Products in <strong>Draft</strong> status are not visible to
-                    customers.
+                    <span>
+                      Products in <strong>Draft</strong> status are not visible
+                      to customers.
+                    </span>
                   </SimpleAlert>
 
                   <MainSection>
@@ -475,8 +477,7 @@ export default function CreateProductForm() {
                       <MainSectionPanelItem className="relative">
                         <MainSectionPanelItemCrown variant="default">
                           Specify the relvant for product tags to improve
-                          searchability. These tags will not be visible to
-                          customers.
+                          searchability.
                         </MainSectionPanelItemCrown>
                         <Field>
                           <Controller
@@ -1022,7 +1023,8 @@ export default function CreateProductForm() {
                         </FieldGroup>
                       </MainSectionPanelItem>
                       <MainSectionPanelItem>
-                        This is an other panel item that is here to show the spacing between items. It has no content.
+                        This is an other panel item that is here to show the
+                        spacing between items. It has no content.
                       </MainSectionPanelItem>
                     </MainSectionPanel>
                   </MainSection>

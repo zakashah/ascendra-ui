@@ -64,7 +64,7 @@ function InvalidDemo() {
         isValid={false}
         onSave={() => {}}
         onReset={() => setIsDirty(false)}
-        validationMessage="Please check the form for errors"
+        validationMessage="Check the errors"
       />
     </div>
   );
@@ -132,7 +132,7 @@ const [isDirty, setIsDirty] = useState(false);
   onInvalid={() => trigger()} // trigger react-hook-form validation
   onSave={() => {}}
   onReset={() => setIsDirty(false)}
-  validationMessage="Please check the form for errors"
+  validationMessage="Check the errors"
 />`}
           >
             <InvalidDemo />

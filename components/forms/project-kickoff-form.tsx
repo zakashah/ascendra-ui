@@ -484,11 +484,12 @@ export default function ProjectKickoffForm() {
                                     <Field
                                       key={opt.value}
                                       orientation="horizontal"
-                                      className="w-auto items-baseline"
+                                      className="w-auto items-center"
                                     >
                                       <RadioGroupItem
                                         value={opt.value}
                                         id={`vis-${opt.value}`}
+                                        className="mb-1"
                                       />
                                       <FieldLabel
                                         htmlFor={`vis-${opt.value}`}
@@ -731,7 +732,7 @@ export default function ProjectKickoffForm() {
 
                       {/* Panel Item 3 — Billing */}
                       <MainSectionPanelItem>
-                        <FieldGroup>
+                        <FieldSet>
                           <Field>
                             <FieldLabel htmlFor="hourly-rate">
                               Hourly Rate
@@ -784,7 +785,7 @@ export default function ProjectKickoffForm() {
                               </Field>
                             )}
                           />
-                        </FieldGroup>
+                        </FieldSet>
                       </MainSectionPanelItem>
 
                       {/* Panel Item 4 — Milestones */}

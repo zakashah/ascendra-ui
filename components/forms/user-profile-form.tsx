@@ -260,9 +260,22 @@ export default function UserProfileForm() {
     return true;
   }
 
-  const { control: gc, formState: { isDirty: generalDirty, isValid: generalValid, errors: ge } } = generalForm;
-  const { control: pc, formState: { isDirty: preferencesDirty, isValid: preferencesValid, errors: pe } } = preferencesForm;
-  const { control: nc, formState: { isDirty: notificationsDirty, isValid: notificationsValid } } = notificationsForm;
+  const {
+    control: gc,
+    formState: { isDirty: generalDirty, isValid: generalValid, errors: ge },
+  } = generalForm;
+  const {
+    control: pc,
+    formState: {
+      isDirty: preferencesDirty,
+      isValid: preferencesValid,
+      errors: pe,
+    },
+  } = preferencesForm;
+  const {
+    control: nc,
+    formState: { isDirty: notificationsDirty, isValid: notificationsValid },
+  } = notificationsForm;
 
   return (
     <>
@@ -492,9 +505,7 @@ export default function UserProfileForm() {
                                 </InputGroup>
                               )}
                             />
-                            <FieldHint
-                              error={ge.bio as { message?: string }}
-                            />
+                            <FieldHint error={ge.bio as { message?: string }} />
                           </Field>
 
                           <Field>
@@ -670,9 +681,7 @@ export default function UserProfileForm() {
                                   <SelectTrigger
                                     id="date-format"
                                     className="w-full"
-                                    aria-invalid={
-                                      !!pe.dateFormat || undefined
-                                    }
+                                    aria-invalid={!!pe.dateFormat || undefined}
                                   >
                                     <SelectValue placeholder="Select a format…" />
                                   </SelectTrigger>
@@ -722,11 +731,12 @@ export default function UserProfileForm() {
                                     <Field
                                       key={opt.value}
                                       orientation="horizontal"
-                                      className="w-auto items-baseline"
+                                      className="w-auto items-center"
                                     >
                                       <RadioGroupItem
                                         value={opt.value}
                                         id={`time-format-${opt.value}`}
+                                        className="mb-1"
                                       />
                                       <FieldLabel
                                         htmlFor={`time-format-${opt.value}`}
@@ -785,11 +795,12 @@ export default function UserProfileForm() {
                                   <Field
                                     key={opt.value}
                                     orientation="horizontal"
-                                    className="w-auto items-baseline"
+                                    className="w-auto items-center"
                                   >
                                     <RadioGroupItem
                                       value={opt.value}
                                       id={`theme-${opt.value}`}
+                                      className="mb-1"
                                     />
                                     <FieldLabel
                                       htmlFor={`theme-${opt.value}`}
@@ -802,9 +813,7 @@ export default function UserProfileForm() {
                               </RadioGroup>
                             )}
                           />
-                          <FieldHint
-                            error={pe.theme as { message?: string }}
-                          />
+                          <FieldHint error={pe.theme as { message?: string }} />
                         </FieldSet>
                       </MainSectionPanelItem>
                     </MainSectionPanel>

@@ -285,11 +285,12 @@ export default function SearchFilterForm() {
                                 <Field
                                   key={opt.value}
                                   orientation="horizontal"
-                                  className="items-baseline"
+                                  className="items-center"
                                 >
                                   <RadioGroupItem
                                     value={opt.value}
                                     id={`sort-${opt.value}`}
+                                    className="mb-1"
                                   />
                                   <FieldLabel
                                     htmlFor={`sort-${opt.value}`}

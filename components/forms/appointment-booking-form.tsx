@@ -223,11 +223,12 @@ export default function AppointmentBookingForm() {
                                   <Field
                                     key={opt.value}
                                     orientation="horizontal"
-                                    className="items-baseline"
+                                    className="items-center"
                                   >
                                     <RadioGroupItem
                                       value={opt.value}
                                       id={`service-${opt.value}`}
+                                      className="mb-1"
                                     />
                                     <FieldLabel
                                       htmlFor={`service-${opt.value}`}
@@ -453,11 +454,12 @@ export default function AppointmentBookingForm() {
                                     <Field
                                       key={opt.value}
                                       orientation="horizontal"
-                                      className="items-baseline"
+                                      className="items-center"
                                     >
                                       <RadioGroupItem
                                         value={opt.value}
                                         id={`slot-${opt.value}`}
+                                        className="mb-1"
                                       />
                                       <FieldLabel
                                         htmlFor={`slot-${opt.value}`}

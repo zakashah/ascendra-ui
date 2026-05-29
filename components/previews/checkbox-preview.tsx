@@ -48,23 +48,23 @@ export function CheckboxDocContent() {
             Pair with a label element for form use.
           </p>
           <ComponentPreview
-            code={`<label className="flex items-center gap-2 cursor-pointer">
+            code={`<label className="flex items-baseline gap-2 cursor-pointer">
   <Checkbox defaultChecked />
   <span className="text-sm text-foreground">Send payment reminders</span>
 </label>
-<label className="flex items-center gap-2 cursor-pointer">
+<label className="flex items-baseline gap-2 cursor-pointer">
   <Checkbox />
   <span className="text-sm text-foreground">Enable auto-invoice</span>
 </label>`}
           >
             <div className="flex flex-col gap-3">
-              <label className="flex items-center gap-2 cursor-pointer">
+              <label className="flex items-baseline gap-2 cursor-pointer">
                 <Checkbox defaultChecked />
                 <span className="text-sm text-foreground">
                   Send payment reminders
                 </span>
               </label>
-              <label className="flex items-center gap-2 cursor-pointer">
+              <label className="flex items-baseline gap-2 cursor-pointer">
                 <Checkbox />
                 <span className="text-sm text-foreground">
                   Enable auto-invoice

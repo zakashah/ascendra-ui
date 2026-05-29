@@ -61,12 +61,18 @@ import { MainSectionPanelItemCrown } from "@/ascendra-ui/components/layout/main-
 
 const schema = z.object({
   fullName: z.string().min(1, "Full name is required"),
-  email: z.string().min(1, "Email address is required").regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Enter a valid email address"),
+  email: z
+    .string()
+    .min(1, "Email address is required")
+    .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Enter a valid email address"),
   phone: z.string(),
   company: z.string(),
   subject: z.string().min(1, "Please select a subject"),
   inquiryType: z.string(),
-  message: z.string().min(1, "Please enter your message").min(20, "Message must be at least 20 characters"),
+  message: z
+    .string()
+    .min(1, "Please enter your message")
+    .min(20, "Message must be at least 20 characters"),
   referralSource: z.string(),
   marketingConsent: z.boolean(),
 });
@@ -279,9 +285,12 @@ export default function ContactInquiryForm() {
                         </MainSectionPanelItemCrown>
                         <MainSectionPanelItemGroup>
                           <SimpleAlert variant="secondary">
-                            Our team responds to all inquiries within{" "}
-                            <strong>1 business day</strong>. For urgent matters,
-                            include &ldquo;Urgent&rdquo; in your subject line.
+                            <span>
+                              Our team responds to all inquiries within{" "}
+                              <strong>1 business day</strong>. For urgent
+                              matters, include &ldquo;Urgent&rdquo; in your
+                              subject line.
+                            </span>
                           </SimpleAlert>
                           <FieldGroup>
                             <Field>
@@ -352,11 +361,12 @@ export default function ContactInquiryForm() {
                                       <Field
                                         key={opt.value}
                                         orientation="horizontal"
-                                        className="items-baseline"
+                                        className="items-center"
                                       >
                                         <RadioGroupItem
                                           value={opt.value}
                                           id={`inquiry-type-${opt.value}`}
+                                          className="mb-1"
                                         />
                                         <FieldLabel
                                           htmlFor={`inquiry-type-${opt.value}`}

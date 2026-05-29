@@ -228,9 +228,11 @@ export default function FinancialTransactionForm() {
               <PageContent>
                 <MainContent>
                   <SimpleAlert>
-                    Posted transactions <strong>cannot be edited</strong>.
-                    Contact your administrator to void or reverse a posted
-                    entry.
+                    <span>
+                      Posted transactions <strong>cannot be edited</strong>.
+                      Contact your administrator to void or reverse a posted
+                      entry.
+                    </span>
                   </SimpleAlert>
 
                   {/* ── Section 1: Transaction Details ────────────────────── */}
@@ -319,11 +321,12 @@ export default function FinancialTransactionForm() {
                                       <Field
                                         key={opt.value}
                                         orientation="horizontal"
-                                        className="w-auto items-baseline"
+                                        className="w-auto items-center"
                                       >
                                         <RadioGroupItem
                                           value={opt.value}
                                           id={`tx-type-${opt.value}`}
+                                          className="mb-1"
                                         />
                                         <FieldLabel
                                           htmlFor={`tx-type-${opt.value}`}
@@ -677,11 +680,12 @@ export default function FinancialTransactionForm() {
                                   <Field
                                     key={opt.value}
                                     orientation="horizontal"
-                                    className="items-baseline"
+                                    className="items-center"
                                   >
                                     <RadioGroupItem
                                       value={opt.value}
                                       id={`freq-${opt.value}`}
+                                      className="mb-1"
                                     />
                                     <FieldLabel
                                       htmlFor={`freq-${opt.value}`}
@@ -750,11 +754,12 @@ export default function FinancialTransactionForm() {
                                     <Field
                                       key={opt.value}
                                       orientation="horizontal"
-                                      className="items-baseline"
+                                      className="items-center"
                                     >
                                       <RadioGroupItem
                                         value={opt.value}
                                         id={`end-${opt.value}`}
+                                        className="mb-1"
                                       />
                                       <FieldLabel
                                         htmlFor={`end-${opt.value}`}

@@ -39,7 +39,7 @@ export function UnsavedChangesBar({
   saveLabel = "Save",
   resetLabel = "Reset",
   message = "Unsaved changes",
-  validationMessage = "Please check the form for errors",
+  validationMessage = "Check the errors",
   savingMessage = "Saving changes…",
   successMessage = "Saved successfully",
   errorMessage = "Failed to save. Please try again.",

@@ -148,9 +148,7 @@ export function DialogDocContent() {
           </h3>
           <p className="text-muted-foreground text-xs">
             Use a{" "}
-            <code className="bg-muted rounded px-1 font-mono text-xs">
-              div
-            </code>{" "}
+            <code className="bg-muted rounded px-1 font-mono text-xs">div</code>{" "}
             with a top separator inside{" "}
             <code className="bg-muted rounded px-1 font-mono text-xs">
               DialogBody
@@ -171,7 +169,7 @@ export function DialogDocContent() {
         Premium features are free to enable on development instances for
         developing and testing purposes.
       </p>
-      <div className="border-border flex items-center gap-2 border-t pt-4 mt-4">
+      <div className="border-border flex items-baseline gap-2 border-t pt-4 mt-4">
         <Checkbox id="dont-show" />
         <label htmlFor="dont-show" className="text-sm text-muted-foreground cursor-pointer">
           Do not show this message again
@@ -200,7 +198,7 @@ export function DialogDocContent() {
                     Premium features are free to enable on development instances
                     for developing and testing purposes.
                   </p>
-                  <div className="border-border flex items-center gap-2 border-t pt-4 mt-4">
+                  <div className="border-border flex items-baseline gap-2 border-t pt-4 mt-4">
                     <Checkbox id="dont-show" />
                     <label
                       htmlFor="dont-show"
