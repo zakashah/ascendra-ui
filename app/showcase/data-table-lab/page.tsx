@@ -301,7 +301,7 @@ export default function DataTableLabPage() {
                   <DataTableLoadingBody />
                   <DataTableErrorBody />
                   <DataTableEmptyBody />
-                  {/* <DataTableFoot /> */}
+                  <DataTableFoot />
                 </DataTableWrapper>
               </DataTableWithQueryProvider>
             </MainContent>
