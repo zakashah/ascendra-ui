@@ -20,7 +20,7 @@ export default function Page() {
             >
               <table
                 data-slot="table"
-                className="w-full border-separate border-spacing-0"
+                className="w-full border-separate border-spacing-0 m-4"
               >
                 <thead data-slot="table-header" className="">
                   <tr
@@ -171,7 +171,7 @@ export default function Page() {
                 <tbody data-slot="table-body" className={cn("")}>
                   <tr
                     data-slot="table-row"
-                    className="group/row transition-colors [clip-path:inset(0_4px)] first:[clip-path:inset(0_4px_0_4px_round_8px_8px_0_0)] last:[clip-path:inset(0_4px_0_4px_round_0_0_8px_8px)] first:last:[clip-path:inset(0_4px_round_8px)] hover:bg-gray-700/4"
+                    className="bg-background group/row transition-colors hover:bg-gray-700/4 shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04)] dark:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2)] first:rounded-t-lg first:shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04),inset_0_1px_0_0_rgba(25,28,33,0.04)] dark:first:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2),inset_0_1px_0_0_rgba(0,0,0,0.2)] last:rounded-b-lg last:shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04),inset_0_-1px_0_0_rgba(25,28,33,0.04),0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)] dark:last:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2),inset_0_-1px_0_0_rgba(0,0,0,0.2),inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,0.4),0_0_3px_0_rgba(0,0,0,0.2)]"
                   >
                     <td
                       data-slot="table-cell"
@@ -264,7 +264,7 @@ export default function Page() {
                   </tr>
                   <tr
                     data-slot="table-row"
-                    className="group/row transition-colors [clip-path:inset(0_4px)] first:[clip-path:inset(0_4px_0_4px_round_8px_8px_0_0)] last:[clip-path:inset(0_4px_0_4px_round_0_0_8px_8px)] first:last:[clip-path:inset(0_4px_round_8px)] hover:bg-gray-700/4"
+                    className="bg-background group/row transition-colors hover:bg-gray-700/4 shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04)] dark:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2)] first:rounded-t-lg first:shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04),inset_0_1px_0_0_rgba(25,28,33,0.04)] dark:first:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2),inset_0_1px_0_0_rgba(0,0,0,0.2)] last:rounded-b-lg last:shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04),inset_0_-1px_0_0_rgba(25,28,33,0.04),0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)] dark:last:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2),inset_0_-1px_0_0_rgba(0,0,0,0.2),inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,0.4),0_0_3px_0_rgba(0,0,0,0.2)]"
                   >
                     <td
                       data-slot="table-cell"
@@ -357,7 +357,7 @@ export default function Page() {
                   </tr>
                   <tr
                     data-slot="table-row"
-                    className="group/row transition-colors [clip-path:inset(0_4px)] first:[clip-path:inset(0_4px_0_4px_round_8px_8px_0_0)] last:[clip-path:inset(0_4px_0_4px_round_0_0_8px_8px)] first:last:[clip-path:inset(0_4px_round_8px)] hover:bg-gray-700/4"
+                    className="bg-background group/row transition-colors hover:bg-gray-700/4 shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04)] dark:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2)] first:rounded-t-lg first:shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04),inset_0_1px_0_0_rgba(25,28,33,0.04)] dark:first:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2),inset_0_1px_0_0_rgba(0,0,0,0.2)] last:rounded-b-lg last:shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04),inset_0_-1px_0_0_rgba(25,28,33,0.04),0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)] dark:last:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2),inset_0_-1px_0_0_rgba(0,0,0,0.2),inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,0.4),0_0_3px_0_rgba(0,0,0,0.2)]"
                   >
                     <td
                       data-slot="table-cell"
@@ -450,7 +450,7 @@ export default function Page() {
                   </tr>
                   <tr
                     data-slot="table-row"
-                    className="group/row transition-colors [clip-path:inset(0_4px)] first:[clip-path:inset(0_4px_0_4px_round_8px_8px_0_0)] last:[clip-path:inset(0_4px_0_4px_round_0_0_8px_8px)] first:last:[clip-path:inset(0_4px_round_8px)] hover:bg-gray-700/4"
+                    className="bg-background group/row transition-colors hover:bg-gray-700/4 shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04)] dark:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2)] first:rounded-t-lg first:shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04),inset_0_1px_0_0_rgba(25,28,33,0.04)] dark:first:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2),inset_0_1px_0_0_rgba(0,0,0,0.2)] last:rounded-b-lg last:shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04),inset_0_-1px_0_0_rgba(25,28,33,0.04),0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)] dark:last:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2),inset_0_-1px_0_0_rgba(0,0,0,0.2),inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,0.4),0_0_3px_0_rgba(0,0,0,0.2)]"
                   >
                     <td
                       data-slot="table-cell"
@@ -543,7 +543,7 @@ export default function Page() {
                   </tr>
                   <tr
                     data-slot="table-row"
-                    className="group/row transition-colors [clip-path:inset(0_4px)] first:[clip-path:inset(0_4px_0_4px_round_8px_8px_0_0)] last:[clip-path:inset(0_4px_0_4px_round_0_0_8px_8px)] first:last:[clip-path:inset(0_4px_round_8px)] hover:bg-gray-700/4"
+                    className="bg-background group/row transition-colors hover:bg-gray-700/4 shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04)] dark:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2)] first:rounded-t-lg first:shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04),inset_0_1px_0_0_rgba(25,28,33,0.04)] dark:first:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2),inset_0_1px_0_0_rgba(0,0,0,0.2)] last:rounded-b-lg last:shadow-[inset_1px_0_0_0_rgba(25,28,33,0.04),inset_-1px_0_0_0_rgba(25,28,33,0.04),inset_0_-1px_0_0_rgba(25,28,33,0.04),0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)] dark:last:shadow-[inset_1px_0_0_0_rgba(0,0,0,0.2),inset_-1px_0_0_0_rgba(0,0,0,0.2),inset_0_-1px_0_0_rgba(0,0,0,0.2),inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,0.4),0_0_3px_0_rgba(0,0,0,0.2)]"
                   >
                     <td
                       data-slot="table-cell"
