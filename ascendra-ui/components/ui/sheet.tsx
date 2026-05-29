@@ -20,8 +20,10 @@ function SheetOverlay({
       data-slot="sheet-overlay"
       className={cn(
         "data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0",
-        /* 2. Transparent overlay: Changed bg-black/40 to bg-transparent and removed blur */
         "fixed inset-0 z-200 bg-transparent duration-150",
+        /* "fixed inset-0 z-200 bg-black/40 duration-300 supports-backdrop-filter:backdrop-blur-sm", */
+        /* "bg-[radial-gradient(rgba(255,255,255,0.07)_2px,transparent_2px)]", */
+        /* "bg-size-[20px_20px]", */
         className,
       )}
       {...props}
@@ -66,25 +68,47 @@ function SheetContent({
         data-slot="sheet-content"
         className={cn(
           /* Base positioning and shape */
-          "fixed z-1000 flex flex-col overflow-hidden rounded-xl bg-white outline-none dark:bg-(--color-gray-1500)",
+          "fixed z-1000 flex flex-col overflow-hidden bg-white outline-none dark:bg-(--color-gray-1500)",
           /* Animation settings */
           "data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 duration-300 ease-in-out",
 
-          /* Floating logic: Side-specific offsets and animations */
+          /* Side-specific: sm/md flush + responsive rounding; lg floating */
           side === "right" && [
-            "border-border top-3 right-3 bottom-3 w-full max-w-md border",
+            "border-border w-full border",
+            /* sm: flush to right edge, 3rem breathing space on left via max-width */
+            "top-0 right-0 bottom-0 max-w-[calc(100%-3rem)]",
+            "rounded-tl-xl rounded-bl-xl rounded-tr-none rounded-br-none",
+            /* md: allow full max-w-md (naturally leaves space on left) */
+            "md:max-w-md",
+            /* lg: floating offsets + all corners rounded */
+            "lg:top-3 lg:right-3 lg:bottom-3 lg:rounded-xl",
             "data-closed:slide-out-to-right data-open:slide-in-from-right",
           ],
           side === "left" && [
-            "border-border top-3 bottom-3 left-3 w-full max-w-md border",
+            "border-border w-full border",
+            /* sm: flush to left edge, breathing space on right via max-width */
+            "top-0 left-0 bottom-0 max-w-[calc(100%-3rem)]",
+            "rounded-tr-xl rounded-br-xl rounded-tl-none rounded-bl-none",
+            /* md: allow full max-w-md */
+            "md:max-w-md",
+            /* lg: floating offsets + all corners rounded */
+            "lg:top-3 lg:left-3 lg:bottom-3 lg:rounded-xl",
             "data-closed:slide-out-to-left data-open:slide-in-from-left",
           ],
           side === "top" && [
-            "border-border top-3 right-3 left-3 h-auto border",
+            "border-border h-auto border",
+            /* sm/md: flush to top, left, right edges; round only bottom corners */
+            "top-0 right-0 left-0 rounded-bl-xl rounded-br-xl rounded-tl-none rounded-tr-none",
+            /* lg: floating offsets + all corners rounded */
+            "lg:top-3 lg:right-3 lg:left-3 lg:rounded-xl",
             "data-closed:slide-out-to-top data-open:slide-in-from-top",
           ],
           side === "bottom" && [
-            "border-border right-3 bottom-3 left-3 h-auto border",
+            "border-border h-auto border",
+            /* sm/md: flush to bottom, left, right edges; round only top corners */
+            "bottom-0 right-0 left-0 rounded-tl-xl rounded-tr-xl rounded-bl-none rounded-br-none",
+            /* lg: floating offsets + all corners rounded */
+            "lg:bottom-3 lg:right-3 lg:left-3 lg:rounded-xl",
             "data-closed:slide-out-to-bottom data-open:slide-in-from-bottom",
           ],
           "shadow-[0_32px_72px_-12px_rgba(25,28,33,0.2),0_16px_32px_-6px_theme(--color-black/0.2)] dark:shadow-[0_32px_72px_-12px_theme(--color-black/0.4),0_16px_32px_-6px_theme(--color-black/0.4)]",
