@@ -80,7 +80,7 @@ export default function DialogsGalleryPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Sample Dialogs
         </div>
-        <h1 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">
           Dialog Gallery
         </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">

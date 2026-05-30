@@ -107,7 +107,7 @@ export default function ComposedChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">Composed Charts</h1>
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Composed Charts</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Composed charts layer multiple mark types — bars, lines, areas, and scatter — on a single canvas. Use them when two related metrics have different units or scales.
         </p>

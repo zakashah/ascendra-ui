@@ -95,7 +95,7 @@ export default function LineChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">Line Charts</h1>
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Line Charts</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Line charts are ideal for continuous data over time — trends, comparisons, and cumulative growth. Click legend labels to toggle individual series.
         </p>
