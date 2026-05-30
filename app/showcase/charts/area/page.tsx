@@ -130,7 +130,7 @@ export default function AreaChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">Area Charts</h1>
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Area Charts</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Area charts emphasise volume and composition over time. Stacking shows absolute contributions; percent-stacking reveals proportion shifts. Click legend labels to toggle series.
         </p>

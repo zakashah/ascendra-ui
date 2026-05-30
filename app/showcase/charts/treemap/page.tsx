@@ -203,7 +203,7 @@ export default function TreemapChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">Treemap</h1>
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Treemap</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Hierarchical data visualised as nested rectangles — cell area encodes value, making dominant categories immediately visible without reading numbers.
         </p>

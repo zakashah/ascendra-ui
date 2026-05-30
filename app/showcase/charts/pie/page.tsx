@@ -141,7 +141,7 @@ export default function PieChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">Pie & Donut Charts</h1>
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Pie & Donut Charts</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Part-to-whole relationships at a glance. Donuts with a center stat surface the most important KPI immediately. Hover slices to explore; click legend to filter.
         </p>

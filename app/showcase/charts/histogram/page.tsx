@@ -83,7 +83,7 @@ export default function HistogramChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">Histogram</h1>
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Histogram</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Frequency distributions across equal-width bins — built with a standard BarChart and pre-binned data. Density and overlay variants reveal shape, skew, and how two populations compare.
         </p>

@@ -141,7 +141,7 @@ export default function CandlestickChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">Candlestick</h1>
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Candlestick</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           OHLC price action built with ComposedChart — a transparent base bar establishes the wick range, a coloured body bar shows open-to-close movement. Green candles close higher; red candles close lower.
         </p>
