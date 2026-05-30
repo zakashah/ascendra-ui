@@ -136,7 +136,7 @@ export default function AreaChartsPage() {
                       </linearGradient>
                     ))}
                   </defs>
-                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
                   <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
                   <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(deviceConfig, fmtDollar)} />} />
@@ -186,7 +186,7 @@ export default function AreaChartsPage() {
                       </linearGradient>
                     ))}
                   </defs>
-                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
                   <YAxis
                     tickLine={false}
@@ -241,7 +241,7 @@ export default function AreaChartsPage() {
                       <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
                   <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
                   <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(targetConfig, fmtDollar)} />} />

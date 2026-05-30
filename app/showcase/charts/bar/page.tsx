@@ -130,7 +130,7 @@ export default function BarChartsPage() {
             <div className="p-5">
               <ChartContainer config={groupedConfig} className="h-72 w-full">
                 <BarChart data={quarterlyData} barGap={4} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis dataKey="quarter" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
                   <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
                   <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(groupedConfig, fmtDollar)} />} />
@@ -163,7 +163,7 @@ export default function BarChartsPage() {
             <div className="p-5">
               <ChartContainer config={stackedConfig} className="h-72 w-full">
                 <BarChart data={stackedData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
                   <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtNum} width={42} />
                   <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(stackedConfig, fmtNum)} />} />
@@ -196,7 +196,7 @@ export default function BarChartsPage() {
             <div className="p-5">
               <ChartContainer config={horizontalConfig} className="h-64 w-full">
                 <BarChart layout="vertical" data={horizontalData} margin={{ top: 4, right: 40, left: 0, bottom: 0 }}>
-                  <CartesianGrid horizontal={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <CartesianGrid horizontal={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtNum} />
                   <YAxis type="category" dataKey="channel" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} width={100} />
                   <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(horizontalConfig, fmtNum)} />} />
@@ -228,7 +228,7 @@ export default function BarChartsPage() {
             <div className="p-5">
               <ChartContainer config={labelConfig} className="h-60 w-full">
                 <BarChart data={labelData} margin={{ top: 20, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis dataKey="category" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
                   <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
                   <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(labelConfig, fmtDollar)} />} />

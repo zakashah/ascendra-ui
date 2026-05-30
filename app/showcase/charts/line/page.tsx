@@ -126,7 +126,7 @@ export default function LineChartsPage() {
             <div className="p-5">
               <ChartContainer config={singleConfig} className="h-[260px] w-full">
                 <LineChart data={singleData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
                   <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
                   <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(singleConfig, fmtDollar)} />} />
@@ -161,7 +161,7 @@ export default function LineChartsPage() {
             <div className="p-5">
               <ChartContainer config={multiConfig} className="h-[260px] w-full">
                 <LineChart data={monthlyData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
                   <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
                   <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(multiConfig, fmtDollar)} />} />
@@ -209,7 +209,7 @@ export default function LineChartsPage() {
                       <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
                   <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtNum} width={42} />
                   <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(gradientConfig, fmtNum)} />} />

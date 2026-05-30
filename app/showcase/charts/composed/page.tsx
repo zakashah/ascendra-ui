@@ -138,7 +138,7 @@ export default function ComposedChartsPage() {
             <div className="p-5">
               <ChartContainer config={revenueGrowthConfig} className="h-72 w-full">
                 <ComposedChart data={revenueGrowthData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
                   <YAxis yAxisId="left" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={44} />
                   <YAxis yAxisId="right" orientation="right" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtPct} width={44} />
@@ -188,7 +188,7 @@ export default function ComposedChartsPage() {
             <div className="p-5">
               <ChartContainer config={dualAxisConfig} className="h-72 w-full">
                 <ComposedChart data={dualAxisData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
                   <YAxis
                     yAxisId="left"
@@ -260,7 +260,7 @@ export default function ComposedChartsPage() {
                       <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
                   <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
                   <ZAxis range={[60, 60]} />
