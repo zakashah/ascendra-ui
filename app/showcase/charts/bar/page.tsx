@@ -77,6 +77,45 @@ const labelConfig: ChartConfig = {
   revenue: { label: "Revenue", color: "var(--chart-1)" },
 };
 
+const waterfallRaw = [
+  { label: "Starting", value: 48000 },
+  { label: "New Sales", value: 21000 },
+  { label: "Upsell", value: 8400 },
+  { label: "Churn", value: -6200 },
+  { label: "Refunds", value: -3100 },
+  { label: "Discounts", value: -4800 },
+  { label: "Net Total", value: null },
+];
+
+const waterfallData = (() => {
+  let running = 0;
+  return waterfallRaw.map((d) => {
+    if (d.value === null) {
+      return { label: d.label, base: 0, bar: running, isTotal: true, total: running };
+    }
+    const base = d.value < 0 ? running + d.value : running;
+    const bar = Math.abs(d.value);
+    running += d.value;
+    return { label: d.label, base, bar, isTotal: false, total: running, raw: d.value };
+  });
+})();
+
+const divergingBarData = [
+  { segment: "Promoters",  score: 42 },
+  { segment: "Satisfied",  score: 28 },
+  { segment: "Neutral",    score: 8 },
+  { segment: "Dissatisfied", score: -14 },
+  { segment: "Detractors", score: -31 },
+];
+
+const waterfallConfig: ChartConfig = {
+  bar: { label: "Amount", color: "var(--chart-1)" },
+};
+
+const divergingBarConfig: ChartConfig = {
+  score: { label: "NPS Score", color: "var(--chart-1)" },
+};
+
 function fmtDollar(v: number) {
   return `$${(v / 1000).toFixed(0)}k`;
 }
@@ -239,6 +278,100 @@ export default function BarChartsPage() {
                       formatter={(v) => fmtDollar(Number(v ?? 0))}
                       style={{ fontSize: 10, fill: "var(--muted-foreground)" }}
                     />
+                  </Bar>
+                </BarChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+        </MainSection>
+
+        {/* 5 — Waterfall */}
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Waterfall</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Revenue bridge from opening balance through gains and losses to net total — floating bars show each contributor in context.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="blue" className="shrink-0 mt-px">Waterfall</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={waterfallConfig} className="h-72 w-full">
+                <BarChart data={waterfallData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
+                  <XAxis dataKey="label" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={44} />
+                  <ChartTooltip
+                    content={({ payload }) => {
+                      if (!payload?.length) return null;
+                      const d = payload[0].payload as { label: string; raw?: number; total: number; isTotal: boolean };
+                      return (
+                        <div className="rounded-lg border bg-background px-3 py-2 text-xs shadow-md">
+                          <div className="font-medium text-foreground mb-1">{d.label}</div>
+                          {!d.isTotal && d.raw !== undefined && (
+                            <div className="text-muted-foreground">Change: <span className="text-foreground">{d.raw > 0 ? "+" : ""}{fmtDollar(d.raw)}</span></div>
+                          )}
+                          <div className="text-muted-foreground">Running total: <span className="text-foreground">{fmtDollar(d.total)}</span></div>
+                        </div>
+                      );
+                    }}
+                  />
+                  <Bar dataKey="base" stackId="w" fill="transparent" radius={0} />
+                  <Bar dataKey="bar" stackId="w" radius={[3, 3, 0, 0]}>
+                    {waterfallData.map((d, i) => (
+                      <Cell
+                        key={i}
+                        fill={
+                          d.isTotal
+                            ? "var(--chart-2)"
+                            : (d as { raw?: number }).raw !== undefined && (d as { raw: number }).raw < 0
+                            ? "var(--chart-5)"
+                            : "var(--chart-3)"
+                        }
+                        fillOpacity={0.85}
+                      />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ChartContainer>
+              <div className="mt-3 flex justify-center gap-5 text-xs text-muted-foreground">
+                <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm shrink-0" style={{ background: "var(--chart-3)" }} />Increase</span>
+                <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm shrink-0" style={{ background: "var(--chart-5)" }} />Decrease</span>
+                <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm shrink-0" style={{ background: "var(--chart-2)" }} />Total</span>
+              </div>
+            </div>
+          </MainSectionPanel>
+        </MainSection>
+
+        {/* 6 — Diverging Bars */}
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Diverging Bars</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  NPS segment scores on a centred axis — positive bars extend right for promoters, negative bars extend left for detractors.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="orange" className="shrink-0 mt-px">±Values</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={divergingBarConfig} className="h-64 w-full">
+                <BarChart layout="vertical" data={divergingBarData} margin={{ top: 4, right: 40, left: 0, bottom: 0 }}>
+                  <CartesianGrid horizontal={false} stroke="var(--border)" strokeOpacity={0.4} />
+                  <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v) => `${v > 0 ? "+" : ""}${v}`} />
+                  <YAxis type="category" dataKey="segment" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} width={96} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={(v) => `${Number(v) > 0 ? "+" : ""}${v}`} />} />
+                  <Bar dataKey="score" radius={[0, 3, 3, 0]}>
+                    {divergingBarData.map((d, i) => (
+                      <Cell key={i} fill={d.score >= 0 ? "var(--chart-3)" : "var(--chart-5)"} fillOpacity={0.85} />
+                    ))}
                   </Bar>
                 </BarChart>
               </ChartContainer>

@@ -34,6 +34,12 @@ const multiKpiData = [
 
 const gaugeData = [{ name: "Score", value: 68, fill: "var(--chart-1)" }];
 
+const comparisonKpis = [
+  { name: "Revenue",   actual: 84, target: 90, fillActual: "var(--chart-1)", fillTarget: "var(--chart-7)" },
+  { name: "Users",     actual: 71, target: 80, fillActual: "var(--chart-2)", fillTarget: "var(--chart-7)" },
+  { name: "Retention", actual: 93, target: 85, fillActual: "var(--chart-3)", fillTarget: "var(--chart-7)" },
+];
+
 // ─── Chart configs ─────────────────────────────────────────────────────────────
 
 const singleConfig: ChartConfig = {
@@ -96,7 +102,7 @@ export default function RadialChartsPage() {
           <MainSectionPanel>
             <div className="p-5">
               <div className="flex flex-col items-center">
-                <ChartContainer config={singleConfig} className="h-[220px] w-[220px]">
+                <ChartContainer config={singleConfig} className="h-55 w-55">
                   <RadialBarChart
                     cx="50%"
                     cy="50%"
@@ -143,7 +149,7 @@ export default function RadialChartsPage() {
           <MainSectionPanel>
             <div className="p-5">
               <div className="flex flex-col sm:flex-row items-center gap-6">
-                <ChartContainer config={multiConfig} className="h-[260px] w-[260px] shrink-0">
+                <ChartContainer config={multiConfig} className="h-65 w-65 shrink-0">
                   <RadialBarChart
                     cx="50%"
                     cy="50%"
@@ -199,7 +205,7 @@ export default function RadialChartsPage() {
           <MainSectionPanel>
             <div className="p-5">
               <div className="flex flex-col items-center">
-                <ChartContainer config={gaugeConfig} className="h-[200px] w-[260px]">
+                <ChartContainer config={gaugeConfig} className="h-50 w-65">
                   <RadialBarChart
                     cx="50%"
                     cy="70%"
@@ -262,6 +268,62 @@ export default function RadialChartsPage() {
               ))}
             </div>
           </MainSectionFooter>
+        </MainSection>
+
+        {/* 4 — Comparison Ring */}
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Comparison Ring</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Actual vs target for three KPIs on paired concentric rings — the inner track shows the target threshold, the outer arc shows attainment.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="green" className="shrink-0 mt-px">vs Target</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <div className="flex flex-col sm:flex-row items-center gap-6">
+                <div className="flex gap-4">
+                  {comparisonKpis.map((kpi) => (
+                    <div key={kpi.name} className="flex flex-col items-center gap-1">
+                      <ChartContainer config={{}} className="h-36 w-36">
+                        <RadialBarChart
+                          cx="50%" cy="50%"
+                          innerRadius={38} outerRadius={62}
+                          startAngle={90} endAngle={-270}
+                          data={[{ value: kpi.target, fill: kpi.fillTarget }, { value: kpi.actual, fill: kpi.fillActual }]}
+                          barSize={10} barGap={2}
+                        >
+                          <PolarAngleAxis type="number" domain={[0, 100]} tick={false} />
+                          <RadialBar dataKey="value" cornerRadius={5} background={{ fill: "var(--muted)" }} />
+                          <text x="50%" y="46%" textAnchor="middle" dominantBaseline="middle" fontSize={16} fontWeight={700} fill="currentColor">{kpi.actual}%</text>
+                          <text x="50%" y="62%" textAnchor="middle" dominantBaseline="middle" fontSize={9} fill="var(--muted-foreground)">of {kpi.target}%</text>
+                        </RadialBarChart>
+                      </ChartContainer>
+                      <span className="text-xs font-medium text-foreground">{kpi.name}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex flex-col gap-3 w-full max-w-xs">
+                  {comparisonKpis.map((kpi) => (
+                    <div key={kpi.name} className="flex items-center gap-3">
+                      <span className="h-2.5 w-2.5 rounded-full shrink-0" style={{ background: kpi.fillActual }} />
+                      <span className="text-xs text-foreground font-medium flex-1">{kpi.name}</span>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <div className="h-1.5 w-24 rounded-full bg-muted overflow-hidden">
+                          <div className="h-full rounded-full" style={{ width: `${kpi.actual}%`, background: kpi.fillActual }} />
+                        </div>
+                        <span className="w-16 text-right">{kpi.actual}% / {kpi.target}%</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </MainSectionPanel>
         </MainSection>
       </div>
     </div>

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, AreaChart, Area } from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, AreaChart, Area, ReferenceLine, ReferenceArea } from "recharts";
 import {
   ChartContainer,
   ChartTooltip,
@@ -70,6 +70,32 @@ const gradientConfig: ChartConfig = {
   visitors: { label: "Visitors", color: "var(--chart-1)" },
 };
 
+const stepData = [
+  { week: "W1", tickets: 142 }, { week: "W2", tickets: 118 },
+  { week: "W3", tickets: 165 }, { week: "W4", tickets: 131 },
+  { week: "W5", tickets: 189 }, { week: "W6", tickets: 204 },
+  { week: "W7", tickets: 177 }, { week: "W8", tickets: 221 },
+  { week: "W9", tickets: 196 }, { week: "W10", tickets: 238 },
+  { week: "W11", tickets: 214 }, { week: "W12", tickets: 251 },
+];
+
+const refData = [
+  { month: "Jan", conversion: 2.1 }, { month: "Feb", conversion: 2.8 },
+  { month: "Mar", conversion: 2.4 }, { month: "Apr", conversion: 3.2 },
+  { month: "May", conversion: 3.9 }, { month: "Jun", conversion: 3.5 },
+  { month: "Jul", conversion: 4.1 }, { month: "Aug", conversion: 4.8 },
+  { month: "Sep", conversion: 4.3 }, { month: "Oct", conversion: 5.2 },
+  { month: "Nov", conversion: 4.9 }, { month: "Dec", conversion: 5.7 },
+];
+
+const stepConfig: ChartConfig = {
+  tickets: { label: "Tickets", color: "var(--chart-2)" },
+};
+
+const refConfig: ChartConfig = {
+  conversion: { label: "Conversion %", color: "var(--chart-1)" },
+};
+
 function fmtDollar(v: number) {
   return `$${(v / 1000).toFixed(0)}k`;
 }
@@ -124,7 +150,7 @@ export default function LineChartsPage() {
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
-              <ChartContainer config={singleConfig} className="h-[260px] w-full">
+              <ChartContainer config={singleConfig} className="h-65 w-full">
                 <LineChart data={singleData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
                   <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
@@ -159,7 +185,7 @@ export default function LineChartsPage() {
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
-              <ChartContainer config={multiConfig} className="h-[260px] w-full">
+              <ChartContainer config={multiConfig} className="h-65 w-full">
                 <LineChart data={monthlyData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
                   <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
                   <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
@@ -201,7 +227,7 @@ export default function LineChartsPage() {
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
-              <ChartContainer config={gradientConfig} className="h-[260px] w-full">
+              <ChartContainer config={gradientConfig} className="h-65 w-full">
                 <AreaChart data={gradientData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="gradVisitors" x1="0" y1="0" x2="0" y2="1">
@@ -223,6 +249,77 @@ export default function LineChartsPage() {
                     activeDot={{ r: 4 }}
                   />
                 </AreaChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+        </MainSection>
+        {/* 4 — Step Line */}
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Step Line</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Weekly support tickets rendered as a step function — each value holds until the next data point, ideal for discrete state changes or inventory counts.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="secondary" className="shrink-0 mt-px">Step</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={stepConfig} className="h-65 w-full">
+                <LineChart data={stepData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
+                  <XAxis dataKey="week" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} width={36} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(stepConfig, (v) => String(v))} />} />
+                  <Line
+                    type="stepAfter"
+                    dataKey="tickets"
+                    stroke="var(--chart-2)"
+                    strokeWidth={2}
+                    dot={false}
+                    activeDot={{ r: 4 }}
+                  />
+                </LineChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+        </MainSection>
+
+        {/* 5 — Line + Reference Band */}
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Line + Reference Band</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Monthly conversion rate with a target line and a shaded "good" zone — makes it immediately clear when performance is above or below goal.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="orange" className="shrink-0 mt-px">Reference</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={refConfig} className="h-65 w-full">
+                <LineChart data={refData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v) => `${v}%`} width={36} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(refConfig, (v) => `${v}%`)} />} />
+                  <ReferenceArea y1={3.5} y2={6} fill="var(--chart-3)" fillOpacity={0.08} />
+                  <ReferenceLine y={3.5} stroke="var(--chart-3)" strokeWidth={1.5} strokeDasharray="4 3" label={{ value: "Target 3.5%", position: "insideTopRight", fontSize: 10, fill: "var(--muted-foreground)" }} />
+                  <Line
+                    type="monotone"
+                    dataKey="conversion"
+                    stroke="var(--chart-1)"
+                    strokeWidth={2}
+                    dot={false}
+                    activeDot={{ r: 4 }}
+                  />
+                </LineChart>
               </ChartContainer>
             </div>
           </MainSectionPanel>

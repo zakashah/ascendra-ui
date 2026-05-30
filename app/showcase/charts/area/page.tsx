@@ -78,6 +78,32 @@ const targetConfig: ChartConfig = {
 const DEVICE_KEYS = ["mobile", "desktop", "tablet"] as const;
 const DEVICE_CHART_NUMS = [1, 2, 6] as const;
 
+const singleAreaData = [
+  { month: "Jan", revenue: 18400 }, { month: "Feb", revenue: 22100 },
+  { month: "Mar", revenue: 19800 }, { month: "Apr", revenue: 26500 },
+  { month: "May", revenue: 31200 }, { month: "Jun", revenue: 28900 },
+  { month: "Jul", revenue: 34100 }, { month: "Aug", revenue: 38600 },
+  { month: "Sep", revenue: 35200 }, { month: "Oct", revenue: 42100 },
+  { month: "Nov", revenue: 39800 }, { month: "Dec", revenue: 46300 },
+];
+
+const divergingData = [
+  { month: "Jan", delta: -3200 }, { month: "Feb", delta: 1800 },
+  { month: "Mar", delta: -900 },  { month: "Apr", delta: 4100 },
+  { month: "May", delta: 6800 },  { month: "Jun", delta: 3200 },
+  { month: "Jul", delta: 7500 },  { month: "Aug", delta: 11200 },
+  { month: "Sep", delta: -1800 }, { month: "Oct", delta: 9400 },
+  { month: "Nov", delta: 5700 },  { month: "Dec", delta: 13100 },
+];
+
+const singleAreaConfig: ChartConfig = {
+  revenue: { label: "Revenue", color: "var(--chart-1)" },
+};
+
+const divergingConfig: ChartConfig = {
+  delta: { label: "vs. Target", color: "var(--chart-1)" },
+};
+
 function fmtDollar(v: number) {
   return `$${(v / 1000).toFixed(0)}k`;
 }
@@ -272,6 +298,84 @@ export default function AreaChartsPage() {
           <MainSectionFooter>
             <ChartSeriesLegend config={targetConfig} hidden={hiddenTarget} onToggle={(k) => setHiddenTarget((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
           </MainSectionFooter>
+        </MainSection>
+
+        {/* 4 — Single Area */}
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Single Area</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  A single revenue series with gradient fill — the simplest area chart, useful as a hero metric widget or sparkline replacement.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="secondary" className="shrink-0 mt-px">Basic</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={singleAreaConfig} className="h-72 w-full">
+                <AreaChart data={singleAreaData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="grad-single" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.3} />
+                      <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0.02} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(singleAreaConfig, fmtDollar)} />} />
+                  <Area type="monotone" dataKey="revenue" stroke="var(--chart-1)" fill="url(#grad-single)" strokeWidth={2} dot={false} activeDot={{ r: 4 }} />
+                </AreaChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+        </MainSection>
+
+        {/* 5 — Diverging Area */}
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Diverging Area</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Monthly performance delta vs target — positive months fill green above the baseline, negative months fill red below it.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="green" className="shrink-0 mt-px">Diverging</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={divergingConfig} className="h-72 w-full">
+                <AreaChart data={divergingData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="grad-pos" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="var(--chart-3)" stopOpacity={0.35} />
+                      <stop offset="95%" stopColor="var(--chart-3)" stopOpacity={0.02} />
+                    </linearGradient>
+                    <linearGradient id="grad-neg" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="var(--chart-5)" stopOpacity={0.02} />
+                      <stop offset="95%" stopColor="var(--chart-5)" stopOpacity={0.35} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v) => `${v > 0 ? "+" : ""}${fmtDollar(v)}`} width={52} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(divergingConfig, (v) => `${v > 0 ? "+" : ""}${fmtDollar(v)}`)} />} />
+                  <Area type="monotone" dataKey="delta" stroke="var(--chart-3)" fill="url(#grad-pos)" strokeWidth={2} dot={false} activeDot={{ r: 4 }}
+                    baseValue={0}
+                  />
+                  <Area type="monotone" dataKey="delta" stroke="var(--chart-5)" fill="url(#grad-neg)" strokeWidth={0} dot={false}
+                    baseValue={0}
+                    fillOpacity={1}
+                  />
+                </AreaChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
         </MainSection>
       </div>
     </div>

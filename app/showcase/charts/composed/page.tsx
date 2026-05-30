@@ -84,6 +84,27 @@ const areaScatterConfig: ChartConfig = {
   outlier: { label: "Outlier Event", color: "var(--chart-4)" },
 };
 
+const tripleData = [
+  { month: "Jan", volume: 3200, rate: 2.1, cumulative: 3200 },
+  { month: "Feb", volume: 4100, rate: 2.8, cumulative: 7300 },
+  { month: "Mar", volume: 3800, rate: 2.4, cumulative: 11100 },
+  { month: "Apr", volume: 5200, rate: 3.2, cumulative: 16300 },
+  { month: "May", volume: 6100, rate: 3.9, cumulative: 22400 },
+  { month: "Jun", volume: 5800, rate: 3.5, cumulative: 28200 },
+  { month: "Jul", volume: 7400, rate: 4.1, cumulative: 35600 },
+  { month: "Aug", volume: 8600, rate: 4.8, cumulative: 44200 },
+  { month: "Sep", volume: 7900, rate: 4.3, cumulative: 52100 },
+  { month: "Oct", volume: 9200, rate: 5.2, cumulative: 61300 },
+  { month: "Nov", volume: 8700, rate: 4.9, cumulative: 70000 },
+  { month: "Dec", volume: 10400, rate: 5.7, cumulative: 80400 },
+];
+
+const tripleConfig: ChartConfig = {
+  volume: { label: "Volume", color: "var(--chart-1)" },
+  rate: { label: "Conv. Rate (%)", color: "var(--chart-3)" },
+  cumulative: { label: "Cumulative", color: "var(--chart-2)" },
+};
+
 function fmtDollar(v: number) {
   return `$${(v / 1000).toFixed(0)}k`;
 }
@@ -98,6 +119,7 @@ export default function ComposedChartsPage() {
   const [hiddenRevGrowth, setHiddenRevGrowth] = useState<Record<string, boolean>>({});
   const [hiddenDual, setHiddenDual] = useState<Record<string, boolean>>({});
   const [hiddenAreaScatter, setHiddenAreaScatter] = useState<Record<string, boolean>>({});
+  const [hiddenTriple, setHiddenTriple] = useState<Record<string, boolean>>({});
 
   return (
     <div className="mx-auto max-w-5xl px-8 py-12">
@@ -282,6 +304,54 @@ export default function ComposedChartsPage() {
           </MainSectionPanel>
           <MainSectionFooter>
             <ChartSeriesLegend config={areaScatterConfig} hidden={hiddenAreaScatter} onToggle={(k) => setHiddenAreaScatter((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+          </MainSectionFooter>
+        </MainSection>
+
+        {/* 4 — Triple Metric */}
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Triple Metric</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Monthly transaction volume (bars), conversion rate (line, right axis), and cumulative total (area) on a single canvas — three related metrics without clutter.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="green" className="shrink-0 mt-px">3-Series</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={tripleConfig} className="h-72 w-full">
+                <ComposedChart data={tripleData} margin={{ top: 4, right: 48, left: 0, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="grad-cumulative" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="var(--chart-2)" stopOpacity={0.15} />
+                      <stop offset="95%" stopColor="var(--chart-2)" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis yAxisId="left" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v: number) => v >= 1000 ? `${(v / 1000).toFixed(0)}k` : String(v)} width={42} />
+                  <YAxis yAxisId="right" orientation="right" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${v}%`} width={36} />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(tripleConfig, (v, k) =>
+                          k === "rate" ? `${v}%` : v >= 1000 ? `${(v / 1000).toFixed(1)}k` : String(v)
+                        )}
+                      />
+                    }
+                  />
+                  <Area yAxisId="left" type="monotone" dataKey="cumulative" stroke="var(--chart-2)" fill="url(#grad-cumulative)" strokeWidth={1.5} dot={false} hide={hiddenTriple["cumulative"]} />
+                  <Bar yAxisId="left" dataKey="volume" fill="var(--chart-1)" fillOpacity={0.85} radius={[3, 3, 0, 0]} hide={hiddenTriple["volume"]} />
+                  <Line yAxisId="right" type="monotone" dataKey="rate" stroke="var(--chart-3)" strokeWidth={2} dot={false} activeDot={{ r: 4 }} hide={hiddenTriple["rate"]} />
+                </ComposedChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+          <MainSectionFooter>
+            <ChartSeriesLegend config={tripleConfig} hidden={hiddenTriple} onToggle={(k) => setHiddenTriple((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
           </MainSectionFooter>
         </MainSection>
       </div>

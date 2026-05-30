@@ -36,6 +36,20 @@ const planDistribution = [
   { name: "Free", value: 9140, fill: "var(--chart-7)" },
 ];
 
+const channelData = [
+  { name: "Organic", value: 38400 },
+  { name: "Paid", value: 24100 },
+  { name: "Social", value: 18700 },
+  { name: "Email", value: 12300 },
+  { name: "Referral", value: 8900 },
+];
+
+const satisfactionData = [
+  { name: "Promoters",    value: 52, fill: "var(--chart-3)" },
+  { name: "Passives",     value: 31, fill: "var(--chart-4)" },
+  { name: "Detractors",   value: 17, fill: "var(--chart-5)" },
+];
+
 const CHART_COLORS = [
   "var(--chart-1)",
   "var(--chart-2)",
@@ -310,6 +324,108 @@ export default function PieChartsPage() {
                   />
                 </PieChart>
               </ChartContainer>
+            </div>
+          </MainSectionPanel>
+        </MainSection>
+
+        {/* 4 — Simple Pie */}
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Simple Pie</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Traffic source breakdown as a classic pie with no inner hole — best when the part-to-whole relationship is the primary message and space allows a full ring.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="secondary" className="shrink-0 mt-px">Pie</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={regionConfig} className="h-72 w-full">
+                <PieChart>
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={(v) => `$${Number(v).toLocaleString()}`}
+                        nameKey="name"
+                      />
+                    }
+                  />
+                  <Pie
+                    data={channelData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={0}
+                    outerRadius={110}
+                    paddingAngle={2}
+                    dataKey="value"
+                  >
+                    {channelData.map((_entry, index) => (
+                      <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+          <MainSectionFooter>
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 w-full">
+              {channelData.map((d, i) => (
+                <div key={d.name} className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <span className="inline-block h-2.5 w-2.5 rounded-full shrink-0" style={{ background: CHART_COLORS[i % CHART_COLORS.length] }} />
+                  {d.name}
+                </div>
+              ))}
+            </div>
+          </MainSectionFooter>
+        </MainSection>
+
+        {/* 5 — Semi-circle Donut */}
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Semi-circle Donut</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  NPS distribution on a half-donut — the flat bottom edge saves vertical space, making it ideal for dashboard cards where height is constrained.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="orange" className="shrink-0 mt-px">Half</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5 flex flex-col items-center">
+              <ChartContainer config={regionConfig} className="h-48 w-72">
+                <PieChart margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+                  <ChartTooltip content={<ChartTooltipContent nameKey="name" formatter={(v) => `${v}%`} />} />
+                  <Pie
+                    data={satisfactionData}
+                    cx="50%"
+                    cy="100%"
+                    startAngle={180}
+                    endAngle={0}
+                    innerRadius={70}
+                    outerRadius={110}
+                    paddingAngle={2}
+                    dataKey="value"
+                  >
+                    {satisfactionData.map((entry) => (
+                      <Cell key={entry.name} fill={entry.fill} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ChartContainer>
+              <div className="flex gap-5 mt-2">
+                {satisfactionData.map((d) => (
+                  <div key={d.name} className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <span className="h-2.5 w-2.5 rounded-full shrink-0" style={{ background: d.fill }} />
+                    <span>{d.name}</span>
+                    <span className="font-medium text-foreground">{d.value}%</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </MainSectionPanel>
         </MainSection>

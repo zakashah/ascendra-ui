@@ -101,6 +101,8 @@ export const navConfig: NavCategory[] = [
       { name: 'Bar Charts', slug: 'charts/bar' },
       { name: 'Pie & Donut', slug: 'charts/pie' },
       { name: 'Radial & Gauge', slug: 'charts/radial' },
+      { name: 'Radar Charts', slug: 'charts/radar' },
+      { name: 'Scatter & Bubble', slug: 'charts/scatter' },
       { name: 'Composed Charts', slug: 'charts/composed' },
     ],
   },
