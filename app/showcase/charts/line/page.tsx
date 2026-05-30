@@ -10,8 +10,15 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { ChartCard } from "@/components/charts/chart-card";
+import { MainSection } from "@/ascendra-ui/components/layout/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
+import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
+import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
+import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
+import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -95,7 +102,7 @@ export default function LineChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Line Charts</h1>
+        <h1 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">Line Charts</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Line charts are ideal for continuous data over time — trends, comparisons, and cumulative growth. Click legend labels to toggle individual series.
         </p>
@@ -103,90 +110,123 @@ export default function LineChartsPage() {
 
       <div className="flex flex-col gap-8">
         {/* 1 — Single Line */}
-        <ChartCard
-          title="Single Line"
-          description="Monthly revenue over a 12-month period. Clean baseline with grid and tooltip."
-          badge="Basic"
-        >
-          <ChartContainer config={singleConfig} className="h-[260px] w-full">
-            <LineChart data={singleData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-              <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
-              <ChartTooltip content={<ChartTooltipContent formatter={(v) => fmtDollar(Number(v))} />} />
-              <Line
-                type="monotone"
-                dataKey="revenue"
-                stroke="var(--color-revenue)"
-                strokeWidth={2}
-                dot={false}
-                activeDot={{ r: 4 }}
-              />
-            </LineChart>
-          </ChartContainer>
-        </ChartCard>
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Single Line</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Monthly revenue over a 12-month period. Clean baseline with grid and tooltip.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="secondary" className="shrink-0 mt-px">Basic</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={singleConfig} className="h-[260px] w-full">
+                <LineChart data={singleData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(singleConfig, fmtDollar)} />} />
+                  <Line
+                    type="monotone"
+                    dataKey="revenue"
+                    stroke="var(--color-revenue)"
+                    strokeWidth={2}
+                    dot={false}
+                    activeDot={{ r: 4 }}
+                  />
+                </LineChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+        </MainSection>
 
         {/* 2 — Multi-Line with toggle */}
-        <ChartCard
-          title="Multi-Line"
-          description="Revenue, expenses, and profit compared across 12 months. Click legend labels to toggle series visibility."
-          badge="Interactive"
-          badgeVariant="default"
-        >
-          <ChartContainer config={multiConfig} className="h-[260px] w-full">
-            <LineChart data={monthlyData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-              <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
-              <ChartTooltip content={<ChartTooltipContent formatter={(v) => fmtDollar(Number(v))} />} />
-              {(["revenue", "expenses", "profit"] as const).map((key) => (
-                <Line
-                  key={key}
-                  type="monotone"
-                  dataKey={key}
-                  stroke={`var(--color-${key})`}
-                  strokeWidth={2}
-                  dot={false}
-                  activeDot={{ r: 4 }}
-                  hide={hidden[key]}
-                />
-              ))}
-            </LineChart>
-          </ChartContainer>
-          <ChartSeriesLegend config={multiConfig} hidden={hidden} onToggle={toggle} />
-        </ChartCard>
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Multi-Line</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Revenue, expenses, and profit compared across 12 months. Click legend labels to toggle series visibility.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="default" className="shrink-0 mt-px">Interactive</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={multiConfig} className="h-[260px] w-full">
+                <LineChart data={monthlyData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(multiConfig, fmtDollar)} />} />
+                  {(["revenue", "expenses", "profit"] as const).map((key) => (
+                    <Line
+                      key={key}
+                      type="monotone"
+                      dataKey={key}
+                      stroke={`var(--color-${key})`}
+                      strokeWidth={2}
+                      dot={false}
+                      activeDot={{ r: 4 }}
+                      hide={hidden[key]}
+                    />
+                  ))}
+                </LineChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+          <MainSectionFooter>
+            <ChartSeriesLegend config={multiConfig} hidden={hidden} onToggle={toggle} className="w-full" />
+          </MainSectionFooter>
+        </MainSection>
 
         {/* 3 — Gradient Area-Line */}
-        <ChartCard
-          title="Gradient Fill"
-          description="Line with a subtle gradient fill underneath — conveys volume and momentum at a glance."
-          badge="Style"
-          badgeVariant="blue"
-        >
-          <ChartContainer config={gradientConfig} className="h-[260px] w-full">
-            <AreaChart data={gradientData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-              <defs>
-                <linearGradient id="gradVisitors" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-              <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtNum} width={42} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Area
-                type="monotone"
-                dataKey="visitors"
-                stroke="var(--chart-1)"
-                strokeWidth={2}
-                fill="url(#gradVisitors)"
-                dot={false}
-                activeDot={{ r: 4 }}
-              />
-            </AreaChart>
-          </ChartContainer>
-        </ChartCard>
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Gradient Fill</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Line with a subtle gradient fill underneath — conveys volume and momentum at a glance.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="blue" className="shrink-0 mt-px">Style</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={gradientConfig} className="h-[260px] w-full">
+                <AreaChart data={gradientData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="gradVisitors" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.2} />
+                      <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtNum} width={42} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(gradientConfig, fmtNum)} />} />
+                  <Area
+                    type="monotone"
+                    dataKey="visitors"
+                    stroke="var(--chart-1)"
+                    strokeWidth={2}
+                    fill="url(#gradVisitors)"
+                    dot={false}
+                    activeDot={{ r: 4 }}
+                  />
+                </AreaChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+        </MainSection>
       </div>
     </div>
   );

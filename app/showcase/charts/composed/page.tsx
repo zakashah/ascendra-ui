@@ -10,8 +10,15 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { ChartCard } from "@/components/charts/chart-card";
+import { MainSection } from "@/ascendra-ui/components/layout/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
+import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
+import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
+import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
+import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -107,7 +114,7 @@ export default function ComposedChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Composed Charts</h1>
+        <h1 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">Composed Charts</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Composed charts layer multiple mark types — bars, lines, areas, and scatter — on a single canvas. Use them when two related metrics have different units or scales.
         </p>
@@ -115,132 +122,168 @@ export default function ComposedChartsPage() {
 
       <div className="flex flex-col gap-8">
         {/* 1 — Bar + Line */}
-        <ChartCard
-          title="Bar + Line"
-          description="Monthly revenue bars overlaid with a growth-rate line. The bar shows absolute performance; the line shows momentum."
-          badge="Bar + Line"
-          badgeVariant="default"
-        >
-          <ChartContainer config={revenueGrowthConfig} className="h-72 w-full">
-            <ComposedChart data={revenueGrowthData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-              <YAxis yAxisId="left" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={44} />
-              <YAxis yAxisId="right" orientation="right" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtPct} width={44} />
-              <ChartTooltip
-                content={
-                  <ChartTooltipContent
-                    formatter={(value, name) =>
-                      name === "revenue" ? fmtDollar(Number(value)) : fmtPct(Number(value))
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Bar + Line</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Monthly revenue bars overlaid with a growth-rate line. The bar shows absolute performance; the line shows momentum.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="default" className="shrink-0 mt-px">Bar + Line</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={revenueGrowthConfig} className="h-72 w-full">
+                <ComposedChart data={revenueGrowthData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis yAxisId="left" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={44} />
+                  <YAxis yAxisId="right" orientation="right" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtPct} width={44} />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(revenueGrowthConfig, (v, k) =>
+                          k === "revenue" ? fmtDollar(v) : fmtPct(v)
+                        )}
+                      />
                     }
                   />
-                }
-              />
-              <Bar yAxisId="left" dataKey="revenue" fill="var(--chart-1)" fillOpacity={0.85} radius={[3, 3, 0, 0]} hide={hiddenRevGrowth["revenue"]} />
-              <Line
-                yAxisId="right"
-                type="monotone"
-                dataKey="growthRate"
-                stroke="var(--chart-3)"
-                strokeWidth={2}
-                dot={{ r: 3, fill: "var(--chart-3)" }}
-                activeDot={{ r: 5 }}
-                hide={hiddenRevGrowth["growthRate"]}
-              />
-            </ComposedChart>
-          </ChartContainer>
-          <ChartSeriesLegend config={revenueGrowthConfig} hidden={hiddenRevGrowth} onToggle={(k) => setHiddenRevGrowth((p) => ({ ...p, [k]: !p[k] }))} />
-        </ChartCard>
+                  <Bar yAxisId="left" dataKey="revenue" fill="var(--chart-1)" fillOpacity={0.85} radius={[3, 3, 0, 0]} hide={hiddenRevGrowth["revenue"]} />
+                  <Line
+                    yAxisId="right"
+                    type="monotone"
+                    dataKey="growthRate"
+                    stroke="var(--chart-3)"
+                    strokeWidth={2}
+                    dot={{ r: 3, fill: "var(--chart-3)" }}
+                    activeDot={{ r: 5 }}
+                    hide={hiddenRevGrowth["growthRate"]}
+                  />
+                </ComposedChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+          <MainSectionFooter>
+            <ChartSeriesLegend config={revenueGrowthConfig} hidden={hiddenRevGrowth} onToggle={(k) => setHiddenRevGrowth((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+          </MainSectionFooter>
+        </MainSection>
 
         {/* 2 — Dual Y-Axis */}
-        <ChartCard
-          title="Dual Y-Axis"
-          description="Order volume (bars, left axis) against average order value (line, right axis). Two scales that can't share an axis — each reads correctly without distortion."
-          badge="Dual Axis"
-          badgeVariant="blue"
-        >
-          <ChartContainer config={dualAxisConfig} className="h-72 w-full">
-            <ComposedChart data={dualAxisData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-              <YAxis
-                yAxisId="left"
-                tickLine={false}
-                axisLine={false}
-                tick={{ fontSize: 11 }}
-                tickFormatter={(v: number) => v >= 1000 ? `${(v / 1000).toFixed(0)}k` : String(v)}
-                width={42}
-              />
-              <YAxis
-                yAxisId="right"
-                orientation="right"
-                tickLine={false}
-                axisLine={false}
-                tick={{ fontSize: 11 }}
-                tickFormatter={(v: number) => `$${v}`}
-                width={44}
-                domain={[200, 260]}
-              />
-              <ChartTooltip
-                content={
-                  <ChartTooltipContent
-                    formatter={(value, name) =>
-                      name === "orders" ? Number(value).toLocaleString() : `$${value}`
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Dual Y-Axis</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Order volume (bars, left axis) against average order value (line, right axis). Two scales that can&apos;t share an axis — each reads correctly without distortion.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="blue" className="shrink-0 mt-px">Dual Axis</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={dualAxisConfig} className="h-72 w-full">
+                <ComposedChart data={dualAxisData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis
+                    yAxisId="left"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={(v: number) => v >= 1000 ? `${(v / 1000).toFixed(0)}k` : String(v)}
+                    width={42}
+                  />
+                  <YAxis
+                    yAxisId="right"
+                    orientation="right"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={(v: number) => `$${v}`}
+                    width={44}
+                    domain={[200, 260]}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(dualAxisConfig, (v, k) =>
+                          k === "orders" ? v.toLocaleString() : `$${v}`
+                        )}
+                      />
                     }
                   />
-                }
-              />
-              <Bar yAxisId="left" dataKey="orders" fill="var(--chart-1)" fillOpacity={0.85} radius={[3, 3, 0, 0]} hide={hiddenDual["orders"]} />
-              <Line
-                yAxisId="right"
-                type="monotone"
-                dataKey="avgOrderValue"
-                stroke="var(--chart-4)"
-                strokeWidth={2}
-                dot={false}
-                activeDot={{ r: 4 }}
-                hide={hiddenDual["avgOrderValue"]}
-              />
-            </ComposedChart>
-          </ChartContainer>
-          <ChartSeriesLegend config={dualAxisConfig} hidden={hiddenDual} onToggle={(k) => setHiddenDual((p) => ({ ...p, [k]: !p[k] }))} />
-        </ChartCard>
+                  <Bar yAxisId="left" dataKey="orders" fill="var(--chart-1)" fillOpacity={0.85} radius={[3, 3, 0, 0]} hide={hiddenDual["orders"]} />
+                  <Line
+                    yAxisId="right"
+                    type="monotone"
+                    dataKey="avgOrderValue"
+                    stroke="var(--chart-4)"
+                    strokeWidth={2}
+                    dot={false}
+                    activeDot={{ r: 4 }}
+                    hide={hiddenDual["avgOrderValue"]}
+                  />
+                </ComposedChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+          <MainSectionFooter>
+            <ChartSeriesLegend config={dualAxisConfig} hidden={hiddenDual} onToggle={(k) => setHiddenDual((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+          </MainSectionFooter>
+        </MainSection>
 
         {/* 3 — Area + Scatter */}
-        <ChartCard
-          title="Area + Scatter"
-          description="Baseline revenue trend as a filled area with high-impact outlier events plotted as scatter points — surface anomalies without losing the trend."
-          badge="Area + Scatter"
-          badgeVariant="orange"
-        >
-          <ChartContainer config={areaScatterConfig} className="h-72 w-full">
-            <ComposedChart data={areaScatterData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-              <defs>
-                <linearGradient id="grad-baseline" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-              <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
-              <ZAxis range={[60, 60]} />
-              <ChartTooltip content={<ChartTooltipContent formatter={(v) => fmtDollar(Number(v))} />} />
-              <Area
-                type="monotone"
-                dataKey="baseline"
-                stroke="var(--chart-1)"
-                fill="url(#grad-baseline)"
-                strokeWidth={2}
-                dot={false}
-                activeDot={{ r: 4 }}
-                hide={hiddenAreaScatter["baseline"]}
-              />
-              <Scatter dataKey="outlier" fill="var(--chart-4)" hide={hiddenAreaScatter["outlier"]} />
-            </ComposedChart>
-          </ChartContainer>
-          <ChartSeriesLegend config={areaScatterConfig} hidden={hiddenAreaScatter} onToggle={(k) => setHiddenAreaScatter((p) => ({ ...p, [k]: !p[k] }))} />
-        </ChartCard>
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Area + Scatter</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Baseline revenue trend as a filled area with high-impact outlier events plotted as scatter points — surface anomalies without losing the trend.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="orange" className="shrink-0 mt-px">Area + Scatter</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={areaScatterConfig} className="h-72 w-full">
+                <ComposedChart data={areaScatterData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="grad-baseline" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.2} />
+                      <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
+                  <ZAxis range={[60, 60]} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(areaScatterConfig, fmtDollar)} />} />
+                  <Area
+                    type="monotone"
+                    dataKey="baseline"
+                    stroke="var(--chart-1)"
+                    fill="url(#grad-baseline)"
+                    strokeWidth={2}
+                    dot={false}
+                    activeDot={{ r: 4 }}
+                    hide={hiddenAreaScatter["baseline"]}
+                  />
+                  <Scatter dataKey="outlier" fill="var(--chart-4)" hide={hiddenAreaScatter["outlier"]} />
+                </ComposedChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+          <MainSectionFooter>
+            <ChartSeriesLegend config={areaScatterConfig} hidden={hiddenAreaScatter} onToggle={(k) => setHiddenAreaScatter((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+          </MainSectionFooter>
+        </MainSection>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ type Props = {
 
 export function ChartSeriesLegend({ config, hidden, onToggle, className }: Props) {
   return (
-    <div className={cn("flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 pt-2", className)}>
+    <div className={cn("flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5", className)}>
       {Object.entries(config).map(([key, value]) => (
         <button
           key={key}

@@ -10,8 +10,15 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { ChartCard } from "@/components/charts/chart-card";
+import { MainSection } from "@/ascendra-ui/components/layout/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
+import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
+import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
+import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
+import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -97,7 +104,7 @@ export default function AreaChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Area Charts</h1>
+        <h1 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">Area Charts</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Area charts emphasise volume and composition over time. Stacking shows absolute contributions; percent-stacking reveals proportion shifts. Click legend labels to toggle series.
         </p>
@@ -105,131 +112,167 @@ export default function AreaChartsPage() {
 
       <div className="flex flex-col gap-8">
         {/* 1 — Stacked Area */}
-        <ChartCard
-          title="Stacked Area"
-          description="Session counts by device type — absolute values stacked to show both individual contribution and total volume."
-          badge="Stacked"
-          badgeVariant="default"
-        >
-          <ChartContainer config={deviceConfig} className="h-72 w-full">
-            <AreaChart data={stackedData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-              <defs>
-                {DEVICE_KEYS.map((key, i) => (
-                  <linearGradient key={key} id={`grad-${key}`} x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`} stopOpacity={0.35} />
-                    <stop offset="95%" stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`} stopOpacity={0.05} />
-                  </linearGradient>
-                ))}
-              </defs>
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-              <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
-              <ChartTooltip content={<ChartTooltipContent formatter={(v) => fmtDollar(Number(v))} />} />
-              {DEVICE_KEYS.map((key, i) => (
-                <Area
-                  key={key}
-                  type="monotone"
-                  dataKey={key}
-                  stackId="1"
-                  stroke={`var(--chart-${DEVICE_CHART_NUMS[i]})`}
-                  fill={`url(#grad-${key})`}
-                  strokeWidth={1.5}
-                  hide={hiddenStacked[key]}
-                />
-              ))}
-            </AreaChart>
-          </ChartContainer>
-          <ChartSeriesLegend config={deviceConfig} hidden={hiddenStacked} onToggle={(k) => setHiddenStacked((p) => ({ ...p, [k]: !p[k] }))} />
-        </ChartCard>
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Stacked Area</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Session counts by device type — absolute values stacked to show both individual contribution and total volume.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="default" className="shrink-0 mt-px">Stacked</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={deviceConfig} className="h-72 w-full">
+                <AreaChart data={stackedData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <defs>
+                    {DEVICE_KEYS.map((key, i) => (
+                      <linearGradient key={key} id={`grad-${key}`} x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`} stopOpacity={0.35} />
+                        <stop offset="95%" stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`} stopOpacity={0.05} />
+                      </linearGradient>
+                    ))}
+                  </defs>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(deviceConfig, fmtDollar)} />} />
+                  {DEVICE_KEYS.map((key, i) => (
+                    <Area
+                      key={key}
+                      type="monotone"
+                      dataKey={key}
+                      stackId="1"
+                      stroke={`var(--chart-${DEVICE_CHART_NUMS[i]})`}
+                      fill={`url(#grad-${key})`}
+                      strokeWidth={1.5}
+                      hide={hiddenStacked[key]}
+                    />
+                  ))}
+                </AreaChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+          <MainSectionFooter>
+            <ChartSeriesLegend config={deviceConfig} hidden={hiddenStacked} onToggle={(k) => setHiddenStacked((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+          </MainSectionFooter>
+        </MainSection>
 
         {/* 2 — Percent-Stacked */}
-        <ChartCard
-          title="Percent-Stacked Area"
-          description="The same data normalised to 100% — reveals how device-type share shifts month by month, independent of volume."
-          badge="100%"
-          badgeVariant="blue"
-        >
-          <ChartContainer config={deviceConfig} className="h-72 w-full">
-            <AreaChart data={percentData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-              <defs>
-                {DEVICE_KEYS.map((key, i) => (
-                  <linearGradient key={key} id={`pgrad-${key}`} x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`} stopOpacity={0.4} />
-                    <stop offset="95%" stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`} stopOpacity={0.05} />
-                  </linearGradient>
-                ))}
-              </defs>
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-              <YAxis
-                tickLine={false}
-                axisLine={false}
-                tick={{ fontSize: 11 }}
-                tickFormatter={(v) => `${v}%`}
-                width={38}
-                domain={[0, 100]}
-              />
-              <ChartTooltip content={<ChartTooltipContent formatter={(v) => `${v}%`} />} />
-              {DEVICE_KEYS.map((key, i) => (
-                <Area
-                  key={key}
-                  type="monotone"
-                  dataKey={key}
-                  stackId="1"
-                  stroke={`var(--chart-${DEVICE_CHART_NUMS[i]})`}
-                  fill={`url(#pgrad-${key})`}
-                  strokeWidth={1.5}
-                  hide={hiddenPercent[key]}
-                />
-              ))}
-            </AreaChart>
-          </ChartContainer>
-          <ChartSeriesLegend config={deviceConfig} hidden={hiddenPercent} onToggle={(k) => setHiddenPercent((p) => ({ ...p, [k]: !p[k] }))} />
-        </ChartCard>
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Percent-Stacked Area</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  The same data normalised to 100% — reveals how device-type share shifts month by month, independent of volume.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="blue" className="shrink-0 mt-px">100%</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={deviceConfig} className="h-72 w-full">
+                <AreaChart data={percentData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <defs>
+                    {DEVICE_KEYS.map((key, i) => (
+                      <linearGradient key={key} id={`pgrad-${key}`} x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`} stopOpacity={0.4} />
+                        <stop offset="95%" stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`} stopOpacity={0.05} />
+                      </linearGradient>
+                    ))}
+                  </defs>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={(v) => `${v}%`}
+                    width={38}
+                    domain={[0, 100]}
+                  />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(deviceConfig, (v) => `${v.toFixed(1)}%`)} />} />
+                  {DEVICE_KEYS.map((key, i) => (
+                    <Area
+                      key={key}
+                      type="monotone"
+                      dataKey={key}
+                      stackId="1"
+                      stroke={`var(--chart-${DEVICE_CHART_NUMS[i]})`}
+                      fill={`url(#pgrad-${key})`}
+                      strokeWidth={1.5}
+                      hide={hiddenPercent[key]}
+                    />
+                  ))}
+                </AreaChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+          <MainSectionFooter>
+            <ChartSeriesLegend config={deviceConfig} hidden={hiddenPercent} onToggle={(k) => setHiddenPercent((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+          </MainSectionFooter>
+        </MainSection>
 
         {/* 3 — Area with Reference Line */}
-        <ChartCard
-          title="Area with Target Line"
-          description="Monthly revenue against a rolling target. The dashed reference line makes it immediately clear when performance is above or below goal."
-          badge="Target"
-          badgeVariant="orange"
-        >
-          <ChartContainer config={targetConfig} className="h-72 w-full">
-            <AreaChart data={targetData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-              <defs>
-                <linearGradient id="grad-actual" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.25} />
-                  <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-              <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
-              <ChartTooltip content={<ChartTooltipContent formatter={(v) => fmtDollar(Number(v))} />} />
-              <Area
-                type="monotone"
-                dataKey="actual"
-                stroke="var(--chart-1)"
-                fill="url(#grad-actual)"
-                strokeWidth={2}
-                dot={false}
-                activeDot={{ r: 4 }}
-                hide={hiddenTarget["actual"]}
-              />
-              <Area
-                type="monotone"
-                dataKey="target"
-                stroke="var(--chart-4)"
-                fill="none"
-                strokeWidth={1.5}
-                strokeDasharray="5 4"
-                dot={false}
-                hide={hiddenTarget["target"]}
-              />
-            </AreaChart>
-          </ChartContainer>
-          <ChartSeriesLegend config={targetConfig} hidden={hiddenTarget} onToggle={(k) => setHiddenTarget((p) => ({ ...p, [k]: !p[k] }))} />
-        </ChartCard>
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Area with Target Line</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Monthly revenue against a rolling target. The dashed reference line makes it immediately clear when performance is above or below goal.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="orange" className="shrink-0 mt-px">Target</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={targetConfig} className="h-72 w-full">
+                <AreaChart data={targetData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="grad-actual" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.25} />
+                      <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(targetConfig, fmtDollar)} />} />
+                  <Area
+                    type="monotone"
+                    dataKey="actual"
+                    stroke="var(--chart-1)"
+                    fill="url(#grad-actual)"
+                    strokeWidth={2}
+                    dot={false}
+                    activeDot={{ r: 4 }}
+                    hide={hiddenTarget["actual"]}
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="target"
+                    stroke="var(--chart-4)"
+                    fill="none"
+                    strokeWidth={1.5}
+                    strokeDasharray="5 4"
+                    dot={false}
+                    hide={hiddenTarget["target"]}
+                  />
+                </AreaChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+          <MainSectionFooter>
+            <ChartSeriesLegend config={targetConfig} hidden={hiddenTarget} onToggle={(k) => setHiddenTarget((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+          </MainSectionFooter>
+        </MainSection>
       </div>
     </div>
   );

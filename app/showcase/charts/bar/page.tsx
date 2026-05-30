@@ -10,8 +10,15 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { ChartCard } from "@/components/charts/chart-card";
+import { MainSection } from "@/ascendra-ui/components/layout/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
+import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
+import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
+import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
+import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -99,7 +106,7 @@ export default function BarChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Bar Charts</h1>
+        <h1 className="mb-3 text-3xl font-semibold tracking-tight text-foreground">Bar Charts</h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Bar charts excel at categorical comparisons. Grouped bars highlight differences; stacked bars show composition; horizontal layout handles long labels gracefully.
         </p>
@@ -107,93 +114,137 @@ export default function BarChartsPage() {
 
       <div className="flex flex-col gap-8">
         {/* 1 — Grouped Vertical */}
-        <ChartCard
-          title="Grouped Vertical"
-          description="Sales by channel across four quarters — side-by-side bars make within-period comparisons instant."
-          badge="Grouped"
-          badgeVariant="default"
-        >
-          <ChartContainer config={groupedConfig} className="h-72 w-full">
-            <BarChart data={quarterlyData} barGap={4} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="quarter" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-              <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
-              <ChartTooltip content={<ChartTooltipContent formatter={(v) => fmtDollar(Number(v))} />} />
-              <Bar dataKey="online" fill="var(--chart-1)" radius={[3, 3, 0, 0]} hide={hiddenGrouped["online"]} />
-              <Bar dataKey="retail" fill="var(--chart-2)" radius={[3, 3, 0, 0]} hide={hiddenGrouped["retail"]} />
-              <Bar dataKey="wholesale" fill="var(--chart-6)" radius={[3, 3, 0, 0]} hide={hiddenGrouped["wholesale"]} />
-            </BarChart>
-          </ChartContainer>
-          <ChartSeriesLegend config={groupedConfig} hidden={hiddenGrouped} onToggle={(k) => setHiddenGrouped((p) => ({ ...p, [k]: !p[k] }))} />
-        </ChartCard>
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Grouped Vertical</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Sales by channel across four quarters — side-by-side bars make within-period comparisons instant.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="default" className="shrink-0 mt-px">Grouped</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={groupedConfig} className="h-72 w-full">
+                <BarChart data={quarterlyData} barGap={4} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="quarter" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(groupedConfig, fmtDollar)} />} />
+                  <Bar dataKey="online" fill="var(--chart-1)" radius={[3, 3, 0, 0]} hide={hiddenGrouped["online"]} />
+                  <Bar dataKey="retail" fill="var(--chart-2)" radius={[3, 3, 0, 0]} hide={hiddenGrouped["retail"]} />
+                  <Bar dataKey="wholesale" fill="var(--chart-6)" radius={[3, 3, 0, 0]} hide={hiddenGrouped["wholesale"]} />
+                </BarChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+          <MainSectionFooter>
+            <ChartSeriesLegend config={groupedConfig} hidden={hiddenGrouped} onToggle={(k) => setHiddenGrouped((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+          </MainSectionFooter>
+        </MainSection>
 
         {/* 2 — Stacked Vertical */}
-        <ChartCard
-          title="Stacked Vertical"
-          description="Monthly customer segments stacked — see total volume and how new, returning, and churned customers shift over time."
-          badge="Stacked"
-          badgeVariant="blue"
-        >
-          <ChartContainer config={stackedConfig} className="h-72 w-full">
-            <BarChart data={stackedData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-              <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtNum} width={42} />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Bar dataKey="new" stackId="a" fill="var(--chart-3)" hide={hiddenStacked["new"]} />
-              <Bar dataKey="returning" stackId="a" fill="var(--chart-1)" hide={hiddenStacked["returning"]} />
-              <Bar dataKey="churned" stackId="a" fill="var(--chart-5)" radius={[3, 3, 0, 0]} hide={hiddenStacked["churned"]} />
-            </BarChart>
-          </ChartContainer>
-          <ChartSeriesLegend config={stackedConfig} hidden={hiddenStacked} onToggle={(k) => setHiddenStacked((p) => ({ ...p, [k]: !p[k] }))} />
-        </ChartCard>
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Stacked Vertical</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Monthly customer segments stacked — see total volume and how new, returning, and churned customers shift over time.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="blue" className="shrink-0 mt-px">Stacked</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={stackedConfig} className="h-72 w-full">
+                <BarChart data={stackedData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtNum} width={42} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(stackedConfig, fmtNum)} />} />
+                  <Bar dataKey="new" stackId="a" fill="var(--chart-3)" hide={hiddenStacked["new"]} />
+                  <Bar dataKey="returning" stackId="a" fill="var(--chart-1)" hide={hiddenStacked["returning"]} />
+                  <Bar dataKey="churned" stackId="a" fill="var(--chart-5)" radius={[3, 3, 0, 0]} hide={hiddenStacked["churned"]} />
+                </BarChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+          <MainSectionFooter>
+            <ChartSeriesLegend config={stackedConfig} hidden={hiddenStacked} onToggle={(k) => setHiddenStacked((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+          </MainSectionFooter>
+        </MainSection>
 
         {/* 3 — Horizontal Single */}
-        <ChartCard
-          title="Horizontal Bar"
-          description="Traffic sources ranked by visit volume. Horizontal layout gives room for long channel labels and makes ranking immediately readable."
-          badge="Ranked"
-          badgeVariant="secondary"
-        >
-          <ChartContainer config={horizontalConfig} className="h-64 w-full">
-            <BarChart layout="vertical" data={horizontalData} margin={{ top: 4, right: 40, left: 0, bottom: 0 }}>
-              <CartesianGrid horizontal={false} strokeDasharray="3 3" />
-              <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtNum} />
-              <YAxis type="category" dataKey="channel" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} width={100} />
-              <ChartTooltip content={<ChartTooltipContent formatter={(v) => fmtNum(Number(v))} />} />
-              <Bar dataKey="visits" radius={[0, 3, 3, 0]}>
-                {horizontalData.map((_entry, index) => (
-                  <Cell key={`cell-${index}`} fill="var(--chart-1)" fillOpacity={1 - index * 0.1} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ChartContainer>
-        </ChartCard>
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Horizontal Bar</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Traffic sources ranked by visit volume. Horizontal layout gives room for long channel labels and makes ranking immediately readable.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="secondary" className="shrink-0 mt-px">Ranked</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={horizontalConfig} className="h-64 w-full">
+                <BarChart layout="vertical" data={horizontalData} margin={{ top: 4, right: 40, left: 0, bottom: 0 }}>
+                  <CartesianGrid horizontal={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtNum} />
+                  <YAxis type="category" dataKey="channel" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} width={100} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(horizontalConfig, fmtNum)} />} />
+                  <Bar dataKey="visits" radius={[0, 3, 3, 0]}>
+                    {horizontalData.map((_entry, index) => (
+                      <Cell key={`cell-${index}`} fill="var(--chart-1)" fillOpacity={1 - index * 0.1} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+        </MainSection>
 
         {/* 4 — Bar with Value Labels */}
-        <ChartCard
-          title="Bar with Value Labels"
-          description="Revenue per product category with values displayed directly on bars — no need to read the axis for exact figures."
-          badge="Labels"
-          badgeVariant="green"
-        >
-          <ChartContainer config={labelConfig} className="h-60 w-full">
-            <BarChart data={labelData} margin={{ top: 20, right: 12, left: 0, bottom: 0 }}>
-              <CartesianGrid vertical={false} strokeDasharray="3 3" />
-              <XAxis dataKey="category" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-              <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
-              <ChartTooltip content={<ChartTooltipContent formatter={(v) => fmtDollar(Number(v))} />} />
-              <Bar dataKey="revenue" fill="var(--chart-1)" radius={[3, 3, 0, 0]}>
-                <LabelList
-                  dataKey="revenue"
-                  position="top"
-                  formatter={(v) => fmtDollar(Number(v ?? 0))}
-                  style={{ fontSize: 10, fill: "var(--muted-foreground)" }}
-                />
-              </Bar>
-            </BarChart>
-          </ChartContainer>
-        </ChartCard>
+        <MainSection>
+          <MainSectionHeader>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <MainSectionHeaderTitle>Bar with Value Labels</MainSectionHeaderTitle>
+                <MainSectionHeaderSubtitle>
+                  Revenue per product category with values displayed directly on bars — no need to read the axis for exact figures.
+                </MainSectionHeaderSubtitle>
+              </div>
+              <SimpleBadge variant="green" className="shrink-0 mt-px">Labels</SimpleBadge>
+            </div>
+          </MainSectionHeader>
+          <MainSectionPanel>
+            <div className="p-5">
+              <ChartContainer config={labelConfig} className="h-60 w-full">
+                <BarChart data={labelData} margin={{ top: 20, right: 12, left: 0, bottom: 0 }}>
+                  <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="var(--border)" />
+                  <XAxis dataKey="category" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
+                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(labelConfig, fmtDollar)} />} />
+                  <Bar dataKey="revenue" fill="var(--chart-1)" radius={[3, 3, 0, 0]}>
+                    <LabelList
+                      dataKey="revenue"
+                      position="top"
+                      formatter={(v) => fmtDollar(Number(v ?? 0))}
+                      style={{ fontSize: 10, fill: "var(--muted-foreground)" }}
+                    />
+                  </Bar>
+                </BarChart>
+              </ChartContainer>
+            </div>
+          </MainSectionPanel>
+        </MainSection>
       </div>
     </div>
   );
