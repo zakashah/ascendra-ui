@@ -295,7 +295,7 @@ export default function LineChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Line + Reference Band</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Monthly conversion rate with a target line and a shaded "good" zone — makes it immediately clear when performance is above or below goal.
+                  Monthly conversion rate with a target line and a shaded &quot;good&quot; zone — makes it immediately clear when performance is above or below goal.
                 </MainSectionHeaderSubtitle>
               </div>
               <SimpleBadge variant="orange" className="shrink-0 mt-px">Reference</SimpleBadge>

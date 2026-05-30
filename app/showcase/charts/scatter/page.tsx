@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
-import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Cell } from "recharts";
+import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid } from "recharts";
 import {
   ChartContainer,
   ChartTooltip,
