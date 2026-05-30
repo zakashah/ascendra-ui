@@ -94,6 +94,17 @@ export const navConfig: NavCategory[] = [
     ],
   },
   {
+    title: 'Charts',
+    items: [
+      { name: 'Line Charts', slug: 'charts/line' },
+      { name: 'Area Charts', slug: 'charts/area' },
+      { name: 'Bar Charts', slug: 'charts/bar' },
+      { name: 'Pie & Donut', slug: 'charts/pie' },
+      { name: 'Radial & Gauge', slug: 'charts/radial' },
+      { name: 'Composed Charts', slug: 'charts/composed' },
+    ],
+  },
+  {
     title: 'Tables & Data',
     items: [
       { name: 'Table', slug: 'table' },
