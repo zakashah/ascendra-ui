@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { chartsConfig } from "@/lib/charts-config";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
@@ -16,10 +19,17 @@ const badgeColor: Record<string, string> = {
   "Finance": "bg-amber-500/10 text-amber-700 ring-amber-500/20 dark:text-amber-400 dark:ring-amber-500/30",
 };
 
+const ALL_CATEGORIES = Array.from(new Set(chartsConfig.map((c) => c.category)));
 const totalVariants = chartsConfig.reduce((sum, c) => sum + c.variants, 0);
-const uniqueCategories = new Set(chartsConfig.map((c) => c.category)).size;
 
 export default function ChartsGalleryPage() {
+  const [activeCategory, setActiveCategory] = useState<string | "All">("All");
+
+  const filtered =
+    activeCategory === "All"
+      ? chartsConfig
+      : chartsConfig.filter((c) => c.category === activeCategory);
+
   return (
     <div className="mx-auto max-w-4xl px-8 py-12">
       {/* Back */}
@@ -49,11 +59,11 @@ export default function ChartsGalleryPage() {
       </div>
 
       {/* Stats */}
-      <div className="mb-10 flex flex-wrap gap-6 border-t border-b py-5">
+      <div className="mb-8 flex flex-wrap gap-6 border-t border-b py-5">
         {[
           { label: "Chart Types", value: chartsConfig.length },
           { label: "Total Variants", value: totalVariants },
-          { label: "Categories", value: uniqueCategories },
+          { label: "Categories", value: ALL_CATEGORIES.length },
           { label: "Built with", value: "recharts" },
         ].map(({ label, value }) => (
           <div key={label} className="flex flex-col gap-0.5">
@@ -63,9 +73,26 @@ export default function ChartsGalleryPage() {
         ))}
       </div>
 
+      {/* Category filter */}
+      <div className="mb-6 flex flex-wrap gap-2">
+        {(["All", ...ALL_CATEGORIES] as const).map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setActiveCategory(cat)}
+            className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+              activeCategory === cat
+                ? "border-foreground/20 bg-foreground text-background"
+                : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/20"
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
       {/* Grid */}
       <div className="grid gap-4 sm:grid-cols-2">
-        {chartsConfig.map((chart) => (
+        {filtered.map((chart) => (
           <Link
             key={chart.slug}
             href={`/showcase/charts/${chart.slug}`}

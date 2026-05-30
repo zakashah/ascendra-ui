@@ -6,6 +6,7 @@ import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-
 import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
 import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
 import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
+import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
 import {
   ChartContainer,
   ChartTooltip,
@@ -191,18 +192,20 @@ export default function CandlestickChartsPage() {
                   </Bar>
                 </ComposedChart>
               </ChartContainer>
-              <div className="mt-3 flex items-center gap-5 justify-center">
-                <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <span className="h-3 w-3 rounded-sm shrink-0" style={{ background: GREEN }} />
-                  Bullish (close &gt; open)
-                </div>
-                <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <span className="h-3 w-3 rounded-sm shrink-0" style={{ background: RED }} />
-                  Bearish (close &lt; open)
-                </div>
-              </div>
             </div>
           </MainSectionPanel>
+          <MainSectionFooter>
+            <div className="flex justify-center gap-6 w-full">
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <span className="h-3 w-3 rounded-sm shrink-0" style={{ background: GREEN }} />
+                Bullish (close &gt; open)
+              </div>
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <span className="h-3 w-3 rounded-sm shrink-0" style={{ background: RED }} />
+                Bearish (close &lt; open)
+              </div>
+            </div>
+          </MainSectionFooter>
         </MainSection>
 
         {/* 2 — Candlestick + Volume */}
@@ -230,7 +233,7 @@ export default function CandlestickChartsPage() {
                     axisLine={false}
                     tick={{ fontSize: 11 }}
                     width={44}
-                    domain={["auto", "auto"]}
+                    domain={[136, 168]}
                     tickFormatter={(v) => `$${v}`}
                   />
                   <ChartTooltip content={(props) => <OHLCTooltip payload={props.payload as unknown as Array<{ payload: Candle }>} label={props.label} />} />
@@ -269,22 +272,24 @@ export default function CandlestickChartsPage() {
                 </ComposedChart>
               </ChartContainer>
 
-              <div className="mt-2 flex items-center gap-5 justify-center">
-                <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <span className="h-3 w-3 rounded-sm shrink-0" style={{ background: GREEN }} />
-                  Bullish
-                </div>
-                <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <span className="h-3 w-3 rounded-sm shrink-0" style={{ background: RED }} />
-                  Bearish
-                </div>
-                <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <span className="h-2 w-3 rounded-sm shrink-0" style={{ background: "var(--chart-4)", opacity: 0.5 }} />
-                  Volume
-                </div>
-              </div>
             </div>
           </MainSectionPanel>
+          <MainSectionFooter>
+            <div className="flex justify-center gap-6 w-full">
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <span className="h-3 w-3 rounded-sm shrink-0" style={{ background: GREEN }} />
+                Bullish
+              </div>
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <span className="h-3 w-3 rounded-sm shrink-0" style={{ background: RED }} />
+                Bearish
+              </div>
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <span className="h-2 w-3 rounded-sm shrink-0" style={{ background: "var(--chart-4)", opacity: 0.5 }} />
+                Volume
+              </div>
+            </div>
+          </MainSectionFooter>
         </MainSection>
       </div>
     </div>

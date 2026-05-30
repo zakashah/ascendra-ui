@@ -16,7 +16,6 @@ import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-
 import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
 import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
 import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -130,11 +129,11 @@ export default function PieChartsPage() {
   return (
     <div className="mx-auto max-w-5xl px-8 py-12">
       <Link
-        href="/showcase"
+        href="/showcase/charts"
         className="text-muted-foreground hover:text-foreground mb-8 flex w-fit items-center gap-1.5 text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
       >
         <LuArrowLeft className="size-3 stroke-2" />
-        Component Showcase
+        Chart Gallery
       </Link>
 
       <div className="mb-10">
@@ -190,18 +189,16 @@ export default function PieChartsPage() {
                   </Pie>
                 </PieChart>
               </ChartContainer>
+              <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1.5">
+                {revenueByRegion.map((d, i) => (
+                  <div key={d.name} className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <span className="inline-block h-2.5 w-2.5 rounded-full shrink-0" style={{ background: CHART_COLORS[i % CHART_COLORS.length] }} />
+                    {d.name}
+                  </div>
+                ))}
+              </div>
             </div>
           </MainSectionPanel>
-          <MainSectionFooter>
-            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 w-full">
-              {revenueByRegion.map((d, i) => (
-                <div key={d.name} className="flex items-center gap-1.5">
-                  <span className="inline-block h-2.5 w-2.5 rounded-full shrink-0" style={{ background: CHART_COLORS[i % CHART_COLORS.length] }} />
-                  {d.name}
-                </div>
-              ))}
-            </div>
-          </MainSectionFooter>
         </MainSection>
 
         {/* 2 — Donut with Legend List */}
@@ -368,18 +365,16 @@ export default function PieChartsPage() {
                   </Pie>
                 </PieChart>
               </ChartContainer>
+              <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1.5">
+                {channelData.map((d, i) => (
+                  <div key={d.name} className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <span className="inline-block h-2.5 w-2.5 rounded-full shrink-0" style={{ background: CHART_COLORS[i % CHART_COLORS.length] }} />
+                    {d.name}
+                  </div>
+                ))}
+              </div>
             </div>
           </MainSectionPanel>
-          <MainSectionFooter>
-            <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 w-full">
-              {channelData.map((d, i) => (
-                <div key={d.name} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <span className="inline-block h-2.5 w-2.5 rounded-full shrink-0" style={{ background: CHART_COLORS[i % CHART_COLORS.length] }} />
-                  {d.name}
-                </div>
-              ))}
-            </div>
-          </MainSectionFooter>
         </MainSection>
 
         {/* 5 — Semi-circle Donut */}

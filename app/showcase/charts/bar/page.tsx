@@ -133,11 +133,11 @@ export default function BarChartsPage() {
   return (
     <div className="mx-auto max-w-5xl px-8 py-12">
       <Link
-        href="/showcase"
+        href="/showcase/charts"
         className="text-muted-foreground hover:text-foreground mb-8 flex w-fit items-center gap-1.5 text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
       >
         <LuArrowLeft className="size-3 stroke-2" />
-        Component Showcase
+        Chart Gallery
       </Link>
 
       <div className="mb-10">
@@ -338,13 +338,15 @@ export default function BarChartsPage() {
                   </Bar>
                 </BarChart>
               </ChartContainer>
-              <div className="mt-3 flex justify-center gap-5 text-xs text-muted-foreground">
-                <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm shrink-0" style={{ background: "var(--chart-3)" }} />Increase</span>
-                <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm shrink-0" style={{ background: "var(--chart-5)" }} />Decrease</span>
-                <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm shrink-0" style={{ background: "var(--chart-2)" }} />Total</span>
-              </div>
             </div>
           </MainSectionPanel>
+          <MainSectionFooter>
+            <div className="flex justify-center gap-5 w-full text-xs text-muted-foreground">
+              <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm shrink-0" style={{ background: "var(--chart-3)" }} />Increase</span>
+              <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm shrink-0" style={{ background: "var(--chart-5)" }} />Decrease</span>
+              <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm shrink-0" style={{ background: "var(--chart-2)" }} />Total</span>
+            </div>
+          </MainSectionFooter>
         </MainSection>
 
         {/* 6 — Diverging Bars */}

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import { formsConfig } from "@/lib/forms-config";
 import type { FormComplexity } from "@/lib/types";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
@@ -12,7 +15,16 @@ const complexityColor: Record<FormComplexity, string> = {
     "bg-purple-500/10 text-purple-700 ring-purple-500/20 dark:text-purple-400 dark:ring-purple-500/30",
 };
 
+const ALL_COMPLEXITIES: FormComplexity[] = ["Simple", "Medium", "Complex"];
+
 export default function FormsGalleryPage() {
+  const [activeComplexity, setActiveComplexity] = useState<FormComplexity | "All">("All");
+
+  const filtered =
+    activeComplexity === "All"
+      ? formsConfig
+      : formsConfig.filter((f) => f.complexity === activeComplexity);
+
   return (
     <div className="mx-auto max-w-4xl px-8 py-12">
       {/* Back */}
@@ -45,7 +57,7 @@ export default function FormsGalleryPage() {
       </div>
 
       {/* Stats */}
-      <div className="mb-10 flex flex-wrap gap-6 border-t border-b py-5">
+      <div className="mb-8 flex flex-wrap gap-6 border-t border-b py-5">
         {[
           { label: "Forms", value: formsConfig.length },
           {
@@ -70,9 +82,26 @@ export default function FormsGalleryPage() {
         ))}
       </div>
 
+      {/* Complexity filter */}
+      <div className="mb-6 flex flex-wrap gap-2">
+        {(["All", ...ALL_COMPLEXITIES] as const).map((c) => (
+          <button
+            key={c}
+            onClick={() => setActiveComplexity(c)}
+            className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
+              activeComplexity === c
+                ? "border-foreground/20 bg-foreground text-background"
+                : "border-border text-muted-foreground hover:text-foreground hover:border-foreground/20"
+            }`}
+          >
+            {c}
+          </button>
+        ))}
+      </div>
+
       {/* Grid */}
       <div className="grid gap-4 sm:grid-cols-2">
-        {formsConfig.map((form) => (
+        {filtered.map((form) => (
           <Link
             key={form.slug}
             href={`/showcase/forms/${form.slug}`}
