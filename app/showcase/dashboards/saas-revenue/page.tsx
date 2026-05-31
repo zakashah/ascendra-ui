@@ -336,32 +336,24 @@ export default function SaasRevenuePage() {
 
       <div className="flex flex-col gap-4">
         {/* ── KPI row ─────────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           {kpis.map((kpi) => (
-            <Card key={kpi.label}>
+            <Card key={kpi.label} className="h-full">
               <CardPanel>
-                <div className="p-5">
-                  <p className="mb-3 text-xs text-muted-foreground">
-                    {kpi.label}
-                  </p>
-                  <div className="flex items-end justify-between gap-2">
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="text-xs text-muted-foreground">{kpi.label}</p>
+                  <div className="mt-auto flex flex-col items-start gap-1 pt-4 md:flex-row md:flex-wrap md:items-center md:justify-between md:gap-2 lg:flex-col lg:items-start lg:gap-1 xl:flex-row xl:items-center xl:justify-between xl:gap-2">
                     <span className="text-2xl font-semibold tracking-tight">
                       {kpi.value}
                     </span>
-                    <span
-                      className={`mb-0.5 flex items-center gap-0.5 rounded-full px-2 py-0.5 text-[0.6875rem] font-medium ${
-                        kpi.up
-                          ? "bg-green-500/10 text-green-600 dark:text-green-400"
-                          : "bg-red-500/10 text-red-600 dark:text-red-400"
-                      }`}
-                    >
+                    <SimpleBadge variant={kpi.up ? "green" : "red"}>
                       {kpi.up ? (
                         <LuTrendingUp className="size-3" />
                       ) : (
                         <LuTrendingDown className="size-3" />
                       )}
                       {kpi.delta}
-                    </span>
+                    </SimpleBadge>
                   </div>
                 </div>
               </CardPanel>
@@ -373,7 +365,7 @@ export default function SaasRevenuePage() {
         <div className="grid grid-cols-12 gap-4">
           {/* MRR & Growth Rate — Bar + Line, dual Y-axis */}
           <div className="col-span-12 md:col-span-8">
-            <Card>
+            <Card className="h-full">
               <CardHeader>
                 <CardHeaderTitle>MRR &amp; Growth Rate</CardHeaderTitle>
                 <CardHeaderSubtitle>12-month trend · MRR bars with growth rate line overlay (right axis)</CardHeaderSubtitle>
@@ -460,10 +452,11 @@ export default function SaasRevenuePage() {
 
           {/* Plan Mix — Donut */}
           <div className="col-span-12 md:col-span-4">
-            <Card>
+            <Card className="h-full">
               <CardPanel>
-                <div className="p-5">
-                  <p className="mb-3 text-sm font-medium">Plan Mix</p>
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="text-sm font-medium">Plan Mix</p>
+                  <div className="mt-auto">
                   <ChartContainer config={{}} className="h-36 w-full">
                     <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
                       <Pie
@@ -519,6 +512,7 @@ export default function SaasRevenuePage() {
                       );
                     })}
                   </div>
+                  </div>
                 </div>
               </CardPanel>
             </Card>
@@ -529,7 +523,7 @@ export default function SaasRevenuePage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Revenue by Tier — Stacked Area */}
           <div className="col-span-12 md:col-span-8">
-            <Card>
+            <Card className="h-full">
               <CardPanel>
                 <div className="p-5">
                   <p className="mb-4 text-sm font-medium">Revenue by Tier</p>
@@ -622,9 +616,9 @@ export default function SaasRevenuePage() {
 
           {/* NRR Gauge — Radial progress ring, scale 0–150% */}
           <div className="col-span-12 md:col-span-4">
-            <Card>
+            <Card className="h-full">
               <CardPanel>
-                <div className="flex flex-col items-center justify-center p-6">
+                <div className="flex flex-1 flex-col items-center justify-center p-6">
                   <ChartContainer config={nrrConfig} className="h-44 w-44">
                     <RadialBarChart
                       cx="50%"
@@ -734,11 +728,12 @@ export default function SaasRevenuePage() {
 
           {/* Churn by Plan Tier — Stacked Bar, last 6 months */}
           <div className="col-span-12 md:col-span-5">
-            <Card>
+            <Card className="h-full">
               <CardPanel>
-                <div className="p-5">
+                <div className="flex flex-1 flex-col p-5">
                   <p className="mb-4 text-sm font-medium">Churn by Cohort</p>
-                  <ChartContainer config={churnConfig} className="h-52 w-full">
+                  <div className="flex-1 min-h-0">
+                  <ChartContainer config={churnConfig} className="h-full w-full">
                     <BarChart
                       data={churnData}
                       margin={{ top: 4, right: 0, left: 0, bottom: 0 }}
@@ -786,6 +781,7 @@ export default function SaasRevenuePage() {
                       ))}
                     </BarChart>
                   </ChartContainer>
+                  </div>
                   <ChartSeriesLegend
                     config={churnConfig}
                     hidden={hiddenChurn}
