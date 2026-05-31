@@ -1,20 +1,28 @@
 "use client";
 
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import {
+  buildBorderClasses,
+  buildBgClasses,
+  type BorderConfig,
+  type BgConfig,
+} from "@/ascendra-ui/components/ui/accent-styles";
 import { useCardContext } from "@/ascendra-ui/components/card/card";
 import { useWizardContextSafe } from "@/ascendra-ui/providers/wizard/wizard.hook";
 
 export function CardPanel({
   collapsed,
+  border,
+  bg,
   className,
   children,
   ...props
-}: React.ComponentProps<"div"> & { collapsed?: boolean }) {
-  const {
-    collapseable,
-    collapsed: contextCollapsed,
-    step,
-  } = useCardContext();
+}: React.ComponentProps<"div"> & {
+  collapsed?: boolean;
+  border?: BorderConfig;
+  bg?: BgConfig;
+}) {
+  const { collapseable, collapsed: contextCollapsed, step } = useCardContext();
   const wizard = useWizardContextSafe();
 
   const isCollapsed =
@@ -46,6 +54,8 @@ export function CardPanel({
             "bg-background mx-1 flex flex-1 flex-col rounded-lg ring-1 ring-(--color-umbra)/4 dark:ring-black/20",
             "shadow-[0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)]",
             "dark:shadow-[inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,0.4),0_0_3px_0_rgba(0,0,0,0.2)]",
+            border && buildBorderClasses(border),
+            bg && buildBgClasses(bg),
           )}
         >
           {children}

@@ -15,6 +15,10 @@ import { Separator } from "@/ascendra-ui/shadcn/components/ui/separator";
 import { type PaginationState } from "@/ascendra-ui/providers/data-table/use-pagination.hook";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 import {
+  buildBorderClasses,
+  type BorderConfig,
+} from "@/ascendra-ui/components/ui/accent-styles";
+import {
   LuChevronFirst,
   LuChevronLast,
   LuChevronLeft,
@@ -54,12 +58,20 @@ const TableScrollContext = React.createContext({
   vscroll: false,
 });
 
-function TableWrapper({ className, ...props }: React.ComponentProps<"div">) {
+function TableWrapper({
+  border,
+  className,
+  ...props
+}: React.ComponentProps<"div"> & { border?: BorderConfig }) {
   return (
     <div
       data-slot="table-wrapper"
       data-table-container
-      className={cn("bg-muted flex flex-col rounded-xl py-1", className)}
+      className={cn(
+        "bg-muted flex flex-col rounded-xl py-1",
+        border && buildBorderClasses(border),
+        className,
+      )}
       {...props}
     />
   );

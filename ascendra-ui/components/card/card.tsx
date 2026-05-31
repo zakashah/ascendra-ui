@@ -3,6 +3,10 @@
 import React, { createContext, useContext, useState } from "react";
 
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import {
+  buildBorderClasses,
+  type BorderConfig,
+} from "@/ascendra-ui/components/ui/accent-styles";
 
 type CardContextValue = {
   collapseable: boolean;
@@ -27,6 +31,7 @@ export function Card({
   collapseable,
   hasError = false,
   step,
+  border,
   className,
   children,
   ...props
@@ -35,6 +40,7 @@ export function Card({
   collapseable?: "expanded" | "collapsed";
   hasError?: boolean;
   step?: number;
+  border?: BorderConfig;
 }) {
   const [collapsed, setCollapsed] = useState(collapseable === "collapsed");
 
@@ -55,6 +61,7 @@ export function Card({
           hasError &&
             collapsed &&
             "outline-2 -outline-offset-2 outline-destructive",
+          border && buildBorderClasses(border),
           className,
         )}
         {...props}
