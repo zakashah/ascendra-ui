@@ -9,11 +9,11 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -103,24 +103,24 @@ export default function RadialChartsPage() {
 
       <div className="flex flex-col gap-8">
         {/* 1 — Single Progress Ring */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Single Progress Ring
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   One KPI displayed as an arc fill against a track — ideal for
                   compact dashboard widgets showing goal completion.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="default" className="shrink-0 mt-px">
                 Progress
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <div className="flex flex-col items-center">
                 <ChartContainer config={singleConfig} className="h-55 w-55">
@@ -176,28 +176,28 @@ export default function RadialChartsPage() {
                 </ChartContainer>
               </div>
             </div>
-          </MainSectionPanel>
-        </MainSection>
+          </CardPanel>
+        </Card>
 
         {/* 2 — Multi-Series Radial */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Multi-Series Radial
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Four KPIs on concentric arcs — Revenue, Users, Retention, and
                   Satisfaction scores compared in a compact layout.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="blue" className="shrink-0 mt-px">
                 Multi-KPI
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <div className="flex flex-col sm:flex-row items-center gap-6">
                 <ChartContainer
@@ -262,28 +262,28 @@ export default function RadialChartsPage() {
                 </div>
               </div>
             </div>
-          </MainSectionPanel>
-        </MainSection>
+          </CardPanel>
+        </Card>
 
         {/* 3 — Gauge / Speedometer */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Gauge / Speedometer
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Health or performance score displayed on a 270° arc with
                   colour zones — green/yellow/red at a glance.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="orange" className="shrink-0 mt-px">
                 Gauge
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <div className="flex flex-col items-center">
                 <ChartContainer config={gaugeConfig} className="h-50 w-65">
@@ -368,27 +368,27 @@ export default function RadialChartsPage() {
                 </div>
               </div>
             </div>
-          </MainSectionPanel>
-        </MainSection>
+          </CardPanel>
+        </Card>
 
         {/* 4 — Comparison Ring */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Comparison Ring</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Comparison Ring</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Actual vs target for three KPIs on paired concentric rings —
                   the inner track shows the target threshold, the outer arc
                   shows attainment.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="green" className="shrink-0 mt-px">
                 vs Target
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <div className="flex flex-col sm:flex-row items-center gap-6">
                 <div className="flex gap-4">
@@ -480,8 +480,8 @@ export default function RadialChartsPage() {
                 </div>
               </div>
             </div>
-          </MainSectionPanel>
-        </MainSection>
+          </CardPanel>
+        </Card>
       </div>
     </div>
   );

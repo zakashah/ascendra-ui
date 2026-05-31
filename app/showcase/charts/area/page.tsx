@@ -10,12 +10,12 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
@@ -158,22 +158,22 @@ export default function AreaChartsPage() {
 
       <div className="flex flex-col gap-8">
         {/* 1 — Stacked Area */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Stacked Area</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Stacked Area</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Session counts by device type — absolute values stacked to
                   show both individual contribution and total volume.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="default" className="shrink-0 mt-px">
                 Stacked
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={deviceConfig} className="h-72 w-full">
                 <AreaChart
@@ -247,36 +247,36 @@ export default function AreaChartsPage() {
                 </AreaChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={deviceConfig}
               hidden={hiddenStacked}
               onToggle={(k) => setHiddenStacked((p) => ({ ...p, [k]: !p[k] }))}
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 2 — Percent-Stacked */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Percent-Stacked Area
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   The same data normalised to 100% — reveals how device-type
                   share shifts month by month, independent of volume.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="blue" className="shrink-0 mt-px">
                 100%
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={deviceConfig} className="h-72 w-full">
                 <AreaChart
@@ -351,37 +351,37 @@ export default function AreaChartsPage() {
                 </AreaChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={deviceConfig}
               hidden={hiddenPercent}
               onToggle={(k) => setHiddenPercent((p) => ({ ...p, [k]: !p[k] }))}
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 3 — Area with Reference Line */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Area with Target Line
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Monthly revenue against a rolling target. The dashed reference
                   line makes it immediately clear when performance is above or
                   below goal.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="orange" className="shrink-0 mt-px">
                 Target
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={targetConfig} className="h-72 w-full">
                 <AreaChart
@@ -460,35 +460,35 @@ export default function AreaChartsPage() {
                 </AreaChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={targetConfig}
               hidden={hiddenTarget}
               onToggle={(k) => setHiddenTarget((p) => ({ ...p, [k]: !p[k] }))}
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 4 — Single Area */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Single Area</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Single Area</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   A single revenue series with gradient fill — the simplest area
                   chart, useful as a hero metric widget or sparkline
                   replacement.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="secondary" className="shrink-0 mt-px">
                 Basic
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={singleAreaConfig} className="h-72 w-full">
                 <AreaChart
@@ -556,26 +556,26 @@ export default function AreaChartsPage() {
                 </AreaChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-        </MainSection>
+          </CardPanel>
+        </Card>
 
         {/* 5 — Diverging Area */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Diverging Area</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Diverging Area</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Monthly performance delta vs target — positive months fill
                   green above the baseline, negative months fill red below it.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="green" className="shrink-0 mt-px">
                 Diverging
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={divergingConfig} className="h-72 w-full">
                 <AreaChart
@@ -660,8 +660,8 @@ export default function AreaChartsPage() {
                 </AreaChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-        </MainSection>
+          </CardPanel>
+        </Card>
       </div>
     </div>
   );

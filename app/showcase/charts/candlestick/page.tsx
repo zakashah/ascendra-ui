@@ -1,12 +1,12 @@
 "use client";
 
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
 import {
   ChartContainer,
   ChartTooltip,
@@ -176,25 +176,25 @@ export default function CandlestickChartsPage() {
 
       <div className="flex flex-col gap-8">
         {/* 1 — OHLC Candlestick */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   OHLC Candlestick
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   12 trading days — green candles indicate bullish closes, red
                   bearish. Thin wicks show the intraday high/low range outside
                   the body.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="default" className="shrink-0 mt-px">
                 OHLC
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={ohlcConfig} className="h-80 w-full">
                 <ComposedChart
@@ -278,8 +278,8 @@ export default function CandlestickChartsPage() {
                 </ComposedChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <div className="flex justify-center gap-6 w-full">
               <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <span
@@ -296,28 +296,28 @@ export default function CandlestickChartsPage() {
                 Bearish (close &lt; open)
               </div>
             </div>
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 2 — Candlestick + Volume */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Candlestick + Volume
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Price candles in the upper pane and volume bars below — higher
                   volume on Jan 20 confirms the breakout move to new highs.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="blue" className="shrink-0 mt-px">
                 +Volume
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5 flex flex-col gap-1">
               {/* Price pane */}
               <ChartContainer config={volumeConfig} className="h-56 w-full">
@@ -437,8 +437,8 @@ export default function CandlestickChartsPage() {
                 </ComposedChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <div className="flex justify-center gap-6 w-full">
               <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                 <span
@@ -462,8 +462,8 @@ export default function CandlestickChartsPage() {
                 Volume
               </div>
             </div>
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
       </div>
     </div>
   );

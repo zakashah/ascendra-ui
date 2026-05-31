@@ -30,11 +30,11 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
 
@@ -326,8 +326,8 @@ export default function SaasRevenuePage() {
         {/* ── KPI row ─────────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {kpis.map((kpi) => (
-            <MainSection key={kpi.label}>
-              <MainSectionPanel>
+            <Card key={kpi.label}>
+              <CardPanel>
                 <div className="p-5">
                   <p className="mb-3 text-xs text-muted-foreground">
                     {kpi.label}
@@ -352,8 +352,8 @@ export default function SaasRevenuePage() {
                     </span>
                   </div>
                 </div>
-              </MainSectionPanel>
-            </MainSection>
+              </CardPanel>
+            </Card>
           ))}
         </div>
 
@@ -361,13 +361,13 @@ export default function SaasRevenuePage() {
         <div className="grid grid-cols-12 gap-4">
           {/* MRR & Growth Rate — Bar + Line, dual Y-axis */}
           <div className="col-span-12 md:col-span-8">
-            <MainSection>
-              <MainSectionHeader>
-                <MainSectionHeaderTitle>
+            <Card>
+              <CardHeader>
+                <CardHeaderTitle>
                   MRR &amp; Growth Rate
-                </MainSectionHeaderTitle>
-              </MainSectionHeader>
-              <MainSectionPanel>
+                </CardHeaderTitle>
+              </CardHeader>
+              <CardPanel>
                 <div className="p-5">
                   <ChartContainer config={mrrConfig} className="h-64 w-full">
                     <ComposedChart
@@ -435,25 +435,25 @@ export default function SaasRevenuePage() {
                     </ComposedChart>
                   </ChartContainer>
                 </div>
-              </MainSectionPanel>
-              <MainSectionFooter>
+              </CardPanel>
+              <CardFooter>
                 <ChartSeriesLegend
                   config={mrrConfig}
                   hidden={hiddenMrr}
                   onToggle={(k) => setHiddenMrr((p) => ({ ...p, [k]: !p[k] }))}
                   className="w-full"
                 />
-              </MainSectionFooter>
-            </MainSection>
+              </CardFooter>
+            </Card>
           </div>
 
           {/* Plan Mix — Donut */}
           <div className="col-span-12 md:col-span-4">
-            <MainSection>
-              <MainSectionHeader>
-                <MainSectionHeaderTitle>Plan Mix</MainSectionHeaderTitle>
-              </MainSectionHeader>
-              <MainSectionPanel>
+            <Card>
+              <CardHeader>
+                <CardHeaderTitle>Plan Mix</CardHeaderTitle>
+              </CardHeader>
+              <CardPanel>
                 <div className="p-5">
                   <ChartContainer config={{}} className="h-36 w-full">
                     <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
@@ -511,8 +511,8 @@ export default function SaasRevenuePage() {
                     })}
                   </div>
                 </div>
-              </MainSectionPanel>
-            </MainSection>
+              </CardPanel>
+            </Card>
           </div>
         </div>
 
@@ -520,11 +520,11 @@ export default function SaasRevenuePage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Revenue by Tier — Stacked Area */}
           <div className="col-span-12 md:col-span-8">
-            <MainSection>
-              <MainSectionHeader>
-                <MainSectionHeaderTitle>Revenue by Tier</MainSectionHeaderTitle>
-              </MainSectionHeader>
-              <MainSectionPanel>
+            <Card>
+              <CardHeader>
+                <CardHeaderTitle>Revenue by Tier</CardHeaderTitle>
+              </CardHeader>
+              <CardPanel>
                 <div className="p-5">
                   <ChartContainer
                     config={revByTierConfig}
@@ -601,8 +601,8 @@ export default function SaasRevenuePage() {
                     </AreaChart>
                   </ChartContainer>
                 </div>
-              </MainSectionPanel>
-              <MainSectionFooter>
+              </CardPanel>
+              <CardFooter>
                 <ChartSeriesLegend
                   config={revByTierConfig}
                   hidden={hiddenRevTier}
@@ -611,17 +611,17 @@ export default function SaasRevenuePage() {
                   }
                   className="w-full"
                 />
-              </MainSectionFooter>
-            </MainSection>
+              </CardFooter>
+            </Card>
           </div>
 
           {/* NRR Gauge — Radial progress ring, scale 0–150% */}
           <div className="col-span-12 md:col-span-4">
-            <MainSection>
-              <MainSectionHeader>
-                <MainSectionHeaderTitle>NRR Gauge</MainSectionHeaderTitle>
-              </MainSectionHeader>
-              <MainSectionPanel>
+            <Card>
+              <CardHeader>
+                <CardHeaderTitle>NRR Gauge</CardHeaderTitle>
+              </CardHeader>
+              <CardPanel>
                 <div className="flex flex-col items-center justify-center p-6">
                   <ChartContainer config={nrrConfig} className="h-44 w-44">
                     <RadialBarChart
@@ -676,8 +676,8 @@ export default function SaasRevenuePage() {
                     </span>
                   </div>
                 </div>
-              </MainSectionPanel>
-            </MainSection>
+              </CardPanel>
+            </Card>
           </div>
         </div>
 
@@ -685,11 +685,11 @@ export default function SaasRevenuePage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Top Accounts — table */}
           <div className="col-span-12 md:col-span-7">
-            <MainSection>
-              <MainSectionHeader>
-                <MainSectionHeaderTitle>Top Accounts</MainSectionHeaderTitle>
-              </MainSectionHeader>
-              <MainSectionPanel>
+            <Card>
+              <CardHeader>
+                <CardHeaderTitle>Top Accounts</CardHeaderTitle>
+              </CardHeader>
+              <CardPanel>
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
@@ -745,17 +745,17 @@ export default function SaasRevenuePage() {
                     </tbody>
                   </table>
                 </div>
-              </MainSectionPanel>
-            </MainSection>
+              </CardPanel>
+            </Card>
           </div>
 
           {/* Churn by Plan Tier — Stacked Bar, last 6 months */}
           <div className="col-span-12 md:col-span-5">
-            <MainSection>
-              <MainSectionHeader>
-                <MainSectionHeaderTitle>Churn by Cohort</MainSectionHeaderTitle>
-              </MainSectionHeader>
-              <MainSectionPanel>
+            <Card>
+              <CardHeader>
+                <CardHeaderTitle>Churn by Cohort</CardHeaderTitle>
+              </CardHeader>
+              <CardPanel>
                 <div className="p-5">
                   <ChartContainer config={churnConfig} className="h-52 w-full">
                     <BarChart
@@ -806,8 +806,8 @@ export default function SaasRevenuePage() {
                     </BarChart>
                   </ChartContainer>
                 </div>
-              </MainSectionPanel>
-              <MainSectionFooter>
+              </CardPanel>
+              <CardFooter>
                 <ChartSeriesLegend
                   config={churnConfig}
                   hidden={hiddenChurn}
@@ -816,8 +816,8 @@ export default function SaasRevenuePage() {
                   }
                   className="w-full"
                 />
-              </MainSectionFooter>
-            </MainSection>
+              </CardFooter>
+            </Card>
           </div>
         </div>
       </div>

@@ -18,12 +18,12 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
@@ -182,24 +182,24 @@ export default function BarChartsPage() {
 
       <div className="flex flex-col gap-8">
         {/* 1 — Grouped Vertical */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Grouped Vertical
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Sales by channel across four quarters — side-by-side bars make
                   within-period comparisons instant.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="default" className="shrink-0 mt-px">
                 Grouped
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={groupedConfig} className="h-72 w-full">
                 <BarChart
@@ -257,36 +257,36 @@ export default function BarChartsPage() {
                 </BarChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={groupedConfig}
               hidden={hiddenGrouped}
               onToggle={(k) => setHiddenGrouped((p) => ({ ...p, [k]: !p[k] }))}
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 2 — Stacked Vertical */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Stacked Vertical
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Monthly customer segments stacked — see total volume and how
                   new, returning, and churned customers shift over time.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="blue" className="shrink-0 mt-px">
                 Stacked
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={stackedConfig} className="h-72 w-full">
                 <BarChart
@@ -341,35 +341,35 @@ export default function BarChartsPage() {
                 </BarChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={stackedConfig}
               hidden={hiddenStacked}
               onToggle={(k) => setHiddenStacked((p) => ({ ...p, [k]: !p[k] }))}
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 3 — Horizontal Single */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Horizontal Bar</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Horizontal Bar</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Traffic sources ranked by visit volume. Horizontal layout
                   gives room for long channel labels and makes ranking
                   immediately readable.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="secondary" className="shrink-0 mt-px">
                 Ranked
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={horizontalConfig} className="h-64 w-full">
                 <BarChart
@@ -419,28 +419,28 @@ export default function BarChartsPage() {
                 </BarChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-        </MainSection>
+          </CardPanel>
+        </Card>
 
         {/* 4 — Bar with Value Labels */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Bar with Value Labels
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Revenue per product category with values displayed directly on
                   bars — no need to read the axis for exact figures.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="green" className="shrink-0 mt-px">
                 Labels
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={labelConfig} className="h-60 w-full">
                 <BarChart
@@ -488,26 +488,26 @@ export default function BarChartsPage() {
                 </BarChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-        </MainSection>
+          </CardPanel>
+        </Card>
 
         {/* 5 — Waterfall */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Waterfall</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Waterfall</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Revenue bridge from opening balance through gains and losses
                   to net total — floating bars show each contributor in context.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="blue" className="shrink-0 mt-px">
                 Waterfall
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={waterfallConfig} className="h-72 w-full">
                 <BarChart
@@ -591,8 +591,8 @@ export default function BarChartsPage() {
                 </BarChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <div className="flex justify-center gap-5 w-full text-xs text-muted-foreground">
               <span className="flex items-center gap-1.5">
                 <span
@@ -616,26 +616,26 @@ export default function BarChartsPage() {
                 Total
               </span>
             </div>
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 6 — Diverging Bars */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Diverging Bars</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Diverging Bars</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   NPS segment scores on a centred axis — positive bars extend
                   right for promoters, negative bars extend left for detractors.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="orange" className="shrink-0 mt-px">
                 ±Values
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer
                 config={divergingBarConfig}
@@ -687,8 +687,8 @@ export default function BarChartsPage() {
                 </BarChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-        </MainSection>
+          </CardPanel>
+        </Card>
       </div>
     </div>
   );

@@ -5,10 +5,10 @@ import {
   LuChartLine,
   LuTable2,
 } from "react-icons/lu";
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
 import type { DashboardMeta, LayoutCell } from "@/lib/types";
 
 // ─── Domain styling ────────────────────────────────────────────────────────────
@@ -121,11 +121,11 @@ export function DashboardComingSoon({
       </div>
 
       <div className="flex flex-col gap-4">
-        {/* KPI row — MainSection + MainSectionPanel, no header/footer */}
+        {/* KPI row — Card + CardPanel, no header/footer */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {dashboard.kpis.map((kpi) => (
-            <MainSection key={kpi}>
-              <MainSectionPanel>
+            <Card key={kpi}>
+              <CardPanel>
                 <div className="p-5">
                   <p className="mb-3 text-xs text-muted-foreground">{kpi}</p>
                   <div className="flex items-end justify-between gap-2">
@@ -137,8 +137,8 @@ export function DashboardComingSoon({
                     </span>
                   </div>
                 </div>
-              </MainSectionPanel>
-            </MainSection>
+              </CardPanel>
+            </Card>
           ))}
         </div>
 
@@ -150,13 +150,13 @@ export function DashboardComingSoon({
                 key={cell.title}
                 className={`col-span-12 ${colSpanClass[cell.cols] ?? "md:col-span-12"}`}
               >
-                <MainSection>
-                  <MainSectionHeader>
-                    <MainSectionHeaderTitle>
+                <Card>
+                  <CardHeader>
+                    <CardHeaderTitle>
                       {cell.title}
-                    </MainSectionHeaderTitle>
-                  </MainSectionHeader>
-                  <MainSectionPanel>
+                    </CardHeaderTitle>
+                  </CardHeader>
+                  <CardPanel>
                     <div
                       className={`${cellHeightClass(cell)} flex items-center justify-center`}
                     >
@@ -173,8 +173,8 @@ export function DashboardComingSoon({
                         </p>
                       </div>
                     </div>
-                  </MainSectionPanel>
-                </MainSection>
+                  </CardPanel>
+                </Card>
               </div>
             ))}
           </div>

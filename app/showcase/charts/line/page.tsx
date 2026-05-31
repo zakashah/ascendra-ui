@@ -20,12 +20,12 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
@@ -165,22 +165,22 @@ export default function LineChartsPage() {
 
       <div className="flex flex-col gap-8">
         {/* 1 — Single Line */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Single Line</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Single Line</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Monthly revenue over a 12-month period. Clean baseline with
                   grid and tooltip.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="secondary" className="shrink-0 mt-px">
                 Basic
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={singleConfig} className="h-65 w-full">
                 <LineChart
@@ -227,26 +227,26 @@ export default function LineChartsPage() {
                 </LineChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-        </MainSection>
+          </CardPanel>
+        </Card>
 
         {/* 2 — Multi-Line with toggle */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Multi-Line</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Multi-Line</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Revenue, expenses, and profit compared across 12 months. Click
                   legend labels to toggle series visibility.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="default" className="shrink-0 mt-px">
                 Interactive
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={multiConfig} className="h-65 w-full">
                 <LineChart
@@ -294,34 +294,34 @@ export default function LineChartsPage() {
                 </LineChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={multiConfig}
               hidden={hidden}
               onToggle={toggle}
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 3 — Gradient Area-Line */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Gradient Fill</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Gradient Fill</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Line with a subtle gradient fill underneath — conveys volume
                   and momentum at a glance.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="blue" className="shrink-0 mt-px">
                 Style
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={gradientConfig} className="h-65 w-full">
                 <AreaChart
@@ -386,26 +386,26 @@ export default function LineChartsPage() {
                 </AreaChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-        </MainSection>
+          </CardPanel>
+        </Card>
         {/* 4 — Step Line */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Step Line</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Step Line</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Weekly support tickets rendered as a step function — each
                   value holds until the next data point, ideal for discrete
                   state changes or inventory counts.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="secondary" className="shrink-0 mt-px">
                 Step
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={stepConfig} className="h-65 w-full">
                 <LineChart
@@ -450,29 +450,29 @@ export default function LineChartsPage() {
                 </LineChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-        </MainSection>
+          </CardPanel>
+        </Card>
 
         {/* 5 — Line + Reference Band */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Line + Reference Band
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Monthly conversion rate with a target line and a shaded
                   &quot;good&quot; zone — makes it immediately clear when
                   performance is above or below goal.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="orange" className="shrink-0 mt-px">
                 Reference
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={refConfig} className="h-65 w-full">
                 <LineChart
@@ -537,8 +537,8 @@ export default function LineChartsPage() {
                 </LineChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-        </MainSection>
+          </CardPanel>
+        </Card>
       </div>
     </div>
   );

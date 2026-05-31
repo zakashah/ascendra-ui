@@ -15,12 +15,12 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -98,23 +98,23 @@ export default function RadarChartsPage() {
 
       <div className="flex flex-col gap-8">
         {/* 1 — Basic Radar */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Basic Radar</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Basic Radar</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Single-series skill profile across six dimensions. Each axis
                   is independent — the filled polygon shows relative strengths
                   at a glance.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="secondary" className="shrink-0 mt-px">
                 Basic
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5 flex justify-center">
               <ChartContainer
                 config={skillConfig}
@@ -148,28 +148,28 @@ export default function RadarChartsPage() {
                 </RadarChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-        </MainSection>
+          </CardPanel>
+        </Card>
 
         {/* 2 — Multi-Series Comparative */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Multi-Series Radar
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Two teams plotted on the same axes — overlapping polygons make
                   it immediately clear where each team leads or lags.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="default" className="shrink-0 mt-px">
                 Comparative
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5 flex justify-center">
               <ChartContainer
                 config={teamConfig}
@@ -210,8 +210,8 @@ export default function RadarChartsPage() {
                 </RadarChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <div className="flex justify-center gap-6 w-full">
               {(["teamA", "teamB"] as const).map((key) => (
                 <div
@@ -226,27 +226,27 @@ export default function RadarChartsPage() {
                 </div>
               ))}
             </div>
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 3 — Filled Comparative */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Filled Radar</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Filled Radar</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Current vs previous period with semi-transparent fills — the
                   overlap area shows retained performance while gaps reveal
                   gains or regressions.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="blue" className="shrink-0 mt-px">
                 Filled
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5 flex justify-center">
               <ChartContainer
                 config={filledConfig}
@@ -287,8 +287,8 @@ export default function RadarChartsPage() {
                 </RadarChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <div className="flex justify-center gap-6 w-full">
               {(["current", "previous"] as const).map((key) => (
                 <div
@@ -303,8 +303,8 @@ export default function RadarChartsPage() {
                 </div>
               ))}
             </div>
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
       </div>
     </div>
   );

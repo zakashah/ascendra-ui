@@ -20,12 +20,12 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
@@ -348,22 +348,22 @@ export default function ComposedChartsPage() {
 
       <div className="flex flex-col gap-8">
         {/* 1 — Bar + Line */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Bar + Line</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Bar + Line</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Monthly revenue bars overlaid with a growth-rate line. The bar
                   shows absolute performance; the line shows momentum.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="default" className="shrink-0 mt-px">
                 Bar + Line
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer
                 config={revenueGrowthConfig}
@@ -434,8 +434,8 @@ export default function ComposedChartsPage() {
                 </ComposedChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={revenueGrowthConfig}
               hidden={hiddenRevGrowth}
@@ -444,27 +444,27 @@ export default function ComposedChartsPage() {
               }
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 2 — Dual Y-Axis */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Dual Y-Axis</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Dual Y-Axis</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Order volume (bars, left axis) against average order value
                   (line, right axis). Two scales that can&apos;t share an axis —
                   each reads correctly without distortion.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="blue" className="shrink-0 mt-px">
                 Dual Axis
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={dualAxisConfig} className="h-72 w-full">
                 <ComposedChart
@@ -535,35 +535,35 @@ export default function ComposedChartsPage() {
                 </ComposedChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={dualAxisConfig}
               hidden={hiddenDual}
               onToggle={(k) => setHiddenDual((p) => ({ ...p, [k]: !p[k] }))}
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 3 — Area + Scatter */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Area + Scatter</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Area + Scatter</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Baseline revenue trend as a filled area with high-impact
                   outlier events plotted as scatter points — surface anomalies
                   without losing the trend.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="orange" className="shrink-0 mt-px">
                 Area + Scatter
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer
                 config={areaScatterConfig}
@@ -641,8 +641,8 @@ export default function ComposedChartsPage() {
                 </ComposedChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={areaScatterConfig}
               hidden={hiddenAreaScatter}
@@ -651,27 +651,27 @@ export default function ComposedChartsPage() {
               }
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 4 — Triple Metric */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Triple Metric</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Triple Metric</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Monthly transaction volume (bars), conversion rate (line,
                   right axis), and cumulative total (area) on a single canvas —
                   three related metrics without clutter.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="green" className="shrink-0 mt-px">
                 3-Series
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={tripleConfig} className="h-72 w-full">
                 <ComposedChart
@@ -773,37 +773,37 @@ export default function ComposedChartsPage() {
                 </ComposedChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={tripleConfig}
               hidden={hiddenTriple}
               onToggle={(k) => setHiddenTriple((p) => ({ ...p, [k]: !p[k] }))}
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 5 — Stacked Bar + Margin Line */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Stacked Cost + Margin
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Monthly operating costs broken into three stacked categories,
                   overlaid with the EBITDA margin line on a right axis — see
                   where spending grows relative to profitability.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="default" className="shrink-0 mt-px">
                 Stacked + Line
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer
                 config={stackedCostConfig}
@@ -896,8 +896,8 @@ export default function ComposedChartsPage() {
                 </ComposedChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={stackedCostConfig}
               hidden={hiddenStackedCost}
@@ -906,27 +906,27 @@ export default function ComposedChartsPage() {
               }
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 6 — Forecast Band */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Forecast Band</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                <CardHeaderTitle>Forecast Band</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Forecast high and low bounds as dashed lines flanking a solid
                   actual-performance area — the gap between bounds narrows as
                   forecasts converge over the period.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="orange" className="shrink-0 mt-px">
                 Forecast Band
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={forecastConfig} className="h-72 w-full">
                 <ComposedChart
@@ -1014,37 +1014,37 @@ export default function ComposedChartsPage() {
                 </ComposedChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={forecastConfig}
               hidden={hiddenForecast}
               onToggle={(k) => setHiddenForecast((p) => ({ ...p, [k]: !p[k] }))}
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 7 — Grouped Bar + Benchmark */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Regional vs Benchmark
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   North and South region revenue as grouped bars, with an
                   industry benchmark overlay as a dashed line — quickly identify
                   which region leads or lags the standard.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="blue" className="shrink-0 mt-px">
                 Grouped + Line
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={regionalConfig} className="h-72 w-full">
                 <ComposedChart
@@ -1107,37 +1107,37 @@ export default function ComposedChartsPage() {
                 </ComposedChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={regionalConfig}
               hidden={hiddenRegional}
               onToggle={(k) => setHiddenRegional((p) => ({ ...p, [k]: !p[k] }))}
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 8 — Cash Flow + Running Balance */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Cash Flow + Running Balance
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Monthly inflows and outflows as grouped bars (left axis) with
                   the cumulative cash balance as a filled area (right axis) —
                   see short-term gaps and long-term health together.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="green" className="shrink-0 mt-px">
                 Inflow / Outflow
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer config={cashFlowConfig} className="h-72 w-full">
                 <ComposedChart
@@ -1233,37 +1233,37 @@ export default function ComposedChartsPage() {
                 </ComposedChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={cashFlowConfig}
               hidden={hiddenCashFlow}
               onToggle={(k) => setHiddenCashFlow((p) => ({ ...p, [k]: !p[k] }))}
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
 
         {/* 9 — Budget vs Actual + Variance */}
-        <MainSection>
-          <MainSectionHeader>
+        <Card>
+          <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>
+                <CardHeaderTitle>
                   Budget vs Actual + Variance
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Side-by-side bars for budgeted and actual revenue, with a
                   variance percentage line on the right axis — months above zero
                   beat the plan; below miss it.
-                </MainSectionHeaderSubtitle>
+                </CardHeaderSubtitle>
               </div>
               <SimpleBadge variant="default" className="shrink-0 mt-px">
                 Budget vs Actual
               </SimpleBadge>
             </div>
-          </MainSectionHeader>
-          <MainSectionPanel>
+          </CardHeader>
+          <CardPanel>
             <div className="p-5">
               <ChartContainer
                 config={budgetActualConfig}
@@ -1342,8 +1342,8 @@ export default function ComposedChartsPage() {
                 </ComposedChart>
               </ChartContainer>
             </div>
-          </MainSectionPanel>
-          <MainSectionFooter>
+          </CardPanel>
+          <CardFooter>
             <ChartSeriesLegend
               config={budgetActualConfig}
               hidden={hiddenBudgetActual}
@@ -1352,8 +1352,8 @@ export default function ComposedChartsPage() {
               }
               className="w-full"
             />
-          </MainSectionFooter>
-        </MainSection>
+          </CardFooter>
+        </Card>
       </div>
     </div>
   );
