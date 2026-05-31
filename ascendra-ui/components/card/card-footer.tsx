@@ -6,11 +6,7 @@ import { useWizardContextSafe } from "@/ascendra-ui/providers/wizard/wizard.hook
 
 type CardFooterProps = React.ComponentProps<"footer">;
 
-export function CardFooter({
-  className,
-  children,
-  ...props
-}: CardFooterProps) {
+export function CardFooter({ className, children, ...props }: CardFooterProps) {
   const { step } = useCardContext();
   const wizard = useWizardContextSafe();
 

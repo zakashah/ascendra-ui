@@ -1,42 +1,54 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import {
-  LuArrowLeft,
-  LuLayoutDashboard,
-  LuTrendingUp,
-  LuTrendingDown,
-} from "react-icons/lu";
-import {
-  ComposedChart,
-  Bar,
-  Line,
-  AreaChart,
-  Area,
-  BarChart,
-  PieChart,
-  Pie,
-  RadialBarChart,
-  RadialBar,
-  PolarAngleAxis,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-} from "recharts";
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableHeaderRow,
+  TableRow,
+  TableWrapper,
+} from "@/ascendra-ui/components/ui/table";
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
+import Link from "next/link";
+import { useState } from "react";
+import {
+  LuArrowLeft,
+  LuLayoutDashboard,
+  LuTrendingDown,
+  LuTrendingUp,
+} from "react-icons/lu";
+import {
+  Area,
+  AreaChart,
+  Bar,
+  BarChart,
+  CartesianGrid,
+  ComposedChart,
+  Line,
+  Pie,
+  PieChart,
+  PolarAngleAxis,
+  RadialBar,
+  RadialBarChart,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 // ─── KPIs ─────────────────────────────────────────────────────────────────────
 
@@ -363,9 +375,8 @@ export default function SaasRevenuePage() {
           <div className="col-span-12 md:col-span-8">
             <Card>
               <CardHeader>
-                <CardHeaderTitle>
-                  MRR &amp; Growth Rate
-                </CardHeaderTitle>
+                <CardHeaderTitle>MRR &amp; Growth Rate</CardHeaderTitle>
+                <CardHeaderSubtitle>12-month trend · MRR bars with growth rate line overlay (right axis)</CardHeaderSubtitle>
               </CardHeader>
               <CardPanel>
                 <div className="p-5">
@@ -434,27 +445,25 @@ export default function SaasRevenuePage() {
                       />
                     </ComposedChart>
                   </ChartContainer>
+                  <ChartSeriesLegend
+                    config={mrrConfig}
+                    hidden={hiddenMrr}
+                    onToggle={(k) =>
+                      setHiddenMrr((p) => ({ ...p, [k]: !p[k] }))
+                    }
+                    className="mt-3 w-full"
+                  />
                 </div>
               </CardPanel>
-              <CardFooter>
-                <ChartSeriesLegend
-                  config={mrrConfig}
-                  hidden={hiddenMrr}
-                  onToggle={(k) => setHiddenMrr((p) => ({ ...p, [k]: !p[k] }))}
-                  className="w-full"
-                />
-              </CardFooter>
             </Card>
           </div>
 
           {/* Plan Mix — Donut */}
           <div className="col-span-12 md:col-span-4">
             <Card>
-              <CardHeader>
-                <CardHeaderTitle>Plan Mix</CardHeaderTitle>
-              </CardHeader>
               <CardPanel>
                 <div className="p-5">
+                  <p className="mb-3 text-sm font-medium">Plan Mix</p>
                   <ChartContainer config={{}} className="h-36 w-full">
                     <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
                       <Pie
@@ -521,11 +530,9 @@ export default function SaasRevenuePage() {
           {/* Revenue by Tier — Stacked Area */}
           <div className="col-span-12 md:col-span-8">
             <Card>
-              <CardHeader>
-                <CardHeaderTitle>Revenue by Tier</CardHeaderTitle>
-              </CardHeader>
               <CardPanel>
                 <div className="p-5">
+                  <p className="mb-4 text-sm font-medium">Revenue by Tier</p>
                   <ChartContainer
                     config={revByTierConfig}
                     className="h-64 w-full"
@@ -600,27 +607,22 @@ export default function SaasRevenuePage() {
                       ))}
                     </AreaChart>
                   </ChartContainer>
+                  <ChartSeriesLegend
+                    config={revByTierConfig}
+                    hidden={hiddenRevTier}
+                    onToggle={(k) =>
+                      setHiddenRevTier((p) => ({ ...p, [k]: !p[k] }))
+                    }
+                    className="mt-3 w-full"
+                  />
                 </div>
               </CardPanel>
-              <CardFooter>
-                <ChartSeriesLegend
-                  config={revByTierConfig}
-                  hidden={hiddenRevTier}
-                  onToggle={(k) =>
-                    setHiddenRevTier((p) => ({ ...p, [k]: !p[k] }))
-                  }
-                  className="w-full"
-                />
-              </CardFooter>
             </Card>
           </div>
 
           {/* NRR Gauge — Radial progress ring, scale 0–150% */}
           <div className="col-span-12 md:col-span-4">
             <Card>
-              <CardHeader>
-                <CardHeaderTitle>NRR Gauge</CardHeaderTitle>
-              </CardHeader>
               <CardPanel>
                 <div className="flex flex-col items-center justify-center p-6">
                   <ChartContainer config={nrrConfig} className="h-44 w-44">
@@ -685,78 +687,57 @@ export default function SaasRevenuePage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Top Accounts — table */}
           <div className="col-span-12 md:col-span-7">
-            <Card>
-              <CardHeader>
-                <CardHeaderTitle>Top Accounts</CardHeaderTitle>
-              </CardHeader>
-              <CardPanel>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b">
-                        <th className="px-5 py-3 text-left text-xs font-medium text-muted-foreground">
-                          Company
-                        </th>
-                        <th className="px-3 py-3 text-left text-xs font-medium text-muted-foreground">
-                          Plan
-                        </th>
-                        <th className="px-3 py-3 text-right text-xs font-medium text-muted-foreground">
-                          MRR
-                        </th>
-                        <th className="px-3 py-3 text-left text-xs font-medium text-muted-foreground">
-                          Since
-                        </th>
-                        <th className="px-5 py-3 text-left text-xs font-medium text-muted-foreground">
-                          Health
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y">
-                      {topAccounts.map((row) => (
-                        <tr
-                          key={row.company}
-                          className="text-xs transition-colors hover:bg-muted/40"
+            <CardHeader>
+              <CardHeaderTitle>Top Accounts</CardHeaderTitle>
+              <CardHeaderSubtitle>Top 8 accounts ranked by monthly recurring revenue</CardHeaderSubtitle>
+            </CardHeader>
+            <TableWrapper>
+              <Table scrollable horizontal vertical height={300}>
+                <TableHeader>
+                  <TableHeaderRow>
+                    <TableHead>Company</TableHead>
+                    <TableHead>Plan</TableHead>
+                    <TableHead className="text-right">MRR</TableHead>
+                    <TableHead>Since</TableHead>
+                    <TableHead>Health</TableHead>
+                  </TableHeaderRow>
+                </TableHeader>
+                <TableBody>
+                  {topAccounts.map((row) => (
+                    <TableRow key={row.company}>
+                      <TableCell className="font-medium">
+                        {row.company}
+                      </TableCell>
+                      <TableCell className="text-muted-foreground">
+                        {row.plan}
+                      </TableCell>
+                      <TableCell className="text-right font-mono tabular-nums">
+                        ${row.mrr.toLocaleString()}
+                      </TableCell>
+                      <TableCell className="text-muted-foreground">
+                        {row.since}
+                      </TableCell>
+                      <TableCell>
+                        <SimpleBadge
+                          variant={row.health === "Healthy" ? "green" : "amber"}
                         >
-                          <td className="px-5 py-3 font-medium">
-                            {row.company}
-                          </td>
-                          <td className="px-3 py-3 text-muted-foreground">
-                            {row.plan}
-                          </td>
-                          <td className="px-3 py-3 text-right font-mono tabular-nums">
-                            ${row.mrr.toLocaleString()}
-                          </td>
-                          <td className="px-3 py-3 text-muted-foreground">
-                            {row.since}
-                          </td>
-                          <td className="px-5 py-3">
-                            <span
-                              className={`inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium ring-1 ring-inset ${
-                                row.health === "Healthy"
-                                  ? "bg-green-500/10 text-green-700 ring-green-500/20 dark:text-green-400"
-                                  : "bg-amber-500/10 text-amber-700 ring-amber-500/20 dark:text-amber-400"
-                              }`}
-                            >
-                              {row.health}
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </CardPanel>
-            </Card>
+                          {row.health}
+                        </SimpleBadge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+              <CardFooter className="border-t-0 pt-0"></CardFooter>
+            </TableWrapper>
           </div>
 
           {/* Churn by Plan Tier — Stacked Bar, last 6 months */}
           <div className="col-span-12 md:col-span-5">
             <Card>
-              <CardHeader>
-                <CardHeaderTitle>Churn by Cohort</CardHeaderTitle>
-              </CardHeader>
               <CardPanel>
                 <div className="p-5">
+                  <p className="mb-4 text-sm font-medium">Churn by Cohort</p>
                   <ChartContainer config={churnConfig} className="h-52 w-full">
                     <BarChart
                       data={churnData}
@@ -805,18 +786,16 @@ export default function SaasRevenuePage() {
                       ))}
                     </BarChart>
                   </ChartContainer>
+                  <ChartSeriesLegend
+                    config={churnConfig}
+                    hidden={hiddenChurn}
+                    onToggle={(k) =>
+                      setHiddenChurn((p) => ({ ...p, [k]: !p[k] }))
+                    }
+                    className="mt-3 w-full"
+                  />
                 </div>
               </CardPanel>
-              <CardFooter>
-                <ChartSeriesLegend
-                  config={churnConfig}
-                  hidden={hiddenChurn}
-                  onToggle={(k) =>
-                    setHiddenChurn((p) => ({ ...p, [k]: !p[k] }))
-                  }
-                  className="w-full"
-                />
-              </CardFooter>
             </Card>
           </div>
         </div>

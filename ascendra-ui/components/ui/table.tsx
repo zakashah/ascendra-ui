@@ -57,7 +57,7 @@ const TableScrollContext = React.createContext({
 function TableWrapper({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      data-slot="table-container"
+      data-slot="table-wrapper"
       data-table-container
       className={cn("bg-muted flex flex-col rounded-xl py-1", className)}
       {...props}
@@ -101,7 +101,7 @@ function Table({
     >
       <div
         ref={ref}
-        data-slot="table-wrapper"
+        data-slot="table-container"
         className={cn(
           "",
           scrollable && horizontal && "-mb-px overflow-x-auto pb-px",
