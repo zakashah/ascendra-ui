@@ -279,7 +279,7 @@ export default function HealthcarePage() {
           <div className="col-span-12 md:col-span-4">
             <Card className="h-full">
               <CardHeader>
-                <CardHeaderTitle>Bed Occupancy</CardHeaderTitle>
+                <CardHeaderTitle className="text-md">Bed Occupancy</CardHeaderTitle>
               </CardHeader>
               <CardPanel>
                 <div className="flex flex-1 flex-col items-center justify-center p-6">

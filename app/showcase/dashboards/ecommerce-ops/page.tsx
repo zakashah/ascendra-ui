@@ -425,7 +425,7 @@ export default function EcommerceOpsPage() {
           <div className="col-span-12 md:col-span-6">
             <Card className="h-full">
               <CardHeader>
-                <CardHeaderTitle>GMV by Category</CardHeaderTitle>
+                <CardHeaderTitle className="text-md">GMV by Category</CardHeaderTitle>
               </CardHeader>
               <CardPanel>
                 <div className="p-5">
