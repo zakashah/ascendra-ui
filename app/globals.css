@@ -330,6 +330,56 @@
   --chart-8: oklch(0.85 0.16 80);
 }
 
+/* Force light theme on an element regardless of the page's dark/light mode.
+   Used by Card inverse={true} when the page is in dark mode. */
+.theme-light {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.2928 0.0163 285.35);
+  --surface-soft: oklch(0.98 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.147 0.004 49.25);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.147 0.004 49.25);
+  --primary: oklch(0.5573 0.2543 283.67);
+  --primary-foreground: oklch(0.98 0.02 201);
+  --secondary: oklch(1 0 0);
+  --secondary-foreground: oklch(0.147 0.004 49.25);
+  --muted: oklch(0.9854 0.0013 286.38);
+  --muted-foreground: oklch(0.4913 0.0254 285.43);
+  --accent: oklch(0.97 0.001 106.424);
+  --accent-foreground: oklch(0.216 0.006 56.043);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.9437 0.0027 286.35);
+  --input: oklch(0.923 0.003 48.717);
+  --ring: oklch(0.5573 0.2543 283.67);
+  --sidebar: oklch(0.985 0.001 106.423);
+  --sidebar-foreground: oklch(0.147 0.004 49.25);
+  --sidebar-primary: oklch(0.61 0.11 222);
+  --sidebar-primary-foreground: oklch(0.98 0.02 201);
+  --sidebar-accent: oklch(0.97 0.001 106.424);
+  --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
+  --sidebar-border: oklch(0.923 0.003 48.717);
+  --sidebar-ring: oklch(0.709 0.01 56.259);
+  --brand: var(--color-purple-700);
+  --positive: var(--color-green-700);
+  --negative: var(--color-red-700);
+  --warning: var(--color-orange-500);
+  --info: var(--color-blue-700);
+  --dimmed: var(--color-gray-500);
+  --bg-main: var(--color-white);
+  --bg-menu: var(--color-white);
+  --bg-separator: var(--color-gray-200);
+  --shadow-xs: 0px 0px 2px 0px #00000014, 0px 1px 2px 0px #0000000f, 0px 0px 0px 1px #0000000a;
+  --chart-1: oklch(0.5573 0.2543 283.67);
+  --chart-2: oklch(0.51 0.18 252);
+  --chart-3: oklch(0.52 0.18 145);
+  --chart-4: oklch(0.72 0.21 50);
+  --chart-5: oklch(0.54 0.24 27);
+  --chart-6: oklch(0.68 0.14 185);
+  --chart-7: oklch(0.62 0.20 310);
+  --chart-8: oklch(0.78 0.16 80);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

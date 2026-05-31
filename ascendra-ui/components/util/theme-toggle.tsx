@@ -1,31 +1,39 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { LuMoon, LuSun } from 'react-icons/lu';
+import { useTheme } from 'next-themes';
+import { LuMoon, LuSun, LuMonitor } from 'react-icons/lu';
+
+const CYCLE: Record<string, string> = { light: 'dark', dark: 'system', system: 'light' };
+
+const ICONS: Record<string, React.ReactNode> = {
+  light: <LuSun className="size-3.5 text-gray-400" />,
+  dark: <LuMoon className="size-3.5 text-gray-400" />,
+  system: <LuMonitor className="size-3.5 text-gray-400" />,
+};
 
 export function ThemeToggle() {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return localStorage.getItem('theme') === 'dark';
-  });
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', isDarkMode);
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-  }, [isDarkMode]);
+    const id = setTimeout(() => setMounted(true));
+    return () => clearTimeout(id);
+  }, []);
+
+  if (!mounted) return <div className="min-h-7 min-w-7" />;
+
+  const current = theme ?? 'system';
 
   return (
     <button
       data-slot="theme-toggle"
       type="button"
-      onClick={() => setIsDarkMode((prev) => !prev)}
+      title={`Theme: ${current}`}
+      onClick={() => setTheme(CYCLE[current] ?? 'system')}
       className="focus-visible:outline-primary bg-background border-border flex min-h-7 min-w-7 cursor-pointer items-center justify-center rounded-full border focus-visible:outline-2 focus-visible:outline-offset-2"
     >
-      {isDarkMode ? (
-        <LuMoon className="size-3.5 text-gray-400" />
-      ) : (
-        <LuSun className="size-3.5 text-gray-400" />
-      )}
+      {ICONS[current]}
     </button>
   );
 }

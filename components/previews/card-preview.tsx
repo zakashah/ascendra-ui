@@ -238,6 +238,57 @@ export function CardDocContent() {
           </ComponentPreview>
         </div>
 
+        {/* Inverse Theme */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">
+            Inverse Theme
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Pass{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              inverse
+            </code>{" "}
+            to render the card in the opposite theme. In light mode the card
+            appears dark; in dark mode it appears light. All semantic tokens and
+            child components flip automatically — no extra props needed anywhere
+            else.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`<Card inverse>
+  <CardHeader>
+    <CardHeaderTitle>School Information</CardHeaderTitle>
+    <CardHeaderSubtitle>Your school details visible to parents.</CardHeaderSubtitle>
+  </CardHeader>
+  <CardPanel>
+    <CardPanelItem>...</CardPanelItem>
+  </CardPanel>
+  <CardFooter>
+    <Button size="sm" variant="secondary">Edit</Button>
+  </CardFooter>
+</Card>`}
+          >
+            <div className="w-full">
+              <Card inverse>
+                <CardHeader>
+                  <CardHeaderTitle>School Information</CardHeaderTitle>
+                  <CardHeaderSubtitle>
+                    Your school details visible to parents.
+                  </CardHeaderSubtitle>
+                </CardHeader>
+                <CardPanel>
+                  <SampleItems />
+                </CardPanel>
+                <CardFooter>
+                  <Button size="sm" variant="secondary">
+                    Edit
+                  </Button>
+                </CardFooter>
+              </Card>
+            </div>
+          </ComponentPreview>
+        </div>
+
         {/* Card — Border */}
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Card — Border</h3>
@@ -1200,6 +1251,13 @@ export function CardDocContent() {
                 name: "border",
                 type: "BorderConfig",
                 description: "Optional accent border on the outer card.",
+              },
+              {
+                name: "inverse",
+                type: "boolean",
+                default: "false",
+                description:
+                  "Renders the card in the opposite theme (dark in light mode, light in dark mode).",
               },
             ]}
           />
