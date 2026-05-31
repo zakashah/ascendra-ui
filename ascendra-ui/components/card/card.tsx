@@ -50,7 +50,7 @@ export function Card({
       <section
         data-slot="card"
         className={cn(
-          "group bg-muted flex flex-col rounded-xl py-1",
+          "group bg-muted flex flex-col rounded-xl pb-1 has-data-[slot=card-header]:pt-1",
           danger && "bg-red-50 dark:bg-(--color-red-1500)",
           hasError &&
             collapsed &&
