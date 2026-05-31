@@ -261,6 +261,25 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'card': {
+    slug: 'card',
+    name: 'Card',
+    description: 'Settings-style card with header, collapsible panel, panel items, field, crown badge, and footer. Supports accent border and gradient background on the panel.',
+    importPath: '@/ascendra-ui/components/card/...',
+    importNames: ['Card', 'CardHeader', 'CardHeaderTitle', 'CardHeaderSubtitle', 'CardPanel', 'CardFooter', 'CardFooterIcon', 'CardPanelItem', 'CardPanelItemGroup', 'CardPanelItemCrown', 'CardPanelField'],
+    props: [
+      { name: 'danger', type: 'boolean', default: 'false', description: 'Applies red danger styling (on Card).' },
+      { name: 'collapseable', type: "'expanded' | 'collapsed'", description: 'Enables collapse with toggle in CardHeader.' },
+      { name: 'hasError', type: 'boolean', default: 'false', description: 'Shows a destructive outline ring when collapsed (on Card).' },
+      { name: 'border', type: 'BorderConfig', description: 'Optional accent border on Card or CardPanel.' },
+      { name: 'bg', type: 'BgConfig', description: 'Optional gradient background on CardPanel.' },
+      { name: 'collapsed', type: 'boolean', description: 'Collapses the item/field to zero height (on CardPanelItem / CardPanelField).' },
+      { name: 'variant', type: "'default' | 'secondary' | 'destructive' | 'success' | 'warning'", default: "'default'", description: 'Crown badge color (on CardPanelItemCrown).' },
+      { name: 'nudge', type: 'boolean', default: 'false', description: 'Attention-pulse animation (on CardPanelItemCrown).' },
+      { name: 'nudgeVariant', type: "'default' | 'secondary' | 'destructive' | 'success' | 'warning'", default: "'warning'", description: 'Nudge color override (on CardPanelItemCrown).' },
+    ],
+  },
+
   'main-section': {
     slug: 'main-section',
     name: 'Main Section',
