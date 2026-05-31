@@ -1,7 +1,6 @@
 "use client";
 
 import React, { createContext, useContext, useState } from "react";
-import { useTheme } from "next-themes";
 
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 import {
@@ -46,12 +45,6 @@ export function Card({
   inverse?: boolean;
 }) {
   const [collapsed, setCollapsed] = useState(collapseable === "collapsed");
-  const { resolvedTheme } = useTheme();
-  const inverseClass = inverse
-    ? resolvedTheme === "dark"
-      ? "theme-light"
-      : "dark"
-    : undefined;
 
   return (
     <CardContext.Provider
@@ -71,7 +64,7 @@ export function Card({
             collapsed &&
             "outline-2 -outline-offset-2 outline-destructive",
           border && buildBorderClasses(border),
-          inverseClass,
+          inverse && "dark",
           className,
         )}
         {...props}

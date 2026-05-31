@@ -23,7 +23,7 @@ export function CardHeaderTitle({
         data-slot="card-header-title"
         onClick={() => wizard.goToStep(step)}
         className={cn(
-          "text-base font-medium cursor-pointer hover:opacity-70 transition-opacity text-left",
+          "text-base font-medium text-foreground cursor-pointer hover:opacity-70 transition-opacity text-left",
           className,
         )}
       >
@@ -35,7 +35,7 @@ export function CardHeaderTitle({
   return (
     <label
       data-slot="card-header-title"
-      className={cn("text-base font-medium", className)}
+      className={cn("text-base font-medium text-foreground", className)}
       {...props}
     >
       {children}
