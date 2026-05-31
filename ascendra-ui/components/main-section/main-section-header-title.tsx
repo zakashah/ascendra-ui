@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
-import { useMainSectionContext } from "@/ascendra-ui/components/layout/main-section";
+import { useMainSectionContext } from "@/ascendra-ui/components/main-section/main-section";
 import { useWizardContextSafe } from "@/ascendra-ui/providers/wizard/wizard.hook";
 
 type MainSectionHeaderTitleProps = React.ComponentProps<"label">;

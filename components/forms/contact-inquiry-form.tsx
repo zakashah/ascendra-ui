@@ -6,15 +6,15 @@ import { Controller, useForm } from "react-hook-form";
 import { LuLock } from "react-icons/lu";
 import { z } from "zod";
 
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
-import { MainSectionFooterIcon } from "@/ascendra-ui/components/layout/main-section-footer-icon";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
-import { MainSectionPanelItemGroup } from "@/ascendra-ui/components/layout/main-section-panel-item-group";
+import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
+import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
+import { MainSectionFooterIcon } from "@/ascendra-ui/components/main-section/main-section-footer-icon";
+import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
+import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
+import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
+import { MainSectionPanelItemGroup } from "@/ascendra-ui/components/main-section/main-section-panel-item-group";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
 import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
@@ -55,7 +55,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/ascendra-ui/components/ui/select";
-import { MainSectionPanelItemCrown } from "@/ascendra-ui/components/layout/main-section-panel-item-crown";
+import { MainSectionPanelItemCrown } from "@/ascendra-ui/components/main-section/main-section-panel-item-crown";
 
 // ─── Schema ────────────────────────────────────────────────────────────────────
 

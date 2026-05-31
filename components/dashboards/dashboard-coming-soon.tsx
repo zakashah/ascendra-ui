@@ -1,9 +1,14 @@
 import Link from "next/link";
-import { LuArrowLeft, LuLayoutDashboard, LuChartLine, LuTable2 } from "react-icons/lu";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
+import {
+  LuArrowLeft,
+  LuLayoutDashboard,
+  LuChartLine,
+  LuTable2,
+} from "react-icons/lu";
+import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
+import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
 import type { DashboardMeta, LayoutCell } from "@/lib/types";
 
 // ─── Domain styling ────────────────────────────────────────────────────────────
@@ -32,31 +37,54 @@ const domainColor: Record<string, string> = {
 };
 
 const chartTypeLabel: Record<string, string> = {
-  line: "Line", area: "Area", bar: "Bar", pie: "Pie & Donut",
-  radial: "Radial & Gauge", radar: "Radar", scatter: "Scatter & Bubble",
-  composed: "Composed", treemap: "Treemap", histogram: "Histogram", candlestick: "Candlestick",
+  line: "Line",
+  area: "Area",
+  bar: "Bar",
+  pie: "Pie & Donut",
+  radial: "Radial & Gauge",
+  radar: "Radar",
+  scatter: "Scatter & Bubble",
+  composed: "Composed",
+  treemap: "Treemap",
+  histogram: "Histogram",
+  candlestick: "Candlestick",
 };
 
 // ─── Tailwind col-span map (dynamic values aren't picked up by JIT) ────────────
 
 const colSpanClass: Record<number, string> = {
-  1: "md:col-span-1",  2: "md:col-span-2",  3: "md:col-span-3",
-  4: "md:col-span-4",  5: "md:col-span-5",  6: "md:col-span-6",
-  7: "md:col-span-7",  8: "md:col-span-8",  9: "md:col-span-9",
-  10: "md:col-span-10", 11: "md:col-span-11", 12: "md:col-span-12",
+  1: "md:col-span-1",
+  2: "md:col-span-2",
+  3: "md:col-span-3",
+  4: "md:col-span-4",
+  5: "md:col-span-5",
+  6: "md:col-span-6",
+  7: "md:col-span-7",
+  8: "md:col-span-8",
+  9: "md:col-span-9",
+  10: "md:col-span-10",
+  11: "md:col-span-11",
+  12: "md:col-span-12",
 };
 
 // ─── Height helper ─────────────────────────────────────────────────────────────
 
 function cellHeightClass(cell: LayoutCell): string {
-  const h = cell.height ?? (cell.cols === 12 ? "lg" : cell.cols <= 4 ? "sm" : "md");
+  const h =
+    cell.height ?? (cell.cols === 12 ? "lg" : cell.cols <= 4 ? "sm" : "md");
   return { xl: "h-80", lg: "h-64", md: "h-52", sm: "h-40" }[h];
 }
 
 // ─── Component ─────────────────────────────────────────────────────────────────
 
-export function DashboardComingSoon({ dashboard }: { dashboard: DashboardMeta }) {
-  const domainCls = domainColor[dashboard.domain] ?? "bg-muted text-muted-foreground ring-border";
+export function DashboardComingSoon({
+  dashboard,
+}: {
+  dashboard: DashboardMeta;
+}) {
+  const domainCls =
+    domainColor[dashboard.domain] ??
+    "bg-muted text-muted-foreground ring-border";
 
   return (
     <div className="mx-auto max-w-7xl px-8 py-12">
@@ -124,7 +152,9 @@ export function DashboardComingSoon({ dashboard }: { dashboard: DashboardMeta })
               >
                 <MainSection>
                   <MainSectionHeader>
-                    <MainSectionHeaderTitle>{cell.title}</MainSectionHeaderTitle>
+                    <MainSectionHeaderTitle>
+                      {cell.title}
+                    </MainSectionHeaderTitle>
                   </MainSectionHeader>
                   <MainSectionPanel>
                     <div
@@ -137,7 +167,9 @@ export function DashboardComingSoon({ dashboard }: { dashboard: DashboardMeta })
                           <LuChartLine className="size-5 text-muted-foreground/25" />
                         )}
                         <p className="text-[0.6875rem] text-muted-foreground/40">
-                          {cell.type === "table" ? "Table placeholder" : "Chart placeholder"}
+                          {cell.type === "table"
+                            ? "Table placeholder"
+                            : "Chart placeholder"}
                         </p>
                       </div>
                     </div>
@@ -152,7 +184,10 @@ export function DashboardComingSoon({ dashboard }: { dashboard: DashboardMeta })
       {/* Meta footer */}
       <div className="mt-8 flex flex-wrap items-center gap-4 border-t pt-6 text-xs text-muted-foreground">
         <span>
-          <span className="font-medium text-foreground">{dashboard.chartTypes.length}</span> chart types
+          <span className="font-medium text-foreground">
+            {dashboard.chartTypes.length}
+          </span>{" "}
+          chart types
         </span>
         <span className="text-border">·</span>
         <span>

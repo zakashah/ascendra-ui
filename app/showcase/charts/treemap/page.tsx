@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
 import { Treemap, ResponsiveContainer } from "recharts";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
+import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
+import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -76,8 +76,12 @@ const CHART_COLORS = [
 // ─── Custom content renderers ─────────────────────────────────────────────────
 
 function BasicContent(props: {
-  x?: number; y?: number; width?: number; height?: number;
-  name?: string; index?: number;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  name?: string;
+  index?: number;
 }) {
   const { x = 0, y = 0, width = 0, height = 0, name, index = 0 } = props;
   if (width < 30 || height < 20) return null;
@@ -88,7 +92,10 @@ function BasicContent(props: {
         y={y + 1}
         width={width - 2}
         height={height - 2}
-        style={{ fill: CHART_COLORS[index % CHART_COLORS.length], opacity: 0.85 }}
+        style={{
+          fill: CHART_COLORS[index % CHART_COLORS.length],
+          opacity: 0.85,
+        }}
         rx={3}
       />
       {width > 50 && height > 30 && (
@@ -107,10 +114,24 @@ function BasicContent(props: {
 }
 
 function NestedContent(props: {
-  x?: number; y?: number; width?: number; height?: number;
-  name?: string; depth?: number; index?: number; root?: { name: string };
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  name?: string;
+  depth?: number;
+  index?: number;
+  root?: { name: string };
 }) {
-  const { x = 0, y = 0, width = 0, height = 0, name, depth = 0, index = 0 } = props;
+  const {
+    x = 0,
+    y = 0,
+    width = 0,
+    height = 0,
+    name,
+    depth = 0,
+    index = 0,
+  } = props;
   if (width < 10 || height < 10) return null;
   const isParent = depth === 1;
   return (
@@ -121,7 +142,9 @@ function NestedContent(props: {
         width={width - 2}
         height={height - 2}
         style={{
-          fill: isParent ? "var(--muted)" : CHART_COLORS[index % CHART_COLORS.length],
+          fill: isParent
+            ? "var(--muted)"
+            : CHART_COLORS[index % CHART_COLORS.length],
           stroke: "var(--background)",
           strokeWidth: 2,
           opacity: isParent ? 0.4 : 0.82,
@@ -148,8 +171,13 @@ function NestedContent(props: {
 }
 
 function LabelContent(props: {
-  x?: number; y?: number; width?: number; height?: number;
-  name?: string; size?: number; index?: number;
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  name?: string;
+  size?: number;
+  index?: number;
 }) {
   const { x = 0, y = 0, width = 0, height = 0, name, size, index = 0 } = props;
   if (width < 40 || height < 28) return null;
@@ -160,7 +188,10 @@ function LabelContent(props: {
         y={y + 1}
         width={width - 2}
         height={height - 2}
-        style={{ fill: CHART_COLORS[index % CHART_COLORS.length], opacity: 0.8 }}
+        style={{
+          fill: CHART_COLORS[index % CHART_COLORS.length],
+          opacity: 0.8,
+        }}
         rx={3}
       />
       <text
@@ -203,9 +234,13 @@ export default function TreemapChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Treemap</h1>
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">
+          Treemap
+        </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Hierarchical data visualised as nested rectangles — cell area encodes value, making dominant categories immediately visible without reading numbers.
+          Hierarchical data visualised as nested rectangles — cell area encodes
+          value, making dominant categories immediately visible without reading
+          numbers.
         </p>
       </div>
 
@@ -217,10 +252,13 @@ export default function TreemapChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Basic Treemap</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Department headcount — each rectangle area is proportional to team size. Engineering and Sales dominate at a glance.
+                  Department headcount — each rectangle area is proportional to
+                  team size. Engineering and Sales dominate at a glance.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="default" className="shrink-0 mt-px">Basic</SimpleBadge>
+              <SimpleBadge variant="default" className="shrink-0 mt-px">
+                Basic
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
@@ -246,10 +284,13 @@ export default function TreemapChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Nested Treemap</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Two-level hierarchy showing business units (parent) and their sub-teams (children). Parent tiles act as grouping containers.
+                  Two-level hierarchy showing business units (parent) and their
+                  sub-teams (children). Parent tiles act as grouping containers.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="blue" className="shrink-0 mt-px">Nested</SimpleBadge>
+              <SimpleBadge variant="blue" className="shrink-0 mt-px">
+                Nested
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
@@ -273,12 +314,18 @@ export default function TreemapChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Treemap with Labels</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Treemap with Labels
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Programming language usage — each cell shows the name and usage count. Custom content renderer centres both the label and value inside each tile.
+                  Programming language usage — each cell shows the name and
+                  usage count. Custom content renderer centres both the label
+                  and value inside each tile.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="green" className="shrink-0 mt-px">Labels</SimpleBadge>
+              <SimpleBadge variant="green" className="shrink-0 mt-px">
+                Labels
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>

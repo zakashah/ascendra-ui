@@ -3,19 +3,27 @@
 import { useState } from "react";
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList, Cell } from "recharts";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  LabelList,
+  Cell,
+} from "recharts";
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
+import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
+import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
+import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
@@ -91,19 +99,32 @@ const waterfallData = (() => {
   let running = 0;
   return waterfallRaw.map((d) => {
     if (d.value === null) {
-      return { label: d.label, base: 0, bar: running, isTotal: true, total: running };
+      return {
+        label: d.label,
+        base: 0,
+        bar: running,
+        isTotal: true,
+        total: running,
+      };
     }
     const base = d.value < 0 ? running + d.value : running;
     const bar = Math.abs(d.value);
     running += d.value;
-    return { label: d.label, base, bar, isTotal: false, total: running, raw: d.value };
+    return {
+      label: d.label,
+      base,
+      bar,
+      isTotal: false,
+      total: running,
+      raw: d.value,
+    };
   });
 })();
 
 const divergingBarData = [
-  { segment: "Promoters",  score: 42 },
-  { segment: "Satisfied",  score: 28 },
-  { segment: "Neutral",    score: 8 },
+  { segment: "Promoters", score: 42 },
+  { segment: "Satisfied", score: 28 },
+  { segment: "Neutral", score: 8 },
   { segment: "Dissatisfied", score: -14 },
   { segment: "Detractors", score: -31 },
 ];
@@ -127,8 +148,12 @@ function fmtNum(v: number) {
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default function BarChartsPage() {
-  const [hiddenGrouped, setHiddenGrouped] = useState<Record<string, boolean>>({});
-  const [hiddenStacked, setHiddenStacked] = useState<Record<string, boolean>>({});
+  const [hiddenGrouped, setHiddenGrouped] = useState<Record<string, boolean>>(
+    {},
+  );
+  const [hiddenStacked, setHiddenStacked] = useState<Record<string, boolean>>(
+    {},
+  );
 
   return (
     <div className="mx-auto max-w-5xl px-8 py-12">
@@ -145,9 +170,13 @@ export default function BarChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Bar Charts</h1>
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">
+          Bar Charts
+        </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Bar charts excel at categorical comparisons. Grouped bars highlight differences; stacked bars show composition; horizontal layout handles long labels gracefully.
+          Bar charts excel at categorical comparisons. Grouped bars highlight
+          differences; stacked bars show composition; horizontal layout handles
+          long labels gracefully.
         </p>
       </div>
 
@@ -157,31 +186,85 @@ export default function BarChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Grouped Vertical</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Grouped Vertical
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Sales by channel across four quarters — side-by-side bars make within-period comparisons instant.
+                  Sales by channel across four quarters — side-by-side bars make
+                  within-period comparisons instant.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="default" className="shrink-0 mt-px">Grouped</SimpleBadge>
+              <SimpleBadge variant="default" className="shrink-0 mt-px">
+                Grouped
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={groupedConfig} className="h-72 w-full">
-                <BarChart data={quarterlyData} barGap={4} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="quarter" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(groupedConfig, fmtDollar)} />} />
-                  <Bar dataKey="online" fill="var(--chart-1)" radius={[3, 3, 0, 0]} hide={hiddenGrouped["online"]} />
-                  <Bar dataKey="retail" fill="var(--chart-2)" radius={[3, 3, 0, 0]} hide={hiddenGrouped["retail"]} />
-                  <Bar dataKey="wholesale" fill="var(--chart-6)" radius={[3, 3, 0, 0]} hide={hiddenGrouped["wholesale"]} />
+                <BarChart
+                  data={quarterlyData}
+                  barGap={4}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="quarter"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={42}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(
+                          groupedConfig,
+                          fmtDollar,
+                        )}
+                      />
+                    }
+                  />
+                  <Bar
+                    dataKey="online"
+                    fill="var(--chart-1)"
+                    radius={[3, 3, 0, 0]}
+                    hide={hiddenGrouped["online"]}
+                  />
+                  <Bar
+                    dataKey="retail"
+                    fill="var(--chart-2)"
+                    radius={[3, 3, 0, 0]}
+                    hide={hiddenGrouped["retail"]}
+                  />
+                  <Bar
+                    dataKey="wholesale"
+                    fill="var(--chart-6)"
+                    radius={[3, 3, 0, 0]}
+                    hide={hiddenGrouped["wholesale"]}
+                  />
                 </BarChart>
               </ChartContainer>
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={groupedConfig} hidden={hiddenGrouped} onToggle={(k) => setHiddenGrouped((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+            <ChartSeriesLegend
+              config={groupedConfig}
+              hidden={hiddenGrouped}
+              onToggle={(k) => setHiddenGrouped((p) => ({ ...p, [k]: !p[k] }))}
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
 
@@ -190,31 +273,82 @@ export default function BarChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Stacked Vertical</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Stacked Vertical
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Monthly customer segments stacked — see total volume and how new, returning, and churned customers shift over time.
+                  Monthly customer segments stacked — see total volume and how
+                  new, returning, and churned customers shift over time.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="blue" className="shrink-0 mt-px">Stacked</SimpleBadge>
+              <SimpleBadge variant="blue" className="shrink-0 mt-px">
+                Stacked
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={stackedConfig} className="h-72 w-full">
-                <BarChart data={stackedData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtNum} width={42} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(stackedConfig, fmtNum)} />} />
-                  <Bar dataKey="new" stackId="a" fill="var(--chart-3)" hide={hiddenStacked["new"]} />
-                  <Bar dataKey="returning" stackId="a" fill="var(--chart-1)" hide={hiddenStacked["returning"]} />
-                  <Bar dataKey="churned" stackId="a" fill="var(--chart-5)" radius={[3, 3, 0, 0]} hide={hiddenStacked["churned"]} />
+                <BarChart
+                  data={stackedData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtNum}
+                    width={42}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(stackedConfig, fmtNum)}
+                      />
+                    }
+                  />
+                  <Bar
+                    dataKey="new"
+                    stackId="a"
+                    fill="var(--chart-3)"
+                    hide={hiddenStacked["new"]}
+                  />
+                  <Bar
+                    dataKey="returning"
+                    stackId="a"
+                    fill="var(--chart-1)"
+                    hide={hiddenStacked["returning"]}
+                  />
+                  <Bar
+                    dataKey="churned"
+                    stackId="a"
+                    fill="var(--chart-5)"
+                    radius={[3, 3, 0, 0]}
+                    hide={hiddenStacked["churned"]}
+                  />
                 </BarChart>
               </ChartContainer>
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={stackedConfig} hidden={hiddenStacked} onToggle={(k) => setHiddenStacked((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+            <ChartSeriesLegend
+              config={stackedConfig}
+              hidden={hiddenStacked}
+              onToggle={(k) => setHiddenStacked((p) => ({ ...p, [k]: !p[k] }))}
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
 
@@ -225,23 +359,61 @@ export default function BarChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Horizontal Bar</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Traffic sources ranked by visit volume. Horizontal layout gives room for long channel labels and makes ranking immediately readable.
+                  Traffic sources ranked by visit volume. Horizontal layout
+                  gives room for long channel labels and makes ranking
+                  immediately readable.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="secondary" className="shrink-0 mt-px">Ranked</SimpleBadge>
+              <SimpleBadge variant="secondary" className="shrink-0 mt-px">
+                Ranked
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={horizontalConfig} className="h-64 w-full">
-                <BarChart layout="vertical" data={horizontalData} margin={{ top: 4, right: 40, left: 0, bottom: 0 }}>
-                  <CartesianGrid horizontal={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtNum} />
-                  <YAxis type="category" dataKey="channel" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} width={100} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(horizontalConfig, fmtNum)} />} />
+                <BarChart
+                  layout="vertical"
+                  data={horizontalData}
+                  margin={{ top: 4, right: 40, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    horizontal={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    type="number"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtNum}
+                  />
+                  <YAxis
+                    type="category"
+                    dataKey="channel"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    width={100}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(
+                          horizontalConfig,
+                          fmtNum,
+                        )}
+                      />
+                    }
+                  />
                   <Bar dataKey="visits" radius={[0, 3, 3, 0]}>
                     {horizontalData.map((_entry, index) => (
-                      <Cell key={`cell-${index}`} fill="var(--chart-1)" fillOpacity={1 - index * 0.1} />
+                      <Cell
+                        key={`cell-${index}`}
+                        fill="var(--chart-1)"
+                        fillOpacity={1 - index * 0.1}
+                      />
                     ))}
                   </Bar>
                 </BarChart>
@@ -255,23 +427,57 @@ export default function BarChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Bar with Value Labels</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Bar with Value Labels
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Revenue per product category with values displayed directly on bars — no need to read the axis for exact figures.
+                  Revenue per product category with values displayed directly on
+                  bars — no need to read the axis for exact figures.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="green" className="shrink-0 mt-px">Labels</SimpleBadge>
+              <SimpleBadge variant="green" className="shrink-0 mt-px">
+                Labels
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={labelConfig} className="h-60 w-full">
-                <BarChart data={labelData} margin={{ top: 20, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="category" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(labelConfig, fmtDollar)} />} />
-                  <Bar dataKey="revenue" fill="var(--chart-1)" radius={[3, 3, 0, 0]}>
+                <BarChart
+                  data={labelData}
+                  margin={{ top: 20, right: 12, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="category"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={42}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(labelConfig, fmtDollar)}
+                      />
+                    }
+                  />
+                  <Bar
+                    dataKey="revenue"
+                    fill="var(--chart-1)"
+                    radius={[3, 3, 0, 0]}
+                  >
                     <LabelList
                       dataKey="revenue"
                       position="top"
@@ -292,35 +498,80 @@ export default function BarChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Waterfall</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Revenue bridge from opening balance through gains and losses to net total — floating bars show each contributor in context.
+                  Revenue bridge from opening balance through gains and losses
+                  to net total — floating bars show each contributor in context.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="blue" className="shrink-0 mt-px">Waterfall</SimpleBadge>
+              <SimpleBadge variant="blue" className="shrink-0 mt-px">
+                Waterfall
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={waterfallConfig} className="h-72 w-full">
-                <BarChart data={waterfallData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="label" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={44} />
+                <BarChart
+                  data={waterfallData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="label"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={44}
+                  />
                   <ChartTooltip
                     content={({ payload }) => {
                       if (!payload?.length) return null;
-                      const d = payload[0].payload as { label: string; raw?: number; total: number; isTotal: boolean };
+                      const d = payload[0].payload as {
+                        label: string;
+                        raw?: number;
+                        total: number;
+                        isTotal: boolean;
+                      };
                       return (
                         <div className="rounded-lg border bg-background px-3 py-2 text-xs shadow-md">
-                          <div className="font-medium text-foreground mb-1">{d.label}</div>
+                          <div className="font-medium text-foreground mb-1">
+                            {d.label}
+                          </div>
                           {!d.isTotal && d.raw !== undefined && (
-                            <div className="text-muted-foreground">Change: <span className="text-foreground">{d.raw > 0 ? "+" : ""}{fmtDollar(d.raw)}</span></div>
+                            <div className="text-muted-foreground">
+                              Change:{" "}
+                              <span className="text-foreground">
+                                {d.raw > 0 ? "+" : ""}
+                                {fmtDollar(d.raw)}
+                              </span>
+                            </div>
                           )}
-                          <div className="text-muted-foreground">Running total: <span className="text-foreground">{fmtDollar(d.total)}</span></div>
+                          <div className="text-muted-foreground">
+                            Running total:{" "}
+                            <span className="text-foreground">
+                              {fmtDollar(d.total)}
+                            </span>
+                          </div>
                         </div>
                       );
                     }}
                   />
-                  <Bar dataKey="base" stackId="w" fill="transparent" radius={0} />
+                  <Bar
+                    dataKey="base"
+                    stackId="w"
+                    fill="transparent"
+                    radius={0}
+                  />
                   <Bar dataKey="bar" stackId="w" radius={[3, 3, 0, 0]}>
                     {waterfallData.map((d, i) => (
                       <Cell
@@ -328,9 +579,10 @@ export default function BarChartsPage() {
                         fill={
                           d.isTotal
                             ? "var(--chart-2)"
-                            : (d as { raw?: number }).raw !== undefined && (d as { raw: number }).raw < 0
-                            ? "var(--chart-5)"
-                            : "var(--chart-3)"
+                            : (d as { raw?: number }).raw !== undefined &&
+                                (d as { raw: number }).raw < 0
+                              ? "var(--chart-5)"
+                              : "var(--chart-3)"
                         }
                         fillOpacity={0.85}
                       />
@@ -342,9 +594,27 @@ export default function BarChartsPage() {
           </MainSectionPanel>
           <MainSectionFooter>
             <div className="flex justify-center gap-5 w-full text-xs text-muted-foreground">
-              <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm shrink-0" style={{ background: "var(--chart-3)" }} />Increase</span>
-              <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm shrink-0" style={{ background: "var(--chart-5)" }} />Decrease</span>
-              <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm shrink-0" style={{ background: "var(--chart-2)" }} />Total</span>
+              <span className="flex items-center gap-1.5">
+                <span
+                  className="h-2.5 w-2.5 rounded-sm shrink-0"
+                  style={{ background: "var(--chart-3)" }}
+                />
+                Increase
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span
+                  className="h-2.5 w-2.5 rounded-sm shrink-0"
+                  style={{ background: "var(--chart-5)" }}
+                />
+                Decrease
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span
+                  className="h-2.5 w-2.5 rounded-sm shrink-0"
+                  style={{ background: "var(--chart-2)" }}
+                />
+                Total
+              </span>
             </div>
           </MainSectionFooter>
         </MainSection>
@@ -356,23 +626,62 @@ export default function BarChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Diverging Bars</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  NPS segment scores on a centred axis — positive bars extend right for promoters, negative bars extend left for detractors.
+                  NPS segment scores on a centred axis — positive bars extend
+                  right for promoters, negative bars extend left for detractors.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="orange" className="shrink-0 mt-px">±Values</SimpleBadge>
+              <SimpleBadge variant="orange" className="shrink-0 mt-px">
+                ±Values
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
-              <ChartContainer config={divergingBarConfig} className="h-64 w-full">
-                <BarChart layout="vertical" data={divergingBarData} margin={{ top: 4, right: 40, left: 0, bottom: 0 }}>
-                  <CartesianGrid horizontal={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v) => `${v > 0 ? "+" : ""}${v}`} />
-                  <YAxis type="category" dataKey="segment" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} width={96} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={(v) => `${Number(v) > 0 ? "+" : ""}${v}`} />} />
+              <ChartContainer
+                config={divergingBarConfig}
+                className="h-64 w-full"
+              >
+                <BarChart
+                  layout="vertical"
+                  data={divergingBarData}
+                  margin={{ top: 4, right: 40, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    horizontal={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    type="number"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={(v) => `${v > 0 ? "+" : ""}${v}`}
+                  />
+                  <YAxis
+                    type="category"
+                    dataKey="segment"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    width={96}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={(v) => `${Number(v) > 0 ? "+" : ""}${v}`}
+                      />
+                    }
+                  />
                   <Bar dataKey="score" radius={[0, 3, 3, 0]}>
                     {divergingBarData.map((d, i) => (
-                      <Cell key={i} fill={d.score >= 0 ? "var(--chart-3)" : "var(--chart-5)"} fillOpacity={0.85} />
+                      <Cell
+                        key={i}
+                        fill={
+                          d.score >= 0 ? "var(--chart-3)" : "var(--chart-5)"
+                        }
+                        fillOpacity={0.85}
+                      />
                     ))}
                   </Bar>
                 </BarChart>

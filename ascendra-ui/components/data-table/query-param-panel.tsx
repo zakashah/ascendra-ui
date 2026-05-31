@@ -6,11 +6,11 @@ import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
+import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
+import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
+import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
+import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import { useQueryContext } from "@/ascendra-ui/providers/data-table-query/data-table-query.provider";
 import type {
@@ -22,7 +22,7 @@ import type {
 import { isFieldDef } from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 import { BookmarkPlus } from "lucide-react";
-import { MainSectionFooterIcon } from "@/ascendra-ui/components/layout/main-section-footer-icon";
+import { MainSectionFooterIcon } from "@/ascendra-ui/components/main-section/main-section-footer-icon";
 import { IoColorFilterOutline } from "react-icons/io5";
 import { SaveQueryDialog } from "./save-query-dialog";
 import { QueryFieldRenderer } from "./query-field-renderer";

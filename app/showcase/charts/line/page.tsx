@@ -3,19 +3,29 @@
 import { useState } from "react";
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, AreaChart, Area, ReferenceLine, ReferenceArea } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  AreaChart,
+  Area,
+  ReferenceLine,
+  ReferenceArea,
+} from "recharts";
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
+import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
+import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
+import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
@@ -37,7 +47,10 @@ const monthlyData = [
   { month: "Dec", revenue: 46300, expenses: 20100, profit: 26200 },
 ];
 
-const singleData = monthlyData.map((d) => ({ month: d.month, revenue: d.revenue }));
+const singleData = monthlyData.map((d) => ({
+  month: d.month,
+  revenue: d.revenue,
+}));
 
 const gradientData = [
   { month: "Jan", visitors: 4200 },
@@ -71,21 +84,33 @@ const gradientConfig: ChartConfig = {
 };
 
 const stepData = [
-  { week: "W1", tickets: 142 }, { week: "W2", tickets: 118 },
-  { week: "W3", tickets: 165 }, { week: "W4", tickets: 131 },
-  { week: "W5", tickets: 189 }, { week: "W6", tickets: 204 },
-  { week: "W7", tickets: 177 }, { week: "W8", tickets: 221 },
-  { week: "W9", tickets: 196 }, { week: "W10", tickets: 238 },
-  { week: "W11", tickets: 214 }, { week: "W12", tickets: 251 },
+  { week: "W1", tickets: 142 },
+  { week: "W2", tickets: 118 },
+  { week: "W3", tickets: 165 },
+  { week: "W4", tickets: 131 },
+  { week: "W5", tickets: 189 },
+  { week: "W6", tickets: 204 },
+  { week: "W7", tickets: 177 },
+  { week: "W8", tickets: 221 },
+  { week: "W9", tickets: 196 },
+  { week: "W10", tickets: 238 },
+  { week: "W11", tickets: 214 },
+  { week: "W12", tickets: 251 },
 ];
 
 const refData = [
-  { month: "Jan", conversion: 2.1 }, { month: "Feb", conversion: 2.8 },
-  { month: "Mar", conversion: 2.4 }, { month: "Apr", conversion: 3.2 },
-  { month: "May", conversion: 3.9 }, { month: "Jun", conversion: 3.5 },
-  { month: "Jul", conversion: 4.1 }, { month: "Aug", conversion: 4.8 },
-  { month: "Sep", conversion: 4.3 }, { month: "Oct", conversion: 5.2 },
-  { month: "Nov", conversion: 4.9 }, { month: "Dec", conversion: 5.7 },
+  { month: "Jan", conversion: 2.1 },
+  { month: "Feb", conversion: 2.8 },
+  { month: "Mar", conversion: 2.4 },
+  { month: "Apr", conversion: 3.2 },
+  { month: "May", conversion: 3.9 },
+  { month: "Jun", conversion: 3.5 },
+  { month: "Jul", conversion: 4.1 },
+  { month: "Aug", conversion: 4.8 },
+  { month: "Sep", conversion: 4.3 },
+  { month: "Oct", conversion: 5.2 },
+  { month: "Nov", conversion: 4.9 },
+  { month: "Dec", conversion: 5.7 },
 ];
 
 const stepConfig: ChartConfig = {
@@ -128,9 +153,13 @@ export default function LineChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Line Charts</h1>
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">
+          Line Charts
+        </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Line charts are ideal for continuous data over time — trends, comparisons, and cumulative growth. Click legend labels to toggle individual series.
+          Line charts are ideal for continuous data over time — trends,
+          comparisons, and cumulative growth. Click legend labels to toggle
+          individual series.
         </p>
       </div>
 
@@ -142,20 +171,51 @@ export default function LineChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Single Line</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Monthly revenue over a 12-month period. Clean baseline with grid and tooltip.
+                  Monthly revenue over a 12-month period. Clean baseline with
+                  grid and tooltip.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="secondary" className="shrink-0 mt-px">Basic</SimpleBadge>
+              <SimpleBadge variant="secondary" className="shrink-0 mt-px">
+                Basic
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={singleConfig} className="h-65 w-full">
-                <LineChart data={singleData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(singleConfig, fmtDollar)} />} />
+                <LineChart
+                  data={singleData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={42}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(
+                          singleConfig,
+                          fmtDollar,
+                        )}
+                      />
+                    }
+                  />
                   <Line
                     type="monotone"
                     dataKey="revenue"
@@ -177,20 +237,48 @@ export default function LineChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Multi-Line</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Revenue, expenses, and profit compared across 12 months. Click legend labels to toggle series visibility.
+                  Revenue, expenses, and profit compared across 12 months. Click
+                  legend labels to toggle series visibility.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="default" className="shrink-0 mt-px">Interactive</SimpleBadge>
+              <SimpleBadge variant="default" className="shrink-0 mt-px">
+                Interactive
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={multiConfig} className="h-65 w-full">
-                <LineChart data={monthlyData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(multiConfig, fmtDollar)} />} />
+                <LineChart
+                  data={monthlyData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={42}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(multiConfig, fmtDollar)}
+                      />
+                    }
+                  />
                   {(["revenue", "expenses", "profit"] as const).map((key) => (
                     <Line
                       key={key}
@@ -208,7 +296,12 @@ export default function LineChartsPage() {
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={multiConfig} hidden={hidden} onToggle={toggle} className="w-full" />
+            <ChartSeriesLegend
+              config={multiConfig}
+              hidden={hidden}
+              onToggle={toggle}
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
 
@@ -219,26 +312,68 @@ export default function LineChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Gradient Fill</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Line with a subtle gradient fill underneath — conveys volume and momentum at a glance.
+                  Line with a subtle gradient fill underneath — conveys volume
+                  and momentum at a glance.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="blue" className="shrink-0 mt-px">Style</SimpleBadge>
+              <SimpleBadge variant="blue" className="shrink-0 mt-px">
+                Style
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={gradientConfig} className="h-65 w-full">
-                <AreaChart data={gradientData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                <AreaChart
+                  data={gradientData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
                   <defs>
-                    <linearGradient id="gradVisitors" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.2} />
-                      <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
+                    <linearGradient
+                      id="gradVisitors"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="5%"
+                        stopColor="var(--chart-1)"
+                        stopOpacity={0.2}
+                      />
+                      <stop
+                        offset="95%"
+                        stopColor="var(--chart-1)"
+                        stopOpacity={0}
+                      />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtNum} width={42} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(gradientConfig, fmtNum)} />} />
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtNum}
+                    width={42}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(gradientConfig, fmtNum)}
+                      />
+                    }
+                  />
                   <Area
                     type="monotone"
                     dataKey="visitors"
@@ -260,20 +395,50 @@ export default function LineChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Step Line</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Weekly support tickets rendered as a step function — each value holds until the next data point, ideal for discrete state changes or inventory counts.
+                  Weekly support tickets rendered as a step function — each
+                  value holds until the next data point, ideal for discrete
+                  state changes or inventory counts.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="secondary" className="shrink-0 mt-px">Step</SimpleBadge>
+              <SimpleBadge variant="secondary" className="shrink-0 mt-px">
+                Step
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={stepConfig} className="h-65 w-full">
-                <LineChart data={stepData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="week" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} width={36} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(stepConfig, (v) => String(v))} />} />
+                <LineChart
+                  data={stepData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="week"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    width={36}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(stepConfig, (v) =>
+                          String(v),
+                        )}
+                      />
+                    }
+                  />
                   <Line
                     type="stepAfter"
                     dataKey="tickets"
@@ -293,24 +458,74 @@ export default function LineChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Line + Reference Band</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Line + Reference Band
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Monthly conversion rate with a target line and a shaded &quot;good&quot; zone — makes it immediately clear when performance is above or below goal.
+                  Monthly conversion rate with a target line and a shaded
+                  &quot;good&quot; zone — makes it immediately clear when
+                  performance is above or below goal.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="orange" className="shrink-0 mt-px">Reference</SimpleBadge>
+              <SimpleBadge variant="orange" className="shrink-0 mt-px">
+                Reference
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={refConfig} className="h-65 w-full">
-                <LineChart data={refData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v) => `${v}%`} width={36} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(refConfig, (v) => `${v}%`)} />} />
-                  <ReferenceArea y1={3.5} y2={6} fill="var(--chart-3)" fillOpacity={0.08} />
-                  <ReferenceLine y={3.5} stroke="var(--chart-3)" strokeWidth={1.5} strokeDasharray="4 3" label={{ value: "Target 3.5%", position: "insideTopRight", fontSize: 10, fill: "var(--muted-foreground)" }} />
+                <LineChart
+                  data={refData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={(v) => `${v}%`}
+                    width={36}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(
+                          refConfig,
+                          (v) => `${v}%`,
+                        )}
+                      />
+                    }
+                  />
+                  <ReferenceArea
+                    y1={3.5}
+                    y2={6}
+                    fill="var(--chart-3)"
+                    fillOpacity={0.08}
+                  />
+                  <ReferenceLine
+                    y={3.5}
+                    stroke="var(--chart-3)"
+                    strokeWidth={1.5}
+                    strokeDasharray="4 3"
+                    label={{
+                      value: "Target 3.5%",
+                      position: "insideTopRight",
+                      fontSize: 10,
+                      fill: "var(--muted-foreground)",
+                    }}
+                  />
                   <Line
                     type="monotone"
                     dataKey="conversion"

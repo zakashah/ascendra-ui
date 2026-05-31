@@ -5,15 +5,15 @@ import { LuChevronDown, LuCode, LuEye, LuShieldCheck } from "react-icons/lu";
 
 import { AsideContent } from "@/ascendra-ui/components/layout/aside-content";
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
-import { MainSectionPanelItemCrown } from "@/ascendra-ui/components/layout/main-section-panel-item-crown";
-import { MainSectionPanelItemGroup } from "@/ascendra-ui/components/layout/main-section-panel-item-group";
+import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
+import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
+import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
+import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
+import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
+import { MainSectionPanelItemCrown } from "@/ascendra-ui/components/main-section/main-section-panel-item-crown";
+import { MainSectionPanelItemGroup } from "@/ascendra-ui/components/main-section/main-section-panel-item-group";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderAction } from "@/ascendra-ui/components/layout/page-header-action";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
@@ -38,7 +38,7 @@ import {
 import { Switch } from "@/ascendra-ui/components/ui/switch";
 
 import { BackLink } from "@/ascendra-ui/components/forms/back-link";
-import { MainSectionFooterIcon } from "@/ascendra-ui/components/layout/main-section-footer-icon";
+import { MainSectionFooterIcon } from "@/ascendra-ui/components/main-section/main-section-footer-icon";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 import { CodeBlock } from "@/components/code-block";
 
@@ -706,7 +706,7 @@ import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-
 
         <Variant
           label="Collapseable section"
-          note="Pass collapseable=&quot;expanded&quot; or collapseable=&quot;collapsed&quot; to MainSection. State is managed internally — the header renders a minimize/maximize toggle. Add hasError to draw a destructive outline when collapsed fields have validation errors."
+          note='Pass collapseable="expanded" or collapseable="collapsed" to MainSection. State is managed internally — the header renders a minimize/maximize toggle. Add hasError to draw a destructive outline when collapsed fields have validation errors.'
           code={`import { MainSection } from "@/ascendra-ui/components/layout/main-section";
 import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
 import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
@@ -762,7 +762,9 @@ import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-secti
             </MainSection>
             <MainSection collapseable="collapsed">
               <MainSectionHeader>
-                <MainSectionHeaderTitle>Advanced settings</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Advanced settings
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
                   These settings are collapsed by default
                 </MainSectionHeaderSubtitle>

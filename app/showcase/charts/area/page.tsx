@@ -10,12 +10,12 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
+import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
+import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
+import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
@@ -79,21 +79,33 @@ const DEVICE_KEYS = ["mobile", "desktop", "tablet"] as const;
 const DEVICE_CHART_NUMS = [1, 2, 6] as const;
 
 const singleAreaData = [
-  { month: "Jan", revenue: 18400 }, { month: "Feb", revenue: 22100 },
-  { month: "Mar", revenue: 19800 }, { month: "Apr", revenue: 26500 },
-  { month: "May", revenue: 31200 }, { month: "Jun", revenue: 28900 },
-  { month: "Jul", revenue: 34100 }, { month: "Aug", revenue: 38600 },
-  { month: "Sep", revenue: 35200 }, { month: "Oct", revenue: 42100 },
-  { month: "Nov", revenue: 39800 }, { month: "Dec", revenue: 46300 },
+  { month: "Jan", revenue: 18400 },
+  { month: "Feb", revenue: 22100 },
+  { month: "Mar", revenue: 19800 },
+  { month: "Apr", revenue: 26500 },
+  { month: "May", revenue: 31200 },
+  { month: "Jun", revenue: 28900 },
+  { month: "Jul", revenue: 34100 },
+  { month: "Aug", revenue: 38600 },
+  { month: "Sep", revenue: 35200 },
+  { month: "Oct", revenue: 42100 },
+  { month: "Nov", revenue: 39800 },
+  { month: "Dec", revenue: 46300 },
 ];
 
 const divergingData = [
-  { month: "Jan", delta: -3200 }, { month: "Feb", delta: 1800 },
-  { month: "Mar", delta: -900 },  { month: "Apr", delta: 4100 },
-  { month: "May", delta: 6800 },  { month: "Jun", delta: 3200 },
-  { month: "Jul", delta: 7500 },  { month: "Aug", delta: 11200 },
-  { month: "Sep", delta: -1800 }, { month: "Oct", delta: 9400 },
-  { month: "Nov", delta: 5700 },  { month: "Dec", delta: 13100 },
+  { month: "Jan", delta: -3200 },
+  { month: "Feb", delta: 1800 },
+  { month: "Mar", delta: -900 },
+  { month: "Apr", delta: 4100 },
+  { month: "May", delta: 6800 },
+  { month: "Jun", delta: 3200 },
+  { month: "Jul", delta: 7500 },
+  { month: "Aug", delta: 11200 },
+  { month: "Sep", delta: -1800 },
+  { month: "Oct", delta: 9400 },
+  { month: "Nov", delta: 5700 },
+  { month: "Dec", delta: 13100 },
 ];
 
 const singleAreaConfig: ChartConfig = {
@@ -111,8 +123,12 @@ function fmtDollar(v: number) {
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default function AreaChartsPage() {
-  const [hiddenStacked, setHiddenStacked] = useState<Record<string, boolean>>({});
-  const [hiddenPercent, setHiddenPercent] = useState<Record<string, boolean>>({});
+  const [hiddenStacked, setHiddenStacked] = useState<Record<string, boolean>>(
+    {},
+  );
+  const [hiddenPercent, setHiddenPercent] = useState<Record<string, boolean>>(
+    {},
+  );
   const [hiddenTarget, setHiddenTarget] = useState<Record<string, boolean>>({});
 
   return (
@@ -130,9 +146,13 @@ export default function AreaChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Area Charts</h1>
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">
+          Area Charts
+        </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Area charts emphasise volume and composition over time. Stacking shows absolute contributions; percent-stacking reveals proportion shifts. Click legend labels to toggle series.
+          Area charts emphasise volume and composition over time. Stacking shows
+          absolute contributions; percent-stacking reveals proportion shifts.
+          Click legend labels to toggle series.
         </p>
       </div>
 
@@ -144,28 +164,74 @@ export default function AreaChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Stacked Area</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Session counts by device type — absolute values stacked to show both individual contribution and total volume.
+                  Session counts by device type — absolute values stacked to
+                  show both individual contribution and total volume.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="default" className="shrink-0 mt-px">Stacked</SimpleBadge>
+              <SimpleBadge variant="default" className="shrink-0 mt-px">
+                Stacked
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={deviceConfig} className="h-72 w-full">
-                <AreaChart data={stackedData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                <AreaChart
+                  data={stackedData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
                   <defs>
                     {DEVICE_KEYS.map((key, i) => (
-                      <linearGradient key={key} id={`grad-${key}`} x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`} stopOpacity={0.35} />
-                        <stop offset="95%" stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`} stopOpacity={0.05} />
+                      <linearGradient
+                        key={key}
+                        id={`grad-${key}`}
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop
+                          offset="5%"
+                          stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`}
+                          stopOpacity={0.35}
+                        />
+                        <stop
+                          offset="95%"
+                          stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`}
+                          stopOpacity={0.05}
+                        />
                       </linearGradient>
                     ))}
                   </defs>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(deviceConfig, fmtDollar)} />} />
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={42}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(
+                          deviceConfig,
+                          fmtDollar,
+                        )}
+                      />
+                    }
+                  />
                   {DEVICE_KEYS.map((key, i) => (
                     <Area
                       key={key}
@@ -183,7 +249,12 @@ export default function AreaChartsPage() {
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={deviceConfig} hidden={hiddenStacked} onToggle={(k) => setHiddenStacked((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+            <ChartSeriesLegend
+              config={deviceConfig}
+              hidden={hiddenStacked}
+              onToggle={(k) => setHiddenStacked((p) => ({ ...p, [k]: !p[k] }))}
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
 
@@ -192,28 +263,61 @@ export default function AreaChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Percent-Stacked Area</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Percent-Stacked Area
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  The same data normalised to 100% — reveals how device-type share shifts month by month, independent of volume.
+                  The same data normalised to 100% — reveals how device-type
+                  share shifts month by month, independent of volume.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="blue" className="shrink-0 mt-px">100%</SimpleBadge>
+              <SimpleBadge variant="blue" className="shrink-0 mt-px">
+                100%
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={deviceConfig} className="h-72 w-full">
-                <AreaChart data={percentData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                <AreaChart
+                  data={percentData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
                   <defs>
                     {DEVICE_KEYS.map((key, i) => (
-                      <linearGradient key={key} id={`pgrad-${key}`} x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`} stopOpacity={0.4} />
-                        <stop offset="95%" stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`} stopOpacity={0.05} />
+                      <linearGradient
+                        key={key}
+                        id={`pgrad-${key}`}
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop
+                          offset="5%"
+                          stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`}
+                          stopOpacity={0.4}
+                        />
+                        <stop
+                          offset="95%"
+                          stopColor={`var(--chart-${DEVICE_CHART_NUMS[i]})`}
+                          stopOpacity={0.05}
+                        />
                       </linearGradient>
                     ))}
                   </defs>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
                   <YAxis
                     tickLine={false}
                     axisLine={false}
@@ -222,7 +326,16 @@ export default function AreaChartsPage() {
                     width={38}
                     domain={[0, 100]}
                   />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(deviceConfig, (v) => `${v.toFixed(1)}%`)} />} />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(
+                          deviceConfig,
+                          (v) => `${v.toFixed(1)}%`,
+                        )}
+                      />
+                    }
+                  />
                   {DEVICE_KEYS.map((key, i) => (
                     <Area
                       key={key}
@@ -240,7 +353,12 @@ export default function AreaChartsPage() {
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={deviceConfig} hidden={hiddenPercent} onToggle={(k) => setHiddenPercent((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+            <ChartSeriesLegend
+              config={deviceConfig}
+              hidden={hiddenPercent}
+              onToggle={(k) => setHiddenPercent((p) => ({ ...p, [k]: !p[k] }))}
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
 
@@ -249,28 +367,76 @@ export default function AreaChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Area with Target Line</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Area with Target Line
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Monthly revenue against a rolling target. The dashed reference line makes it immediately clear when performance is above or below goal.
+                  Monthly revenue against a rolling target. The dashed reference
+                  line makes it immediately clear when performance is above or
+                  below goal.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="orange" className="shrink-0 mt-px">Target</SimpleBadge>
+              <SimpleBadge variant="orange" className="shrink-0 mt-px">
+                Target
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={targetConfig} className="h-72 w-full">
-                <AreaChart data={targetData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                <AreaChart
+                  data={targetData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
                   <defs>
-                    <linearGradient id="grad-actual" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.25} />
-                      <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
+                    <linearGradient
+                      id="grad-actual"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="5%"
+                        stopColor="var(--chart-1)"
+                        stopOpacity={0.25}
+                      />
+                      <stop
+                        offset="95%"
+                        stopColor="var(--chart-1)"
+                        stopOpacity={0}
+                      />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(targetConfig, fmtDollar)} />} />
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={42}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(
+                          targetConfig,
+                          fmtDollar,
+                        )}
+                      />
+                    }
+                  />
                   <Area
                     type="monotone"
                     dataKey="actual"
@@ -296,7 +462,12 @@ export default function AreaChartsPage() {
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={targetConfig} hidden={hiddenTarget} onToggle={(k) => setHiddenTarget((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+            <ChartSeriesLegend
+              config={targetConfig}
+              hidden={hiddenTarget}
+              onToggle={(k) => setHiddenTarget((p) => ({ ...p, [k]: !p[k] }))}
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
 
@@ -307,27 +478,81 @@ export default function AreaChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Single Area</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  A single revenue series with gradient fill — the simplest area chart, useful as a hero metric widget or sparkline replacement.
+                  A single revenue series with gradient fill — the simplest area
+                  chart, useful as a hero metric widget or sparkline
+                  replacement.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="secondary" className="shrink-0 mt-px">Basic</SimpleBadge>
+              <SimpleBadge variant="secondary" className="shrink-0 mt-px">
+                Basic
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={singleAreaConfig} className="h-72 w-full">
-                <AreaChart data={singleAreaData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                <AreaChart
+                  data={singleAreaData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
                   <defs>
-                    <linearGradient id="grad-single" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.3} />
-                      <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0.02} />
+                    <linearGradient
+                      id="grad-single"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="5%"
+                        stopColor="var(--chart-1)"
+                        stopOpacity={0.3}
+                      />
+                      <stop
+                        offset="95%"
+                        stopColor="var(--chart-1)"
+                        stopOpacity={0.02}
+                      />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(singleAreaConfig, fmtDollar)} />} />
-                  <Area type="monotone" dataKey="revenue" stroke="var(--chart-1)" fill="url(#grad-single)" strokeWidth={2} dot={false} activeDot={{ r: 4 }} />
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={42}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(
+                          singleAreaConfig,
+                          fmtDollar,
+                        )}
+                      />
+                    }
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="revenue"
+                    stroke="var(--chart-1)"
+                    fill="url(#grad-single)"
+                    strokeWidth={2}
+                    dot={false}
+                    activeDot={{ r: 4 }}
+                  />
                 </AreaChart>
               </ChartContainer>
             </div>
@@ -341,34 +566,94 @@ export default function AreaChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Diverging Area</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Monthly performance delta vs target — positive months fill green above the baseline, negative months fill red below it.
+                  Monthly performance delta vs target — positive months fill
+                  green above the baseline, negative months fill red below it.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="green" className="shrink-0 mt-px">Diverging</SimpleBadge>
+              <SimpleBadge variant="green" className="shrink-0 mt-px">
+                Diverging
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={divergingConfig} className="h-72 w-full">
-                <AreaChart data={divergingData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                <AreaChart
+                  data={divergingData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
                   <defs>
                     <linearGradient id="grad-pos" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="var(--chart-3)" stopOpacity={0.35} />
-                      <stop offset="95%" stopColor="var(--chart-3)" stopOpacity={0.02} />
+                      <stop
+                        offset="5%"
+                        stopColor="var(--chart-3)"
+                        stopOpacity={0.35}
+                      />
+                      <stop
+                        offset="95%"
+                        stopColor="var(--chart-3)"
+                        stopOpacity={0.02}
+                      />
                     </linearGradient>
                     <linearGradient id="grad-neg" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="var(--chart-5)" stopOpacity={0.02} />
-                      <stop offset="95%" stopColor="var(--chart-5)" stopOpacity={0.35} />
+                      <stop
+                        offset="5%"
+                        stopColor="var(--chart-5)"
+                        stopOpacity={0.02}
+                      />
+                      <stop
+                        offset="95%"
+                        stopColor="var(--chart-5)"
+                        stopOpacity={0.35}
+                      />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v) => `${v > 0 ? "+" : ""}${fmtDollar(v)}`} width={52} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(divergingConfig, (v) => `${v > 0 ? "+" : ""}${fmtDollar(v)}`)} />} />
-                  <Area type="monotone" dataKey="delta" stroke="var(--chart-3)" fill="url(#grad-pos)" strokeWidth={2} dot={false} activeDot={{ r: 4 }}
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={(v) => `${v > 0 ? "+" : ""}${fmtDollar(v)}`}
+                    width={52}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(
+                          divergingConfig,
+                          (v) => `${v > 0 ? "+" : ""}${fmtDollar(v)}`,
+                        )}
+                      />
+                    }
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="delta"
+                    stroke="var(--chart-3)"
+                    fill="url(#grad-pos)"
+                    strokeWidth={2}
+                    dot={false}
+                    activeDot={{ r: 4 }}
                     baseValue={0}
                   />
-                  <Area type="monotone" dataKey="delta" stroke="var(--chart-5)" fill="url(#grad-neg)" strokeWidth={0} dot={false}
+                  <Area
+                    type="monotone"
+                    dataKey="delta"
+                    stroke="var(--chart-5)"
+                    fill="url(#grad-neg)"
+                    strokeWidth={0}
+                    dot={false}
                     baseValue={0}
                     fillOpacity={1}
                   />

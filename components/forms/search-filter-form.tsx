@@ -4,13 +4,13 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import type { DateRange } from "react-day-picker";
 
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
+import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
+import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
+import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
+import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
 import { PageMain } from "@/ascendra-ui/components/layout/page-main";
@@ -103,7 +103,7 @@ export default function SearchFilterForm() {
       statusArchived: false,
       sortBy: "newest",
     },
-    mode:"onTouched"
+    mode: "onTouched",
   });
 
   function onApply(data: FilterValues) {

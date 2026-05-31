@@ -11,11 +11,11 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
+import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
+import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -44,9 +44,9 @@ const channelData = [
 ];
 
 const satisfactionData = [
-  { name: "Promoters",    value: 52, fill: "var(--chart-3)" },
-  { name: "Passives",     value: 31, fill: "var(--chart-4)" },
-  { name: "Detractors",   value: 17, fill: "var(--chart-5)" },
+  { name: "Promoters", value: 52, fill: "var(--chart-3)" },
+  { name: "Passives", value: 31, fill: "var(--chart-4)" },
+  { name: "Detractors", value: 17, fill: "var(--chart-5)" },
 ];
 
 const CHART_COLORS = [
@@ -78,23 +78,42 @@ const planConfig: ChartConfig = {
 
 function renderActiveShape(props: PieSectorDataItem) {
   const {
-    cx = 0, cy = 0,
-    innerRadius = 0, outerRadius = 0,
-    startAngle, endAngle, fill,
-    payload, value,
+    cx = 0,
+    cy = 0,
+    innerRadius = 0,
+    outerRadius = 0,
+    startAngle,
+    endAngle,
+    fill,
+    payload,
+    value,
   } = props;
   const name = (payload as { name?: string })?.name ?? "";
 
   return (
     <g>
-      <text x={cx} y={cy - 8} textAnchor="middle" fontSize={13} fontWeight={600} fill="currentColor">
+      <text
+        x={cx}
+        y={cy - 8}
+        textAnchor="middle"
+        fontSize={13}
+        fontWeight={600}
+        fill="currentColor"
+      >
         {name}
       </text>
-      <text x={cx} y={cy + 12} textAnchor="middle" fontSize={11} fill="var(--muted-foreground)">
+      <text
+        x={cx}
+        y={cy + 12}
+        textAnchor="middle"
+        fontSize={11}
+        fill="var(--muted-foreground)"
+      >
         {typeof value === "number" ? `$${value.toLocaleString()}` : ""}
       </text>
       <Sector
-        cx={cx} cy={cy}
+        cx={cx}
+        cy={cy}
         innerRadius={Number(innerRadius)}
         outerRadius={Number(outerRadius) + 8}
         startAngle={startAngle}
@@ -102,7 +121,8 @@ function renderActiveShape(props: PieSectorDataItem) {
         fill={fill}
       />
       <Sector
-        cx={cx} cy={cy}
+        cx={cx}
+        cy={cy}
         innerRadius={Number(outerRadius) + 12}
         outerRadius={Number(outerRadius) + 15}
         startAngle={startAngle}
@@ -141,9 +161,13 @@ export default function PieChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Pie & Donut Charts</h1>
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">
+          Pie & Donut Charts
+        </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Part-to-whole relationships at a glance. Donuts with a center stat surface the most important KPI immediately. Hover slices to explore; click legend to filter.
+          Part-to-whole relationships at a glance. Donuts with a center stat
+          surface the most important KPI immediately. Hover slices to explore;
+          click legend to filter.
         </p>
       </div>
 
@@ -153,12 +177,17 @@ export default function PieChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Donut — Center Stat</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Donut — Center Stat
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Revenue split by region. Hover a slice to see name and value in the center hole.
+                  Revenue split by region. Hover a slice to see name and value
+                  in the center hole.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="default" className="shrink-0 mt-px">Interactive</SimpleBadge>
+              <SimpleBadge variant="default" className="shrink-0 mt-px">
+                Interactive
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
@@ -184,15 +213,26 @@ export default function PieChartsPage() {
                     activeShape={renderActiveShape}
                   >
                     {revenueByRegion.map((_entry, index) => (
-                      <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={CHART_COLORS[index % CHART_COLORS.length]}
+                      />
                     ))}
                   </Pie>
                 </PieChart>
               </ChartContainer>
               <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1.5">
                 {revenueByRegion.map((d, i) => (
-                  <div key={d.name} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                    <span className="inline-block h-2.5 w-2.5 rounded-full shrink-0" style={{ background: CHART_COLORS[i % CHART_COLORS.length] }} />
+                  <div
+                    key={d.name}
+                    className="flex items-center gap-1.5 text-xs text-muted-foreground"
+                  >
+                    <span
+                      className="inline-block h-2.5 w-2.5 rounded-full shrink-0"
+                      style={{
+                        background: CHART_COLORS[i % CHART_COLORS.length],
+                      }}
+                    />
                     {d.name}
                   </div>
                 ))}
@@ -206,18 +246,26 @@ export default function PieChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Donut — Legend List</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Donut — Legend List
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Subscription plan distribution with a tabular legend showing exact counts. Click any row to hide/show that slice.
+                  Subscription plan distribution with a tabular legend showing
+                  exact counts. Click any row to hide/show that slice.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="blue" className="shrink-0 mt-px">Legend</SimpleBadge>
+              <SimpleBadge variant="blue" className="shrink-0 mt-px">
+                Legend
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <div className="flex flex-col sm:flex-row gap-6 items-center">
-                <ChartContainer config={planConfig} className="h-60 w-60 shrink-0">
+                <ChartContainer
+                  config={planConfig}
+                  className="h-60 w-60 shrink-0"
+                >
                   <PieChart>
                     <Pie
                       data={visiblePlans}
@@ -232,13 +280,30 @@ export default function PieChartsPage() {
                         <Cell key={entry.name} fill={entry.fill} />
                       ))}
                     </Pie>
-                    <text x="50%" y="46%" textAnchor="middle" dominantBaseline="middle" fontSize={20} fontWeight={600} fill="currentColor">
+                    <text
+                      x="50%"
+                      y="46%"
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      fontSize={20}
+                      fontWeight={600}
+                      fill="currentColor"
+                    >
                       {visibleTotal.toLocaleString()}
                     </text>
-                    <text x="50%" y="58%" textAnchor="middle" dominantBaseline="middle" fontSize={10} fill="var(--muted-foreground)">
+                    <text
+                      x="50%"
+                      y="58%"
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      fontSize={10}
+                      fill="var(--muted-foreground)"
+                    >
                       Total users
                     </text>
-                    <ChartTooltip content={<ChartTooltipContent nameKey="name" />} />
+                    <ChartTooltip
+                      content={<ChartTooltipContent nameKey="name" />}
+                    />
                   </PieChart>
                 </ChartContainer>
 
@@ -251,12 +316,19 @@ export default function PieChartsPage() {
                       className={`flex items-center justify-between rounded-lg px-3 py-2 text-xs transition-colors hover:bg-muted/60 ${hiddenPlans[d.name] ? "opacity-40" : ""}`}
                     >
                       <div className="flex items-center gap-2">
-                        <span className="h-2.5 w-2.5 rounded-full shrink-0" style={{ background: d.fill }} />
-                        <span className="font-medium text-foreground">{d.name}</span>
+                        <span
+                          className="h-2.5 w-2.5 rounded-full shrink-0"
+                          style={{ background: d.fill }}
+                        />
+                        <span className="font-medium text-foreground">
+                          {d.name}
+                        </span>
                       </div>
                       <div className="flex items-center gap-3 text-muted-foreground">
                         <span>{d.value.toLocaleString()}</span>
-                        <span className="w-10 text-right">{((d.value / total) * 100).toFixed(1)}%</span>
+                        <span className="w-10 text-right">
+                          {((d.value / total) * 100).toFixed(1)}%
+                        </span>
                       </div>
                     </button>
                   ))}
@@ -271,12 +343,18 @@ export default function PieChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Active Slice Highlight</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Active Slice Highlight
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Hover any slice to explode it outward with a ring indicator — useful for dashboards where users drill into specific segments.
+                  Hover any slice to explode it outward with a ring indicator —
+                  useful for dashboards where users drill into specific
+                  segments.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="green" className="shrink-0 mt-px">Hover</SimpleBadge>
+              <SimpleBadge variant="green" className="shrink-0 mt-px">
+                Hover
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
@@ -311,12 +389,17 @@ export default function PieChartsPage() {
                     )}
                   >
                     {revenueByRegion.map((_entry, index) => (
-                      <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={CHART_COLORS[index % CHART_COLORS.length]}
+                      />
                     ))}
                   </Pie>
                   <Legend
                     formatter={(value) => (
-                      <span className="text-xs text-muted-foreground">{value}</span>
+                      <span className="text-xs text-muted-foreground">
+                        {value}
+                      </span>
                     )}
                   />
                 </PieChart>
@@ -332,10 +415,14 @@ export default function PieChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Simple Pie</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Traffic source breakdown as a classic pie with no inner hole — best when the part-to-whole relationship is the primary message and space allows a full ring.
+                  Traffic source breakdown as a classic pie with no inner hole —
+                  best when the part-to-whole relationship is the primary
+                  message and space allows a full ring.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="secondary" className="shrink-0 mt-px">Pie</SimpleBadge>
+              <SimpleBadge variant="secondary" className="shrink-0 mt-px">
+                Pie
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
@@ -360,15 +447,26 @@ export default function PieChartsPage() {
                     dataKey="value"
                   >
                     {channelData.map((_entry, index) => (
-                      <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={CHART_COLORS[index % CHART_COLORS.length]}
+                      />
                     ))}
                   </Pie>
                 </PieChart>
               </ChartContainer>
               <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1.5">
                 {channelData.map((d, i) => (
-                  <div key={d.name} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                    <span className="inline-block h-2.5 w-2.5 rounded-full shrink-0" style={{ background: CHART_COLORS[i % CHART_COLORS.length] }} />
+                  <div
+                    key={d.name}
+                    className="flex items-center gap-1.5 text-xs text-muted-foreground"
+                  >
+                    <span
+                      className="inline-block h-2.5 w-2.5 rounded-full shrink-0"
+                      style={{
+                        background: CHART_COLORS[i % CHART_COLORS.length],
+                      }}
+                    />
                     {d.name}
                   </div>
                 ))}
@@ -382,19 +480,32 @@ export default function PieChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Semi-circle Donut</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Semi-circle Donut
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  NPS distribution on a half-donut — the flat bottom edge saves vertical space, making it ideal for dashboard cards where height is constrained.
+                  NPS distribution on a half-donut — the flat bottom edge saves
+                  vertical space, making it ideal for dashboard cards where
+                  height is constrained.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="orange" className="shrink-0 mt-px">Half</SimpleBadge>
+              <SimpleBadge variant="orange" className="shrink-0 mt-px">
+                Half
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5 flex flex-col items-center">
               <ChartContainer config={regionConfig} className="h-48 w-72">
                 <PieChart margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
-                  <ChartTooltip content={<ChartTooltipContent nameKey="name" formatter={(v) => `${v}%`} />} />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        nameKey="name"
+                        formatter={(v) => `${v}%`}
+                      />
+                    }
+                  />
                   <Pie
                     data={satisfactionData}
                     cx="50%"
@@ -414,10 +525,18 @@ export default function PieChartsPage() {
               </ChartContainer>
               <div className="flex gap-5 mt-2">
                 {satisfactionData.map((d) => (
-                  <div key={d.name} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                    <span className="h-2.5 w-2.5 rounded-full shrink-0" style={{ background: d.fill }} />
+                  <div
+                    key={d.name}
+                    className="flex items-center gap-1.5 text-xs text-muted-foreground"
+                  >
+                    <span
+                      className="h-2.5 w-2.5 rounded-full shrink-0"
+                      style={{ background: d.fill }}
+                    />
                     <span>{d.name}</span>
-                    <span className="font-medium text-foreground">{d.value}%</span>
+                    <span className="font-medium text-foreground">
+                      {d.value}%
+                    </span>
                   </div>
                 ))}
               </div>

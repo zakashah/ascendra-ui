@@ -2,19 +2,25 @@
 
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
-import { RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from "recharts";
+import {
+  RadarChart,
+  Radar,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+} from "recharts";
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
+import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
+import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
+import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -80,9 +86,13 @@ export default function RadarChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Radar Charts</h1>
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">
+          Radar Charts
+        </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Radar (spider) charts reveal multivariate profiles at a glance — ideal for skill assessments, team comparisons, and period-over-period performance across several dimensions simultaneously.
+          Radar (spider) charts reveal multivariate profiles at a glance — ideal
+          for skill assessments, team comparisons, and period-over-period
+          performance across several dimensions simultaneously.
         </p>
       </div>
 
@@ -94,19 +104,33 @@ export default function RadarChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Basic Radar</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Single-series skill profile across six dimensions. Each axis is independent — the filled polygon shows relative strengths at a glance.
+                  Single-series skill profile across six dimensions. Each axis
+                  is independent — the filled polygon shows relative strengths
+                  at a glance.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="secondary" className="shrink-0 mt-px">Basic</SimpleBadge>
+              <SimpleBadge variant="secondary" className="shrink-0 mt-px">
+                Basic
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5 flex justify-center">
-              <ChartContainer config={skillConfig} className="h-[300px] w-[340px]">
-                <RadarChart data={skillData} margin={{ top: 10, right: 20, left: 20, bottom: 10 }}>
+              <ChartContainer
+                config={skillConfig}
+                className="h-[300px] w-[340px]"
+              >
+                <RadarChart
+                  data={skillData}
+                  margin={{ top: 10, right: 20, left: 20, bottom: 10 }}
+                >
                   <PolarGrid stroke="var(--border)" strokeOpacity={0.4} />
                   <PolarAngleAxis dataKey="skill" tick={{ fontSize: 11 }} />
-                  <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
+                  <PolarRadiusAxis
+                    domain={[0, 100]}
+                    tick={false}
+                    axisLine={false}
+                  />
                   <Radar
                     name="Score"
                     dataKey="value"
@@ -116,7 +140,11 @@ export default function RadarChartsPage() {
                     strokeWidth={2}
                     dot={{ r: 3, fill: "var(--chart-1)" }}
                   />
-                  <ChartTooltip content={<ChartTooltipContent formatter={(v) => `${v}/100`} />} />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent formatter={(v) => `${v}/100`} />
+                    }
+                  />
                 </RadarChart>
               </ChartContainer>
             </div>
@@ -128,21 +156,36 @@ export default function RadarChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Multi-Series Radar</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Multi-Series Radar
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Two teams plotted on the same axes — overlapping polygons make it immediately clear where each team leads or lags.
+                  Two teams plotted on the same axes — overlapping polygons make
+                  it immediately clear where each team leads or lags.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="default" className="shrink-0 mt-px">Comparative</SimpleBadge>
+              <SimpleBadge variant="default" className="shrink-0 mt-px">
+                Comparative
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5 flex justify-center">
-              <ChartContainer config={teamConfig} className="h-[300px] w-[340px]">
-                <RadarChart data={teamCompareData} margin={{ top: 10, right: 20, left: 20, bottom: 10 }}>
+              <ChartContainer
+                config={teamConfig}
+                className="h-[300px] w-[340px]"
+              >
+                <RadarChart
+                  data={teamCompareData}
+                  margin={{ top: 10, right: 20, left: 20, bottom: 10 }}
+                >
                   <PolarGrid stroke="var(--border)" strokeOpacity={0.4} />
                   <PolarAngleAxis dataKey="dimension" tick={{ fontSize: 11 }} />
-                  <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
+                  <PolarRadiusAxis
+                    domain={[0, 100]}
+                    tick={false}
+                    axisLine={false}
+                  />
                   <Radar
                     name="teamA"
                     dataKey="teamA"
@@ -159,7 +202,11 @@ export default function RadarChartsPage() {
                     strokeWidth={2}
                     dot={{ r: 3, fill: "var(--chart-2)" }}
                   />
-                  <ChartTooltip content={<ChartTooltipContent formatter={(v) => `${v}/100`} />} />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent formatter={(v) => `${v}/100`} />
+                    }
+                  />
                 </RadarChart>
               </ChartContainer>
             </div>
@@ -167,8 +214,14 @@ export default function RadarChartsPage() {
           <MainSectionFooter>
             <div className="flex justify-center gap-6 w-full">
               {(["teamA", "teamB"] as const).map((key) => (
-                <div key={key} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <span className="h-2.5 w-2.5 rounded-full shrink-0" style={{ background: teamConfig[key].color }} />
+                <div
+                  key={key}
+                  className="flex items-center gap-1.5 text-xs text-muted-foreground"
+                >
+                  <span
+                    className="h-2.5 w-2.5 rounded-full shrink-0"
+                    style={{ background: teamConfig[key].color }}
+                  />
                   {teamConfig[key].label}
                 </div>
               ))}
@@ -183,19 +236,33 @@ export default function RadarChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Filled Radar</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Current vs previous period with semi-transparent fills — the overlap area shows retained performance while gaps reveal gains or regressions.
+                  Current vs previous period with semi-transparent fills — the
+                  overlap area shows retained performance while gaps reveal
+                  gains or regressions.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="blue" className="shrink-0 mt-px">Filled</SimpleBadge>
+              <SimpleBadge variant="blue" className="shrink-0 mt-px">
+                Filled
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5 flex justify-center">
-              <ChartContainer config={filledConfig} className="h-[300px] w-[340px]">
-                <RadarChart data={filledData} margin={{ top: 10, right: 20, left: 20, bottom: 10 }}>
+              <ChartContainer
+                config={filledConfig}
+                className="h-[300px] w-[340px]"
+              >
+                <RadarChart
+                  data={filledData}
+                  margin={{ top: 10, right: 20, left: 20, bottom: 10 }}
+                >
                   <PolarGrid stroke="var(--border)" strokeOpacity={0.4} />
                   <PolarAngleAxis dataKey="axis" tick={{ fontSize: 11 }} />
-                  <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
+                  <PolarRadiusAxis
+                    domain={[0, 100]}
+                    tick={false}
+                    axisLine={false}
+                  />
                   <Radar
                     name="previous"
                     dataKey="previous"
@@ -212,7 +279,11 @@ export default function RadarChartsPage() {
                     fillOpacity={0.25}
                     strokeWidth={2}
                   />
-                  <ChartTooltip content={<ChartTooltipContent formatter={(v) => `${v}/100`} />} />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent formatter={(v) => `${v}/100`} />
+                    }
+                  />
                 </RadarChart>
               </ChartContainer>
             </div>
@@ -220,8 +291,14 @@ export default function RadarChartsPage() {
           <MainSectionFooter>
             <div className="flex justify-center gap-6 w-full">
               {(["current", "previous"] as const).map((key) => (
-                <div key={key} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <span className="h-2.5 w-2.5 rounded-full shrink-0" style={{ background: filledConfig[key].color }} />
+                <div
+                  key={key}
+                  className="flex items-center gap-1.5 text-xs text-muted-foreground"
+                >
+                  <span
+                    className="h-2.5 w-2.5 rounded-full shrink-0"
+                    style={{ background: filledConfig[key].color }}
+                  />
                   {filledConfig[key].label}
                 </div>
               ))}

@@ -5,12 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
+import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
+import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
 import { PageMain } from "@/ascendra-ui/components/layout/page-main";
@@ -255,7 +255,8 @@ export default function JobApplicationForm() {
                               />
                               <FieldHint
                                 error={errors.firstName as { message?: string }}
-                                mandatory help="This is help text"
+                                mandatory
+                                help="This is help text"
                               />
                             </Field>
 

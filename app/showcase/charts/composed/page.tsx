@@ -3,19 +3,29 @@
 import { useState } from "react";
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
-import { ComposedChart, Bar, Line, Area, XAxis, YAxis, CartesianGrid, Scatter, ZAxis } from "recharts";
+import {
+  ComposedChart,
+  Bar,
+  Line,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Scatter,
+  ZAxis,
+} from "recharts";
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
+import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
+import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
+import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
+import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
+import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
@@ -86,18 +96,77 @@ const stackedCostData = [
   { month: "Jan", infra: 12400, payroll: 38200, marketing: 8100, margin: 18.2 },
   { month: "Feb", infra: 13100, payroll: 38200, marketing: 9400, margin: 22.4 },
   { month: "Mar", infra: 12800, payroll: 38200, marketing: 7600, margin: 20.8 },
-  { month: "Apr", infra: 14200, payroll: 40100, marketing: 11200, margin: 24.1 },
-  { month: "May", infra: 15600, payroll: 40100, marketing: 13800, margin: 27.3 },
-  { month: "Jun", infra: 14900, payroll: 40100, marketing: 12400, margin: 25.6 },
-  { month: "Jul", infra: 16800, payroll: 42000, marketing: 15200, margin: 28.9 },
-  { month: "Aug", infra: 18400, payroll: 42000, marketing: 17600, margin: 31.2 },
-  { month: "Sep", infra: 17200, payroll: 42000, marketing: 14900, margin: 29.4 },
-  { month: "Oct", infra: 19600, payroll: 44200, marketing: 18800, margin: 32.8 },
-  { month: "Nov", infra: 18900, payroll: 44200, marketing: 16400, margin: 30.1 },
-  { month: "Dec", infra: 21400, payroll: 44200, marketing: 21200, margin: 35.4 },
+  {
+    month: "Apr",
+    infra: 14200,
+    payroll: 40100,
+    marketing: 11200,
+    margin: 24.1,
+  },
+  {
+    month: "May",
+    infra: 15600,
+    payroll: 40100,
+    marketing: 13800,
+    margin: 27.3,
+  },
+  {
+    month: "Jun",
+    infra: 14900,
+    payroll: 40100,
+    marketing: 12400,
+    margin: 25.6,
+  },
+  {
+    month: "Jul",
+    infra: 16800,
+    payroll: 42000,
+    marketing: 15200,
+    margin: 28.9,
+  },
+  {
+    month: "Aug",
+    infra: 18400,
+    payroll: 42000,
+    marketing: 17600,
+    margin: 31.2,
+  },
+  {
+    month: "Sep",
+    infra: 17200,
+    payroll: 42000,
+    marketing: 14900,
+    margin: 29.4,
+  },
+  {
+    month: "Oct",
+    infra: 19600,
+    payroll: 44200,
+    marketing: 18800,
+    margin: 32.8,
+  },
+  {
+    month: "Nov",
+    infra: 18900,
+    payroll: 44200,
+    marketing: 16400,
+    margin: 30.1,
+  },
+  {
+    month: "Dec",
+    infra: 21400,
+    payroll: 44200,
+    marketing: 21200,
+    margin: 35.4,
+  },
 ];
 
-const forecastData: Array<{ month: string; lower: number; upper: number; actual?: number }> = [
+const forecastData: Array<{
+  month: string;
+  lower: number;
+  upper: number;
+  actual?: number;
+}> = [
   { month: "Jan", lower: 38000, upper: 48000, actual: 42100 },
   { month: "Feb", lower: 44000, upper: 58000, actual: 51800 },
   { month: "Mar", lower: 40000, upper: 55000, actual: 48600 },
@@ -228,15 +297,29 @@ function fmtPct(v: number) {
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default function ComposedChartsPage() {
-  const [hiddenRevGrowth, setHiddenRevGrowth] = useState<Record<string, boolean>>({});
+  const [hiddenRevGrowth, setHiddenRevGrowth] = useState<
+    Record<string, boolean>
+  >({});
   const [hiddenDual, setHiddenDual] = useState<Record<string, boolean>>({});
-  const [hiddenAreaScatter, setHiddenAreaScatter] = useState<Record<string, boolean>>({});
+  const [hiddenAreaScatter, setHiddenAreaScatter] = useState<
+    Record<string, boolean>
+  >({});
   const [hiddenTriple, setHiddenTriple] = useState<Record<string, boolean>>({});
-  const [hiddenStackedCost, setHiddenStackedCost] = useState<Record<string, boolean>>({});
-  const [hiddenForecast, setHiddenForecast] = useState<Record<string, boolean>>({});
-  const [hiddenRegional, setHiddenRegional] = useState<Record<string, boolean>>({});
-  const [hiddenCashFlow, setHiddenCashFlow] = useState<Record<string, boolean>>({});
-  const [hiddenBudgetActual, setHiddenBudgetActual] = useState<Record<string, boolean>>({});
+  const [hiddenStackedCost, setHiddenStackedCost] = useState<
+    Record<string, boolean>
+  >({});
+  const [hiddenForecast, setHiddenForecast] = useState<Record<string, boolean>>(
+    {},
+  );
+  const [hiddenRegional, setHiddenRegional] = useState<Record<string, boolean>>(
+    {},
+  );
+  const [hiddenCashFlow, setHiddenCashFlow] = useState<Record<string, boolean>>(
+    {},
+  );
+  const [hiddenBudgetActual, setHiddenBudgetActual] = useState<
+    Record<string, boolean>
+  >({});
 
   return (
     <div className="mx-auto max-w-5xl px-8 py-12">
@@ -253,9 +336,13 @@ export default function ComposedChartsPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Charts
         </div>
-        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">Composed Charts</h1>
+        <h1 className="mb-3 text-2xl font-semibold tracking-tight text-foreground">
+          Composed Charts
+        </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Composed charts layer multiple mark types — bars, lines, areas, and scatter — on a single canvas. Use them when two related metrics have different units or scales.
+          Composed charts layer multiple mark types — bars, lines, areas, and
+          scatter — on a single canvas. Use them when two related metrics have
+          different units or scales.
         </p>
       </div>
 
@@ -267,30 +354,73 @@ export default function ComposedChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Bar + Line</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Monthly revenue bars overlaid with a growth-rate line. The bar shows absolute performance; the line shows momentum.
+                  Monthly revenue bars overlaid with a growth-rate line. The bar
+                  shows absolute performance; the line shows momentum.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="default" className="shrink-0 mt-px">Bar + Line</SimpleBadge>
+              <SimpleBadge variant="default" className="shrink-0 mt-px">
+                Bar + Line
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
-              <ChartContainer config={revenueGrowthConfig} className="h-72 w-full">
-                <ComposedChart data={revenueGrowthData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis yAxisId="left" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={44} />
-                  <YAxis yAxisId="right" orientation="right" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtPct} width={44} />
+              <ChartContainer
+                config={revenueGrowthConfig}
+                className="h-72 w-full"
+              >
+                <ComposedChart
+                  data={revenueGrowthData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    yAxisId="left"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={44}
+                  />
+                  <YAxis
+                    yAxisId="right"
+                    orientation="right"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtPct}
+                    width={44}
+                  />
                   <ChartTooltip
                     content={
                       <ChartTooltipContent
-                        formatter={makeTooltipFormatter(revenueGrowthConfig, (v, k) =>
-                          k === "revenue" ? fmtDollar(v) : fmtPct(v)
+                        formatter={makeTooltipFormatter(
+                          revenueGrowthConfig,
+                          (v, k) =>
+                            k === "revenue" ? fmtDollar(v) : fmtPct(v),
                         )}
                       />
                     }
                   />
-                  <Bar yAxisId="left" dataKey="revenue" fill="var(--chart-1)" fillOpacity={0.85} radius={[3, 3, 0, 0]} hide={hiddenRevGrowth["revenue"]} />
+                  <Bar
+                    yAxisId="left"
+                    dataKey="revenue"
+                    fill="var(--chart-1)"
+                    fillOpacity={0.85}
+                    radius={[3, 3, 0, 0]}
+                    hide={hiddenRevGrowth["revenue"]}
+                  />
                   <Line
                     yAxisId="right"
                     type="monotone"
@@ -306,7 +436,14 @@ export default function ComposedChartsPage() {
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={revenueGrowthConfig} hidden={hiddenRevGrowth} onToggle={(k) => setHiddenRevGrowth((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+            <ChartSeriesLegend
+              config={revenueGrowthConfig}
+              hidden={hiddenRevGrowth}
+              onToggle={(k) =>
+                setHiddenRevGrowth((p) => ({ ...p, [k]: !p[k] }))
+              }
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
 
@@ -317,24 +454,43 @@ export default function ComposedChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Dual Y-Axis</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Order volume (bars, left axis) against average order value (line, right axis). Two scales that can&apos;t share an axis — each reads correctly without distortion.
+                  Order volume (bars, left axis) against average order value
+                  (line, right axis). Two scales that can&apos;t share an axis —
+                  each reads correctly without distortion.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="blue" className="shrink-0 mt-px">Dual Axis</SimpleBadge>
+              <SimpleBadge variant="blue" className="shrink-0 mt-px">
+                Dual Axis
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={dualAxisConfig} className="h-72 w-full">
-                <ComposedChart data={dualAxisData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+                <ComposedChart
+                  data={dualAxisData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
                   <YAxis
                     yAxisId="left"
                     tickLine={false}
                     axisLine={false}
                     tick={{ fontSize: 11 }}
-                    tickFormatter={(v: number) => v >= 1000 ? `${(v / 1000).toFixed(0)}k` : String(v)}
+                    tickFormatter={(v: number) =>
+                      v >= 1000 ? `${(v / 1000).toFixed(0)}k` : String(v)
+                    }
                     width={42}
                   />
                   <YAxis
@@ -350,13 +506,22 @@ export default function ComposedChartsPage() {
                   <ChartTooltip
                     content={
                       <ChartTooltipContent
-                        formatter={makeTooltipFormatter(dualAxisConfig, (v, k) =>
-                          k === "orders" ? v.toLocaleString() : `$${v}`
+                        formatter={makeTooltipFormatter(
+                          dualAxisConfig,
+                          (v, k) =>
+                            k === "orders" ? v.toLocaleString() : `$${v}`,
                         )}
                       />
                     }
                   />
-                  <Bar yAxisId="left" dataKey="orders" fill="var(--chart-1)" fillOpacity={0.85} radius={[3, 3, 0, 0]} hide={hiddenDual["orders"]} />
+                  <Bar
+                    yAxisId="left"
+                    dataKey="orders"
+                    fill="var(--chart-1)"
+                    fillOpacity={0.85}
+                    radius={[3, 3, 0, 0]}
+                    hide={hiddenDual["orders"]}
+                  />
                   <Line
                     yAxisId="right"
                     type="monotone"
@@ -372,7 +537,12 @@ export default function ComposedChartsPage() {
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={dualAxisConfig} hidden={hiddenDual} onToggle={(k) => setHiddenDual((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+            <ChartSeriesLegend
+              config={dualAxisConfig}
+              hidden={hiddenDual}
+              onToggle={(k) => setHiddenDual((p) => ({ ...p, [k]: !p[k] }))}
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
 
@@ -383,27 +553,76 @@ export default function ComposedChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Area + Scatter</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Baseline revenue trend as a filled area with high-impact outlier events plotted as scatter points — surface anomalies without losing the trend.
+                  Baseline revenue trend as a filled area with high-impact
+                  outlier events plotted as scatter points — surface anomalies
+                  without losing the trend.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="orange" className="shrink-0 mt-px">Area + Scatter</SimpleBadge>
+              <SimpleBadge variant="orange" className="shrink-0 mt-px">
+                Area + Scatter
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
-              <ChartContainer config={areaScatterConfig} className="h-72 w-full">
-                <ComposedChart data={areaScatterData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+              <ChartContainer
+                config={areaScatterConfig}
+                className="h-72 w-full"
+              >
+                <ComposedChart
+                  data={areaScatterData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
                   <defs>
-                    <linearGradient id="grad-baseline" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.2} />
-                      <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
+                    <linearGradient
+                      id="grad-baseline"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="5%"
+                        stopColor="var(--chart-1)"
+                        stopOpacity={0.2}
+                      />
+                      <stop
+                        offset="95%"
+                        stopColor="var(--chart-1)"
+                        stopOpacity={0}
+                      />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={42} />
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={42}
+                  />
                   <ZAxis range={[60, 60]} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(areaScatterConfig, fmtDollar)} />} />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(
+                          areaScatterConfig,
+                          fmtDollar,
+                        )}
+                      />
+                    }
+                  />
                   <Area
                     type="monotone"
                     dataKey="baseline"
@@ -414,13 +633,24 @@ export default function ComposedChartsPage() {
                     activeDot={{ r: 4 }}
                     hide={hiddenAreaScatter["baseline"]}
                   />
-                  <Scatter dataKey="outlier" fill="var(--chart-4)" hide={hiddenAreaScatter["outlier"]} />
+                  <Scatter
+                    dataKey="outlier"
+                    fill="var(--chart-4)"
+                    hide={hiddenAreaScatter["outlier"]}
+                  />
                 </ComposedChart>
               </ChartContainer>
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={areaScatterConfig} hidden={hiddenAreaScatter} onToggle={(k) => setHiddenAreaScatter((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+            <ChartSeriesLegend
+              config={areaScatterConfig}
+              hidden={hiddenAreaScatter}
+              onToggle={(k) =>
+                setHiddenAreaScatter((p) => ({ ...p, [k]: !p[k] }))
+              }
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
 
@@ -431,44 +661,126 @@ export default function ComposedChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Triple Metric</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Monthly transaction volume (bars), conversion rate (line, right axis), and cumulative total (area) on a single canvas — three related metrics without clutter.
+                  Monthly transaction volume (bars), conversion rate (line,
+                  right axis), and cumulative total (area) on a single canvas —
+                  three related metrics without clutter.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="green" className="shrink-0 mt-px">3-Series</SimpleBadge>
+              <SimpleBadge variant="green" className="shrink-0 mt-px">
+                3-Series
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={tripleConfig} className="h-72 w-full">
-                <ComposedChart data={tripleData} margin={{ top: 4, right: 48, left: 0, bottom: 0 }}>
+                <ComposedChart
+                  data={tripleData}
+                  margin={{ top: 4, right: 48, left: 0, bottom: 0 }}
+                >
                   <defs>
-                    <linearGradient id="grad-cumulative" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="var(--chart-2)" stopOpacity={0.15} />
-                      <stop offset="95%" stopColor="var(--chart-2)" stopOpacity={0} />
+                    <linearGradient
+                      id="grad-cumulative"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="5%"
+                        stopColor="var(--chart-2)"
+                        stopOpacity={0.15}
+                      />
+                      <stop
+                        offset="95%"
+                        stopColor="var(--chart-2)"
+                        stopOpacity={0}
+                      />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis yAxisId="left" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v: number) => v >= 1000 ? `${(v / 1000).toFixed(0)}k` : String(v)} width={42} />
-                  <YAxis yAxisId="right" orientation="right" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={(v: number) => `${v}%`} width={36} />
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    yAxisId="left"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={(v: number) =>
+                      v >= 1000 ? `${(v / 1000).toFixed(0)}k` : String(v)
+                    }
+                    width={42}
+                  />
+                  <YAxis
+                    yAxisId="right"
+                    orientation="right"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={(v: number) => `${v}%`}
+                    width={36}
+                  />
                   <ChartTooltip
                     content={
                       <ChartTooltipContent
                         formatter={makeTooltipFormatter(tripleConfig, (v, k) =>
-                          k === "rate" ? `${v}%` : v >= 1000 ? `${(v / 1000).toFixed(1)}k` : String(v)
+                          k === "rate"
+                            ? `${v}%`
+                            : v >= 1000
+                              ? `${(v / 1000).toFixed(1)}k`
+                              : String(v),
                         )}
                       />
                     }
                   />
-                  <Area yAxisId="left" type="monotone" dataKey="cumulative" stroke="var(--chart-2)" fill="url(#grad-cumulative)" strokeWidth={1.5} dot={false} hide={hiddenTriple["cumulative"]} />
-                  <Bar yAxisId="left" dataKey="volume" fill="var(--chart-1)" fillOpacity={0.85} radius={[3, 3, 0, 0]} hide={hiddenTriple["volume"]} />
-                  <Line yAxisId="right" type="monotone" dataKey="rate" stroke="var(--chart-3)" strokeWidth={2} dot={false} activeDot={{ r: 4 }} hide={hiddenTriple["rate"]} />
+                  <Area
+                    yAxisId="left"
+                    type="monotone"
+                    dataKey="cumulative"
+                    stroke="var(--chart-2)"
+                    fill="url(#grad-cumulative)"
+                    strokeWidth={1.5}
+                    dot={false}
+                    hide={hiddenTriple["cumulative"]}
+                  />
+                  <Bar
+                    yAxisId="left"
+                    dataKey="volume"
+                    fill="var(--chart-1)"
+                    fillOpacity={0.85}
+                    radius={[3, 3, 0, 0]}
+                    hide={hiddenTriple["volume"]}
+                  />
+                  <Line
+                    yAxisId="right"
+                    type="monotone"
+                    dataKey="rate"
+                    stroke="var(--chart-3)"
+                    strokeWidth={2}
+                    dot={false}
+                    activeDot={{ r: 4 }}
+                    hide={hiddenTriple["rate"]}
+                  />
                 </ComposedChart>
               </ChartContainer>
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={tripleConfig} hidden={hiddenTriple} onToggle={(k) => setHiddenTriple((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+            <ChartSeriesLegend
+              config={tripleConfig}
+              hidden={hiddenTriple}
+              onToggle={(k) => setHiddenTriple((p) => ({ ...p, [k]: !p[k] }))}
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
 
@@ -477,20 +789,42 @@ export default function ComposedChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Stacked Cost + Margin</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Stacked Cost + Margin
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Monthly operating costs broken into three stacked categories, overlaid with the EBITDA margin line on a right axis — see where spending grows relative to profitability.
+                  Monthly operating costs broken into three stacked categories,
+                  overlaid with the EBITDA margin line on a right axis — see
+                  where spending grows relative to profitability.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="default" className="shrink-0 mt-px">Stacked + Line</SimpleBadge>
+              <SimpleBadge variant="default" className="shrink-0 mt-px">
+                Stacked + Line
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
-              <ChartContainer config={stackedCostConfig} className="h-72 w-full">
-                <ComposedChart data={stackedCostData} margin={{ top: 4, right: 48, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
+              <ChartContainer
+                config={stackedCostConfig}
+                className="h-72 w-full"
+              >
+                <ComposedChart
+                  data={stackedCostData}
+                  margin={{ top: 4, right: 48, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
                   <YAxis
                     yAxisId="left"
                     tickLine={false}
@@ -512,15 +846,43 @@ export default function ComposedChartsPage() {
                   <ChartTooltip
                     content={
                       <ChartTooltipContent
-                        formatter={makeTooltipFormatter(stackedCostConfig, (v, k) =>
-                          k === "margin" ? `${v}%` : `$${(v / 1000).toFixed(1)}k`
+                        formatter={makeTooltipFormatter(
+                          stackedCostConfig,
+                          (v, k) =>
+                            k === "margin"
+                              ? `${v}%`
+                              : `$${(v / 1000).toFixed(1)}k`,
                         )}
                       />
                     }
                   />
-                  <Bar yAxisId="left" dataKey="infra" stackId="costs" fill="var(--chart-1)" fillOpacity={0.85} radius={[0, 0, 0, 0]} hide={hiddenStackedCost["infra"]} />
-                  <Bar yAxisId="left" dataKey="payroll" stackId="costs" fill="var(--chart-2)" fillOpacity={0.85} radius={[0, 0, 0, 0]} hide={hiddenStackedCost["payroll"]} />
-                  <Bar yAxisId="left" dataKey="marketing" stackId="costs" fill="var(--chart-3)" fillOpacity={0.85} radius={[3, 3, 0, 0]} hide={hiddenStackedCost["marketing"]} />
+                  <Bar
+                    yAxisId="left"
+                    dataKey="infra"
+                    stackId="costs"
+                    fill="var(--chart-1)"
+                    fillOpacity={0.85}
+                    radius={[0, 0, 0, 0]}
+                    hide={hiddenStackedCost["infra"]}
+                  />
+                  <Bar
+                    yAxisId="left"
+                    dataKey="payroll"
+                    stackId="costs"
+                    fill="var(--chart-2)"
+                    fillOpacity={0.85}
+                    radius={[0, 0, 0, 0]}
+                    hide={hiddenStackedCost["payroll"]}
+                  />
+                  <Bar
+                    yAxisId="left"
+                    dataKey="marketing"
+                    stackId="costs"
+                    fill="var(--chart-3)"
+                    fillOpacity={0.85}
+                    radius={[3, 3, 0, 0]}
+                    hide={hiddenStackedCost["marketing"]}
+                  />
                   <Line
                     yAxisId="right"
                     type="monotone"
@@ -536,7 +898,14 @@ export default function ComposedChartsPage() {
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={stackedCostConfig} hidden={hiddenStackedCost} onToggle={(k) => setHiddenStackedCost((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+            <ChartSeriesLegend
+              config={stackedCostConfig}
+              hidden={hiddenStackedCost}
+              onToggle={(k) =>
+                setHiddenStackedCost((p) => ({ ...p, [k]: !p[k] }))
+              }
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
 
@@ -547,26 +916,72 @@ export default function ComposedChartsPage() {
               <div>
                 <MainSectionHeaderTitle>Forecast Band</MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Forecast high and low bounds as dashed lines flanking a solid actual-performance area — the gap between bounds narrows as forecasts converge over the period.
+                  Forecast high and low bounds as dashed lines flanking a solid
+                  actual-performance area — the gap between bounds narrows as
+                  forecasts converge over the period.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="orange" className="shrink-0 mt-px">Forecast Band</SimpleBadge>
+              <SimpleBadge variant="orange" className="shrink-0 mt-px">
+                Forecast Band
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={forecastConfig} className="h-72 w-full">
-                <ComposedChart data={forecastData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
+                <ComposedChart
+                  data={forecastData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
                   <defs>
-                    <linearGradient id="grad-actual-forecast" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.2} />
-                      <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
+                    <linearGradient
+                      id="grad-actual-forecast"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="5%"
+                        stopColor="var(--chart-1)"
+                        stopOpacity={0.2}
+                      />
+                      <stop
+                        offset="95%"
+                        stopColor="var(--chart-1)"
+                        stopOpacity={0}
+                      />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={44} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(forecastConfig, fmtDollar)} />} />
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={44}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(
+                          forecastConfig,
+                          fmtDollar,
+                        )}
+                      />
+                    }
+                  />
                   <Line
                     type="monotone"
                     dataKey="upper"
@@ -601,7 +1016,12 @@ export default function ComposedChartsPage() {
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={forecastConfig} hidden={hiddenForecast} onToggle={(k) => setHiddenForecast((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+            <ChartSeriesLegend
+              config={forecastConfig}
+              hidden={hiddenForecast}
+              onToggle={(k) => setHiddenForecast((p) => ({ ...p, [k]: !p[k] }))}
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
 
@@ -610,24 +1030,70 @@ export default function ComposedChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Regional vs Benchmark</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Regional vs Benchmark
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  North and South region revenue as grouped bars, with an industry benchmark overlay as a dashed line — quickly identify which region leads or lags the standard.
+                  North and South region revenue as grouped bars, with an
+                  industry benchmark overlay as a dashed line — quickly identify
+                  which region leads or lags the standard.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="blue" className="shrink-0 mt-px">Grouped + Line</SimpleBadge>
+              <SimpleBadge variant="blue" className="shrink-0 mt-px">
+                Grouped + Line
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={regionalConfig} className="h-72 w-full">
-                <ComposedChart data={regionalData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={44} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(regionalConfig, fmtDollar)} />} />
-                  <Bar dataKey="north" fill="var(--chart-1)" fillOpacity={0.85} radius={[3, 3, 0, 0]} hide={hiddenRegional["north"]} />
-                  <Bar dataKey="south" fill="var(--chart-2)" fillOpacity={0.85} radius={[3, 3, 0, 0]} hide={hiddenRegional["south"]} />
+                <ComposedChart
+                  data={regionalData}
+                  margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={44}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(
+                          regionalConfig,
+                          fmtDollar,
+                        )}
+                      />
+                    }
+                  />
+                  <Bar
+                    dataKey="north"
+                    fill="var(--chart-1)"
+                    fillOpacity={0.85}
+                    radius={[3, 3, 0, 0]}
+                    hide={hiddenRegional["north"]}
+                  />
+                  <Bar
+                    dataKey="south"
+                    fill="var(--chart-2)"
+                    fillOpacity={0.85}
+                    radius={[3, 3, 0, 0]}
+                    hide={hiddenRegional["south"]}
+                  />
                   <Line
                     type="monotone"
                     dataKey="benchmark"
@@ -643,7 +1109,12 @@ export default function ComposedChartsPage() {
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={regionalConfig} hidden={hiddenRegional} onToggle={(k) => setHiddenRegional((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+            <ChartSeriesLegend
+              config={regionalConfig}
+              hidden={hiddenRegional}
+              onToggle={(k) => setHiddenRegional((p) => ({ ...p, [k]: !p[k] }))}
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
 
@@ -652,31 +1123,102 @@ export default function ComposedChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Cash Flow + Running Balance</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Cash Flow + Running Balance
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Monthly inflows and outflows as grouped bars (left axis) with the cumulative cash balance as a filled area (right axis) — see short-term gaps and long-term health together.
+                  Monthly inflows and outflows as grouped bars (left axis) with
+                  the cumulative cash balance as a filled area (right axis) —
+                  see short-term gaps and long-term health together.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="green" className="shrink-0 mt-px">Inflow / Outflow</SimpleBadge>
+              <SimpleBadge variant="green" className="shrink-0 mt-px">
+                Inflow / Outflow
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
               <ChartContainer config={cashFlowConfig} className="h-72 w-full">
-                <ComposedChart data={cashFlowData} margin={{ top: 4, right: 52, left: 0, bottom: 0 }}>
+                <ComposedChart
+                  data={cashFlowData}
+                  margin={{ top: 4, right: 52, left: 0, bottom: 0 }}
+                >
                   <defs>
-                    <linearGradient id="grad-balance" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="var(--chart-1)" stopOpacity={0.18} />
-                      <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
+                    <linearGradient
+                      id="grad-balance"
+                      x1="0"
+                      y1="0"
+                      x2="0"
+                      y2="1"
+                    >
+                      <stop
+                        offset="5%"
+                        stopColor="var(--chart-1)"
+                        stopOpacity={0.18}
+                      />
+                      <stop
+                        offset="95%"
+                        stopColor="var(--chart-1)"
+                        stopOpacity={0}
+                      />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis yAxisId="left" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={44} />
-                  <YAxis yAxisId="right" orientation="right" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={44} />
-                  <ChartTooltip content={<ChartTooltipContent formatter={makeTooltipFormatter(cashFlowConfig, fmtDollar)} />} />
-                  <Bar yAxisId="left" dataKey="inflows" fill="var(--chart-2)" fillOpacity={0.85} radius={[3, 3, 0, 0]} hide={hiddenCashFlow["inflows"]} />
-                  <Bar yAxisId="left" dataKey="outflows" fill="var(--chart-3)" fillOpacity={0.85} radius={[3, 3, 0, 0]} hide={hiddenCashFlow["outflows"]} />
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    yAxisId="left"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={44}
+                  />
+                  <YAxis
+                    yAxisId="right"
+                    orientation="right"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={44}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={makeTooltipFormatter(
+                          cashFlowConfig,
+                          fmtDollar,
+                        )}
+                      />
+                    }
+                  />
+                  <Bar
+                    yAxisId="left"
+                    dataKey="inflows"
+                    fill="var(--chart-2)"
+                    fillOpacity={0.85}
+                    radius={[3, 3, 0, 0]}
+                    hide={hiddenCashFlow["inflows"]}
+                  />
+                  <Bar
+                    yAxisId="left"
+                    dataKey="outflows"
+                    fill="var(--chart-3)"
+                    fillOpacity={0.85}
+                    radius={[3, 3, 0, 0]}
+                    hide={hiddenCashFlow["outflows"]}
+                  />
                   <Area
                     yAxisId="right"
                     type="monotone"
@@ -693,7 +1235,12 @@ export default function ComposedChartsPage() {
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={cashFlowConfig} hidden={hiddenCashFlow} onToggle={(k) => setHiddenCashFlow((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+            <ChartSeriesLegend
+              config={cashFlowConfig}
+              hidden={hiddenCashFlow}
+              onToggle={(k) => setHiddenCashFlow((p) => ({ ...p, [k]: !p[k] }))}
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
 
@@ -702,33 +1249,86 @@ export default function ComposedChartsPage() {
           <MainSectionHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <MainSectionHeaderTitle>Budget vs Actual + Variance</MainSectionHeaderTitle>
+                <MainSectionHeaderTitle>
+                  Budget vs Actual + Variance
+                </MainSectionHeaderTitle>
                 <MainSectionHeaderSubtitle>
-                  Side-by-side bars for budgeted and actual revenue, with a variance percentage line on the right axis — months above zero beat the plan; below miss it.
+                  Side-by-side bars for budgeted and actual revenue, with a
+                  variance percentage line on the right axis — months above zero
+                  beat the plan; below miss it.
                 </MainSectionHeaderSubtitle>
               </div>
-              <SimpleBadge variant="default" className="shrink-0 mt-px">Budget vs Actual</SimpleBadge>
+              <SimpleBadge variant="default" className="shrink-0 mt-px">
+                Budget vs Actual
+              </SimpleBadge>
             </div>
           </MainSectionHeader>
           <MainSectionPanel>
             <div className="p-5">
-              <ChartContainer config={budgetActualConfig} className="h-72 w-full">
-                <ComposedChart data={budgetActualData} margin={{ top: 4, right: 48, left: 0, bottom: 0 }}>
-                  <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
-                  <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
-                  <YAxis yAxisId="left" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtDollar} width={44} />
-                  <YAxis yAxisId="right" orientation="right" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} tickFormatter={fmtPct} width={44} />
+              <ChartContainer
+                config={budgetActualConfig}
+                className="h-72 w-full"
+              >
+                <ComposedChart
+                  data={budgetActualData}
+                  margin={{ top: 4, right: 48, left: 0, bottom: 0 }}
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.4}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    yAxisId="left"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtDollar}
+                    width={44}
+                  />
+                  <YAxis
+                    yAxisId="right"
+                    orientation="right"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={fmtPct}
+                    width={44}
+                  />
                   <ChartTooltip
                     content={
                       <ChartTooltipContent
-                        formatter={makeTooltipFormatter(budgetActualConfig, (v, k) =>
-                          k === "variance" ? fmtPct(v) : fmtDollar(v)
+                        formatter={makeTooltipFormatter(
+                          budgetActualConfig,
+                          (v, k) =>
+                            k === "variance" ? fmtPct(v) : fmtDollar(v),
                         )}
                       />
                     }
                   />
-                  <Bar yAxisId="left" dataKey="budget" fill="var(--chart-3)" fillOpacity={0.6} radius={[3, 3, 0, 0]} hide={hiddenBudgetActual["budget"]} />
-                  <Bar yAxisId="left" dataKey="actual" fill="var(--chart-1)" fillOpacity={0.85} radius={[3, 3, 0, 0]} hide={hiddenBudgetActual["actual"]} />
+                  <Bar
+                    yAxisId="left"
+                    dataKey="budget"
+                    fill="var(--chart-3)"
+                    fillOpacity={0.6}
+                    radius={[3, 3, 0, 0]}
+                    hide={hiddenBudgetActual["budget"]}
+                  />
+                  <Bar
+                    yAxisId="left"
+                    dataKey="actual"
+                    fill="var(--chart-1)"
+                    fillOpacity={0.85}
+                    radius={[3, 3, 0, 0]}
+                    hide={hiddenBudgetActual["actual"]}
+                  />
                   <Line
                     yAxisId="right"
                     type="monotone"
@@ -744,7 +1344,14 @@ export default function ComposedChartsPage() {
             </div>
           </MainSectionPanel>
           <MainSectionFooter>
-            <ChartSeriesLegend config={budgetActualConfig} hidden={hiddenBudgetActual} onToggle={(k) => setHiddenBudgetActual((p) => ({ ...p, [k]: !p[k] }))} className="w-full" />
+            <ChartSeriesLegend
+              config={budgetActualConfig}
+              hidden={hiddenBudgetActual}
+              onToggle={(k) =>
+                setHiddenBudgetActual((p) => ({ ...p, [k]: !p[k] }))
+              }
+              className="w-full"
+            />
           </MainSectionFooter>
         </MainSection>
       </div>

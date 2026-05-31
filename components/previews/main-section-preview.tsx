@@ -3,11 +3,11 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
+import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
+import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
+import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
+import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
 import { Button } from "@/ascendra-ui/components/ui/button";
 import { registry } from "@/lib/registry";
 
