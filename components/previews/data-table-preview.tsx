@@ -1,9 +1,19 @@
 "use client";
 
+import { useState } from "react";
 import { ComponentPreview } from "../component-preview";
+import { CodeBlock } from "../code-block";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
 import { registry } from "@/lib/registry";
+import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import type {
+  AccentColor,
+  BorderSide,
+  BorderStroke,
+  BgStyle,
+  BgTo,
+} from "@/ascendra-ui/components/ui/accent-styles";
 import { type ColumnDef } from "@/ascendra-ui/providers/data-table/data-table.types";
 import { DataTableProvider } from "@/ascendra-ui/providers/data-table/data-table.provider";
 import { DataTable } from "@/ascendra-ui/components/data-table/data-table";
@@ -253,6 +263,492 @@ function InvoiceDataTable({
         <DataTableFoot />
       </DataTableWrapper>
     </DataTableProvider>
+  );
+}
+
+// ─── Playground helpers ───────────────────────────────────────────────────────
+
+const ACCENT_COLORS: AccentColor[] = [
+  "orange",
+  "blue",
+  "amber",
+  "teal",
+  "indigo",
+  "purple",
+  "red",
+  "slate",
+];
+const COLOR_SWATCH: Record<AccentColor, string> = {
+  orange: "bg-orange-500",
+  blue: "bg-blue-500",
+  amber: "bg-amber-500",
+  teal: "bg-teal-500",
+  indigo: "bg-indigo-500",
+  purple: "bg-purple-500",
+  red: "bg-red-500",
+  slate: "bg-slate-500",
+};
+
+const BORDER_SIDES: BorderSide[] = ["t", "l", "r", "b"];
+const BORDER_SIDE_LABEL: Record<BorderSide, string> = {
+  t: "Top",
+  l: "Left",
+  r: "Right",
+  b: "Bottom",
+};
+const BORDER_STROKES: BorderStroke[] = [1, 2, 3];
+const BG_STYLES: BgStyle[] = ["linear", "radial", "conic"];
+const BG_TOS: BgTo[] = ["transparent", "white", "black", ...ACCENT_COLORS];
+
+type BorderState = {
+  enabled: boolean;
+  side: BorderSide;
+  stroke: BorderStroke;
+  color: AccentColor;
+};
+type BgState = {
+  enabled: boolean;
+  style: BgStyle;
+  side: BorderSide;
+  color: AccentColor;
+  to: BgTo;
+};
+
+
+function Pill({
+  active,
+  onClick,
+  children,
+  className,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "rounded-md px-2.5 py-1 text-xs font-medium transition-colors border",
+        active
+          ? "bg-foreground text-background border-foreground"
+          : "bg-background text-muted-foreground border-border hover:text-foreground",
+        className,
+      )}
+    >
+      {children}
+    </button>
+  );
+}
+
+function ControlRow({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      {/* <span className="w-12 shrink-0 text-xs text-muted-foreground">
+        {label}
+      </span> */}
+      {children}
+    </div>
+  );
+}
+
+function generateCode(
+  wrapperBorder: BorderState,
+  bodyBorder: BorderState,
+  bodyBg: BgState,
+): string {
+  const wb = wrapperBorder.enabled
+    ? ` border={{ side: "${wrapperBorder.side}", stroke: ${wrapperBorder.stroke}, color: "${wrapperBorder.color}" }}`
+    : "";
+  const bb = bodyBorder.enabled
+    ? `border={{ side: "${bodyBorder.side}", stroke: ${bodyBorder.stroke}, color: "${bodyBorder.color}" }}`
+    : "";
+  const bg = bodyBg.enabled
+    ? `bg={{ style: "${bodyBg.style}", side: "${bodyBg.side}", color: "${bodyBg.color}", to: "${bodyBg.to}" }}`
+    : "";
+  const bodyAttrs = [bb, bg].filter(Boolean).join("\n      ");
+  const bodyLine = bodyAttrs ? `\n      ${bodyAttrs}` : "";
+
+  return `<DataTableWrapper${wb}>
+  <DataTable>
+    <DataTableHeader>...</DataTableHeader>
+    <DataTableBody${bodyLine}${bodyAttrs ? "\n    " : ""}>
+      {(row) => <DataTableRow key={row.id}>...</DataTableRow>}
+    </DataTableBody>
+  </DataTable>
+  <DataTableLoadingBody />
+  <DataTableEmptyBody />
+  <DataTableFoot />
+</DataTableWrapper>`;
+}
+
+function PlaygroundDataTable({
+  wrapperBorder,
+  bodyBorder,
+  bodyBg,
+}: {
+  wrapperBorder: BorderState;
+  bodyBorder: BorderState;
+  bodyBg: BgState;
+}) {
+  return (
+    <DataTableProvider data={MOCK_INVOICES} columns={INVOICE_COLUMNS}>
+      <DataTableWrapper
+        border={wrapperBorder.enabled ? wrapperBorder : undefined}
+      >
+        <DataTable scrollable horizontal height={320}>
+          <DataTableHeader>
+            <DataTableHeaderRow>
+              <DataTableHead column="invoiceNumber" />
+              <DataTableHead column="clientName" />
+              <DataTableHead column="amount" />
+              <DataTableHead column="dueDate" />
+              <DataTableHead column="status" />
+              <DataTableHead column="issuedAt" />
+            </DataTableHeaderRow>
+          </DataTableHeader>
+          <DataTableBody
+            border={bodyBorder.enabled ? bodyBorder : undefined}
+            bg={bodyBg.enabled ? bodyBg : undefined}
+          >
+            {(row: Invoice) => (
+              <DataTableRow key={row.id}>
+                <DataTableCell column="invoiceNumber">
+                  <DataTableHighlight
+                    text={row.invoiceNumber}
+                    item={row}
+                    itemKey="invoiceNumber"
+                  />
+                </DataTableCell>
+                <DataTableCell column="clientName">
+                  <DataTableHighlight
+                    text={row.clientName}
+                    item={row}
+                    itemKey="clientName"
+                  />
+                </DataTableCell>
+                <DataTableCell column="amount">
+                  <DataTableHighlight
+                    text={formatAmount(row.amount)}
+                    item={row}
+                    itemKey="amount"
+                  />
+                </DataTableCell>
+                <DataTableCell column="dueDate">
+                  <DataTableHighlight
+                    text={formatDate(row.dueDate)}
+                    item={row}
+                    itemKey="dueDate"
+                  />
+                </DataTableCell>
+                <DataTableCell column="status">
+                  <SimpleBadge variant={statusBadgeVariant[row.status]}>
+                    {statusLabel[row.status]}
+                  </SimpleBadge>
+                </DataTableCell>
+                <DataTableCell column="issuedAt">
+                  <DataTableHighlight
+                    text={formatDate(row.issuedAt)}
+                    item={row}
+                    itemKey="issuedAt"
+                  />
+                </DataTableCell>
+              </DataTableRow>
+            )}
+          </DataTableBody>
+        </DataTable>
+        <DataTableLoadingBody />
+        <DataTableEmptyBody />
+        <DataTableFoot />
+      </DataTableWrapper>
+    </DataTableProvider>
+  );
+}
+
+function DataTableAccentPlayground() {
+  const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
+  const [wrapperBorder, setWrapperBorder] = useState<BorderState>({
+    enabled: true,
+    side: "t",
+    stroke: 3,
+    color: "orange",
+  });
+  const [bodyBorder, setBodyBorder] = useState<BorderState>({
+    enabled: false,
+    side: "t",
+    stroke: 3,
+    color: "blue",
+  });
+  const [bodyBg, setBodyBg] = useState<BgState>({
+    enabled: true,
+    style: "linear",
+    side: "b",
+    color: "blue",
+    to: "transparent",
+  });
+
+  return (
+    <div className="rounded-lg border overflow-hidden">
+      {/* Tab bar */}
+      <div className="flex border-b bg-muted/60">
+        {(["preview", "code"] as const).map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={cn(
+              "px-4 py-2 text-xs font-medium capitalize transition-colors",
+              activeTab === tab
+                ? "text-foreground border-b-2 border-foreground -mb-px bg-background"
+                : "text-muted-foreground hover:text-foreground",
+            )}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      {/* Preview tab: controls sidebar + live table side-by-side */}
+      {activeTab === "preview" && (
+        <div className="flex flex-col lg:flex-row">
+          {/* Controls — full width on small, fixed sidebar on large */}
+          <div className="w-full lg:w-63 shrink-0 border-b lg:border-b-0 lg:border-r divide-y bg-muted/10">
+            {/* Wrapper Border */}
+            <div className="p-3 space-y-3">
+              <Pill
+                active={wrapperBorder.enabled}
+                onClick={() =>
+                  setWrapperBorder((s) => ({ ...s, enabled: !s.enabled }))
+                }
+              >
+                {wrapperBorder.enabled ? "✓ " : ""}Wrapper Border
+              </Pill>
+              {wrapperBorder.enabled && (
+                <div className="space-y-2">
+                  <ControlRow label="Side">
+                    {BORDER_SIDES.map((s) => (
+                      <Pill
+                        key={s}
+                        active={wrapperBorder.side === s}
+                        onClick={() =>
+                          setWrapperBorder((st) => ({ ...st, side: s }))
+                        }
+                      >
+                        {BORDER_SIDE_LABEL[s]}
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  <ControlRow label="Stroke">
+                    {BORDER_STROKES.map((n) => (
+                      <Pill
+                        key={n}
+                        active={wrapperBorder.stroke === n}
+                        onClick={() =>
+                          setWrapperBorder((st) => ({ ...st, stroke: n }))
+                        }
+                      >
+                        {n}px
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  <ControlRow label="Color">
+                    {ACCENT_COLORS.map((c) => (
+                      <button
+                        key={c}
+                        title={c}
+                        onClick={() =>
+                          setWrapperBorder((st) => ({ ...st, color: c }))
+                        }
+                        className={cn(
+                          "h-5 w-5 rounded border-2 transition-all",
+                          COLOR_SWATCH[c],
+                          wrapperBorder.color === c
+                            ? "border-foreground scale-110"
+                            : "border-transparent",
+                        )}
+                      />
+                    ))}
+                  </ControlRow>
+                </div>
+              )}
+            </div>
+
+            {/* Body Border */}
+            <div className="p-3 space-y-3">
+              <Pill
+                active={bodyBorder.enabled}
+                onClick={() =>
+                  setBodyBorder((s) => ({ ...s, enabled: !s.enabled }))
+                }
+              >
+                {bodyBorder.enabled ? "✓ " : ""}Body Border
+              </Pill>
+              {bodyBorder.enabled && (
+                <div className="space-y-2">
+                  <ControlRow label="Side">
+                    {BORDER_SIDES.map((s) => (
+                      <Pill
+                        key={s}
+                        active={bodyBorder.side === s}
+                        onClick={() =>
+                          setBodyBorder((st) => ({ ...st, side: s }))
+                        }
+                      >
+                        {BORDER_SIDE_LABEL[s]}
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  <ControlRow label="Stroke">
+                    {BORDER_STROKES.map((n) => (
+                      <Pill
+                        key={n}
+                        active={bodyBorder.stroke === n}
+                        onClick={() =>
+                          setBodyBorder((st) => ({ ...st, stroke: n }))
+                        }
+                      >
+                        {n}px
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  <ControlRow label="Color">
+                    {ACCENT_COLORS.map((c) => (
+                      <button
+                        key={c}
+                        title={c}
+                        onClick={() =>
+                          setBodyBorder((st) => ({ ...st, color: c }))
+                        }
+                        className={cn(
+                          "h-5 w-5 rounded border-2 transition-all",
+                          COLOR_SWATCH[c],
+                          bodyBorder.color === c
+                            ? "border-foreground scale-110"
+                            : "border-transparent",
+                        )}
+                      />
+                    ))}
+                  </ControlRow>
+                </div>
+              )}
+            </div>
+
+            {/* Body Background */}
+            <div className="p-3 space-y-3">
+              <Pill
+                active={bodyBg.enabled}
+                onClick={() =>
+                  setBodyBg((s) => ({ ...s, enabled: !s.enabled }))
+                }
+              >
+                {bodyBg.enabled ? "✓ " : ""}Body Background
+              </Pill>
+              {bodyBg.enabled && (
+                <div className="space-y-2">
+                  <ControlRow label="Style">
+                    {BG_STYLES.map((s) => (
+                      <Pill
+                        key={s}
+                        active={bodyBg.style === s}
+                        onClick={() =>
+                          setBodyBg((st) => ({ ...st, style: s }))
+                        }
+                      >
+                        {s}
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  {bodyBg.style === "linear" && (
+                    <ControlRow label="Side">
+                      {BORDER_SIDES.map((s) => (
+                        <Pill
+                          key={s}
+                          active={bodyBg.side === s}
+                          onClick={() =>
+                            setBodyBg((st) => ({ ...st, side: s }))
+                          }
+                        >
+                          {BORDER_SIDE_LABEL[s]}
+                        </Pill>
+                      ))}
+                    </ControlRow>
+                  )}
+                  <ControlRow label="Color">
+                    {ACCENT_COLORS.map((c) => (
+                      <button
+                        key={c}
+                        title={c}
+                        onClick={() =>
+                          setBodyBg((st) => ({ ...st, color: c }))
+                        }
+                        className={cn(
+                          "h-5 w-5 rounded border-2 transition-all",
+                          COLOR_SWATCH[c],
+                          bodyBg.color === c
+                            ? "border-foreground scale-110"
+                            : "border-transparent",
+                        )}
+                      />
+                    ))}
+                  </ControlRow>
+                  <ControlRow label="To">
+                    <div className="flex flex-wrap gap-1">
+                      {BG_TOS.map((t) => (
+                        <button
+                          key={t}
+                          onClick={() => setBodyBg((st) => ({ ...st, to: t }))}
+                          className={cn(
+                            "flex h-5 items-center rounded border-2 px-1 text-[9px] font-medium transition-all",
+                            t === "transparent" &&
+                              "bg-transparent text-muted-foreground",
+                            t === "white" && "bg-white text-black",
+                            t === "black" && "bg-black text-white",
+                            t !== "transparent" &&
+                              t !== "white" &&
+                              t !== "black" &&
+                              cn(COLOR_SWATCH[t as AccentColor], "text-white"),
+                            bodyBg.to === t
+                              ? "border-foreground scale-110"
+                              : "border-transparent",
+                          )}
+                        >
+                          {t}
+                        </button>
+                      ))}
+                    </div>
+                  </ControlRow>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Live preview */}
+          <div className="flex-1 min-w-0 p-4">
+            <PlaygroundDataTable
+              wrapperBorder={wrapperBorder}
+              bodyBorder={bodyBorder}
+              bodyBg={bodyBg}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Code tab */}
+      {activeTab === "code" && (
+        <div className="p-4">
+          <CodeBlock
+            label="Generated code"
+            code={generateCode(wrapperBorder, bodyBorder, bodyBg)}
+          />
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -694,12 +1190,140 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
             </div>
           </ComponentPreview>
         </div>
+
+        {/* Accent styles playground */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">
+            Accent Styles — Border &amp; Background
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              DataTableWrapper
+            </code>{" "}
+            accepts a{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              border
+            </code>{" "}
+            prop.{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              DataTableBody
+            </code>{" "}
+            accepts both{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              border
+            </code>{" "}
+            and{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">bg</code>.
+            Toggle each option below and see the result live.
+          </p>
+          <DataTableAccentPlayground />
+        </div>
       </div>
 
       {/* ── Props ── */}
-      <div className="space-y-4">
-        <SectionHeader>ColumnDef&lt;T&gt; Props</SectionHeader>
-        <PropsTable props={meta.props ?? []} />
+      <div className="space-y-8">
+        <SectionHeader>Props</SectionHeader>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">
+            ColumnDef&lt;T&gt;
+          </h3>
+          <PropsTable props={meta.props ?? []} />
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">
+            DataTableWrapper
+          </h3>
+          <PropsTable
+            props={[
+              {
+                name: "border",
+                type: "BorderConfig",
+                description:
+                  "Optional accent border on the outer wrapper. Omit to render without a border.",
+              },
+            ]}
+          />
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">DataTableBody</h3>
+          <PropsTable
+            props={[
+              {
+                name: "border",
+                type: "BorderConfig",
+                description:
+                  "Optional accent border on the ::before panel element.",
+              },
+              {
+                name: "bg",
+                type: "BgConfig",
+                description:
+                  "Optional gradient background on the ::before panel. Removes solid bg-background when set.",
+              },
+            ]}
+          />
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">BorderConfig</h3>
+          <PropsTable
+            props={[
+              {
+                name: "side",
+                type: "'t' | 'l' | 'r' | 'b'",
+                default: "'t'",
+                description: "Which side the border appears on.",
+              },
+              {
+                name: "stroke",
+                type: "1 | 2 | 3",
+                default: "3",
+                description: "Border thickness in px.",
+              },
+              {
+                name: "color",
+                type: "'blue' | 'amber' | 'purple' | 'red' | 'teal' | 'orange' | 'indigo' | 'slate'",
+                default: "'orange'",
+                description: "Accent color at 60% opacity.",
+              },
+            ]}
+          />
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">BgConfig</h3>
+          <PropsTable
+            props={[
+              {
+                name: "style",
+                type: "'linear' | 'radial' | 'conic'",
+                default: "'linear'",
+                description: "CSS gradient type.",
+              },
+              {
+                name: "side",
+                type: "'t' | 'l' | 'r' | 'b'",
+                default: "'b'",
+                description: "Gradient direction for linear gradients.",
+              },
+              {
+                name: "color",
+                type: "'blue' | 'amber' | 'purple' | 'red' | 'teal' | 'orange' | 'indigo' | 'slate'",
+                default: "'orange'",
+                description: "Start color at 7% opacity.",
+              },
+              {
+                name: "to",
+                type: "'transparent' | 'white' | 'black' | AccentColor",
+                default: "'transparent'",
+                description: "End stop color. Accent colors resolve to 500/60.",
+              },
+            ]}
+          />
+        </div>
       </div>
     </div>
   );
