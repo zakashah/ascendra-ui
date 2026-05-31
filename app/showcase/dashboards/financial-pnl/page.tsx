@@ -182,14 +182,12 @@ export default function FinancialPnlPage() {
             <Card key={kpi.label} className="h-full">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
-                  <div className="flex items-start justify-between gap-2">
-                    <p className="text-xs text-muted-foreground leading-relaxed">
-                      {kpi.label}
-                    </p>
-                    <SimpleBadge
-                      variant={kpi.up ? "green" : "red"}
-                      className="shrink-0"
-                    >
+                  <p className="text-xs text-muted-foreground">{kpi.label}</p>
+                  <div className="mt-auto flex flex-col items-start gap-1 pt-4 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-2">
+                    <span className="text-2xl font-semibold tracking-tight">
+                      {kpi.value}
+                    </span>
+                    <SimpleBadge variant={kpi.up ? "green" : "red"}>
                       {kpi.up ? (
                         <LuTrendingUp className="size-3" />
                       ) : (
@@ -198,9 +196,6 @@ export default function FinancialPnlPage() {
                       {kpi.delta}
                     </SimpleBadge>
                   </div>
-                  <span className="mt-auto pt-4 text-2xl font-semibold tracking-tight">
-                    {kpi.value}
-                  </span>
                 </div>
               </CardPanel>
             </Card>
