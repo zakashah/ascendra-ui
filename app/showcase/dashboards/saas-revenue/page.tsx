@@ -368,7 +368,10 @@ export default function SaasRevenuePage() {
             <Card className="h-full">
               <CardHeader>
                 <CardHeaderTitle>MRR &amp; Growth Rate</CardHeaderTitle>
-                <CardHeaderSubtitle>12-month trend · MRR bars with growth rate line overlay (right axis)</CardHeaderSubtitle>
+                <CardHeaderSubtitle>
+                  12-month trend · MRR bars with growth rate line overlay (right
+                  axis)
+                </CardHeaderSubtitle>
               </CardHeader>
               <CardPanel>
                 <div className="p-5">
@@ -457,61 +460,63 @@ export default function SaasRevenuePage() {
                 <div className="flex flex-1 flex-col p-5">
                   <p className="text-sm font-medium">Plan Mix</p>
                   <div className="mt-auto">
-                  <ChartContainer config={{}} className="h-36 w-full">
-                    <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
-                      <Pie
-                        data={planMixData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={44}
-                        outerRadius={64}
-                        paddingAngle={2}
-                        dataKey="value"
-                        nameKey="name"
-                      />
-                      <ChartTooltip
-                        content={
-                          <ChartTooltipContent
-                            formatter={(v) => [
-                              `$${Number(v).toLocaleString()}`,
-                              "",
-                            ]}
-                            nameKey="name"
-                          />
-                        }
-                      />
-                    </PieChart>
-                  </ChartContainer>
-                  {/* Custom legend */}
-                  <div className="mt-4 flex flex-col gap-2">
-                    {planMixData.map((d) => {
-                      const pct = ((d.value / 248400) * 100).toFixed(0);
-                      return (
-                        <div
-                          key={d.name}
-                          className="flex items-center justify-between gap-2 text-xs"
-                        >
-                          <div className="flex items-center gap-1.5">
-                            <span
-                              className="h-2 w-2 shrink-0 rounded-[2px]"
-                              style={{ background: d.fill }}
+                    <ChartContainer config={{}} className="h-36 w-full">
+                      <PieChart
+                        margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+                      >
+                        <Pie
+                          data={planMixData}
+                          cx="50%"
+                          cy="50%"
+                          innerRadius={44}
+                          outerRadius={64}
+                          paddingAngle={2}
+                          dataKey="value"
+                          nameKey="name"
+                        />
+                        <ChartTooltip
+                          content={
+                            <ChartTooltipContent
+                              formatter={(v) => [
+                                `$${Number(v).toLocaleString()}`,
+                                "",
+                              ]}
+                              nameKey="name"
                             />
-                            <span className="text-muted-foreground">
-                              {d.name}
-                            </span>
+                          }
+                        />
+                      </PieChart>
+                    </ChartContainer>
+                    {/* Custom legend */}
+                    <div className="mt-4 flex flex-col gap-2">
+                      {planMixData.map((d) => {
+                        const pct = ((d.value / 248400) * 100).toFixed(0);
+                        return (
+                          <div
+                            key={d.name}
+                            className="flex items-center justify-between gap-2 text-xs"
+                          >
+                            <div className="flex items-center gap-1.5">
+                              <span
+                                className="h-2 w-2 shrink-0 rounded-[2px]"
+                                style={{ background: d.fill }}
+                              />
+                              <span className="text-muted-foreground">
+                                {d.name}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-2 tabular-nums">
+                              <span className="text-muted-foreground/60">
+                                {pct}%
+                              </span>
+                              <span className="font-medium">
+                                ${(d.value / 1000).toFixed(1)}k
+                              </span>
+                            </div>
                           </div>
-                          <div className="flex items-center gap-2 tabular-nums">
-                            <span className="text-muted-foreground/60">
-                              {pct}%
-                            </span>
-                            <span className="font-medium">
-                              ${(d.value / 1000).toFixed(1)}k
-                            </span>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </CardPanel>
@@ -683,7 +688,9 @@ export default function SaasRevenuePage() {
           <div className="col-span-12 md:col-span-7">
             <CardHeader>
               <CardHeaderTitle>Top Accounts</CardHeaderTitle>
-              <CardHeaderSubtitle>Top 8 accounts ranked by monthly recurring revenue</CardHeaderSubtitle>
+              <CardHeaderSubtitle>
+                Top 8 accounts ranked by monthly recurring revenue
+              </CardHeaderSubtitle>
             </CardHeader>
             <TableWrapper>
               <Table scrollable horizontal vertical height={300}>
@@ -733,54 +740,58 @@ export default function SaasRevenuePage() {
                 <div className="flex flex-1 flex-col p-5">
                   <p className="mb-4 text-sm font-medium">Churn by Cohort</p>
                   <div className="flex-1 min-h-0">
-                  <ChartContainer config={churnConfig} className="h-full w-full">
-                    <BarChart
-                      data={churnData}
-                      margin={{ top: 4, right: 0, left: 0, bottom: 0 }}
+                    <ChartContainer
+                      config={churnConfig}
+                      className="h-full w-full"
                     >
-                      <CartesianGrid
-                        vertical={false}
-                        stroke="var(--border)"
-                        strokeOpacity={0.4}
-                      />
-                      <XAxis
-                        dataKey="month"
-                        tickLine={false}
-                        axisLine={false}
-                        tick={{ fontSize: 11 }}
-                        dy={6}
-                      />
-                      <YAxis
-                        tickLine={false}
-                        axisLine={false}
-                        tick={{ fontSize: 11 }}
-                        tickFormatter={fmtMrr}
-                        width={40}
-                      />
-                      <ChartTooltip
-                        content={
-                          <ChartTooltipContent
-                            formatter={makeTooltipFormatter(churnConfig, (v) =>
-                              fmtMrr(v),
-                            )}
-                          />
-                        }
-                      />
-                      {TIER_KEYS.map((key, i) => (
-                        <Bar
-                          key={key}
-                          dataKey={key}
-                          stackId="churn"
-                          fill={`var(--chart-${i + 1})`}
-                          fillOpacity={0.85}
-                          radius={
-                            key === "growth" ? [3, 3, 0, 0] : [0, 0, 0, 0]
-                          }
-                          hide={hiddenChurn[key]}
+                      <BarChart
+                        data={churnData}
+                        margin={{ top: 4, right: 0, left: 0, bottom: 0 }}
+                      >
+                        <CartesianGrid
+                          vertical={false}
+                          stroke="var(--border)"
+                          strokeOpacity={0.4}
                         />
-                      ))}
-                    </BarChart>
-                  </ChartContainer>
+                        <XAxis
+                          dataKey="month"
+                          tickLine={false}
+                          axisLine={false}
+                          tick={{ fontSize: 11 }}
+                          dy={6}
+                        />
+                        <YAxis
+                          tickLine={false}
+                          axisLine={false}
+                          tick={{ fontSize: 11 }}
+                          tickFormatter={fmtMrr}
+                          width={40}
+                        />
+                        <ChartTooltip
+                          content={
+                            <ChartTooltipContent
+                              formatter={makeTooltipFormatter(
+                                churnConfig,
+                                (v) => fmtMrr(v),
+                              )}
+                            />
+                          }
+                        />
+                        {TIER_KEYS.map((key, i) => (
+                          <Bar
+                            key={key}
+                            dataKey={key}
+                            stackId="churn"
+                            fill={`var(--chart-${i + 1})`}
+                            fillOpacity={0.85}
+                            radius={
+                              key === "growth" ? [3, 3, 0, 0] : [0, 0, 0, 0]
+                            }
+                            hide={hiddenChurn[key]}
+                          />
+                        ))}
+                      </BarChart>
+                    </ChartContainer>
                   </div>
                   <ChartSeriesLegend
                     config={churnConfig}
