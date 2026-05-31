@@ -372,7 +372,7 @@ export default function RealEstatePage() {
           {kpis.map((kpi) => (
             <Card key={kpi.label} className="h-full">
               <CardPanel>
-                <div className="flex flex-1 flex-col p-5">
+                <div className="flex flex-1 flex-col p-5 bg-linear-to-b from-amber-500/[0.07] to-transparent">
                   <p className="text-xs text-muted-foreground">{kpi.label}</p>
                   <div className="mt-auto flex flex-col items-start gap-1 pt-4 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-2">
                     <span className="text-2xl font-semibold tracking-tight">
