@@ -27,6 +27,22 @@ export const navConfig: NavCategory[] = [
     ],
   },
   {
+    title: 'Sample Dashboards',
+    items: [
+      { name: 'Dashboard Gallery',   slug: 'dashboards' },
+      { name: 'SaaS Revenue',        slug: 'dashboards/saas-revenue' },
+      { name: 'E-commerce Ops',      slug: 'dashboards/ecommerce-ops' },
+      { name: 'Marketing',           slug: 'dashboards/marketing' },
+      { name: 'Financial P&L',       slug: 'dashboards/financial-pnl' },
+      { name: 'Trading Portfolio',   slug: 'dashboards/trading-portfolio' },
+      { name: 'Healthcare',          slug: 'dashboards/healthcare' },
+      { name: 'HR & People',         slug: 'dashboards/hr-people' },
+      { name: 'DevOps',              slug: 'dashboards/devops' },
+      { name: 'Supply Chain',        slug: 'dashboards/supply-chain' },
+      { name: 'Real Estate',         slug: 'dashboards/real-estate' },
+    ],
+  },
+  {
     title: 'Sample Forms',
     items: [
       { name: 'Forms Gallery', slug: 'forms' },

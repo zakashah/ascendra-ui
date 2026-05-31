@@ -68,3 +68,22 @@ export type DrawerMeta = {
   domain: string;
   components: string[];
 };
+
+export type LayoutCellHeight = 'sm' | 'md' | 'lg' | 'xl';
+
+export type LayoutCell = {
+  type: 'chart' | 'table';
+  cols: number;
+  title: string;
+  height?: LayoutCellHeight;
+};
+
+export type DashboardMeta = {
+  slug: string;
+  name: string;
+  domain: string;
+  description: string;
+  chartTypes: string[];
+  kpis: [string, string, string, string];
+  layout: LayoutCell[][];
+};
