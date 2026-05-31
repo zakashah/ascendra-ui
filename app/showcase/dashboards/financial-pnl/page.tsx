@@ -51,10 +51,10 @@ import {
 // ─── KPIs ─────────────────────────────────────────────────────────────────────
 
 const kpis = [
-  { label: "Total Revenue",      value: "$8.64M", delta: "+14.2%", up: true  },
-  { label: "EBITDA",             value: "$1.92M", delta: "+28.6%", up: true  },
-  { label: "Monthly Burn Rate",  value: "$680k",  delta: "−$42k",  up: true  },
-  { label: "Cash Runway",        value: "18 mo",  delta: "+3 mo",  up: true  },
+  { label: "Total Revenue", value: "$8.64M", delta: "+14.2%", up: true },
+  { label: "EBITDA", value: "$1.92M", delta: "+28.6%", up: true },
+  { label: "Monthly Burn Rate", value: "$680k", delta: "−$42k", up: true },
+  { label: "Cash Runway", value: "18 mo", delta: "+3 mo", up: true },
 ] as const;
 
 // ─── Costs & EBITDA Margin ────────────────────────────────────────────────────
@@ -62,30 +62,116 @@ const kpis = [
 //   ebitdaPct = EBITDA / revenue × 100
 
 const costsData = [
-  { month: "Jan", payroll: 332, infra: 51, marketing: 127, revenue: 600,  ebitdaPct: 15 },
-  { month: "Feb", payroll: 335, infra: 52, marketing: 128, revenue: 620,  ebitdaPct: 17 },
-  { month: "Mar", payroll: 346, infra: 56, marketing: 158, revenue: 700,  ebitdaPct: 20 },
-  { month: "Apr", payroll: 354, infra: 54, marketing: 137, revenue: 690,  ebitdaPct: 21 },
-  { month: "May", payroll: 360, infra: 55, marketing: 139, revenue: 710,  ebitdaPct: 22 },
-  { month: "Jun", payroll: 354, infra: 54, marketing: 136, revenue: 680,  ebitdaPct: 20 },
-  { month: "Jul", payroll: 361, infra: 56, marketing: 138, revenue: 730,  ebitdaPct: 24 },
-  { month: "Aug", payroll: 371, infra: 57, marketing: 142, revenue: 760,  ebitdaPct: 25 },
-  { month: "Sep", payroll: 356, infra: 55, marketing: 136, revenue: 710,  ebitdaPct: 23 },
-  { month: "Oct", payroll: 400, infra: 62, marketing: 153, revenue: 820,  ebitdaPct: 25 },
-  { month: "Nov", payroll: 408, infra: 63, marketing: 157, revenue: 860,  ebitdaPct: 27 },
-  { month: "Dec", payroll: 376, infra: 58, marketing: 144, revenue: 760,  ebitdaPct: 24 },
+  {
+    month: "Jan",
+    payroll: 332,
+    infra: 51,
+    marketing: 127,
+    revenue: 600,
+    ebitdaPct: 15,
+  },
+  {
+    month: "Feb",
+    payroll: 335,
+    infra: 52,
+    marketing: 128,
+    revenue: 620,
+    ebitdaPct: 17,
+  },
+  {
+    month: "Mar",
+    payroll: 346,
+    infra: 56,
+    marketing: 158,
+    revenue: 700,
+    ebitdaPct: 20,
+  },
+  {
+    month: "Apr",
+    payroll: 354,
+    infra: 54,
+    marketing: 137,
+    revenue: 690,
+    ebitdaPct: 21,
+  },
+  {
+    month: "May",
+    payroll: 360,
+    infra: 55,
+    marketing: 139,
+    revenue: 710,
+    ebitdaPct: 22,
+  },
+  {
+    month: "Jun",
+    payroll: 354,
+    infra: 54,
+    marketing: 136,
+    revenue: 680,
+    ebitdaPct: 20,
+  },
+  {
+    month: "Jul",
+    payroll: 361,
+    infra: 56,
+    marketing: 138,
+    revenue: 730,
+    ebitdaPct: 24,
+  },
+  {
+    month: "Aug",
+    payroll: 371,
+    infra: 57,
+    marketing: 142,
+    revenue: 760,
+    ebitdaPct: 25,
+  },
+  {
+    month: "Sep",
+    payroll: 356,
+    infra: 55,
+    marketing: 136,
+    revenue: 710,
+    ebitdaPct: 23,
+  },
+  {
+    month: "Oct",
+    payroll: 400,
+    infra: 62,
+    marketing: 153,
+    revenue: 820,
+    ebitdaPct: 25,
+  },
+  {
+    month: "Nov",
+    payroll: 408,
+    infra: 63,
+    marketing: 157,
+    revenue: 860,
+    ebitdaPct: 27,
+  },
+  {
+    month: "Dec",
+    payroll: 376,
+    infra: 58,
+    marketing: 144,
+    revenue: 760,
+    ebitdaPct: 24,
+  },
 ];
 
 const costsConfig: ChartConfig = {
-  payroll:   { label: "Payroll",       color: "var(--chart-1)" },
-  infra:     { label: "Infrastructure", color: "var(--chart-2)" },
-  marketing: { label: "Marketing",     color: "var(--chart-3)" },
+  payroll: { label: "Payroll", color: "var(--chart-1)" },
+  infra: { label: "Infrastructure", color: "var(--chart-2)" },
+  marketing: { label: "Marketing", color: "var(--chart-3)" },
   ebitdaPct: { label: "EBITDA Margin", color: "var(--chart-4)" },
 };
 
 // ─── Budget Attainment Gauge ──────────────────────────────────────────────────
 
-const budgetGaugeData = [{ name: "Budget", value: 108, fill: "var(--chart-2)" }];
+const budgetGaugeData = [
+  { name: "Budget", value: 108, fill: "var(--chart-2)" },
+];
 
 const budgetGaugeConfig: ChartConfig = {
   Budget: { label: "Attainment", color: "var(--chart-2)" },
@@ -94,53 +180,98 @@ const budgetGaugeConfig: ChartConfig = {
 // ─── Revenue vs Expenses ──────────────────────────────────────────────────────
 
 const revExpData = costsData.map((d) => ({
-  month:    d.month,
-  revenue:  d.revenue,
+  month: d.month,
+  revenue: d.revenue,
   expenses: d.payroll + d.infra + d.marketing,
 }));
 
 const revExpConfig: ChartConfig = {
-  revenue:  { label: "Revenue",   color: "var(--chart-1)" },
-  expenses: { label: "Expenses",  color: "var(--chart-3)" },
+  revenue: { label: "Revenue", color: "var(--chart-1)" },
+  expenses: { label: "Expenses", color: "var(--chart-3)" },
 };
 
 // ─── Cash Flow ────────────────────────────────────────────────────────────────
 // net = monthly operating cash; balance = running total (opening $10.8M)
 
 const cashFlowData = [
-  { month: "Jan", net:  90,  balance: 10890 },
-  { month: "Feb", net: 105,  balance: 10995 },
-  { month: "Mar", net: 140,  balance: 11135 },
-  { month: "Apr", net: 145,  balance: 11280 },
-  { month: "May", net: 156,  balance: 11436 },
-  { month: "Jun", net: -62,  balance: 11374 },
-  { month: "Jul", net: 175,  balance: 11549 },
-  { month: "Aug", net: 190,  balance: 11739 },
-  { month: "Sep", net: -48,  balance: 11691 },
-  { month: "Oct", net: 205,  balance: 11896 },
-  { month: "Nov", net: 232,  balance: 12128 },
-  { month: "Dec", net: 182,  balance: 12310 },
+  { month: "Jan", net: 90, balance: 10890 },
+  { month: "Feb", net: 105, balance: 10995 },
+  { month: "Mar", net: 140, balance: 11135 },
+  { month: "Apr", net: 145, balance: 11280 },
+  { month: "May", net: 156, balance: 11436 },
+  { month: "Jun", net: -62, balance: 11374 },
+  { month: "Jul", net: 175, balance: 11549 },
+  { month: "Aug", net: 190, balance: 11739 },
+  { month: "Sep", net: -48, balance: 11691 },
+  { month: "Oct", net: 205, balance: 11896 },
+  { month: "Nov", net: 232, balance: 12128 },
+  { month: "Dec", net: 182, balance: 12310 },
 ];
 
 const cashFlowConfig: ChartConfig = {
-  net:     { label: "Net Cash Flow",  color: "var(--chart-2)" },
-  balance: { label: "Cash Balance",   color: "var(--chart-1)" },
+  net: { label: "Net Cash Flow", color: "var(--chart-2)" },
+  balance: { label: "Cash Balance", color: "var(--chart-1)" },
 };
 
 // ─── P&L Summary ──────────────────────────────────────────────────────────────
 
 const pnlRows = [
-  { item: "Revenue",      q1: "$1.9M", q2: "$2.1M", q3: "$2.2M", q4: "$2.4M", fy: "$8.6M", yoy: "+14.2%", up: true  },
-  { item: "Gross Profit", q1: "$1.3M", q2: "$1.5M", q3: "$1.5M", q4: "$1.7M", fy: "$6.0M", yoy: "+16.8%", up: true  },
-  { item: "EBITDA",       q1: "$335k", q2: "$437k", q3: "$528k", q4: "$619k", fy: "$1.9M", yoy: "+28.6%", up: true  },
-  { item: "Net Income",   q1: "$235k", q2: "$306k", q3: "$370k", q4: "$433k", fy: "$1.3M", yoy: "+22.4%", up: true  },
-  { item: "Headcount",    q1: "44",    q2: "47",    q3: "50",    q4: "52",    fy: "52",    yoy: "+10",    up: true  },
+  {
+    item: "Revenue",
+    q1: "$1.9M",
+    q2: "$2.1M",
+    q3: "$2.2M",
+    q4: "$2.4M",
+    fy: "$8.6M",
+    yoy: "+14.2%",
+    up: true,
+  },
+  {
+    item: "Gross Profit",
+    q1: "$1.3M",
+    q2: "$1.5M",
+    q3: "$1.5M",
+    q4: "$1.7M",
+    fy: "$6.0M",
+    yoy: "+16.8%",
+    up: true,
+  },
+  {
+    item: "EBITDA",
+    q1: "$335k",
+    q2: "$437k",
+    q3: "$528k",
+    q4: "$619k",
+    fy: "$1.9M",
+    yoy: "+28.6%",
+    up: true,
+  },
+  {
+    item: "Net Income",
+    q1: "$235k",
+    q2: "$306k",
+    q3: "$370k",
+    q4: "$433k",
+    fy: "$1.3M",
+    yoy: "+22.4%",
+    up: true,
+  },
+  {
+    item: "Headcount",
+    q1: "44",
+    q2: "47",
+    q3: "50",
+    q4: "52",
+    fy: "52",
+    yoy: "+10",
+    up: true,
+  },
 ];
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function FinancialPnlPage() {
-  const [hiddenCosts,  setHiddenCosts]  = useState<Record<string, boolean>>({});
+  const [hiddenCosts, setHiddenCosts] = useState<Record<string, boolean>>({});
   const [hiddenRevExp, setHiddenRevExp] = useState<Record<string, boolean>>({});
 
   return (
@@ -171,7 +302,8 @@ export default function FinancialPnlPage() {
           </span>
         </div>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Revenue, EBITDA, cost structure, and cash position — the CFO view for a scaling company.
+          Revenue, EBITDA, cost structure, and cash position — the CFO view for
+          a scaling company.
         </p>
       </div>
 
@@ -181,7 +313,7 @@ export default function FinancialPnlPage() {
           {kpis.map((kpi) => (
             <Card key={kpi.label} className="h-full">
               <CardPanel>
-                <div className="flex flex-1 flex-col p-5 bg-linear-to-b from-emerald-500/[0.07] to-transparent">
+                <div className="flex flex-1 flex-col p-5 ">
                   <p className="text-xs text-muted-foreground">{kpi.label}</p>
                   <div className="mt-auto flex flex-col items-start gap-1 pt-4 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-2">
                     <span className="text-2xl font-semibold tracking-tight">
@@ -395,10 +527,7 @@ export default function FinancialPnlPage() {
               </CardHeader>
               <CardPanel>
                 <div className="p-5">
-                  <ChartContainer
-                    config={revExpConfig}
-                    className="h-64 w-full"
-                  >
+                  <ChartContainer config={revExpConfig} className="h-64 w-full">
                     <AreaChart
                       data={revExpData}
                       margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
@@ -566,11 +695,7 @@ export default function FinancialPnlPage() {
                             />
                           }
                         />
-                        <Bar
-                          yAxisId="left"
-                          dataKey="net"
-                          radius={[3, 3, 0, 0]}
-                        >
+                        <Bar yAxisId="left" dataKey="net" radius={[3, 3, 0, 0]}>
                           {cashFlowData.map((entry, i) => (
                             <Cell
                               key={i}
@@ -598,7 +723,8 @@ export default function FinancialPnlPage() {
                 </div>
               </CardPanel>
               <CardFooter>
-                Bars = monthly net cash · green positive · red negative · line = running balance
+                Bars = monthly net cash · green positive · red negative · line =
+                running balance
               </CardFooter>
             </Card>
           </div>

@@ -47,65 +47,120 @@ import {
 // ─── KPIs ─────────────────────────────────────────────────────────────────────
 
 const kpis = [
-  { label: "Gross Merchandise Value", value: "$4.82M", delta: "+12.4%", up: true },
-  { label: "Orders Placed",           value: "28,340", delta: "+9.1%",  up: true },
-  { label: "Avg. Order Value",        value: "$170",   delta: "−2.1%",  up: false },
-  { label: "Return Rate",             value: "8.3%",   delta: "−1.2 pts", up: true },
+  {
+    label: "Gross Merchandise Value",
+    value: "$4.82M",
+    delta: "+12.4%",
+    up: true,
+  },
+  { label: "Orders Placed", value: "28,340", delta: "+9.1%", up: true },
+  { label: "Avg. Order Value", value: "$170", delta: "−2.1%", up: false },
+  { label: "Return Rate", value: "8.3%", delta: "−1.2 pts", up: true },
 ] as const;
 
 // ─── Weekly Orders ─────────────────────────────────────────────────────────────
 
 const weeklyOrdersData = [
   // Jan
-  {w:1,orders:498,returns:42},{w:2,orders:512,returns:44},{w:3,orders:488,returns:41},{w:4,orders:476,returns:40},
+  { w: 1, orders: 498, returns: 42 },
+  { w: 2, orders: 512, returns: 44 },
+  { w: 3, orders: 488, returns: 41 },
+  { w: 4, orders: 476, returns: 40 },
   // Feb
-  {w:5,orders:445,returns:38},{w:6,orders:432,returns:37},{w:7,orders:461,returns:39},{w:8,orders:453,returns:38},
+  { w: 5, orders: 445, returns: 38 },
+  { w: 6, orders: 432, returns: 37 },
+  { w: 7, orders: 461, returns: 39 },
+  { w: 8, orders: 453, returns: 38 },
   // Mar
-  {w:9,orders:492,returns:41},{w:10,orders:518,returns:43},{w:11,orders:534,returns:44},{w:12,orders:528,returns:44},{w:13,orders:542,returns:46},
+  { w: 9, orders: 492, returns: 41 },
+  { w: 10, orders: 518, returns: 43 },
+  { w: 11, orders: 534, returns: 44 },
+  { w: 12, orders: 528, returns: 44 },
+  { w: 13, orders: 542, returns: 46 },
   // Apr
-  {w:14,orders:548,returns:46},{w:15,orders:562,returns:47},{w:16,orders:571,returns:48},{w:17,orders:558,returns:47},
+  { w: 14, orders: 548, returns: 46 },
+  { w: 15, orders: 562, returns: 47 },
+  { w: 16, orders: 571, returns: 48 },
+  { w: 17, orders: 558, returns: 47 },
   // May
-  {w:18,orders:574,returns:48},{w:19,orders:588,returns:49},{w:20,orders:596,returns:50},{w:21,orders:582,returns:49},
+  { w: 18, orders: 574, returns: 48 },
+  { w: 19, orders: 588, returns: 49 },
+  { w: 20, orders: 596, returns: 50 },
+  { w: 21, orders: 582, returns: 49 },
   // Jun
-  {w:22,orders:605,returns:51},{w:23,orders:618,returns:52},{w:24,orders:624,returns:52},{w:25,orders:631,returns:53},{w:26,orders:619,returns:52},
+  { w: 22, orders: 605, returns: 51 },
+  { w: 23, orders: 618, returns: 52 },
+  { w: 24, orders: 624, returns: 52 },
+  { w: 25, orders: 631, returns: 53 },
+  { w: 26, orders: 619, returns: 52 },
   // Jul
-  {w:27,orders:638,returns:54},{w:28,orders:652,returns:55},{w:29,orders:644,returns:54},{w:30,orders:628,returns:53},
+  { w: 27, orders: 638, returns: 54 },
+  { w: 28, orders: 652, returns: 55 },
+  { w: 29, orders: 644, returns: 54 },
+  { w: 30, orders: 628, returns: 53 },
   // Aug
-  {w:31,orders:634,returns:53},{w:32,orders:641,returns:54},{w:33,orders:628,returns:53},{w:34,orders:619,returns:52},{w:35,orders:612,returns:51},
+  { w: 31, orders: 634, returns: 53 },
+  { w: 32, orders: 641, returns: 54 },
+  { w: 33, orders: 628, returns: 53 },
+  { w: 34, orders: 619, returns: 52 },
+  { w: 35, orders: 612, returns: 51 },
   // Sep
-  {w:36,orders:648,returns:54},{w:37,orders:661,returns:55},{w:38,orders:654,returns:55},{w:39,orders:642,returns:54},
+  { w: 36, orders: 648, returns: 54 },
+  { w: 37, orders: 661, returns: 55 },
+  { w: 38, orders: 654, returns: 55 },
+  { w: 39, orders: 642, returns: 54 },
   // Oct
-  {w:40,orders:672,returns:56},{w:41,orders:685,returns:57},{w:42,orders:698,returns:58},{w:43,orders:688,returns:57},
+  { w: 40, orders: 672, returns: 56 },
+  { w: 41, orders: 685, returns: 57 },
+  { w: 42, orders: 698, returns: 58 },
+  { w: 43, orders: 688, returns: 57 },
   // Nov — Black Friday spike at w46
-  {w:44,orders:726,returns:61},{w:45,orders:752,returns:63},{w:46,orders:818,returns:74},{w:47,orders:792,returns:71},
+  { w: 44, orders: 726, returns: 61 },
+  { w: 45, orders: 752, returns: 63 },
+  { w: 46, orders: 818, returns: 74 },
+  { w: 47, orders: 792, returns: 71 },
   // Dec — holiday peak then wind-down
-  {w:48,orders:834,returns:78},{w:49,orders:842,returns:82},{w:50,orders:814,returns:75},{w:51,orders:768,returns:68},{w:52,orders:698,returns:62},
+  { w: 48, orders: 834, returns: 78 },
+  { w: 49, orders: 842, returns: 82 },
+  { w: 50, orders: 814, returns: 75 },
+  { w: 51, orders: 768, returns: 68 },
+  { w: 52, orders: 698, returns: 62 },
 ];
 
 const weeklyOrdersConfig: ChartConfig = {
-  orders:  { label: "Orders",  color: "var(--chart-1)" },
+  orders: { label: "Orders", color: "var(--chart-1)" },
   returns: { label: "Returns", color: "var(--chart-3)" },
 };
 
 const WEEK_MONTHS: Record<number, string> = {
-  1:"Jan", 5:"Feb", 9:"Mar", 13:"Apr", 17:"May", 21:"Jun",
-  25:"Jul", 29:"Aug", 33:"Sep", 37:"Oct", 41:"Nov", 45:"Dec",
+  1: "Jan",
+  5: "Feb",
+  9: "Mar",
+  13: "Apr",
+  17: "May",
+  21: "Jun",
+  25: "Jul",
+  29: "Aug",
+  33: "Sep",
+  37: "Oct",
+  41: "Nov",
+  45: "Dec",
 };
 
 // ─── Orders by Category ────────────────────────────────────────────────────────
 
 const ordersByCatData = [
   { cat: "Electronics", current: 4820, prior: 4150 },
-  { cat: "Clothing",    current: 6340, prior: 5980 },
-  { cat: "Home",        current: 3960, prior: 3720 },
-  { cat: "Sports",      current: 3180, prior: 2890 },
-  { cat: "Beauty",      current: 2840, prior: 2650 },
-  { cat: "Books",       current: 1940, prior: 1820 },
+  { cat: "Clothing", current: 6340, prior: 5980 },
+  { cat: "Home", current: 3960, prior: 3720 },
+  { cat: "Sports", current: 3180, prior: 2890 },
+  { cat: "Beauty", current: 2840, prior: 2650 },
+  { cat: "Books", current: 1940, prior: 1820 },
 ];
 
 const ordersByCatConfig: ChartConfig = {
-  current: { label: "This Month",  color: "var(--chart-1)" },
-  prior:   { label: "Prior Month", color: "var(--chart-2)" },
+  current: { label: "This Month", color: "var(--chart-1)" },
+  prior: { label: "Prior Month", color: "var(--chart-2)" },
 };
 
 // ─── GMV by Category (Treemap) ─────────────────────────────────────────────────
@@ -113,30 +168,30 @@ const ordersByCatConfig: ChartConfig = {
 // Values sum to $4,820k = $4.82M, matching the GMV KPI.
 const gmvCatData = [
   { name: "Electronics", value: 1824000, fill: "var(--chart-1)" },
-  { name: "Clothing",    value: 1041000, fill: "var(--chart-2)" },
-  { name: "Home",        value: 742000,  fill: "var(--chart-3)" },
-  { name: "Sports",      value: 481000,  fill: "var(--chart-4)" },
-  { name: "Beauty",      value: 318000,  fill: "var(--chart-1)" },
-  { name: "Books",       value: 196000,  fill: "var(--chart-2)" },
-  { name: "Toys",        value: 142000,  fill: "var(--chart-3)" },
-  { name: "Grocery",     value: 76000,   fill: "var(--chart-4)" },
+  { name: "Clothing", value: 1041000, fill: "var(--chart-2)" },
+  { name: "Home", value: 742000, fill: "var(--chart-3)" },
+  { name: "Sports", value: 481000, fill: "var(--chart-4)" },
+  { name: "Beauty", value: 318000, fill: "var(--chart-1)" },
+  { name: "Books", value: 196000, fill: "var(--chart-2)" },
+  { name: "Toys", value: 142000, fill: "var(--chart-3)" },
+  { name: "Grocery", value: 76000, fill: "var(--chart-4)" },
 ];
 
 // ─── Order Value Distribution (Histogram) ──────────────────────────────────────
 
 const orderValueDistData = [
-  { bin: "$0",    count: 680  },
-  { bin: "$25",   count: 1920 },
-  { bin: "$50",   count: 3140 },
-  { bin: "$75",   count: 4280 },
-  { bin: "$100",  count: 4820 },
-  { bin: "$125",  count: 4640 },
-  { bin: "$150",  count: 3980 },
-  { bin: "$175",  count: 3120 },
-  { bin: "$200",  count: 2480 },
-  { bin: "$250",  count: 1380 },
-  { bin: "$300",  count: 820  },
-  { bin: "$400+", count: 280  },
+  { bin: "$0", count: 680 },
+  { bin: "$25", count: 1920 },
+  { bin: "$50", count: 3140 },
+  { bin: "$75", count: 4280 },
+  { bin: "$100", count: 4820 },
+  { bin: "$125", count: 4640 },
+  { bin: "$150", count: 3980 },
+  { bin: "$175", count: 3120 },
+  { bin: "$200", count: 2480 },
+  { bin: "$250", count: 1380 },
+  { bin: "$300", count: 820 },
+  { bin: "$400+", count: 280 },
 ];
 
 const histConfig: ChartConfig = {
@@ -146,14 +201,70 @@ const histConfig: ChartConfig = {
 // ─── Top Products ──────────────────────────────────────────────────────────────
 
 const topProducts = [
-  { name: "iPhone 15 Pro Case",     cat: "Electronics", units: 2840, gmv: 85200,  ret: 4.2,  trend: "Up"     },
-  { name: "Running Shoes Pro",      cat: "Sports",      units: 1920, gmv: 192000, ret: 7.8,  trend: "Up"     },
-  { name: "Wireless Earbuds Gen 3", cat: "Electronics", units: 1640, gmv: 246000, ret: 5.1,  trend: "Stable" },
-  { name: "Cotton Slim-Fit Tee",    cat: "Clothing",    units: 4280, gmv: 85600,  ret: 12.4, trend: "Up"     },
-  { name: "Air Purifier X200",      cat: "Home",        units: 820,  gmv: 213200, ret: 3.8,  trend: "Up"     },
-  { name: "Yoga Mat Premium",       cat: "Sports",      units: 1380, gmv: 69000,  ret: 6.2,  trend: "Down"   },
-  { name: "Moisturiser SPF50",      cat: "Beauty",      units: 2140, gmv: 64200,  ret: 9.1,  trend: "Up"     },
-  { name: "Desk Lamp LED",          cat: "Home",        units: 960,  gmv: 86400,  ret: 4.5,  trend: "Stable" },
+  {
+    name: "iPhone 15 Pro Case",
+    cat: "Electronics",
+    units: 2840,
+    gmv: 85200,
+    ret: 4.2,
+    trend: "Up",
+  },
+  {
+    name: "Running Shoes Pro",
+    cat: "Sports",
+    units: 1920,
+    gmv: 192000,
+    ret: 7.8,
+    trend: "Up",
+  },
+  {
+    name: "Wireless Earbuds Gen 3",
+    cat: "Electronics",
+    units: 1640,
+    gmv: 246000,
+    ret: 5.1,
+    trend: "Stable",
+  },
+  {
+    name: "Cotton Slim-Fit Tee",
+    cat: "Clothing",
+    units: 4280,
+    gmv: 85600,
+    ret: 12.4,
+    trend: "Up",
+  },
+  {
+    name: "Air Purifier X200",
+    cat: "Home",
+    units: 820,
+    gmv: 213200,
+    ret: 3.8,
+    trend: "Up",
+  },
+  {
+    name: "Yoga Mat Premium",
+    cat: "Sports",
+    units: 1380,
+    gmv: 69000,
+    ret: 6.2,
+    trend: "Down",
+  },
+  {
+    name: "Moisturiser SPF50",
+    cat: "Beauty",
+    units: 2140,
+    gmv: 64200,
+    ret: 9.1,
+    trend: "Up",
+  },
+  {
+    name: "Desk Lamp LED",
+    cat: "Home",
+    units: 960,
+    gmv: 86400,
+    ret: 4.5,
+    trend: "Stable",
+  },
 ];
 
 // ─── Treemap cell renderer ────────────────────────────────────────────────────
@@ -170,14 +281,28 @@ interface GmvCellProps {
 }
 
 function GmvCell(props: GmvCellProps) {
-  const { x = 0, y = 0, width = 0, height = 0, name, value, fill, depth } = props;
+  const {
+    x = 0,
+    y = 0,
+    width = 0,
+    height = 0,
+    name,
+    value,
+    fill,
+    depth,
+  } = props;
   if (depth !== 1 || !name || width < 2 || height < 2) return null;
   return (
     <g>
       <rect
-        x={x} y={y} width={width} height={height}
-        fill={fill} fillOpacity={0.82}
-        stroke="var(--background)" strokeWidth={2}
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+        fill={fill}
+        fillOpacity={0.82}
+        stroke="var(--background)"
+        strokeWidth={2}
         rx={4}
       />
       {width > 54 && height > 26 && (
@@ -186,7 +311,13 @@ function GmvCell(props: GmvCellProps) {
         </text>
       )}
       {width > 54 && height > 42 && (
-        <text x={x + 8} y={y + 30} fill="white" fillOpacity={0.72} fontSize={10}>
+        <text
+          x={x + 8}
+          y={y + 30}
+          fill="white"
+          fillOpacity={0.72}
+          fontSize={10}
+        >
           {`$${((value ?? 0) / 1000).toFixed(0)}k`}
         </text>
       )}
@@ -228,7 +359,8 @@ export default function EcommerceOpsPage() {
           </span>
         </div>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Order volume, GMV, category performance, and return rates — the ops view for a mid-size online retailer.
+          Order volume, GMV, category performance, and return rates — the ops
+          view for a mid-size online retailer.
         </p>
       </div>
 
@@ -236,9 +368,9 @@ export default function EcommerceOpsPage() {
         {/* ── KPI row ─────────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {kpis.map((kpi) => (
-            <Card key={kpi.label} className="h-full overflow-hidden border-t-2 border-t-amber-500/60">
+            <Card key={kpi.label} className="h-full">
               <CardPanel>
-                <div className="flex flex-1 flex-col p-5 bg-linear-to-b from-amber-500/[0.07] to-transparent">
+                <div className="flex flex-1 flex-col p-5">
                   <p className="text-xs text-muted-foreground">{kpi.label}</p>
                   <div className="mt-auto flex flex-col items-start gap-1 pt-4 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-2">
                     <span className="text-2xl font-semibold tracking-tight">
@@ -262,7 +394,7 @@ export default function EcommerceOpsPage() {
         {/* ── Row 1: Daily Orders — full width ─────────────────────────────── */}
         <div className="grid grid-cols-12 gap-4">
           <div className="col-span-12">
-            <Card className="h-full overflow-hidden border-t-2 border-t-amber-500/60">
+            <Card className="h-full">
               <CardHeader>
                 <CardHeaderTitle>Daily Orders</CardHeaderTitle>
                 <CardHeaderSubtitle>
@@ -347,7 +479,7 @@ export default function EcommerceOpsPage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Orders by Category — grouped bar */}
           <div className="col-span-12 md:col-span-6">
-            <Card className="h-full overflow-hidden border-t-2 border-t-amber-500/60">
+            <Card className="h-full">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="mb-4 text-sm font-medium">Orders by Category</p>
@@ -423,9 +555,11 @@ export default function EcommerceOpsPage() {
 
           {/* GMV by Category — Treemap */}
           <div className="col-span-12 md:col-span-6">
-            <Card className="h-full overflow-hidden border-t-2 border-t-amber-500/60">
+            <Card className="h-full">
               <CardHeader>
-                <CardHeaderTitle className="text-md">GMV by Category</CardHeaderTitle>
+                <CardHeaderTitle className="text-md">
+                  GMV by Category
+                </CardHeaderTitle>
               </CardHeader>
               <CardPanel>
                 <div className="p-5">
@@ -460,7 +594,9 @@ export default function EcommerceOpsPage() {
                   </ChartContainer>
                 </div>
               </CardPanel>
-              <CardFooter>Gross merchandise value share · trailing 12 months</CardFooter>
+              <CardFooter>
+                Gross merchandise value share · trailing 12 months
+              </CardFooter>
             </Card>
           </div>
         </div>
@@ -469,12 +605,17 @@ export default function EcommerceOpsPage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Histogram */}
           <div className="col-span-12 md:col-span-4">
-            <Card className="h-full overflow-hidden border-t-2 border-t-amber-500/60">
+            <Card className="h-full">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
-                  <p className="mb-4 text-sm font-medium">Order Value Distribution</p>
+                  <p className="mb-4 text-sm font-medium">
+                    Order Value Distribution
+                  </p>
                   <div className="flex-1 min-h-0">
-                    <ChartContainer config={histConfig} className="h-full w-full">
+                    <ChartContainer
+                      config={histConfig}
+                      className="h-full w-full"
+                    >
                       <BarChart
                         data={orderValueDistData}
                         barCategoryGap="3%"
@@ -505,9 +646,8 @@ export default function EcommerceOpsPage() {
                         <ChartTooltip
                           content={
                             <ChartTooltipContent
-                              formatter={makeTooltipFormatter(
-                                histConfig,
-                                (v) => v.toLocaleString(),
+                              formatter={makeTooltipFormatter(histConfig, (v) =>
+                                v.toLocaleString(),
                               )}
                             />
                           }

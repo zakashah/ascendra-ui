@@ -56,10 +56,10 @@ import {
 // ─── KPIs ─────────────────────────────────────────────────────────────────────
 
 const kpis = [
-  { label: "Attributed Revenue", value: "$2.14M",  delta: "+18.3%",    up: true  },
-  { label: "Blended ROAS",       value: "4.2×",    delta: "+0.4×",     up: true  },
-  { label: "Customer Acq. Cost", value: "$48",      delta: "−$6",       up: true  },
-  { label: "Avg. CTR",           value: "3.8%",     delta: "+0.6 pts",  up: true  },
+  { label: "Attributed Revenue", value: "$2.14M", delta: "+18.3%", up: true },
+  { label: "Blended ROAS", value: "4.2×", delta: "+0.4×", up: true },
+  { label: "Customer Acq. Cost", value: "$48", delta: "−$6", up: true },
+  { label: "Avg. CTR", value: "3.8%", delta: "+0.6 pts", up: true },
 ] as const;
 
 // ─── Channel ROAS ─────────────────────────────────────────────────────────────
@@ -67,12 +67,12 @@ const kpis = [
 const ROAS_TARGET = 4.0;
 
 const channelRoasData = [
-  { channel: "Display",     roas: 1.8 },
+  { channel: "Display", roas: 1.8 },
   { channel: "Paid Social", roas: 3.2 },
-  { channel: "Affiliate",   roas: 4.1 },
+  { channel: "Affiliate", roas: 4.1 },
   { channel: "Paid Search", roas: 5.8 },
-  { channel: "Email",       roas: 7.4 },
-  { channel: "Organic",     roas: 9.2 },
+  { channel: "Email", roas: 7.4 },
+  { channel: "Organic", roas: 9.2 },
 ];
 
 const roasConfig: ChartConfig = {
@@ -82,41 +82,125 @@ const roasConfig: ChartConfig = {
 // ─── Channel Scorecard (Radar) ────────────────────────────────────────────────
 
 const radarData = [
-  { dim: "Volume",          actual: 78, benchmark: 70 },
+  { dim: "Volume", actual: 78, benchmark: 70 },
   { dim: "Cost Efficiency", actual: 82, benchmark: 70 },
-  { dim: "Conv. Rate",      actual: 65, benchmark: 70 },
-  { dim: "Brand Fit",       actual: 90, benchmark: 70 },
-  { dim: "Scalability",     actual: 55, benchmark: 70 },
-  { dim: "Attribution",     actual: 72, benchmark: 70 },
+  { dim: "Conv. Rate", actual: 65, benchmark: 70 },
+  { dim: "Brand Fit", actual: 90, benchmark: 70 },
+  { dim: "Scalability", actual: 55, benchmark: 70 },
+  { dim: "Attribution", actual: 72, benchmark: 70 },
 ];
 
 const radarConfig: ChartConfig = {
-  actual:    { label: "Actual",    color: "var(--chart-1)" },
+  actual: { label: "Actual", color: "var(--chart-1)" },
   benchmark: { label: "Benchmark", color: "var(--chart-3)" },
 };
 
 // ─── Traffic by Source ────────────────────────────────────────────────────────
 
 const trafficData = [
-  { month: "Jan", organic: 18200, paid: 9400,  email: 4200, direct: 6800, referral: 2100 },
-  { month: "Feb", organic: 17800, paid: 10200, email: 4400, direct: 6400, referral: 2200 },
-  { month: "Mar", organic: 19400, paid: 11800, email: 4800, direct: 7200, referral: 2400 },
-  { month: "Apr", organic: 20100, paid: 12400, email: 5000, direct: 7600, referral: 2600 },
-  { month: "May", organic: 21200, paid: 13600, email: 5200, direct: 8100, referral: 2800 },
-  { month: "Jun", organic: 22400, paid: 14800, email: 5600, direct: 8400, referral: 3000 },
-  { month: "Jul", organic: 22800, paid: 15400, email: 5800, direct: 8600, referral: 3200 },
-  { month: "Aug", organic: 23600, paid: 16200, email: 6000, direct: 9000, referral: 3400 },
-  { month: "Sep", organic: 21800, paid: 15600, email: 5800, direct: 8400, referral: 3200 },
-  { month: "Oct", organic: 24400, paid: 17400, email: 6200, direct: 9400, referral: 3600 },
-  { month: "Nov", organic: 26200, paid: 19200, email: 6800, direct: 10200, referral: 3800 },
-  { month: "Dec", organic: 24800, paid: 17600, email: 6400, direct: 9600, referral: 3600 },
+  {
+    month: "Jan",
+    organic: 18200,
+    paid: 9400,
+    email: 4200,
+    direct: 6800,
+    referral: 2100,
+  },
+  {
+    month: "Feb",
+    organic: 17800,
+    paid: 10200,
+    email: 4400,
+    direct: 6400,
+    referral: 2200,
+  },
+  {
+    month: "Mar",
+    organic: 19400,
+    paid: 11800,
+    email: 4800,
+    direct: 7200,
+    referral: 2400,
+  },
+  {
+    month: "Apr",
+    organic: 20100,
+    paid: 12400,
+    email: 5000,
+    direct: 7600,
+    referral: 2600,
+  },
+  {
+    month: "May",
+    organic: 21200,
+    paid: 13600,
+    email: 5200,
+    direct: 8100,
+    referral: 2800,
+  },
+  {
+    month: "Jun",
+    organic: 22400,
+    paid: 14800,
+    email: 5600,
+    direct: 8400,
+    referral: 3000,
+  },
+  {
+    month: "Jul",
+    organic: 22800,
+    paid: 15400,
+    email: 5800,
+    direct: 8600,
+    referral: 3200,
+  },
+  {
+    month: "Aug",
+    organic: 23600,
+    paid: 16200,
+    email: 6000,
+    direct: 9000,
+    referral: 3400,
+  },
+  {
+    month: "Sep",
+    organic: 21800,
+    paid: 15600,
+    email: 5800,
+    direct: 8400,
+    referral: 3200,
+  },
+  {
+    month: "Oct",
+    organic: 24400,
+    paid: 17400,
+    email: 6200,
+    direct: 9400,
+    referral: 3600,
+  },
+  {
+    month: "Nov",
+    organic: 26200,
+    paid: 19200,
+    email: 6800,
+    direct: 10200,
+    referral: 3800,
+  },
+  {
+    month: "Dec",
+    organic: 24800,
+    paid: 17600,
+    email: 6400,
+    direct: 9600,
+    referral: 3600,
+  },
 ];
 
 const trafficConfig: ChartConfig = {
-  organic:  { label: "Organic",  color: "var(--chart-1)" },
-  paid:     { label: "Paid",     color: "var(--chart-2)" },
-  email:    { label: "Email",    color: "var(--chart-3)" },
-  direct:   { label: "Direct",   color: "var(--chart-4)" },
+  organic: { label: "Organic", color: "var(--chart-1)" },
+  paid: { label: "Paid", color: "var(--chart-2)" },
+  email: { label: "Email", color: "var(--chart-3)" },
+  direct: { label: "Direct", color: "var(--chart-4)" },
   referral: { label: "Referral", color: "var(--chart-1)" },
 };
 
@@ -125,10 +209,10 @@ const trafficConfig: ChartConfig = {
 const spendAllocationData = [
   { name: "Paid Search", value: 35, fill: "var(--chart-1)" },
   { name: "Paid Social", value: 28, fill: "var(--chart-2)" },
-  { name: "Display",     value: 12, fill: "var(--chart-3)" },
-  { name: "Affiliate",   value: 10, fill: "var(--chart-4)" },
-  { name: "Email",       value: 8,  fill: "var(--chart-1)" },
-  { name: "Influencer",  value: 7,  fill: "var(--chart-2)" },
+  { name: "Display", value: 12, fill: "var(--chart-3)" },
+  { name: "Affiliate", value: 10, fill: "var(--chart-4)" },
+  { name: "Email", value: 8, fill: "var(--chart-1)" },
+  { name: "Influencer", value: 7, fill: "var(--chart-2)" },
 ];
 
 const TOTAL_SPEND = 128000;
@@ -151,41 +235,109 @@ const spendRevenueData = [
 ];
 
 const spendRevConfig: ChartConfig = {
-  spend:   { label: "Ad Spend",          color: "var(--chart-1)" },
+  spend: { label: "Ad Spend", color: "var(--chart-1)" },
   revenue: { label: "Attributed Revenue", color: "var(--chart-3)" },
 };
 
 // ─── Campaign Status ──────────────────────────────────────────────────────────
 
 const campaignStatuses = [
-  { status: "Active",    count: 5, fill: "var(--chart-2)" },
-  { status: "Paused",    count: 2, fill: "var(--chart-4)" },
+  { status: "Active", count: 5, fill: "var(--chart-2)" },
+  { status: "Paused", count: 2, fill: "var(--chart-4)" },
   { status: "Completed", count: 1, fill: "var(--chart-1)" },
-  { status: "Draft",     count: 3, fill: "var(--border)" },
+  { status: "Draft", count: 3, fill: "var(--border)" },
 ];
 
-const BUDGET_TOTAL   = 128000;
+const BUDGET_TOTAL = 128000;
 const BUDGET_DEPLOYED = 87400;
 
 // ─── Active Campaigns ─────────────────────────────────────────────────────────
 
 const campaigns = [
-  { name: "Spring Clearance",    channel: "Paid Search", spend: 28400, revenue: 142000, roas: 5.0, ctr: 4.2, status: "Active"    },
-  { name: "Brand Awareness Q2",  channel: "Display",     spend: 18200, revenue:  32760, roas: 1.8, ctr: 0.8, status: "Active"    },
-  { name: "Email Re-engagement", channel: "Email",       spend:  4800, revenue:  36480, roas: 7.6, ctr: 6.2, status: "Active"    },
-  { name: "Affiliate Spring",    channel: "Affiliate",   spend: 12600, revenue:  51660, roas: 4.1, ctr: 2.8, status: "Active"    },
-  { name: "Retargeting RLSA",    channel: "Paid Search", spend: 16800, revenue:  98280, roas: 5.8, ctr: 5.4, status: "Active"    },
-  { name: "Social UGC Test",     channel: "Paid Social", spend: 22400, revenue:  62720, roas: 2.8, ctr: 3.1, status: "Paused"    },
-  { name: "Influencer May",      channel: "Influencer",  spend:  9200, revenue:  18400, roas: 2.0, ctr: 1.4, status: "Paused"    },
-  { name: "Newsletter Q1 Recap", channel: "Email",       spend:  2400, revenue:  20640, roas: 8.6, ctr: 7.8, status: "Completed" },
+  {
+    name: "Spring Clearance",
+    channel: "Paid Search",
+    spend: 28400,
+    revenue: 142000,
+    roas: 5.0,
+    ctr: 4.2,
+    status: "Active",
+  },
+  {
+    name: "Brand Awareness Q2",
+    channel: "Display",
+    spend: 18200,
+    revenue: 32760,
+    roas: 1.8,
+    ctr: 0.8,
+    status: "Active",
+  },
+  {
+    name: "Email Re-engagement",
+    channel: "Email",
+    spend: 4800,
+    revenue: 36480,
+    roas: 7.6,
+    ctr: 6.2,
+    status: "Active",
+  },
+  {
+    name: "Affiliate Spring",
+    channel: "Affiliate",
+    spend: 12600,
+    revenue: 51660,
+    roas: 4.1,
+    ctr: 2.8,
+    status: "Active",
+  },
+  {
+    name: "Retargeting RLSA",
+    channel: "Paid Search",
+    spend: 16800,
+    revenue: 98280,
+    roas: 5.8,
+    ctr: 5.4,
+    status: "Active",
+  },
+  {
+    name: "Social UGC Test",
+    channel: "Paid Social",
+    spend: 22400,
+    revenue: 62720,
+    roas: 2.8,
+    ctr: 3.1,
+    status: "Paused",
+  },
+  {
+    name: "Influencer May",
+    channel: "Influencer",
+    spend: 9200,
+    revenue: 18400,
+    roas: 2.0,
+    ctr: 1.4,
+    status: "Paused",
+  },
+  {
+    name: "Newsletter Q1 Recap",
+    channel: "Email",
+    spend: 2400,
+    revenue: 20640,
+    roas: 8.6,
+    ctr: 7.8,
+    status: "Completed",
+  },
 ];
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function MarketingPage() {
-  const [hiddenRadar,    setHiddenRadar]    = useState<Record<string, boolean>>({});
-  const [hiddenTraffic,  setHiddenTraffic]  = useState<Record<string, boolean>>({});
-  const [hiddenSpendRev, setHiddenSpendRev] = useState<Record<string, boolean>>({});
+  const [hiddenRadar, setHiddenRadar] = useState<Record<string, boolean>>({});
+  const [hiddenTraffic, setHiddenTraffic] = useState<Record<string, boolean>>(
+    {},
+  );
+  const [hiddenSpendRev, setHiddenSpendRev] = useState<Record<string, boolean>>(
+    {},
+  );
 
   const budgetPct = Math.round((BUDGET_DEPLOYED / BUDGET_TOTAL) * 100);
 
@@ -217,7 +369,8 @@ export default function MarketingPage() {
           </span>
         </div>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Channel ROAS, traffic mix, spend efficiency, and campaign performance — the growth view for a performance marketing team.
+          Channel ROAS, traffic mix, spend efficiency, and campaign performance
+          — the growth view for a performance marketing team.
         </p>
       </div>
 
@@ -225,9 +378,9 @@ export default function MarketingPage() {
         {/* ── KPI row ─────────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           {kpis.map((kpi) => (
-            <Card key={kpi.label} className="h-full overflow-hidden border-t-2 border-t-purple-500/60">
+            <Card key={kpi.label} className="h-full">
               <CardPanel>
-                <div className="flex flex-1 flex-col p-5 bg-linear-to-b from-purple-500/[0.07] to-transparent">
+                <div className="flex flex-1 flex-col p-5">
                   <p className="text-xs text-muted-foreground">{kpi.label}</p>
                   <div className="mt-auto flex flex-col items-start gap-1 pt-4 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-2">
                     <span className="text-2xl font-semibold tracking-tight">
@@ -252,12 +405,15 @@ export default function MarketingPage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Channel ROAS — horizontal bar */}
           <div className="col-span-12 md:col-span-5">
-            <Card className="h-full overflow-hidden border-t-2 border-t-purple-500/60">
+            <Card className="h-full">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="mb-4 text-sm font-medium">Channel ROAS</p>
                   <div className="flex-1 min-h-0">
-                    <ChartContainer config={roasConfig} className="h-full w-full">
+                    <ChartContainer
+                      config={roasConfig}
+                      className="h-full w-full"
+                    >
                       <BarChart
                         data={channelRoasData}
                         layout="vertical"
@@ -324,14 +480,15 @@ export default function MarketingPage() {
                 </div>
               </CardPanel>
               <CardFooter>
-                Coloured by target · green = above {ROAS_TARGET}× · orange = below
+                Coloured by target · green = above {ROAS_TARGET}× · orange =
+                below
               </CardFooter>
             </Card>
           </div>
 
           {/* Channel Scorecard — Radar */}
           <div className="col-span-12 md:col-span-7">
-            <Card className="h-full overflow-hidden border-t-2 border-t-purple-500/60">
+            <Card className="h-full">
               <CardHeader>
                 <CardHeaderTitle>Channel Scorecard</CardHeaderTitle>
                 <CardHeaderSubtitle>
@@ -341,19 +498,16 @@ export default function MarketingPage() {
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <div className="flex-1 min-h-0">
-                    <ChartContainer config={radarConfig} className="h-full w-full">
+                    <ChartContainer
+                      config={radarConfig}
+                      className="h-full w-full"
+                    >
                       <RadarChart
                         data={radarData}
                         margin={{ top: 10, right: 20, bottom: 10, left: 20 }}
                       >
-                        <PolarGrid
-                          stroke="var(--border)"
-                          strokeOpacity={0.4}
-                        />
-                        <PolarAngleAxis
-                          dataKey="dim"
-                          tick={{ fontSize: 11 }}
-                        />
+                        <PolarGrid stroke="var(--border)" strokeOpacity={0.4} />
+                        <PolarAngleAxis dataKey="dim" tick={{ fontSize: 11 }} />
                         <ChartTooltip
                           content={
                             <ChartTooltipContent
@@ -404,7 +558,7 @@ export default function MarketingPage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Traffic by Source — stacked area, normalised % */}
           <div className="col-span-12 md:col-span-8">
-            <Card className="h-full overflow-hidden border-t-2 border-t-purple-500/60">
+            <Card className="h-full">
               <CardHeader>
                 <CardHeaderTitle>Traffic by Source</CardHeaderTitle>
                 <CardHeaderSubtitle>
@@ -413,7 +567,10 @@ export default function MarketingPage() {
               </CardHeader>
               <CardPanel>
                 <div className="p-5">
-                  <ChartContainer config={trafficConfig} className="h-56 w-full">
+                  <ChartContainer
+                    config={trafficConfig}
+                    className="h-56 w-full"
+                  >
                     <AreaChart
                       data={trafficData}
                       stackOffset="expand"
@@ -445,14 +602,19 @@ export default function MarketingPage() {
                           <ChartTooltipContent
                             formatter={makeTooltipFormatter(
                               trafficConfig,
-                              (v) =>
-                                `${(Number(v) * 100).toFixed(1)}%`,
+                              (v) => `${(Number(v) * 100).toFixed(1)}%`,
                             )}
                           />
                         }
                       />
                       {(
-                        ["organic", "paid", "email", "direct", "referral"] as const
+                        [
+                          "organic",
+                          "paid",
+                          "email",
+                          "direct",
+                          "referral",
+                        ] as const
                       ).map((key) => (
                         <Area
                           key={key}
@@ -483,13 +645,15 @@ export default function MarketingPage() {
 
           {/* Spend Allocation — Donut */}
           <div className="col-span-12 md:col-span-4">
-            <Card className="h-full overflow-hidden border-t-2 border-t-purple-500/60">
+            <Card className="h-full">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="text-sm font-medium">Spend Allocation</p>
                   <div className="mt-auto">
                     <ChartContainer config={{}} className="h-36 w-full">
-                      <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+                      <PieChart
+                        margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
+                      >
                         <Pie
                           data={spendAllocationData}
                           cx="50%"
@@ -530,7 +694,11 @@ export default function MarketingPage() {
                               {d.value}%
                             </span>
                             <span className="font-medium">
-                              ${((d.value / 100) * TOTAL_SPEND / 1000).toFixed(1)}k
+                              $
+                              {(((d.value / 100) * TOTAL_SPEND) / 1000).toFixed(
+                                1,
+                              )}
+                              k
                             </span>
                           </div>
                         </div>
@@ -547,7 +715,7 @@ export default function MarketingPage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Spend vs Revenue — Composed Bar + Line, dual axis */}
           <div className="col-span-12 md:col-span-8">
-            <Card className="h-full overflow-hidden border-t-2 border-t-purple-500/60">
+            <Card className="h-full">
               <CardHeader>
                 <CardHeaderTitle>Spend vs Revenue</CardHeaderTitle>
                 <CardHeaderSubtitle>
@@ -556,7 +724,10 @@ export default function MarketingPage() {
               </CardHeader>
               <CardPanel>
                 <div className="p-5">
-                  <ChartContainer config={spendRevConfig} className="h-56 w-full">
+                  <ChartContainer
+                    config={spendRevConfig}
+                    className="h-56 w-full"
+                  >
                     <ComposedChart
                       data={spendRevenueData}
                       margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
@@ -639,7 +810,7 @@ export default function MarketingPage() {
 
           {/* Campaign Status */}
           <div className="col-span-12 md:col-span-4">
-            <Card className="h-full overflow-hidden border-t-2 border-t-purple-500/60">
+            <Card className="h-full">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="mb-4 text-sm font-medium">Campaign Status</p>
@@ -655,16 +826,22 @@ export default function MarketingPage() {
                             className="h-2 w-2 shrink-0 rounded-full"
                             style={{ background: fill }}
                           />
-                          <span className="text-muted-foreground">{status}</span>
+                          <span className="text-muted-foreground">
+                            {status}
+                          </span>
                         </div>
-                        <span className="font-medium tabular-nums">{count}</span>
+                        <span className="font-medium tabular-nums">
+                          {count}
+                        </span>
                       </div>
                     ))}
                   </div>
 
                   <div className="mt-auto pt-6">
                     <div className="mb-2 flex items-baseline justify-between text-xs">
-                      <span className="text-muted-foreground">Monthly Budget</span>
+                      <span className="text-muted-foreground">
+                        Monthly Budget
+                      </span>
                       <span className="font-medium">
                         ${(BUDGET_TOTAL / 1000).toFixed(0)}k
                       </span>
@@ -679,7 +856,9 @@ export default function MarketingPage() {
                       />
                     </div>
                     <div className="mt-1.5 flex items-center justify-between text-xs text-muted-foreground">
-                      <span>${(BUDGET_DEPLOYED / 1000).toFixed(1)}k deployed</span>
+                      <span>
+                        ${(BUDGET_DEPLOYED / 1000).toFixed(1)}k deployed
+                      </span>
                       <span>{budgetPct}%</span>
                     </div>
                   </div>
