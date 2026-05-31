@@ -236,7 +236,7 @@ export default function EcommerceOpsPage() {
         {/* ── KPI row ─────────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {kpis.map((kpi) => (
-            <Card key={kpi.label} className="h-full">
+            <Card key={kpi.label} className="h-full overflow-hidden border-t-2 border-t-amber-500/60">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="text-xs text-muted-foreground">{kpi.label}</p>
@@ -262,7 +262,7 @@ export default function EcommerceOpsPage() {
         {/* ── Row 1: Daily Orders — full width ─────────────────────────────── */}
         <div className="grid grid-cols-12 gap-4">
           <div className="col-span-12">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-amber-500/60">
               <CardHeader>
                 <CardHeaderTitle>Daily Orders</CardHeaderTitle>
                 <CardHeaderSubtitle>
@@ -347,7 +347,7 @@ export default function EcommerceOpsPage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Orders by Category — grouped bar */}
           <div className="col-span-12 md:col-span-6">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-amber-500/60">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="mb-4 text-sm font-medium">Orders by Category</p>
@@ -423,7 +423,7 @@ export default function EcommerceOpsPage() {
 
           {/* GMV by Category — Treemap */}
           <div className="col-span-12 md:col-span-6">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-amber-500/60">
               <CardHeader>
                 <CardHeaderTitle className="text-md">GMV by Category</CardHeaderTitle>
               </CardHeader>
@@ -469,7 +469,7 @@ export default function EcommerceOpsPage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Histogram */}
           <div className="col-span-12 md:col-span-4">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-amber-500/60">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="mb-4 text-sm font-medium">Order Value Distribution</p>

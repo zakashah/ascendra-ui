@@ -50,28 +50,45 @@ import {
 // ─── KPIs ─────────────────────────────────────────────────────────────────────
 
 const kpis = [
-  { label: "Portfolio Value", value: "$1.48M",  delta: "+$98.8k", up: true  },
-  { label: "Day P&L",         value: "+$8,240", delta: "+0.56%",  up: true  },
-  { label: "Beta",            value: "1.12",    delta: "−0.04",   up: true  },
-  { label: "Sharpe Ratio",    value: "1.84",    delta: "+0.12",   up: true  },
+  { label: "Portfolio Value", value: "$1.48M", delta: "+$98.8k", up: true },
+  { label: "Day P&L", value: "+$8,240", delta: "+0.56%", up: true },
+  { label: "Beta", value: "1.12", delta: "−0.04", up: true },
+  { label: "Sharpe Ratio", value: "1.84", delta: "+0.12", up: true },
 ] as const;
 
 // ─── Candlestick helpers ───────────────────────────────────────────────────────
 
 type Candle = {
   date: string;
-  open: number; high: number; low: number; close: number; volume: number;
-  bodyBase: number; bodyHeight: number; wickBase: number; wickTop: number;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+  bodyBase: number;
+  bodyHeight: number;
+  wickBase: number;
+  wickTop: number;
   bullish: boolean;
   ma: number | null;
 };
 
 function makeCandle(
-  date: string, open: number, high: number, low: number, close: number,
-  volume: number, ma: number | null = null,
+  date: string,
+  open: number,
+  high: number,
+  low: number,
+  close: number,
+  volume: number,
+  ma: number | null = null,
 ): Candle {
   return {
-    date, open, high, low, close, volume,
+    date,
+    open,
+    high,
+    low,
+    close,
+    volume,
     bodyBase: Math.min(open, close),
     bodyHeight: Math.abs(close - open),
     wickBase: low,
@@ -84,12 +101,12 @@ function makeCandle(
 // ─── 40-day Price Action ───────────────────────────────────────────────────────
 
 const priceData: Candle[] = [
-  makeCandle("Feb 2",  165.2, 167.8, 163.4, 167.1, 124000),
-  makeCandle("Feb 3",  167.1, 169.4, 165.8, 166.2,  98000),
-  makeCandle("Feb 4",  166.2, 168.2, 164.6, 168.0, 112000),
-  makeCandle("Feb 5",  168.0, 170.6, 167.2, 169.8, 134000),
-  makeCandle("Feb 6",  169.8, 172.4, 168.6, 171.4, 156000),
-  makeCandle("Feb 9",  171.4, 174.2, 170.2, 173.8, 142000),
+  makeCandle("Feb 2", 165.2, 167.8, 163.4, 167.1, 124000),
+  makeCandle("Feb 3", 167.1, 169.4, 165.8, 166.2, 98000),
+  makeCandle("Feb 4", 166.2, 168.2, 164.6, 168.0, 112000),
+  makeCandle("Feb 5", 168.0, 170.6, 167.2, 169.8, 134000),
+  makeCandle("Feb 6", 169.8, 172.4, 168.6, 171.4, 156000),
+  makeCandle("Feb 9", 171.4, 174.2, 170.2, 173.8, 142000),
   makeCandle("Feb 10", 173.8, 175.0, 171.6, 172.4, 118000),
   makeCandle("Feb 11", 172.4, 174.8, 171.0, 174.2, 128000),
   makeCandle("Feb 12", 174.2, 176.8, 173.0, 175.6, 144000),
@@ -104,12 +121,12 @@ const priceData: Candle[] = [
   makeCandle("Feb 25", 180.2, 182.4, 178.6, 181.8, 152000),
   makeCandle("Feb 26", 181.8, 183.6, 180.4, 182.4, 142000),
   makeCandle("Feb 27", 182.4, 184.2, 181.0, 183.6, 128000, 177.6),
-  makeCandle("Mar 2",  183.6, 185.8, 182.4, 184.8, 118000, 179.4),
-  makeCandle("Mar 3",  184.8, 186.4, 183.6, 185.2, 124000, 181.2),
-  makeCandle("Mar 4",  185.2, 187.0, 184.0, 186.4, 136000, 182.8),
-  makeCandle("Mar 5",  186.4, 187.8, 184.8, 185.6, 122000, 183.8),
-  makeCandle("Mar 6",  185.6, 187.2, 184.2, 186.8, 118000, 184.6),
-  makeCandle("Mar 9",  186.8, 192.4, 186.2, 191.6, 214000, 185.8),
+  makeCandle("Mar 2", 183.6, 185.8, 182.4, 184.8, 118000, 179.4),
+  makeCandle("Mar 3", 184.8, 186.4, 183.6, 185.2, 124000, 181.2),
+  makeCandle("Mar 4", 185.2, 187.0, 184.0, 186.4, 136000, 182.8),
+  makeCandle("Mar 5", 186.4, 187.8, 184.8, 185.6, 122000, 183.8),
+  makeCandle("Mar 6", 185.6, 187.2, 184.2, 186.8, 118000, 184.6),
+  makeCandle("Mar 9", 186.8, 192.4, 186.2, 191.6, 214000, 185.8),
   makeCandle("Mar 10", 191.6, 194.8, 190.2, 193.4, 188000, 187.2),
   makeCandle("Mar 11", 193.4, 196.2, 192.0, 195.2, 172000, 188.6),
   makeCandle("Mar 12", 195.2, 197.6, 193.8, 196.4, 162000, 190.2),
@@ -127,19 +144,37 @@ const priceData: Candle[] = [
 ];
 
 const GREEN = "var(--chart-2)";
-const BEAR  = "var(--destructive)";
+const BEAR = "var(--destructive)";
 
-function OHLCTooltip({ payload, label }: { payload?: Array<{ payload: Candle }>; label?: string }) {
+function OHLCTooltip({
+  payload,
+  label,
+}: {
+  payload?: Array<{ payload: Candle }>;
+  label?: string;
+}) {
   if (!payload?.length) return null;
   const d = payload[0].payload;
   const color = d.bullish ? GREEN : BEAR;
   return (
     <div className="rounded-lg border bg-background px-3 py-2 text-xs shadow-md min-w-32.5">
       <div className="font-medium text-foreground mb-1.5">{label}</div>
-      {([["Open", d.open], ["High", d.high], ["Low", d.low], ["Close", d.close]] as [string, number][]).map(([k, v]) => (
-        <div key={k} className="flex justify-between gap-4 text-muted-foreground">
+      {(
+        [
+          ["Open", d.open],
+          ["High", d.high],
+          ["Low", d.low],
+          ["Close", d.close],
+        ] as [string, number][]
+      ).map(([k, v]) => (
+        <div
+          key={k}
+          className="flex justify-between gap-4 text-muted-foreground"
+        >
           {k}
-          <span className="font-medium" style={{ color }}>${v.toFixed(2)}</span>
+          <span className="font-medium" style={{ color }}>
+            ${v.toFixed(2)}
+          </span>
         </div>
       ))}
     </div>
@@ -153,42 +188,42 @@ const priceConfig: ChartConfig = {
 // ─── Return Distribution ───────────────────────────────────────────────────────
 
 const returnDistData = [
-  { bin: "−3%",   count: 4,  curve: 3.2  },
-  { bin: "−2.5%", count: 8,  curve: 8.4  },
-  { bin: "−2%",   count: 14, curve: 18.6 },
+  { bin: "−3%", count: 4, curve: 3.2 },
+  { bin: "−2.5%", count: 8, curve: 8.4 },
+  { bin: "−2%", count: 14, curve: 18.6 },
   { bin: "−1.5%", count: 22, curve: 34.2 },
-  { bin: "−1%",   count: 38, curve: 52.8 },
+  { bin: "−1%", count: 38, curve: 52.8 },
   { bin: "−0.5%", count: 54, curve: 62.4 },
-  { bin: "0%",    count: 62, curve: 64.2 },
-  { bin: "0.5%",  count: 58, curve: 60.8 },
-  { bin: "1%",    count: 44, curve: 50.4 },
-  { bin: "1.5%",  count: 28, curve: 34.6 },
-  { bin: "2%",    count: 16, curve: 19.2 },
-  { bin: "2.5%",  count: 10, curve: 9.4  },
-  { bin: "3%",    count: 7,  curve: 4.2  },
-  { bin: "3%+",   count: 4,  curve: 2.0  },
+  { bin: "0%", count: 62, curve: 64.2 },
+  { bin: "0.5%", count: 58, curve: 60.8 },
+  { bin: "1%", count: 44, curve: 50.4 },
+  { bin: "1.5%", count: 28, curve: 34.6 },
+  { bin: "2%", count: 16, curve: 19.2 },
+  { bin: "2.5%", count: 10, curve: 9.4 },
+  { bin: "3%", count: 7, curve: 4.2 },
+  { bin: "3%+", count: 4, curve: 2.0 },
 ];
 
 const returnConfig: ChartConfig = {
-  count: { label: "Days",   color: "var(--chart-1)" },
+  count: { label: "Days", color: "var(--chart-1)" },
   curve: { label: "Normal", color: "var(--chart-3)" },
 };
 
 // ─── Risk vs Return Scatter ────────────────────────────────────────────────────
 
 const riskReturnData = [
-  { ticker: "AAPL",  vol: 18.2, ret: 24.8, z: 120 },
-  { ticker: "MSFT",  vol: 16.8, ret: 22.4, z: 110 },
-  { ticker: "NVDA",  vol: 34.6, ret: 68.2, z: 80  },
-  { ticker: "AMZN",  vol: 24.2, ret: 18.4, z: 90  },
-  { ticker: "GOOGL", vol: 19.8, ret: 20.6, z: 75  },
-  { ticker: "META",  vol: 28.4, ret: 42.8, z: 65  },
-  { ticker: "TSLA",  vol: 48.2, ret: 15.2, z: 55  },
-  { ticker: "BRK",   vol: 12.4, ret: 14.8, z: 130 },
-  { ticker: "JPM",   vol: 20.6, ret: 16.2, z: 85  },
-  { ticker: "V",     vol: 14.8, ret: 18.8, z: 80  },
-  { ticker: "JNJ",   vol: 11.2, ret: 8.4,  z: 100 },
-  { ticker: "XOM",   vol: 22.4, ret: 12.6, z: 60  },
+  { ticker: "AAPL", vol: 18.2, ret: 24.8, z: 120 },
+  { ticker: "MSFT", vol: 16.8, ret: 22.4, z: 110 },
+  { ticker: "NVDA", vol: 34.6, ret: 68.2, z: 80 },
+  { ticker: "AMZN", vol: 24.2, ret: 18.4, z: 90 },
+  { ticker: "GOOGL", vol: 19.8, ret: 20.6, z: 75 },
+  { ticker: "META", vol: 28.4, ret: 42.8, z: 65 },
+  { ticker: "TSLA", vol: 48.2, ret: 15.2, z: 55 },
+  { ticker: "BRK", vol: 12.4, ret: 14.8, z: 130 },
+  { ticker: "JPM", vol: 20.6, ret: 16.2, z: 85 },
+  { ticker: "V", vol: 14.8, ret: 18.8, z: 80 },
+  { ticker: "JNJ", vol: 11.2, ret: 8.4, z: 100 },
+  { ticker: "XOM", vol: 22.4, ret: 12.6, z: 60 },
 ];
 
 const scatterConfig: ChartConfig = {
@@ -202,14 +237,94 @@ const miniData = priceData.slice(-20);
 // ─── Positions Table ───────────────────────────────────────────────────────────
 
 const positions = [
-  { ticker: "JPM",   name: "JPMorgan Chase",    shares: 220, avgCost: 152.80, current: 196.80, pnl:  9680, pnlPct: 28.8, weight: 14.6, beta: 1.12 },
-  { ticker: "AAPL",  name: "Apple Inc.",         shares: 280, avgCost: 152.40, current: 218.20, pnl: 18424, pnlPct: 43.2, weight: 12.8, beta: 1.18 },
-  { ticker: "NVDA",  name: "NVIDIA Corp.",        shares: 85,  avgCost: 420.80, current: 824.16, pnl: 34286, pnlPct: 95.9, weight: 11.9, beta: 1.84 },
-  { ticker: "BRK",   name: "Berkshire Hathaway", shares: 55,  avgCost: 512.60, current: 618.40, pnl:  5819, pnlPct: 20.6, weight: 11.5, beta: 0.64 },
-  { ticker: "MSFT",  name: "Microsoft Corp.",    shares: 150, avgCost: 298.20, current: 418.64, pnl: 18066, pnlPct: 40.4, weight: 11.3, beta: 0.92 },
-  { ticker: "JNJ",   name: "Johnson & Johnson",  shares: 180, avgCost: 156.40, current: 168.80, pnl:  2232, pnlPct:  7.9, weight: 10.3, beta: 0.42 },
-  { ticker: "AMZN",  name: "Amazon",             shares: 200, avgCost: 138.40, current: 182.20, pnl:  8760, pnlPct: 31.7, weight:  9.8, beta: 1.22 },
-  { ticker: "TSLA",  name: "Tesla",              shares: 95,  avgCost: 248.60, current: 264.40, pnl:  1501, pnlPct:  6.4, weight:  8.5, beta: 2.08 },
+  {
+    ticker: "JPM",
+    name: "JPMorgan Chase",
+    shares: 220,
+    avgCost: 152.8,
+    current: 196.8,
+    pnl: 9680,
+    pnlPct: 28.8,
+    weight: 14.6,
+    beta: 1.12,
+  },
+  {
+    ticker: "AAPL",
+    name: "Apple Inc.",
+    shares: 280,
+    avgCost: 152.4,
+    current: 218.2,
+    pnl: 18424,
+    pnlPct: 43.2,
+    weight: 12.8,
+    beta: 1.18,
+  },
+  {
+    ticker: "NVDA",
+    name: "NVIDIA Corp.",
+    shares: 85,
+    avgCost: 420.8,
+    current: 824.16,
+    pnl: 34286,
+    pnlPct: 95.9,
+    weight: 11.9,
+    beta: 1.84,
+  },
+  {
+    ticker: "BRK",
+    name: "Berkshire Hathaway",
+    shares: 55,
+    avgCost: 512.6,
+    current: 618.4,
+    pnl: 5819,
+    pnlPct: 20.6,
+    weight: 11.5,
+    beta: 0.64,
+  },
+  {
+    ticker: "MSFT",
+    name: "Microsoft Corp.",
+    shares: 150,
+    avgCost: 298.2,
+    current: 418.64,
+    pnl: 18066,
+    pnlPct: 40.4,
+    weight: 11.3,
+    beta: 0.92,
+  },
+  {
+    ticker: "JNJ",
+    name: "Johnson & Johnson",
+    shares: 180,
+    avgCost: 156.4,
+    current: 168.8,
+    pnl: 2232,
+    pnlPct: 7.9,
+    weight: 10.3,
+    beta: 0.42,
+  },
+  {
+    ticker: "AMZN",
+    name: "Amazon",
+    shares: 200,
+    avgCost: 138.4,
+    current: 182.2,
+    pnl: 8760,
+    pnlPct: 31.7,
+    weight: 9.8,
+    beta: 1.22,
+  },
+  {
+    ticker: "TSLA",
+    name: "Tesla",
+    shares: 95,
+    avgCost: 248.6,
+    current: 264.4,
+    pnl: 1501,
+    pnlPct: 6.4,
+    weight: 8.5,
+    beta: 2.08,
+  },
 ];
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -243,7 +358,9 @@ export default function TradingPortfolioPage() {
           </span>
         </div>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          OHLC price action, return distribution, risk-adjusted returns, and position-level P&amp;L — the core view for a quantitative equity portfolio.
+          OHLC price action, return distribution, risk-adjusted returns, and
+          position-level P&amp;L — the core view for a quantitative equity
+          portfolio.
         </p>
       </div>
 
@@ -251,14 +368,23 @@ export default function TradingPortfolioPage() {
         {/* ── KPI row ─────────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {kpis.map((kpi) => (
-            <Card key={kpi.label} className="h-full">
+            <Card
+              key={kpi.label}
+              className="h-full overflow-hidden border-l-[3px] border-l-red-500/60"
+            >
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="text-xs text-muted-foreground">{kpi.label}</p>
                   <div className="mt-auto flex flex-col items-start gap-1 pt-4 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-2">
-                    <span className="text-2xl font-semibold tracking-tight">{kpi.value}</span>
+                    <span className="text-2xl font-semibold tracking-tight">
+                      {kpi.value}
+                    </span>
                     <SimpleBadge variant={kpi.up ? "green" : "red"}>
-                      {kpi.up ? <LuTrendingUp className="size-3" /> : <LuTrendingDown className="size-3" />}
+                      {kpi.up ? (
+                        <LuTrendingUp className="size-3" />
+                      ) : (
+                        <LuTrendingDown className="size-3" />
+                      )}
                       {kpi.delta}
                     </SimpleBadge>
                   </div>
@@ -275,14 +401,22 @@ export default function TradingPortfolioPage() {
               <CardHeader>
                 <CardHeaderTitle>Price Action</CardHeaderTitle>
                 <CardHeaderSubtitle>
-                  40 trading days · OHLC candlestick with 20-day moving average overlay
+                  40 trading days · OHLC candlestick with 20-day moving average
+                  overlay
                 </CardHeaderSubtitle>
               </CardHeader>
               <CardPanel>
                 <div className="p-5">
                   <ChartContainer config={priceConfig} className="h-80 w-full">
-                    <ComposedChart data={priceData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                      <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
+                    <ComposedChart
+                      data={priceData}
+                      margin={{ top: 4, right: 12, left: 0, bottom: 0 }}
+                    >
+                      <CartesianGrid
+                        vertical={false}
+                        stroke="var(--border)"
+                        strokeOpacity={0.4}
+                      />
                       <XAxis
                         dataKey="date"
                         tickLine={false}
@@ -302,20 +436,58 @@ export default function TradingPortfolioPage() {
                       <ChartTooltip
                         content={(props) => (
                           <OHLCTooltip
-                            payload={props.payload as unknown as Array<{ payload: Candle }>}
+                            payload={
+                              props.payload as unknown as Array<{
+                                payload: Candle;
+                              }>
+                            }
                             label={props.label as string}
                           />
                         )}
                       />
                       {/* Wick: transparent base + thin full-range bar */}
-                      <Bar dataKey="wickBase" stackId="candle" fill="transparent" legendType="none" isAnimationActive={false} />
-                      <Bar dataKey="wickTop"  stackId="candle" barSize={2} radius={0} legendType="none" isAnimationActive={false}>
-                        {priceData.map((d, i) => <Cell key={i} fill={d.bullish ? GREEN : BEAR} fillOpacity={0.55} />)}
+                      <Bar
+                        dataKey="wickBase"
+                        stackId="candle"
+                        fill="transparent"
+                        legendType="none"
+                        isAnimationActive={false}
+                      />
+                      <Bar
+                        dataKey="wickTop"
+                        stackId="candle"
+                        barSize={2}
+                        radius={0}
+                        legendType="none"
+                        isAnimationActive={false}
+                      >
+                        {priceData.map((d, i) => (
+                          <Cell
+                            key={i}
+                            fill={d.bullish ? GREEN : BEAR}
+                            fillOpacity={0.55}
+                          />
+                        ))}
                       </Bar>
                       {/* Body: transparent base + colored body */}
-                      <Bar dataKey="bodyBase"   stackId="body" fill="transparent" legendType="none" isAnimationActive={false} />
-                      <Bar dataKey="bodyHeight" stackId="body" barSize={10} radius={[1, 1, 1, 1]} legendType="none" isAnimationActive={false}>
-                        {priceData.map((d, i) => <Cell key={i} fill={d.bullish ? GREEN : BEAR} />)}
+                      <Bar
+                        dataKey="bodyBase"
+                        stackId="body"
+                        fill="transparent"
+                        legendType="none"
+                        isAnimationActive={false}
+                      />
+                      <Bar
+                        dataKey="bodyHeight"
+                        stackId="body"
+                        barSize={10}
+                        radius={[1, 1, 1, 1]}
+                        legendType="none"
+                        isAnimationActive={false}
+                      >
+                        {priceData.map((d, i) => (
+                          <Cell key={i} fill={d.bullish ? GREEN : BEAR} />
+                        ))}
                       </Bar>
                       {/* 20-day MA */}
                       <Line
@@ -331,15 +503,24 @@ export default function TradingPortfolioPage() {
                   </ChartContainer>
                   <div className="mt-3 flex items-center justify-center gap-6 text-xs text-muted-foreground">
                     <div className="flex items-center gap-1.5">
-                      <span className="h-3 w-3 rounded-sm shrink-0" style={{ background: GREEN }} />
+                      <span
+                        className="h-3 w-3 rounded-sm shrink-0"
+                        style={{ background: GREEN }}
+                      />
                       Bullish close
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <span className="h-3 w-3 rounded-sm shrink-0" style={{ background: BEAR }} />
+                      <span
+                        className="h-3 w-3 rounded-sm shrink-0"
+                        style={{ background: BEAR }}
+                      />
                       Bearish close
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <span className="h-px w-6 shrink-0 rounded-full" style={{ background: "var(--chart-4)" }} />
+                      <span
+                        className="h-px w-6 shrink-0 rounded-full"
+                        style={{ background: "var(--chart-4)" }}
+                      />
                       20-day MA
                     </div>
                   </div>
@@ -356,11 +537,24 @@ export default function TradingPortfolioPage() {
             <Card className="h-full">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
-                  <p className="mb-4 text-sm font-medium">Return Distribution</p>
+                  <p className="mb-4 text-sm font-medium">
+                    Return Distribution
+                  </p>
                   <div className="flex-1 min-h-0">
-                    <ChartContainer config={returnConfig} className="h-52 w-full">
-                      <ComposedChart data={returnDistData} barCategoryGap="4%" margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-                        <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
+                    <ChartContainer
+                      config={returnConfig}
+                      className="h-52 w-full"
+                    >
+                      <ComposedChart
+                        data={returnDistData}
+                        barCategoryGap="4%"
+                        margin={{ top: 4, right: 8, left: 0, bottom: 0 }}
+                      >
+                        <CartesianGrid
+                          vertical={false}
+                          stroke="var(--border)"
+                          strokeOpacity={0.4}
+                        />
                         <XAxis
                           dataKey="bin"
                           tickLine={false}
@@ -378,7 +572,10 @@ export default function TradingPortfolioPage() {
                         <ChartTooltip
                           content={
                             <ChartTooltipContent
-                              formatter={makeTooltipFormatter(returnConfig, (v) => String(v))}
+                              formatter={makeTooltipFormatter(
+                                returnConfig,
+                                (v) => String(v),
+                              )}
                             />
                           }
                         />
@@ -403,7 +600,9 @@ export default function TradingPortfolioPage() {
                   <ChartSeriesLegend
                     config={returnConfig}
                     hidden={hiddenReturn}
-                    onToggle={(k) => setHiddenReturn((p) => ({ ...p, [k]: !p[k] }))}
+                    onToggle={(k) =>
+                      setHiddenReturn((p) => ({ ...p, [k]: !p[k] }))
+                    }
                     className="mt-3 w-full"
                   />
                 </div>
@@ -416,13 +615,23 @@ export default function TradingPortfolioPage() {
             <Card className="h-full">
               <CardHeader>
                 <CardHeaderTitle>Risk vs Return</CardHeaderTitle>
-                <CardHeaderSubtitle>Annualised vol vs YTD return · bubble = position size</CardHeaderSubtitle>
+                <CardHeaderSubtitle>
+                  Annualised vol vs YTD return · bubble = position size
+                </CardHeaderSubtitle>
               </CardHeader>
               <CardPanel>
                 <div className="p-5">
-                  <ChartContainer config={scatterConfig} className="h-52 w-full">
-                    <ScatterChart margin={{ top: 4, right: 12, left: 0, bottom: 16 }}>
-                      <CartesianGrid stroke="var(--border)" strokeOpacity={0.4} />
+                  <ChartContainer
+                    config={scatterConfig}
+                    className="h-52 w-full"
+                  >
+                    <ScatterChart
+                      margin={{ top: 4, right: 12, left: 0, bottom: 16 }}
+                    >
+                      <CartesianGrid
+                        stroke="var(--border)"
+                        strokeOpacity={0.4}
+                      />
                       <XAxis
                         dataKey="vol"
                         type="number"
@@ -432,7 +641,13 @@ export default function TradingPortfolioPage() {
                         tick={{ fontSize: 10 }}
                         tickFormatter={(v) => `${v}%`}
                         domain={[8, 52]}
-                        label={{ value: "Volatility %", position: "insideBottom", offset: -8, fontSize: 10, fill: "var(--muted-foreground)" }}
+                        label={{
+                          value: "Volatility %",
+                          position: "insideBottom",
+                          offset: -8,
+                          fontSize: 10,
+                          fill: "var(--muted-foreground)",
+                        }}
                       />
                       <YAxis
                         dataKey="ret"
@@ -448,17 +663,34 @@ export default function TradingPortfolioPage() {
                       <ChartTooltip
                         content={({ active, payload }) => {
                           if (!active || !payload?.length) return null;
-                          const d = payload[0].payload as (typeof riskReturnData)[0];
+                          const d = payload[0]
+                            .payload as (typeof riskReturnData)[0];
                           return (
                             <div className="rounded-lg border bg-background px-3 py-2 text-xs shadow-md">
-                              <div className="mb-1 font-semibold">{d.ticker}</div>
-                              <div className="text-muted-foreground">Vol: <span className="text-foreground font-medium">{d.vol}%</span></div>
-                              <div className="text-muted-foreground">YTD: <span className="text-foreground font-medium">+{d.ret}%</span></div>
+                              <div className="mb-1 font-semibold">
+                                {d.ticker}
+                              </div>
+                              <div className="text-muted-foreground">
+                                Vol:{" "}
+                                <span className="text-foreground font-medium">
+                                  {d.vol}%
+                                </span>
+                              </div>
+                              <div className="text-muted-foreground">
+                                YTD:{" "}
+                                <span className="text-foreground font-medium">
+                                  +{d.ret}%
+                                </span>
+                              </div>
                             </div>
                           );
                         }}
                       />
-                      <Scatter data={riskReturnData} fill="var(--chart-1)" fillOpacity={0.7} />
+                      <Scatter
+                        data={riskReturnData}
+                        fill="var(--chart-1)"
+                        fillOpacity={0.7}
+                      />
                     </ScatterChart>
                   </ChartContainer>
                 </div>
@@ -471,12 +703,17 @@ export default function TradingPortfolioPage() {
             <Card className="h-full">
               <CardHeader>
                 <CardHeaderTitle>Price + Volume</CardHeaderTitle>
-                <CardHeaderSubtitle>Last 20 sessions · candles with volume pane</CardHeaderSubtitle>
+                <CardHeaderSubtitle>
+                  Last 20 sessions · candles with volume pane
+                </CardHeaderSubtitle>
               </CardHeader>
               <CardPanel>
                 <div className="p-5 flex flex-col gap-1">
                   <ChartContainer config={{}} className="h-36 w-full">
-                    <ComposedChart data={miniData} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
+                    <ComposedChart
+                      data={miniData}
+                      margin={{ top: 4, right: 8, left: 0, bottom: 0 }}
+                    >
                       <XAxis dataKey="date" hide />
                       <YAxis
                         tickLine={false}
@@ -489,23 +726,63 @@ export default function TradingPortfolioPage() {
                       <ChartTooltip
                         content={(props) => (
                           <OHLCTooltip
-                            payload={props.payload as unknown as Array<{ payload: Candle }>}
+                            payload={
+                              props.payload as unknown as Array<{
+                                payload: Candle;
+                              }>
+                            }
                             label={props.label as string}
                           />
                         )}
                       />
-                      <Bar dataKey="wickBase"   stackId="c" fill="transparent" legendType="none" isAnimationActive={false} />
-                      <Bar dataKey="wickTop"    stackId="c" barSize={2} legendType="none" isAnimationActive={false}>
-                        {miniData.map((d, i) => <Cell key={i} fill={d.bullish ? GREEN : BEAR} fillOpacity={0.5} />)}
+                      <Bar
+                        dataKey="wickBase"
+                        stackId="c"
+                        fill="transparent"
+                        legendType="none"
+                        isAnimationActive={false}
+                      />
+                      <Bar
+                        dataKey="wickTop"
+                        stackId="c"
+                        barSize={2}
+                        legendType="none"
+                        isAnimationActive={false}
+                      >
+                        {miniData.map((d, i) => (
+                          <Cell
+                            key={i}
+                            fill={d.bullish ? GREEN : BEAR}
+                            fillOpacity={0.5}
+                          />
+                        ))}
                       </Bar>
-                      <Bar dataKey="bodyBase"   stackId="b" fill="transparent" legendType="none" isAnimationActive={false} />
-                      <Bar dataKey="bodyHeight" stackId="b" barSize={8} radius={[1, 1, 1, 1]} legendType="none" isAnimationActive={false}>
-                        {miniData.map((d, i) => <Cell key={i} fill={d.bullish ? GREEN : BEAR} />)}
+                      <Bar
+                        dataKey="bodyBase"
+                        stackId="b"
+                        fill="transparent"
+                        legendType="none"
+                        isAnimationActive={false}
+                      />
+                      <Bar
+                        dataKey="bodyHeight"
+                        stackId="b"
+                        barSize={8}
+                        radius={[1, 1, 1, 1]}
+                        legendType="none"
+                        isAnimationActive={false}
+                      >
+                        {miniData.map((d, i) => (
+                          <Cell key={i} fill={d.bullish ? GREEN : BEAR} />
+                        ))}
                       </Bar>
                     </ComposedChart>
                   </ChartContainer>
                   <ChartContainer config={{}} className="h-16 w-full">
-                    <BarChart data={miniData} margin={{ top: 0, right: 8, left: 0, bottom: 0 }}>
+                    <BarChart
+                      data={miniData}
+                      margin={{ top: 0, right: 8, left: 0, bottom: 0 }}
+                    >
                       <XAxis dataKey="date" hide />
                       <YAxis
                         tickLine={false}
@@ -515,8 +792,18 @@ export default function TradingPortfolioPage() {
                         tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`}
                         tickCount={2}
                       />
-                      <Bar dataKey="volume" radius={[2, 2, 0, 0]} isAnimationActive={false}>
-                        {miniData.map((d, i) => <Cell key={i} fill={d.bullish ? GREEN : BEAR} fillOpacity={0.45} />)}
+                      <Bar
+                        dataKey="volume"
+                        radius={[2, 2, 0, 0]}
+                        isAnimationActive={false}
+                      >
+                        {miniData.map((d, i) => (
+                          <Cell
+                            key={i}
+                            fill={d.bullish ? GREEN : BEAR}
+                            fillOpacity={0.45}
+                          />
+                        ))}
                       </Bar>
                     </BarChart>
                   </ChartContainer>
@@ -531,7 +818,9 @@ export default function TradingPortfolioPage() {
           <div className="col-span-12">
             <CardHeader>
               <CardHeaderTitle>Positions</CardHeaderTitle>
-              <CardHeaderSubtitle>8 holdings · sorted by portfolio weight</CardHeaderSubtitle>
+              <CardHeaderSubtitle>
+                8 holdings · sorted by portfolio weight
+              </CardHeaderSubtitle>
             </CardHeader>
             <TableWrapper>
               <Table scrollable horizontal vertical height={340}>
@@ -551,19 +840,35 @@ export default function TradingPortfolioPage() {
                 <TableBody>
                   {positions.map((row) => (
                     <TableRow key={row.ticker}>
-                      <TableCell className="font-mono font-semibold">{row.ticker}</TableCell>
-                      <TableCell className="text-muted-foreground">{row.name}</TableCell>
-                      <TableCell className="text-right tabular-nums">{row.shares}</TableCell>
-                      <TableCell className="text-right font-mono tabular-nums">${row.avgCost.toFixed(2)}</TableCell>
-                      <TableCell className="text-right font-mono tabular-nums">${row.current.toFixed(2)}</TableCell>
+                      <TableCell className="font-mono font-semibold">
+                        {row.ticker}
+                      </TableCell>
+                      <TableCell className="text-muted-foreground">
+                        {row.name}
+                      </TableCell>
+                      <TableCell className="text-right tabular-nums">
+                        {row.shares}
+                      </TableCell>
+                      <TableCell className="text-right font-mono tabular-nums">
+                        ${row.avgCost.toFixed(2)}
+                      </TableCell>
+                      <TableCell className="text-right font-mono tabular-nums">
+                        ${row.current.toFixed(2)}
+                      </TableCell>
                       <TableCell className="text-right font-mono tabular-nums text-emerald-600 dark:text-emerald-400">
                         +${row.pnl.toLocaleString()}
                       </TableCell>
                       <TableCell className="text-right tabular-nums">
-                        <SimpleBadge variant="green">+{row.pnlPct}%</SimpleBadge>
+                        <SimpleBadge variant="green">
+                          +{row.pnlPct}%
+                        </SimpleBadge>
                       </TableCell>
-                      <TableCell className="text-right tabular-nums">{row.weight}%</TableCell>
-                      <TableCell className="text-right tabular-nums">{row.beta}</TableCell>
+                      <TableCell className="text-right tabular-nums">
+                        {row.weight}%
+                      </TableCell>
+                      <TableCell className="text-right tabular-nums">
+                        {row.beta}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

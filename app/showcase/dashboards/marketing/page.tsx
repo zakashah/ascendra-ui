@@ -225,7 +225,7 @@ export default function MarketingPage() {
         {/* ── KPI row ─────────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           {kpis.map((kpi) => (
-            <Card key={kpi.label} className="h-full">
+            <Card key={kpi.label} className="h-full overflow-hidden border-t-2 border-t-purple-500/60">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="text-xs text-muted-foreground">{kpi.label}</p>
@@ -252,7 +252,7 @@ export default function MarketingPage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Channel ROAS — horizontal bar */}
           <div className="col-span-12 md:col-span-5">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-purple-500/60">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="mb-4 text-sm font-medium">Channel ROAS</p>
@@ -331,7 +331,7 @@ export default function MarketingPage() {
 
           {/* Channel Scorecard — Radar */}
           <div className="col-span-12 md:col-span-7">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-purple-500/60">
               <CardHeader>
                 <CardHeaderTitle>Channel Scorecard</CardHeaderTitle>
                 <CardHeaderSubtitle>
@@ -404,7 +404,7 @@ export default function MarketingPage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Traffic by Source — stacked area, normalised % */}
           <div className="col-span-12 md:col-span-8">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-purple-500/60">
               <CardHeader>
                 <CardHeaderTitle>Traffic by Source</CardHeaderTitle>
                 <CardHeaderSubtitle>
@@ -483,7 +483,7 @@ export default function MarketingPage() {
 
           {/* Spend Allocation — Donut */}
           <div className="col-span-12 md:col-span-4">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-purple-500/60">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="text-sm font-medium">Spend Allocation</p>
@@ -547,7 +547,7 @@ export default function MarketingPage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Spend vs Revenue — Composed Bar + Line, dual axis */}
           <div className="col-span-12 md:col-span-8">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-purple-500/60">
               <CardHeader>
                 <CardHeaderTitle>Spend vs Revenue</CardHeaderTitle>
                 <CardHeaderSubtitle>
@@ -639,7 +639,7 @@ export default function MarketingPage() {
 
           {/* Campaign Status */}
           <div className="col-span-12 md:col-span-4">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-purple-500/60">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="mb-4 text-sm font-medium">Campaign Status</p>

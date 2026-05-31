@@ -338,7 +338,7 @@ export default function SaasRevenuePage() {
         {/* ── KPI row ─────────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           {kpis.map((kpi) => (
-            <Card key={kpi.label} className="h-full">
+            <Card key={kpi.label} className="h-full overflow-hidden border-l-[3px] border-l-blue-500/60">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="text-xs text-muted-foreground">{kpi.label}</p>

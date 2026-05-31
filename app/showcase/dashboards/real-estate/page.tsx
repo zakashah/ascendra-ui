@@ -399,7 +399,9 @@ export default function RealEstatePage() {
           <div className="col-span-12 md:col-span-7">
             <Card className="h-full">
               <CardHeader>
-                <CardHeaderTitle className="text-sm">Portfolio by Type</CardHeaderTitle>
+                <CardHeaderTitle className="text-sm">
+                  Portfolio by Type
+                </CardHeaderTitle>
               </CardHeader>
               <CardPanel>
                 <div className="p-5">

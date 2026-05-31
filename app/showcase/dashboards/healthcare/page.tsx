@@ -198,7 +198,7 @@ export default function HealthcarePage() {
         {/* ── KPI row ─────────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {kpis.map((kpi) => (
-            <Card key={kpi.label} className="h-full">
+            <Card key={kpi.label} className="h-full overflow-hidden border-t-2 border-t-teal-500/60">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="text-xs text-muted-foreground">{kpi.label}</p>
@@ -219,7 +219,7 @@ export default function HealthcarePage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Admissions Trend — Line 3 series */}
           <div className="col-span-12 md:col-span-8">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-teal-500/60">
               <CardHeader>
                 <CardHeaderTitle>Admissions Trend</CardHeaderTitle>
                 <CardHeaderSubtitle>12-month view · admissions, discharges, and readmissions</CardHeaderSubtitle>
@@ -277,7 +277,7 @@ export default function HealthcarePage() {
 
           {/* Bed Occupancy — Radial gauge */}
           <div className="col-span-12 md:col-span-4">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-teal-500/60">
               <CardHeader>
                 <CardHeaderTitle className="text-md">Bed Occupancy</CardHeaderTitle>
               </CardHeader>
@@ -323,7 +323,7 @@ export default function HealthcarePage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Conditions grouped bar */}
           <div className="col-span-12 md:col-span-6">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-teal-500/60">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="mb-4 text-sm font-medium">Conditions by Department</p>
@@ -369,7 +369,7 @@ export default function HealthcarePage() {
 
           {/* Department Scorecard — Radar */}
           <div className="col-span-12 md:col-span-6">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-teal-500/60">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="mb-2 text-sm font-medium">Department Scorecard</p>
@@ -406,7 +406,7 @@ export default function HealthcarePage() {
         <div className="grid grid-cols-12 gap-4">
           {/* Age Distribution histogram */}
           <div className="col-span-12 md:col-span-4">
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-t-2 border-t-teal-500/60">
               <CardPanel>
                 <div className="flex flex-1 flex-col p-5">
                   <p className="mb-4 text-sm font-medium">Patient Age Distribution</p>
