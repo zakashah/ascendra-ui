@@ -703,7 +703,7 @@ export default function SaasRevenuePage() {
                     <TableHead>Health</TableHead>
                   </TableHeaderRow>
                 </TableHeader>
-                <TableBody>
+                <TableBody border={{}} bg={{}}>
                   {topAccounts.map((row) => (
                     <TableRow key={row.company}>
                       <TableCell className="font-medium">

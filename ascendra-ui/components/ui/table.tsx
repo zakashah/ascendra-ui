@@ -16,7 +16,10 @@ import { type PaginationState } from "@/ascendra-ui/providers/data-table/use-pag
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 import {
   buildBorderClasses,
+  buildBorderBeforeClasses,
+  buildBgBeforeClasses,
   type BorderConfig,
+  type BgConfig,
 } from "@/ascendra-ui/components/ui/accent-styles";
 import {
   LuChevronFirst,
@@ -171,17 +174,25 @@ function TableHeaderRow({
   );
 }
 
-function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
+function TableBody({
+  border,
+  bg,
+  className,
+  ...props
+}: React.ComponentProps<"tbody"> & { border?: BorderConfig; bg?: BgConfig }) {
   return (
     <tbody
       data-slot="table-body"
       className={cn(
         "relative isolate transform-[translateZ(0)]",
-        "before:bg-background before:absolute before:inset-0 before:-z-10 before:mx-1 before:rounded-lg",
+        !bg && "before:bg-background",
+        "before:absolute before:inset-0 before:-z-10 before:mx-1 before:rounded-lg",
         "before:ring-1 before:ring-(--color-umbra)/4 dark:before:ring-black/20",
         "before:shadow-[0_1px_2px_0_rgba(25,28,33,0.06),0_0_2px_0_rgba(0,0,0,0.08)]",
         "dark:before:shadow-[inset_0_0_1px_1px_rgba(255,255,255,0.01),0_1px_3px_0_rgba(0,0,0,2),0_0_3px_0_rgba(0,0,0,0.2)",
         "[&>tr:not(:last-child)>td]:border-border [&>tr:not(:last-child)>td]:border-b",
+        border && buildBorderBeforeClasses(border),
+        bg && buildBgBeforeClasses(bg),
         className,
       )}
       {...props}

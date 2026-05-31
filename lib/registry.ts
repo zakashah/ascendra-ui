@@ -223,14 +223,30 @@ export const registry: Record<string, ComponentMeta> = {
   'table': {
     slug: 'table',
     name: 'Table',
-    description: 'Data table with header, body, footer, scrollable container, and empty state support.',
+    description: 'Data table with header, body, footer, scrollable container, and optional accent border and gradient background.',
     importPath: '@/ascendra-ui/components/ui/table',
     importNames: ['Table', 'TableWrapper', 'TableHeader', 'TableHeaderRow', 'TableBody', 'TableRow', 'TableHead', 'TableCell', 'TableFooter', 'TableFoot', 'EmptyBody'],
     props: [
-      { name: 'scrollable', type: 'boolean', description: 'Enable scroll on the TableWrapper.' },
-      { name: 'vertical', type: 'boolean', description: 'Enable vertical scroll.' },
-      { name: 'horizontal', type: 'boolean', description: 'Enable horizontal scroll.' },
-      { name: 'height', type: 'number', description: 'Fixed height in px for scrollable tables.' },
+      // Table
+      { name: 'scrollable', type: 'boolean', default: 'false', description: 'Enables scroll on the table container.' },
+      { name: 'vertical', type: 'boolean', default: 'false', description: 'Enables vertical (y-axis) scroll.' },
+      { name: 'horizontal', type: 'boolean', default: 'true', description: 'Enables horizontal (x-axis) scroll.' },
+      { name: 'height', type: 'number', description: 'Max height in px when vertical scroll is enabled.' },
+      { name: 'minHeight', type: 'number', description: 'Minimum height in px for the table container.' },
+      // TableWrapper
+      { name: 'border (TableWrapper)', type: 'BorderConfig', description: 'Optional accent border on the outer wrapper.' },
+      // TableBody
+      { name: 'border (TableBody)', type: 'BorderConfig', description: 'Optional accent border on the ::before panel element.' },
+      { name: 'bg (TableBody)', type: 'BgConfig', description: 'Optional gradient background on the ::before panel. Removes solid bg when set.' },
+      // BorderConfig
+      { name: 'border.side', type: "'t' | 'l' | 'r' | 'b'", default: "'t'", description: 'Side the border appears on.' },
+      { name: 'border.stroke', type: '1 | 2 | 3', default: '3', description: 'Border thickness in px.' },
+      { name: 'border.color', type: "'blue' | 'amber' | 'purple' | 'red' | 'teal' | 'orange' | 'indigo' | 'slate'", default: "'orange'", description: 'Accent color at 60% opacity.' },
+      // BgConfig
+      { name: 'bg.style', type: "'linear' | 'radial' | 'conic'", default: "'linear'", description: 'CSS gradient type.' },
+      { name: 'bg.side', type: "'t' | 'l' | 'r' | 'b'", default: "'b'", description: 'Gradient direction (linear only).' },
+      { name: 'bg.color', type: "'blue' | 'amber' | 'purple' | 'red' | 'teal' | 'orange' | 'indigo' | 'slate'", default: "'orange'", description: 'Start color at 7% opacity.' },
+      { name: 'bg.to', type: "'transparent' | 'white' | 'black' | AccentColor", default: "'transparent'", description: 'End stop color. Accent colors resolve to 500/60.' },
     ],
   },
 
