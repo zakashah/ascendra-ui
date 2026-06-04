@@ -1,18 +1,32 @@
 import Link from "next/link";
+import {
+  AppWindow,
+  Bell,
+  CalendarDays,
+  ClipboardList,
+  Compass,
+  LayoutDashboard,
+  LayoutPanelTop,
+  PanelLeft,
+  Settings,
+  Table2,
+  Wrench,
+} from "lucide-react";
 import { navConfig } from "@/lib/nav-config";
 import { registry } from "@/lib/registry";
+import type { LucideIcon } from "lucide-react";
 
-const categoryIcons: Record<string, string> = {
-  "Feedback & Status": "🔴",
-  "Forms & Inputs": "📋",
-  "Date & Time": "📅",
-  Navigation: "🧭",
-  Overlays: "🪟",
-  "Tables & Data": "📊",
-  Layout: "⬛",
-  Tabs: "📑",
-  Sidebar: "☰",
-  Utilities: "🔧",
+const categoryIcons: Record<string, LucideIcon> = {
+  "Feedback & Status": Bell,
+  "Forms & Inputs": ClipboardList,
+  "Date & Time": CalendarDays,
+  Navigation: Compass,
+  Overlays: AppWindow,
+  "Tables & Data": Table2,
+  Layout: LayoutDashboard,
+  Tabs: LayoutPanelTop,
+  Sidebar: PanelLeft,
+  Utilities: Wrench,
 };
 
 export default function ShowcasePage() {
@@ -67,9 +81,10 @@ export default function ShowcasePage() {
               className="group flex items-center justify-between rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <div className="flex items-center gap-2.5">
-                <span className="text-lg">
-                  {categoryIcons[category.title] ?? "📦"}
-                </span>
+                {(() => {
+                  const Icon = categoryIcons[category.title] ?? Settings;
+                  return <Icon className="h-4 w-4 text-muted-foreground" />;
+                })()}
                 <span className="text-sm font-medium text-foreground transition-colors group-hover:text-primary">
                   {category.title}
                 </span>
