@@ -1,13 +1,19 @@
 import Link from "next/link";
 import {
   AppWindow,
+  BarChart2,
   Bell,
   CalendarDays,
   ClipboardList,
   Compass,
+  FileText,
   LayoutDashboard,
   LayoutPanelTop,
+  MessageSquare,
+  Monitor,
+  PanelBottomOpen,
   PanelLeft,
+  PanelRightOpen,
   Settings,
   Table2,
   Wrench,
@@ -17,6 +23,12 @@ import { registry } from "@/lib/registry";
 import type { LucideIcon } from "lucide-react";
 
 const categoryIcons: Record<string, LucideIcon> = {
+  "Sample Dialogs": MessageSquare,
+  "Sample Sheets": PanelRightOpen,
+  "Sample Drawers": PanelBottomOpen,
+  "Sample Dashboards": Monitor,
+  "Sample Forms": FileText,
+  Charts: BarChart2,
   "Feedback & Status": Bell,
   "Forms & Inputs": ClipboardList,
   "Date & Time": CalendarDays,
