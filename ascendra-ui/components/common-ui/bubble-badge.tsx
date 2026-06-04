@@ -2,13 +2,13 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 
 const bubbleBadgeVariants = cva(
-  'inline-flex items-center justify-center rounded-full font-medium whitespace-nowrap transition-all select-none',
+  'inline-flex items-center justify-center rounded-full font-medium whitespace-nowrap transition-all select-none leading-none',
   {
     variants: {
       size: {
-        sm: 'p-[3px] text-[11px]',
-        md: 'p-[5px] text-xs',
-        lg: 'p-[8px] text-sm',
+        sm: 'h-[18px] min-w-[18px] px-[3px] text-[10px]',
+        md: 'h-5 min-w-5 px-1 text-[11px]',
+        lg: 'h-6 min-w-6 px-1.5 text-xs',
       },
       color: {
         gray:   'bg-gradient-to-b from-gray-100 to-gray-200 text-gray-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1px_2px_rgba(0,0,0,0.08)]',

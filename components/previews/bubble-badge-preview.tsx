@@ -57,10 +57,10 @@ export function BubbleBadgeDocContent() {
 <BubbleBadge size="lg" color="blue">lg</BubbleBadge>`}
           >
             <BubbleBadge size="sm" color="blue">
-              sm
+              s
             </BubbleBadge>
             <BubbleBadge size="md" color="blue">
-              md
+              m
             </BubbleBadge>
             <BubbleBadge size="lg" color="blue">
               lg
