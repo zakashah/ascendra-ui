@@ -1,37 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Sheet,
-  SheetTrigger,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetSubHeader,
-  SheetTitle,
-  SheetDescription,
-  SheetBody,
-  SheetFooter,
-  SheetTabs,
-  SheetTabList,
-  SheetTabTrigger,
-  SheetTabContent,
-  SheetSection,
-  SheetSectionHeader,
-  SheetProperties,
-  SheetKey,
-  SheetValue,
-} from "@/ascendra-ui/components/ui/sheet";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { NameAvatar } from "@/ascendra-ui/components/common-ui/name-avatar";
-import { Switch } from "@/ascendra-ui/components/ui/switch";
-import {
-  ItemGroup,
-  Item,
-  ItemContent,
-  ItemTitle,
-  ItemDescription,
-} from "@/ascendra-ui/components/ui/item";
+import { Button, Item, ItemContent, ItemDescription, ItemGroup, ItemTitle, NameAvatar, Sheet, SheetBody, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetKey, SheetProperties, SheetSection, SheetSectionHeader, SheetSubHeader, SheetTabContent, SheetTabList, SheetTabs, SheetTabTrigger, SheetTitle, SheetTrigger, SheetValue, Switch } from "@/ascendra-ui";
 
 const experience = [
   {

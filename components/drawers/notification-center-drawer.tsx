@@ -8,9 +8,7 @@ import {
   DrawerContent,
   DrawerFooter,
 } from "@/ascendra-ui/shadcn/components/ui/drawer";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { BubbleBadge } from "@/ascendra-ui/components/common-ui/bubble-badge";
-import { StatusDot } from "@/ascendra-ui/components/common-ui/status-dot";
+import { BubbleBadge, Button, StatusDot } from "@/ascendra-ui";
 
 const initialNotifications = [
   {

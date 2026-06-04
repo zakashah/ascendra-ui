@@ -3,7 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { ThemeToggle } from "@/ascendra-ui/components/util/theme-toggle";
+import { ThemeToggle } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["theme-toggle"];
@@ -12,7 +12,7 @@ export function ThemeToggleDocContent() {
   return (
     <div className="space-y-10">
       <ComponentPreview
-        code={`import { ThemeToggle } from "@/ascendra-ui/components/util/theme-toggle";
+        code={`import { ThemeToggle } from "@/ascendra-ui";
 
 <ThemeToggle />`}
       >

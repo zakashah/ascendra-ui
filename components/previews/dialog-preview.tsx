@@ -3,19 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogBody,
-  DialogFooter,
-  DialogClose,
-} from "@/ascendra-ui/components/ui/dialog";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
+import { Button, Checkbox, Dialog, DialogBody, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["dialog"];
@@ -27,7 +15,7 @@ export function DialogDocContent() {
         code={`import {
   Dialog, DialogTrigger, DialogContent, DialogHeader,
   DialogTitle, DialogDescription, DialogBody, DialogFooter, DialogClose,
-} from "@/ascendra-ui/components/ui/dialog";
+} from "@/ascendra-ui";
 
 <Dialog>
   <DialogTrigger asChild>

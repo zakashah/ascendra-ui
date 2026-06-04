@@ -3,7 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { Button } from "@/ascendra-ui/components/ui/button";
+import { Button } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 import { LuPlus } from "react-icons/lu";
 
@@ -14,7 +14,7 @@ export function ButtonDocContent() {
     <div className="space-y-10">
       {/* Hero preview */}
       <ComponentPreview
-        code={`import { Button } from "@/ascendra-ui/components/ui/button";
+        code={`import { Button } from "@/ascendra-ui";
 
 <Button>Continue</Button>`}
       >

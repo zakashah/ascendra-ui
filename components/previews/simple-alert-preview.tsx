@@ -3,7 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
+import { SimpleAlert } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 import { LuShieldAlert, LuCircleCheck } from "react-icons/lu";
 
@@ -13,7 +13,7 @@ export function SimpleAlertDocContent() {
   return (
     <div className="space-y-10">
       <ComponentPreview
-        code={`import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
+        code={`import { SimpleAlert } from "@/ascendra-ui";
 
 <SimpleAlert>Your session will expire in 5 minutes.</SimpleAlert>`}
       >

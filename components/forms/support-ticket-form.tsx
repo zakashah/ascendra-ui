@@ -6,64 +6,8 @@ import { Controller, useForm } from "react-hook-form";
 import { LuInfo } from "react-icons/lu";
 import { z } from "zod";
 
-import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
-import { CardFooterIcon } from "@/ascendra-ui/components/card/card-footer-icon";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
-import { PageContent } from "@/ascendra-ui/components/layout/page-content";
-import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageMain } from "@/ascendra-ui/components/layout/page-main";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
+import { BackLink, Card, CardFooter, CardFooterIcon, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, CardPanelItem, Checkbox, Combobox, ComboboxCollection, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, DatePicker, Field, FieldGrid, FieldGroup, FieldHint, FieldLabel, FieldLegend, FieldSet, Input, InputGroup, InputGroupTextarea, MainContent, PageContent, PageHeader, PageHeaderGroup, PageMain, PageSubtitle, PageTitle, PageWrapper, RadioGroup, RadioGroupItem, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue, SimpleAlert, Switch, UnsavedChangesBar } from "@/ascendra-ui";
 
-import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
-import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar";
-import { BackLink } from "@/ascendra-ui/components/forms/back-link";
-import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
-import {
-  Combobox,
-  ComboboxCollection,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-} from "@/ascendra-ui/components/ui/combobox";
-import {
-  Field,
-  FieldGrid,
-  FieldGroup,
-  FieldHint,
-  FieldLabel,
-  FieldLegend,
-  FieldSet,
-} from "@/ascendra-ui/components/ui/field";
-import { DatePicker } from "@/ascendra-ui/components/date/date-picker";
-import { Input } from "@/ascendra-ui/components/ui/input";
-import {
-  InputGroup,
-  InputGroupTextarea,
-} from "@/ascendra-ui/components/ui/input-group";
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@/ascendra-ui/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/ascendra-ui/components/ui/select";
-import { Switch } from "@/ascendra-ui/components/ui/switch";
 
 // ─── Schema ────────────────────────────────────────────────────────────────────
 

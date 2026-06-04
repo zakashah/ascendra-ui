@@ -3,10 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@/ascendra-ui/components/ui/radio-group";
+import { RadioGroup, RadioGroupItem } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["radio-group"];
@@ -15,7 +12,7 @@ export function RadioGroupDocContent() {
   return (
     <div className="space-y-10">
       <ComponentPreview
-        code={`import { RadioGroup, RadioGroupItem } from "@/ascendra-ui/components/ui/radio-group";
+        code={`import { RadioGroup, RadioGroupItem } from "@/ascendra-ui";
 
 <RadioGroup defaultValue="monthly">
   <RadioGroupItem value="monthly" />

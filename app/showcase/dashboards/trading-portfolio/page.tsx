@@ -1,22 +1,6 @@
 "use client";
 
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableHeaderRow,
-  TableRow,
-  TableWrapper,
-} from "@/ascendra-ui/components/ui/table";
+import { BackLink, Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, DashboardContent, PageHeader, PageHeaderAction, PageHeaderGroup, PageSubtitle, PageTitle, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
 import {
   ChartContainer,
   ChartTooltip,
@@ -30,13 +14,6 @@ import {
   LuTrendingDown,
   LuTrendingUp,
 } from "react-icons/lu";
-import { BackLink } from "@/ascendra-ui/components/forms/back-link";
-import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderAction } from "@/ascendra-ui/components/layout/page-header-action";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { DashboardContent } from "@/ascendra-ui/components/layout/dashboard-content";
 import {
   Bar,
   BarChart,

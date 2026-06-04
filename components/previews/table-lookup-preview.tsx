@@ -4,10 +4,7 @@ import { useState } from "react";
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import {
-  TableLookup,
-  type TableLookupColumn,
-} from "@/ascendra-ui/components/ui/table-lookup";
+import { TableLookup, type TableLookupColumn } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["table-lookup"];
@@ -319,7 +316,7 @@ export function TableLookupDocContent() {
     <div className="space-y-10">
       {/* Hero preview */}
       <ComponentPreview
-        code={`import { TableLookup } from "@/ascendra-ui/components/ui/table-lookup";
+        code={`import { TableLookup } from "@/ascendra-ui";
 
 const columns = [
   { key: "code",    label: "Code",      width: 80,  searchable: true },

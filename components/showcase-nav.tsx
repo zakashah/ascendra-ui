@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { LuMenu, LuSearch, LuX } from "react-icons/lu";
 import { navConfig } from "@/lib/nav-config";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
-import { ThemeToggle } from "@/ascendra-ui/components/util/theme-toggle";
+import { ThemeToggle } from "@/ascendra-ui";
 
 function NavContent({
   query,

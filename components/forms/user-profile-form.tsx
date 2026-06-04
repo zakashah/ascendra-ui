@@ -5,65 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
-import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageMain } from "@/ascendra-ui/components/layout/page-main";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
+import { BackLink, Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, CardPanelItem, Combobox, ComboboxCollection, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, Field, FieldGrid, FieldGroup, FieldHint, FieldInfo, FieldLabel, FieldLabelGroup, FieldLegend, FieldSet, Input, InputGroup, InputGroupTextarea, MainContent, PageHeader, PageHeaderGroup, PageMain, PageSubtitle, PageTitle, RadioGroup, RadioGroupItem, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue, Switch, TabContent, TabList, Tabs, TabTrigger, UnsavedChangesBar } from "@/ascendra-ui";
 
-import { TabContent } from "@/ascendra-ui/components/tabs/tab-content";
-import { TabList } from "@/ascendra-ui/components/tabs/tab-list";
-import { TabTrigger } from "@/ascendra-ui/components/tabs/tab-trigger";
-import { Tabs } from "@/ascendra-ui/components/tabs/tabs";
 
-import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar";
-import { BackLink } from "@/ascendra-ui/components/forms/back-link";
-import {
-  Combobox,
-  ComboboxCollection,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-} from "@/ascendra-ui/components/ui/combobox";
-import {
-  Field,
-  FieldGrid,
-  FieldGroup,
-  FieldHint,
-  FieldInfo,
-  FieldLabel,
-  FieldLabelGroup,
-  FieldLegend,
-  FieldSet,
-} from "@/ascendra-ui/components/ui/field";
-import { Input } from "@/ascendra-ui/components/ui/input";
-import {
-  InputGroup,
-  InputGroupTextarea,
-} from "@/ascendra-ui/components/ui/input-group";
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@/ascendra-ui/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/ascendra-ui/components/ui/select";
-import { Switch } from "@/ascendra-ui/components/ui/switch";
-import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 
 // ─── Schemas ───────────────────────────────────────────────────────────────────
 

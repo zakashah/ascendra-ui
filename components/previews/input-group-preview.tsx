@@ -3,14 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupText,
-  InputGroupInput,
-  InputGroupTextarea,
-} from "@/ascendra-ui/components/ui/input-group";
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput, InputGroupText, InputGroupTextarea } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 import { LuSearch, LuCopy, LuGlobe } from "react-icons/lu";
 
@@ -23,7 +16,7 @@ export function InputGroupDocContent() {
         code={`import {
   InputGroup, InputGroupAddon, InputGroupButton,
   InputGroupText, InputGroupInput, InputGroupTextarea,
-} from "@/ascendra-ui/components/ui/input-group";
+} from "@/ascendra-ui";
 
 <InputGroup>
   <InputGroupAddon align="inline-start">

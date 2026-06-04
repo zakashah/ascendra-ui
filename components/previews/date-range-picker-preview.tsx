@@ -5,7 +5,7 @@ import { type DateRange } from "react-day-picker";
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { DateRangePicker } from "@/ascendra-ui/components/date/date-range-picker";
+import { DateRangePicker } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["date-range-picker"];
@@ -20,7 +20,7 @@ export function DateRangePickerDocContent() {
     <div className="space-y-10">
       {/* Hero preview */}
       <ComponentPreview
-        code={`import { DateRangePicker } from "@/ascendra-ui/components/date/date-range-picker";
+        code={`import { DateRangePicker } from "@/ascendra-ui";
 import type { DateRange } from "react-day-picker";
 
 const [range, setRange] = useState<DateRange | undefined>(undefined);

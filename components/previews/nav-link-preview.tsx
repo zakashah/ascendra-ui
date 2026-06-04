@@ -3,8 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { NavLink } from "@/ascendra-ui/components/nav/nav-link";
-import { NavLinkBadge } from "@/ascendra-ui/components/nav/nav-link-badge";
+import { NavLink, NavLinkBadge } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["nav-link"];
@@ -13,7 +12,7 @@ export function NavLinkDocContent() {
   return (
     <div className="space-y-10">
       <ComponentPreview
-        code={`import { NavLink, NavLinkBadge } from "@/ascendra-ui/components/nav/nav-link";
+        code={`import { NavLink, NavLinkBadge } from "@/ascendra-ui";
 
 <NavLink href="/parents" exact>Parents</NavLink>`}
       >

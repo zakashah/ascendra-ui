@@ -1,77 +1,18 @@
 "use client";
 
-import { type ColumnDef } from "@/ascendra-ui/providers/data-table/data-table.types";
+import { Button, type ColumnDef, DataTable, DataTableBar, DataTableBarAction, DataTableBarContent, DataTableBody, DataTableBulkDeleteHeadAction, DataTableBulkExportHeadAction, DataTableCell, DataTableCheckboxCell, DataTableCheckboxHead, DataTableColumnManager, DataTableDeleteRowAction, DataTableDuplicateRowAction, DataTableEditRowAction, DataTableEmptyBody, DataTableErrorBody, DataTableFilterBar, DataTableFilterDropdown, DataTableFoot, DataTableHead, DataTableHeadAction, DataTableHeader, DataTableHeaderRow, DataTableHighlight, DataTableLoadingBody, DataTableRow, DataTableRowAction, DataTableRowActionItem, DataTableSearchInput, DataTableSortDropdown, DataTableViewRowAction, DataTableWithQueryProvider, DataTableWrapper, DropdownMenuLabel, DropdownMenuSeparator, type FieldOptionsMap, MainContent, PageHeader, PageHeaderGroup, PageMain, PageSubtitle, PageTitle, QueryBar, type QueryFunctionMap, QueryParamPanel, SimpleBadge, TabContent, TabList, Tabs, TabTrigger } from "@/ascendra-ui";
 import {
   PRESET_QUERIES,
   fetchMockInvoices,
   type Invoice,
   type InvoiceStatus,
 } from "@/lib/mock/invoice-mock";
-import {
-  type QueryFunctionMap,
-  type FieldOptionsMap,
-} from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
-import { DataTableWithQueryProvider } from "@/ascendra-ui/providers/data-table-query/data-table-with-query.provider";
 
-import { DataTable } from "@/ascendra-ui/components/data-table/data-table";
-import { DataTableHeader } from "@/ascendra-ui/components/data-table/data-table-header";
-import { DataTableHeaderRow } from "@/ascendra-ui/components/data-table/data-table-header-row";
-import { DataTableHead } from "@/ascendra-ui/components/data-table/data-table-head";
-import { DataTableBody } from "@/ascendra-ui/components/data-table/data-table-body";
-import { DataTableRow } from "@/ascendra-ui/components/data-table/data-table-row";
-import { DataTableCell } from "@/ascendra-ui/components/data-table/data-table-cell";
-import { DataTableCheckboxHead } from "@/ascendra-ui/components/data-table/data-table-checkbox-head";
-import { DataTableCheckboxCell } from "@/ascendra-ui/components/data-table/data-table-checkbox-cell";
-import { DataTableHighlight } from "@/ascendra-ui/components/data-table/data-table-highlight";
-import { DataTableFoot } from "@/ascendra-ui/components/data-table/data-table-foot";
-import { DataTableEmptyBody } from "@/ascendra-ui/components/data-table/data-table-empty-body";
-import { DataTableErrorBody } from "@/ascendra-ui/components/data-table/data-table-error-body";
-import { DataTableLoadingBody } from "@/ascendra-ui/components/data-table/data-table-loading-body";
-import { DataTableWrapper } from "@/ascendra-ui/components/data-table/data-table-wrapper";
-import { DataTableBar } from "@/ascendra-ui/components/data-table/data-table-bar";
-import { DataTableBarContent } from "@/ascendra-ui/components/data-table/data-table-bar-content";
-import { DataTableBarAction } from "@/ascendra-ui/components/data-table/data-table-bar-action";
-import { DataTableSearchInput } from "@/ascendra-ui/components/data-table/data-table-search-input";
-import { DataTableColumnManager } from "@/ascendra-ui/components/data-table/data-table-column-manager";
-import { DataTableSortDropdown } from "@/ascendra-ui/components/data-table/data-table-sort-dropdown";
-import { DataTableFilterDropdown } from "@/ascendra-ui/components/data-table/data-table-filter-dropdown";
-import { DataTableFilterBar } from "@/ascendra-ui/components/data-table/data-table-filter-bar";
-import { QueryBar } from "@/ascendra-ui/components/data-table/query-bar";
-import { QueryParamPanel } from "@/ascendra-ui/components/data-table/query-param-panel";
 
-import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { PageMain } from "@/ascendra-ui/components/layout/page-main";
 
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
-import { Button } from "@/ascendra-ui/components/ui/button";
 
-import { Tabs } from "@/ascendra-ui/components/tabs/tabs";
-import { TabList } from "@/ascendra-ui/components/tabs/tab-list";
-import { TabTrigger } from "@/ascendra-ui/components/tabs/tab-trigger";
-import { TabContent } from "@/ascendra-ui/components/tabs/tab-content";
-import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 import { formatAmount, formatDate } from "@/ascendra-ui/utils/common.util";
 import { DataTableGuide } from "./_guide";
-import {
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from "@/ascendra-ui/components/ui/dropdown-menu";
-import {
-  DataTableHeadAction,
-  DataTableBulkExportHeadAction,
-  DataTableBulkDeleteHeadAction,
-} from "@/ascendra-ui/components/data-table/data-table-head-action";
-import {
-  DataTableDeleteRowAction,
-  DataTableDuplicateRowAction,
-  DataTableEditRowAction,
-  DataTableRowAction,
-  DataTableRowActionItem,
-  DataTableViewRowAction,
-} from "@/ascendra-ui/components/data-table/data-table-row-action";
 import { LuNotebookPen, LuTicketCheck, LuTrash2 } from "react-icons/lu";
 
 const statusVariant: Record<InvoiceStatus, "green" | "amber" | "red"> = {

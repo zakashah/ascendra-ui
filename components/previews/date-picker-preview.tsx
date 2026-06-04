@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { DatePicker } from "@/ascendra-ui/components/date/date-picker";
+import { DatePicker } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["date-picker"];
@@ -17,7 +17,7 @@ export function DatePickerDocContent() {
     <div className="space-y-10">
       {/* Hero preview */}
       <ComponentPreview
-        code={`import { DatePicker } from "@/ascendra-ui/components/date/date-picker";
+        code={`import { DatePicker } from "@/ascendra-ui";
 
 const [date, setDate] = useState<Date | undefined>(undefined);
 

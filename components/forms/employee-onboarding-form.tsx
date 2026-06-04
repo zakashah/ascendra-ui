@@ -5,71 +5,9 @@ import { Controller, useForm } from "react-hook-form";
 import { LuShieldCheck } from "react-icons/lu";
 import { z } from "zod";
 
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
-import { CardFooterIcon } from "@/ascendra-ui/components/card/card-footer-icon";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
-import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageMain } from "@/ascendra-ui/components/layout/page-main";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageContent } from "@/ascendra-ui/components/layout/page-content";
-import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
-import { MainContent } from "@/ascendra-ui/components/layout/main-content";
+import { BackLink, Card, CardFooter, CardFooterIcon, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, CardPanelField, CardPanelItem, Checkbox, Combobox, ComboboxCollection, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, DatePicker, Field, FieldGrid, FieldGroup, FieldHint, FieldLabel, FieldLegend, FieldSet, Input, InputGroup, InputGroupAddon, InputGroupInput, InputGroupText, MainContent, PageContent, PageHeader, PageHeaderGroup, PageMain, PageSubtitle, PageTitle, PageWrapper, RadioGroup, RadioGroupItem, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue, SimpleAlert, Switch, WizardNavigator, WizardProvider, type WizardStep, WizardSteps } from "@/ascendra-ui";
 
-import { WizardProvider } from "@/ascendra-ui/providers/wizard/wizard.provider";
-import type { WizardStep } from "@/ascendra-ui/providers/wizard/wizard.types";
-import { WizardSteps } from "@/ascendra-ui/components/wizard/wizard-steps";
-import { WizardNavigator } from "@/ascendra-ui/components/wizard/wizard-navigator";
 
-import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
-import { BackLink } from "@/ascendra-ui/components/forms/back-link";
-import { DatePicker } from "@/ascendra-ui/components/date/date-picker";
-import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
-import {
-  Combobox,
-  ComboboxCollection,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-} from "@/ascendra-ui/components/ui/combobox";
-import {
-  Field,
-  FieldGrid,
-  FieldGroup,
-  FieldHint,
-  FieldLabel,
-  FieldLegend,
-  FieldSet,
-} from "@/ascendra-ui/components/ui/field";
-import { Input } from "@/ascendra-ui/components/ui/input";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-  InputGroupText,
-} from "@/ascendra-ui/components/ui/input-group";
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@/ascendra-ui/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/ascendra-ui/components/ui/select";
-import { Switch } from "@/ascendra-ui/components/ui/switch";
-import { CardPanelField } from "@/ascendra-ui/components/card/card-panel-field";
 
 // ─── Schema ────────────────────────────────────────────────────────────────────
 

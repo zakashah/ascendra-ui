@@ -3,7 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { BubbleBadge } from "@/ascendra-ui/components/common-ui/bubble-badge";
+import { BubbleBadge } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["bubble-badge"];
@@ -12,7 +12,7 @@ export function BubbleBadgeDocContent() {
   return (
     <div className="space-y-10">
       <ComponentPreview
-        code={`import { BubbleBadge } from "@/ascendra-ui/components/common-ui/bubble-badge";
+        code={`import { BubbleBadge } from "@/ascendra-ui";
 
 <BubbleBadge color="blue">12</BubbleBadge>`}
       >

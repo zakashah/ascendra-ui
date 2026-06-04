@@ -5,58 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
-import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageMain } from "@/ascendra-ui/components/layout/page-main";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageContent } from "@/ascendra-ui/components/layout/page-content";
-import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
-import { MainContent } from "@/ascendra-ui/components/layout/main-content";
+import { BackLink, Card, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, CardPanelItem, Checkbox, Combobox, ComboboxCollection, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, DatePicker, Field, FieldGrid, FieldGroup, FieldHint, FieldLabel, FieldSet, Input, InputGroup, InputGroupAddon, InputGroupInput, InputGroupText, InputGroupTextarea, MainContent, PageContent, PageHeader, PageHeaderGroup, PageMain, PageSubtitle, PageTitle, PageWrapper, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue, UnsavedChangesBar } from "@/ascendra-ui";
 
-import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar";
-import { BackLink } from "@/ascendra-ui/components/forms/back-link";
-import { DatePicker } from "@/ascendra-ui/components/date/date-picker";
-import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
-import {
-  Combobox,
-  ComboboxCollection,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-} from "@/ascendra-ui/components/ui/combobox";
-import {
-  Field,
-  FieldGrid,
-  FieldGroup,
-  FieldHint,
-  FieldLabel,
-  FieldSet,
-} from "@/ascendra-ui/components/ui/field";
-import { Input } from "@/ascendra-ui/components/ui/input";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-  InputGroupText,
-  InputGroupTextarea,
-} from "@/ascendra-ui/components/ui/input-group";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/ascendra-ui/components/ui/select";
 
 // ─── Schema ────────────────────────────────────────────────────────────────────
 

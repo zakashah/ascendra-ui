@@ -9,9 +9,7 @@ import {
   DrawerContent,
   DrawerFooter,
 } from "@/ascendra-ui/shadcn/components/ui/drawer";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { Input } from "@/ascendra-ui/components/ui/input";
-import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
+import { Button, Input, SimpleAlert } from "@/ascendra-ui";
 
 const consequences = [
   "All projects and files will be permanently deleted",

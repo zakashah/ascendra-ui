@@ -3,12 +3,7 @@
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
 import { Treemap, ResponsiveContainer } from "recharts";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
+import { Card, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, SimpleBadge } from "@/ascendra-ui";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 

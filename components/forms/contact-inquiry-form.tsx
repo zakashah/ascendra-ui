@@ -6,56 +6,8 @@ import { Controller, useForm } from "react-hook-form";
 import { LuLock } from "react-icons/lu";
 import { z } from "zod";
 
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
-import { CardFooterIcon } from "@/ascendra-ui/components/card/card-footer-icon";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
-import { CardPanelItemGroup } from "@/ascendra-ui/components/card/card-panel-item-group";
-import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
+import { BackLink, Card, CardFooter, CardFooterIcon, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, CardPanelItem, CardPanelItemCrown, CardPanelItemGroup, Checkbox, Field, FieldDescription, FieldGrid, FieldGroup, FieldHint, FieldLabel, FieldLegend, FieldSet, Input, InputGroup, InputGroupTextarea, MainContent, PageContent, PageHeader, PageHeaderGroup, PageMain, PageSubtitle, PageTitle, PageWrapper, RadioGroup, RadioGroupItem, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue, SimpleAlert, UnsavedChangesBar } from "@/ascendra-ui";
 
-import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
-import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar";
-import { BackLink } from "@/ascendra-ui/components/forms/back-link";
-import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { PageContent } from "@/ascendra-ui/components/layout/page-content";
-import { PageMain } from "@/ascendra-ui/components/layout/page-main";
-import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
-import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
-import {
-  Field,
-  FieldDescription,
-  FieldGrid,
-  FieldGroup,
-  FieldHint,
-  FieldLabel,
-  FieldLegend,
-  FieldSet,
-} from "@/ascendra-ui/components/ui/field";
-import { Input } from "@/ascendra-ui/components/ui/input";
-import {
-  InputGroup,
-  InputGroupTextarea,
-} from "@/ascendra-ui/components/ui/input-group";
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@/ascendra-ui/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/ascendra-ui/components/ui/select";
-import { CardPanelItemCrown } from "@/ascendra-ui/components/card/card-panel-item-crown";
 
 // ─── Schema ────────────────────────────────────────────────────────────────────
 

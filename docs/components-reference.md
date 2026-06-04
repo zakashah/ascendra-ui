@@ -1,6 +1,6 @@
 # Ascendra UI — Component Reference
 
-> Auto-generated on 2026-05-27 from `lib/registry.ts`.  
+> Auto-generated on 2026-06-04 from `lib/registry.ts`.  
 > Run `npm run docs:generate` after any registry change to keep this file current.
 
 ---
@@ -16,7 +16,7 @@
 | Navigation | Anchor, Nav Link, Header, Nav |
 | Overlays | Dialog, Sheet, Dropdown Menu |
 | Tables & Data | Table, Empty State, Data Table |
-| Layout | Main Section, Page Header, Page Bar, Aside Content, Item |
+| Layout | Card, Page Header, Page Bar, Aside Content, Item |
 | Tabs | Tabs |
 | Sidebar | Sidebar Menu |
 | Utilities | Copy Text, Name Avatar, Theme Toggle, Pagination Button, Row Action Button, Scroll To Top |
@@ -33,7 +33,7 @@
 Small inline status badge for labeling content with semantic color variants.
 
 - **Slug:** `simple-badge`
-- **Import:** `import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge"`
+- **Import:** `import { SimpleBadge } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/simple-badge`
 
 **Props**
@@ -51,7 +51,7 @@ Small inline status badge for labeling content with semantic color variants.
 Gradient pill badges with inset highlight, available in multiple sizes and colors.
 
 - **Slug:** `bubble-badge`
-- **Import:** `import { BubbleBadge } from "@/ascendra-ui/components/common-ui/bubble-badge"`
+- **Import:** `import { BubbleBadge } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/bubble-badge`
 
 **Props**
@@ -68,7 +68,7 @@ Gradient pill badges with inset highlight, available in multiple sizes and color
 Tiny status indicator dot with a halo shadow ring, available in semantic colors.
 
 - **Slug:** `status-dot`
-- **Import:** `import { StatusDot } from "@/ascendra-ui/components/common-ui/status-dot"`
+- **Import:** `import { StatusDot } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/status-dot`
 
 **Props**
@@ -84,7 +84,7 @@ Tiny status indicator dot with a halo shadow ring, available in semantic colors.
 Compact alert notification box with semantic severity variants and an optional icon.
 
 - **Slug:** `simple-alert`
-- **Import:** `import { SimpleAlert, AlertIcon } from "@/ascendra-ui/components/common-ui/simple-alert"`
+- **Import:** `import { SimpleAlert, AlertIcon } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/simple-alert`
 
 **Props**
@@ -101,7 +101,7 @@ Compact alert notification box with semantic severity variants and an optional i
 Premium feature indicator with a blue-purple gradient treatment.
 
 - **Slug:** `pro-badge`
-- **Import:** `import { ProBadge } from "@/ascendra-ui/components/common-ui/pro-badge"`
+- **Import:** `import { ProBadge } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/pro-badge`
 
 **Props**
@@ -115,7 +115,7 @@ _No props — accepts standard HTML attributes._
 Fixed bottom bar that surfaces when a form has unsaved changes, with save/reset actions and status states.
 
 - **Slug:** `unsaved-changes-bar`
-- **Import:** `import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar"`
+- **Import:** `import { UnsavedChangesBar } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/unsaved-changes-bar`
 
 **Props**
@@ -142,7 +142,7 @@ Fixed bottom bar that surfaces when a form has unsaved changes, with save/reset 
 Primary CTA button with a 4-layer shadow and gloss system, available in multiple variants and sizes.
 
 - **Slug:** `button`
-- **Import:** `import { Button } from "@/ascendra-ui/components/ui/button"`
+- **Import:** `import { Button } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/button`
 
 **Props**
@@ -161,7 +161,7 @@ Primary CTA button with a 4-layer shadow and gloss system, available in multiple
 Text input with smart focus: shadow ring for pointer interactions, outline for keyboard navigation.
 
 - **Slug:** `input`
-- **Import:** `import { Input } from "@/ascendra-ui/components/ui/input"`
+- **Import:** `import { Input } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/input`
 
 **Props**
@@ -179,7 +179,7 @@ Text input with smart focus: shadow ring for pointer interactions, outline for k
 Composite input system with prefix/suffix text, icon addons, and button addons.
 
 - **Slug:** `input-group`
-- **Import:** `import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupText, InputGroupInput, InputGroupTextarea } from "@/ascendra-ui/components/ui/input-group"`
+- **Import:** `import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupText, InputGroupInput, InputGroupTextarea } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/input-group`
 
 **Props**
@@ -195,7 +195,7 @@ Composite input system with prefix/suffix text, icon addons, and button addons.
 Custom checkbox with gradient overlay and shadow ring on the checked state.
 
 - **Slug:** `checkbox`
-- **Import:** `import { Checkbox } from "@/ascendra-ui/components/ui/checkbox"`
+- **Import:** `import { Checkbox } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/checkbox`
 
 **Props**
@@ -214,7 +214,7 @@ Custom checkbox with gradient overlay and shadow ring on the checked state.
 Custom radio group with glow and gloss effects on the selected item.
 
 - **Slug:** `radio-group`
-- **Import:** `import { RadioGroup, RadioGroupItem } from "@/ascendra-ui/components/ui/radio-group"`
+- **Import:** `import { RadioGroup, RadioGroupItem } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/radio-group`
 
 **Props**
@@ -234,7 +234,7 @@ Custom radio group with glow and gloss effects on the selected item.
 Toggle switch with a gradient overlay on the active track.
 
 - **Slug:** `switch`
-- **Import:** `import { Switch } from "@/ascendra-ui/components/ui/switch"`
+- **Import:** `import { Switch } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/switch`
 
 **Props**
@@ -253,7 +253,7 @@ Toggle switch with a gradient overlay on the active track.
 Custom select dropdown with scroll buttons and size variants.
 
 - **Slug:** `select`
-- **Import:** `import { Select, SelectTrigger, SelectContent, SelectItem, SelectGroup, SelectLabel, SelectValue, SelectSeparator } from "@/ascendra-ui/components/ui/select"`
+- **Import:** `import { Select, SelectTrigger, SelectContent, SelectItem, SelectGroup, SelectLabel, SelectValue, SelectSeparator } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/select`
 
 **Props**
@@ -270,7 +270,7 @@ Custom select dropdown with scroll buttons and size variants.
 Compound form field wrapper with label, description, error display, and orientation variants.
 
 - **Slug:** `field`
-- **Import:** `import { Field, FieldSet, FieldLegend, FieldGroup, FieldContent, FieldLabel, FieldTitle, FieldDescription, FieldSeparator, FieldError } from "@/ascendra-ui/components/ui/field"`
+- **Import:** `import { Field, FieldSet, FieldLegend, FieldGroup, FieldContent, FieldLabel, FieldTitle, FieldDescription, FieldSeparator, FieldError } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/field`
 
 **Props**
@@ -288,7 +288,7 @@ Compound form field wrapper with label, description, error display, and orientat
 Searchable dropdown with single and multi-select (chips) modes, built on Base UI.
 
 - **Slug:** `combobox`
-- **Import:** `import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxGroup, ComboboxLabel, ComboboxEmpty, ComboboxSeparator, ComboboxChips, ComboboxChip, ComboboxChipsInput } from "@/ascendra-ui/components/ui/combobox"`
+- **Import:** `import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxGroup, ComboboxLabel, ComboboxEmpty, ComboboxSeparator, ComboboxChips, ComboboxChip, ComboboxChipsInput } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/combobox`
 
 **Props**
@@ -307,7 +307,7 @@ Searchable dropdown with single and multi-select (chips) modes, built on Base UI
 Table-based lookup field for large datasets — supports single and multi-select with chips, async search, and configurable multi-column display.
 
 - **Slug:** `table-lookup`
-- **Import:** `import { TableLookup } from "@/ascendra-ui/components/ui/table-lookup"`
+- **Import:** `import { TableLookup } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/table-lookup`
 
 **Props**
@@ -334,7 +334,7 @@ Table-based lookup field for large datasets — supports single and multi-select
 Full-featured calendar built on react-day-picker. Supports single, multiple, and range selection with optional month/year dropdowns.
 
 - **Slug:** `calendar`
-- **Import:** `import { Calendar } from "@/ascendra-ui/components/date/calendar"`
+- **Import:** `import { Calendar } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/calendar`
 
 **Props**
@@ -357,7 +357,7 @@ Full-featured calendar built on react-day-picker. Supports single, multiple, and
 Popover-based single date picker with a trigger button and an embedded Calendar.
 
 - **Slug:** `date-picker`
-- **Import:** `import { DatePicker } from "@/ascendra-ui/components/date/date-picker"`
+- **Import:** `import { DatePicker } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/date-picker`
 
 **Props**
@@ -380,7 +380,7 @@ Popover-based single date picker with a trigger button and an embedded Calendar.
 Popover-based date range picker with configurable month count and an embedded range Calendar.
 
 - **Slug:** `date-range-picker`
-- **Import:** `import { DateRangePicker } from "@/ascendra-ui/components/date/date-range-picker"`
+- **Import:** `import { DateRangePicker } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/date-range-picker`
 
 **Props**
@@ -405,7 +405,7 @@ Popover-based date range picker with configurable month count and an embedded ra
 Styled link component with semantic color variants and keyboard focus states.
 
 - **Slug:** `anchor`
-- **Import:** `import { Anchor } from "@/ascendra-ui/components/common-ui/anchor"`
+- **Import:** `import { Anchor } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/anchor`
 
 **Props**
@@ -422,7 +422,7 @@ Styled link component with semantic color variants and keyboard focus states.
 Sticky horizontal navigation bar with muted background and horizontally scrollable content area.
 
 - **Slug:** `nav`
-- **Import:** `import { Nav } from "@/ascendra-ui/components/nav/nav"`
+- **Import:** `import { Nav } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/nav`
 
 **Props**
@@ -436,7 +436,7 @@ _No props — accepts standard HTML attributes._
 Navigation link with an active underline indicator driven by the current pathname.
 
 - **Slug:** `nav-link`
-- **Import:** `import { NavLink, NavLinkBadge } from "@/ascendra-ui/components/nav/nav-link"`
+- **Import:** `import { NavLink, NavLinkBadge } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/nav-link`
 
 **Props**
@@ -453,7 +453,7 @@ Navigation link with an active underline indicator driven by the current pathnam
 Top navigation header with breadcrumb links, slash separators, chevrons, and action slots.
 
 - **Slug:** `header`
-- **Import:** `import { Header, HeaderLink, HeaderSlash, HeaderChevron, HeaderActions, HeaderLinks } from "@/ascendra-ui/components/header/header"`
+- **Import:** `import { Header, HeaderLink, HeaderSlash, HeaderChevron, HeaderActions, HeaderLinks } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/header`
 
 **Props**
@@ -469,7 +469,7 @@ _No props — accepts standard HTML attributes._
 Modal dialog with header, body, and footer slots. Centered overlay with max-w-sm default.
 
 - **Slug:** `dialog`
-- **Import:** `import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogBody, DialogFooter, DialogClose } from "@/ascendra-ui/components/ui/dialog"`
+- **Import:** `import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogBody, DialogFooter, DialogClose } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/dialog`
 
 **Props**
@@ -486,7 +486,7 @@ Modal dialog with header, body, and footer slots. Centered overlay with max-w-sm
 Slide-out drawer panel that opens from any edge of the screen.
 
 - **Slug:** `sheet`
-- **Import:** `import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetBody, SheetFooter, SheetClose } from "@/ascendra-ui/components/ui/sheet"`
+- **Import:** `import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetBody, SheetFooter, SheetClose } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/sheet`
 
 **Props**
@@ -503,7 +503,7 @@ Slide-out drawer panel that opens from any edge of the screen.
 Full-featured dropdown with items, separators, checkboxes, radio groups, and sub-menus.
 
 - **Slug:** `dropdown-menu`
-- **Import:** `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel, DropdownMenuCheckboxItem, DropdownMenuRadioItem, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuSubContent, DropdownMenuShortcut } from "@/ascendra-ui/components/ui/dropdown-menu"`
+- **Import:** `import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel, DropdownMenuCheckboxItem, DropdownMenuRadioItem, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuSubContent, DropdownMenuShortcut } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/dropdown-menu`
 
 **Props**
@@ -519,20 +519,31 @@ Full-featured dropdown with items, separators, checkboxes, radio groups, and sub
 
 #### Table
 
-Data table with header, body, footer, scrollable container, and empty state support.
+Data table with header, body, footer, scrollable container, and optional accent border and gradient background.
 
 - **Slug:** `table`
-- **Import:** `import { Table, TableWrapper, TableHeader, TableHeaderRow, TableBody, TableRow, TableHead, TableCell, TableFooter, TableFoot, EmptyBody } from "@/ascendra-ui/components/ui/table"`
+- **Import:** `import { Table, TableWrapper, TableHeader, TableHeaderRow, TableBody, TableRow, TableHead, TableCell, TableFooter, TableFoot, EmptyBody } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/table`
 
 **Props**
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `scrollable` | `boolean` | — | Enable scroll on the TableWrapper. |
-| `vertical` | `boolean` | — | Enable vertical scroll. |
-| `horizontal` | `boolean` | — | Enable horizontal scroll. |
-| `height` | `number` | — | Fixed height in px for scrollable tables. |
+| `scrollable` | `boolean` | `false` | Enables scroll on the table container. |
+| `vertical` | `boolean` | `false` | Enables vertical (y-axis) scroll. |
+| `horizontal` | `boolean` | `true` | Enables horizontal (x-axis) scroll. |
+| `height` | `number` | — | Max height in px when vertical scroll is enabled. |
+| `minHeight` | `number` | — | Minimum height in px for the table container. |
+| `border (TableWrapper)` | `BorderConfig` | — | Optional accent border on the outer wrapper. |
+| `border (TableBody)` | `BorderConfig` | — | Optional accent border on the ::before panel element. |
+| `bg (TableBody)` | `BgConfig` | — | Optional gradient background on the ::before panel. Removes solid bg when set. |
+| `border.side` | `'t' \| 'l' \| 'r' \| 'b'` | `'t'` | Side the border appears on. |
+| `border.stroke` | `1 \| 2 \| 3` | `3` | Border thickness in px. |
+| `border.color` | `'blue' \| 'amber' \| 'purple' \| 'red' \| 'teal' \| 'orange' \| 'indigo' \| 'slate'` | `'orange'` | Accent color at 60% opacity. |
+| `bg.style` | `'linear' \| 'radial' \| 'conic'` | `'linear'` | CSS gradient type. |
+| `bg.side` | `'t' \| 'l' \| 'r' \| 'b'` | `'b'` | Gradient direction (linear only). |
+| `bg.color` | `'blue' \| 'amber' \| 'purple' \| 'red' \| 'teal' \| 'orange' \| 'indigo' \| 'slate'` | `'orange'` | Start color at 7% opacity. |
+| `bg.to` | `'transparent' \| 'white' \| 'black' \| AccentColor` | `'transparent'` | End stop color. Accent colors resolve to 500/60. |
 
 ---
 
@@ -541,7 +552,7 @@ Data table with header, body, footer, scrollable container, and empty state supp
 Placeholder for empty content areas with optional icon media and call-to-action.
 
 - **Slug:** `empty`
-- **Import:** `import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent, EmptyMedia } from "@/ascendra-ui/components/ui/empty"`
+- **Import:** `import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent, EmptyMedia } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/empty`
 
 **Props**
@@ -557,7 +568,7 @@ Placeholder for empty content areas with optional icon media and call-to-action.
 Feature-rich data table with built-in search, filtering, sorting, column management, and pagination — composed via DataTableProvider and QueryProvider.
 
 - **Slug:** `data-table`
-- **Import:** `import { DataTable, DataTableHeader, DataTableHeaderRow, DataTableHead, DataTableBody, DataTableRow, DataTableCell, DataTableHighlight, DataTableWrapper, DataTableFoot, DataTableLoadingBody, DataTableEmptyBody, DataTableSearchInput, DataTableColumnManager, DataTableSortDropdown, DataTableFilterDropdown, DataTableFilterBar } from "@/ascendra-ui/components/data-table"`
+- **Import:** `import { DataTable, DataTableHeader, DataTableHeaderRow, DataTableHead, DataTableBody, DataTableRow, DataTableCell, DataTableHighlight, DataTableWrapper, DataTableFoot, DataTableLoadingBody, DataTableEmptyBody, DataTableSearchInput, DataTableColumnManager, DataTableSortDropdown, DataTableFilterDropdown, DataTableFilterBar } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/data-table`
 
 **Props**
@@ -578,21 +589,27 @@ Feature-rich data table with built-in search, filtering, sorting, column managem
 
 ### Layout
 
-#### Main Section
+#### Card
 
-Settings-page section with header, footer, and collapsible panel support. Includes a danger variant.
+Settings-style card with header, collapsible panel, panel items, field, crown badge, and footer. Supports accent border and gradient background on the panel.
 
-- **Slug:** `main-section`
-- **Import:** `import { MainSection, MainSectionHeader, MainSectionFooter, MainSectionPanel, MainSectionPanelItem, MainSectionPanelItemGroup } from "@/ascendra-ui/components/layout/main-section"`
-- **Showcase:** `/showcase/main-section`
+- **Slug:** `card`
+- **Import:** `import { Card, CardHeader, CardHeaderTitle, CardHeaderSubtitle, CardPanel, CardFooter, CardFooterIcon, CardPanelItem, CardPanelItemGroup, CardPanelItemCrown, CardPanelField } from "@/ascendra-ui"`
+- **Showcase:** `/showcase/card`
 
 **Props**
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `danger` | `boolean` | `false` | Applies red danger styling (on MainSection). |
-| `collapsed` | `boolean` | — | Controls the panel collapsed state (on MainSectionPanel). |
-| `dimmed` | `boolean` | — | Dims the panel item content (on MainSectionPanelItem). |
+| `danger` | `boolean` | `false` | Applies red danger styling (on Card). |
+| `collapseable` | `'expanded' \| 'collapsed'` | — | Enables collapse with toggle in CardHeader. |
+| `hasError` | `boolean` | `false` | Shows a destructive outline ring when collapsed (on Card). |
+| `border` | `BorderConfig` | — | Optional accent border on Card or CardPanel. |
+| `bg` | `BgConfig` | — | Optional gradient background on CardPanel. |
+| `collapsed` | `boolean` | — | Collapses the item/field to zero height (on CardPanelItem / CardPanelField). |
+| `variant` | `'default' \| 'secondary' \| 'destructive' \| 'success' \| 'warning'` | `'default'` | Crown badge color (on CardPanelItemCrown). |
+| `nudge` | `boolean` | `false` | Attention-pulse animation (on CardPanelItemCrown). |
+| `nudgeVariant` | `'default' \| 'secondary' \| 'destructive' \| 'success' \| 'warning'` | `'warning'` | Nudge color override (on CardPanelItemCrown). |
 
 ---
 
@@ -601,7 +618,7 @@ Settings-page section with header, footer, and collapsible panel support. Includ
 Page-level header with title, subtitle, and an action slot. Composes PageHeaderGroup, PageTitle, PageSubtitle, and PageHeaderAction.
 
 - **Slug:** `page-header`
-- **Import:** `import { PageHeader, PageHeaderGroup, PageTitle, PageSubtitle, PageHeaderAction } from "@/ascendra-ui/components/layout/page-header"`
+- **Import:** `import { PageHeader, PageHeaderGroup, PageTitle, PageSubtitle, PageHeaderAction } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/page-header`
 
 **Props**
@@ -615,7 +632,7 @@ _No props — accepts standard HTML attributes._
 Horizontal toolbar for search, filters, and primary actions above page content.
 
 - **Slug:** `page-bar`
-- **Import:** `import { PageBar, PageBarContent, PageBarAction } from "@/ascendra-ui/components/layout/page-bar"`
+- **Import:** `import { PageBar, PageBarContent, PageBarAction } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/page-bar`
 
 **Props**
@@ -629,7 +646,7 @@ _No props — accepts standard HTML attributes._
 Aside panel with optional dimmed state and gradient mask for overflow content on mobile.
 
 - **Slug:** `aside-content`
-- **Import:** `import { AsideContent } from "@/ascendra-ui/components/layout/aside-content"`
+- **Import:** `import { AsideContent } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/aside-content`
 
 **Props**
@@ -645,7 +662,7 @@ Aside panel with optional dimmed state and gradient mask for overflow content on
 Flexible list item with media, title, description, actions, header, and footer slots. Supports outline and muted variants.
 
 - **Slug:** `item`
-- **Import:** `import { Item, ItemMedia, ItemContent, ItemTitle, ItemDescription, ItemActions, ItemGroup, ItemSeparator, ItemHeader, ItemFooter } from "@/ascendra-ui/components/ui/item"`
+- **Import:** `import { Item, ItemMedia, ItemContent, ItemTitle, ItemDescription, ItemActions, ItemGroup, ItemSeparator, ItemHeader, ItemFooter } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/item`
 
 **Props**
@@ -666,7 +683,7 @@ Flexible list item with media, title, description, actions, header, and footer s
 Tabbed navigation with dirty-state dot indicator and disabled tab support.
 
 - **Slug:** `tabs`
-- **Import:** `import { Tabs, TabList, TabTrigger, TabContent } from "@/ascendra-ui/components/tabs/tabs"`
+- **Import:** `import { Tabs, TabList, TabTrigger, TabContent } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/tabs`
 
 **Props**
@@ -688,7 +705,7 @@ Tabbed navigation with dirty-state dot indicator and disabled tab support.
 Expandable sidebar navigation with grouped menu sets, icon headers, and active link detection.
 
 - **Slug:** `sidebar-menu`
-- **Import:** `import { SideBarMenu, SideBarMenuHeader, SideBarMenuContent, SideBarMenuItem, SideBarMenuItemGroup, SideBarMenuSet, SideBarMenuSetTitle } from "@/ascendra-ui/components/side-bar/side-bar-menu"`
+- **Import:** `import { SideBarMenu, SideBarMenuHeader, SideBarMenuContent, SideBarMenuItem, SideBarMenuItemGroup, SideBarMenuSet, SideBarMenuSetTitle } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/sidebar-menu`
 
 **Props**
@@ -709,7 +726,7 @@ Expandable sidebar navigation with grouped menu sets, icon headers, and active l
 Inline copy-to-clipboard trigger with icon feedback and an optional tooltip confirmation.
 
 - **Slug:** `copy-text`
-- **Import:** `import { CopyText } from "@/ascendra-ui/components/util/copy-text"`
+- **Import:** `import { CopyText } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/copy-text`
 
 **Props**
@@ -729,7 +746,7 @@ Inline copy-to-clipboard trigger with icon feedback and an optional tooltip conf
 Auto-generated avatar from name initials with a deterministic background color derived from the name.
 
 - **Slug:** `name-avatar`
-- **Import:** `import { NameAvatar } from "@/ascendra-ui/components/common-ui/name-avatar"`
+- **Import:** `import { NameAvatar } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/name-avatar`
 
 **Props**
@@ -747,7 +764,7 @@ Auto-generated avatar from name initials with a deterministic background color d
 Dark/light mode toggle button powered by next-themes.
 
 - **Slug:** `theme-toggle`
-- **Import:** `import { ThemeToggle } from "@/ascendra-ui/components/util/theme-toggle"`
+- **Import:** `import { ThemeToggle } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/theme-toggle`
 
 **Props**
@@ -761,7 +778,7 @@ _No props — accepts standard HTML attributes._
 Small bordered navigation button for pagination controls.
 
 - **Slug:** `pagination-button`
-- **Import:** `import { PaginationButton } from "@/ascendra-ui/components/common-ui/pagination-button"`
+- **Import:** `import { PaginationButton } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/pagination-button`
 
 **Props**
@@ -775,7 +792,7 @@ _No props — accepts standard HTML attributes._
 Icon button for table row actions — hidden by default, visible on row hover.
 
 - **Slug:** `row-action-button`
-- **Import:** `import { RowActionButton } from "@/ascendra-ui/components/common-ui/row-action-button"`
+- **Import:** `import { RowActionButton } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/row-action-button`
 
 **Props**
@@ -791,7 +808,7 @@ Icon button for table row actions — hidden by default, visible on row hover.
 Behavior-only component that scrolls the window to the top on every route change and disables browser scroll restoration.
 
 - **Slug:** `scroll-to-top`
-- **Import:** `import { ScrollToTop } from "@/ascendra-ui/components/util/scroll-to-top"`
+- **Import:** `import { ScrollToTop } from "@/ascendra-ui"`
 - **Showcase:** `/showcase/scroll-to-top`
 
 **Props**

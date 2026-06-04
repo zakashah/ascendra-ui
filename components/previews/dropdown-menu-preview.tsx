@@ -3,20 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuLabel,
-  DropdownMenuCheckboxItem,
-  DropdownMenuSub,
-  DropdownMenuSubTrigger,
-  DropdownMenuSubContent,
-  DropdownMenuShortcut,
-} from "@/ascendra-ui/components/ui/dropdown-menu";
-import { Button } from "@/ascendra-ui/components/ui/button";
+import { Button, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 import { LuPencil, LuTrash2, LuEye, LuEllipsis } from "react-icons/lu";
 
@@ -30,7 +17,7 @@ export function DropdownMenuDocContent() {
   DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
   DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel,
   DropdownMenuCheckboxItem, DropdownMenuShortcut,
-} from "@/ascendra-ui/components/ui/dropdown-menu";
+} from "@/ascendra-ui";
 
 <DropdownMenu>
   <DropdownMenuTrigger asChild>

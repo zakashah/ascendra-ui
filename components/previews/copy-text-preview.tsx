@@ -3,7 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { CopyText } from "@/ascendra-ui/components/util/copy-text";
+import { CopyText } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["copy-text"];
@@ -12,7 +12,7 @@ export function CopyTextDocContent() {
   return (
     <div className="space-y-10">
       <ComponentPreview
-        code={`import { CopyText } from "@/ascendra-ui/components/util/copy-text";
+        code={`import { CopyText } from "@/ascendra-ui";
 
 <CopyText value="INV-00124">INV-00124</CopyText>`}
       >

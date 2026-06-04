@@ -5,7 +5,7 @@ import { type DateRange } from "react-day-picker";
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { Calendar } from "@/ascendra-ui/components/date/calendar";
+import { Calendar } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["calendar"];
@@ -20,7 +20,7 @@ export function CalendarDocContent() {
       {/* Hero preview */}
       <ComponentPreview
         align="start"
-        code={`import { Calendar } from "@/ascendra-ui/components/date/calendar";
+        code={`import { Calendar } from "@/ascendra-ui";
 
 const [date, setDate] = useState<Date | undefined>(undefined);
 

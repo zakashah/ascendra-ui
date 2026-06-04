@@ -11,15 +11,7 @@ import {
   DrawerDescription,
   DrawerFooter,
 } from "@/ascendra-ui/shadcn/components/ui/drawer";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { Switch } from "@/ascendra-ui/components/ui/switch";
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
-import {
-  ItemGroup,
-  Item,
-  ItemContent,
-  ItemTitle,
-} from "@/ascendra-ui/components/ui/item";
+import { Button, Item, ItemContent, ItemGroup, ItemTitle, SimpleBadge, Switch } from "@/ascendra-ui";
 
 const categories = ["Electronics", "Clothing", "Home & Garden", "Sports", "Books"];
 const activeFilters = ["Electronics", "In Stock", "New"];

@@ -1,12 +1,6 @@
 "use client";
 
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
+import { Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, SimpleBadge } from "@/ascendra-ui";
 import {
   ChartContainer,
   ChartTooltip,

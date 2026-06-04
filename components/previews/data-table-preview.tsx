@@ -7,37 +7,7 @@ import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
 import { registry } from "@/lib/registry";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
-import type {
-  AccentColor,
-  BorderSide,
-  BorderStroke,
-  BgStyle,
-  BgTo,
-} from "@/ascendra-ui/components/ui/accent-styles";
-import { type ColumnDef } from "@/ascendra-ui/providers/data-table/data-table.types";
-import { DataTableProvider } from "@/ascendra-ui/providers/data-table/data-table.provider";
-import { DataTable } from "@/ascendra-ui/components/data-table/data-table";
-import { DataTableHeader } from "@/ascendra-ui/components/data-table/data-table-header";
-import { DataTableHeaderRow } from "@/ascendra-ui/components/data-table/data-table-header-row";
-import { DataTableHead } from "@/ascendra-ui/components/data-table/data-table-head";
-import { DataTableBody } from "@/ascendra-ui/components/data-table/data-table-body";
-import { DataTableRow } from "@/ascendra-ui/components/data-table/data-table-row";
-import { DataTableCell } from "@/ascendra-ui/components/data-table/data-table-cell";
-import { DataTableHighlight } from "@/ascendra-ui/components/data-table/data-table-highlight";
-import { DataTableFoot } from "@/ascendra-ui/components/data-table/data-table-foot";
-import { DataTableEmptyBody } from "@/ascendra-ui/components/data-table/data-table-empty-body";
-import { DataTableLoadingBody } from "@/ascendra-ui/components/data-table/data-table-loading-body";
-import { DataTableWrapper } from "@/ascendra-ui/components/data-table/data-table-wrapper";
-import { DataTableBar } from "@/ascendra-ui/components/data-table/data-table-bar";
-import { DataTableBarContent } from "@/ascendra-ui/components/data-table/data-table-bar-content";
-import { DataTableBarAction } from "@/ascendra-ui/components/data-table/data-table-bar-action";
-import { DataTableSearchInput } from "@/ascendra-ui/components/data-table/data-table-search-input";
-import { DataTableColumnManager } from "@/ascendra-ui/components/data-table/data-table-column-manager";
-import { DataTableSortDropdown } from "@/ascendra-ui/components/data-table/data-table-sort-dropdown";
-import { DataTableFilterDropdown } from "@/ascendra-ui/components/data-table/data-table-filter-dropdown";
-import { DataTableFilterBar } from "@/ascendra-ui/components/data-table/data-table-filter-bar";
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
-import { Button } from "@/ascendra-ui/components/ui/button";
+import { type AccentColor, type BgStyle, type BgTo, type BorderSide, type BorderStroke, Button, type ColumnDef, DataTable, DataTableBar, DataTableBarAction, DataTableBarContent, DataTableBody, DataTableCell, DataTableColumnManager, DataTableEmptyBody, DataTableFilterBar, DataTableFilterDropdown, DataTableFoot, DataTableHead, DataTableHeader, DataTableHeaderRow, DataTableHighlight, DataTableLoadingBody, DataTableProvider, DataTableRow, DataTableSearchInput, DataTableSortDropdown, DataTableWrapper, SimpleBadge } from "@/ascendra-ui";
 
 // ─── Entity & mock data ───────────────────────────────────────────────────────
 
@@ -763,28 +733,7 @@ export function DataTableDocContent() {
       <ComponentPreview
         align="start"
         minHeight={460}
-        code={`import { ColumnDef } from '@/ascendra-ui/providers/data-table/data-table.types';
-import { DataTableProvider } from '@/ascendra-ui/providers/data-table/data-table.provider';
-import { DataTable } from '@/ascendra-ui/components/data-table/data-table';
-import { DataTableHeader } from '@/ascendra-ui/components/data-table/data-table-header';
-import { DataTableHeaderRow } from '@/ascendra-ui/components/data-table/data-table-header-row';
-import { DataTableHead } from '@/ascendra-ui/components/data-table/data-table-head';
-import { DataTableBody } from '@/ascendra-ui/components/data-table/data-table-body';
-import { DataTableRow } from '@/ascendra-ui/components/data-table/data-table-row';
-import { DataTableCell } from '@/ascendra-ui/components/data-table/data-table-cell';
-import { DataTableHighlight } from '@/ascendra-ui/components/data-table/data-table-highlight';
-import { DataTableFoot } from '@/ascendra-ui/components/data-table/data-table-foot';
-import { DataTableEmptyBody } from '@/ascendra-ui/components/data-table/data-table-empty-body';
-import { DataTableLoadingBody } from '@/ascendra-ui/components/data-table/data-table-loading-body';
-import { DataTableWrapper } from '@/ascendra-ui/components/data-table/data-table-wrapper';
-import { DataTableBar } from '@/ascendra-ui/components/layout/data-table-bar';
-import { DataTableBarContent } from '@/ascendra-ui/components/layout/data-table-bar-content';
-import { DataTableBarAction } from '@/ascendra-ui/components/layout/data-table-bar-action';
-import { DataTableSearchInput } from '@/ascendra-ui/components/data-table/data-table-search-input';
-import { DataTableColumnManager } from '@/ascendra-ui/components/data-table/data-table-column-manager';
-import { DataTableSortDropdown } from '@/ascendra-ui/components/data-table/data-table-sort-dropdown';
-import { DataTableFilterDropdown } from '@/ascendra-ui/components/data-table/data-table-filter-dropdown';
-import { DataTableFilterBar } from '@/ascendra-ui/components/data-table/data-table-filter-bar';
+        code={`import { ColumnDef } from '@/ascendra-ui';
 
 // 1. Define columns
 const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
@@ -1037,7 +986,7 @@ const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
           <ComponentPreview
             align="start"
             minHeight={100}
-            code={`import { ColumnDef } from '@/ascendra-ui/providers/data-table/data-table.types';
+            code={`import { ColumnDef } from '@/ascendra-ui';
 
 const INVOICE_COLUMNS: ColumnDef<Invoice>[] = [
   // freeze: always visible; cannot be hidden via the column manager

@@ -3,10 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { Tabs } from "@/ascendra-ui/components/tabs/tabs";
-import { TabList } from "@/ascendra-ui/components/tabs/tab-list";
-import { TabTrigger } from "@/ascendra-ui/components/tabs/tab-trigger";
-import { TabContent } from "@/ascendra-ui/components/tabs/tab-content";
+import { TabContent, TabList, Tabs, TabTrigger } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["tabs"];
@@ -16,7 +13,7 @@ export function TabsDocContent() {
     <div className="space-y-10">
       <ComponentPreview
         align="start"
-        code={`import { Tabs, TabList, TabTrigger, TabContent } from "@/ascendra-ui/components/tabs/tabs";
+        code={`import { Tabs, TabList, TabTrigger, TabContent } from "@/ascendra-ui";
 
 <Tabs defaultValue="overview">
   <TabList>

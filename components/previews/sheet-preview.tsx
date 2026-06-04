@@ -3,20 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import {
-  Sheet,
-  SheetTrigger,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-  SheetBody,
-  SheetFooter,
-  SheetClose,
-  SheetSubHeader,
-  SheetSubFooter,
-} from "@/ascendra-ui/components/ui/sheet";
-import { Button } from "@/ascendra-ui/components/ui/button";
+import { Button, Sheet, SheetBody, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetSubFooter, SheetSubHeader, SheetTitle, SheetTrigger } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["sheet"];
@@ -28,7 +15,7 @@ export function SheetDocContent() {
         code={`import {
   Sheet, SheetTrigger, SheetContent, SheetHeader,
   SheetTitle, SheetDescription, SheetBody, SheetFooter, SheetClose,
-} from "@/ascendra-ui/components/ui/sheet";
+} from "@/ascendra-ui";
 
 <Sheet>
   <SheetTrigger asChild>

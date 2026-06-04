@@ -15,13 +15,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn/components/ui/chart";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
+import { Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, SimpleBadge } from "@/ascendra-ui";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 

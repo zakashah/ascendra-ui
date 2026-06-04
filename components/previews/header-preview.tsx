@@ -3,12 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { Header } from "@/ascendra-ui/components/header/header";
-import { HeaderLinks } from "@/ascendra-ui/components/header/header-links";
-import { HeaderLink } from "@/ascendra-ui/components/header/header-link";
-import { HeaderSlash } from "@/ascendra-ui/components/header/header-slash";
-import { HeaderChevron } from "@/ascendra-ui/components/header/header-chevron";
-import { HeaderActions } from "@/ascendra-ui/components/header/header-actions";
+import { Header, HeaderActions, HeaderChevron, HeaderLink, HeaderLinks, HeaderSlash } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["header"];
@@ -18,7 +13,7 @@ export function HeaderDocContent() {
     <div className="space-y-10">
       <ComponentPreview
         minHeight={80}
-        code={`import { Header, HeaderLink, HeaderSlash, HeaderChevron, HeaderActions, HeaderLinks } from "@/ascendra-ui/components/header/header";
+        code={`import { Header, HeaderLink, HeaderSlash, HeaderChevron, HeaderActions, HeaderLinks } from "@/ascendra-ui";
 
 <Header>
   <HeaderLinks>

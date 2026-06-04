@@ -12,16 +12,7 @@ import {
   DrawerDescription,
   DrawerFooter,
 } from "@/ascendra-ui/shadcn/components/ui/drawer";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { Input } from "@/ascendra-ui/components/ui/input";
-import { NameAvatar } from "@/ascendra-ui/components/common-ui/name-avatar";
-import {
-  ItemGroup,
-  Item,
-  ItemContent,
-  ItemTitle,
-  ItemDescription,
-} from "@/ascendra-ui/components/ui/item";
+import { Button, Input, Item, ItemContent, ItemDescription, ItemGroup, ItemTitle, NameAvatar } from "@/ascendra-ui";
 
 const members = [
   { name: "Sarah Mitchell", role: "Senior Product Designer" },

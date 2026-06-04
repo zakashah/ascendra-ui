@@ -153,16 +153,8 @@ function QuickStartSection() {
         compound components inside.
       </p>
 
-      <CodeBlock>{`import { DataTableProvider } from "@/ascendra-ui/providers/data-table/data-table.provider";
-import { type ColumnDef } from "@/ascendra-ui/providers/data-table/data-table.types";
-import { DataTable }           from "@/ascendra-ui/components/data-table/data-table";
-import { DataTableHeader }     from "@/ascendra-ui/components/data-table/data-table-header";
-import { DataTableHeaderRow }  from "@/ascendra-ui/components/data-table/data-table-header-row";
-import { DataTableHead }       from "@/ascendra-ui/components/data-table/data-table-head";
-import { DataTableBody }       from "@/ascendra-ui/components/data-table/data-table-body";
-import { DataTableRow }        from "@/ascendra-ui/components/data-table/data-table-row";
-import { DataTableCell }       from "@/ascendra-ui/components/data-table/data-table-cell";
-import { DataTableFoot }       from "@/ascendra-ui/components/data-table/data-table-foot";
+      <CodeBlock>{`import { DataTableProvider } from "@/ascendra-ui";
+import { type ColumnDef, DataTable, DataTableBody, DataTableCell, DataTableDeleteRowAction, DataTableEditRowAction, DataTableFoot, DataTableHead, DataTableHeader, DataTableHeaderRow, DataTableRow, DataTableRowAction } from "@/ascendra-ui";
 
 type User = { id: number; name: string; email: string };
 
@@ -703,12 +695,7 @@ function ActionsSection() {
   DataTableBulkExportHeadAction,
   DataTableBulkDeleteHeadAction,
   DataTableRefreshHeadAction,
-} from "@/ascendra-ui/components/data-table/data-table-head-action";
-import {
-  DataTableRowAction,
-  DataTableEditRowAction,
-  DataTableDeleteRowAction,
-} from "@/ascendra-ui/components/data-table/data-table-row-action";
+} from "@/ascendra-ui";
 
 // In the header row:
 <DataTableHeadAction

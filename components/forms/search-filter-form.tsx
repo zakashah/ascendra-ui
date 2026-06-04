@@ -4,48 +4,8 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import type { DateRange } from "react-day-picker";
 
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
-import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageMain } from "@/ascendra-ui/components/layout/page-main";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageContent } from "@/ascendra-ui/components/layout/page-content";
-import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
-import { MainContent } from "@/ascendra-ui/components/layout/main-content";
+import { BackLink, Button, Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, CardPanelItem, Checkbox, Combobox, ComboboxCollection, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, DateRangePicker, Field, FieldHint, FieldLabel, FieldLegend, FieldSet, Input, MainContent, PageContent, PageHeader, PageHeaderGroup, PageMain, PageSubtitle, PageTitle, PageWrapper, RadioGroup, RadioGroupItem, SimpleAlert } from "@/ascendra-ui";
 
-import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
-import { BackLink } from "@/ascendra-ui/components/forms/back-link";
-import { DateRangePicker } from "@/ascendra-ui/components/date/date-range-picker";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
-import {
-  Combobox,
-  ComboboxCollection,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-} from "@/ascendra-ui/components/ui/combobox";
-import {
-  Field,
-  FieldHint,
-  FieldLabel,
-  FieldLegend,
-  FieldSet,
-} from "@/ascendra-ui/components/ui/field";
-import { Input } from "@/ascendra-ui/components/ui/input";
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@/ascendra-ui/components/ui/radio-group";
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 

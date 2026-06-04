@@ -3,15 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import {
-  Empty,
-  EmptyHeader,
-  EmptyTitle,
-  EmptyDescription,
-  EmptyContent,
-  EmptyMedia,
-} from "@/ascendra-ui/components/ui/empty";
-import { Button } from "@/ascendra-ui/components/ui/button";
+import { Button, Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 import { LuFileX, LuPlus } from "react-icons/lu";
 
@@ -24,7 +16,7 @@ export function EmptyDocContent() {
         code={`import {
   Empty, EmptyHeader, EmptyTitle, EmptyDescription,
   EmptyContent, EmptyMedia,
-} from "@/ascendra-ui/components/ui/empty";
+} from "@/ascendra-ui";
 
 <Empty>
   <EmptyHeader>

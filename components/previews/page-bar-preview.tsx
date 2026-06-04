@@ -1,14 +1,6 @@
 "use client";
 
-import { DataTableBarAction } from "@/ascendra-ui/components/data-table/data-table-bar-action";
-import { DataTableBarContent } from "@/ascendra-ui/components/data-table/data-table-bar-content";
-import { TableBar } from "@/ascendra-ui/components/layout/table-bar";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "@/ascendra-ui/components/ui/input-group";
+import { Button, DataTableBarAction, DataTableBarContent, InputGroup, InputGroupAddon, InputGroupInput, TableBar } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 import { LuPlus, LuSearch, LuSlidersHorizontal } from "react-icons/lu";
 import { ComponentPreview } from "../component-preview";
@@ -22,7 +14,7 @@ export function PageBarDocContent() {
     <div className="space-y-10">
       <ComponentPreview
         align="start"
-        code={`import { PageBar, PageBarContent, PageBarAction } from "@/ascendra-ui/components/layout/page-bar";
+        code={`import { PageBar, PageBarContent, PageBarAction } from "@/ascendra-ui";
 
 <TableBar>
   <PageBarContent>

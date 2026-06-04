@@ -1,31 +1,6 @@
 "use client";
 
-import {
-  Sheet,
-  SheetTrigger,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-  SheetBody,
-  SheetFooter,
-  SheetSection,
-  SheetSectionHeader,
-  SheetProperties,
-  SheetKey,
-  SheetValue,
-} from "@/ascendra-ui/components/ui/sheet";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { NameAvatar } from "@/ascendra-ui/components/common-ui/name-avatar";
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
-import { StatusDot } from "@/ascendra-ui/components/common-ui/status-dot";
-import {
-  Item,
-  ItemContent,
-  ItemTitle,
-  ItemActions,
-} from "@/ascendra-ui/components/ui/item";
+import { Button, Item, ItemActions, ItemContent, ItemTitle, NameAvatar, Sheet, SheetBody, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetKey, SheetProperties, SheetSection, SheetSectionHeader, SheetTitle, SheetTrigger, SheetValue, SimpleBadge, StatusDot } from "@/ascendra-ui";
 
 const recentActivity = [
   { event: "Upgraded to Pro plan", time: "3 days ago" },

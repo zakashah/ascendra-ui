@@ -3,7 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { Switch } from "@/ascendra-ui/components/ui/switch";
+import { Switch } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["switch"];
@@ -12,7 +12,7 @@ export function SwitchDocContent() {
   return (
     <div className="space-y-10">
       <ComponentPreview
-        code={`import { Switch } from "@/ascendra-ui/components/ui/switch";
+        code={`import { Switch } from "@/ascendra-ui";
 
 <Switch defaultChecked />`}
       >

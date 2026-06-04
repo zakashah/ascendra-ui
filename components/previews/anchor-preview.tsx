@@ -3,7 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { Anchor } from "@/ascendra-ui/components/common-ui/anchor";
+import { Anchor } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["anchor"];
@@ -12,7 +12,7 @@ export function AnchorDocContent() {
   return (
     <div className="space-y-10">
       <ComponentPreview
-        code={`import { Anchor } from "@/ascendra-ui/components/common-ui/anchor";
+        code={`import { Anchor } from "@/ascendra-ui";
 
 <Anchor href="#">View invoice</Anchor>`}
       >

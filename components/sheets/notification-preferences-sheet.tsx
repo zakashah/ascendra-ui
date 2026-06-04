@@ -1,21 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Sheet,
-  SheetTrigger,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-  SheetBody,
-  SheetFooter,
-  SheetSection,
-  SheetSectionHeader,
-} from "@/ascendra-ui/components/ui/sheet";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { Switch } from "@/ascendra-ui/components/ui/switch";
+import { Button, Sheet, SheetBody, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetSection, SheetSectionHeader, SheetTitle, SheetTrigger, Switch } from "@/ascendra-ui";
 
 type Prefs = {
   emailProduct: boolean;

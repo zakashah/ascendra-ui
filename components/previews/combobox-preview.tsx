@@ -4,22 +4,7 @@ import { useState } from "react";
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxContent,
-  ComboboxList,
-  ComboboxItem,
-  ComboboxEmpty,
-  ComboboxCollection,
-  ComboboxSeparator,
-  ComboboxGroup,
-  ComboboxLabel,
-  ComboboxChips,
-  ComboboxChip,
-  ComboboxChipsInput,
-} from "@/ascendra-ui/components/ui/combobox";
-import { InputGroupAddon } from "@/ascendra-ui/components/ui/input-group";
+import { Combobox, ComboboxChip, ComboboxChips, ComboboxChipsInput, ComboboxCollection, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxInput, ComboboxItem, ComboboxLabel, ComboboxList, ComboboxSeparator, InputGroupAddon } from "@/ascendra-ui";
 import { Globe, Layers, Rocket, Server, Zap, Search } from "lucide-react";
 import { registry } from "@/lib/registry";
 
@@ -93,7 +78,7 @@ export function ComboboxDocContent() {
     <div className="space-y-10">
       {/* Hero preview */}
       <ComponentPreview
-        code={`import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxEmpty } from "@/ascendra-ui/components/ui/combobox";
+        code={`import { Combobox, ComboboxInput, ComboboxContent, ComboboxList, ComboboxItem, ComboboxEmpty } from "@/ascendra-ui";
 
 const [value, setValue] = useState<string | null>(null);
 
@@ -464,7 +449,7 @@ const inputValue = open ? filter : values.join(", ");
             icon.
           </p>
           <ComponentPreview
-            code={`import { InputGroupAddon } from "@/ascendra-ui/components/ui/input-group";
+            code={`import { InputGroupAddon } from "@/ascendra-ui";
 import { Search } from "lucide-react";
 
 <Combobox>

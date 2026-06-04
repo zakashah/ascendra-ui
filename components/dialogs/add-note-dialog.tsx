@@ -1,23 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogBody,
-  DialogFooter,
-  DialogClose,
-} from "@/ascendra-ui/components/ui/dialog";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { Field, FieldLabel } from "@/ascendra-ui/components/ui/field";
-import {
-  InputGroup,
-  InputGroupTextarea,
-} from "@/ascendra-ui/components/ui/input-group";
+import { Button, Dialog, DialogBody, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, Field, FieldLabel, InputGroup, InputGroupTextarea } from "@/ascendra-ui";
 
 export default function AddNoteDialog() {
   const [note, setNote] = useState("");

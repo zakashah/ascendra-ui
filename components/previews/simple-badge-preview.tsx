@@ -3,7 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
+import { SimpleBadge } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 import { LuCircleCheck, LuTriangleAlert } from "react-icons/lu";
 
@@ -14,7 +14,7 @@ export function SimpleBadgeDocContent() {
     <div className="space-y-10">
       {/* Hero preview */}
       <ComponentPreview
-        code={`import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
+        code={`import { SimpleBadge } from "@/ascendra-ui";
 
 <SimpleBadge>Active</SimpleBadge>`}
       >

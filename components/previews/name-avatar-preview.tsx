@@ -3,7 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { NameAvatar } from "@/ascendra-ui/components/common-ui/name-avatar";
+import { NameAvatar } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["name-avatar"];
@@ -12,7 +12,7 @@ export function NameAvatarDocContent() {
   return (
     <div className="space-y-10">
       <ComponentPreview
-        code={`import { NameAvatar } from "@/ascendra-ui/components/common-ui/name-avatar";
+        code={`import { NameAvatar } from "@/ascendra-ui";
 
 <NameAvatar name="Ahmed Khan" href="#" />`}
       >

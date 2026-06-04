@@ -3,7 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { AsideContent } from "@/ascendra-ui/components/layout/aside-content";
+import { AsideContent } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["aside-content"];
@@ -13,7 +13,7 @@ export function AsideContentDocContent() {
     <div className="space-y-10">
       <ComponentPreview
         align="start"
-        code={`import { AsideContent } from "@/ascendra-ui/components/layout/aside-content";
+        code={`import { AsideContent } from "@/ascendra-ui";
 
 <AsideContent>
   <p className="text-sm text-foreground font-medium">Invoice Summary</p>

@@ -12,7 +12,7 @@ export function ScrollToTopDocContent() {
     <div className="space-y-10">
       {/* Hero — code-only, no live widget (behavior component) */}
       <ComponentPreview
-        code={`import { ScrollToTop } from "@/ascendra-ui/components/util/scroll-to-top";
+        code={`import { ScrollToTop } from "@/ascendra-ui";
 
 // Place once in your root layout:
 export default function RootLayout({ children }) {

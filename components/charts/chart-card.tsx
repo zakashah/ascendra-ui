@@ -1,5 +1,5 @@
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
+import { SimpleBadge } from "@/ascendra-ui";
 
 type ChartCardProps = {
   title: string;

@@ -3,16 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectGroup,
-  SelectLabel,
-  SelectValue,
-  SelectSeparator,
-} from "@/ascendra-ui/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator, SelectTrigger, SelectValue } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["select"];
@@ -24,7 +15,7 @@ export function SelectDocContent() {
         code={`import {
   Select, SelectTrigger, SelectContent, SelectItem,
   SelectGroup, SelectLabel, SelectValue, SelectSeparator,
-} from "@/ascendra-ui/components/ui/select";
+} from "@/ascendra-ui";
 
 <Select>
   <SelectTrigger>

@@ -1,19 +1,7 @@
 "use client";
 
 import { LuCircleAlert } from "react-icons/lu";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogBody,
-  DialogFooter,
-  DialogClose,
-} from "@/ascendra-ui/components/ui/dialog";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
+import { Button, Dialog, DialogBody, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, SimpleAlert } from "@/ascendra-ui";
 
 export default function PaymentFailedDialog() {
   return (

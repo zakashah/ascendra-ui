@@ -3,12 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { SideBarMenu } from "@/ascendra-ui/components/side-bar/side-bar-menu";
-import { SideBarMenuHeader } from "@/ascendra-ui/components/side-bar/side-bar-menu-header";
-import { SideBarMenuContent } from "@/ascendra-ui/components/side-bar/side-bar-menu-content";
-import { SideBarMenuItem } from "@/ascendra-ui/components/side-bar/side-bar-menu-item";
-import { SideBarMenuSet } from "@/ascendra-ui/components/side-bar/side-bar-menu-set";
-import { SideBarMenuSetTitle } from "@/ascendra-ui/components/side-bar/side-bar-menu-set-title";
+import { SideBarMenu, SideBarMenuContent, SideBarMenuHeader, SideBarMenuItem, SideBarMenuSet, SideBarMenuSetTitle } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 import { LuUsers, LuFileText, LuLayoutDashboard } from "react-icons/lu";
 
@@ -22,7 +17,7 @@ export function SidebarMenuDocContent() {
         code={`import {
   SideBarMenu, SideBarMenuHeader, SideBarMenuContent,
   SideBarMenuItem, SideBarMenuSet, SideBarMenuSetTitle,
-} from "@/ascendra-ui/components/side-bar/side-bar-menu";
+} from "@/ascendra-ui";
 
 <SideBarMenu basePath="/merchant">
   <SideBarMenuHeader icon={LuUsers}>Parents</SideBarMenuHeader>

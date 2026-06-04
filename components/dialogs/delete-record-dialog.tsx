@@ -1,17 +1,6 @@
 "use client";
 
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogBody,
-  DialogFooter,
-  DialogClose,
-} from "@/ascendra-ui/components/ui/dialog";
-import { Button } from "@/ascendra-ui/components/ui/button";
+import { Button, Dialog, DialogBody, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/ascendra-ui";
 
 export default function DeleteRecordDialog() {
   return (

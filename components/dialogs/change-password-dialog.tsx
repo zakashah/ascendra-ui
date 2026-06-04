@@ -1,19 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogBody,
-  DialogFooter,
-  DialogClose,
-} from "@/ascendra-ui/components/ui/dialog";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { Input } from "@/ascendra-ui/components/ui/input";
-import { Field, FieldLabel, FieldGrid } from "@/ascendra-ui/components/ui/field";
+import { Button, Dialog, DialogBody, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, Field, FieldGrid, FieldLabel, Input } from "@/ascendra-ui";
 
 export default function ChangePasswordDialog() {
   const [current, setCurrent] = useState("");

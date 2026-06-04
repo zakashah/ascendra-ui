@@ -3,7 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { PaginationButton } from "@/ascendra-ui/components/common-ui/pagination-button";
+import { PaginationButton } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 import {
   LuChevronLeft,
@@ -18,7 +18,7 @@ export function PaginationButtonDocContent() {
   return (
     <div className="space-y-10">
       <ComponentPreview
-        code={`import { PaginationButton } from "@/ascendra-ui/components/common-ui/pagination-button";
+        code={`import { PaginationButton } from "@/ascendra-ui";
 
 <PaginationButton>
   <LuChevronLeft />

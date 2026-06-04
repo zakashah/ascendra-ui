@@ -4,20 +4,7 @@ import { useState } from "react";
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
-import { CardFooterIcon } from "@/ascendra-ui/components/card/card-footer-icon";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
-import { CardPanelItemGroup } from "@/ascendra-ui/components/card/card-panel-item-group";
-import { CardPanelItemCrown } from "@/ascendra-ui/components/card/card-panel-item-crown";
-import { CardPanelField } from "@/ascendra-ui/components/card/card-panel-field";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { Input } from "@/ascendra-ui/components/ui/input";
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
+import { Button, Card, CardFooter, CardFooterIcon, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, CardPanelField, CardPanelItem, CardPanelItemCrown, CardPanelItemGroup, Input, SimpleBadge } from "@/ascendra-ui";
 import { InfoIcon, TriangleAlertIcon } from "lucide-react";
 
 // ─── Reusable sample content ──────────────────────────────────────────────────
@@ -61,7 +48,7 @@ export function CardDocContent() {
       {/* ── Hero ── */}
       <ComponentPreview
         align="start"
-        code={`import { Card, CardHeader, CardHeaderTitle, CardHeaderSubtitle, CardPanel, CardFooter } from "@/ascendra-ui/components/card/...";
+        code={`import { Card, CardHeader, CardHeaderTitle, CardHeaderSubtitle, CardPanel, CardFooter } from "@/ascendra-ui";
 
 <Card>
   <CardHeader>

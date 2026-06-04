@@ -3,7 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
+import { Checkbox } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["checkbox"];
@@ -12,7 +12,7 @@ export function CheckboxDocContent() {
   return (
     <div className="space-y-10">
       <ComponentPreview
-        code={`import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
+        code={`import { Checkbox } from "@/ascendra-ui";
 
 <Checkbox />`}
       >

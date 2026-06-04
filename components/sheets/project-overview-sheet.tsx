@@ -1,38 +1,6 @@
 "use client";
 
-import {
-  Sheet,
-  SheetTrigger,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetSubHeader,
-  SheetTitle,
-  SheetDescription,
-  SheetBody,
-  SheetFooter,
-  SheetTabs,
-  SheetTabList,
-  SheetTabTrigger,
-  SheetTabContent,
-  SheetSection,
-  SheetSectionHeader,
-  SheetProperties,
-  SheetKey,
-  SheetValue,
-} from "@/ascendra-ui/components/ui/sheet";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { NameAvatar } from "@/ascendra-ui/components/common-ui/name-avatar";
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
-import { StatusDot } from "@/ascendra-ui/components/common-ui/status-dot";
-import {
-  ItemGroup,
-  Item,
-  ItemContent,
-  ItemTitle,
-  ItemDescription,
-  ItemActions,
-} from "@/ascendra-ui/components/ui/item";
+import { Button, Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemTitle, NameAvatar, Sheet, SheetBody, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetKey, SheetProperties, SheetSection, SheetSectionHeader, SheetSubHeader, SheetTabContent, SheetTabList, SheetTabs, SheetTabTrigger, SheetTitle, SheetTrigger, SheetValue, SimpleBadge, StatusDot } from "@/ascendra-ui";
 
 const milestones = [
   { name: "Discovery & Research", status: "done", date: "Apr 10" },

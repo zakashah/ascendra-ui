@@ -4,8 +4,7 @@ import { useState } from "react";
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar";
-import { Button } from "@/ascendra-ui/components/ui/button";
+import { Button, UnsavedChangesBar } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["unsaved-changes-bar"];
@@ -76,7 +75,7 @@ export function UnsavedChangesBarDocContent() {
       {/* Hero preview */}
       <ComponentPreview
         minHeight={120}
-        code={`import { UnsavedChangesBar } from "@/ascendra-ui/components/common-ui/unsaved-changes-bar";
+        code={`import { UnsavedChangesBar } from "@/ascendra-ui";
 
 const [isDirty, setIsDirty] = useState(false);
 

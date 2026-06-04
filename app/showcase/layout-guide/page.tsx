@@ -3,42 +3,10 @@
 import { useState } from "react";
 import { LuChevronDown, LuCode, LuEye, LuShieldCheck } from "react-icons/lu";
 
-import { AsideContent } from "@/ascendra-ui/components/layout/aside-content";
-import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
-import { CardPanelItemCrown } from "@/ascendra-ui/components/card/card-panel-item-crown";
-import { CardPanelItemGroup } from "@/ascendra-ui/components/card/card-panel-item-group";
-import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderAction } from "@/ascendra-ui/components/layout/page-header-action";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageMain } from "@/ascendra-ui/components/layout/page-main";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
+import { AsideContent, BackLink, Button, Card, CardFooter, CardFooterIcon, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, CardPanelItem, CardPanelItemCrown, CardPanelItemGroup, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, MainContent, PageHeader, PageHeaderAction, PageHeaderGroup, PageMain, PageSubtitle, PageTitle, PageWrapper, SimpleAlert, Switch, TabContent, TabList, Tabs, TabTrigger } from "@/ascendra-ui";
 
-import { TabContent } from "@/ascendra-ui/components/tabs/tab-content";
-import { TabList } from "@/ascendra-ui/components/tabs/tab-list";
-import { TabTrigger } from "@/ascendra-ui/components/tabs/tab-trigger";
-import { Tabs } from "@/ascendra-ui/components/tabs/tabs";
 
-import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/ascendra-ui/components/ui/dropdown-menu";
-import { Switch } from "@/ascendra-ui/components/ui/switch";
 
-import { BackLink } from "@/ascendra-ui/components/forms/back-link";
-import { CardFooterIcon } from "@/ascendra-ui/components/card/card-footer-icon";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 import { CodeBlock } from "@/components/code-block";
 
@@ -147,7 +115,7 @@ export default function LayoutGuidePage() {
       >
         <Variant
           label="Standard back link"
-          code={`import { BackLink } from "@/ascendra-ui/components/forms/back-link";
+          code={`import { BackLink } from "@/ascendra-ui";
 
 <BackLink href="/settings">Settings</BackLink>`}
         >
@@ -162,8 +130,7 @@ export default function LayoutGuidePage() {
       >
         <Variant
           label="Title only"
-          code={`import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
+          code={`import { PageHeader } from "@/ascendra-ui";
 
 <PageHeader>
   <PageTitle>API Keys</PageTitle>
@@ -176,10 +143,7 @@ import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
 
         <Variant
           label="Title + description"
-          code={`import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
+          code={`import { PageHeader } from "@/ascendra-ui";
 
 <PageHeader>
   <PageHeaderGroup>
@@ -202,10 +166,7 @@ import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
 
         <Variant
           label="Title + action"
-          code={`import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageHeaderAction } from "@/ascendra-ui/components/layout/page-header-action";
-import { Button } from "@/ascendra-ui/components/ui/button";
+          code={`import { PageHeader } from "@/ascendra-ui";
 
 <PageHeader>
   <PageTitle>Team Members</PageTitle>
@@ -224,12 +185,7 @@ import { Button } from "@/ascendra-ui/components/ui/button";
 
         <Variant
           label="Title + description + action"
-          code={`import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { PageHeaderAction } from "@/ascendra-ui/components/layout/page-header-action";
-import { Button } from "@/ascendra-ui/components/ui/button";
+          code={`import { PageHeader } from "@/ascendra-ui";
 
 <PageHeader>
   <PageHeaderGroup>
@@ -259,18 +215,6 @@ import { Button } from "@/ascendra-ui/components/ui/button";
         <Variant
           label="Title + description + dropdown action"
           code={`import { LuChevronDown, LuEye, LuCode } from "react-icons/lu";
-import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { PageHeaderAction } from "@/ascendra-ui/components/layout/page-header-action";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/ascendra-ui/components/ui/dropdown-menu";
 
 <PageHeader>
   <PageHeaderGroup>
@@ -338,20 +282,7 @@ import {
         <Variant
           label="Standard — back link + header + sections"
           noPad
-          code={`import { BackLink } from "@/ascendra-ui/components/forms/back-link";
-import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { PageMain } from "@/ascendra-ui/components/layout/page-main";
-import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
-import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
+          code={`import { BackLink } from "@/ascendra-ui";
 
 export default function Page() {
   return (
@@ -434,19 +365,7 @@ export default function Page() {
           label="With tabs — header + tab bar + per-tab content"
           note="TabContent carries the same mt-8 spacing as PageContent, so PageContent is not needed inside each tab."
           noPad
-          code={`import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { PageMain } from "@/ascendra-ui/components/layout/page-main";
-import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { Tabs } from "@/ascendra-ui/components/tabs/tabs";
-import { TabList } from "@/ascendra-ui/components/tabs/tab-list";
-import { TabTrigger } from "@/ascendra-ui/components/tabs/tab-trigger";
-import { TabContent } from "@/ascendra-ui/components/tabs/tab-content";
+          code={`import { PageHeader } from "@/ascendra-ui";
 
 export default function Page() {
   return (
@@ -558,10 +477,7 @@ export default function Page() {
       >
         <Variant
           label="Header only"
-          code={`import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+          code={`import { Card } from "@/ascendra-ui";
 
 <Card>
   <CardHeader>
@@ -585,11 +501,6 @@ import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-su
         <Variant
           label="Header + footer"
           code={`import { LuInfo } from "react-icons/lu";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
 
 <Card>
   <CardHeader>
@@ -623,11 +534,7 @@ import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
         <Variant
           label="Alert above sections"
           note="SimpleAlert goes inside MainContent, above the section stack — not inside a Card."
-          code={`import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
-import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+          code={`import { SimpleAlert } from "@/ascendra-ui";
 
 <MainContent>
   <SimpleAlert>
@@ -655,11 +562,7 @@ import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title
 
         <Variant
           label="Multiple sections (stacked)"
-          code={`import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+          code={`import { MainContent } from "@/ascendra-ui";
 
 <MainContent>
   <Card>
@@ -707,12 +610,7 @@ import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-su
         <Variant
           label="Collapseable section"
           note='Pass collapseable="expanded" or collapseable="collapsed" to Card. State is managed internally — the header renders a minimize/maximize toggle. Add hasError to draw a destructive outline when collapsed fields have validation errors.'
-          code={`import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
+          code={`import { Card } from "@/ascendra-ui";
 
 // Starts expanded
 <Card collapseable="expanded">
@@ -803,11 +701,7 @@ import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
       >
         <Variant
           label="Single panel item"
-          code={`import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
+          code={`import { Card } from "@/ascendra-ui";
 
 <Card>
   <CardHeader>
@@ -834,12 +728,7 @@ import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
 
         <Variant
           label="Multiple panel items"
-          code={`import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
-import { Button } from "@/ascendra-ui/components/ui/button";
+          code={`import { Card } from "@/ascendra-ui";
 
 <Card>
   <CardHeader>
@@ -886,13 +775,7 @@ import { Button } from "@/ascendra-ui/components/ui/button";
         <Variant
           label="PanelItemGroup"
           note="Wraps multiple elements inside a single panel item and adds consistent vertical spacing between them."
-          code={`import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
-import { CardPanelItemGroup } from "@/ascendra-ui/components/card/card-panel-item-group";
+          code={`import { SimpleAlert } from "@/ascendra-ui";
 
 <Card>
   <CardHeader>
@@ -940,14 +823,6 @@ import { CardPanelItemGroup } from "@/ascendra-ui/components/card/card-panel-ite
           code={`"use client";
 import { useState } from "react";
 import { LuShieldCheck } from "react-icons/lu";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
-import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
-import { Switch } from "@/ascendra-ui/components/ui/switch";
 
 export function CollapsibleSection() {
   const [collapsed, setCollapsed] = useState(true);
@@ -1019,14 +894,7 @@ export function CollapsibleSection() {
         <Variant
           label="MainContent + AsideContent"
           noPad
-          code={`import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { AsideContent } from "@/ascendra-ui/components/layout/aside-content";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
-import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
+          code={`import { MainContent } from "@/ascendra-ui";
 
 <div className="flex flex-col items-start gap-8 sm:flex-row">
   <MainContent>

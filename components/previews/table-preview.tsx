@@ -3,18 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import {
-  Table,
-  TableWrapper,
-  TableHeader,
-  TableHeaderRow,
-  TableBody,
-  TableRow,
-  TableHead,
-  TableCell,
-  EmptyBody,
-} from "@/ascendra-ui/components/ui/table";
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
+import { EmptyBody, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
 
 // ─── Shared sample rows ──────────────────────────────────────────────────────
 
@@ -72,7 +61,7 @@ export function TableDocContent() {
         code={`import {
   Table, TableWrapper, TableHeader, TableHeaderRow,
   TableBody, TableRow, TableHead, TableCell,
-} from "@/ascendra-ui/components/ui/table";
+} from "@/ascendra-ui";
 
 <TableWrapper>
   <Table>

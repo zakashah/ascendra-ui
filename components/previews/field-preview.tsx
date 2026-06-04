@@ -7,55 +7,8 @@ import { ComponentPreview } from "../component-preview";
 import { PropsTable } from "../props-table";
 import { SectionHeader } from "../section-header";
 
-import {
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldGroup,
-  FieldHint,
-  FieldInfo,
-  FieldLabel,
-  FieldLabelGroup,
-  FieldLegend,
-  FieldSeparator,
-  FieldSet,
-  FieldTitle,
-} from "@/ascendra-ui/components/ui/field";
+import { Button, Checkbox, Combobox, ComboboxCollection, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, DatePicker, DateRangePicker, Field, FieldContent, FieldDescription, FieldGroup, FieldHint, FieldInfo, FieldLabel, FieldLabelGroup, FieldLegend, FieldSeparator, FieldSet, FieldTitle, Input, InputGroup, InputGroupAddon, InputGroupInput, InputGroupText, InputGroupTextarea, RadioGroup, RadioGroupItem, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue, Switch } from "@/ascendra-ui";
 
-import { DatePicker } from "@/ascendra-ui/components/date/date-picker";
-import { DateRangePicker } from "@/ascendra-ui/components/date/date-range-picker";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { Checkbox } from "@/ascendra-ui/components/ui/checkbox";
-import {
-  Combobox,
-  ComboboxCollection,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-} from "@/ascendra-ui/components/ui/combobox";
-import { Input } from "@/ascendra-ui/components/ui/input";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-  InputGroupText,
-  InputGroupTextarea,
-} from "@/ascendra-ui/components/ui/input-group";
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@/ascendra-ui/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/ascendra-ui/components/ui/select";
-import { Switch } from "@/ascendra-ui/components/ui/switch";
 
 import { registry } from "@/lib/registry";
 import { LuGlobe } from "react-icons/lu";
@@ -84,8 +37,7 @@ export function FieldDocContent() {
         align="start"
         code={`import {
   Field, FieldLabel, FieldLabelGroup, FieldInfo, FieldHint,
-} from "@/ascendra-ui/components/ui/field";
-import { Input } from "@/ascendra-ui/components/ui/input";
+} from "@/ascendra-ui";
 
 // Simple — label only
 <Field>

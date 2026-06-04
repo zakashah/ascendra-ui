@@ -3,12 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
-import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
-import { PageHeaderAction } from "@/ascendra-ui/components/layout/page-header-action";
-import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
-import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
-import { Button } from "@/ascendra-ui/components/ui/button";
+import { Button, PageHeader, PageHeaderAction, PageHeaderGroup, PageSubtitle, PageTitle } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 import { LuPlus } from "react-icons/lu";
 
@@ -19,7 +14,7 @@ export function PageHeaderDocContent() {
     <div className="space-y-10">
       <ComponentPreview
         align="start"
-        code={`import { PageHeader, PageHeaderGroup, PageTitle, PageSubtitle, PageHeaderAction } from "@/ascendra-ui/components/layout/page-header";
+        code={`import { PageHeader, PageHeaderGroup, PageTitle, PageSubtitle, PageHeaderAction } from "@/ascendra-ui";
 
 <PageHeader>
   <PageHeaderGroup>

@@ -3,7 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { ProBadge } from "@/ascendra-ui/components/common-ui/pro-badge";
+import { ProBadge } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["pro-badge"];
@@ -12,7 +12,7 @@ export function ProBadgeDocContent() {
   return (
     <div className="space-y-10">
       <ComponentPreview
-        code={`import { ProBadge } from "@/ascendra-ui/components/common-ui/pro-badge";
+        code={`import { ProBadge } from "@/ascendra-ui";
 
 <ProBadge>Pro</ProBadge>`}
       >

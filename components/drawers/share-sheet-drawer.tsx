@@ -19,7 +19,7 @@ import {
   DrawerTitle,
   DrawerDescription,
 } from "@/ascendra-ui/shadcn/components/ui/drawer";
-import { Button } from "@/ascendra-ui/components/ui/button";
+import { Button } from "@/ascendra-ui";
 
 const destinations = [
   { id: "link", label: "Copy Link", icon: LuLink },

@@ -14,14 +14,7 @@ import {
   DrawerContent,
   DrawerFooter,
 } from "@/ascendra-ui/shadcn/components/ui/drawer";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import {
-  ItemGroup,
-  Item,
-  ItemMedia,
-  ItemContent,
-  ItemTitle,
-} from "@/ascendra-ui/components/ui/item";
+import { Button, Item, ItemContent, ItemGroup, ItemMedia, ItemTitle } from "@/ascendra-ui";
 
 const actions = [
   { label: "Rename", icon: LuPencil, destructive: false },

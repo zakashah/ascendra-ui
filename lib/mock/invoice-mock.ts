@@ -177,7 +177,7 @@ export async function fetchMockInvoices(
 
 // ─── Invoice Queries ───────────────────────────────────────────────────────────
 
-import type { QueryDef } from '@/ascendra-ui/providers/data-table-query/data-table-query.types';
+import type { QueryDef } from '@/ascendra-ui';
 
 export const PRESET_QUERIES: QueryDef[] = [
   {

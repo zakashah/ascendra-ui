@@ -3,18 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import {
-  Item,
-  ItemMedia,
-  ItemContent,
-  ItemTitle,
-  ItemDescription,
-  ItemActions,
-  ItemGroup,
-  ItemSeparator,
-} from "@/ascendra-ui/components/ui/item";
-import { RowActionButton } from "@/ascendra-ui/components/common-ui/row-action-button";
-import { NameAvatar } from "@/ascendra-ui/components/common-ui/name-avatar";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemSeparator, ItemTitle, NameAvatar, RowActionButton } from "@/ascendra-ui";
 import { LuUser, LuSettings, LuBell, LuTrash2 } from "react-icons/lu";
 import { registry } from "@/lib/registry";
 
@@ -26,7 +15,7 @@ export function ItemDocContent() {
       {/* Hero preview */}
       <ComponentPreview
         align="start"
-        code={`import { Item, ItemMedia, ItemContent, ItemTitle, ItemDescription } from "@/ascendra-ui/components/ui/item";
+        code={`import { Item, ItemMedia, ItemContent, ItemTitle, ItemDescription } from "@/ascendra-ui";
 
 <Item>
   <ItemMedia variant="icon">

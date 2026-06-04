@@ -3,7 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { RowActionButton } from "@/ascendra-ui/components/common-ui/row-action-button";
+import { RowActionButton } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["row-action-button"];
@@ -12,7 +12,7 @@ export function RowActionButtonDocContent() {
   return (
     <div className="space-y-10">
       <ComponentPreview
-        code={`import { RowActionButton } from "@/ascendra-ui/components/common-ui/row-action-button";
+        code={`import { RowActionButton } from "@/ascendra-ui";
 
 <RowActionButton opaque />`}
       >
@@ -82,7 +82,7 @@ export function RowActionButtonDocContent() {
             for a full row action menu.
           </p>
           <ComponentPreview
-            code={`import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/ascendra-ui/components/ui/dropdown-menu";
+            code={`import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/ascendra-ui";
 
 <div className="group/row flex items-center justify-between rounded-lg border px-4 py-3">
   <span className="text-sm text-foreground">Ahmed Khan</span>

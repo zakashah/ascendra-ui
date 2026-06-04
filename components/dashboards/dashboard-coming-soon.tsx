@@ -5,10 +5,7 @@ import {
   LuChartLine,
   LuTable2,
 } from "react-icons/lu";
-import { Card } from "@/ascendra-ui/components/card/card";
-import { CardHeader } from "@/ascendra-ui/components/card/card-header";
-import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
-import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { Card, CardHeader, CardHeaderTitle, CardPanel } from "@/ascendra-ui";
 import type { DashboardMeta, LayoutCell } from "@/lib/types";
 
 // ─── Domain styling ────────────────────────────────────────────────────────────

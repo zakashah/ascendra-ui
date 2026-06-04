@@ -8,9 +8,7 @@ import {
   DrawerContent,
   DrawerFooter,
 } from "@/ascendra-ui/shadcn/components/ui/drawer";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { NameAvatar } from "@/ascendra-ui/components/common-ui/name-avatar";
-import { StatusDot } from "@/ascendra-ui/components/common-ui/status-dot";
+import { Button, NameAvatar, StatusDot } from "@/ascendra-ui";
 
 const attendees = [
   { name: "Sarah Mitchell", status: "accepted" },

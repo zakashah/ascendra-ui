@@ -1,32 +1,7 @@
 "use client";
 
 import { LuCircleAlert } from "react-icons/lu";
-import {
-  Sheet,
-  SheetTrigger,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
-  SheetBody,
-  SheetFooter,
-  SheetSection,
-  SheetSectionHeader,
-  SheetProperties,
-  SheetKey,
-  SheetValue,
-} from "@/ascendra-ui/components/ui/sheet";
-import { Button } from "@/ascendra-ui/components/ui/button";
-import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
-import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
-import {
-  Item,
-  ItemContent,
-  ItemTitle,
-  ItemDescription,
-  ItemActions,
-} from "@/ascendra-ui/components/ui/item";
+import { Button, Item, ItemActions, ItemContent, ItemDescription, ItemTitle, Sheet, SheetBody, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetKey, SheetProperties, SheetSection, SheetSectionHeader, SheetTitle, SheetTrigger, SheetValue, SimpleAlert, SimpleBadge } from "@/ascendra-ui";
 
 const lineItems = [
   {

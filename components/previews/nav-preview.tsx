@@ -3,8 +3,7 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { Nav } from "@/ascendra-ui/components/nav/nav";
-import { NavLink } from "@/ascendra-ui/components/nav/nav-link";
+import { Nav, NavLink } from "@/ascendra-ui";
 import { registry } from "@/lib/registry";
 
 const meta = registry["nav"];
@@ -16,8 +15,7 @@ export function NavDocContent() {
       <ComponentPreview
         align="start"
         minHeight={80}
-        code={`import { Nav } from "@/ascendra-ui/components/nav/nav";
-import { NavLink } from "@/ascendra-ui/components/nav/nav-link";
+        code={`import { Nav } from "@/ascendra-ui";
 
 <Nav>
   <NavLink href="/overview">Overview</NavLink>
