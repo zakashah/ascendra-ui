@@ -5,12 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
 import { PageMain } from "@/ascendra-ui/components/layout/page-main";
@@ -218,19 +218,19 @@ export default function JobApplicationForm() {
               <PageContent>
                 <MainContent>
                   {/* ── Section 1: Personal Information ───────────────────── */}
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Personal Information
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Tell us a bit about yourself and how we can reach you.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 1 — Name */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -287,10 +287,10 @@ export default function JobApplicationForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Contact */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -344,10 +344,10 @@ export default function JobApplicationForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 3 — Online presence */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -395,25 +395,25 @@ export default function JobApplicationForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
 
                   {/* ── Section 2: Position Details ────────────────────────── */}
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Position Details
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Tell us about the role you&apos;re applying for and your
                         availability.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 1 — Role */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -498,10 +498,10 @@ export default function JobApplicationForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Availability & arrangement */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -580,10 +580,10 @@ export default function JobApplicationForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 3 — Compensation */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <Field>
                             <FieldLabel htmlFor="expected-salary">
@@ -642,25 +642,25 @@ export default function JobApplicationForm() {
                             <FieldHint />
                           </Field>
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
 
                   {/* ── Section 3: Background & Cover Letter ───────────────── */}
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Background &amp; Cover Letter
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Share your experience and why you&apos;re a great fit
                         for this role.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 1 — Experience */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -758,10 +758,10 @@ export default function JobApplicationForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Current situation */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -825,10 +825,10 @@ export default function JobApplicationForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 3 — Cover letter */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <Field>
                           <FieldLabel htmlFor="cover-letter">
                             Cover Letter
@@ -856,10 +856,10 @@ export default function JobApplicationForm() {
                             mandatory
                           />
                         </Field>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 4 — Declarations */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup className="gap-1">
                           <Controller
                             name="declarationAccurate"
@@ -934,9 +934,9 @@ export default function JobApplicationForm() {
                             />
                           )}
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
                 </MainContent>
               </PageContent>
             </PageWrapper>

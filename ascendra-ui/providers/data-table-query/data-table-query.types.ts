@@ -75,7 +75,7 @@ export interface QueryDef {
   title: string;
   description: string;
   group: QueryGroup;
-  /** Rendered in MainSectionFooter when present */
+  /** Rendered in CardFooter when present */
   info?: string;
   /** Grid column count per breakpoint — defaults to sm:1, md:1, lg:1 */
   columns?: ColumnsConfig;

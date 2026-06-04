@@ -280,19 +280,6 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
-  'main-section': {
-    slug: 'main-section',
-    name: 'Main Section',
-    description: 'Settings-page section with header, footer, and collapsible panel support. Includes a danger variant.',
-    importPath: '@/ascendra-ui/components/layout/main-section',
-    importNames: ['MainSection', 'MainSectionHeader', 'MainSectionFooter', 'MainSectionPanel', 'MainSectionPanelItem', 'MainSectionPanelItemGroup'],
-    props: [
-      { name: 'danger', type: 'boolean', default: 'false', description: 'Applies red danger styling (on MainSection).' },
-      { name: 'collapsed', type: 'boolean', description: 'Controls the panel collapsed state (on MainSectionPanel).' },
-      { name: 'dimmed', type: 'boolean', description: 'Dims the panel item content (on MainSectionPanelItem).' },
-    ],
-  },
-
   'page-header': {
     slug: 'page-header',
     name: 'Page Header',

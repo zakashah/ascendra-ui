@@ -5,12 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
 import { PageMain } from "@/ascendra-ui/components/layout/page-main";
@@ -60,7 +60,7 @@ import {
   SelectValue,
 } from "@/ascendra-ui/components/ui/select";
 import { Switch } from "@/ascendra-ui/components/ui/switch";
-import { MainSectionPanelItemCrown } from "@/ascendra-ui/components/main-section/main-section-panel-item-crown";
+import { CardPanelItemCrown } from "@/ascendra-ui/components/card/card-panel-item-crown";
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 
 // ─── Schema ────────────────────────────────────────────────────────────────────
@@ -225,19 +225,19 @@ export default function CreateProductForm() {
                     </span>
                   </SimpleAlert>
 
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Basic Information
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Enter the product name, category, and description.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 1 — Identification */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -284,10 +284,10 @@ export default function CreateProductForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Classification */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -353,10 +353,10 @@ export default function CreateProductForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 3 — Brand & Status */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -440,10 +440,10 @@ export default function CreateProductForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 4 — Description */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <Field>
                           <FieldLabel htmlFor="description">
                             Description
@@ -471,14 +471,14 @@ export default function CreateProductForm() {
                             mandatory
                           />
                         </Field>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 5 — Tags */}
-                      <MainSectionPanelItem className="relative">
-                        <MainSectionPanelItemCrown variant="default">
+                      <CardPanelItem className="relative">
+                        <CardPanelItemCrown variant="default">
                           Specify the relvant for product tags to improve
                           searchability.
-                        </MainSectionPanelItemCrown>
+                        </CardPanelItemCrown>
                         <Field>
                           <Controller
                             name="tags"
@@ -496,9 +496,9 @@ export default function CreateProductForm() {
                           />
                           <FieldHint description="Comma-separated tags for search and filtering." />
                         </Field>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
                 </MainContent>
               </TabContent>
 
@@ -506,17 +506,17 @@ export default function CreateProductForm() {
               <TabContent value="pricing">
                 <MainContent>
                   {/* Section: Pricing */}
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>Pricing</MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>Pricing</CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Set the selling price and cost for this product.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 1 — Price */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -574,10 +574,10 @@ export default function CreateProductForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Cost */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <Field>
                           <FieldLabel htmlFor="cost-per-item">
                             Cost Per Item
@@ -603,8 +603,8 @@ export default function CreateProductForm() {
                           />
                           <FieldHint description="Used to calculate margin. Not visible to customers." />
                         </Field>
-                      </MainSectionPanelItem>
-                      <MainSectionPanelItem>
+                      </CardPanelItem>
+                      <CardPanelItem>
                         <Field>
                           <FieldLabel htmlFor="barcode">
                             Barcode (ISBN, UPC, GTIN)
@@ -625,29 +625,29 @@ export default function CreateProductForm() {
                           />
                           <FieldHint />
                         </Field>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
 
                   {/* Section: Inventory (collapsible) */}
-                  <MainSection>
-                    <MainSectionHeader>
+                  <Card>
+                    <CardHeader>
                       <div className="flex items-center gap-2">
                         <Switch
                           checked={trackInventory}
                           onCheckedChange={setTrackInventory}
                         />
-                        <MainSectionHeaderTitle>
+                        <CardHeaderTitle>
                           Track inventory
-                        </MainSectionHeaderTitle>
+                        </CardHeaderTitle>
                       </div>
-                      <MainSectionHeaderSubtitle className="ml-8">
+                      <CardHeaderSubtitle className="ml-8">
                         Monitor stock levels and get low-stock alerts.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel collapsed={!trackInventory}>
-                      <MainSectionPanelItem>
+                    <CardPanel collapsed={!trackInventory}>
+                      <CardPanelItem>
                         <FieldGroup>
                           <FieldSet>
                             <FieldGrid>
@@ -721,28 +721,28 @@ export default function CreateProductForm() {
                             )}
                           />
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
                 </MainContent>
               </TabContent>
 
               {/* ── Tab: Shipping ─────────────────────────────────────────── */}
               <TabContent value="shipping">
                 <MainContent>
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Shipping Details
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Specify shipping dimensions and customs information.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 3 — Shipping class */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -824,10 +824,10 @@ export default function CreateProductForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 4 — Customs */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <Field>
                             <FieldLabel htmlFor="hs-tariff-code">
@@ -874,23 +874,23 @@ export default function CreateProductForm() {
                             )}
                           />
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
 
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Physical Details
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Specify shipping dimensions and customs information.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 1 — Physical product toggle */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <Field
                           orientation="horizontal"
                           className="items-center"
@@ -916,10 +916,10 @@ export default function CreateProductForm() {
                             This is a physical product
                           </FieldLabel>
                         </Field>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Weight & Dimensions (shown when physical) */}
-                      <MainSectionPanelItem collapsed={!isPhysicalState}>
+                      <CardPanelItem collapsed={!isPhysicalState}>
                         <FieldGroup>
                           <FieldSet>
                             <FieldGrid>
@@ -1021,13 +1021,13 @@ export default function CreateProductForm() {
                             <FieldHint />
                           </FieldSet>
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                      <MainSectionPanelItem>
+                      </CardPanelItem>
+                      <CardPanelItem>
                         This is an other panel item that is here to show the
                         spacing between items. It has no content.
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
                 </MainContent>
               </TabContent>
             </Tabs>

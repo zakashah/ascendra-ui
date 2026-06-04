@@ -5,14 +5,14 @@ import { Controller, useForm } from "react-hook-form";
 import { LuShieldCheck } from "react-icons/lu";
 import { z } from "zod";
 
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
-import { MainSectionFooterIcon } from "@/ascendra-ui/components/main-section/main-section-footer-icon";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
+import { CardFooterIcon } from "@/ascendra-ui/components/card/card-footer-icon";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
 import { PageMain } from "@/ascendra-ui/components/layout/page-main";
@@ -69,7 +69,7 @@ import {
   SelectValue,
 } from "@/ascendra-ui/components/ui/select";
 import { Switch } from "@/ascendra-ui/components/ui/switch";
-import { MainSectionPanelField } from "@/ascendra-ui/components/main-section/main-section-panel-field";
+import { CardPanelField } from "@/ascendra-ui/components/card/card-panel-field";
 
 // ─── Schema ────────────────────────────────────────────────────────────────────
 
@@ -330,18 +330,18 @@ export default function EmployeeOnboardingForm() {
               <PageContent>
                 <MainContent>
                   {/* ── Step 1: Personal Information ──────────────────────── */}
-                  <MainSection step={0}>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card step={0}>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Step 1 — Personal Information
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Enter the employee&apos;s personal details and home
                         address.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
-                    <MainSectionPanel>
-                      <MainSectionPanelItem>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
+                    <CardPanel>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -443,9 +443,9 @@ export default function EmployeeOnboardingForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -502,9 +502,9 @@ export default function EmployeeOnboardingForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <Field>
                             <FieldLabel htmlFor="s1-street">
@@ -658,23 +658,23 @@ export default function EmployeeOnboardingForm() {
                             </FieldGrid>
                           </FieldSet>
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
 
                   {/* ── Step 2: Employment Details ─────────────────────────── */}
-                  <MainSection step={1}>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card step={1}>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Step 2 — Employment Details
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Define the role, reporting structure, and start date.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
-                      <MainSectionPanelItem>
+                    <CardPanel>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -896,9 +896,9 @@ export default function EmployeeOnboardingForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -956,23 +956,23 @@ export default function EmployeeOnboardingForm() {
                           A welcome email with login instructions will be sent
                           to the personal email on the start date.
                         </SimpleAlert>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
 
                   {/* ── Step 3: Compensation & Benefits ───────────────────── */}
-                  <MainSection step={2}>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card step={2}>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Step 3 — Compensation &amp; Benefits
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Set salary, equity, and benefits enrollment.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
-                      <MainSectionPanelItem>
+                    <CardPanel>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -1054,9 +1054,9 @@ export default function EmployeeOnboardingForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <Controller
                             name="bonusEligible"
@@ -1108,9 +1108,9 @@ export default function EmployeeOnboardingForm() {
                             <FieldHint optional />
                           </Field>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldLegend>Benefits</FieldLegend>
                           <Controller
@@ -1179,7 +1179,7 @@ export default function EmployeeOnboardingForm() {
                               </Field>
                             )}
                           />
-                          <MainSectionPanelField collapsed={!enroll401k}>
+                          <CardPanelField collapsed={!enroll401k}>
                             <Field className="pl-px">
                               <FieldLabel htmlFor="s3-contribution">
                                 Contribution %
@@ -1205,25 +1205,25 @@ export default function EmployeeOnboardingForm() {
                               />
                               <FieldHint optional />
                             </Field>
-                          </MainSectionPanelField>
+                          </CardPanelField>
                         </FieldSet>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
 
                   {/* ── Step 4: IT & System Access ─────────────────────────── */}
-                  <MainSection step={3}>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card step={3}>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Step 4 — IT &amp; System Access
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Provision hardware, software, and access permissions.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
-                      <MainSectionPanelItem>
+                    <CardPanel>
+                      <CardPanelItem>
                         <FieldGroup>
                           <FieldSet>
                             <FieldGrid>
@@ -1324,9 +1324,9 @@ export default function EmployeeOnboardingForm() {
                             />
                           </FieldSet>
                         </FieldGroup>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <Field>
                             <FieldLabel htmlFor="s4-software">
@@ -1395,9 +1395,9 @@ export default function EmployeeOnboardingForm() {
                             />
                           </Field>
                         </FieldGroup>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <Field>
                             <FieldLabel htmlFor="s4-access-level">
@@ -1492,9 +1492,9 @@ export default function EmployeeOnboardingForm() {
                             )}
                           />
                         </FieldGroup>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <FieldLegend>Security</FieldLegend>
                           <Controller
@@ -1542,17 +1542,17 @@ export default function EmployeeOnboardingForm() {
                             )}
                           />
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
+                      </CardPanelItem>
+                    </CardPanel>
 
-                    <MainSectionFooter>
-                      <MainSectionFooterIcon icon={LuShieldCheck} />
+                    <CardFooter>
+                      <CardFooterIcon icon={LuShieldCheck} />
                       <span>
                         IT provisioning typically takes 1–2 business days before
                         the start date.
                       </span>
-                    </MainSectionFooter>
-                  </MainSection>
+                    </CardFooter>
+                  </Card>
 
                   <WizardNavigator />
                 </MainContent>

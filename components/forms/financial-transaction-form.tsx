@@ -7,13 +7,13 @@ import { Controller, useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
 import { PageContent } from "@/ascendra-ui/components/layout/page-content";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
@@ -236,19 +236,19 @@ export default function FinancialTransactionForm() {
                   </SimpleAlert>
 
                   {/* ── Section 1: Transaction Details ────────────────────── */}
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Transaction Details
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Enter the core details for this transaction.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 1 — Core fields (horizontal layout) */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <Field
                             orientation="horizontal"
@@ -533,10 +533,10 @@ export default function FinancialTransactionForm() {
                             </div>
                           </Field>
                         </FieldGroup>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Supporting details */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <Field
                             orientation="horizontal"
@@ -628,35 +628,35 @@ export default function FinancialTransactionForm() {
                             </div>
                           </Field>
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
+                      </CardPanelItem>
+                    </CardPanel>
 
-                    <MainSectionFooter>
+                    <CardFooter>
                       All amounts in USD. Currency conversion is not supported
                       in this view.
-                    </MainSectionFooter>
-                  </MainSection>
+                    </CardFooter>
+                  </Card>
 
                   {/* ── Section 2: Recurring Schedule (collapsible) ────────── */}
-                  <MainSection>
-                    <MainSectionHeader>
+                  <Card>
+                    <CardHeader>
                       <div className="flex items-center gap-2">
                         <Switch
                           checked={isRecurring}
                           onCheckedChange={setIsRecurring}
                         />
-                        <MainSectionHeaderTitle>
+                        <CardHeaderTitle>
                           Set as recurring
-                        </MainSectionHeaderTitle>
+                        </CardHeaderTitle>
                       </div>
-                      <MainSectionHeaderSubtitle className="ml-8">
+                      <CardHeaderSubtitle className="ml-8">
                         Automatically repeat this transaction on a schedule.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel collapsed={!isRecurring}>
+                    <CardPanel collapsed={!isRecurring}>
                       {/* Panel Item 1 — Frequency */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldLegend variant="label">Frequency</FieldLegend>
                           <Controller
@@ -700,10 +700,10 @@ export default function FinancialTransactionForm() {
                           />
                           <FieldHint />
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Date range */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <Field>
                           <FieldLabel htmlFor="active-period">
                             Active Period
@@ -724,10 +724,10 @@ export default function FinancialTransactionForm() {
                           />
                           <FieldHint />
                         </Field>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 3 — End condition */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <FieldSet>
                             <FieldLegend variant="label">
@@ -799,9 +799,9 @@ export default function FinancialTransactionForm() {
                             </Field>
                           )}
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
                 </MainContent>
               </PageContent>
             </PageWrapper>

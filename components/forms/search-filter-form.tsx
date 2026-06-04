@@ -4,13 +4,13 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import type { DateRange } from "react-day-picker";
 
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
 import { PageMain } from "@/ascendra-ui/components/layout/page-main";
@@ -134,18 +134,18 @@ export default function SearchFilterForm() {
           <PageWrapper>
             <PageContent>
               <MainContent>
-                <MainSection>
-                  <MainSectionHeader>
-                    <MainSectionHeaderTitle>Filters</MainSectionHeaderTitle>
-                    <MainSectionHeaderSubtitle>
+                <Card>
+                  <CardHeader>
+                    <CardHeaderTitle>Filters</CardHeaderTitle>
+                    <CardHeaderSubtitle>
                       Combine filters to find exactly what you&apos;re looking
                       for.
-                    </MainSectionHeaderSubtitle>
-                  </MainSectionHeader>
+                    </CardHeaderSubtitle>
+                  </CardHeader>
 
-                  <MainSectionPanel>
+                  <CardPanel>
                     {/* Panel Item 1 — Keyword */}
-                    <MainSectionPanelItem>
+                    <CardPanelItem>
                       <Field>
                         <FieldLabel htmlFor="keyword">Search</FieldLabel>
                         <Controller
@@ -164,10 +164,10 @@ export default function SearchFilterForm() {
                         />
                         <FieldHint />
                       </Field>
-                    </MainSectionPanelItem>
+                    </CardPanelItem>
 
                     {/* Panel Item 2 — Date range */}
-                    <MainSectionPanelItem>
+                    <CardPanelItem>
                       <Field>
                         <FieldLabel htmlFor="date-range">Date Range</FieldLabel>
                         <Controller
@@ -185,10 +185,10 @@ export default function SearchFilterForm() {
                         />
                         <FieldHint />
                       </Field>
-                    </MainSectionPanelItem>
+                    </CardPanelItem>
 
                     {/* Panel Item 3 — Categories */}
-                    <MainSectionPanelItem>
+                    <CardPanelItem>
                       <Field>
                         <FieldLabel htmlFor="categories">Categories</FieldLabel>
                         <Controller
@@ -225,10 +225,10 @@ export default function SearchFilterForm() {
                         />
                         <FieldHint />
                       </Field>
-                    </MainSectionPanelItem>
+                    </CardPanelItem>
 
                     {/* Panel Item 4 — Status checkboxes */}
-                    <MainSectionPanelItem>
+                    <CardPanelItem>
                       <FieldSet>
                         <FieldLegend variant="label">Status</FieldLegend>
                         {STATUS_FILTERS.map(({ name, label }) => (
@@ -258,10 +258,10 @@ export default function SearchFilterForm() {
                           />
                         ))}
                       </FieldSet>
-                    </MainSectionPanelItem>
+                    </CardPanelItem>
 
                     {/* Panel Item 5 — Sort by */}
-                    <MainSectionPanelItem>
+                    <CardPanelItem>
                       <FieldSet>
                         <FieldLegend variant="label">Sort By</FieldLegend>
                         <Controller
@@ -305,18 +305,18 @@ export default function SearchFilterForm() {
                         />
                         <FieldHint />
                       </FieldSet>
-                    </MainSectionPanelItem>
-                  </MainSectionPanel>
+                    </CardPanelItem>
+                  </CardPanel>
 
-                  <MainSectionFooter className="justify-end gap-2">
+                  <CardFooter className="justify-end gap-2">
                     <Button variant="ghost" type="button" onClick={handleReset}>
                       Reset
                     </Button>
                     <Button type="button" onClick={handleSubmit(onApply)}>
                       Apply filters
                     </Button>
-                  </MainSectionFooter>
-                </MainSection>
+                  </CardFooter>
+                </Card>
 
                 {resultCount !== null && (
                   <SimpleAlert variant="secondary">

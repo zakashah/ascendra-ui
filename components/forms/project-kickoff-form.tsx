@@ -7,14 +7,14 @@ import { LuInfo } from "react-icons/lu";
 import { z } from "zod";
 import type { DateRange } from "react-day-picker";
 
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
-import { MainSectionFooterIcon } from "@/ascendra-ui/components/main-section/main-section-footer-icon";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
+import { CardFooterIcon } from "@/ascendra-ui/components/card/card-footer-icon";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
 import { PageMain } from "@/ascendra-ui/components/layout/page-main";
@@ -224,20 +224,20 @@ export default function ProjectKickoffForm() {
                   </SimpleAlert>
 
                   {/* ── Section 1: Project Basics ──────────────────────────── */}
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Project Basics
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Define the core identity and classification of this
                         project.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 1 — Identity */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -287,10 +287,10 @@ export default function ProjectKickoffForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Description */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <Field>
                           <FieldLabel htmlFor="description">
                             Description
@@ -314,10 +314,10 @@ export default function ProjectKickoffForm() {
                           />
                           <FieldHint />
                         </Field>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 3 — Classification */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -411,10 +411,10 @@ export default function ProjectKickoffForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 4 — Client & Visibility */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <FieldSet>
                             <FieldGrid>
@@ -508,22 +508,22 @@ export default function ProjectKickoffForm() {
                             />
                           </FieldSet>
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
 
                   {/* ── Section 2: Team ────────────────────────────────────── */}
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>Team</MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>Team</CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Assign an owner and invite team members to collaborate.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 1 — Ownership */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <Field>
                           <FieldLabel htmlFor="owner">Project Owner</FieldLabel>
                           <Controller
@@ -563,10 +563,10 @@ export default function ProjectKickoffForm() {
                             mandatory
                           />
                         </Field>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Members */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <Field>
                           <FieldLabel htmlFor="members">
                             Team Members
@@ -587,10 +587,10 @@ export default function ProjectKickoffForm() {
                           />
                           <FieldHint />
                         </Field>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 3 — External */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <Field>
                           <FieldLabel htmlFor="external-stakeholders">
                             External Stakeholders
@@ -611,29 +611,29 @@ export default function ProjectKickoffForm() {
                           />
                           <FieldHint />
                         </Field>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
+                      </CardPanelItem>
+                    </CardPanel>
 
-                    <MainSectionFooter>
+                    <CardFooter>
                       Team members will receive an email invitation when the
                       project is created.
-                    </MainSectionFooter>
-                  </MainSection>
+                    </CardFooter>
+                  </Card>
 
                   {/* ── Section 3: Timeline & Budget ───────────────────────── */}
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Timeline &amp; Budget
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Set project dates, budget, and define key milestones.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 1 — Timeline */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <Field>
                           <FieldLabel htmlFor="project-dates">
                             Project Dates
@@ -656,10 +656,10 @@ export default function ProjectKickoffForm() {
                             mandatory
                           />
                         </Field>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Budget */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -728,10 +728,10 @@ export default function ProjectKickoffForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 3 — Billing */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <Field>
                             <FieldLabel htmlFor="hourly-rate">
@@ -786,10 +786,10 @@ export default function ProjectKickoffForm() {
                             )}
                           />
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 4 — Milestones */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <FieldLegend>Milestones</FieldLegend>
                           {MILESTONES.map(({ name, label }) => (
@@ -819,18 +819,18 @@ export default function ProjectKickoffForm() {
                             />
                           ))}
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
+                      </CardPanelItem>
+                    </CardPanel>
 
-                    <MainSectionFooter>
-                      <MainSectionFooterIcon icon={LuInfo} />
+                    <CardFooter>
+                      <CardFooterIcon icon={LuInfo} />
                       <span>
                         Budget alerts are sent when spending reaches{" "}
                         <strong>80%</strong> and <strong>100%</strong> of the
                         total.
                       </span>
-                    </MainSectionFooter>
-                  </MainSection>
+                    </CardFooter>
+                  </Card>
                 </MainContent>
               </PageContent>
             </PageWrapper>

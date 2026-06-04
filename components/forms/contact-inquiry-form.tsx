@@ -6,15 +6,15 @@ import { Controller, useForm } from "react-hook-form";
 import { LuLock } from "react-icons/lu";
 import { z } from "zod";
 
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
-import { MainSectionFooterIcon } from "@/ascendra-ui/components/main-section/main-section-footer-icon";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
-import { MainSectionPanelItemGroup } from "@/ascendra-ui/components/main-section/main-section-panel-item-group";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
+import { CardFooterIcon } from "@/ascendra-ui/components/card/card-footer-icon";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
+import { CardPanelItemGroup } from "@/ascendra-ui/components/card/card-panel-item-group";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
 import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
@@ -55,7 +55,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/ascendra-ui/components/ui/select";
-import { MainSectionPanelItemCrown } from "@/ascendra-ui/components/main-section/main-section-panel-item-crown";
+import { CardPanelItemCrown } from "@/ascendra-ui/components/card/card-panel-item-crown";
 
 // ─── Schema ────────────────────────────────────────────────────────────────────
 
@@ -161,20 +161,20 @@ export default function ContactInquiryForm() {
             <PageWrapper>
               <PageContent>
                 <MainContent>
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Send us a message
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Fill in the form below and a member of our team will be
                         in touch.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* ── Contact Details ──────────────────────────────────────────── */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -276,14 +276,14 @@ export default function ContactInquiryForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* ── Your Message ─────────────────────────────────────────────── */}
-                      <MainSectionPanelItem className="relative">
-                        <MainSectionPanelItemCrown>
+                      <CardPanelItem className="relative">
+                        <CardPanelItemCrown>
                           Provide your message details below
-                        </MainSectionPanelItemCrown>
-                        <MainSectionPanelItemGroup>
+                        </CardPanelItemCrown>
+                        <CardPanelItemGroup>
                           <SimpleAlert variant="secondary">
                             <span>
                               Our team responds to all inquiries within{" "}
@@ -408,11 +408,11 @@ export default function ContactInquiryForm() {
                               />
                             </Field>
                           </FieldGroup>
-                        </MainSectionPanelItemGroup>
-                      </MainSectionPanelItem>
+                        </CardPanelItemGroup>
+                      </CardPanelItem>
 
                       {/* ── Additional Information ───────────────────────────────────── */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldLegend>Additional Information</FieldLegend>
                         <FieldDescription>
                           Please provide any additional information that may
@@ -483,11 +483,11 @@ export default function ContactInquiryForm() {
                             )}
                           />
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
+                      </CardPanelItem>
+                    </CardPanel>
 
-                    <MainSectionFooter>
-                      <MainSectionFooterIcon icon={LuLock} />
+                    <CardFooter>
+                      <CardFooterIcon icon={LuLock} />
                       <span>
                         By submitting this form you agree to our{" "}
                         <a
@@ -499,8 +499,8 @@ export default function ContactInquiryForm() {
                         . We&apos;ll never share your contact details with third
                         parties.
                       </span>
-                    </MainSectionFooter>
-                  </MainSection>
+                    </CardFooter>
+                  </Card>
                 </MainContent>
               </PageContent>
             </PageWrapper>

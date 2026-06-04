@@ -7,14 +7,14 @@ import { LuInfo } from "react-icons/lu";
 import { z } from "zod";
 
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
-import { MainSectionFooterIcon } from "@/ascendra-ui/components/main-section/main-section-footer-icon";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
+import { CardFooterIcon } from "@/ascendra-ui/components/card/card-footer-icon";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
 import { PageContent } from "@/ascendra-ui/components/layout/page-content";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
@@ -213,20 +213,20 @@ export default function SupportTicketForm() {
                   </SimpleAlert>
 
                   {/* ── Section 1: Issue Details ──────────────────────────── */}
-                  <MainSection collapseable="expanded">
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card collapseable="expanded">
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Issue Details
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Describe the problem you&apos;re experiencing as clearly
                         as possible.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 1 — Summary */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <Field>
                             <FieldLabel htmlFor="summary">
@@ -296,10 +296,10 @@ export default function SupportTicketForm() {
                             />
                           </Field>
                         </FieldGroup>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Priority & Type */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <FieldSet>
                             <FieldLegend variant="label">Priority</FieldLegend>
@@ -393,10 +393,10 @@ export default function SupportTicketForm() {
                             />
                           </Field>
                         </FieldGroup>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 3 — Description */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <Field>
                             <FieldLabel htmlFor="description">
@@ -451,10 +451,10 @@ export default function SupportTicketForm() {
                             )}
                           />
                         </FieldGroup>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 4 — Affected Users */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <Field>
                             <FieldLabel htmlFor="affected-users">
@@ -521,39 +521,39 @@ export default function SupportTicketForm() {
                             <FieldHint />
                           </Field>
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
+                      </CardPanelItem>
+                    </CardPanel>
 
-                    <MainSectionFooter>
-                      <MainSectionFooterIcon icon={LuInfo} />
+                    <CardFooter>
+                      <CardFooterIcon icon={LuInfo} />
                       <span>
                         Do not include passwords, personal data, or payment
                         details in your ticket.
                       </span>
-                    </MainSectionFooter>
-                  </MainSection>
+                    </CardFooter>
+                  </Card>
 
                   {/* ── Section 2: System Information (collapsible) ───────── */}
-                  <MainSection>
-                    <MainSectionHeader>
+                  <Card>
+                    <CardHeader>
                       <div className="flex items-center gap-2">
                         <Switch
                           checked={includeSystemInfo}
                           onCheckedChange={setIncludeSystemInfo}
                         />
-                        <MainSectionHeaderTitle>
+                        <CardHeaderTitle>
                           Include system information
-                        </MainSectionHeaderTitle>
+                        </CardHeaderTitle>
                       </div>
-                      <MainSectionHeaderSubtitle className="ml-8">
+                      <CardHeaderSubtitle className="ml-8">
                         Helps our team diagnose environment-specific issues
                         faster.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel collapsed={!includeSystemInfo}>
+                    <CardPanel collapsed={!includeSystemInfo}>
                       {/* Panel Item 1 — Environment */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -675,10 +675,10 @@ export default function SupportTicketForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Error Details */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <Field>
                             <FieldLabel htmlFor="error-code">
@@ -722,15 +722,15 @@ export default function SupportTicketForm() {
                             <FieldHint />
                           </Field>
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
+                      </CardPanelItem>
+                    </CardPanel>
 
-                    <MainSectionFooter>
-                      <MainSectionFooterIcon />
+                    <CardFooter>
+                      <CardFooterIcon />
                       System information is only visible to our support
                       engineers.
-                    </MainSectionFooter>
-                  </MainSection>
+                    </CardFooter>
+                  </Card>
                 </MainContent>
               </PageContent>
             </PageWrapper>

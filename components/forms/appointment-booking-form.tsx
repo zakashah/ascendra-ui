@@ -7,14 +7,14 @@ import { LuShieldCheck } from "react-icons/lu";
 import { z } from "zod";
 
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
-import { MainSectionFooterIcon } from "@/ascendra-ui/components/main-section/main-section-footer-icon";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
+import { CardFooterIcon } from "@/ascendra-ui/components/card/card-footer-icon";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
 import { PageContent } from "@/ascendra-ui/components/layout/page-content";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
@@ -186,20 +186,20 @@ export default function AppointmentBookingForm() {
               <PageContent>
                 <MainContent>
                   {/* ── Section 1: Service Selection ──────────────────────── */}
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Service Selection
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Choose the type of appointment and your preferred
                         provider.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 1 — Service type */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldLegend variant="label">Service</FieldLegend>
                           <Controller
@@ -245,10 +245,10 @@ export default function AppointmentBookingForm() {
                             error={errors.service as { message?: string }}
                           />
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Provider & Location */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -339,10 +339,10 @@ export default function AppointmentBookingForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 3 — Notes for provider */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <Field>
                           <FieldLabel htmlFor="visit-reason">
                             Reason for Visit
@@ -367,17 +367,17 @@ export default function AppointmentBookingForm() {
                           />
                           <FieldHint optional />
                         </Field>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
+                      </CardPanelItem>
+                    </CardPanel>
 
-                    <MainSectionFooter>
+                    <CardFooter>
                       Appointments can be cancelled up to 24 hours in advance
                       without charge.
-                    </MainSectionFooter>
-                  </MainSection>
+                    </CardFooter>
+                  </Card>
 
                   {/* ── Section 2: Date & Time ─────────────────────────────── */}
-                  <MainSection
+                  <Card
                     collapseable="collapsed"
                     hasError={
                       !!errors.appointmentDate ||
@@ -385,18 +385,18 @@ export default function AppointmentBookingForm() {
                       !!errors.duration
                     }
                   >
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Date &amp; Time
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Select your preferred appointment date and time slot.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 1 — Date */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <SimpleAlert variant="secondary">
                           Available slots shown are for the selected provider
                           and location.
@@ -426,10 +426,10 @@ export default function AppointmentBookingForm() {
                             }
                           />
                         </Field>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Time slot */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <FieldSet>
                             <FieldLegend variant="label">Time Slot</FieldLegend>
@@ -519,24 +519,24 @@ export default function AppointmentBookingForm() {
                             />
                           </Field>
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
 
                   {/* ── Section 3: Patient Details ─────────────────────────── */}
-                  <MainSection collapseable="collapsed">
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card collapseable="collapsed">
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Patient Details
-                      </MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                      </CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Provide your personal information and insurance details.
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
 
-                    <MainSectionPanel>
+                    <CardPanel>
                       {/* Panel Item 1 — Personal */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -592,10 +592,10 @@ export default function AppointmentBookingForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 2 — Contact */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -648,10 +648,10 @@ export default function AppointmentBookingForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 3 — Insurance */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldSet>
                           <FieldGrid>
                             <Field>
@@ -697,10 +697,10 @@ export default function AppointmentBookingForm() {
                             </Field>
                           </FieldGrid>
                         </FieldSet>
-                      </MainSectionPanelItem>
+                      </CardPanelItem>
 
                       {/* Panel Item 4 — Additional */}
-                      <MainSectionPanelItem>
+                      <CardPanelItem>
                         <FieldGroup>
                           <Field>
                             <FieldLabel htmlFor="allergies">
@@ -760,17 +760,17 @@ export default function AppointmentBookingForm() {
                             />
                           )}
                         </FieldGroup>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
+                      </CardPanelItem>
+                    </CardPanel>
 
-                    <MainSectionFooter>
-                      <MainSectionFooterIcon icon={LuShieldCheck} />
+                    <CardFooter>
+                      <CardFooterIcon icon={LuShieldCheck} />
                       <span>
                         Your medical information is encrypted and never shared
                         with third parties.
                       </span>
-                    </MainSectionFooter>
-                  </MainSection>
+                    </CardFooter>
+                  </Card>
                 </MainContent>
               </PageContent>
             </PageWrapper>

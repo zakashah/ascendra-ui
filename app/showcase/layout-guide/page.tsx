@@ -5,15 +5,15 @@ import { LuChevronDown, LuCode, LuEye, LuShieldCheck } from "react-icons/lu";
 
 import { AsideContent } from "@/ascendra-ui/components/layout/aside-content";
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { MainSection } from "@/ascendra-ui/components/main-section/main-section";
-import { MainSectionFooter } from "@/ascendra-ui/components/main-section/main-section-footer";
-import { MainSectionHeader } from "@/ascendra-ui/components/main-section/main-section-header";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/main-section/main-section-header-subtitle";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/main-section/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/main-section/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/main-section/main-section-panel-item";
-import { MainSectionPanelItemCrown } from "@/ascendra-ui/components/main-section/main-section-panel-item-crown";
-import { MainSectionPanelItemGroup } from "@/ascendra-ui/components/main-section/main-section-panel-item-group";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
+import { CardPanelItemCrown } from "@/ascendra-ui/components/card/card-panel-item-crown";
+import { CardPanelItemGroup } from "@/ascendra-ui/components/card/card-panel-item-group";
 import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
 import { PageHeaderAction } from "@/ascendra-ui/components/layout/page-header-action";
 import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
@@ -38,7 +38,7 @@ import {
 import { Switch } from "@/ascendra-ui/components/ui/switch";
 
 import { BackLink } from "@/ascendra-ui/components/forms/back-link";
-import { MainSectionFooterIcon } from "@/ascendra-ui/components/main-section/main-section-footer-icon";
+import { CardFooterIcon } from "@/ascendra-ui/components/card/card-footer-icon";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 import { CodeBlock } from "@/components/code-block";
 
@@ -346,12 +346,12 @@ import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
 import { PageMain } from "@/ascendra-ui/components/layout/page-main";
 import { PageWrapper } from "@/ascendra-ui/components/layout/page-wrapper";
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
 
 export default function Page() {
   return (
@@ -371,19 +371,19 @@ export default function Page() {
         <PageWrapper>
           <div className="mt-8 px-6 pb-6 flex flex-col gap-6">
             <MainContent>
-              <MainSection>
-                <MainSectionHeader>
-                  <MainSectionHeaderTitle>General</MainSectionHeaderTitle>
-                  <MainSectionHeaderSubtitle>
+              <Card>
+                <CardHeader>
+                  <CardHeaderTitle>General</CardHeaderTitle>
+                  <CardHeaderSubtitle>
                     Basic team information
-                  </MainSectionHeaderSubtitle>
-                </MainSectionHeader>
-                <MainSectionPanel>
-                  <MainSectionPanelItem>
+                  </CardHeaderSubtitle>
+                </CardHeader>
+                <CardPanel>
+                  <CardPanelItem>
                     {/* Fields go here */}
-                  </MainSectionPanelItem>
-                </MainSectionPanel>
-              </MainSection>
+                  </CardPanelItem>
+                </CardPanel>
+              </Card>
             </MainContent>
           </div>
         </PageWrapper>
@@ -409,21 +409,21 @@ export default function Page() {
             <PageWrapper>
               <div className="mt-8 px-6 pb-6 flex flex-col gap-6">
                 <MainContent>
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>General</MainSectionHeaderTitle>
-                      <MainSectionHeaderSubtitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>General</CardHeaderTitle>
+                      <CardHeaderSubtitle>
                         Basic team information
-                      </MainSectionHeaderSubtitle>
-                    </MainSectionHeader>
-                    <MainSectionPanel>
-                      <MainSectionPanelItem>
+                      </CardHeaderSubtitle>
+                    </CardHeader>
+                    <CardPanel>
+                      <CardPanelItem>
                         <p className="text-sm text-muted-foreground">
                           Panel items go here
                         </p>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
                 </MainContent>
               </div>
             </PageWrapper>
@@ -440,9 +440,9 @@ import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
 import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
 import { PageMain } from "@/ascendra-ui/components/layout/page-main";
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
 import { Tabs } from "@/ascendra-ui/components/tabs/tabs";
 import { TabList } from "@/ascendra-ui/components/tabs/tab-list";
 import { TabTrigger } from "@/ascendra-ui/components/tabs/tab-trigger";
@@ -472,13 +472,13 @@ export default function Page() {
           </TabList>
           <TabContent value="general">
             <MainContent>
-              <MainSection>
-                <MainSectionHeader>
-                  <MainSectionHeaderTitle>
+              <Card>
+                <CardHeader>
+                  <CardHeaderTitle>
                     Personal details
-                  </MainSectionHeaderTitle>
-                </MainSectionHeader>
-              </MainSection>
+                  </CardHeaderTitle>
+                </CardHeader>
+              </Card>
             </MainContent>
           </TabContent>
         </Tabs>
@@ -508,42 +508,42 @@ export default function Page() {
               </TabList>
               <TabContent value="general">
                 <MainContent>
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Personal details
-                      </MainSectionHeaderTitle>
-                    </MainSectionHeader>
-                    <MainSectionPanel>
-                      <MainSectionPanelItem>
+                      </CardHeaderTitle>
+                    </CardHeader>
+                    <CardPanel>
+                      <CardPanelItem>
                         <p className="text-sm text-muted-foreground">
                           Fields here
                         </p>
-                      </MainSectionPanelItem>
-                    </MainSectionPanel>
-                  </MainSection>
+                      </CardPanelItem>
+                    </CardPanel>
+                  </Card>
                 </MainContent>
               </TabContent>
               <TabContent value="security">
                 <MainContent>
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Password &amp; 2FA
-                      </MainSectionHeaderTitle>
-                    </MainSectionHeader>
-                  </MainSection>
+                      </CardHeaderTitle>
+                    </CardHeader>
+                  </Card>
                 </MainContent>
               </TabContent>
               <TabContent value="notifications">
                 <MainContent>
-                  <MainSection>
-                    <MainSectionHeader>
-                      <MainSectionHeaderTitle>
+                  <Card>
+                    <CardHeader>
+                      <CardHeaderTitle>
                         Notification preferences
-                      </MainSectionHeaderTitle>
-                    </MainSectionHeader>
-                  </MainSection>
+                      </CardHeaderTitle>
+                    </CardHeader>
+                  </Card>
                 </MainContent>
               </TabContent>
             </Tabs>
@@ -554,90 +554,90 @@ export default function Page() {
       {/* ── 4. Content Sections ───────────────────────────────────────────── */}
       <GuideSection
         title="Content Sections"
-        description="MainSection is the primary content container — a muted rounded card that groups related settings. Stack multiple sections inside MainContent. Use MainSectionFooter for inline notes, and SimpleAlert above the section stack for page-level notices."
+        description="Card is the primary content container — a muted rounded card that groups related settings. Stack multiple sections inside MainContent. Use CardFooter for inline notes, and SimpleAlert above the section stack for page-level notices."
       >
         <Variant
           label="Header only"
-          code={`import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
+          code={`import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
 
-<MainSection>
-  <MainSectionHeader>
-    <MainSectionHeaderTitle>Section title</MainSectionHeaderTitle>
-    <MainSectionHeaderSubtitle>
+<Card>
+  <CardHeader>
+    <CardHeaderTitle>Section title</CardHeaderTitle>
+    <CardHeaderSubtitle>
       Optional subtitle that describes the section purpose
-    </MainSectionHeaderSubtitle>
-  </MainSectionHeader>
-</MainSection>`}
+    </CardHeaderSubtitle>
+  </CardHeader>
+</Card>`}
         >
-          <MainSection>
-            <MainSectionHeader>
-              <MainSectionHeaderTitle>Section title</MainSectionHeaderTitle>
-              <MainSectionHeaderSubtitle>
+          <Card>
+            <CardHeader>
+              <CardHeaderTitle>Section title</CardHeaderTitle>
+              <CardHeaderSubtitle>
                 Optional subtitle that describes the section purpose
-              </MainSectionHeaderSubtitle>
-            </MainSectionHeader>
-          </MainSection>
+              </CardHeaderSubtitle>
+            </CardHeader>
+          </Card>
         </Variant>
 
         <Variant
           label="Header + footer"
           code={`import { LuInfo } from "react-icons/lu";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
 
-<MainSection>
-  <MainSectionHeader>
-    <MainSectionHeaderTitle>Email authentication</MainSectionHeaderTitle>
-    <MainSectionHeaderSubtitle>
+<Card>
+  <CardHeader>
+    <CardHeaderTitle>Email authentication</CardHeaderTitle>
+    <CardHeaderSubtitle>
       Allow users to sign in with their email address
-    </MainSectionHeaderSubtitle>
-  </MainSectionHeader>
-  <MainSectionFooter>
-    <MainSectionFooterIcon />
+    </CardHeaderSubtitle>
+  </CardHeader>
+  <CardFooter>
+    <CardFooterIcon />
     Footer text for additional context, caveats, or related links.
-  </MainSectionFooter>
-</MainSection>`}
+  </CardFooter>
+</Card>`}
         >
-          <MainSection>
-            <MainSectionHeader>
-              <MainSectionHeaderTitle>
+          <Card>
+            <CardHeader>
+              <CardHeaderTitle>
                 Email authentication
-              </MainSectionHeaderTitle>
-              <MainSectionHeaderSubtitle>
+              </CardHeaderTitle>
+              <CardHeaderSubtitle>
                 Allow users to sign in with their email address
-              </MainSectionHeaderSubtitle>
-            </MainSectionHeader>
-            <MainSectionFooter>
-              <MainSectionFooterIcon />
+              </CardHeaderSubtitle>
+            </CardHeader>
+            <CardFooter>
+              <CardFooterIcon />
               Footer text for additional context, caveats, or related links.
-            </MainSectionFooter>
-          </MainSection>
+            </CardFooter>
+          </Card>
         </Variant>
 
         <Variant
           label="Alert above sections"
-          note="SimpleAlert goes inside MainContent, above the section stack — not inside a MainSection."
+          note="SimpleAlert goes inside MainContent, above the section stack — not inside a Card."
           code={`import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
 import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
 
 <MainContent>
   <SimpleAlert>
     You are viewing a read-only snapshot. Contact your admin to make changes.
   </SimpleAlert>
-  <MainSection>
-    <MainSectionHeader>
-      <MainSectionHeaderTitle>Permissions</MainSectionHeaderTitle>
-    </MainSectionHeader>
-  </MainSection>
+  <Card>
+    <CardHeader>
+      <CardHeaderTitle>Permissions</CardHeaderTitle>
+    </CardHeader>
+  </Card>
 </MainContent>`}
         >
           <div className="flex flex-col gap-6">
@@ -645,153 +645,153 @@ import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-sec
               You are viewing a read-only snapshot. Contact your admin to make
               changes.
             </SimpleAlert>
-            <MainSection>
-              <MainSectionHeader>
-                <MainSectionHeaderTitle>Permissions</MainSectionHeaderTitle>
-              </MainSectionHeader>
-            </MainSection>
+            <Card>
+              <CardHeader>
+                <CardHeaderTitle>Permissions</CardHeaderTitle>
+              </CardHeader>
+            </Card>
           </div>
         </Variant>
 
         <Variant
           label="Multiple sections (stacked)"
           code={`import { MainContent } from "@/ascendra-ui/components/layout/main-content";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
 
 <MainContent>
-  <MainSection>
-    <MainSectionHeader>
-      <MainSectionHeaderTitle>Account details</MainSectionHeaderTitle>
-    </MainSectionHeader>
-  </MainSection>
-  <MainSection>
-    <MainSectionHeader>
-      <MainSectionHeaderTitle>Billing</MainSectionHeaderTitle>
-    </MainSectionHeader>
-  </MainSection>
-  <MainSection danger>
-    <MainSectionHeader>
-      <MainSectionHeaderTitle>Danger zone</MainSectionHeaderTitle>
-      <MainSectionHeaderSubtitle>
+  <Card>
+    <CardHeader>
+      <CardHeaderTitle>Account details</CardHeaderTitle>
+    </CardHeader>
+  </Card>
+  <Card>
+    <CardHeader>
+      <CardHeaderTitle>Billing</CardHeaderTitle>
+    </CardHeader>
+  </Card>
+  <Card danger>
+    <CardHeader>
+      <CardHeaderTitle>Danger zone</CardHeaderTitle>
+      <CardHeaderSubtitle>
         Irreversible actions — proceed with care
-      </MainSectionHeaderSubtitle>
-    </MainSectionHeader>
-  </MainSection>
+      </CardHeaderSubtitle>
+    </CardHeader>
+  </Card>
 </MainContent>`}
         >
           <div className="flex flex-col gap-6">
-            <MainSection>
-              <MainSectionHeader>
-                <MainSectionHeaderTitle>Account details</MainSectionHeaderTitle>
-              </MainSectionHeader>
-            </MainSection>
-            <MainSection>
-              <MainSectionHeader>
-                <MainSectionHeaderTitle>Billing</MainSectionHeaderTitle>
-              </MainSectionHeader>
-            </MainSection>
-            <MainSection danger>
-              <MainSectionHeader>
-                <MainSectionHeaderTitle>Danger zone</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+            <Card>
+              <CardHeader>
+                <CardHeaderTitle>Account details</CardHeaderTitle>
+              </CardHeader>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardHeaderTitle>Billing</CardHeaderTitle>
+              </CardHeader>
+            </Card>
+            <Card danger>
+              <CardHeader>
+                <CardHeaderTitle>Danger zone</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Irreversible actions — proceed with care
-                </MainSectionHeaderSubtitle>
-              </MainSectionHeader>
-            </MainSection>
+                </CardHeaderSubtitle>
+              </CardHeader>
+            </Card>
           </div>
         </Variant>
 
         <Variant
           label="Collapseable section"
-          note='Pass collapseable="expanded" or collapseable="collapsed" to MainSection. State is managed internally — the header renders a minimize/maximize toggle. Add hasError to draw a destructive outline when collapsed fields have validation errors.'
-          code={`import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+          note='Pass collapseable="expanded" or collapseable="collapsed" to Card. State is managed internally — the header renders a minimize/maximize toggle. Add hasError to draw a destructive outline when collapsed fields have validation errors.'
+          code={`import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
 
 // Starts expanded
-<MainSection collapseable="expanded">
-  <MainSectionHeader>
-    <MainSectionHeaderTitle>Notification preferences</MainSectionHeaderTitle>
-    <MainSectionHeaderSubtitle>
+<Card collapseable="expanded">
+  <CardHeader>
+    <CardHeaderTitle>Notification preferences</CardHeaderTitle>
+    <CardHeaderSubtitle>
       Choose when and how you receive notifications
-    </MainSectionHeaderSubtitle>
-  </MainSectionHeader>
-  <MainSectionPanel>
-    <MainSectionPanelItem>Panel content</MainSectionPanelItem>
-  </MainSectionPanel>
-</MainSection>
+    </CardHeaderSubtitle>
+  </CardHeader>
+  <CardPanel>
+    <CardPanelItem>Panel content</CardPanelItem>
+  </CardPanel>
+</Card>
 
 // Starts collapsed
-<MainSection collapseable="collapsed">
-  <MainSectionHeader>
-    <MainSectionHeaderTitle>Advanced settings</MainSectionHeaderTitle>
-  </MainSectionHeader>
-  <MainSectionPanel>
-    <MainSectionPanelItem>Panel content</MainSectionPanelItem>
-  </MainSectionPanel>
-</MainSection>
+<Card collapseable="collapsed">
+  <CardHeader>
+    <CardHeaderTitle>Advanced settings</CardHeaderTitle>
+  </CardHeader>
+  <CardPanel>
+    <CardPanelItem>Panel content</CardPanelItem>
+  </CardPanel>
+</Card>
 
 // With validation error outline (when collapsed fields fail submit)
-<MainSection collapseable="expanded" hasError={!!errors.notificationEmail}>
+<Card collapseable="expanded" hasError={!!errors.notificationEmail}>
   ...
-</MainSection>`}
+</Card>`}
         >
           <div className="flex flex-col gap-4">
-            <MainSection collapseable="expanded">
-              <MainSectionHeader>
-                <MainSectionHeaderTitle>
+            <Card collapseable="expanded">
+              <CardHeader>
+                <CardHeaderTitle>
                   Notification preferences
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Choose when and how you receive notifications
-                </MainSectionHeaderSubtitle>
-              </MainSectionHeader>
-              <MainSectionPanel>
-                <MainSectionPanelItem>
+                </CardHeaderSubtitle>
+              </CardHeader>
+              <CardPanel>
+                <CardPanelItem>
                   <p className="text-sm text-muted-foreground">
                     Panel content goes here
                   </p>
-                </MainSectionPanelItem>
-              </MainSectionPanel>
-            </MainSection>
-            <MainSection collapseable="collapsed">
-              <MainSectionHeader>
-                <MainSectionHeaderTitle>
+                </CardPanelItem>
+              </CardPanel>
+            </Card>
+            <Card collapseable="collapsed">
+              <CardHeader>
+                <CardHeaderTitle>
                   Advanced settings
-                </MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardHeaderTitle>
+                <CardHeaderSubtitle>
                   These settings are collapsed by default
-                </MainSectionHeaderSubtitle>
-              </MainSectionHeader>
-              <MainSectionPanel>
-                <MainSectionPanelItem>
+                </CardHeaderSubtitle>
+              </CardHeader>
+              <CardPanel>
+                <CardPanelItem>
                   <p className="text-sm text-muted-foreground">
                     Panel content goes here
                   </p>
-                </MainSectionPanelItem>
-              </MainSectionPanel>
-            </MainSection>
-            <MainSection collapseable="collapsed" hasError>
-              <MainSectionHeader>
-                <MainSectionHeaderTitle>Billing details</MainSectionHeaderTitle>
-                <MainSectionHeaderSubtitle>
+                </CardPanelItem>
+              </CardPanel>
+            </Card>
+            <Card collapseable="collapsed" hasError>
+              <CardHeader>
+                <CardHeaderTitle>Billing details</CardHeaderTitle>
+                <CardHeaderSubtitle>
                   Collapsed with a validation error outline
-                </MainSectionHeaderSubtitle>
-              </MainSectionHeader>
-              <MainSectionPanel>
-                <MainSectionPanelItem>
+                </CardHeaderSubtitle>
+              </CardHeader>
+              <CardPanel>
+                <CardPanelItem>
                   <p className="text-sm text-muted-foreground">
                     Panel content goes here
                   </p>
-                </MainSectionPanelItem>
-              </MainSectionPanel>
-            </MainSection>
+                </CardPanelItem>
+              </CardPanel>
+            </Card>
           </div>
         </Variant>
       </GuideSection>
@@ -799,128 +799,128 @@ import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-secti
       {/* ── 5. Section Panels ─────────────────────────────────────────────── */}
       <GuideSection
         title="Section Panels"
-        description="MainSectionPanel renders the white card that lives inside a section. MainSectionPanelItem is each row within that card, separated by a top border (the first item has no border). Use MainSectionPanelItemGroup to manage vertical spacing between elements within an item. Panels can animate to zero height when collapsed."
+        description="CardPanel renders the white card that lives inside a section. CardPanelItem is each row within that card, separated by a top border (the first item has no border). Use CardPanelItemGroup to manage vertical spacing between elements within an item. Panels can animate to zero height when collapsed."
       >
         <Variant
           label="Single panel item"
-          code={`import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+          code={`import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
 
-<MainSection>
-  <MainSectionHeader>
-    <MainSectionHeaderTitle>Account deletion</MainSectionHeaderTitle>
-  </MainSectionHeader>
-  <MainSectionPanel>
-    <MainSectionPanelItem>
+<Card>
+  <CardHeader>
+    <CardHeaderTitle>Account deletion</CardHeaderTitle>
+  </CardHeader>
+  <CardPanel>
+    <CardPanelItem>
       Allow users to delete their accounts from the profile page
-    </MainSectionPanelItem>
-  </MainSectionPanel>
-</MainSection>`}
+    </CardPanelItem>
+  </CardPanel>
+</Card>`}
         >
-          <MainSection>
-            <MainSectionHeader>
-              <MainSectionHeaderTitle>Account deletion</MainSectionHeaderTitle>
-            </MainSectionHeader>
-            <MainSectionPanel>
-              <MainSectionPanelItem>
+          <Card>
+            <CardHeader>
+              <CardHeaderTitle>Account deletion</CardHeaderTitle>
+            </CardHeader>
+            <CardPanel>
+              <CardPanelItem>
                 Allow users to delete their accounts from the profile page
-              </MainSectionPanelItem>
-            </MainSectionPanel>
-          </MainSection>
+              </CardPanelItem>
+            </CardPanel>
+          </Card>
         </Variant>
 
         <Variant
           label="Multiple panel items"
-          code={`import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+          code={`import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
 import { Button } from "@/ascendra-ui/components/ui/button";
 
-<MainSection>
-  <MainSectionHeader>
-    <MainSectionHeaderTitle>Password policy</MainSectionHeaderTitle>
-  </MainSectionHeader>
-  <MainSectionPanel>
-    <MainSectionPanelItem>
+<Card>
+  <CardHeader>
+    <CardHeaderTitle>Password policy</CardHeaderTitle>
+  </CardHeader>
+  <CardPanel>
+    <CardPanelItem>
       Require a minimum of 8 characters
-    </MainSectionPanelItem>
-    <MainSectionPanelItem className="relative">
-      <MainSectionPanelItemCrown variant={"default"}>
+    </CardPanelItem>
+    <CardPanelItem className="relative">
+      <CardPanelItemCrown variant={"default"}>
         Authenticator application must be enabled to generate backup codes
-      </MainSectionPanelItemCrown>
+      </CardPanelItemCrown>
       Reject known compromised passwords
-    </MainSectionPanelItem>
-    <MainSectionPanelItem>
+    </CardPanelItem>
+    <CardPanelItem>
       <Button variant="secondary">Apply to existing users</Button>
-    </MainSectionPanelItem>
-  </MainSectionPanel>
-</MainSection>`}
+    </CardPanelItem>
+  </CardPanel>
+</Card>`}
         >
-          <MainSection>
-            <MainSectionHeader>
-              <MainSectionHeaderTitle>Password policy</MainSectionHeaderTitle>
-            </MainSectionHeader>
-            <MainSectionPanel>
-              <MainSectionPanelItem>
+          <Card>
+            <CardHeader>
+              <CardHeaderTitle>Password policy</CardHeaderTitle>
+            </CardHeader>
+            <CardPanel>
+              <CardPanelItem>
                 Require a minimum of 8 characters
-              </MainSectionPanelItem>
-              <MainSectionPanelItem className="relative">
-                <MainSectionPanelItemCrown variant={"default"}>
+              </CardPanelItem>
+              <CardPanelItem className="relative">
+                <CardPanelItemCrown variant={"default"}>
                   Authenticator application must be enabled to generate backup
                   codes
-                </MainSectionPanelItemCrown>
+                </CardPanelItemCrown>
                 Reject known compromised passwords
-              </MainSectionPanelItem>
-              <MainSectionPanelItem>
+              </CardPanelItem>
+              <CardPanelItem>
                 <Button variant="secondary">Apply to existing users</Button>
-              </MainSectionPanelItem>
-            </MainSectionPanel>
-          </MainSection>
+              </CardPanelItem>
+            </CardPanel>
+          </Card>
         </Variant>
 
         <Variant
           label="PanelItemGroup"
           note="Wraps multiple elements inside a single panel item and adds consistent vertical spacing between them."
           code={`import { SimpleAlert } from "@/ascendra-ui/components/common-ui/simple-alert";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
-import { MainSectionPanelItemGroup } from "@/ascendra-ui/components/layout/main-section-panel-item-group";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
+import { CardPanelItemGroup } from "@/ascendra-ui/components/card/card-panel-item-group";
 
-<MainSection>
-  <MainSectionHeader>
-    <MainSectionHeaderTitle>Sign-up restrictions</MainSectionHeaderTitle>
-  </MainSectionHeader>
-  <MainSectionPanel>
-    <MainSectionPanelItem>
-      <MainSectionPanelItemGroup>
+<Card>
+  <CardHeader>
+    <CardHeaderTitle>Sign-up restrictions</CardHeaderTitle>
+  </CardHeader>
+  <CardPanel>
+    <CardPanelItem>
+      <CardPanelItemGroup>
         <p className="text-sm">
           Restrict sign-up to specific email domains
         </p>
         <SimpleAlert>
           Existing users outside the allowed domains retain their access.
         </SimpleAlert>
-      </MainSectionPanelItemGroup>
-    </MainSectionPanelItem>
-  </MainSectionPanel>
-</MainSection>`}
+      </CardPanelItemGroup>
+    </CardPanelItem>
+  </CardPanel>
+</Card>`}
         >
-          <MainSection>
-            <MainSectionHeader>
-              <MainSectionHeaderTitle>
+          <Card>
+            <CardHeader>
+              <CardHeaderTitle>
                 Sign-up restrictions
-              </MainSectionHeaderTitle>
-            </MainSectionHeader>
-            <MainSectionPanel>
-              <MainSectionPanelItem>
-                <MainSectionPanelItemGroup>
+              </CardHeaderTitle>
+            </CardHeader>
+            <CardPanel>
+              <CardPanelItem>
+                <CardPanelItemGroup>
                   <p className="text-sm">
                     Restrict sign-up to specific email domains
                   </p>
@@ -928,86 +928,86 @@ import { MainSectionPanelItemGroup } from "@/ascendra-ui/components/layout/main-
                     Existing users outside the allowed domains retain their
                     access.
                   </SimpleAlert>
-                </MainSectionPanelItemGroup>
-              </MainSectionPanelItem>
-            </MainSectionPanel>
-          </MainSection>
+                </CardPanelItemGroup>
+              </CardPanelItem>
+            </CardPanel>
+          </Card>
         </Variant>
 
         <Variant
           label="Collapsible panel"
-          note="Pair a Switch in the section header with the collapsed prop on MainSectionPanel. The footer border hides automatically when the panel is open."
+          note="Pair a Switch in the section header with the collapsed prop on CardPanel. The footer border hides automatically when the panel is open."
           code={`"use client";
 import { useState } from "react";
 import { LuShieldCheck } from "react-icons/lu";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
-import { MainSectionFooter } from "@/ascendra-ui/components/layout/main-section-footer";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
+import { CardFooter } from "@/ascendra-ui/components/card/card-footer";
 import { Switch } from "@/ascendra-ui/components/ui/switch";
 
 export function CollapsibleSection() {
   const [collapsed, setCollapsed] = useState(true);
 
   return (
-    <MainSection>
-      <MainSectionHeader>
+    <Card>
+      <CardHeader>
         <div className="flex items-center gap-2">
           <Switch
             checked={!collapsed}
             onClick={() => setCollapsed((prev) => !prev)}
           />
-          <MainSectionHeaderTitle>Email sign-up</MainSectionHeaderTitle>
+          <CardHeaderTitle>Email sign-up</CardHeaderTitle>
         </div>
-        <MainSectionHeaderSubtitle className="ml-8">
+        <CardHeaderSubtitle className="ml-8">
           Allow users to register with an email address and password
-        </MainSectionHeaderSubtitle>
-      </MainSectionHeader>
-      <MainSectionPanel collapsed={collapsed}>
-        <MainSectionPanelItem>
+        </CardHeaderSubtitle>
+      </CardHeader>
+      <CardPanel collapsed={collapsed}>
+        <CardPanelItem>
           Minimum password length: 8 characters
-        </MainSectionPanelItem>
-        <MainSectionPanelItem>
+        </CardPanelItem>
+        <CardPanelItem>
           Reject known compromised passwords
-        </MainSectionPanelItem>
-      </MainSectionPanel>
-      <MainSectionFooter>
-        <MainSectionFooterIcon icon={LuShieldCheck} />
+        </CardPanelItem>
+      </CardPanel>
+      <CardFooter>
+        <CardFooterIcon icon={LuShieldCheck} />
         These settings apply to new sign-ups only.
-      </MainSectionFooter>
-    </MainSection>
+      </CardFooter>
+    </Card>
   );
 }`}
         >
-          <MainSection>
-            <MainSectionHeader>
+          <Card>
+            <CardHeader>
               <div className="flex items-center gap-2">
                 <Switch
                   checked={!panelCollapsed}
                   onClick={() => setPanelCollapsed((prev) => !prev)}
                 />
-                <MainSectionHeaderTitle>Email sign-up</MainSectionHeaderTitle>
+                <CardHeaderTitle>Email sign-up</CardHeaderTitle>
               </div>
-              <MainSectionHeaderSubtitle className="ml-8">
+              <CardHeaderSubtitle className="ml-8">
                 Allow users to register with an email address and password
-              </MainSectionHeaderSubtitle>
-            </MainSectionHeader>
-            <MainSectionPanel collapsed={panelCollapsed}>
-              <MainSectionPanelItem>
+              </CardHeaderSubtitle>
+            </CardHeader>
+            <CardPanel collapsed={panelCollapsed}>
+              <CardPanelItem>
                 Minimum password length: 8 characters
-              </MainSectionPanelItem>
-              <MainSectionPanelItem>
+              </CardPanelItem>
+              <CardPanelItem>
                 Reject known compromised passwords
-              </MainSectionPanelItem>
-            </MainSectionPanel>
-            <MainSectionFooter>
-              <MainSectionFooterIcon icon={LuShieldCheck} />
+              </CardPanelItem>
+            </CardPanel>
+            <CardFooter>
+              <CardFooterIcon icon={LuShieldCheck} />
               These settings apply to new sign-ups only.
-            </MainSectionFooter>
-          </MainSection>
+            </CardFooter>
+          </Card>
         </Variant>
       </GuideSection>
 
@@ -1021,31 +1021,31 @@ export function CollapsibleSection() {
           noPad
           code={`import { MainContent } from "@/ascendra-ui/components/layout/main-content";
 import { AsideContent } from "@/ascendra-ui/components/layout/aside-content";
-import { MainSection } from "@/ascendra-ui/components/layout/main-section";
-import { MainSectionHeader } from "@/ascendra-ui/components/layout/main-section-header";
-import { MainSectionHeaderTitle } from "@/ascendra-ui/components/layout/main-section-header-title";
-import { MainSectionHeaderSubtitle } from "@/ascendra-ui/components/layout/main-section-header-subtitle";
-import { MainSectionPanel } from "@/ascendra-ui/components/layout/main-section-panel";
-import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-section-panel-item";
+import { Card } from "@/ascendra-ui/components/card/card";
+import { CardHeader } from "@/ascendra-ui/components/card/card-header";
+import { CardHeaderTitle } from "@/ascendra-ui/components/card/card-header-title";
+import { CardHeaderSubtitle } from "@/ascendra-ui/components/card/card-header-subtitle";
+import { CardPanel } from "@/ascendra-ui/components/card/card-panel";
+import { CardPanelItem } from "@/ascendra-ui/components/card/card-panel-item";
 
 <div className="flex flex-col items-start gap-8 sm:flex-row">
   <MainContent>
-    <MainSection>
-      <MainSectionHeader>
-        <MainSectionHeaderTitle>Password sign-in</MainSectionHeaderTitle>
-        <MainSectionHeaderSubtitle>
+    <Card>
+      <CardHeader>
+        <CardHeaderTitle>Password sign-in</CardHeaderTitle>
+        <CardHeaderSubtitle>
           Require users to authenticate with a password
-        </MainSectionHeaderSubtitle>
-      </MainSectionHeader>
-      <MainSectionPanel>
-        <MainSectionPanelItem>
+        </CardHeaderSubtitle>
+      </CardHeader>
+      <CardPanel>
+        <CardPanelItem>
           Minimum password length: 8 characters
-        </MainSectionPanelItem>
-        <MainSectionPanelItem>
+        </CardPanelItem>
+        <CardPanelItem>
           Reject known compromised passwords
-        </MainSectionPanelItem>
-      </MainSectionPanel>
-    </MainSection>
+        </CardPanelItem>
+      </CardPanel>
+    </Card>
   </MainContent>
   <AsideContent dimmed={dimmed}>
     {/* Sidebar content */}
@@ -1061,24 +1061,24 @@ import { MainSectionPanelItem } from "@/ascendra-ui/components/layout/main-secti
           </div>
           <div className="flex flex-col items-start gap-8 p-6 sm:flex-row">
             <MainContent>
-              <MainSection>
-                <MainSectionHeader>
-                  <MainSectionHeaderTitle>
+              <Card>
+                <CardHeader>
+                  <CardHeaderTitle>
                     Password sign-in
-                  </MainSectionHeaderTitle>
-                  <MainSectionHeaderSubtitle>
+                  </CardHeaderTitle>
+                  <CardHeaderSubtitle>
                     Require users to authenticate with a password
-                  </MainSectionHeaderSubtitle>
-                </MainSectionHeader>
-                <MainSectionPanel>
-                  <MainSectionPanelItem>
+                  </CardHeaderSubtitle>
+                </CardHeader>
+                <CardPanel>
+                  <CardPanelItem>
                     Minimum password length: 8 characters
-                  </MainSectionPanelItem>
-                  <MainSectionPanelItem>
+                  </CardPanelItem>
+                  <CardPanelItem>
                     Reject known compromised passwords
-                  </MainSectionPanelItem>
-                </MainSectionPanel>
-              </MainSection>
+                  </CardPanelItem>
+                </CardPanel>
+              </Card>
             </MainContent>
             <AsideContent dimmed={asideDimmed}>
               <div className="flex min-w-48 flex-col gap-3 text-sm">

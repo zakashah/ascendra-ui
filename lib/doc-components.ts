@@ -23,7 +23,6 @@ import { SheetDocContent } from "@/components/previews/sheet-preview";
 import { DropdownMenuDocContent } from "@/components/previews/dropdown-menu-preview";
 import { TableDocContent } from "@/components/previews/table-preview";
 import { EmptyDocContent } from "@/components/previews/empty-preview";
-import { MainSectionDocContent } from "@/components/previews/main-section-preview";
 import { PageHeaderDocContent } from "@/components/previews/page-header-preview";
 import { PageBarDocContent } from "@/components/previews/page-bar-preview";
 import { AsideContentDocContent } from "@/components/previews/aside-content-preview";
@@ -71,7 +70,6 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   table: TableDocContent,
   empty: EmptyDocContent,
   card: CardDocContent,
-  "main-section": MainSectionDocContent,
   "page-header": PageHeaderDocContent,
   "page-bar": PageBarDocContent,
   "aside-content": AsideContentDocContent,
