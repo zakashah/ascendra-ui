@@ -7,7 +7,7 @@ const bubbleBadgeVariants = cva(
     variants: {
       size: {
         sm: 'h-[18px] min-w-[18px] px-[3px] text-[10px]',
-        md: 'h-5 min-w-5 px-1 text-[11px]',
+        md: 'h-5 min-w-5 px-1 text-2xs',
         lg: 'h-6 min-w-6 px-1.5 text-xs',
       },
       color: {

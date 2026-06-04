@@ -308,7 +308,7 @@ function QueryParamPanelInner() {
                   {group.showTitle && group.title && (
                     <>
                       <div className="absolute inset-0 -top-px border-t border-dashed border-gray-400/50" />
-                      <div className="text-muted-foreground bg-background absolute -top-3 left-2 z-10 ml-2 rounded-full border border-dashed border-gray-400/50 px-1.5 py-0.5 text-[11px] opacity-100">
+                      <div className="text-muted-foreground bg-background absolute -top-3 left-2 z-10 ml-2 rounded-full border border-dashed border-gray-400/50 px-1.5 py-0.5 text-2xs opacity-100">
                         {group.title}
                       </div>
                     </>

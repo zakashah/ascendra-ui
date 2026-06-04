@@ -6,7 +6,7 @@ import { cn } from '@/ascendra-ui/shadcn/lib/utils';
 
 const badgeVariants = cva(
   /* Base styles: text-ceramic-label-4 properties */
-  'relative inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-[4px] px-1 py-0.5 font-medium transition-all text-[0.6875rem] leading-[0.875rem] tracking-[0.015em] ring-1 ring-inset overflow-hidden',
+  'relative inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-[4px] px-1 py-0.5 font-medium transition-all text-2xs tracking-[0.015em] ring-1 ring-inset overflow-hidden',
   {
     variants: {
       size: {

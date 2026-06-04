@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 
 const crownLabelVariants = cva(
-  "bg-background absolute -top-3 left-2 z-10 ml-2 rounded-full border border-dashed px-1.5 py-0.5 text-[11px]",
+  "bg-background absolute -top-3 left-2 z-10 ml-2 rounded-full border border-dashed px-1.5 py-0.5 text-2xs",
   {
     variants: {
       variant: {
