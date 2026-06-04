@@ -25,14 +25,18 @@ import {
 } from "@/ascendra-ui/shadcn/components/ui/chart";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
-import Link from "next/link";
 import { useState } from "react";
 import {
-  LuArrowLeft,
-  LuLayoutDashboard,
   LuTrendingDown,
   LuTrendingUp,
 } from "react-icons/lu";
+import { BackLink } from "@/ascendra-ui/components/forms/back-link";
+import { PageHeader } from "@/ascendra-ui/components/layout/page-header";
+import { PageHeaderAction } from "@/ascendra-ui/components/layout/page-header-action";
+import { PageHeaderGroup } from "@/ascendra-ui/components/layout/page-header-group";
+import { PageSubtitle } from "@/ascendra-ui/components/layout/page-subtitle";
+import { PageTitle } from "@/ascendra-ui/components/layout/page-title";
+import { DashboardContent } from "@/ascendra-ui/components/layout/dashboard-content";
 import {
   Area,
   Bar,
@@ -189,37 +193,24 @@ export default function SupplyChainPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-8 py-12">
-      {/* Back */}
-      <Link
-        href="/showcase/dashboards"
-        className="text-muted-foreground hover:text-foreground mb-10 flex w-fit items-center gap-1.5 text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
-      >
-        <LuArrowLeft className="size-3 stroke-2" />
-        Dashboard Gallery
-      </Link>
+      <BackLink href="/showcase/dashboards">Dashboard Gallery</BackLink>
 
-      {/* Page header */}
-      <div className="mb-10">
-        <div className="mb-3 flex flex-wrap items-center gap-2">
-          <div className="inline-flex items-center gap-2 rounded-full border bg-muted/60 px-3 py-1 text-xs text-muted-foreground">
-            <LuLayoutDashboard className="size-3" />
-            Dashboards
-          </div>
-        </div>
-        <div className="mb-2 flex flex-wrap items-center gap-3">
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-            Supply Chain
-          </h1>
+      <PageHeader variant="dashboard">
+        <PageHeaderGroup>
+          <PageTitle>Supply Chain</PageTitle>
+          <PageSubtitle>
+            Inventory flow, supplier performance, shipment visibility, and open
+            orders — the ops view for a multi-region distribution network.
+          </PageSubtitle>
+        </PageHeaderGroup>
+        <PageHeaderAction className="w-fit">
           <span className="inline-flex items-center rounded-full bg-orange-500/10 px-2.5 py-0.5 text-xs font-medium text-orange-700 ring-1 ring-inset ring-orange-500/20 dark:text-orange-400 dark:ring-orange-500/30">
             Operations / Logistics
           </span>
-        </div>
-        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Inventory flow, supplier performance, shipment visibility, and open orders — the ops view for a multi-region distribution network.
-        </p>
-      </div>
+        </PageHeaderAction>
+      </PageHeader>
 
-      <div className="flex flex-col gap-4">
+      <DashboardContent>
         {/* ── KPI row ─────────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {kpis.map((kpi) => (
@@ -565,7 +556,7 @@ export default function SupplyChainPage() {
             </TableWrapper>
           </div>
         </div>
-      </div>
+      </DashboardContent>
     </div>
   );
 }
