@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { TooltipProvider } from "@/ascendra-ui/shadcn/components/ui/tooltip";
-import { QueryProvider, ScrollToTop } from "@/ascendra-ui";
+import { QueryProvider, ScrollToTop, Toaster } from "@/ascendra-ui";
 
 /* const inter = Inter({ subsets: ['latin'], variable: '--font-sans' }); */
 
@@ -39,6 +39,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <TooltipProvider>{children}</TooltipProvider>
+            <Toaster />
           </ThemeProvider>
         </QueryProvider>
       </body>

@@ -9,6 +9,7 @@ export * from './components/common-ui/row-action-button';
 export * from './components/common-ui/simple-alert';
 export * from './components/common-ui/simple-badge';
 export * from './components/common-ui/status-dot';
+export * from './components/common-ui/toast';
 export * from './components/common-ui/unsaved-changes-bar';
 
 // UI Primitives

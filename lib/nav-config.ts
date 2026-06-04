@@ -65,6 +65,7 @@ export const navConfig: NavCategory[] = [
       { name: 'Bubble Badge', slug: 'bubble-badge' },
       { name: 'Status Dot', slug: 'status-dot' },
       { name: 'Simple Alert', slug: 'simple-alert' },
+      { name: 'Toast', slug: 'toasts' },
       { name: 'Pro Badge', slug: 'pro-badge' },
       { name: 'Unsaved Changes Bar', slug: 'unsaved-changes-bar' },
     ],
