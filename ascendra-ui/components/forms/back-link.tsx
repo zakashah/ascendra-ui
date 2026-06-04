@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 
 export function BackLink({
   href,

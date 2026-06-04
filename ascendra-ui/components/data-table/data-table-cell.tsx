@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useDataTableColumns } from '@/ascendra-ui/providers/data-table/data-table.provider';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 
 interface DataTableCellProps extends Omit<React.ComponentProps<'td'>, 'column'> {
   column: string;

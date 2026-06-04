@@ -20,7 +20,7 @@ import type {
   QueryParamValues,
 } from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
 import { isFieldDef } from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 import { BookmarkPlus } from "lucide-react";
 import { CardFooterIcon } from "@/ascendra-ui/components/card/card-footer-icon";
 import { IoColorFilterOutline } from "react-icons/io5";

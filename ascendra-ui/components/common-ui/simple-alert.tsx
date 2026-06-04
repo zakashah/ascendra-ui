@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 import { InfoIcon } from 'lucide-react';
 
 type IconType = React.ComponentType<{

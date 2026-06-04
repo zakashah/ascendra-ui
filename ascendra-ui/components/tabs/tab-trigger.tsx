@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 import { useTabs } from '@/ascendra-ui/providers/tabs/tabs.provider';
 import Link from 'next/link';
 import { BubbleBadge } from '../common-ui/bubble-badge';

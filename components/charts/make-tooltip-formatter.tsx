@@ -1,4 +1,4 @@
-import type { ChartConfig } from "@/ascendra-ui/shadcn/components/ui/chart"
+import type { ChartConfig } from "@/ascendra-ui/shadcn"
 
 export function makeTooltipFormatter(
   config: ChartConfig,

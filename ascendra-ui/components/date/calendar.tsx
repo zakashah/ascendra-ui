@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { DayPicker } from 'react-day-picker';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 import { buttonVariants } from '@/ascendra-ui/components/ui/button';
 import {
   Select,

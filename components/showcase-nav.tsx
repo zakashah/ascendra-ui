@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LuMenu, LuSearch, LuX } from "react-icons/lu";
 import { navConfig } from "@/lib/nav-config";
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 import { ThemeToggle } from "@/ascendra-ui";
 
 function NavContent({

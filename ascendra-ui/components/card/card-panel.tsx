@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 import {
   buildBorderClasses,
   buildBgClasses,

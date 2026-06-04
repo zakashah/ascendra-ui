@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import { type DateRange } from 'react-day-picker';
 import { type CalendarProps } from '@/ascendra-ui/components/date/calendar';
 import { LuCalendar } from 'react-icons/lu';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 import { Calendar } from '@/ascendra-ui/components/date/calendar';
 
 interface DateRangePickerProps {

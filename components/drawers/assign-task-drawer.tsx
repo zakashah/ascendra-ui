@@ -11,7 +11,7 @@ import {
   DrawerTitle,
   DrawerDescription,
   DrawerFooter,
-} from "@/ascendra-ui/shadcn/components/ui/drawer";
+} from "@/ascendra-ui/shadcn";
 import { Button, Input, Item, ItemContent, ItemDescription, ItemGroup, ItemTitle, NameAvatar } from "@/ascendra-ui";
 
 const members = [

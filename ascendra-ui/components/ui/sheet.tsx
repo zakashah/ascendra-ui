@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Dialog as SheetPrimitive } from "radix-ui";
 import { X } from "lucide-react";
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 import {
   TabsContext,
   useTabs,

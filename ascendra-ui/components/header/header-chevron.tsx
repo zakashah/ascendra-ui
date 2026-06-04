@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 import { LucideChevronsUpDown } from 'lucide-react';
 
 type IconType = React.ComponentType<{

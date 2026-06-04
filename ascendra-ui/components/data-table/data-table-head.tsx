@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { useDataTableColumns, useDataTableSort } from '@/ascendra-ui/providers/data-table/data-table.provider';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 import { DataTableSortIcon } from './data-table-sort-icon';
 
 interface DataTableHeadProps {

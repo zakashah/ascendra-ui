@@ -1,7 +1,6 @@
 "use client";
 
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
-import type { ChartConfig } from "@/ascendra-ui/shadcn/components/ui/chart";
+import { cn, type ChartConfig } from "@/ascendra-ui/shadcn";
 
 type Props = {
   config: ChartConfig;

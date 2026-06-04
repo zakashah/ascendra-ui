@@ -1,4 +1,4 @@
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const variants = cva(

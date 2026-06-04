@@ -2,7 +2,7 @@
 
 import { LuMaximize, LuMinimize } from "react-icons/lu";
 
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 import { useCardContext } from "@/ascendra-ui/components/card/card";
 
 export function CardHeader({

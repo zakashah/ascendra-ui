@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 
 const bubbleBadgeVariants = cva(
   'inline-flex items-center justify-center rounded-full font-medium whitespace-nowrap transition-all select-none leading-none',

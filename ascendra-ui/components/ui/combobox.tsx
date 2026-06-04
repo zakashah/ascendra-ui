@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 import { ChevronDownIcon, XIcon, CheckIcon } from "lucide-react";
 
 const ComboboxAnchorContext = React.createContext<{

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InfoIcon } from 'lucide-react';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 
 type IconType = React.ComponentType<{
   className?: string;

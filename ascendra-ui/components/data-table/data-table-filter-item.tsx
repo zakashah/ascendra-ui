@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/ascendra-ui/components/ui/dropdown-menu';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 import { RxCrossCircled } from 'react-icons/rx';
 
 interface DataTableFilterItemProps {

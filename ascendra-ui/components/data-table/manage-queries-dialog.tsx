@@ -12,7 +12,7 @@ import {
 import { Switch } from "@/ascendra-ui/components/ui/switch";
 import { useQueryContext } from "@/ascendra-ui/providers/data-table-query/data-table-query.provider";
 import type { QueryGroup } from "@/ascendra-ui/providers/data-table-query/data-table-query.types";
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 import { useEffect, useRef, useState } from "react";
 import { LuSquareMinus, LuSquarePlay } from "react-icons/lu";
 import { RiDraggable } from "react-icons/ri";

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { TooltipProvider } from "@/ascendra-ui/shadcn/components/ui/tooltip";
+import { TooltipProvider } from "@/ascendra-ui/shadcn";
 import { QueryProvider, ScrollToTop, Toaster } from "@/ascendra-ui";
 
 /* const inter = Inter({ subsets: ['latin'], variable: '--font-sans' }); */

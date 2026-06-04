@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 import { usePathname } from 'next/navigation';
 import { useIsSmallScreen } from '@/ascendra-ui/hooks/use-is-small-screen';
 

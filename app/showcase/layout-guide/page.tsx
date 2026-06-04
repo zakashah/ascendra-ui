@@ -7,7 +7,7 @@ import { AsideContent, BackLink, Button, Card, CardFooter, CardFooterIcon, CardH
 
 
 
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 import { CodeBlock } from "@/components/code-block";
 
 // ─── Guide primitives ─────────────────────────────────────────────────────────

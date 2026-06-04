@@ -1,4 +1,4 @@
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 
 /* use class "w-fit" if do not require expanding */
 export function PageHeaderAction({

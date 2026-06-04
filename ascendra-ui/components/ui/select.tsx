@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Select as SelectPrimitive } from 'radix-ui';
 
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from 'lucide-react';
 
 const SelectContext = React.createContext<{ readOnly?: boolean }>({});

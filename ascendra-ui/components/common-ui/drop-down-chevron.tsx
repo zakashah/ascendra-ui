@@ -1,4 +1,4 @@
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { LuChevronDown } from 'react-icons/lu';
 

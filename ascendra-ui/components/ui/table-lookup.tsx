@@ -37,7 +37,7 @@ import {
   TableRow,
   TableWrapper,
 } from "@/ascendra-ui/components/ui/table";
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 import { ArrowUpIcon, ChevronDownIcon, XIcon } from "lucide-react";
 import { LuLoader, LuTextSearch } from "react-icons/lu";
 import { useQuery } from "@tanstack/react-query";

@@ -14,7 +14,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
-} from "@/ascendra-ui/shadcn/components/ui/chart";
+} from "@/ascendra-ui/shadcn";
 import { Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, SimpleBadge } from "@/ascendra-ui";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────

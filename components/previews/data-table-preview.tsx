@@ -6,7 +6,7 @@ import { CodeBlock } from "../code-block";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
 import { registry } from "@/lib/registry";
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 import { type AccentColor, type BgStyle, type BgTo, type BorderSide, type BorderStroke, Button, type ColumnDef, DataTable, DataTableBar, DataTableBarAction, DataTableBarContent, DataTableBody, DataTableCell, DataTableColumnManager, DataTableEmptyBody, DataTableFilterBar, DataTableFilterDropdown, DataTableFoot, DataTableHead, DataTableHeader, DataTableHeaderRow, DataTableHighlight, DataTableLoadingBody, DataTableProvider, DataTableRow, DataTableSearchInput, DataTableSortDropdown, DataTableWrapper, SimpleBadge } from "@/ascendra-ui";
 
 // ─── Entity & mock data ───────────────────────────────────────────────────────

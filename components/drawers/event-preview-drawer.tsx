@@ -7,7 +7,7 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerFooter,
-} from "@/ascendra-ui/shadcn/components/ui/drawer";
+} from "@/ascendra-ui/shadcn";
 import { Button, NameAvatar, StatusDot } from "@/ascendra-ui";
 
 const attendees = [

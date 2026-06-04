@@ -11,9 +11,8 @@ import {
 } from "@/ascendra-ui/components/ui/select";
 
 import { PaginationButton } from "@/ascendra-ui/components/common-ui/pagination-button";
-import { Separator } from "@/ascendra-ui/shadcn/components/ui/separator";
+import { cn, Separator } from "@/ascendra-ui/shadcn";
 import { type PaginationState } from "@/ascendra-ui/providers/data-table/use-pagination.hook";
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
 import {
   buildBorderClasses,
   buildBorderBeforeClasses,

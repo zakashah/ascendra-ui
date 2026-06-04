@@ -10,7 +10,7 @@ import {
   DrawerTitle,
   DrawerDescription,
   DrawerFooter,
-} from "@/ascendra-ui/shadcn/components/ui/drawer";
+} from "@/ascendra-ui/shadcn";
 import { Button, Item, ItemContent, ItemGroup, ItemTitle, SimpleBadge, Switch } from "@/ascendra-ui";
 
 const categories = ["Electronics", "Clothing", "Home & Garden", "Sports", "Books"];

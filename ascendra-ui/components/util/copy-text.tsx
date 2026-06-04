@@ -1,12 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/ascendra-ui/shadcn/components/ui/tooltip';
+import { cn, Tooltip, TooltipContent, TooltipTrigger } from '@/ascendra-ui/shadcn';
 import { LuCopy, LuCheck, LuCopyCheck } from 'react-icons/lu';
 
 type CopyTextProps = {

@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 import { useCardContext } from "@/ascendra-ui/components/card/card";
 import { useWizardContextSafe } from "@/ascendra-ui/providers/wizard/wizard.hook";
 

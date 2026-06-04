@@ -1,6 +1,6 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@/ascendra-ui/shadcn/lib/utils"
+import { cn } from "@/ascendra-ui/shadcn"
 
 const statusDotVariants = cva(
   "block size-1.5 shrink-0 rounded-full shadow-[0_0_0_3px]",

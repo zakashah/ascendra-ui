@@ -5,7 +5,7 @@ import { Popover as PopoverPrimitive } from 'radix-ui';
 import { format } from 'date-fns';
 import { type CalendarProps } from '@/ascendra-ui/components/date/calendar';
 import { LuCalendar } from 'react-icons/lu';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 import { Calendar } from '@/ascendra-ui/components/date/calendar';
 
 interface DatePickerProps {

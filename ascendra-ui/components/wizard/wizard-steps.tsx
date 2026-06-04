@@ -1,7 +1,7 @@
 "use client";
 
 import { LuCheck } from "react-icons/lu";
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 import { useWizardContext } from "@/ascendra-ui/providers/wizard/wizard.hook";
 
 export function WizardSteps() {

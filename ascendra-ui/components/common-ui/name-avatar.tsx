@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 
 const AVATAR_COLORS = [
   '#F97316', // orange

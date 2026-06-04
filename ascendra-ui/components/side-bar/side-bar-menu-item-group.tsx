@@ -1,4 +1,4 @@
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 
 export function SideBarMenuItemGroup({
   className,

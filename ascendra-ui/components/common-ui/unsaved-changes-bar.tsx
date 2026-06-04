@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { InfoIcon, Loader2 } from "lucide-react";
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 import { Button } from "@/ascendra-ui/components/ui/button";
 
 interface UnsavedChangesBarProps {

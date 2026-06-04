@@ -1,5 +1,5 @@
 import { PropDef } from "@/lib/types";
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 
 type Props = {
   props: PropDef[];

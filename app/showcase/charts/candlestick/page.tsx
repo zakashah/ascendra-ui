@@ -5,7 +5,7 @@ import {
   ChartContainer,
   ChartTooltip,
   type ChartConfig,
-} from "@/ascendra-ui/shadcn/components/ui/chart";
+} from "@/ascendra-ui/shadcn";
 import Link from "next/link";
 import { LuArrowLeft } from "react-icons/lu";
 import {

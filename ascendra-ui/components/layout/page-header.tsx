@@ -1,4 +1,4 @@
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 
 /* use class "flex-nowrap" if no line wrape is required */
 /* variant="dashboard" adds a bottom border + margin to separate from content */

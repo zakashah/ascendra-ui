@@ -2,8 +2,7 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Slot } from "radix-ui";
 
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
-import { Separator } from "@/ascendra-ui/shadcn/components/ui/separator";
+import { cn, Separator } from "@/ascendra-ui/shadcn";
 
 function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (

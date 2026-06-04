@@ -4,15 +4,8 @@ import { useMemo } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { LuTriangleAlert } from "react-icons/lu";
 
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
-import { Label } from "@/ascendra-ui/shadcn/components/ui/label";
-import { Separator } from "@/ascendra-ui/shadcn/components/ui/separator";
+import { cn, Label, Separator, Tooltip, TooltipContent, TooltipTrigger } from "@/ascendra-ui/shadcn";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/ascendra-ui/shadcn/components/ui/tooltip";
 
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (

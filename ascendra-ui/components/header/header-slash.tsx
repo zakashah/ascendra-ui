@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { LuSlash } from 'react-icons/lu';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 
 export function HeaderSlash({
   className,

@@ -13,7 +13,7 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerFooter,
-} from "@/ascendra-ui/shadcn/components/ui/drawer";
+} from "@/ascendra-ui/shadcn";
 import { Button, Item, ItemContent, ItemGroup, ItemMedia, ItemTitle } from "@/ascendra-ui";
 
 const actions = [

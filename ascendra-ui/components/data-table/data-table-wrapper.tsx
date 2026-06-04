@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 import { useOptionalQueryContext } from '@/ascendra-ui/providers/data-table-query/data-table-query.provider';
 import {
   buildBorderClasses,

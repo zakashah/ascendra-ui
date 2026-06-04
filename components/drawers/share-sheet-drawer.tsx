@@ -18,7 +18,7 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerDescription,
-} from "@/ascendra-ui/shadcn/components/ui/drawer";
+} from "@/ascendra-ui/shadcn";
 import { Button } from "@/ascendra-ui";
 
 const destinations = [

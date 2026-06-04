@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { cn } from '@/ascendra-ui/shadcn';
 
 const buttonVariants = cva(
   'gap-1.5 group relative inline-flex shrink-0 items-center focus-visible:outline-2 focus-visible:outline-offset-3 font-medium leading-[1.25rem] justify-center overflow-hidden transition-all duration-200 select-none disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer before:pointer-events-none before:absolute before:inset-0 before:size-full before:transition-opacity before:duration-200',

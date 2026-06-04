@@ -1,10 +1,4 @@
-import {
-  Avatar,
-  AvatarBadge,
-  AvatarFallback,
-  AvatarImage,
-} from '@/ascendra-ui/shadcn/components/ui/avatar';
-import { cn } from '@/ascendra-ui/shadcn/lib/utils';
+import { Avatar, AvatarBadge, AvatarFallback, AvatarImage, cn } from '@/ascendra-ui/shadcn';
 import { LucideChevronsUpDown, PlusIcon } from 'lucide-react';
 
 export function SideBarFooter({

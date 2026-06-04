@@ -7,7 +7,7 @@ import {
   InputGroupInput,
 } from "@/ascendra-ui/components/ui/input-group";
 import { useDataTableContext } from "@/ascendra-ui/providers/data-table/data-table.provider";
-import { cn } from "@/ascendra-ui/shadcn/lib/utils";
+import { cn } from "@/ascendra-ui/shadcn";
 import { useRef, useState } from "react";
 import { LuSearch, LuX } from "react-icons/lu";
 import { VscSearchFuzzy } from "react-icons/vsc";
