@@ -57,12 +57,23 @@ const frameworksWithMeta = [
   },
 ];
 
+const statusOptions = ["Active", "Inactive", "Pending", "Archived", "Draft"];
+
+const roleOptions = [
+  { value: "admin", label: "Admin" },
+  { value: "editor", label: "Editor" },
+  { value: "viewer", label: "Viewer" },
+  { value: "billing", label: "Billing" },
+];
+
 export function ComboboxDocContent() {
   const [single, setSingle] = useState<string | null>(null);
   const [multi, setMulti] = useState<string[]>([]);
   const [multiCheck, setMultiCheck] = useState<string[]>([]);
   const [multiOpen, setMultiOpen] = useState(false);
   const [filterText, setFilterText] = useState("");
+  const [compactMulti, setCompactMulti] = useState<string[]>([]);
+  const [roleMulti, setRoleMulti] = useState<string[]>([]);
   const [iconItem, setIconItem] = useState<
     (typeof frameworksWithMeta)[number] | null
   >(null);
@@ -282,6 +293,111 @@ const [value, setValue] = useState<string | null>(null);
                   </ComboboxList>
                 </ComboboxContent>
               </Combobox>
+            </div>
+          </ComponentPreview>
+        </div>
+
+        {/* Compact multi-select */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">
+            Multi-select (compact, no search)
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            For short lists (≤8 options) where all items fit without searching.
+            Use{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              readOnly
+            </code>{" "}
+            on{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              ComboboxInput
+            </code>{" "}
+            to disable typing and show a badge count instead.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`const [values, setValues] = useState<string[]>([]);
+const statuses = ["Active", "Inactive", "Pending", "Archived", "Draft"];
+
+<Combobox
+  multiple
+  items={statuses}
+  value={values}
+  onValueChange={(v) => setValues(v as string[])}
+>
+  <ComboboxInput
+    readOnly
+    placeholder="Filter by status"
+    value={values.length > 0 ? \`\${values.length} selected\` : ""}
+    showClear={values.length > 0}
+  />
+  <ComboboxContent>
+    <ComboboxList>
+      <ComboboxCollection>
+        {(s: string) => <ComboboxItem key={s} value={s}>{s}</ComboboxItem>}
+      </ComboboxCollection>
+    </ComboboxList>
+  </ComboboxContent>
+</Combobox>`}
+          >
+            <div className="flex flex-wrap gap-4">
+              <div className="w-52">
+                <Combobox
+                  multiple
+                  items={statusOptions}
+                  value={compactMulti}
+                  onValueChange={(v) => setCompactMulti(v as string[])}
+                >
+                  <ComboboxInput
+                    readOnly
+                    placeholder="Filter by status"
+                    value={compactMulti.length > 0 ? `${compactMulti.length} selected` : ""}
+                    showClear={compactMulti.length > 0}
+                  />
+                  <ComboboxContent>
+                    <ComboboxList>
+                      <ComboboxEmpty>No results.</ComboboxEmpty>
+                      <ComboboxCollection>
+                        {(s: string) => (
+                          <ComboboxItem key={s} value={s}>
+                            {s}
+                          </ComboboxItem>
+                        )}
+                      </ComboboxCollection>
+                    </ComboboxList>
+                  </ComboboxContent>
+                </Combobox>
+              </div>
+              <div className="w-52">
+                <Combobox
+                  multiple
+                  items={roleOptions.map((r) => r.value)}
+                  value={roleMulti}
+                  onValueChange={(v) => setRoleMulti(v as string[])}
+                >
+                  <ComboboxInput
+                    readOnly
+                    placeholder="Filter by role"
+                    value={roleMulti.length > 0 ? `${roleMulti.length} selected` : ""}
+                    showClear={roleMulti.length > 0}
+                  />
+                  <ComboboxContent>
+                    <ComboboxList>
+                      <ComboboxEmpty>No results.</ComboboxEmpty>
+                      <ComboboxCollection>
+                        {(val: string) => {
+                          const r = roleOptions.find((o) => o.value === val)!;
+                          return (
+                            <ComboboxItem key={r.value} value={r.value}>
+                              {r.label}
+                            </ComboboxItem>
+                          );
+                        }}
+                      </ComboboxCollection>
+                    </ComboboxList>
+                  </ComboboxContent>
+                </Combobox>
+              </div>
             </div>
           </ComponentPreview>
         </div>

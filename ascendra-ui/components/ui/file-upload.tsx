@@ -1,0 +1,404 @@
+"use client";
+
+import * as React from "react";
+import { Upload, X, FileIcon, CheckCircle2, AlertCircle } from "lucide-react";
+import { cn } from "@/ascendra-ui/shadcn";
+import { ProgressBar } from "./progress";
+
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+export type FileUploadVariant = "dropzone" | "button" | "inline";
+export type FileUploadState = "idle" | "dragover" | "uploading" | "success" | "error";
+
+export interface FileUploadFile {
+  file: File;
+  progress?: number;
+  error?: string;
+}
+
+export interface FileUploadProps {
+  variant?: FileUploadVariant;
+  accept?: string;
+  maxSize?: number;
+  multiple?: boolean;
+  disabled?: boolean;
+  uploadProgress?: number;
+  state?: FileUploadState;
+  errorMessage?: string;
+  onFiles?: (files: File[]) => void;
+  className?: string;
+}
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function formatSize(bytes: number) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function validateFiles(files: File[], accept?: string, maxSize?: number) {
+  const errors: string[] = [];
+  files.forEach((file) => {
+    if (maxSize && file.size > maxSize) {
+      errors.push(`${file.name} exceeds max size of ${formatSize(maxSize)}.`);
+    }
+    if (accept) {
+      const accepted = accept.split(",").map((a) => a.trim());
+      const match = accepted.some((a) => {
+        if (a.startsWith(".")) return file.name.endsWith(a);
+        if (a.endsWith("/*")) return file.type.startsWith(a.replace("/*", ""));
+        return file.type === a;
+      });
+      if (!match) errors.push(`${file.name} is not an accepted file type.`);
+    }
+  });
+  return errors;
+}
+
+// ─── Dropzone variant ─────────────────────────────────────────────────────────
+
+function FileUploadDropzone({
+  accept,
+  maxSize,
+  multiple,
+  disabled,
+  uploadProgress,
+  state: controlledState,
+  errorMessage: controlledError,
+  onFiles,
+  className,
+}: Omit<FileUploadProps, "variant">) {
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [state, setState] = React.useState<FileUploadState>(controlledState ?? "idle");
+  const [files, setFiles] = React.useState<File[]>([]);
+  const [error, setError] = React.useState<string | null>(null);
+
+  const effectiveState = controlledState ?? state;
+  const effectiveError = controlledError ?? error;
+
+  function handleFiles(incoming: FileList | null) {
+    if (!incoming) return;
+    const arr = Array.from(incoming);
+    const errs = validateFiles(arr, accept, maxSize);
+    if (errs.length) {
+      setState("error");
+      setError(errs[0]);
+      return;
+    }
+    setFiles(arr);
+    setError(null);
+    setState("uploading");
+    onFiles?.(arr);
+  }
+
+  function handleDrop(e: React.DragEvent) {
+    e.preventDefault();
+    if (disabled) return;
+    setState("idle");
+    handleFiles(e.dataTransfer.files);
+  }
+
+  function handleReset() {
+    setState("idle");
+    setFiles([]);
+    setError(null);
+    if (inputRef.current) inputRef.current.value = "";
+  }
+
+  const isDragover = effectiveState === "dragover";
+  const isSuccess = effectiveState === "success";
+  const isError = effectiveState === "error";
+  const isUploading = effectiveState === "uploading";
+
+  return (
+    <div className={cn("flex flex-col gap-2", className)}>
+      <div
+        role="button"
+        tabIndex={disabled ? -1 : 0}
+        aria-disabled={disabled}
+        onDragOver={(e) => { e.preventDefault(); if (!disabled) setState("dragover"); }}
+        onDragLeave={() => setState("idle")}
+        onDrop={handleDrop}
+        onClick={() => !disabled && inputRef.current?.click()}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") inputRef.current?.click(); }}
+        className={cn(
+          "relative flex cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed p-8 text-center transition-all duration-150 outline-none",
+          "bg-background dark:bg-secondary/30",
+          // Idle
+          !isDragover && !isSuccess && !isError && "border-border hover:border-foreground/30 hover:bg-muted/40 focus-visible:border-primary focus-visible:bg-muted/40",
+          // Dragover
+          isDragover && "border-primary bg-primary/5 scale-[1.01]",
+          // Success
+          isSuccess && "border-emerald-500/60 bg-emerald-500/5",
+          // Error
+          isError && "border-destructive/60 bg-destructive/5",
+          // Disabled
+          disabled && "cursor-not-allowed opacity-50",
+        )}
+      >
+        {isSuccess ? (
+          <CheckCircle2 className="size-8 text-emerald-500" />
+        ) : isError ? (
+          <AlertCircle className="size-8 text-destructive" />
+        ) : (
+          <div className={cn(
+            "flex size-12 items-center justify-center rounded-lg border transition-colors",
+            isDragover ? "border-primary/40 bg-primary/10 text-primary" : "border-border bg-muted text-muted-foreground",
+          )}>
+            <Upload className="size-5" />
+          </div>
+        )}
+
+        <div className="flex flex-col gap-1">
+          {isSuccess ? (
+            <>
+              <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
+                {files.length === 1 ? files[0].name : `${files.length} files uploaded`}
+              </p>
+              <p className="text-xs text-muted-foreground">Upload complete</p>
+            </>
+          ) : isError ? (
+            <>
+              <p className="text-sm font-medium text-destructive">Upload failed</p>
+              <p className="text-xs text-destructive/80">{effectiveError}</p>
+            </>
+          ) : isDragover ? (
+            <p className="text-sm font-medium text-primary">Drop to upload</p>
+          ) : (
+            <>
+              <p className="text-sm font-medium text-foreground">
+                <span className="text-primary">Click to browse</span> or drag and drop
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {accept ? accept.split(",").join(", ") : "Any file type"}
+                {maxSize ? ` · max ${formatSize(maxSize)}` : ""}
+                {multiple ? " · multiple files allowed" : ""}
+              </p>
+            </>
+          )}
+        </div>
+
+        {isUploading && (
+          <div className="w-full max-w-xs flex flex-col gap-1.5">
+            <ProgressBar value={uploadProgress} indeterminate={uploadProgress === undefined} size="sm" />
+            <p className="text-[0.6875rem] text-muted-foreground text-center">
+              {uploadProgress !== undefined ? `${uploadProgress}%` : "Uploading…"}
+            </p>
+          </div>
+        )}
+
+        {(isSuccess || isError) && (
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); handleReset(); }}
+            className="text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+          >
+            {isError ? "Try again" : "Upload another"}
+          </button>
+        )}
+
+        <input
+          ref={inputRef}
+          type="file"
+          accept={accept}
+          multiple={multiple}
+          disabled={disabled}
+          className="sr-only"
+          onChange={(e) => handleFiles(e.target.files)}
+        />
+      </div>
+    </div>
+  );
+}
+
+// ─── Button variant ───────────────────────────────────────────────────────────
+
+function FileUploadButton({
+  accept,
+  maxSize,
+  multiple,
+  disabled,
+  state: controlledState,
+  errorMessage: controlledError,
+  onFiles,
+  className,
+}: Omit<FileUploadProps, "variant">) {
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [files, setFiles] = React.useState<File[]>([]);
+  const [error, setError] = React.useState<string | null>(null);
+
+  const effectiveError = controlledError ?? error;
+  const effectiveState = controlledState;
+
+  function handleFiles(incoming: FileList | null) {
+    if (!incoming) return;
+    const arr = Array.from(incoming);
+    const errs = validateFiles(arr, accept, maxSize);
+    if (errs.length) { setError(errs[0]); return; }
+    setFiles(arr);
+    setError(null);
+    onFiles?.(arr);
+  }
+
+  const isSuccess = effectiveState === "success" || files.length > 0;
+  const isError = !!effectiveError;
+
+  return (
+    <div className={cn("flex flex-col gap-1.5", className)}>
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          disabled={disabled}
+          onClick={() => inputRef.current?.click()}
+          className={cn(
+            "inline-flex h-8 items-center gap-1.5 rounded-[.375rem] border px-3 text-sm font-medium transition-all outline-none",
+            "ring-1 ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset",
+            "shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06)]",
+            "hover:ring-(--color-umbra)/24 hover:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1)]",
+            "focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-1",
+            "bg-white dark:bg-secondary text-foreground",
+            "disabled:cursor-not-allowed disabled:opacity-50",
+            isError && "ring-destructive ring-2",
+          )}
+        >
+          <Upload className="size-3.5 text-muted-foreground" />
+          Choose file{multiple ? "s" : ""}
+        </button>
+
+        <span className="text-sm text-muted-foreground">
+          {isSuccess
+            ? files.length === 1
+              ? files[0].name
+              : `${files.length} files selected`
+            : "No file chosen"}
+        </span>
+
+        {isSuccess && (
+          <button
+            type="button"
+            onClick={() => { setFiles([]); if (inputRef.current) inputRef.current.value = ""; }}
+            className="text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Clear selection"
+          >
+            <X className="size-3.5" />
+          </button>
+        )}
+      </div>
+
+      {isError && (
+        <p className="text-xs text-destructive">{effectiveError}</p>
+      )}
+
+      <input
+        ref={inputRef}
+        type="file"
+        accept={accept}
+        multiple={multiple}
+        disabled={disabled}
+        className="sr-only"
+        onChange={(e) => handleFiles(e.target.files)}
+      />
+    </div>
+  );
+}
+
+// ─── Inline variant ───────────────────────────────────────────────────────────
+
+function FileUploadInline({
+  accept,
+  maxSize,
+  multiple,
+  disabled,
+  state: controlledState,
+  errorMessage: controlledError,
+  onFiles,
+  className,
+}: Omit<FileUploadProps, "variant">) {
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [files, setFiles] = React.useState<File[]>([]);
+  const [error, setError] = React.useState<string | null>(null);
+
+  const effectiveError = controlledError ?? error;
+
+  function handleFiles(incoming: FileList | null) {
+    if (!incoming) return;
+    const arr = Array.from(incoming);
+    const errs = validateFiles(arr, accept, maxSize);
+    if (errs.length) { setError(errs[0]); return; }
+    setFiles(arr);
+    setError(null);
+    onFiles?.(arr);
+  }
+
+  function removeFile(index: number) {
+    setFiles((prev) => prev.filter((_, i) => i !== index));
+  }
+
+  const isError = !!effectiveError || controlledState === "error";
+
+  return (
+    <div className={cn("flex flex-col gap-1.5", className)}>
+      <div
+        className={cn(
+          "flex min-h-[2rem] flex-wrap items-center gap-1.5 rounded-[.375rem] px-2 py-1",
+          "ring-1 ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset",
+          "shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06)]",
+          "bg-white dark:bg-secondary",
+          "transition-all",
+          isError && "ring-2 ring-destructive",
+          disabled && "cursor-not-allowed opacity-50",
+        )}
+      >
+        {files.map((f, i) => (
+          <span
+            key={i}
+            className="inline-flex items-center gap-1 rounded-md bg-muted px-1.5 py-0.5 text-xs"
+          >
+            <FileIcon className="size-3 text-muted-foreground shrink-0" />
+            <span className="max-w-[120px] truncate">{f.name}</span>
+            <button
+              type="button"
+              onClick={() => removeFile(i)}
+              className="text-muted-foreground hover:text-foreground"
+              aria-label={`Remove ${f.name}`}
+            >
+              <X className="size-3" />
+            </button>
+          </span>
+        ))}
+        <button
+          type="button"
+          disabled={disabled}
+          onClick={() => inputRef.current?.click()}
+          className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors disabled:cursor-not-allowed"
+        >
+          <Upload className="size-3" />
+          {files.length === 0 ? `Add file${multiple ? "s" : ""}` : "Add more"}
+        </button>
+      </div>
+
+      {isError && (
+        <p className="text-xs text-destructive">{effectiveError}</p>
+      )}
+
+      <input
+        ref={inputRef}
+        type="file"
+        accept={accept}
+        multiple={multiple}
+        disabled={disabled}
+        className="sr-only"
+        onChange={(e) => handleFiles(e.target.files)}
+      />
+    </div>
+  );
+}
+
+// ─── Main export ──────────────────────────────────────────────────────────────
+
+export function FileUpload({ variant = "dropzone", ...props }: FileUploadProps) {
+  if (variant === "button") return <FileUploadButton {...props} />;
+  if (variant === "inline") return <FileUploadInline {...props} />;
+  return <FileUploadDropzone {...props} />;
+}

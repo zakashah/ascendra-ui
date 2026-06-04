@@ -68,6 +68,8 @@ export const navConfig: NavCategory[] = [
       { name: 'Toast', slug: 'toasts' },
       { name: 'Pro Badge', slug: 'pro-badge' },
       { name: 'Unsaved Changes Bar', slug: 'unsaved-changes-bar' },
+      { name: 'Progress & Stepper', slug: 'progress' },
+      { name: 'Skeleton', slug: 'skeleton' },
     ],
   },
   {
@@ -83,6 +85,9 @@ export const navConfig: NavCategory[] = [
       { name: 'Field', slug: 'field' },
       { name: 'Combobox', slug: 'combobox' },
       { name: 'Table Lookup', slug: 'table-lookup' },
+      { name: 'File Upload', slug: 'file-upload' },
+      { name: 'Rich Text Editor', slug: 'rich-text-editor' },
+      { name: 'Color Picker', slug: 'color-picker' },
     ],
   },
   {
@@ -108,6 +113,8 @@ export const navConfig: NavCategory[] = [
       { name: 'Dialog', slug: 'dialog' },
       { name: 'Sheet', slug: 'sheet' },
       { name: 'Dropdown Menu', slug: 'dropdown-menu' },
+      { name: 'Tooltip', slug: 'tooltips' },
+      { name: 'Command Palette', slug: 'command-palette' },
     ],
   },
   {

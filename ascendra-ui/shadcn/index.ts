@@ -15,9 +15,12 @@
 //   - sidebar   → ascendra-ui/components/side-bar/
 //   - card      → ascendra-ui/components/card/
 //   - badge     → ascendra-ui/components/common-ui/simple-badge, bubble-badge
-//   - alert-dialog, skeleton, slider, textarea
+//   - alert-dialog, slider, textarea
 //     (not yet needed; add back via shadcn CLI when a use-case arises)
+//   - skeleton  → ascendra-ui/components/ui/skeleton (wrapped with presets)
+//   - progress  → ascendra-ui/components/ui/progress (wrapped with size/color variants)
 
+export * from "./components/ui/command";
 export * from "./components/ui/accordion";
 export * from "./components/ui/avatar";
 export * from "./components/ui/chart";
