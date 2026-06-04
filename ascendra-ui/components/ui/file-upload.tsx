@@ -123,16 +123,16 @@ function FileUploadDropzone({
         onClick={() => !disabled && inputRef.current?.click()}
         onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") inputRef.current?.click(); }}
         className={cn(
-          "relative flex cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed p-8 text-center transition-all duration-150 outline-none",
-          "bg-background dark:bg-secondary/30",
+          "relative flex cursor-pointer flex-col items-center justify-center gap-3 rounded-[.375rem] border-2 border-dashed p-8 text-center transition-all duration-150 outline-none",
+          "bg-white dark:bg-secondary",
           // Idle
-          !isDragover && !isSuccess && !isError && "border-border hover:border-foreground/30 hover:bg-muted/40 focus-visible:border-primary focus-visible:bg-muted/40",
+          !isDragover && !isSuccess && !isError && "border-border/60 hover:border-foreground/30 hover:bg-muted/30 focus-visible:border-primary",
           // Dragover
           isDragover && "border-primary bg-primary/5 scale-[1.01]",
           // Success
-          isSuccess && "border-emerald-500/60 bg-emerald-500/5",
+          isSuccess && "border-emerald-500/50 bg-emerald-500/5",
           // Error
-          isError && "border-destructive/60 bg-destructive/5",
+          isError && "border-destructive/50 bg-destructive/5",
           // Disabled
           disabled && "cursor-not-allowed opacity-50",
         )}
@@ -143,8 +143,8 @@ function FileUploadDropzone({
           <AlertCircle className="size-8 text-destructive" />
         ) : (
           <div className={cn(
-            "flex size-12 items-center justify-center rounded-lg border transition-colors",
-            isDragover ? "border-primary/40 bg-primary/10 text-primary" : "border-border bg-muted text-muted-foreground",
+            "flex size-12 items-center justify-center rounded-[.375rem] border transition-colors",
+            isDragover ? "border-primary/40 bg-primary/10 text-primary" : "border-border bg-muted/60 text-muted-foreground",
           )}>
             <Upload className="size-5" />
           </div>

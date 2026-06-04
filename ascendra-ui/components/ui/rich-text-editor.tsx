@@ -48,11 +48,11 @@ function ToolbarButton({
       disabled={disabled}
       onClick={onClick}
       className={cn(
-        "inline-flex size-7 items-center justify-center rounded-md transition-colors outline-none",
+        "inline-flex size-7 items-center justify-center rounded-lg transition-colors outline-none",
         "text-muted-foreground hover:bg-muted hover:text-foreground",
-        "focus-visible:ring-2 focus-visible:ring-primary",
+        "focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-1",
         "disabled:cursor-not-allowed disabled:opacity-40",
-        active && "bg-muted text-foreground",
+        active && "bg-muted/80 text-foreground shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]",
       )}
     >
       {children}
@@ -113,7 +113,7 @@ export function RichTextEditor({
     >
       {/* Toolbar */}
       {!readOnly && (
-        <div className="flex items-center gap-0.5 border-b px-2 py-1.5">
+        <div className="flex items-center gap-0.5 border-b bg-muted/40 px-2 py-1.5">
           {/* Text format group */}
           <ToolbarButton
             title="Bold"

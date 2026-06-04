@@ -170,10 +170,28 @@ export function ColorPicker({
           type="button"
           disabled={disabled}
           className={cn(
-            "inline-flex size-8 items-center justify-center rounded-[.375rem] outline-none transition-all",
-            "ring-1 ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset",
-            "shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06)]",
-            "hover:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.12)]",
+            /* Layout */
+            "relative inline-flex size-8 shrink-0 items-center justify-center rounded-[.375rem] outline-none transition-all",
+
+            /* Light shadow system */
+            "shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_0_0_1px_rgba(25,28,33,.2),0_4px_4px_-2px_rgba(0,0,0,0.06)]",
+            /* Dark shadow system */
+            "dark:shadow-[0_-1px_1px_rgba(255,255,255,0.12),0_0_0_1px_#525260,0_0_0_2px_rgba(0,0,0,0.16)]",
+
+            /* ::before — bottom-darken gradient overlay */
+            "before:pointer-events-none before:absolute before:inset-0 before:size-full before:rounded-[inherit]",
+            "before:bg-linear-to-b before:from-transparent before:to-black/10",
+
+            /* ::after — top-lighten gloss */
+            "after:pointer-events-none after:absolute after:inset-0 after:size-full after:rounded-[inherit]",
+            "after:bg-linear-to-b after:from-white/30 after:to-transparent",
+            "dark:after:from-white/10",
+
+            /* Hover — ring tightens, gradients fade */
+            "hover:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1),0_0_0_1px_rgba(25,28,33,.28),0_4px_4px_-2px_rgba(0,0,0,0.07)]",
+            "dark:hover:shadow-[0_-1px_1px_rgba(255,255,255,0.2),0_0_0_1px_rgba(61,61,74,0.88),0_0_0_2px_rgba(0,0,0,0.2)]",
+            "hover:before:opacity-0 hover:after:opacity-0",
+
             "focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-1",
             "disabled:cursor-not-allowed disabled:opacity-50",
             className,

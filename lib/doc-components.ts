@@ -45,6 +45,13 @@ import { DatePickerDocContent } from "@/components/previews/date-picker-preview"
 import { DateRangePickerDocContent } from "@/components/previews/date-range-picker-preview";
 import { DataTableDocContent } from "@/components/previews/data-table-preview";
 import { CardDocContent } from "@/components/previews/card-preview";
+import { TooltipDocContent } from "@/components/previews/tooltip-preview";
+import { ProgressDocContent } from "@/components/previews/progress-preview";
+import { SkeletonDocContent } from "@/components/previews/skeleton-preview";
+import { CommandPaletteDocContent } from "@/components/previews/command-palette-preview";
+import { FileUploadDocContent } from "@/components/previews/file-upload-preview";
+import { RichTextEditorDocContent } from "@/components/previews/rich-text-editor-preview";
+import { ColorPickerDocContent } from "@/components/previews/color-picker-preview";
 
 export type DocComponent = React.ComponentType;
 
@@ -91,4 +98,11 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   "date-picker": DatePickerDocContent,
   "date-range-picker": DateRangePickerDocContent,
   "data-table": DataTableDocContent,
+  tooltips: TooltipDocContent,
+  progress: ProgressDocContent,
+  skeleton: SkeletonDocContent,
+  "command-palette": CommandPaletteDocContent,
+  "file-upload": FileUploadDocContent,
+  "rich-text-editor": RichTextEditorDocContent,
+  "color-picker": ColorPickerDocContent,
 };

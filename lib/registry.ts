@@ -572,4 +572,113 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'variant', type: "'default' | 'icon' | 'image'", default: "'default'", description: 'Media display type (on ItemMedia).' },
     ],
   },
+
+  'tooltips': {
+    slug: 'tooltips',
+    name: 'Tooltip',
+    description: 'Floating label that appears on hover or focus. Wraps Radix UI Tooltip with TooltipProvider, all four placements, and rich content support.',
+    importPath: '@/ascendra-ui/shadcn',
+    importNames: ['Tooltip', 'TooltipTrigger', 'TooltipContent', 'TooltipProvider'],
+    props: [
+      { name: 'side', type: "'top' | 'right' | 'bottom' | 'left'", default: "'top'", description: 'Which side the tooltip appears on (on TooltipContent).' },
+      { name: 'sideOffset', type: 'number', default: '4', description: 'Distance in px between trigger and tooltip (on TooltipContent).' },
+      { name: 'align', type: "'start' | 'center' | 'end'", default: "'center'", description: 'Alignment relative to the trigger (on TooltipContent).' },
+      { name: 'delayDuration', type: 'number', default: '700', description: 'Hover delay in ms before showing (on TooltipProvider).' },
+    ],
+  },
+
+  'progress': {
+    slug: 'progress',
+    name: 'Progress & Stepper',
+    description: 'ProgressBar wraps Radix Progress with size and color variants plus an indeterminate animation. Stepper is a fully custom horizontal step indicator with four statuses.',
+    importPath: '@/ascendra-ui',
+    importNames: ['ProgressBar', 'Stepper'],
+    props: [
+      { name: 'value', type: 'number', description: 'ProgressBar — progress value 0–100. Omit for indeterminate.' },
+      { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg'", default: "'md'", description: 'ProgressBar — bar height.' },
+      { name: 'color', type: "'default' | 'success' | 'warning' | 'destructive' | 'info'", default: "'default'", description: 'ProgressBar — fill color.' },
+      { name: 'indeterminate', type: 'boolean', default: 'false', description: 'ProgressBar — looping animation when progress is unknown.' },
+      { name: 'steps', type: 'StepperStep[]', description: 'Stepper — array of step objects with label, optional description, and optional status.' },
+      { name: 'currentStep', type: 'number', description: 'Stepper — active step index. Drives completed/active/pending status automatically.' },
+    ],
+  },
+
+  'skeleton': {
+    slug: 'skeleton',
+    name: 'Skeleton',
+    description: 'Animated loading placeholder. Includes preset compositions for text blocks, user rows, stat tiles, cards, and table rows — built on shadcn skeleton.',
+    importPath: '@/ascendra-ui',
+    importNames: ['Skeleton', 'SkeletonText', 'SkeletonUser', 'SkeletonCard', 'SkeletonTableRow', 'SkeletonTable', 'SkeletonStat'],
+    props: [
+      { name: 'className', type: 'string', description: 'Skeleton — additional CSS classes to set size and shape.' },
+      { name: 'lines', type: 'number', default: '3', description: 'SkeletonText — number of text lines.' },
+      { name: 'rows', type: 'number', default: '5', description: 'SkeletonTable — number of data rows.' },
+    ],
+  },
+
+  'command-palette': {
+    slug: 'command-palette',
+    name: 'Command Palette',
+    description: 'Keyboard-first command palette dialog built on shadcn Command + Dialog. Groups commands with icons and shortcuts. Registers ⌘K/Ctrl+K via useCommandPalette hook.',
+    importPath: '@/ascendra-ui',
+    importNames: ['CommandPalette', 'useCommandPalette'],
+    props: [
+      { name: 'open', type: 'boolean', description: 'Controlled open state.' },
+      { name: 'onOpenChange', type: '(open: boolean) => void', description: 'Called when open state changes.' },
+      { name: 'groups', type: 'CommandPaletteGroup[]', description: 'Array of grouped command items.' },
+      { name: 'placeholder', type: 'string', default: "'Search commands…'", description: 'Search input placeholder.' },
+      { name: 'emptyMessage', type: 'string', default: "'No results found.'", description: 'Message shown when no items match.' },
+    ],
+  },
+
+  'file-upload': {
+    slug: 'file-upload',
+    name: 'File Upload',
+    description: 'Fully custom file upload with three variants (dropzone, button, inline) and five controlled states (idle, dragover, uploading, success, error). Includes drag-and-drop, type validation, size limits, and a progress bar.',
+    importPath: '@/ascendra-ui',
+    importNames: ['FileUpload'],
+    props: [
+      { name: 'variant', type: "'dropzone' | 'button' | 'inline'", default: "'dropzone'", description: 'Layout variant.' },
+      { name: 'accept', type: 'string', description: 'Comma-separated accepted extensions or MIME types.' },
+      { name: 'maxSize', type: 'number', description: 'Max file size in bytes — validated client-side.' },
+      { name: 'multiple', type: 'boolean', default: 'false', description: 'Allow selecting multiple files.' },
+      { name: 'state', type: "'idle' | 'dragover' | 'uploading' | 'success' | 'error'", default: "'idle'", description: 'Controlled state override.' },
+      { name: 'uploadProgress', type: 'number', description: 'Progress 0–100 shown during uploading state.' },
+      { name: 'errorMessage', type: 'string', description: 'Error text in error state.' },
+      { name: 'onFiles', type: '(files: File[]) => void', description: 'Called with validated files when selected.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disables all interactions.' },
+    ],
+  },
+
+  'rich-text-editor': {
+    slug: 'rich-text-editor',
+    name: 'Rich Text Editor',
+    description: 'Tiptap-based rich text editor with a 6-action toolbar (bold, italic, strike, bullet list, numbered list, link). Controlled value/onChange API compatible with react-hook-form. Matches input ring and shadow tokens.',
+    importPath: '@/ascendra-ui',
+    importNames: ['RichTextEditor'],
+    props: [
+      { name: 'value', type: 'string', description: 'Controlled HTML content.' },
+      { name: 'onChange', type: '(html: string) => void', description: 'Called with full HTML on every change.' },
+      { name: 'placeholder', type: 'string', default: "'Write something…'", description: 'Placeholder shown in the empty editor.' },
+      { name: 'readOnly', type: 'boolean', default: 'false', description: 'Hides toolbar and disables editing.' },
+      { name: 'minHeight', type: 'number', default: '120', description: 'Min height of the editor area in px.' },
+      { name: 'className', type: 'string', description: 'Additional CSS classes on the container.' },
+    ],
+  },
+
+  'color-picker': {
+    slug: 'color-picker',
+    name: 'Color Picker',
+    description: 'Fully custom color picker using Radix DropdownMenu as the floating shell — the same token-aligned popover as all other dropdowns. Supports HSL sliders, hex input, and a configurable preset grid.',
+    importPath: '@/ascendra-ui',
+    importNames: ['ColorPicker'],
+    props: [
+      { name: 'value', type: 'string', default: "'#2563eb'", description: 'Controlled hex color value (6-digit).' },
+      { name: 'onChange', type: '(hex: string) => void', description: 'Called with the new hex when the color changes.' },
+      { name: 'presets', type: 'string[]', description: 'Array of hex preset swatches. Defaults to a 30-color system palette.' },
+      { name: 'presetsOnly', type: 'boolean', default: 'false', description: 'Hide sliders and hex input — show only the preset grid.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Prevents opening the picker.' },
+      { name: 'className', type: 'string', description: 'Additional CSS classes on the trigger button.' },
+    ],
+  },
 };
