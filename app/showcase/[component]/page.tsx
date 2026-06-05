@@ -35,7 +35,7 @@ export default async function ComponentPage({
   const isWide = component === 'data-table';
 
   return (
-    <div className={`mx-auto ${isWide ? 'max-w-5xl' : 'max-w-3xl'} px-8 py-12`}>
+    <>
       {/* Breadcrumb */}
       {category && (
         <p className="mb-4 text-xs text-muted-foreground">
@@ -86,6 +86,6 @@ export default async function ComponentPage({
           )}
         </div>
       )}
-    </div>
+    </>
   );
 }

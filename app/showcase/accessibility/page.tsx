@@ -240,7 +240,7 @@ function StatusCell({ status }: { status: Status }) {
 
 export default function AccessibilityPage() {
   return (
-    <div className="mx-auto max-w-4xl px-8 py-12">
+    <>
       {/* Breadcrumb */}
       <p className="mb-4 text-xs text-muted-foreground">
         <Link
@@ -390,7 +390,7 @@ export default function AccessibilityPage() {
           <SectionHeader>How to update this page</SectionHeader>
           <div className="rounded-lg border p-4 space-y-2 text-sm text-muted-foreground">
             <p>
-              When you fix a gap, update the component's row from{" "}
+              When you fix a gap, update the component&apos;s row from{" "}
               <code className="rounded bg-muted px-1 font-mono text-xs">
                 fail
               </code>{" "}
@@ -417,7 +417,7 @@ export default function AccessibilityPage() {
               <code className="rounded bg-muted px-1 font-mono text-xs">
                 partial
               </code>{" "}
-              for ARIA until it's been reviewed — don't leave it blank.
+              for ARIA until it&apos;s been reviewed — don&apos;t leave it blank.
             </p>
             <p>
               For components built on Radix primitives (Dialog, Select, Combobox,
@@ -426,12 +426,12 @@ export default function AccessibilityPage() {
               <code className="rounded bg-muted px-1 font-mono text-xs">
                 pass
               </code>{" "}
-              by default unless you've overridden the trigger or content
+              by default unless you&apos;ve overridden the trigger or content
               structure.
             </p>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

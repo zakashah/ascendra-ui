@@ -47,7 +47,7 @@ export default function ShowcasePage() {
   const categoryCount = categories.length;
 
   return (
-    <div className="mx-auto max-w-3xl px-8 py-12">
+    <>
       {/* Hero */}
       <div className="mb-12">
         <div className="mb-4 inline-flex items-center gap-2 rounded-full border bg-muted/60 px-3 py-1 text-xs text-muted-foreground">
@@ -130,6 +130,6 @@ export default function ShowcasePage() {
         </code>{" "}
         and are built on Radix UI + Tailwind CSS v4.
       </p>
-    </div>
+    </>
   );
 }

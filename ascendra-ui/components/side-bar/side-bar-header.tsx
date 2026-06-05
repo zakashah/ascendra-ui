@@ -6,10 +6,10 @@ export function SideBarHeader({
   ...props
 }: React.ComponentProps<'header'>) {
   return (
-    <header data-slot="side-bar-header" className={cn('p-0.5 pr-1.5', className)} {...props}>
+    <header data-slot="side-bar-header" className={cn('p-0.5 pr-1.5 pt-0', className)} {...props}>
       <button
         type="button"
-        className="group bg-background focus-visible:outline-primary hover:bg-muted/75 flex w-full cursor-pointer items-center gap-2 rounded-[0.375rem] px-2 py-1.5 text-left focus-visible:outline-2"
+        className="group bg-background focus-visible:outline-primary hover:bg-muted/75 flex w-full cursor-pointer items-center gap-2 rounded-[0.375rem] px-2 py-1.5 pt-0 text-left focus-visible:outline-2"
       >
         <Avatar>
           <AvatarImage
