@@ -689,6 +689,213 @@ export function CardDocContent() {
           </div>
         </div>
 
+        {/* Card — All-sides border */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">
+            Card — All-sides Border
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Pass{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              side: &quot;all&quot;
+            </code>{" "}
+            to draw a full-perimeter accent border. Useful for selected,
+            highlighted, or info-box cards.
+          </p>
+
+          <div className="space-y-1.5">
+            <p className="text-xs text-muted-foreground font-medium">
+              All sides · teal · stroke 1
+            </p>
+            <ComponentPreview
+              align="start"
+              code={`<Card border={{ side: "all", stroke: 1, color: "teal" }}>
+  ...
+</Card>`}
+            >
+              <div className="w-full">
+                <Card border={{ side: "all", stroke: 1, color: "teal" }}>
+                  <CardHeader>
+                    <CardHeaderTitle>Integration Active</CardHeaderTitle>
+                    <CardHeaderSubtitle>
+                      Connected and syncing in real time.
+                    </CardHeaderSubtitle>
+                  </CardHeader>
+                  <CardPanel>
+                    <SampleItems />
+                  </CardPanel>
+                </Card>
+              </div>
+            </ComponentPreview>
+          </div>
+
+          <div className="space-y-1.5">
+            <p className="text-xs text-muted-foreground font-medium">
+              All 8 accent colors (all sides, stroke 1)
+            </p>
+            <ComponentPreview
+              align="start"
+              code={`<Card border={{ side: "all", stroke: 1, color: "orange" }}>...</Card>
+<Card border={{ side: "all", stroke: 1, color: "blue" }}>...</Card>
+...`}
+            >
+              <div className="grid w-full grid-cols-2 gap-3">
+                {(
+                  [
+                    "orange",
+                    "blue",
+                    "amber",
+                    "teal",
+                    "indigo",
+                    "purple",
+                    "red",
+                    "slate",
+                  ] as const
+                ).map((color) => (
+                  <div key={color} className="space-y-1">
+                    <p className="text-xs text-muted-foreground capitalize">
+                      {color}
+                    </p>
+                    <Card border={{ side: "all", stroke: 1, color }}>
+                      <CardHeader>
+                        <CardHeaderTitle>Profile</CardHeaderTitle>
+                      </CardHeader>
+                      <CardPanel>
+                        <CardPanelItem>
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-foreground">
+                              Status
+                            </span>
+                            <SimpleBadge variant="green">Active</SimpleBadge>
+                          </div>
+                        </CardPanelItem>
+                      </CardPanel>
+                    </Card>
+                  </div>
+                ))}
+              </div>
+            </ComponentPreview>
+          </div>
+        </div>
+
+        {/* CardPanel — Solid Background */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">
+            CardPanel — Solid Background
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Pass{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              bg=&#123;&#123; style: &quot;solid&quot;, color: &quot;…&quot; &#125;&#125;
+            </code>{" "}
+            for a flat tinted background with no gradient. More predictable than
+            linear/radial for dense content.
+          </p>
+
+          <div className="space-y-1.5">
+            <p className="text-xs text-muted-foreground font-medium">
+              Solid · indigo
+            </p>
+            <ComponentPreview
+              align="start"
+              code={`<CardPanel bg={{ style: "solid", color: "indigo" }}>
+  ...
+</CardPanel>`}
+            >
+              <div className="w-full">
+                <Card>
+                  <CardHeader>
+                    <CardHeaderTitle>Plan Details</CardHeaderTitle>
+                    <CardHeaderSubtitle>
+                      Your current subscription.
+                    </CardHeaderSubtitle>
+                  </CardHeader>
+                  <CardPanel bg={{ style: "solid", color: "indigo" }}>
+                    <SampleItems />
+                  </CardPanel>
+                </Card>
+              </div>
+            </ComponentPreview>
+          </div>
+
+          <div className="space-y-1.5">
+            <p className="text-xs text-muted-foreground font-medium">
+              All 8 accent colors (solid)
+            </p>
+            <ComponentPreview
+              align="start"
+              code={`<CardPanel bg={{ style: "solid", color: "orange" }}>...</CardPanel>
+<CardPanel bg={{ style: "solid", color: "blue" }}>...</CardPanel>
+...`}
+            >
+              <div className="grid w-full grid-cols-2 gap-3">
+                {(
+                  [
+                    "orange",
+                    "blue",
+                    "amber",
+                    "teal",
+                    "indigo",
+                    "purple",
+                    "red",
+                    "slate",
+                  ] as const
+                ).map((color) => (
+                  <div key={color} className="space-y-1">
+                    <p className="text-xs text-muted-foreground capitalize">
+                      {color}
+                    </p>
+                    <Card>
+                      <CardHeader>
+                        <CardHeaderTitle>Profile</CardHeaderTitle>
+                      </CardHeader>
+                      <CardPanel bg={{ style: "solid", color }}>
+                        <CardPanelItem>
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-foreground">
+                              Status
+                            </span>
+                            <SimpleBadge variant="green">Active</SimpleBadge>
+                          </div>
+                        </CardPanelItem>
+                      </CardPanel>
+                    </Card>
+                  </div>
+                ))}
+              </div>
+            </ComponentPreview>
+          </div>
+
+          <div className="space-y-1.5">
+            <p className="text-xs text-muted-foreground font-medium">
+              Combined: all-sides border + solid background
+            </p>
+            <ComponentPreview
+              align="start"
+              code={`<Card border={{ side: "all", stroke: 1, color: "teal" }}>
+  <CardHeader>...</CardHeader>
+  <CardPanel bg={{ style: "solid", color: "teal" }}>
+    ...
+  </CardPanel>
+</Card>`}
+            >
+              <div className="w-full">
+                <Card border={{ side: "all", stroke: 1, color: "teal" }}>
+                  <CardHeader>
+                    <CardHeaderTitle>Integration Active</CardHeaderTitle>
+                    <CardHeaderSubtitle>
+                      Connected and syncing in real time.
+                    </CardHeaderSubtitle>
+                  </CardHeader>
+                  <CardPanel bg={{ style: "solid", color: "teal" }}>
+                    <SampleItems />
+                  </CardPanel>
+                </Card>
+              </div>
+            </ComponentPreview>
+          </div>
+        </div>
+
         {/* CardPanelItem — Collapse */}
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">
@@ -1361,9 +1568,9 @@ export function CardDocContent() {
             props={[
               {
                 name: "side",
-                type: "'t' | 'l' | 'r' | 'b'",
+                type: "'t' | 'l' | 'r' | 'b' | 'all'",
                 default: "'t'",
-                description: "Which side the border appears on.",
+                description: "Which side the border appears on. Use 'all' for a full-perimeter border.",
               },
               {
                 name: "stroke",
@@ -1388,9 +1595,9 @@ export function CardDocContent() {
             props={[
               {
                 name: "style",
-                type: "'linear' | 'radial' | 'conic'",
+                type: "'linear' | 'radial' | 'conic' | 'solid'",
                 default: "'linear'",
-                description: "CSS gradient type.",
+                description: "Background style. 'solid' applies a flat tinted background with no gradient; side and to are ignored.",
               },
               {
                 name: "side",

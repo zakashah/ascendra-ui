@@ -8,7 +8,7 @@ export type AccentColor =
   | "indigo"
   | "slate";
 
-export type BorderSide = "t" | "l" | "r" | "b";
+export type BorderSide = "t" | "l" | "r" | "b" | "all";
 export type BorderStroke = 1 | 2 | 3;
 
 export type BorderConfig = {
@@ -17,7 +17,7 @@ export type BorderConfig = {
   color?: AccentColor;
 };
 
-export type BgStyle = "linear" | "radial" | "conic";
+export type BgStyle = "linear" | "radial" | "conic" | "solid";
 export type BgTo = "transparent" | "white" | "black" | AccentColor;
 
 export type BgConfig = {
@@ -34,6 +34,7 @@ const BORDER_WIDTH: Record<BorderSide, Record<BorderStroke, string>> = {
   l: { 1: "border-l", 2: "border-l-2", 3: "border-l-[3px]" },
   r: { 1: "border-r", 2: "border-r-2", 3: "border-r-[3px]" },
   b: { 1: "border-b", 2: "border-b-2", 3: "border-b-[3px]" },
+  all: { 1: "border", 2: "border-2", 3: "border-[3px]" },
 };
 
 const BORDER_COLOR: Record<BorderSide, Record<AccentColor, string>> = {
@@ -77,6 +78,16 @@ const BORDER_COLOR: Record<BorderSide, Record<AccentColor, string>> = {
     indigo: "border-b-indigo-500/60",
     slate: "border-b-slate-500/60",
   },
+  all: {
+    blue: "border-blue-500/60",
+    amber: "border-amber-500/60",
+    purple: "border-purple-500/60",
+    red: "border-red-500/60",
+    teal: "border-teal-500/60",
+    orange: "border-orange-500/60",
+    indigo: "border-indigo-500/60",
+    slate: "border-slate-500/60",
+  },
 };
 
 const BG_GRADIENT_DIR: Record<BgStyle, Record<BorderSide, string>> = {
@@ -85,9 +96,11 @@ const BG_GRADIENT_DIR: Record<BgStyle, Record<BorderSide, string>> = {
     l: "bg-linear-to-l",
     r: "bg-linear-to-r",
     b: "bg-linear-to-b",
+    all: "bg-linear-to-b",
   },
-  radial: { t: "bg-radial", l: "bg-radial", r: "bg-radial", b: "bg-radial" },
-  conic: { t: "bg-conic", l: "bg-conic", r: "bg-conic", b: "bg-conic" },
+  radial: { t: "bg-radial", l: "bg-radial", r: "bg-radial", b: "bg-radial", all: "bg-radial" },
+  conic: { t: "bg-conic", l: "bg-conic", r: "bg-conic", b: "bg-conic", all: "bg-conic" },
+  solid: { t: "", l: "", r: "", b: "", all: "" },
 };
 
 const BG_FROM: Record<AccentColor, string> = {
@@ -122,6 +135,7 @@ const BEFORE_BORDER_WIDTH: Record<BorderSide, Record<BorderStroke, string>> = {
   l: { 1: "before:border-l", 2: "before:border-l-2", 3: "before:border-l-[3px]" },
   r: { 1: "before:border-r", 2: "before:border-r-2", 3: "before:border-r-[3px]" },
   b: { 1: "before:border-b", 2: "before:border-b-2", 3: "before:border-b-[3px]" },
+  all: { 1: "before:border", 2: "before:border-2", 3: "before:border-[3px]" },
 };
 
 const BEFORE_BORDER_COLOR: Record<BorderSide, Record<AccentColor, string>> = {
@@ -165,6 +179,38 @@ const BEFORE_BORDER_COLOR: Record<BorderSide, Record<AccentColor, string>> = {
     indigo: "before:border-b-indigo-500/60",
     slate: "before:border-b-slate-500/60",
   },
+  all: {
+    blue: "before:border-blue-500/60",
+    amber: "before:border-amber-500/60",
+    purple: "before:border-purple-500/60",
+    red: "before:border-red-500/60",
+    teal: "before:border-teal-500/60",
+    orange: "before:border-orange-500/60",
+    indigo: "before:border-indigo-500/60",
+    slate: "before:border-slate-500/60",
+  },
+};
+
+const BG_SOLID: Record<AccentColor, string> = {
+  blue: "bg-blue-500/[0.07]",
+  amber: "bg-amber-500/[0.07]",
+  purple: "bg-purple-500/[0.07]",
+  red: "bg-red-500/[0.07]",
+  teal: "bg-teal-500/[0.07]",
+  orange: "bg-orange-500/[0.07]",
+  indigo: "bg-indigo-500/[0.07]",
+  slate: "bg-slate-500/[0.07]",
+};
+
+const BEFORE_BG_SOLID: Record<AccentColor, string> = {
+  blue: "before:bg-blue-500/[0.07]",
+  amber: "before:bg-amber-500/[0.07]",
+  purple: "before:bg-purple-500/[0.07]",
+  red: "before:bg-red-500/[0.07]",
+  teal: "before:bg-teal-500/[0.07]",
+  orange: "before:bg-orange-500/[0.07]",
+  indigo: "before:bg-indigo-500/[0.07]",
+  slate: "before:bg-slate-500/[0.07]",
 };
 
 const BEFORE_BG_GRADIENT_DIR: Record<BgStyle, Record<BorderSide, string>> = {
@@ -173,18 +219,28 @@ const BEFORE_BG_GRADIENT_DIR: Record<BgStyle, Record<BorderSide, string>> = {
     l: "before:bg-linear-to-l",
     r: "before:bg-linear-to-r",
     b: "before:bg-linear-to-b",
+    all: "before:bg-linear-to-b",
   },
   radial: {
     t: "before:bg-radial",
     l: "before:bg-radial",
     r: "before:bg-radial",
     b: "before:bg-radial",
+    all: "before:bg-radial",
   },
   conic: {
     t: "before:bg-conic",
     l: "before:bg-conic",
     r: "before:bg-conic",
     b: "before:bg-conic",
+    all: "before:bg-conic",
+  },
+  solid: {
+    t: "",
+    l: "",
+    r: "",
+    b: "",
+    all: "",
   },
 };
 
@@ -238,16 +294,18 @@ export function buildBorderBeforeClasses(border: BorderConfig): string {
 
 export function buildBgClasses(bg: BgConfig): string {
   const style = bg.style ?? "linear";
-  const side = bg.side ?? "b";
   const color = bg.color ?? "orange";
+  if (style === "solid") return BG_SOLID[color];
+  const side = bg.side ?? "b";
   const to = bg.to ?? "transparent";
   return [BG_GRADIENT_DIR[style][side], BG_FROM[color], BG_TO[to]].join(" ");
 }
 
 export function buildBgBeforeClasses(bg: BgConfig): string {
   const style = bg.style ?? "linear";
-  const side = bg.side ?? "b";
   const color = bg.color ?? "orange";
+  if (style === "solid") return BEFORE_BG_SOLID[color];
+  const side = bg.side ?? "b";
   const to = bg.to ?? "transparent";
   return [
     BEFORE_BG_GRADIENT_DIR[style][side],

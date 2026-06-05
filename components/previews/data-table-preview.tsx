@@ -259,15 +259,16 @@ const COLOR_SWATCH: Record<AccentColor, string> = {
   slate: "bg-slate-500",
 };
 
-const BORDER_SIDES: BorderSide[] = ["t", "l", "r", "b"];
+const BORDER_SIDES: BorderSide[] = ["t", "l", "r", "b", "all"];
 const BORDER_SIDE_LABEL: Record<BorderSide, string> = {
   t: "Top",
   l: "Left",
   r: "Right",
   b: "Bottom",
+  all: "All",
 };
 const BORDER_STROKES: BorderStroke[] = [1, 2, 3];
-const BG_STYLES: BgStyle[] = ["linear", "radial", "conic"];
+const BG_STYLES: BgStyle[] = ["linear", "radial", "conic", "solid"];
 const BG_TOS: BgTo[] = ["transparent", "white", "black", ...ACCENT_COLORS];
 
 type BorderState = {

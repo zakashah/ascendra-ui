@@ -4,6 +4,7 @@ import * as React from "react";
 import { Upload, X, FileIcon, CheckCircle2, AlertCircle } from "lucide-react";
 import { cn } from "@/ascendra-ui/shadcn";
 import { ProgressBar } from "./progress";
+import { Button } from "./button";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -123,7 +124,7 @@ function FileUploadDropzone({
         onClick={() => !disabled && inputRef.current?.click()}
         onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") inputRef.current?.click(); }}
         className={cn(
-          "relative flex cursor-pointer flex-col items-center justify-center gap-3 rounded-[.375rem] border-2 border-dashed p-8 text-center transition-all duration-150 outline-none",
+          "relative flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border border-dashed p-8 text-center transition-all duration-150 outline-none",
           "bg-white dark:bg-secondary",
           // Idle
           !isDragover && !isSuccess && !isError && "border-border/60 hover:border-foreground/30 hover:bg-muted/30 focus-visible:border-primary",
@@ -143,8 +144,8 @@ function FileUploadDropzone({
           <AlertCircle className="size-8 text-destructive" />
         ) : (
           <div className={cn(
-            "flex size-12 items-center justify-center rounded-[.375rem] border transition-colors",
-            isDragover ? "border-primary/40 bg-primary/10 text-primary" : "border-border bg-muted/60 text-muted-foreground",
+            "flex size-12 items-center justify-center rounded-lg ring-1 ring-inset transition-colors",
+            isDragover ? "ring-primary/40 bg-primary/10 text-primary" : "ring-border bg-gray-700/4 text-foreground",
           )}>
             <Upload className="size-5" />
           </div>
@@ -247,24 +248,16 @@ function FileUploadButton({
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
       <div className="flex items-center gap-2">
-        <button
-          type="button"
+        <Button
+          variant="secondary"
+          size="sm"
           disabled={disabled}
           onClick={() => inputRef.current?.click()}
-          className={cn(
-            "inline-flex h-8 items-center gap-1.5 rounded-[.375rem] border px-3 text-sm font-medium transition-all outline-none",
-            "ring-1 ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset",
-            "shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06)]",
-            "hover:ring-(--color-umbra)/24 hover:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.1)]",
-            "focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-1",
-            "bg-white dark:bg-secondary text-foreground",
-            "disabled:cursor-not-allowed disabled:opacity-50",
-            isError && "ring-destructive ring-2",
-          )}
+          className={cn(isError && "ring-destructive ring-2")}
         >
           <Upload className="size-3.5 text-muted-foreground" />
           Choose file{multiple ? "s" : ""}
-        </button>
+        </Button>
 
         <span className="text-sm text-muted-foreground">
           {isSuccess
@@ -341,10 +334,11 @@ function FileUploadInline({
     <div className={cn("flex flex-col gap-1.5", className)}>
       <div
         className={cn(
-          "flex min-h-[2rem] flex-wrap items-center gap-1.5 rounded-[.375rem] px-2 py-1",
-          "ring-1 ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset",
-          "shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06)]",
+          "flex min-h-8 flex-wrap items-center gap-1.5 rounded-[.375rem] px-2 py-1",
           "bg-white dark:bg-secondary",
+          "ring-1 ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset",
+          "shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04)]",
+          "dark:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24)]",
           "transition-all",
           isError && "ring-2 ring-destructive",
           disabled && "cursor-not-allowed opacity-50",
@@ -356,7 +350,7 @@ function FileUploadInline({
             className="inline-flex items-center gap-1 rounded-md bg-muted px-1.5 py-0.5 text-xs"
           >
             <FileIcon className="size-3 text-muted-foreground shrink-0" />
-            <span className="max-w-[120px] truncate">{f.name}</span>
+            <span className="max-w-30 truncate">{f.name}</span>
             <button
               type="button"
               onClick={() => removeFile(i)}
