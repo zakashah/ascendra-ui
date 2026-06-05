@@ -331,8 +331,7 @@ export default function DesignTokensPage() {
         <div className="space-y-4">
           <SectionHeader>Brand Colors</SectionHeader>
           <p className="text-xs text-muted-foreground">
-            Intent-based aliases sourced from the Clerk palette. Light and dark
-            values differ — see{" "}
+            Intent-based semantic aliases. Light and dark values differ — see{" "}
             <code className="rounded bg-muted px-1 font-mono text-xs">
               .dark
             </code>{" "}
@@ -369,8 +368,11 @@ export default function DesignTokensPage() {
         {/* ── Typography ── */}
         <div className="space-y-4">
           <SectionHeader>Typography</SectionHeader>
+
+          {/* Font families */}
+          <p className="text-xs font-medium text-foreground">Font families</p>
           <p className="text-xs text-muted-foreground">
-            Font families are injected by{" "}
+            Injected by{" "}
             <code className="rounded bg-muted px-1 font-mono text-xs">
               next/font
             </code>{" "}
@@ -392,6 +394,136 @@ export default function DesignTokensPage() {
               <p className="font-mono text-sm text-foreground">
                 const token = &quot;oklch(0.5573 0.2543 283.67)&quot;;
               </p>
+            </div>
+          </div>
+
+          {/* Semantic type scale */}
+          <p className="pt-2 text-xs font-medium text-foreground">
+            Semantic type scale
+          </p>
+          <p className="text-xs text-muted-foreground">
+            Defined in{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              @theme inline
+            </code>{" "}
+            — available as Tailwind utilities (
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              text-body
+            </code>
+            ,{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              text-heading
+            </code>
+            , etc.) and as CSS vars.
+          </p>
+          <div className="rounded-lg border overflow-hidden">
+            <div className="grid grid-cols-[140px_80px_80px_1fr] gap-4 border-b bg-muted/50 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              <span>Token</span>
+              <span>Size</span>
+              <span>Line-h</span>
+              <span>Example</span>
+            </div>
+            <div className="divide-y">
+              {[
+                {
+                  token: "--text-caption",
+                  tw: "text-caption",
+                  size: "11px",
+                  lh: "16px",
+                  role: "Timestamps · tooltips",
+                  style: { fontSize: "0.6875rem", lineHeight: "1rem" },
+                },
+                {
+                  token: "--text-label",
+                  tw: "text-label",
+                  size: "12px",
+                  lh: "16px",
+                  role: "Form labels · badge text",
+                  style: { fontSize: "0.75rem", lineHeight: "1rem" },
+                },
+                {
+                  token: "--text-body-sm",
+                  tw: "text-body-sm",
+                  size: "14px",
+                  lh: "20px",
+                  role: "Secondary body copy",
+                  style: { fontSize: "0.875rem", lineHeight: "1.25rem" },
+                },
+                {
+                  token: "--text-body",
+                  tw: "text-body",
+                  size: "16px",
+                  lh: "24px",
+                  role: "Primary body copy",
+                  style: { fontSize: "1rem", lineHeight: "1.5rem" },
+                },
+                {
+                  token: "--text-heading-sm",
+                  tw: "text-heading-sm",
+                  size: "18px",
+                  lh: "28px",
+                  role: "Card titles",
+                  style: {
+                    fontSize: "1.125rem",
+                    lineHeight: "1.75rem",
+                    fontWeight: 600,
+                  },
+                },
+                {
+                  token: "--text-heading",
+                  tw: "text-heading",
+                  size: "20px",
+                  lh: "28px",
+                  role: "Section headings",
+                  style: {
+                    fontSize: "1.25rem",
+                    lineHeight: "1.75rem",
+                    fontWeight: 600,
+                  },
+                },
+                {
+                  token: "--text-heading-lg",
+                  tw: "text-heading-lg",
+                  size: "24px",
+                  lh: "32px",
+                  role: "Page headings",
+                  style: {
+                    fontSize: "1.5rem",
+                    lineHeight: "2rem",
+                    fontWeight: 600,
+                  },
+                },
+                {
+                  token: "--text-display",
+                  tw: "text-display",
+                  size: "30px",
+                  lh: "36px",
+                  role: "Hero / display",
+                  style: {
+                    fontSize: "1.875rem",
+                    lineHeight: "2.25rem",
+                    fontWeight: 700,
+                  },
+                },
+              ].map((row) => (
+                <div
+                  key={row.token}
+                  className="grid grid-cols-[140px_80px_80px_1fr] items-baseline gap-4 px-4 py-3"
+                >
+                  <code className="font-mono text-[0.6875rem] text-foreground">
+                    {row.token}
+                  </code>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    {row.size}
+                  </span>
+                  <span className="font-mono text-xs text-muted-foreground">
+                    {row.lh}
+                  </span>
+                  <span style={row.style} className="text-foreground">
+                    {row.role}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

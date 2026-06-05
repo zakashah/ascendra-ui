@@ -6,7 +6,7 @@ Format: `## [version or date] — description`. Breaking changes are marked **Br
 
 ---
 
-## [2026-06-05] — StatusDot & BubbleBadge semantic tokens, chart neon palette, new components, structural fixes
+## [2026-06-05] — StatusDot & BubbleBadge semantic tokens, chart neon palette, new components
 
 ### Changed
 - `StatusDot`: variants `warning`, `info`, `positive` now map to semantic CSS tokens (`--warning`, `--info`, `--positive`) instead of raw Tailwind colors (`bg-orange-500`, `bg-sky-500`, `bg-emerald-500`). Components now respect theme overrides.
@@ -14,15 +14,10 @@ Format: `## [version or date] — description`. Breaking changes are marked **Br
 - `SimpleBadge`: updated variant styles to align with semantic token system.
 - `SimpleAlert`: updated variant styles to align with semantic token system.
 - Chart colors (dark mode): neon-boosted palette applied to all 8 chart variables for better contrast on dark backgrounds.
-- All 10 dashboard pages: migrated inline page headers to `BackLink` + `PageHeader` + `PageHeaderGroup` components. Consistent layout across all dashboards.
 
 ### Added
 - `Toast` — Sonner-based toast notification system with showcase page.
-- `ascendra-ui/index.ts` — export barrel; all public components now importable from `@/ascendra-ui`.
 - Multiple missing components added in iteration 2 (see `docs/components-reference.md` for full list).
-
-### Fixed
-- `globals.css`: removed `bisque` named color constant; replaced with explicit `oklch()` value.
 
 ---
 
@@ -36,11 +31,11 @@ Format: `## [version or date] — description`. Breaking changes are marked **Br
 
 ## Upcoming (planned)
 
+### Structural
+
 ### UI Gaps
 
 ### Documentation
-- Typography scale tokens — `globals.css` has partial Clerk-sourced type vars (`--text-2xs--line-height` etc.) but no semantic scale tokens (`--text-label`, `--text-body`, `--text-heading`). Design Tokens page only shows font families, not the full scale.
-- Shadcn boundary document — no written policy on which shadcn components are replaced by Ascendra equivalents, which are used as-is, and how to handle upstream shadcn updates.
 
 ---
 
