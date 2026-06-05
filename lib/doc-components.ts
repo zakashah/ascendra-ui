@@ -52,6 +52,7 @@ import { CommandPaletteDocContent } from "@/components/previews/command-palette-
 import { FileUploadDocContent } from "@/components/previews/file-upload-preview";
 import { RichTextEditorDocContent } from "@/components/previews/rich-text-editor-preview";
 import { ColorPickerDocContent } from "@/components/previews/color-picker-preview";
+import { ToastDocContent } from "@/components/previews/toast-preview";
 
 export type DocComponent = React.ComponentType;
 
@@ -105,4 +106,5 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   "file-upload": FileUploadDocContent,
   "rich-text-editor": RichTextEditorDocContent,
   "color-picker": ColorPickerDocContent,
+  toasts: ToastDocContent,
 };

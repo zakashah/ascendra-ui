@@ -666,6 +666,20 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'toasts': {
+    slug: 'toasts',
+    name: 'Toast',
+    description: 'Lightweight, accessible toast notifications powered by Sonner. Mount <Toaster /> once in the root layout and call toast() from anywhere.',
+    importPath: '@/ascendra-ui',
+    importNames: ['toast', 'Toaster'],
+    props: [
+      { name: 'description', type: 'string', description: 'Optional supporting text shown below the title.' },
+      { name: 'action', type: '{ label: string; onClick: () => void }', description: 'Inline action button shown inside the toast.' },
+      { name: 'duration', type: 'number', default: '4000', description: 'Auto-dismiss delay in milliseconds. Pass Infinity to persist.' },
+      { name: 'id', type: 'string | number', description: 'Unique ID for updating or dismissing a specific toast.' },
+    ],
+  },
+
   'color-picker': {
     slug: 'color-picker',
     name: 'Color Picker',
