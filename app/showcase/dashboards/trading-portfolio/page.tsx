@@ -381,7 +381,8 @@ export default function TradingPortfolioPage() {
                       <CartesianGrid
                         vertical={false}
                         stroke="var(--border)"
-                        strokeOpacity={0.4}
+                        strokeOpacity={0.6}
+                        strokeWidth={0.5}
                       />
                       <XAxis
                         dataKey="date"
@@ -519,7 +520,8 @@ export default function TradingPortfolioPage() {
                         <CartesianGrid
                           vertical={false}
                           stroke="var(--border)"
-                          strokeOpacity={0.4}
+                          strokeOpacity={0.6}
+                          strokeWidth={0.5}
                         />
                         <XAxis
                           dataKey="bin"
@@ -596,7 +598,8 @@ export default function TradingPortfolioPage() {
                     >
                       <CartesianGrid
                         stroke="var(--border)"
-                        strokeOpacity={0.4}
+                        strokeOpacity={0.6}
+                        strokeWidth={0.5}
                       />
                       <XAxis
                         dataKey="vol"

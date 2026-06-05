@@ -195,7 +195,7 @@ export default function HrPeoplePage() {
                 <div className="p-5">
                   <ChartContainer config={hiringConfig} className="h-64 w-full">
                     <ComposedChart data={hiringData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                      <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
+                      <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.6} strokeWidth={0.5} />
                       <XAxis dataKey="month" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} dy={6} />
                       <YAxis yAxisId="left" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} width={28} />
                       <YAxis
@@ -305,7 +305,7 @@ export default function HrPeoplePage() {
                       data={deptData}
                       margin={{ top: 0, right: 80, left: 0, bottom: 0 }}
                     >
-                      <CartesianGrid horizontal={false} stroke="var(--border)" strokeOpacity={0.4} />
+                      <CartesianGrid horizontal={false} stroke="var(--border)" strokeOpacity={0.6} strokeWidth={0.5} />
                       <XAxis type="number" tickLine={false} axisLine={false} tick={{ fontSize: 11 }} />
                       <YAxis
                         type="category"
@@ -347,7 +347,7 @@ export default function HrPeoplePage() {
                   <div className="flex-1 min-h-0">
                   <ChartContainer config={scatterConfig} className="h-full w-full">
                     <ScatterChart margin={{ top: 4, right: 12, left: 0, bottom: 16 }}>
-                      <CartesianGrid stroke="var(--border)" strokeOpacity={0.4} />
+                      <CartesianGrid stroke="var(--border)" strokeOpacity={0.6} strokeWidth={0.5} />
                       <XAxis
                         dataKey="tenure"
                         type="number"

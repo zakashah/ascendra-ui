@@ -227,7 +227,7 @@ export default function SupplyChainPage() {
                       data={inventoryFlowData}
                       margin={{ top: 4, right: 36, left: 0, bottom: 0 }}
                     >
-                      <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
+                      <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.6} strokeWidth={0.5} />
                       <XAxis
                         dataKey="month"
                         tickLine={false}
@@ -313,7 +313,7 @@ export default function SupplyChainPage() {
                         data={shipmentsData}
                         margin={{ top: 4, right: 8, left: 0, bottom: 0 }}
                       >
-                        <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
+                        <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.6} strokeWidth={0.5} />
                         <XAxis
                           dataKey="region"
                           tickLine={false}

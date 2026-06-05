@@ -370,7 +370,8 @@ export default function ComposedChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="month"
@@ -468,7 +469,8 @@ export default function ComposedChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="month"
@@ -590,7 +592,8 @@ export default function ComposedChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="month"
@@ -695,7 +698,8 @@ export default function ComposedChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="month"
@@ -810,7 +814,8 @@ export default function ComposedChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="month"
@@ -950,7 +955,8 @@ export default function ComposedChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="month"
@@ -1048,7 +1054,8 @@ export default function ComposedChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="month"
@@ -1161,7 +1168,8 @@ export default function ComposedChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="month"
@@ -1270,7 +1278,8 @@ export default function ComposedChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="month"

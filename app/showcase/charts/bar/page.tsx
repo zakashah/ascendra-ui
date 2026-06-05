@@ -204,7 +204,8 @@ export default function BarChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="quarter"
@@ -290,7 +291,8 @@ export default function BarChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="month"
@@ -374,7 +376,8 @@ export default function BarChartsPage() {
                   <CartesianGrid
                     horizontal={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     type="number"
@@ -444,7 +447,8 @@ export default function BarChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="category"
@@ -511,7 +515,8 @@ export default function BarChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="label"
@@ -643,7 +648,8 @@ export default function BarChartsPage() {
                   <CartesianGrid
                     horizontal={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     type="number"

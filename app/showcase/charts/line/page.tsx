@@ -20,7 +20,15 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn";
-import { Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, SimpleBadge } from "@/ascendra-ui";
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+  CardHeaderSubtitle,
+  CardHeaderTitle,
+  CardPanel,
+  SimpleBadge,
+} from "@/ascendra-ui";
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
 
@@ -184,7 +192,8 @@ export default function LineChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="month"
@@ -250,7 +259,8 @@ export default function LineChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="month"
@@ -345,7 +355,8 @@ export default function LineChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="month"
@@ -409,7 +420,8 @@ export default function LineChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="week"
@@ -452,9 +464,7 @@ export default function LineChartsPage() {
           <CardHeader>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <CardHeaderTitle>
-                  Line + Reference Band
-                </CardHeaderTitle>
+                <CardHeaderTitle>Line + Reference Band</CardHeaderTitle>
                 <CardHeaderSubtitle>
                   Monthly conversion rate with a target line and a shaded
                   &quot;good&quot; zone — makes it immediately clear when
@@ -476,7 +486,8 @@ export default function LineChartsPage() {
                   <CartesianGrid
                     vertical={false}
                     stroke="var(--border)"
-                    strokeOpacity={0.4}
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
                   />
                   <XAxis
                     dataKey="month"

@@ -389,7 +389,8 @@ export default function MarketingPage() {
                         <CartesianGrid
                           horizontal={false}
                           stroke="var(--border)"
-                          strokeOpacity={0.4}
+                          strokeOpacity={0.6}
+                          strokeWidth={0.5}
                         />
                         <XAxis
                           type="number"
@@ -473,7 +474,7 @@ export default function MarketingPage() {
                         data={radarData}
                         margin={{ top: 10, right: 20, bottom: 10, left: 20 }}
                       >
-                        <PolarGrid stroke="var(--border)" strokeOpacity={0.4} />
+                        <PolarGrid stroke="var(--border)" strokeOpacity={0.6} strokeWidth={0.5} />
                         <PolarAngleAxis dataKey="dim" tick={{ fontSize: 11 }} />
                         <ChartTooltip
                           content={
@@ -546,7 +547,8 @@ export default function MarketingPage() {
                       <CartesianGrid
                         vertical={false}
                         stroke="var(--border)"
-                        strokeOpacity={0.4}
+                        strokeOpacity={0.6}
+                        strokeWidth={0.5}
                       />
                       <XAxis
                         dataKey="month"
@@ -702,7 +704,8 @@ export default function MarketingPage() {
                       <CartesianGrid
                         vertical={false}
                         stroke="var(--border)"
-                        strokeOpacity={0.4}
+                        strokeOpacity={0.6}
+                        strokeWidth={0.5}
                       />
                       <XAxis
                         dataKey="month"

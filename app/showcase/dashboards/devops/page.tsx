@@ -365,7 +365,8 @@ export default function DevopsPage() {
                       <CartesianGrid
                         vertical={false}
                         stroke="var(--border)"
-                        strokeOpacity={0.4}
+                        strokeOpacity={0.6}
+                        strokeWidth={0.5}
                       />
                       <XAxis
                         dataKey="d"
@@ -467,7 +468,8 @@ export default function DevopsPage() {
                         <CartesianGrid
                           vertical={false}
                           stroke="var(--border)"
-                          strokeOpacity={0.4}
+                          strokeOpacity={0.6}
+                          strokeWidth={0.5}
                         />
                         <XAxis
                           dataKey="d"
@@ -489,6 +491,7 @@ export default function DevopsPage() {
                           stroke="var(--destructive)"
                           strokeDasharray="4 3"
                           strokeOpacity={0.6}
+                          strokeWidth={0.5}
                           label={{
                             value: "SLA 200ms",
                             position: "insideTopRight",
@@ -577,7 +580,8 @@ export default function DevopsPage() {
                         <CartesianGrid
                           horizontal={false}
                           stroke="var(--border)"
-                          strokeOpacity={0.4}
+                          strokeOpacity={0.6}
+                          strokeWidth={0.5}
                         />
                         <XAxis
                           type="number"
@@ -656,7 +660,8 @@ export default function DevopsPage() {
                       <CartesianGrid
                         vertical={false}
                         stroke="var(--border)"
-                        strokeOpacity={0.4}
+                        strokeOpacity={0.6}
+                        strokeWidth={0.5}
                       />
                       <XAxis
                         dataKey="d"

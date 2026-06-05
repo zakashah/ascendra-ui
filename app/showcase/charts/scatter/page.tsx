@@ -157,7 +157,7 @@ export default function ScatterChartsPage() {
                 <ScatterChart
                   margin={{ top: 4, right: 20, left: 0, bottom: 0 }}
                 >
-                  <CartesianGrid stroke="var(--border)" strokeOpacity={0.4} />
+                  <CartesianGrid stroke="var(--border)" strokeOpacity={0.6} strokeWidth={0.5} />
                   <XAxis
                     type="number"
                     dataKey="x"
@@ -240,7 +240,7 @@ export default function ScatterChartsPage() {
                 <ScatterChart
                   margin={{ top: 4, right: 20, left: 0, bottom: 16 }}
                 >
-                  <CartesianGrid stroke="var(--border)" strokeOpacity={0.4} />
+                  <CartesianGrid stroke="var(--border)" strokeOpacity={0.6} strokeWidth={0.5} />
                   <XAxis
                     type="number"
                     dataKey="x"
@@ -336,7 +336,7 @@ export default function ScatterChartsPage() {
                 <ScatterChart
                   margin={{ top: 4, right: 20, left: 0, bottom: 0 }}
                 >
-                  <CartesianGrid stroke="var(--border)" strokeOpacity={0.4} />
+                  <CartesianGrid stroke="var(--border)" strokeOpacity={0.6} strokeWidth={0.5} />
                   <XAxis
                     type="number"
                     dataKey="x"

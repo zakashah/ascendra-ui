@@ -381,7 +381,8 @@ export default function EcommerceOpsPage() {
                       <CartesianGrid
                         vertical={false}
                         stroke="var(--border)"
-                        strokeOpacity={0.4}
+                        strokeOpacity={0.6}
+                        strokeWidth={0.5}
                       />
                       <XAxis
                         dataKey="w"
@@ -462,7 +463,8 @@ export default function EcommerceOpsPage() {
                         <CartesianGrid
                           vertical={false}
                           stroke="var(--border)"
-                          strokeOpacity={0.4}
+                          strokeOpacity={0.6}
+                          strokeWidth={0.5}
                         />
                         <XAxis
                           dataKey="cat"
@@ -591,7 +593,8 @@ export default function EcommerceOpsPage() {
                         <CartesianGrid
                           vertical={false}
                           stroke="var(--border)"
-                          strokeOpacity={0.4}
+                          strokeOpacity={0.6}
+                          strokeWidth={0.5}
                         />
                         <XAxis
                           dataKey="bin"

@@ -198,7 +198,7 @@ export default function HealthcarePage() {
                 <div className="p-5">
                   <ChartContainer config={admissionsConfig} className="h-64 w-full">
                     <LineChart data={admissionsData} margin={{ top: 4, right: 12, left: 0, bottom: 0 }}>
-                      <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
+                      <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.6} strokeWidth={0.5} />
                       <XAxis
                         dataKey="month"
                         tickLine={false}
@@ -300,7 +300,7 @@ export default function HealthcarePage() {
                   <div className="flex-1 min-h-0">
                     <ChartContainer config={conditionsConfig} className="h-52 w-full">
                       <BarChart data={conditionsData} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-                        <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
+                        <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.6} strokeWidth={0.5} />
                         <XAxis
                           dataKey="condition"
                           tickLine={false}
@@ -383,7 +383,7 @@ export default function HealthcarePage() {
                   <div className="flex-1 min-h-0">
                     <ChartContainer config={ageConfig} className="h-full w-full">
                       <BarChart data={ageDistData} barCategoryGap="6%" margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-                        <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.4} />
+                        <CartesianGrid vertical={false} stroke="var(--border)" strokeOpacity={0.6} strokeWidth={0.5} />
                         <XAxis
                           dataKey="bin"
                           tickLine={false}
