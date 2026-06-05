@@ -15,7 +15,10 @@ const statusDotVariants = cva(
         amber: "bg-amber-500 shadow-amber-500/25",
         red: "bg-red-500 shadow-red-500/25",
         primary: "bg-primary shadow-primary/25",
-        gray: "bg-gray-400 shadow-gray-400/25"
+        gray: "bg-gray-400 shadow-gray-400/25",
+        warning: "bg-warning shadow-warning/25",
+        positive: "bg-positive shadow-positive/25",
+        info: "bg-info shadow-info/25"
       }
     },
     defaultVariants: {

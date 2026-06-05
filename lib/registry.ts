@@ -22,7 +22,7 @@ export const registry: Record<string, ComponentMeta> = {
     importNames: ['BubbleBadge'],
     props: [
       { name: 'size', type: "'sm' | 'md' | 'lg'", default: "'sm'", description: 'Size of the badge.' },
-      { name: 'color', type: "'gray' | 'blue' | 'green' | 'red' | 'amber' | 'orange' | 'violet'", default: "'gray'", description: 'Color variant.' },
+      { name: 'color', type: "'gray' | 'blue' | 'green' | 'red' | 'amber' | 'orange' | 'violet' | 'warning' | 'positive' | 'info'", default: "'gray'", description: 'Color variant.' },
     ],
   },
 
@@ -33,7 +33,7 @@ export const registry: Record<string, ComponentMeta> = {
     importPath: '@/ascendra-ui',
     importNames: ['StatusDot'],
     props: [
-      { name: 'variant', type: "'orange' | 'emerald' | 'sky' | 'violet' | 'rose' | 'amber' | 'red' | 'primary' | 'gray'", default: "'gray'", description: 'Color variant.' },
+      { name: 'variant', type: "'orange' | 'emerald' | 'sky' | 'violet' | 'rose' | 'amber' | 'red' | 'primary' | 'gray' | 'warning' | 'positive' | 'info'", default: "'gray'", description: 'Color variant.' },
     ],
   },
 

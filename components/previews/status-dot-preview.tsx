@@ -25,7 +25,7 @@ export function StatusDotDocContent() {
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Variants</h3>
           <p className="text-xs text-muted-foreground">
-            Nine semantic color variants with matching halo shadow ring.
+            Twelve semantic color variants with matching halo shadow ring.
           </p>
           <ComponentPreview
             code={`<StatusDot variant="orange" />
@@ -36,7 +36,10 @@ export function StatusDotDocContent() {
 <StatusDot variant="amber" />
 <StatusDot variant="red" />
 <StatusDot variant="primary" />
-<StatusDot variant="gray" />`}
+<StatusDot variant="gray" />
+<StatusDot variant="warning" />
+<StatusDot variant="positive" />
+<StatusDot variant="info" />`}
           >
             <StatusDot variant="orange" />
             <StatusDot variant="emerald" />
@@ -47,6 +50,9 @@ export function StatusDotDocContent() {
             <StatusDot variant="red" />
             <StatusDot variant="primary" />
             <StatusDot variant="gray" />
+            <StatusDot variant="warning" />
+            <StatusDot variant="positive" />
+            <StatusDot variant="info" />
           </ComponentPreview>
         </div>
 

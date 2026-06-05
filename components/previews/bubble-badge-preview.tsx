@@ -25,7 +25,7 @@ export function BubbleBadgeDocContent() {
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Colors</h3>
           <p className="text-xs text-muted-foreground">
-            Seven gradient color variants.
+            Ten gradient color variants.
           </p>
           <ComponentPreview
             code={`<BubbleBadge color="gray">9</BubbleBadge>
@@ -34,7 +34,10 @@ export function BubbleBadgeDocContent() {
 <BubbleBadge color="red">3</BubbleBadge>
 <BubbleBadge color="amber">7</BubbleBadge>
 <BubbleBadge color="orange">2</BubbleBadge>
-<BubbleBadge color="violet">4</BubbleBadge>`}
+<BubbleBadge color="violet">4</BubbleBadge>
+<BubbleBadge color="warning">6</BubbleBadge>
+<BubbleBadge color="positive">8</BubbleBadge>
+<BubbleBadge color="info">1</BubbleBadge>`}
           >
             <BubbleBadge color="gray">9</BubbleBadge>
             <BubbleBadge color="blue">12</BubbleBadge>
@@ -43,6 +46,9 @@ export function BubbleBadgeDocContent() {
             <BubbleBadge color="amber">7</BubbleBadge>
             <BubbleBadge color="orange">2</BubbleBadge>
             <BubbleBadge color="violet">4</BubbleBadge>
+            <BubbleBadge color="warning">6</BubbleBadge>
+            <BubbleBadge color="positive">8</BubbleBadge>
+            <BubbleBadge color="info">1</BubbleBadge>
           </ComponentPreview>
         </div>
 
