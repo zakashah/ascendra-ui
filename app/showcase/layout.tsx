@@ -117,21 +117,21 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             {/* Getting Started */}
             <SideBarMenuSet>
               <SideBarMenuSetTitle>Getting Started</SideBarMenuSetTitle>
-              <SideBarMenu basePath="/showcase">
+              <SideBarMenu basePath="/showcase/getting-started">
                 <SideBarMenuHeader icon={LuBookOpen}>
                   Getting Started
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/showcase/overview">
+                  <SideBarMenuItem path="/showcase/getting-started/overview">
                     Overview
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/design-tokens">
+                  <SideBarMenuItem path="/showcase/getting-started/design-tokens">
                     Design Tokens
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/guidelines">
+                  <SideBarMenuItem path="/showcase/getting-started/guidelines">
                     Usage Guidelines
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/accessibility">
+                  <SideBarMenuItem path="/showcase/getting-started/accessibility">
                     Accessibility
                   </SideBarMenuItem>
                 </SideBarMenuContent>
