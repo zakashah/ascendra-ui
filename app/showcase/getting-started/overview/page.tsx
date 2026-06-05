@@ -50,7 +50,7 @@ export default function ShowcasePage() {
     <>
       {/* Hero */}
       <div className="mb-12">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border bg-muted/60 px-3 py-1 text-xs text-muted-foreground">
+        <div className="mb-8 inline-flex items-center gap-2 rounded-full border bg-muted/60 px-3 py-1 text-xs text-muted-foreground">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Ascendra Design System
         </div>

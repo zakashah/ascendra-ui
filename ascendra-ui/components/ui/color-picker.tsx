@@ -233,25 +233,45 @@ export function ColorPicker({
           <div className="mb-3">
             <p className="mb-1.5 text-[0.6875rem] font-medium text-muted-foreground">Presets</p>
             <div className="flex flex-wrap gap-1">
-              {presets.map((preset) => (
-                <button
-                  key={preset}
-                  type="button"
-                  title={preset}
-                  onClick={() => {
-                    setHsl(hexToHsl(preset));
-                    setHexInput(preset);
-                    onChange?.(preset);
-                  }}
-                  className={cn(
-                    "size-5 rounded-md border-2 transition-transform hover:scale-110 focus-visible:outline-2 focus-visible:outline-primary outline-none",
-                    currentHex.toLowerCase() === preset.toLowerCase()
-                      ? "border-foreground scale-110"
-                      : "border-transparent",
-                  )}
-                  style={{ backgroundColor: preset }}
-                />
-              ))}
+              {presets.map((preset) => {
+                const isSelected = currentHex.toLowerCase() === preset.toLowerCase();
+                return (
+                  <button
+                    key={preset}
+                    type="button"
+                    title={preset}
+                    onClick={() => {
+                      setHsl(hexToHsl(preset));
+                      setHexInput(preset);
+                      onChange?.(preset);
+                    }}
+                    className={cn(
+                      "relative size-5 rounded-full outline-none transition-all hover:scale-110",
+                      "shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_1px_2px_rgba(0,0,0,0.15)]",
+                      "focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-1",
+                      isSelected && "ring-2 ring-foreground ring-offset-1 ring-offset-secondary scale-110",
+                    )}
+                    style={{
+                      backgroundColor: preset,
+                      backgroundImage: "linear-gradient(to bottom, rgba(255,255,255,0.25) 0%, rgba(0,0,0,0.1) 100%)",
+                    }}
+                  >
+                    {isSelected && (
+                      <svg
+                        className="absolute inset-0 m-auto size-2.5 text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <polyline points="2,6 5,9 10,3" />
+                      </svg>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
 

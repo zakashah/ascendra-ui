@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { LuChevronDown, LuCode, LuEye, LuShieldCheck } from "react-icons/lu";
 
 import { AsideContent, BackLink, Button, Card, CardFooter, CardFooterIcon, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, CardPanelItem, CardPanelItemCrown, CardPanelItemGroup, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, MainContent, PageHeader, PageHeaderAction, PageHeaderGroup, PageMain, PageSubtitle, PageTitle, PageWrapper, SimpleAlert, Switch, TabContent, TabList, Tabs, TabTrigger } from "@/ascendra-ui";
@@ -98,6 +99,17 @@ export default function LayoutGuidePage() {
 
   return (
     <>
+      {/* Breadcrumb */}
+      <p className="mb-8 text-xs text-muted-foreground">
+        <Link href="/showcase" className="hover:text-foreground transition-colors rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+          Overview
+        </Link>
+        <span className="mx-1.5">/</span>
+        Layout
+        <span className="mx-1.5">/</span>
+        Layout Guide
+      </p>
+
       {/* ── Intro ─────────────────────────────────────────────────────────── */}
       <div className="flex flex-col gap-1.5">
         <h1 className="text-2xl font-semibold tracking-tight">Layout System</h1>

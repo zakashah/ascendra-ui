@@ -40,8 +40,13 @@ export function NameAvatar({
       {...props}
     >
       <div
-        style={{ backgroundColor, width: size, height: size }}
-        className="flex items-center justify-center rounded-full text-white font-normal select-none"
+        style={{
+          backgroundColor,
+          backgroundImage: 'linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(0,0,0,0.1) 100%)',
+          width: size,
+          height: size,
+        }}
+        className="flex items-center justify-center rounded-full text-white font-normal select-none shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_1px_2px_rgba(0,0,0,0.15)]"
       >
         <span style={{ fontSize: size * 0.4 }}>{initials}</span>
       </div>

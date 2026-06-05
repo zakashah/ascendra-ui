@@ -34,13 +34,11 @@ export default async function ComponentPage({
   const category = findCategory(fullSlug);
   const importStatement = `import { ${meta.importNames.join(", ")} } from "${meta.importPath}"`;
 
-  const isWide = component === 'data-table';
-
   return (
     <>
       {/* Breadcrumb */}
       {category && (
-        <p className="mb-4 text-xs text-muted-foreground">
+        <p className="mb-8 text-xs text-muted-foreground">
           <Link href="/showcase" className="hover:text-foreground transition-colors rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
             Overview
           </Link>

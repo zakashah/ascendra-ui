@@ -242,7 +242,7 @@ export default function AccessibilityPage() {
   return (
     <>
       {/* Breadcrumb */}
-      <p className="mb-4 text-xs text-muted-foreground">
+      <p className="mb-8 text-xs text-muted-foreground">
         <Link
           href="/showcase"
           className="hover:text-foreground transition-colors"

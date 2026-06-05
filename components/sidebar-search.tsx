@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { RiSearchLine } from "react-icons/ri";
@@ -12,39 +12,87 @@ import {
   InputGroupText,
   InputGroupInput,
   InputGroupButton,
+  SideBarMenuItem,
+  SideBarMenuHeader,
+  SideBarMenuSetTitle,
 } from "@/ascendra-ui";
-import { navConfig } from "@/lib/nav-config";
 
-type SearchResult = {
-  categoryTitle: string;
+type NavItem = {
+  category: string;
   name: string;
   href: string;
 };
 
-function getResults(query: string): SearchResult[] {
-  const q = query.trim().toLowerCase();
-  if (!q) return [];
-  return navConfig.flatMap((category) =>
-    category.items
-      .filter((item) => item.slug && item.name.toLowerCase().includes(q))
-      .map((item) => ({
-        categoryTitle: category.title,
-        name: item.name,
-        href: `/showcase/${item.slug}`,
-      })),
-  );
+function extractText(node: React.ReactNode): string {
+  if (typeof node === "string") return node;
+  if (typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(extractText).join("");
+  if (React.isValidElement(node))
+    return extractText((node.props as Record<string, unknown>).children as React.ReactNode);
+  return "";
 }
 
-export function SidebarSearch({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function extractNavItems(
+  children: React.ReactNode,
+  inheritedCategory = "",
+): NavItem[] {
+  const items: NavItem[] = [];
+  const childArray = React.Children.toArray(children);
+
+  // First pass: find the category from a header in this level's direct children
+  let localCategory = inheritedCategory;
+  for (const child of childArray) {
+    if (React.isValidElement(child)) {
+      if (
+        child.type === SideBarMenuHeader ||
+        child.type === SideBarMenuSetTitle
+      ) {
+        localCategory = extractText(
+          (child.props as Record<string, unknown>).children as React.ReactNode,
+        );
+        break;
+      }
+    }
+  }
+
+  // Second pass: collect items and recurse into containers
+  for (const child of childArray) {
+    if (!React.isValidElement(child)) continue;
+    const props = child.props as Record<string, unknown>;
+
+    if (child.type === SideBarMenuItem) {
+      items.push({
+        category: localCategory,
+        name: extractText(props.children as React.ReactNode),
+        href: props.path as string,
+      });
+    } else if (
+      child.type !== SideBarMenuHeader &&
+      child.type !== SideBarMenuSetTitle &&
+      props.children
+    ) {
+      items.push(
+        ...extractNavItems(props.children as React.ReactNode, localCategory),
+      );
+    }
+  }
+
+  return items;
+}
+
+export function SidebarSearch({ children }: { children: React.ReactNode }) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
 
-  const results = getResults(query);
+  const allItems = useMemo(() => extractNavItems(children), [children]);
+
+  const results = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    return allItems.filter((item) => item.name.toLowerCase().includes(q));
+  }, [query, allItems]);
+
   const isSearching = query.trim().length > 0;
 
   const handleResultClick = () => {
@@ -56,7 +104,6 @@ export function SidebarSearch({
 
   return (
     <>
-      {/* Search input */}
       <div className="px-3 pt-3 pb-1">
         <InputGroup>
           <InputGroupAddon align="inline-start">
@@ -87,7 +134,6 @@ export function SidebarSearch({
         </InputGroup>
       </div>
 
-      {/* Results or normal sidebar menu */}
       {isSearching ? (
         <div className="mt-1 px-1.5">
           {results.length === 0 ? (
@@ -109,11 +155,9 @@ export function SidebarSearch({
                       isActive && "bg-foreground/8 text-foreground",
                     )}
                   >
-                    <span className="min-w-0 flex-1 truncate">
-                      {result.name}
-                    </span>
+                    <span className="min-w-0 flex-1 truncate">{result.name}</span>
                     <span className="shrink-0 text-[10px] text-muted-foreground/50">
-                      {result.categoryTitle}
+                      {result.category}
                     </span>
                   </Link>
                 );

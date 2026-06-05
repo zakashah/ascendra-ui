@@ -3,7 +3,15 @@
 import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { SideBarMenu, SideBarMenuContent, SideBarMenuHeader, SideBarMenuItem, SideBarMenuSet, SideBarMenuSetTitle } from "@/ascendra-ui";
+import {
+  SideBarMenu,
+  SideBarMenuContent,
+  SideBarMenuHeader,
+  SideBarMenuItem,
+  SideBarMenuSet,
+  SideBarMenuSetTitle,
+} from "@/ascendra-ui";
+import { SidebarSearch } from "@/components/sidebar-search";
 import { registry } from "@/lib/registry";
 import { LuUsers, LuFileText, LuLayoutDashboard } from "react-icons/lu";
 
@@ -126,6 +134,76 @@ export function SidebarMenuDocContent() {
                   </SideBarMenu>
                 </SideBarMenuSet>
               </div>
+            </div>
+          </ComponentPreview>
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">
+            Sidebar Search
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Wrap your sidebar menu in{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              SidebarSearch
+            </code>{" "}
+            to add a search input that filters items directly from the children
+            tree — no separate data config required.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`import { SidebarSearch } from "@/components/sidebar-search";
+
+<SidebarSearch>
+  <SideBarMenuSet>
+    <SideBarMenuSetTitle>Management</SideBarMenuSetTitle>
+    <SideBarMenu basePath="/merchant/parents">
+      <SideBarMenuHeader icon={LuUsers}>Parents</SideBarMenuHeader>
+      <SideBarMenuContent>
+        <SideBarMenuItem path="/merchant/parents">All Parents</SideBarMenuItem>
+        <SideBarMenuItem path="/merchant/parents/new">Add Parent</SideBarMenuItem>
+      </SideBarMenuContent>
+    </SideBarMenu>
+    <SideBarMenu basePath="/merchant/invoices">
+      <SideBarMenuHeader icon={LuFileText}>Invoices</SideBarMenuHeader>
+      <SideBarMenuContent>
+        <SideBarMenuItem path="/merchant/invoices">All Invoices</SideBarMenuItem>
+      </SideBarMenuContent>
+    </SideBarMenu>
+  </SideBarMenuSet>
+</SidebarSearch>`}
+          >
+            <div className="w-64 rounded-lg border bg-background overflow-hidden">
+              <SidebarSearch>
+                <div className="pb-2 pt-4">
+                  <SideBarMenuSet>
+                    <SideBarMenuSetTitle>Management</SideBarMenuSetTitle>
+                    <SideBarMenu basePath="/showcase/parents">
+                      <SideBarMenuHeader icon={LuUsers}>
+                        Parents
+                      </SideBarMenuHeader>
+                      <SideBarMenuContent>
+                        <SideBarMenuItem path="/showcase/parents">
+                          All Parents
+                        </SideBarMenuItem>
+                        <SideBarMenuItem path="/showcase/parents/new">
+                          Add Parent
+                        </SideBarMenuItem>
+                      </SideBarMenuContent>
+                    </SideBarMenu>
+                    <SideBarMenu basePath="/showcase/invoices">
+                      <SideBarMenuHeader icon={LuFileText}>
+                        Invoices
+                      </SideBarMenuHeader>
+                      <SideBarMenuContent>
+                        <SideBarMenuItem path="/showcase/invoices">
+                          All Invoices
+                        </SideBarMenuItem>
+                      </SideBarMenuContent>
+                    </SideBarMenu>
+                  </SideBarMenuSet>
+                </div>
+              </SidebarSearch>
             </div>
           </ComponentPreview>
         </div>
