@@ -1,6 +1,6 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
-@import 'shadcn/tailwind.css';
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -8,7 +8,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-surface-soft: var(--surface-soft);
-  /* Clerk semantic aliases — available as Tailwind utilities (bg-brand, text-positive, etc.) */
+  /* semantic aliases — available as Tailwind utilities (bg-brand, text-positive, etc.) */
   --color-brand: var(--brand);
   --color-positive: var(--positive);
   --color-negative: var(--negative);
@@ -88,14 +88,14 @@
   --input: oklch(0.923 0.003 48.717);
   --ring: oklch(0.5573 0.2543 283.67);
   /* chart palette: violet → sky → emerald → rose → orange → amber → red → primary */
-  --chart-1: oklch(0.606 0.230 281);  /* violet-500   */
-  --chart-2: oklch(0.679 0.154 233);  /* sky-500      */
-  --chart-3: oklch(0.698 0.152 163);  /* emerald-500  */
-  --chart-4: oklch(0.647 0.227 14);   /* rose-500     */
-  --chart-5: oklch(0.702 0.187 44);   /* orange-500   */
-  --chart-6: oklch(0.769 0.170 70);   /* amber-500    */
-  --chart-7: oklch(0.637 0.213 27);   /* red-500      */
-  --chart-8: oklch(0.557 0.254 284);  /* primary      */
+  --chart-1: oklch(0.606 0.23 281); /* violet-500   */
+  --chart-2: oklch(0.679 0.154 233); /* sky-500      */
+  --chart-3: oklch(0.698 0.152 163); /* emerald-500  */
+  --chart-4: oklch(0.647 0.227 14); /* rose-500     */
+  --chart-5: oklch(0.702 0.187 44); /* orange-500   */
+  --chart-6: oklch(0.769 0.17 70); /* amber-500    */
+  --chart-7: oklch(0.637 0.213 27); /* red-500      */
+  --chart-8: oklch(0.557 0.254 284); /* primary      */
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0.001 106.423);
   --sidebar-foreground: oklch(0.147 0.004 49.25);
@@ -107,8 +107,8 @@
   --sidebar-ring: oklch(0.709 0.01 56.259);
 
   /* ============================================================
-     CLERK COLOR PALETTE
-     Raw color tokens sourced from Clerk's design system.
+     COLOR PALETTE
+     Raw color tokens.
      Use via var(--color-gray-500) in CSS, or via Tailwind
      arbitrary values: text-[var(--color-purple-700)]
      ============================================================ */
@@ -227,32 +227,6 @@
     0px 0px 0px 1px #0000000a;
 
   /* ============================================================
-     CLERK COMPONENT SDK VARIABLES
-     Themes @clerk/nextjs auth UI components (sign-in, sign-up
-     modals etc.). Add more overrides here once Clerk is installed.
-     ============================================================ */
-  --clerk-color-primary: var(--brand);
-  --clerk-color-foreground: var(--foreground);
-  --clerk-color-muted-foreground: var(--muted-foreground);
-  --clerk-color-success: var(--positive);
-  --clerk-color-danger: var(--negative);
-  --clerk-color-warning: var(--warning);
-  --clerk-color-background: var(--background);
-  --clerk-color-neutral: var(--color-black);
-  --clerk-color-modal-backdrop: #0006;
-  --clerk-color-input: transparent;
-  --clerk-color-input-foreground: var(--foreground);
-  --clerk-color-border: var(--border);
-
-  --clerk-font-family: var(--font-sans);
-  --clerk-font-weight-bold: 500;
-  --clerk-font-size-xs: 0.6875rem; /* 11px */
-  --clerk-font-size-sm: 0.75rem; /* 12px */
-  --clerk-font-size-md: 0.875rem; /* 14px */
-  --clerk-font-size-lg: 1rem; /* 16px */
-  --clerk-font-size-xl: 1.125rem; /* 18px */
-
-  /* ============================================================
      SYNTAX HIGHLIGHTING
      For code blocks rendered inside the dashboard.
      ============================================================ */
@@ -273,7 +247,7 @@
   /* foreground: #2b2b34 #f6f6f7 */
   --foreground: oklch(0.9734 0.0013 286.37);
   --surface-soft: oklch(0.22 0 0);
-  --card: oklch(0.216 0.006 56.043);
+  --card: oklch(0.216 0.006 285.76);
   --card-foreground: oklch(0.985 0.001 106.423);
   --popover: oklch(0.216 0.006 56.043);
   --popover-foreground: oklch(0.985 0.001 106.423);
@@ -322,14 +296,14 @@
   --sh-comment: var(--color-gray-700);
 
   /* chart palette — neon boost for dark backgrounds */
-  --chart-1: oklch(0.72 0.26 281);   /* violet neon   */
-  --chart-2: oklch(0.78 0.18 233);   /* sky neon      */
-  --chart-3: oklch(0.78 0.18 163);   /* emerald neon  */
-  --chart-4: oklch(0.74 0.25 14);    /* rose neon     */
-  --chart-5: oklch(0.78 0.21 44);    /* orange neon   */
-  --chart-6: oklch(0.86 0.18 70);    /* amber neon    */
-  --chart-7: oklch(0.72 0.23 27);    /* red neon      */
-  --chart-8: oklch(0.70 0.26 284);   /* primary neon  */
+  --chart-1: oklch(0.72 0.26 281); /* violet neon   */
+  --chart-2: oklch(0.78 0.18 233); /* sky neon      */
+  --chart-3: oklch(0.78 0.18 163); /* emerald neon  */
+  --chart-4: oklch(0.74 0.25 14); /* rose neon     */
+  --chart-5: oklch(0.78 0.21 44); /* orange neon   */
+  --chart-6: oklch(0.86 0.18 70); /* amber neon    */
+  --chart-7: oklch(0.72 0.23 27); /* red neon      */
+  --chart-8: oklch(0.7 0.26 284); /* primary neon  */
 }
 
 @layer base {
@@ -426,9 +400,15 @@
 }
 
 @keyframes progress-indeterminate {
-  0%   { transform: translateX(-100%) scaleX(0.4); }
-  40%  { transform: translateX(0%)    scaleX(0.6); }
-  100% { transform: translateX(100%)  scaleX(0.4); }
+  0% {
+    transform: translateX(-100%) scaleX(0.4);
+  }
+  40% {
+    transform: translateX(0%) scaleX(0.6);
+  }
+  100% {
+    transform: translateX(100%) scaleX(0.4);
+  }
 }
 
 .animate-progress-indeterminate {

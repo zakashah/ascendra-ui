@@ -36,12 +36,7 @@ Format: `## [version or date] — description`. Breaking changes are marked **Br
 
 ## Upcoming (planned)
 
-### Structural
-- Align dark mode `--card` hue: currently `oklch(0.216 0.006 56.043)` (56° warm). Should match `--background` hue family at 285° (cool blue-gray) to prevent warm cast on dark surfaces.
-
 ### UI Gaps
-- Alert Dialog — destructive confirmation pattern (confirm before delete/revoke). No showcase page exists yet.
-- `react-hook-form` wiring — at least one form page should demonstrate `useForm` + `register` + `formState.errors` → `FieldError`. None of the 10 form showcase pages currently do this.
 
 ### Documentation
 - Typography scale tokens — `globals.css` has partial Clerk-sourced type vars (`--text-2xs--line-height` etc.) but no semantic scale tokens (`--text-label`, `--text-body`, `--text-heading`). Design Tokens page only shows font families, not the full scale.
