@@ -34,19 +34,29 @@ import {
   ThemeToggle,
 } from "@/ascendra-ui";
 import { Avatar, AvatarImage } from "@/ascendra-ui/shadcn";
-import { BiNotification } from "react-icons/bi";
-import { FaCode } from "react-icons/fa";
-import { LuCircleArrowUp } from "react-icons/lu";
+import {
+  LuBookOpen,
+  LuCalendar,
+  LuCircleArrowUp,
+  LuLayers,
+  LuPanelLeft,
+  LuPanelRight,
+} from "react-icons/lu";
 import {
   MdDashboardCustomize,
-  MdOutlineAccountBalanceWallet,
-  MdOutlineDesktopWindows,
+  MdOutlineTab,
+  MdOutlineWindow,
 } from "react-icons/md";
-import { PiBracketsCurlyBold } from "react-icons/pi";
-import { RiAccountBoxLine, RiBillLine, RiSettingsLine } from "react-icons/ri";
-import { SiMonkeytie } from "react-icons/si";
+import {
+  RiBarChartLine,
+  RiBellLine,
+  RiCompassLine,
+  RiFileListLine,
+  RiKeyboardLine,
+  RiLayoutLine,
+  RiTableLine,
+} from "react-icons/ri";
 import { TbSettingsCheck } from "react-icons/tb";
-import { TfiMenuAlt } from "react-icons/tfi";
 import { VscSymbolStructure } from "react-icons/vsc";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
@@ -104,194 +114,373 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         <SideBar>
           <SideBarHeader />
           <SideBarMain>
+
+            {/* Getting Started */}
             <SideBarMenuSet>
-              <SideBarMenuSetTitle>Configure</SideBarMenuSetTitle>
-              <SideBarMenu basePath="/user-and-auth">
-                <SideBarMenuHeader icon={SiMonkeytie}>
-                  User & Authentication
+              <SideBarMenuSetTitle>Getting Started</SideBarMenuSetTitle>
+              <SideBarMenu basePath="/showcase/overview">
+                <SideBarMenuHeader icon={LuBookOpen}>
+                  Getting Started
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/user-and-auth/user-and-authentication">
-                    User & Authentication
+                  <SideBarMenuItem path="/showcase/overview">Overview</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/design-tokens">
+                    Design Tokens
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/user-and-auth/sso-connections">
-                    SSO Connections
+                  <SideBarMenuItem path="/showcase/guidelines">
+                    Usage Guidelines
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/user-and-auth/web3">
-                    Web3
-                  </SideBarMenuItem>
-                  <SideBarMenuItem path="/user-and-auth/mfa">
-                    Multi-factor
-                  </SideBarMenuItem>
-                  <SideBarMenuItem path="/user-and-auth/restrictions">
-                    Restrictions
-                  </SideBarMenuItem>
-                  <SideBarMenuItem path="/user-and-auth/attack-protection">
-                    Attack Protection
-                  </SideBarMenuItem>
-                  <SideBarMenuItem path="/user-and-auth/waitlist">
-                    Waitlist
-                  </SideBarMenuItem>
-                  <SideBarMenuItem path="/user-and-auth/legal">
-                    Legal
+                  <SideBarMenuItem path="/showcase/accessibility">
+                    Accessibility
                   </SideBarMenuItem>
                 </SideBarMenuContent>
               </SideBarMenu>
-              <SideBarMenu basePath="/sessions">
-                <SideBarMenuHeader icon={MdOutlineDesktopWindows}>
-                  Sessions
-                </SideBarMenuHeader>
-                <SideBarMenuContent>
-                  <SideBarMenuItem path="/sessions/sessions">
-                    Sessions
-                  </SideBarMenuItem>
-                  <SideBarMenuItem path="/sessions/jwt-templates">
-                    JWT Templates
-                  </SideBarMenuItem>
-                </SideBarMenuContent>
-              </SideBarMenu>
-              <SideBarMenu basePath="/organizations">
-                <SideBarMenuHeader icon={VscSymbolStructure}>
-                  Organizations
-                </SideBarMenuHeader>
-                <SideBarMenuContent>
-                  <SideBarMenuItem path="/organizations/settings">
-                    Settings
-                  </SideBarMenuItem>
-                  <SideBarMenuItem path="/organizations/roles">
-                    Roles & Permissions
-                  </SideBarMenuItem>
-                </SideBarMenuContent>
-              </SideBarMenu>
-              <SideBarMenu basePath="/billing">
-                <SideBarMenuHeader icon={RiBillLine}>Billing</SideBarMenuHeader>
-                <SideBarMenuContent>
-                  <SideBarMenuItem path="/billing/settings">
-                    Settings
-                  </SideBarMenuItem>
-                  <SideBarMenuItem path="/billing/subscription-plans">
-                    Subscription plans
-                  </SideBarMenuItem>
-                  <SideBarMenuItem path="/billing/table-usage">
-                    Table usage
-                  </SideBarMenuItem>
-                </SideBarMenuContent>
-              </SideBarMenu>
+            </SideBarMenuSet>
+
+            {/* Samples */}
+            <SideBarMenuSet>
+              <SideBarMenuSetTitle>Samples</SideBarMenuSetTitle>
               <SideBarMenuItemGroup>
                 <SideBarMenuItem
                   alternate="stand-alone"
-                  icon={RiAccountBoxLine}
-                  path="/account-portal"
+                  icon={MdOutlineWindow}
+                  path="/showcase/dialogs"
                 >
-                  Account Portal
+                  Dialog Gallery
                 </SideBarMenuItem>
                 <SideBarMenuItem
                   alternate="stand-alone"
-                  icon={TfiMenuAlt}
-                  path="/features"
+                  icon={LuPanelRight}
+                  path="/showcase/sheets"
                 >
-                  Features
+                  Sheet Gallery
+                </SideBarMenuItem>
+                <SideBarMenuItem
+                  alternate="stand-alone"
+                  icon={LuPanelLeft}
+                  path="/showcase/drawers"
+                >
+                  Drawer Gallery
                 </SideBarMenuItem>
               </SideBarMenuItemGroup>
-              <SideBarMenu basePath="/customizations">
+              <SideBarMenu basePath="/showcase/dashboards">
                 <SideBarMenuHeader icon={MdDashboardCustomize}>
-                  Customizations
+                  Sample Dashboards
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/customizations/avatars">
-                    Avatars
+                  <SideBarMenuItem path="/showcase/dashboards">
+                    Dashboard Gallery
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/customizations/emails">
-                    Emails
+                  <SideBarMenuItem path="/showcase/dashboards/saas-revenue">
+                    SaaS Revenue
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/customizations/sms">
-                    SMS
+                  <SideBarMenuItem path="/showcase/dashboards/ecommerce-ops">
+                    E-commerce Ops
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/dashboards/marketing">
+                    Marketing
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/dashboards/financial-pnl">
+                    Financial P&L
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/dashboards/trading-portfolio">
+                    Trading Portfolio
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/dashboards/healthcare">
+                    Healthcare
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/dashboards/hr-people">
+                    HR & People
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/dashboards/devops">
+                    DevOps
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/dashboards/supply-chain">
+                    Supply Chain
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/dashboards/real-estate">
+                    Real Estate
                   </SideBarMenuItem>
                 </SideBarMenuContent>
               </SideBarMenu>
-              <SideBarMenu basePath="/developers">
-                <SideBarMenuHeader icon={FaCode}>Developers</SideBarMenuHeader>
+              <SideBarMenu basePath="/showcase/forms">
+                <SideBarMenuHeader icon={RiFileListLine}>
+                  Sample Forms
+                </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/developers/webhooks">
-                    Webhooks
+                  <SideBarMenuItem path="/showcase/forms">
+                    Forms Gallery
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/developers/domains">
-                    Domains
+                  <SideBarMenuItem path="/showcase/forms/contact-inquiry">
+                    Contact & Inquiry
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/developers/paths">
-                    Paths
+                  <SideBarMenuItem path="/showcase/forms/user-profile">
+                    User Profile Settings
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/developers/api-keys">
-                    API Keys
+                  <SideBarMenuItem path="/showcase/forms/support-ticket">
+                    Support Ticket
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/developers/m2m">
-                    M2M Authentication
+                  <SideBarMenuItem path="/showcase/forms/appointment-booking">
+                    Appointment Booking
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/developers/oauth-apps">
-                    OAuth Applications
+                  <SideBarMenuItem path="/showcase/forms/job-application">
+                    Job Application
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/developers/native-apps">
-                    Native Applications
+                  <SideBarMenuItem path="/showcase/forms/financial-transaction">
+                    Financial Transaction
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/developers/integrations">
-                    Integrations
+                  <SideBarMenuItem path="/showcase/forms/create-product">
+                    Create Product
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/forms/project-kickoff">
+                    Project Kickoff
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/forms/search-filter">
+                    Search & Filter Panel
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/forms/employee-onboarding">
+                    Employee Onboarding
                   </SideBarMenuItem>
                 </SideBarMenuContent>
               </SideBarMenu>
             </SideBarMenuSet>
+
+            {/* Components */}
             <SideBarMenuSet>
-              <SideBarMenuSetTitle>Input</SideBarMenuSetTitle>
+              <SideBarMenuSetTitle>Components</SideBarMenuSetTitle>
+              <SideBarMenu basePath="/showcase/feedback">
+                <SideBarMenuHeader icon={RiBellLine}>
+                  Feedback & Status
+                </SideBarMenuHeader>
+                <SideBarMenuContent>
+                  <SideBarMenuItem path="/showcase/simple-badge">
+                    Simple Badge
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/bubble-badge">
+                    Bubble Badge
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/status-dot">
+                    Status Dot
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/simple-alert">
+                    Simple Alert
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/toasts">Toast</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/pro-badge">
+                    Pro Badge
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/unsaved-changes-bar">
+                    Unsaved Changes Bar
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/progress">
+                    Progress & Stepper
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/skeleton">
+                    Skeleton
+                  </SideBarMenuItem>
+                </SideBarMenuContent>
+              </SideBarMenu>
+              <SideBarMenu basePath="/showcase/inputs">
+                <SideBarMenuHeader icon={RiKeyboardLine}>
+                  Forms & Inputs
+                </SideBarMenuHeader>
+                <SideBarMenuContent>
+                  <SideBarMenuItem path="/showcase/button">Button</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/input">Input</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/input-group">
+                    Input Group
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/checkbox">
+                    Checkbox
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/radio-group">
+                    Radio Group
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/switch">Switch</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/select">Select</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/field">Field</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/combobox">
+                    Combobox
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/table-lookup">
+                    Table Lookup
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/file-upload">
+                    File Upload
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/rich-text-editor">
+                    Rich Text Editor
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/color-picker">
+                    Color Picker
+                  </SideBarMenuItem>
+                </SideBarMenuContent>
+              </SideBarMenu>
+              <SideBarMenu basePath="/showcase/date">
+                <SideBarMenuHeader icon={LuCalendar}>
+                  Date & Time
+                </SideBarMenuHeader>
+                <SideBarMenuContent>
+                  <SideBarMenuItem path="/showcase/calendar">
+                    Calendar
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/date-picker">
+                    Date Picker
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/date-range-picker">
+                    Date Range Picker
+                  </SideBarMenuItem>
+                </SideBarMenuContent>
+              </SideBarMenu>
+              <SideBarMenu basePath="/showcase/nav">
+                <SideBarMenuHeader icon={RiCompassLine}>
+                  Navigation
+                </SideBarMenuHeader>
+                <SideBarMenuContent>
+                  <SideBarMenuItem path="/showcase/anchor">Anchor</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/nav">Nav</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/nav-link">
+                    Nav Link
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/header">Header</SideBarMenuItem>
+                </SideBarMenuContent>
+              </SideBarMenu>
+              <SideBarMenu basePath="/showcase/overlay">
+                <SideBarMenuHeader icon={LuLayers}>Overlays</SideBarMenuHeader>
+                <SideBarMenuContent>
+                  <SideBarMenuItem path="/showcase/dialog">Dialog</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/sheet">Sheet</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/dropdown-menu">
+                    Dropdown Menu
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/tooltips">
+                    Tooltip
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/command-palette">
+                    Command Palette
+                  </SideBarMenuItem>
+                </SideBarMenuContent>
+              </SideBarMenu>
+              <SideBarMenu basePath="/showcase/charts">
+                <SideBarMenuHeader icon={RiBarChartLine}>Charts</SideBarMenuHeader>
+                <SideBarMenuContent>
+                  <SideBarMenuItem path="/showcase/charts">
+                    Chart Gallery
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/charts/line">
+                    Line Charts
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/charts/area">
+                    Area Charts
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/charts/bar">
+                    Bar Charts
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/charts/pie">
+                    Pie & Donut
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/charts/radial">
+                    Radial & Gauge
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/charts/radar">
+                    Radar Charts
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/charts/scatter">
+                    Scatter & Bubble
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/charts/composed">
+                    Composed Charts
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/charts/treemap">
+                    Treemap
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/charts/histogram">
+                    Histogram
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/charts/candlestick">
+                    Candlestick
+                  </SideBarMenuItem>
+                </SideBarMenuContent>
+              </SideBarMenu>
+              <SideBarMenu basePath="/showcase/data-table">
+                <SideBarMenuHeader icon={RiTableLine}>
+                  Tables & Data
+                </SideBarMenuHeader>
+                <SideBarMenuContent>
+                  <SideBarMenuItem path="/showcase/table">Table</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/empty">
+                    Empty State
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/data-table">
+                    Data Table
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/data-table-lab">
+                    Data Table Lab
+                  </SideBarMenuItem>
+                </SideBarMenuContent>
+              </SideBarMenu>
+              <SideBarMenu basePath="/showcase/layout">
+                <SideBarMenuHeader icon={RiLayoutLine}>Layout</SideBarMenuHeader>
+                <SideBarMenuContent>
+                  <SideBarMenuItem path="/showcase/layout-guide">
+                    Layout Guide
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/card">Card</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/page-header">
+                    Page Header
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/page-bar">
+                    Page Bar
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/aside-content">
+                    Aside Content
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/item">Item</SideBarMenuItem>
+                </SideBarMenuContent>
+              </SideBarMenu>
               <SideBarMenuItemGroup>
-                <SideBarMenuItem alternate="stand-alone" path="/input/combobox">
-                  Combobox
+                <SideBarMenuItem
+                  alternate="stand-alone"
+                  icon={MdOutlineTab}
+                  path="/showcase/tabs"
+                >
+                  Tabs
+                </SideBarMenuItem>
+                <SideBarMenuItem
+                  alternate="stand-alone"
+                  icon={VscSymbolStructure}
+                  path="/showcase/sidebar-menu"
+                >
+                  Sidebar Menu
                 </SideBarMenuItem>
               </SideBarMenuItemGroup>
+              <SideBarMenu basePath="/showcase/util">
+                <SideBarMenuHeader icon={TbSettingsCheck}>
+                  Utilities
+                </SideBarMenuHeader>
+                <SideBarMenuContent>
+                  <SideBarMenuItem path="/showcase/copy-text">
+                    Copy Text
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/name-avatar">
+                    Name Avatar
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/theme-toggle">
+                    Theme Toggle
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/pagination-button">
+                    Pagination Button
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/row-action-button">
+                    Row Action Button
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/scroll-to-top">
+                    Scroll To Top
+                  </SideBarMenuItem>
+                </SideBarMenuContent>
+              </SideBarMenu>
             </SideBarMenuSet>
-            <SideBarMenuSet>
-              <SideBarMenuSetTitle>Instance</SideBarMenuSetTitle>
-              <SideBarMenuItemGroup>
-                <SideBarMenuItem
-                  alternate="stand-alone"
-                  icon={RiSettingsLine}
-                  path="/instance/settings"
-                >
-                  Settings
-                </SideBarMenuItem>
-                <SideBarMenuItem
-                  alternate="stand-alone"
-                  icon={PiBracketsCurlyBold}
-                  path="/instance/api-keys"
-                >
-                  API Keys
-                </SideBarMenuItem>
-                <SideBarMenuItem
-                  alternate="stand-alone"
-                  icon={BiNotification}
-                  path="/instance/updates"
-                >
-                  Updates
-                </SideBarMenuItem>
-              </SideBarMenuItemGroup>
-            </SideBarMenuSet>
-            <SideBarMenuSet>
-              <SideBarMenuSetTitle>Application</SideBarMenuSetTitle>
-              <SideBarMenuItemGroup>
-                <SideBarMenuItem
-                  alternate="stand-alone"
-                  icon={TbSettingsCheck}
-                  path="/application/settings"
-                >
-                  Settings
-                </SideBarMenuItem>
-                <SideBarMenuItem
-                  alternate="stand-alone"
-                  icon={MdOutlineAccountBalanceWallet}
-                  path="/application/billing"
-                >
-                  Plan and Billing
-                </SideBarMenuItem>
-              </SideBarMenuItemGroup>
-            </SideBarMenuSet>
+
           </SideBarMain>
           {/* <SideBarFooter /> */}
         </SideBar>
