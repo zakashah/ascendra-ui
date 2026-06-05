@@ -149,8 +149,6 @@ export default function JobApplicationForm() {
 
   return (
     <>
-      <div className="app-container mt-8 pb-24 lg:mt-10 lg:pb-28">
-        <div className="mx-auto flex w-full max-w-3xl flex-col">
           <BackLink href="/showcase/forms">Forms Gallery</BackLink>
 
           <PageHeader>
@@ -891,8 +889,6 @@ export default function JobApplicationForm() {
               </PageContent>
             </PageWrapper>
           </PageMain>
-        </div>
-      </div>
 
       <UnsavedChangesBar
         isDirty={isDirty}

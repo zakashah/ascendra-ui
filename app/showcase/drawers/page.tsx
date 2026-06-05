@@ -48,7 +48,7 @@ export default function DrawersGalleryPage() {
       : drawersConfig.filter((d) => d.type === activeType);
 
   return (
-    <div className="mx-auto max-w-4xl px-8 py-12">
+    <>
       {/* Back */}
       <Link
         href="/showcase"
@@ -158,6 +158,6 @@ export default function DrawersGalleryPage() {
           );
         })}
       </div>
-    </div>
+    </>
   );
 }

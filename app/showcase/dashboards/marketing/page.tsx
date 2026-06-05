@@ -323,7 +323,7 @@ export default function MarketingPage() {
   const budgetPct = Math.round((BUDGET_DEPLOYED / BUDGET_TOTAL) * 100);
 
   return (
-    <div className="mx-auto max-w-7xl px-8 py-12">
+    <>
       <BackLink href="/showcase/dashboards">Dashboard Gallery</BackLink>
 
       <PageHeader variant="dashboard">
@@ -898,6 +898,6 @@ export default function MarketingPage() {
           </div>
         </div>
       </DashboardContent>
-    </div>
+    </>
   );
 }

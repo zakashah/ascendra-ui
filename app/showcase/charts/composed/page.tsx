@@ -316,7 +316,7 @@ export default function ComposedChartsPage() {
   >({});
 
   return (
-    <div className="mx-auto max-w-5xl px-8 py-12">
+    <>
       <Link
         href="/showcase/charts"
         className="text-muted-foreground hover:text-foreground mb-8 flex w-fit items-center gap-1.5 text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
@@ -1349,6 +1349,6 @@ export default function ComposedChartsPage() {
           </CardFooter>
         </Card>
       </div>
-    </div>
+    </>
   );
 }

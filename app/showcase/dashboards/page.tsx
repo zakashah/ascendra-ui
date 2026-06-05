@@ -56,7 +56,7 @@ const totalChartInstances = dashboardsConfig.reduce((s, d) => s + d.chartTypes.l
 
 export default function DashboardsGalleryPage() {
   return (
-    <div className="mx-auto max-w-5xl px-8 py-12">
+    <>
       {/* Back */}
       <Link
         href="/showcase"
@@ -163,6 +163,6 @@ export default function DashboardsGalleryPage() {
           );
         })}
       </div>
-    </div>
+    </>
   );
 }

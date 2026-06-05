@@ -26,7 +26,7 @@ export default function FormsGalleryPage() {
       : formsConfig.filter((f) => f.complexity === activeComplexity);
 
   return (
-    <div className="mx-auto max-w-4xl px-8 py-12">
+    <>
       {/* Back */}
       <Link
         href="/showcase"
@@ -159,6 +159,6 @@ export default function FormsGalleryPage() {
           </Link>
         ))}
       </div>
-    </div>
+    </>
   );
 }

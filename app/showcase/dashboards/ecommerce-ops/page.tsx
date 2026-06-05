@@ -313,7 +313,7 @@ export default function EcommerceOpsPage() {
   const [hiddenCat, setHiddenCat] = useState<Record<string, boolean>>({});
 
   return (
-    <div className="mx-auto max-w-7xl px-8 py-12">
+    <>
       <BackLink href="/showcase/dashboards">Dashboard Gallery</BackLink>
 
       <PageHeader variant="dashboard">
@@ -691,6 +691,6 @@ export default function EcommerceOpsPage() {
           </div>
         </div>
       </DashboardContent>
-    </div>
+    </>
   );
 }

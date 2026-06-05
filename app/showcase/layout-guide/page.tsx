@@ -97,7 +97,7 @@ export default function LayoutGuidePage() {
   const [asideDimmed, setAsideDimmed] = useState(false);
 
   return (
-    <div className="mx-auto max-w-4xl px-8 py-12 flex flex-col gap-14">
+    <>
       {/* ── Intro ─────────────────────────────────────────────────────────── */}
       <div className="flex flex-col gap-1.5">
         <h1 className="text-2xl font-semibold tracking-tight">Layout System</h1>
@@ -1019,6 +1019,6 @@ export function CollapsibleSection() {
           </div>
         </Variant>
       </GuideSection>
-    </div>
+    </>
   );
 }

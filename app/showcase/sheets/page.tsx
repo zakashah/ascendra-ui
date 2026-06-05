@@ -52,7 +52,7 @@ export default function SheetsGalleryPage() {
       : sheetsConfig.filter((s) => s.type === activeType);
 
   return (
-    <div className="mx-auto max-w-4xl px-8 py-12">
+    <>
       {/* Back */}
       <Link
         href="/showcase"
@@ -161,6 +161,6 @@ export default function SheetsGalleryPage() {
           );
         })}
       </div>
-    </div>
+    </>
   );
 }

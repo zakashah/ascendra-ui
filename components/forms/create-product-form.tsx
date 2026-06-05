@@ -139,9 +139,7 @@ export default function CreateProductForm() {
 
   return (
     <>
-      <div className="app-container mt-8 pb-24 lg:mt-10 lg:pb-28">
-        <div className="mx-auto flex w-full max-w-3xl flex-col">
-          <BackLink href="/showcase/forms">Forms Gallery</BackLink>
+     <BackLink href="/showcase/forms">Forms Gallery</BackLink>
 
           <PageHeader>
             <PageHeaderGroup>
@@ -978,8 +976,6 @@ export default function CreateProductForm() {
               </TabContent>
             </Tabs>
           </PageMain>
-        </div>
-      </div>
 
       <UnsavedChangesBar
         isDirty={isDirty}

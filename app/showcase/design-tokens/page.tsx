@@ -271,7 +271,7 @@ function RadiusSwatch({ token }: { token: RadiusToken }) {
 
 export default function DesignTokensPage() {
   return (
-    <div className="mx-auto max-w-3xl px-8 py-12">
+    <>
       {/* Breadcrumb */}
       <p className="mb-4 text-xs text-muted-foreground">
         <Link
@@ -718,6 +718,6 @@ export default function DesignTokensPage() {
           to update light and dark mode values globally.
         </p>
       </div>
-    </div>
+    </>
   );
 }

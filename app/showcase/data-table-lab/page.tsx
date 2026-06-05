@@ -79,7 +79,7 @@ const INVOICE_FIELD_OPTIONS: FieldOptionsMap = {
 
 export default function DataTableLabPage() {
   return (
-    <div className="mx-auto max-w-5xl px-8 pt-12 pb-16">
+    <>
       <PageHeader>
         <PageHeaderGroup>
           <PageTitle>Data Table Lab</PageTitle>
@@ -254,6 +254,6 @@ export default function DataTableLabPage() {
           </TabContent>
         </Tabs>
       </PageMain>
-    </div>
+    </>
   );
 }

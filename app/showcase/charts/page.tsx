@@ -6,17 +6,22 @@ import { chartsConfig } from "@/lib/charts-config";
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
 const categoryColor: Record<string, string> = {
-  "Comparison":       "bg-blue-500/10 text-blue-700 ring-blue-500/20 dark:text-blue-400 dark:ring-blue-500/30",
+  Comparison:
+    "bg-blue-500/10 text-blue-700 ring-blue-500/20 dark:text-blue-400 dark:ring-blue-500/30",
   "Temporal / Trend": "bg-primary/10 text-primary ring-primary/20",
-  "Composition":      "bg-green-500/10 text-green-700 ring-green-500/20 dark:text-green-400 dark:ring-green-500/30",
-  "Distribution":     "bg-orange-500/10 text-orange-700 ring-orange-500/20 dark:text-orange-400 dark:ring-orange-500/30",
-  "Relational":       "bg-purple-500/10 text-purple-700 ring-purple-500/20 dark:text-purple-400 dark:ring-purple-500/30",
-  "Multi-type":       "bg-muted text-muted-foreground ring-border",
+  Composition:
+    "bg-green-500/10 text-green-700 ring-green-500/20 dark:text-green-400 dark:ring-green-500/30",
+  Distribution:
+    "bg-orange-500/10 text-orange-700 ring-orange-500/20 dark:text-orange-400 dark:ring-orange-500/30",
+  Relational:
+    "bg-purple-500/10 text-purple-700 ring-purple-500/20 dark:text-purple-400 dark:ring-purple-500/30",
+  "Multi-type": "bg-muted text-muted-foreground ring-border",
 };
 
 const badgeColor: Record<string, string> = {
-  "New":     "bg-green-500/10 text-green-700 ring-green-500/20 dark:text-green-400 dark:ring-green-500/30",
-  "Finance": "bg-amber-500/10 text-amber-700 ring-amber-500/20 dark:text-amber-400 dark:ring-amber-500/30",
+  New: "bg-green-500/10 text-green-700 ring-green-500/20 dark:text-green-400 dark:ring-green-500/30",
+  Finance:
+    "bg-amber-500/10 text-amber-700 ring-amber-500/20 dark:text-amber-400 dark:ring-amber-500/30",
 };
 
 const ALL_CATEGORIES = Array.from(new Set(chartsConfig.map((c) => c.category)));
@@ -31,7 +36,7 @@ export default function ChartsGalleryPage() {
       : chartsConfig.filter((c) => c.category === activeCategory);
 
   return (
-    <div className="mx-auto max-w-4xl px-8 py-12">
+    <>
       {/* Back */}
       <Link
         href="/showcase"
@@ -51,9 +56,13 @@ export default function ChartsGalleryPage() {
           Chart Gallery
         </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          <span className="text-foreground font-medium">{chartsConfig.length} chart types</span>
+          <span className="text-foreground font-medium">
+            {chartsConfig.length} chart types
+          </span>
           {" · "}
-          <span className="text-foreground font-medium">{totalVariants} variants total</span>
+          <span className="text-foreground font-medium">
+            {totalVariants} variants total
+          </span>
           {" · "}built with recharts + shadcn/ui
         </p>
       </div>
@@ -67,7 +76,9 @@ export default function ChartsGalleryPage() {
           { label: "Built with", value: "recharts" },
         ].map(({ label, value }) => (
           <div key={label} className="flex flex-col gap-0.5">
-            <span className="text-2xl font-semibold text-foreground">{value}</span>
+            <span className="text-2xl font-semibold text-foreground">
+              {value}
+            </span>
             <span className="text-xs text-muted-foreground">{label}</span>
           </div>
         ))}
@@ -101,7 +112,9 @@ export default function ChartsGalleryPage() {
             {/* Header */}
             <div className="flex items-start justify-between gap-3">
               <div className="flex flex-col gap-1">
-                <span className="font-medium text-foreground">{chart.name}</span>
+                <span className="font-medium text-foreground">
+                  {chart.name}
+                </span>
                 <span className="text-xs text-muted-foreground">
                   {chart.variants} variant{chart.variants !== 1 ? "s" : ""}
                 </span>
@@ -152,6 +165,6 @@ export default function ChartsGalleryPage() {
           </Link>
         ))}
       </div>
-    </div>
+    </>
   );
 }

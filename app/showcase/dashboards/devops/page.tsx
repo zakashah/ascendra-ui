@@ -271,7 +271,7 @@ export default function DevopsPage() {
   );
 
   return (
-    <div className="mx-auto max-w-7xl px-8 py-12">
+    <>
       <BackLink href="/showcase/dashboards">Dashboard Gallery</BackLink>
 
       <PageHeader variant="dashboard">
@@ -871,6 +871,6 @@ export default function DevopsPage() {
           </div>
         </div>
       </DashboardContent>
-    </div>
+    </>
   );
 }

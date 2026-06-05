@@ -314,7 +314,7 @@ export default function RealEstatePage() {
   const [hiddenRental, setHiddenRental] = useState<Record<string, boolean>>({});
 
   return (
-    <div className="mx-auto max-w-7xl px-8 py-12">
+    <>
       <BackLink href="/showcase/dashboards">Dashboard Gallery</BackLink>
 
       <PageHeader variant="dashboard">
@@ -821,6 +821,6 @@ export default function RealEstatePage() {
           </div>
         </div>
       </DashboardContent>
-    </div>
+    </>
   );
 }

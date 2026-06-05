@@ -203,7 +203,7 @@ function RuleList({ rules }: { rules: Rule[] }) {
 
 export default function GuidelinesPage() {
   return (
-    <div className="mx-auto max-w-3xl px-8 py-12">
+    <>
       {/* Breadcrumb */}
       <p className="mb-4 text-xs text-muted-foreground">
         <Link
@@ -224,8 +224,8 @@ export default function GuidelinesPage() {
           Usage Guidelines
         </h1>
         <p className="text-sm text-muted-foreground">
-          Decision rules for when to use which component. These answer the "which
-          one?" questions that the component pages don't.
+          Decision rules for when to use which component. These answer the &quot;which
+          one?&quot; questions that the component pages don&apos;t.
         </p>
       </div>
 
@@ -364,6 +364,6 @@ export default function GuidelinesPage() {
           <code className="rounded bg-muted px-1 font-mono">CHANGELOG.md</code>.
         </p>
       </div>
-    </div>
+    </>
   );
 }

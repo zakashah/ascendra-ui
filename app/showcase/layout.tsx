@@ -114,16 +114,17 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         <SideBar>
           <SideBarHeader />
           <SideBarMain>
-
             {/* Getting Started */}
             <SideBarMenuSet>
               <SideBarMenuSetTitle>Getting Started</SideBarMenuSetTitle>
-              <SideBarMenu basePath="/showcase/overview">
+              <SideBarMenu basePath="/showcase">
                 <SideBarMenuHeader icon={LuBookOpen}>
                   Getting Started
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/showcase/overview">Overview</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/overview">
+                    Overview
+                  </SideBarMenuItem>
                   <SideBarMenuItem path="/showcase/design-tokens">
                     Design Tokens
                   </SideBarMenuItem>
@@ -265,7 +266,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   <SideBarMenuItem path="/showcase/simple-alert">
                     Simple Alert
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/toasts">Toast</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/toasts">
+                    Toast
+                  </SideBarMenuItem>
                   <SideBarMenuItem path="/showcase/pro-badge">
                     Pro Badge
                   </SideBarMenuItem>
@@ -285,8 +288,12 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Forms & Inputs
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/showcase/button">Button</SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/input">Input</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/button">
+                    Button
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/input">
+                    Input
+                  </SideBarMenuItem>
                   <SideBarMenuItem path="/showcase/input-group">
                     Input Group
                   </SideBarMenuItem>
@@ -296,9 +303,15 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   <SideBarMenuItem path="/showcase/radio-group">
                     Radio Group
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/switch">Switch</SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/select">Select</SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/field">Field</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/switch">
+                    Switch
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/select">
+                    Select
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/field">
+                    Field
+                  </SideBarMenuItem>
                   <SideBarMenuItem path="/showcase/combobox">
                     Combobox
                   </SideBarMenuItem>
@@ -337,19 +350,27 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Navigation
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/showcase/anchor">Anchor</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/anchor">
+                    Anchor
+                  </SideBarMenuItem>
                   <SideBarMenuItem path="/showcase/nav">Nav</SideBarMenuItem>
                   <SideBarMenuItem path="/showcase/nav-link">
                     Nav Link
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/header">Header</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/header">
+                    Header
+                  </SideBarMenuItem>
                 </SideBarMenuContent>
               </SideBarMenu>
               <SideBarMenu basePath="/showcase/overlay">
                 <SideBarMenuHeader icon={LuLayers}>Overlays</SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/showcase/dialog">Dialog</SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/sheet">Sheet</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/dialog">
+                    Dialog
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/sheet">
+                    Sheet
+                  </SideBarMenuItem>
                   <SideBarMenuItem path="/showcase/dropdown-menu">
                     Dropdown Menu
                   </SideBarMenuItem>
@@ -362,7 +383,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 </SideBarMenuContent>
               </SideBarMenu>
               <SideBarMenu basePath="/showcase/charts">
-                <SideBarMenuHeader icon={RiBarChartLine}>Charts</SideBarMenuHeader>
+                <SideBarMenuHeader icon={RiBarChartLine}>
+                  Charts
+                </SideBarMenuHeader>
                 <SideBarMenuContent>
                   <SideBarMenuItem path="/showcase/charts">
                     Chart Gallery
@@ -407,7 +430,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Tables & Data
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/showcase/table">Table</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/table">
+                    Table
+                  </SideBarMenuItem>
                   <SideBarMenuItem path="/showcase/empty">
                     Empty State
                   </SideBarMenuItem>
@@ -420,7 +445,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 </SideBarMenuContent>
               </SideBarMenu>
               <SideBarMenu basePath="/showcase/layout">
-                <SideBarMenuHeader icon={RiLayoutLine}>Layout</SideBarMenuHeader>
+                <SideBarMenuHeader icon={RiLayoutLine}>
+                  Layout
+                </SideBarMenuHeader>
                 <SideBarMenuContent>
                   <SideBarMenuItem path="/showcase/layout-guide">
                     Layout Guide
@@ -480,7 +507,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                 </SideBarMenuContent>
               </SideBarMenu>
             </SideBarMenuSet>
-
           </SideBarMain>
           {/* <SideBarFooter /> */}
         </SideBar>

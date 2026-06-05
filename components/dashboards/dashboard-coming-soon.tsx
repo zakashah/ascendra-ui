@@ -84,7 +84,7 @@ export function DashboardComingSoon({
     "bg-muted text-muted-foreground ring-border";
 
   return (
-    <div className="mx-auto max-w-7xl px-8 py-12">
+    <>
       {/* Back */}
       <Link
         href="/showcase/dashboards"
@@ -205,6 +205,6 @@ export function DashboardComingSoon({
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -283,7 +283,7 @@ export default function SaasRevenuePage() {
   const [hiddenChurn, setHiddenChurn] = useState<Record<string, boolean>>({});
 
   return (
-    <div className="mx-auto max-w-7xl px-8 py-12">
+    <>
       <BackLink href="/showcase/dashboards">Dashboard Gallery</BackLink>
 
       <PageHeader variant="dashboard">
@@ -774,6 +774,6 @@ export default function SaasRevenuePage() {
           </div>
         </div>
       </DashboardContent>
-    </div>
+    </>
   );
 }
