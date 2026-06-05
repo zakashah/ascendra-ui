@@ -254,31 +254,31 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Feedback & Status
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/showcase/simple-badge">
+                  <SideBarMenuItem path="/showcase/feedback/simple-badge">
                     Simple Badge
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/bubble-badge">
+                  <SideBarMenuItem path="/showcase/feedback/bubble-badge">
                     Bubble Badge
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/status-dot">
+                  <SideBarMenuItem path="/showcase/feedback/status-dot">
                     Status Dot
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/simple-alert">
+                  <SideBarMenuItem path="/showcase/feedback/simple-alert">
                     Simple Alert
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/toasts">
+                  <SideBarMenuItem path="/showcase/feedback/toasts">
                     Toast
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/pro-badge">
+                  <SideBarMenuItem path="/showcase/feedback/pro-badge">
                     Pro Badge
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/unsaved-changes-bar">
+                  <SideBarMenuItem path="/showcase/feedback/unsaved-changes-bar">
                     Unsaved Changes Bar
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/progress">
+                  <SideBarMenuItem path="/showcase/feedback/progress">
                     Progress & Stepper
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/skeleton">
+                  <SideBarMenuItem path="/showcase/feedback/skeleton">
                     Skeleton
                   </SideBarMenuItem>
                 </SideBarMenuContent>
@@ -288,43 +288,43 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Forms & Inputs
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/showcase/button">
+                  <SideBarMenuItem path="/showcase/inputs/button">
                     Button
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/input">
+                  <SideBarMenuItem path="/showcase/inputs/input">
                     Input
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/input-group">
+                  <SideBarMenuItem path="/showcase/inputs/input-group">
                     Input Group
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/checkbox">
+                  <SideBarMenuItem path="/showcase/inputs/checkbox">
                     Checkbox
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/radio-group">
+                  <SideBarMenuItem path="/showcase/inputs/radio-group">
                     Radio Group
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/switch">
+                  <SideBarMenuItem path="/showcase/inputs/switch">
                     Switch
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/select">
+                  <SideBarMenuItem path="/showcase/inputs/select">
                     Select
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/field">
+                  <SideBarMenuItem path="/showcase/inputs/field">
                     Field
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/combobox">
+                  <SideBarMenuItem path="/showcase/inputs/combobox">
                     Combobox
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/table-lookup">
+                  <SideBarMenuItem path="/showcase/inputs/table-lookup">
                     Table Lookup
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/file-upload">
+                  <SideBarMenuItem path="/showcase/inputs/file-upload">
                     File Upload
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/rich-text-editor">
+                  <SideBarMenuItem path="/showcase/inputs/rich-text-editor">
                     Rich Text Editor
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/color-picker">
+                  <SideBarMenuItem path="/showcase/inputs/color-picker">
                     Color Picker
                   </SideBarMenuItem>
                 </SideBarMenuContent>
@@ -334,13 +334,13 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Date & Time
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/showcase/calendar">
+                  <SideBarMenuItem path="/showcase/date/calendar">
                     Calendar
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/date-picker">
+                  <SideBarMenuItem path="/showcase/date/date-picker">
                     Date Picker
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/date-range-picker">
+                  <SideBarMenuItem path="/showcase/date/date-range-picker">
                     Date Range Picker
                   </SideBarMenuItem>
                 </SideBarMenuContent>
@@ -350,14 +350,16 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Navigation
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/showcase/anchor">
+                  <SideBarMenuItem path="/showcase/nav/anchor">
                     Anchor
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/nav">Nav</SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/nav-link">
+                  <SideBarMenuItem path="/showcase/nav/nav">
+                    Nav
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/nav/nav-link">
                     Nav Link
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/header">
+                  <SideBarMenuItem path="/showcase/nav/header">
                     Header
                   </SideBarMenuItem>
                 </SideBarMenuContent>
@@ -365,19 +367,19 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               <SideBarMenu basePath="/showcase/overlay">
                 <SideBarMenuHeader icon={LuLayers}>Overlays</SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/showcase/dialog">
+                  <SideBarMenuItem path="/showcase/overlay/dialog">
                     Dialog
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/sheet">
+                  <SideBarMenuItem path="/showcase/overlay/sheet">
                     Sheet
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/dropdown-menu">
+                  <SideBarMenuItem path="/showcase/overlay/dropdown-menu">
                     Dropdown Menu
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/tooltips">
+                  <SideBarMenuItem path="/showcase/overlay/tooltips">
                     Tooltip
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/command-palette">
+                  <SideBarMenuItem path="/showcase/overlay/command-palette">
                     Command Palette
                   </SideBarMenuItem>
                 </SideBarMenuContent>
@@ -430,10 +432,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Tables & Data
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/showcase/table">
+                  <SideBarMenuItem path="/showcase/data-table/table">
                     Table
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/empty">
+                  <SideBarMenuItem path="/showcase/data-table/empty">
                     Empty State
                   </SideBarMenuItem>
                   <SideBarMenuItem path="/showcase/data-table">
@@ -452,17 +454,21 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   <SideBarMenuItem path="/showcase/layout-guide">
                     Layout Guide
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/card">Card</SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/page-header">
+                  <SideBarMenuItem path="/showcase/layout/card">
+                    Card
+                  </SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/layout/page-header">
                     Page Header
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/page-bar">
+                  <SideBarMenuItem path="/showcase/layout/page-bar">
                     Page Bar
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/aside-content">
+                  <SideBarMenuItem path="/showcase/layout/aside-content">
                     Aside Content
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/item">Item</SideBarMenuItem>
+                  <SideBarMenuItem path="/showcase/layout/item">
+                    Item
+                  </SideBarMenuItem>
                 </SideBarMenuContent>
               </SideBarMenu>
               <SideBarMenuItemGroup>
@@ -486,22 +492,22 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Utilities
                 </SideBarMenuHeader>
                 <SideBarMenuContent>
-                  <SideBarMenuItem path="/showcase/copy-text">
+                  <SideBarMenuItem path="/showcase/util/copy-text">
                     Copy Text
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/name-avatar">
+                  <SideBarMenuItem path="/showcase/util/name-avatar">
                     Name Avatar
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/theme-toggle">
+                  <SideBarMenuItem path="/showcase/util/theme-toggle">
                     Theme Toggle
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/pagination-button">
+                  <SideBarMenuItem path="/showcase/util/pagination-button">
                     Pagination Button
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/row-action-button">
+                  <SideBarMenuItem path="/showcase/util/row-action-button">
                     Row Action Button
                   </SideBarMenuItem>
-                  <SideBarMenuItem path="/showcase/scroll-to-top">
+                  <SideBarMenuItem path="/showcase/util/scroll-to-top">
                     Scroll To Top
                   </SideBarMenuItem>
                 </SideBarMenuContent>

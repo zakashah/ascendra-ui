@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import { cn } from '@/ascendra-ui/shadcn';
 import { usePathname } from 'next/navigation';
+import { useSideBar } from './side-bar';
 
 export function SideBarMenu({
   basePath,
@@ -12,6 +13,7 @@ export function SideBarMenu({
 }: React.ComponentProps<'div'> & { basePath: string }) {
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
+  const { persistent } = useSideBar();
 
   useEffect(() => {
     const menu = menuRef.current;
@@ -24,8 +26,9 @@ export function SideBarMenu({
       menu.setAttribute('data-locked', 'true');
     } else {
       menu.removeAttribute('data-locked');
-      // IMPORTANT: do NOT collapse automatically
-      // leave data-open untouched for multi-open behavior
+      if (!persistent) {
+        menu.setAttribute('data-open', 'false');
+      }
     }
 
     const syncInert = () => {
@@ -50,7 +53,7 @@ export function SideBarMenu({
     });
 
     return () => observer.disconnect();
-  }, [pathname, basePath]);
+  }, [pathname, basePath, persistent]);
 
   return (
     <div

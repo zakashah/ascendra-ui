@@ -7,29 +7,31 @@ import { PropsTable } from "@/components/props-table";
 import { SectionHeader } from "@/components/section-header";
 import { ImportChip } from "@/components/import-chip";
 
-function findCategory(slug: string) {
-  return navConfig.find((c) => c.items.some((i) => i.slug === slug))?.title ?? null;
+function findCategory(fullSlug: string) {
+  return navConfig.find((c) => c.items.some((i) => i.slug === fullSlug))?.title ?? null;
 }
 
 export async function generateStaticParams() {
   return navConfig
     .flatMap((c) => c.items)
     .filter((item) => item.slug !== "")
-    .map((item) => ({ component: item.slug }));
+    .map((item) => ({ slug: item.slug.split('/') }));
 }
 
 export default async function ComponentPage({
   params,
 }: {
-  params: Promise<{ component: string }>;
+  params: Promise<{ slug: string[] }>;
 }) {
-  const { component } = await params;
+  const { slug } = await params;
+  const component = slug[slug.length - 1];
+  const fullSlug = slug.join('/');
   const meta = registry[component];
 
   if (!meta) notFound();
 
   const DocContent = docComponents[component];
-  const category = findCategory(component);
+  const category = findCategory(fullSlug);
   const importStatement = `import { ${meta.importNames.join(", ")} } from "${meta.importPath}"`;
 
   const isWide = component === 'data-table';
