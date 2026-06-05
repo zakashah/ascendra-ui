@@ -12,16 +12,16 @@ export function CardHeaderTitle({
   ...props
 }: CardHeaderTitleProps) {
   const { step } = useCardContext();
-  const wizard = useStepperContextSafe();
+  const stepper = useStepperContextSafe();
   const isCompleted =
-    step !== undefined && wizard !== null && step < wizard.currentStep;
+    step !== undefined && stepper !== null && step < stepper.currentStep;
 
   if (isCompleted) {
     return (
       <button
         type="button"
         data-slot="card-header-title"
-        onClick={() => wizard.goToStep(step)}
+        onClick={() => stepper.goToStep(step)}
         className={cn(
           "text-base font-medium text-foreground cursor-pointer hover:opacity-70 transition-opacity text-left",
           className,

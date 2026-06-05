@@ -285,7 +285,7 @@ export default function EmployeeOnboardingForm() {
   const accessLevel = watch("accessLevel");
   const enroll401k = watch("enroll401k");
 
-  const WIZARD_STEPS: StepperStep[] = [
+  const STEPPER_STEPS: StepperStep[] = [
     {
       label: "Personal Information",
       description: "Identity & address",
@@ -315,7 +315,7 @@ export default function EmployeeOnboardingForm() {
   return (
     <div className="app-container mt-8 pb-24 lg:mt-10 lg:pb-28">
       <div className="mx-auto flex w-full max-w-3xl flex-col">
-        <StepperProvider steps={WIZARD_STEPS} onSubmit={handleSave}>
+        <StepperProvider steps={STEPPER_STEPS} onSubmit={handleSave}>
           <BackLink href="/showcase/forms">Forms Gallery</BackLink>
           <PageHeader>
             <PageHeaderGroup>
@@ -327,7 +327,7 @@ export default function EmployeeOnboardingForm() {
             </PageHeaderGroup>
           </PageHeader>
           <PageMain>
-            <PageWrapper hideDivider>
+            <PageWrapper>
               <PageContent>
                 <MainContent>
                   <Stepper />

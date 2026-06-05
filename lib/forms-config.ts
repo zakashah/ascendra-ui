@@ -95,12 +95,12 @@ export const formsConfig: FormMeta[] = [
   },
   {
     slug: 'employee-onboarding',
-    name: 'Employee Onboarding Wizard',
+    name: 'Employee Onboarding Stepper',
     description:
-      'Four-step wizard covering personal info, employment details, compensation, and IT access — the broadest coverage of the component library in one form.',
+      'Four-step stepper covering personal info, employment details, compensation, and IT access — the broadest coverage of the component library in one form.',
     domain: 'HR / Enterprise',
     complexity: 'Complex',
-    layout: '4-step wizard with step indicator and per-step sections',
+    layout: '4-step stepper with step indicator and per-step sections',
     components: ['Input', 'InputGroup', 'Select', 'Combobox', 'RadioGroup', 'Checkbox', 'Switch', 'DatePicker', 'TableLookup', 'SimpleAlert', 'Field', 'FieldGroup', 'UnsavedChangesBar'],
   },
 ];

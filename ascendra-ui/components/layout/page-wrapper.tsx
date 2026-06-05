@@ -3,12 +3,11 @@ import { cn } from '@/ascendra-ui/shadcn';
 export function PageWrapper({
   className,
   children,
-  hideDivider,
   ...props
-}: React.ComponentProps<'div'> & { hideDivider?: boolean }) {
+}: React.ComponentProps<'div'>) {
   return (
     <div data-slot="page-wrapper" className={cn('', className)} {...props}>
-      {!hideDivider && <div className="border-border border-b" />}
+      <div className="border-border border-b [[data-slot=page-wrapper]:has([data-slot=stepper])_&]:hidden" />
       {children}
     </div>
   );

@@ -12,9 +12,9 @@ export function CardHeaderSubtitle({
   ...props
 }: CardHeaderSubtitleProps) {
   const { step } = useCardContext();
-  const wizard = useStepperContextSafe();
+  const stepper = useStepperContextSafe();
 
-  if (step !== undefined && wizard !== null && wizard.currentStep !== step) {
+  if (step !== undefined && stepper !== null && stepper.currentStep !== step) {
     return null;
   }
 

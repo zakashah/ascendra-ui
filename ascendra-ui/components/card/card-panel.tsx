@@ -23,11 +23,11 @@ export function CardPanel({
   bg?: BgConfig;
 }) {
   const { collapseable, collapsed: contextCollapsed, step } = useCardContext();
-  const wizard = useStepperContextSafe();
+  const stepper = useStepperContextSafe();
 
   const isCollapsed =
-    step !== undefined && wizard !== null
-      ? wizard.currentStep !== step
+    step !== undefined && stepper !== null
+      ? stepper.currentStep !== step
       : (collapsed ?? (collapseable ? contextCollapsed : false));
 
   return (

@@ -88,7 +88,7 @@ export function Stepper({ steps: stepsProp, currentStep: currentStepProp, onStep
   });
 
   return (
-    <div className={cn("flex w-full items-start", className)}>
+    <div data-slot="stepper" className={cn("flex w-full items-start", className)}>
       {resolved.map((step, i) => {
         const status = step.status ?? "pending";
         const isLast = i === steps.length - 1;

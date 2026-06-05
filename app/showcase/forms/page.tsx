@@ -51,7 +51,7 @@ export default function FormsGalleryPage() {
             {formsConfig.length} production-grade forms
           </span>{" "}
           spanning multiple business domains and layouts — from a simple contact
-          form to a multi-step onboarding wizard. Each form is fully interactive
+          form to a multi-step onboarding stepper. Each form is fully interactive
           and built exclusively with components from this design system.
         </p>
       </div>
