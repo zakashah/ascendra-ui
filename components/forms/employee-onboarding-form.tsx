@@ -327,7 +327,7 @@ export default function EmployeeOnboardingForm() {
             </PageHeaderGroup>
           </PageHeader>
           <PageMain>
-            <PageWrapper>
+            <PageWrapper hideDivider>
               <PageContent>
                 <MainContent>
                   <WizardSteps />
