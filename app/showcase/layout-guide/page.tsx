@@ -973,6 +973,52 @@ export function CollapsibleSection() {
           </div>
         </Variant>
       </GuideSection>
+
+      {/* ── Page Container ────────────────────────────────────────────────── */}
+      <GuideSection
+        title="Page Container"
+        description="The .app-container CSS class applies responsive horizontal padding and a max-width cap. Use it on the outermost div of any full-viewport-width page that lives outside the showcase sidebar layout — for example a marketing page, a public-facing route, or a standalone dashboard that doesn't share the sidebar chrome."
+      >
+        <Variant
+          label="app-container"
+          code={`// Defined in globals.css — no import needed
+// Mobile: 1.5rem (24px) horizontal padding
+// Tablet/desktop (md+): 2.5rem (40px) horizontal padding
+// max-width: 72rem (max-w-6xl)
+
+<div className="app-container">
+  <BackLink href="/dashboard">Dashboard</BackLink>
+  <PageHeader>
+    <PageTitle>Report</PageTitle>
+  </PageHeader>
+  <PageMain>
+    {/* page content */}
+  </PageMain>
+</div>`}
+        >
+          <div className="rounded border bg-muted/40 px-6 py-4 text-sm text-muted-foreground">
+            <p className="font-mono text-xs mb-2 text-foreground">
+              .app-container
+            </p>
+            <p>
+              Applies{" "}
+              <code className="rounded bg-muted px-1 font-mono text-xs">
+                w-[calc(100%-var(--app-layout-spacing))]
+              </code>{" "}
+              with{" "}
+              <code className="rounded bg-muted px-1 font-mono text-xs">
+                mx-auto max-w-6xl
+              </code>
+              .
+            </p>
+            <p className="mt-1">
+              Responsive spacing:{" "}
+              <strong className="text-foreground">24px</strong> mobile →{" "}
+              <strong className="text-foreground">40px</strong> tablet/desktop.
+            </p>
+          </div>
+        </Variant>
+      </GuideSection>
     </div>
   );
 }

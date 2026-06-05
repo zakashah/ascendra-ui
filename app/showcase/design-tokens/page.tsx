@@ -396,6 +396,184 @@ export default function DesignTokensPage() {
           </div>
         </div>
 
+        {/* ── Spacing ── */}
+        <div className="space-y-4">
+          <SectionHeader>Spacing Scale</SectionHeader>
+          <p className="text-xs text-muted-foreground">
+            One layout spacing token controls horizontal padding across the entire
+            app. It responds to screen size automatically.
+          </p>
+          <div className="space-y-3">
+            <div className="rounded-lg border overflow-hidden">
+              <div className="grid grid-cols-[160px_1fr_1fr] gap-4 border-b bg-muted/50 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <span>Token</span>
+                <span>Value</span>
+                <span>Context</span>
+              </div>
+              <div className="divide-y">
+                <div className="grid grid-cols-[160px_1fr_1fr] gap-4 px-4 py-3 text-sm">
+                  <code className="font-mono text-xs text-foreground">
+                    --app-layout-spacing
+                  </code>
+                  <span className="text-foreground">1.5rem (24px)</span>
+                  <span className="text-muted-foreground">
+                    Mobile — default
+                  </span>
+                </div>
+                <div className="grid grid-cols-[160px_1fr_1fr] gap-4 px-4 py-3 text-sm">
+                  <code className="font-mono text-xs text-foreground">
+                    --app-layout-spacing
+                  </code>
+                  <span className="text-foreground">2.5rem (40px)</span>
+                  <span className="text-muted-foreground">
+                    Tablet / desktop (md+)
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="rounded-lg border p-4 space-y-1.5">
+              <p className="font-mono text-xs font-medium text-foreground">
+                .app-container
+              </p>
+              <p className="text-xs text-muted-foreground">
+                CSS class defined in{" "}
+                <code className="rounded bg-muted px-1 font-mono">
+                  globals.css
+                </code>
+                . Applies responsive horizontal padding via{" "}
+                <code className="rounded bg-muted px-1 font-mono">
+                  --app-layout-spacing
+                </code>{" "}
+                and caps width at{" "}
+                <code className="rounded bg-muted px-1 font-mono">
+                  max-w-6xl
+                </code>
+                . Use this on the outermost div of any full-viewport-width page
+                that lives outside the showcase sidebar layout.
+              </p>
+              <div className="mt-2 rounded bg-muted px-3 py-2 font-mono text-xs text-foreground">
+                {`<div className="app-container">`}
+                <br />
+                &nbsp;&nbsp;{`<PageHeader>…</PageHeader>`}
+                <br />
+                {`</div>`}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Chart Colors ── */}
+        <div className="space-y-4">
+          <SectionHeader>Chart Color Mapping</SectionHeader>
+          <p className="text-xs text-muted-foreground">
+            Eight chart variables map to semantic intent. Always use them in
+            order (chart-1 first) to keep visual language consistent across
+            charts. Dark mode values are neon-boosted for legibility on dark
+            backgrounds.
+          </p>
+          <div className="rounded-lg border overflow-hidden">
+            <div className="grid grid-cols-[60px_120px_1fr_1fr] gap-4 border-b bg-muted/50 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              <span>Token</span>
+              <span>Swatch</span>
+              <span>Semantic role</span>
+              <span>Dark mode</span>
+            </div>
+            <div className="divide-y">
+              {[
+                {
+                  token: "chart-1",
+                  bg: "bg-[--chart-1]",
+                  lightOklch: "oklch(0.606 0.230 281)",
+                  role: "Primary / Brand — violet",
+                  dark: "Neon violet · oklch(0.72 0.26 281)",
+                },
+                {
+                  token: "chart-2",
+                  bg: "bg-[--chart-2]",
+                  lightOklch: "oklch(0.679 0.154 233)",
+                  role: "Info — sky blue",
+                  dark: "Neon sky · oklch(0.78 0.18 233)",
+                },
+                {
+                  token: "chart-3",
+                  bg: "bg-[--chart-3]",
+                  lightOklch: "oklch(0.698 0.152 163)",
+                  role: "Positive — emerald",
+                  dark: "Neon emerald · oklch(0.78 0.18 163)",
+                },
+                {
+                  token: "chart-4",
+                  bg: "bg-[--chart-4]",
+                  lightOklch: "oklch(0.647 0.227 14)",
+                  role: "Negative — rose",
+                  dark: "Neon rose · oklch(0.74 0.25 14)",
+                },
+                {
+                  token: "chart-5",
+                  bg: "bg-[--chart-5]",
+                  lightOklch: "oklch(0.702 0.187 44)",
+                  role: "Warning — orange",
+                  dark: "Neon orange · oklch(0.78 0.21 44)",
+                },
+                {
+                  token: "chart-6",
+                  bg: "bg-[--chart-6]",
+                  lightOklch: "oklch(0.769 0.170 70)",
+                  role: "Accent — amber",
+                  dark: "Neon amber · oklch(0.86 0.18 70)",
+                },
+                {
+                  token: "chart-7",
+                  bg: "bg-[--chart-7]",
+                  lightOklch: "oklch(0.637 0.213 27)",
+                  role: "Danger — red",
+                  dark: "Neon red · oklch(0.72 0.23 27)",
+                },
+                {
+                  token: "chart-8",
+                  bg: "bg-[--chart-8]",
+                  lightOklch: "oklch(0.557 0.254 284)",
+                  role: "Secondary brand — deep violet",
+                  dark: "Neon deep violet · oklch(0.70 0.26 284)",
+                },
+              ].map((row) => (
+                <div
+                  key={row.token}
+                  className="grid grid-cols-[60px_120px_1fr_1fr] items-center gap-4 px-4 py-3 text-sm"
+                >
+                  <code className="font-mono text-xs text-foreground">
+                    {row.token}
+                  </code>
+                  <div className="flex items-center gap-2">
+                    <div
+                      className={`h-6 w-6 rounded border ${row.bg}`}
+                      style={{ background: `var(--${row.token})` }}
+                    />
+                    <span className="font-mono text-[0.6rem] text-muted-foreground leading-tight break-all">
+                      {row.lightOklch}
+                    </span>
+                  </div>
+                  <span className="text-foreground">{row.role}</span>
+                  <span className="text-muted-foreground text-xs">
+                    {row.dark}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <p className="text-xs text-muted-foreground">
+            When adding a new chart, use{" "}
+            <code className="rounded bg-muted px-1 font-mono">chart-1</code>{" "}
+            through{" "}
+            <code className="rounded bg-muted px-1 font-mono">chart-8</code>{" "}
+            as{" "}
+            <code className="rounded bg-muted px-1 font-mono">
+              stroke=&#34;var(--chart-1)&#34;
+            </code>{" "}
+            — never hard-code hex or named colors in chart components.
+          </p>
+        </div>
+
         {/* ── Source note ── */}
         <p className="border-t pt-6 text-xs text-muted-foreground">
           All values are defined in{" "}

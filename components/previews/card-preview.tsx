@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { ComponentPreview } from "../component-preview";
+import { CodeBlock } from "../code-block";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { Button, Card, CardFooter, CardFooterIcon, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, CardPanelField, CardPanelItem, CardPanelItemCrown, CardPanelItemGroup, Input, SimpleBadge } from "@/ascendra-ui";
+import { cn } from "@/ascendra-ui/shadcn";
+import { type AccentColor, type BgStyle, type BgTo, type BorderSide, type BorderStroke, Button, Card, CardFooter, CardFooterIcon, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, CardPanelField, CardPanelItem, CardPanelItemCrown, CardPanelItemGroup, Input, SimpleBadge } from "@/ascendra-ui";
 import { InfoIcon, TriangleAlertIcon } from "lucide-react";
 
 // ─── Reusable sample content ──────────────────────────────────────────────────
@@ -33,6 +35,290 @@ function SampleItems() {
         </div>
       </CardPanelItem>
     </>
+  );
+}
+
+// ─── Playground ──────────────────────────────────────────────────────────────
+
+const ACCENT_COLORS: AccentColor[] = [
+  "orange", "blue", "amber", "teal", "indigo", "purple", "red", "slate",
+];
+const COLOR_SWATCH: Record<AccentColor, string> = {
+  orange: "bg-orange-500", blue: "bg-blue-500", amber: "bg-amber-500",
+  teal: "bg-teal-500", indigo: "bg-indigo-500", purple: "bg-purple-500",
+  red: "bg-red-500", slate: "bg-slate-500",
+};
+
+const BORDER_SIDES: BorderSide[] = ["t", "l", "r", "b", "all"];
+const BORDER_SIDE_LABEL: Record<BorderSide, string> = {
+  t: "Top", l: "Left", r: "Right", b: "Bottom", all: "All",
+};
+const BORDER_STROKES: BorderStroke[] = [1, 2, 3];
+const BG_STYLES: BgStyle[] = ["linear", "radial", "conic", "solid"];
+const BG_TOS: BgTo[] = ["transparent", "white", "black", ...ACCENT_COLORS];
+
+type BorderState = { enabled: boolean; side: BorderSide; stroke: BorderStroke; color: AccentColor };
+type BgState = { enabled: boolean; style: BgStyle; side: BorderSide; color: AccentColor; to: BgTo };
+
+function Pill({ active, onClick, children, className }: {
+  active: boolean; onClick: () => void; children: React.ReactNode; className?: string;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "rounded-md px-2.5 py-1 text-xs font-medium transition-colors border",
+        active
+          ? "bg-foreground text-background border-foreground"
+          : "bg-background text-muted-foreground border-border hover:text-foreground",
+        className,
+      )}
+    >
+      {children}
+    </button>
+  );
+}
+
+function ControlRow({ children }: { label: string; children: React.ReactNode }) {
+  return <div className="flex flex-wrap items-center gap-2">{children}</div>;
+}
+
+function generateCardCode(cardBorder: BorderState, panelBorder: BorderState, panelBg: BgState): string {
+  const cb = cardBorder.enabled
+    ? ` border={{ side: "${cardBorder.side}", stroke: ${cardBorder.stroke}, color: "${cardBorder.color}" }}`
+    : "";
+  const pb = panelBorder.enabled
+    ? `border={{ side: "${panelBorder.side}", stroke: ${panelBorder.stroke}, color: "${panelBorder.color}" }}`
+    : "";
+  const bg = panelBg.enabled
+    ? `bg={{ style: "${panelBg.style}", side: "${panelBg.side}", color: "${panelBg.color}", to: "${panelBg.to}" }}`
+    : "";
+  const panelAttrs = [pb, bg].filter(Boolean).join("\n      ");
+  const panelLine = panelAttrs ? `\n      ${panelAttrs}` : "";
+
+  return `<Card${cb}>
+  <CardHeader>
+    <CardHeaderTitle>School Information</CardHeaderTitle>
+    <CardHeaderSubtitle>Your school details visible to parents.</CardHeaderSubtitle>
+  </CardHeader>
+  <CardPanel${panelLine}${panelAttrs ? "\n    " : ""}>
+    <CardPanelItem>...</CardPanelItem>
+    <CardPanelItem>...</CardPanelItem>
+  </CardPanel>
+</Card>`;
+}
+
+function PlaygroundCard({ cardBorder, panelBorder, panelBg }: {
+  cardBorder: BorderState; panelBorder: BorderState; panelBg: BgState;
+}) {
+  return (
+    <Card border={cardBorder.enabled ? cardBorder : undefined}>
+      <CardHeader>
+        <CardHeaderTitle>School Information</CardHeaderTitle>
+        <CardHeaderSubtitle>Your school details visible to parents.</CardHeaderSubtitle>
+      </CardHeader>
+      <CardPanel
+        border={panelBorder.enabled ? panelBorder : undefined}
+        bg={panelBg.enabled ? panelBg : undefined}
+      >
+        <SampleItems />
+      </CardPanel>
+    </Card>
+  );
+}
+
+function CardAccentPlayground() {
+  const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
+  const [cardBorder, setCardBorder] = useState<BorderState>({
+    enabled: true, side: "t", stroke: 3, color: "orange",
+  });
+  const [panelBorder, setPanelBorder] = useState<BorderState>({
+    enabled: false, side: "t", stroke: 3, color: "blue",
+  });
+  const [panelBg, setPanelBg] = useState<BgState>({
+    enabled: true, style: "linear", side: "b", color: "blue", to: "transparent",
+  });
+
+  return (
+    <div className="rounded-lg border overflow-hidden">
+      {/* Tab bar */}
+      <div className="flex border-b bg-muted/60">
+        {(["preview", "code"] as const).map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={cn(
+              "px-4 py-2 text-xs font-medium capitalize transition-colors",
+              activeTab === tab
+                ? "text-foreground border-b-2 border-foreground -mb-px bg-background"
+                : "text-muted-foreground hover:text-foreground",
+            )}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      {activeTab === "preview" && (
+        <div className="flex flex-col lg:flex-row">
+          {/* Controls */}
+          <div className="w-full lg:w-63 shrink-0 border-b lg:border-b-0 lg:border-r divide-y bg-muted/10">
+            {/* Card Border */}
+            <div className="p-3 space-y-3">
+              <Pill active={cardBorder.enabled} onClick={() => setCardBorder((s) => ({ ...s, enabled: !s.enabled }))}>
+                {cardBorder.enabled ? "✓ " : ""}Card Border
+              </Pill>
+              {cardBorder.enabled && (
+                <div className="space-y-2">
+                  <ControlRow label="Side">
+                    {BORDER_SIDES.map((s) => (
+                      <Pill key={s} active={cardBorder.side === s} onClick={() => setCardBorder((st) => ({ ...st, side: s }))}>
+                        {BORDER_SIDE_LABEL[s]}
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  <ControlRow label="Stroke">
+                    {BORDER_STROKES.map((n) => (
+                      <Pill key={n} active={cardBorder.stroke === n} onClick={() => setCardBorder((st) => ({ ...st, stroke: n }))}>
+                        {n}px
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  <ControlRow label="Color">
+                    {ACCENT_COLORS.map((c) => (
+                      <button
+                        key={c}
+                        title={c}
+                        onClick={() => setCardBorder((st) => ({ ...st, color: c }))}
+                        className={cn(
+                          "h-5 w-5 rounded border-2 transition-all",
+                          COLOR_SWATCH[c],
+                          cardBorder.color === c ? "border-foreground scale-110" : "border-transparent",
+                        )}
+                      />
+                    ))}
+                  </ControlRow>
+                </div>
+              )}
+            </div>
+
+            {/* Panel Border */}
+            <div className="p-3 space-y-3">
+              <Pill active={panelBorder.enabled} onClick={() => setPanelBorder((s) => ({ ...s, enabled: !s.enabled }))}>
+                {panelBorder.enabled ? "✓ " : ""}Panel Border
+              </Pill>
+              {panelBorder.enabled && (
+                <div className="space-y-2">
+                  <ControlRow label="Side">
+                    {BORDER_SIDES.map((s) => (
+                      <Pill key={s} active={panelBorder.side === s} onClick={() => setPanelBorder((st) => ({ ...st, side: s }))}>
+                        {BORDER_SIDE_LABEL[s]}
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  <ControlRow label="Stroke">
+                    {BORDER_STROKES.map((n) => (
+                      <Pill key={n} active={panelBorder.stroke === n} onClick={() => setPanelBorder((st) => ({ ...st, stroke: n }))}>
+                        {n}px
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  <ControlRow label="Color">
+                    {ACCENT_COLORS.map((c) => (
+                      <button
+                        key={c}
+                        title={c}
+                        onClick={() => setPanelBorder((st) => ({ ...st, color: c }))}
+                        className={cn(
+                          "h-5 w-5 rounded border-2 transition-all",
+                          COLOR_SWATCH[c],
+                          panelBorder.color === c ? "border-foreground scale-110" : "border-transparent",
+                        )}
+                      />
+                    ))}
+                  </ControlRow>
+                </div>
+              )}
+            </div>
+
+            {/* Panel Background */}
+            <div className="p-3 space-y-3">
+              <Pill active={panelBg.enabled} onClick={() => setPanelBg((s) => ({ ...s, enabled: !s.enabled }))}>
+                {panelBg.enabled ? "✓ " : ""}Panel Background
+              </Pill>
+              {panelBg.enabled && (
+                <div className="space-y-2">
+                  <ControlRow label="Style">
+                    {BG_STYLES.map((s) => (
+                      <Pill key={s} active={panelBg.style === s} onClick={() => setPanelBg((st) => ({ ...st, style: s }))}>
+                        {s}
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  {panelBg.style === "linear" && (
+                    <ControlRow label="Side">
+                      {BORDER_SIDES.map((s) => (
+                        <Pill key={s} active={panelBg.side === s} onClick={() => setPanelBg((st) => ({ ...st, side: s }))}>
+                          {BORDER_SIDE_LABEL[s]}
+                        </Pill>
+                      ))}
+                    </ControlRow>
+                  )}
+                  <ControlRow label="Color">
+                    {ACCENT_COLORS.map((c) => (
+                      <button
+                        key={c}
+                        title={c}
+                        onClick={() => setPanelBg((st) => ({ ...st, color: c }))}
+                        className={cn(
+                          "h-5 w-5 rounded border-2 transition-all",
+                          COLOR_SWATCH[c],
+                          panelBg.color === c ? "border-foreground scale-110" : "border-transparent",
+                        )}
+                      />
+                    ))}
+                  </ControlRow>
+                  {panelBg.style !== "solid" && (
+                    <ControlRow label="To">
+                      <div className="flex flex-wrap gap-1">
+                        {BG_TOS.map((t) => (
+                          <button
+                            key={t}
+                            onClick={() => setPanelBg((st) => ({ ...st, to: t }))}
+                            className={cn(
+                              "flex h-5 items-center rounded border-2 px-1 text-[9px] font-medium transition-all",
+                              t === "transparent" && "bg-transparent text-muted-foreground",
+                              t === "white" && "bg-white text-black",
+                              t === "black" && "bg-black text-white",
+                              t !== "transparent" && t !== "white" && t !== "black" &&
+                                cn(COLOR_SWATCH[t as AccentColor], "text-white"),
+                              panelBg.to === t ? "border-foreground scale-110" : "border-transparent",
+                            )}
+                          >
+                            {t}
+                          </button>
+                        ))}
+                      </div>
+                    </ControlRow>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Live preview */}
+          <div className="flex-1 min-w-0 p-4">
+            <PlaygroundCard cardBorder={cardBorder} panelBorder={panelBorder} panelBg={panelBg} />
+          </div>
+        </div>
+      )}
+
+      {activeTab === "code" && (
+        <div className="p-4">
+          <CodeBlock label="Generated code" code={generateCardCode(cardBorder, panelBorder, panelBg)} />
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -1404,6 +1690,25 @@ export function CardDocContent() {
               </Card>
             </div>
           </ComponentPreview>
+        </div>
+        {/* Accent Styles Playground */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">
+            Accent Styles — Border &amp; Background
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            <code className="rounded bg-muted px-1 font-mono text-xs">Card</code>{" "}
+            accepts a{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">border</code>{" "}
+            prop.{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">CardPanel</code>{" "}
+            accepts both{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">border</code>{" "}
+            and{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">bg</code>.
+            Toggle each option below and see the result live.
+          </p>
+          <CardAccentPlayground />
         </div>
       </div>
 

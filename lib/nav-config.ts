@@ -6,6 +6,8 @@ export const navConfig: NavCategory[] = [
     items: [
       { name: 'Overview', slug: '' },
       { name: 'Design Tokens', slug: 'design-tokens' },
+      { name: 'Usage Guidelines', slug: 'guidelines' },
+      { name: 'Accessibility', slug: 'accessibility' },
     ],
   },
   {

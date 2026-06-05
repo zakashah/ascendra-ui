@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { ComponentPreview } from "../component-preview";
+import { CodeBlock } from "../code-block";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
-import { EmptyBody, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
+import { cn } from "@/ascendra-ui/shadcn";
+import { type AccentColor, type BgStyle, type BgTo, type BorderSide, type BorderStroke, EmptyBody, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
 
 // ─── Shared sample rows ──────────────────────────────────────────────────────
 
@@ -46,6 +49,296 @@ function SampleHeaders() {
       <TableHead>Amount</TableHead>
       <TableHead>Status</TableHead>
     </TableHeaderRow>
+  );
+}
+
+// ─── Playground ──────────────────────────────────────────────────────────────
+
+const ACCENT_COLORS: AccentColor[] = [
+  "orange", "blue", "amber", "teal", "indigo", "purple", "red", "slate",
+];
+const COLOR_SWATCH: Record<AccentColor, string> = {
+  orange: "bg-orange-500",
+  blue: "bg-blue-500",
+  amber: "bg-amber-500",
+  teal: "bg-teal-500",
+  indigo: "bg-indigo-500",
+  purple: "bg-purple-500",
+  red: "bg-red-500",
+  slate: "bg-slate-500",
+};
+
+const BORDER_SIDES: BorderSide[] = ["t", "l", "r", "b", "all"];
+const BORDER_SIDE_LABEL: Record<BorderSide, string> = {
+  t: "Top", l: "Left", r: "Right", b: "Bottom", all: "All",
+};
+const BORDER_STROKES: BorderStroke[] = [1, 2, 3];
+const BG_STYLES: BgStyle[] = ["linear", "radial", "conic", "solid"];
+const BG_TOS: BgTo[] = ["transparent", "white", "black", ...ACCENT_COLORS];
+
+type BorderState = { enabled: boolean; side: BorderSide; stroke: BorderStroke; color: AccentColor };
+type BgState = { enabled: boolean; style: BgStyle; side: BorderSide; color: AccentColor; to: BgTo };
+
+function Pill({ active, onClick, children, className }: {
+  active: boolean; onClick: () => void; children: React.ReactNode; className?: string;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "rounded-md px-2.5 py-1 text-xs font-medium transition-colors border",
+        active
+          ? "bg-foreground text-background border-foreground"
+          : "bg-background text-muted-foreground border-border hover:text-foreground",
+        className,
+      )}
+    >
+      {children}
+    </button>
+  );
+}
+
+function ControlRow({ children }: { label: string; children: React.ReactNode }) {
+  return <div className="flex flex-wrap items-center gap-2">{children}</div>;
+}
+
+function generateCode(wrapperBorder: BorderState, bodyBorder: BorderState, bodyBg: BgState): string {
+  const wb = wrapperBorder.enabled
+    ? ` border={{ side: "${wrapperBorder.side}", stroke: ${wrapperBorder.stroke}, color: "${wrapperBorder.color}" }}`
+    : "";
+  const bb = bodyBorder.enabled
+    ? `border={{ side: "${bodyBorder.side}", stroke: ${bodyBorder.stroke}, color: "${bodyBorder.color}" }}`
+    : "";
+  const bg = bodyBg.enabled
+    ? `bg={{ style: "${bodyBg.style}", side: "${bodyBg.side}", color: "${bodyBg.color}", to: "${bodyBg.to}" }}`
+    : "";
+  const bodyAttrs = [bb, bg].filter(Boolean).join("\n      ");
+  const bodyLine = bodyAttrs ? `\n      ${bodyAttrs}` : "";
+
+  return `<TableWrapper${wb}>
+  <Table>
+    <TableHeader>
+      <TableHeaderRow>...</TableHeaderRow>
+    </TableHeader>
+    <TableBody${bodyLine}${bodyAttrs ? "\n    " : ""}>
+      <TableRow>...</TableRow>
+    </TableBody>
+  </Table>
+</TableWrapper>`;
+}
+
+function PlaygroundTable({ wrapperBorder, bodyBorder, bodyBg }: {
+  wrapperBorder: BorderState; bodyBorder: BorderState; bodyBg: BgState;
+}) {
+  return (
+    <TableWrapper border={wrapperBorder.enabled ? wrapperBorder : undefined}>
+      <Table>
+        <TableHeader>
+          <SampleHeaders />
+        </TableHeader>
+        <TableBody
+          border={bodyBorder.enabled ? bodyBorder : undefined}
+          bg={bodyBg.enabled ? bodyBg : undefined}
+        >
+          <SampleRows />
+        </TableBody>
+      </Table>
+    </TableWrapper>
+  );
+}
+
+function TableAccentPlayground() {
+  const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
+  const [wrapperBorder, setWrapperBorder] = useState<BorderState>({
+    enabled: true, side: "t", stroke: 3, color: "orange",
+  });
+  const [bodyBorder, setBodyBorder] = useState<BorderState>({
+    enabled: false, side: "t", stroke: 3, color: "blue",
+  });
+  const [bodyBg, setBodyBg] = useState<BgState>({
+    enabled: true, style: "linear", side: "b", color: "blue", to: "transparent",
+  });
+
+  return (
+    <div className="rounded-lg border overflow-hidden">
+      {/* Tab bar */}
+      <div className="flex border-b bg-muted/60">
+        {(["preview", "code"] as const).map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={cn(
+              "px-4 py-2 text-xs font-medium capitalize transition-colors",
+              activeTab === tab
+                ? "text-foreground border-b-2 border-foreground -mb-px bg-background"
+                : "text-muted-foreground hover:text-foreground",
+            )}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      {activeTab === "preview" && (
+        <div className="flex flex-col lg:flex-row">
+          {/* Controls */}
+          <div className="w-full lg:w-63 shrink-0 border-b lg:border-b-0 lg:border-r divide-y bg-muted/10">
+            {/* Wrapper Border */}
+            <div className="p-3 space-y-3">
+              <Pill active={wrapperBorder.enabled} onClick={() => setWrapperBorder((s) => ({ ...s, enabled: !s.enabled }))}>
+                {wrapperBorder.enabled ? "✓ " : ""}Wrapper Border
+              </Pill>
+              {wrapperBorder.enabled && (
+                <div className="space-y-2">
+                  <ControlRow label="Side">
+                    {BORDER_SIDES.map((s) => (
+                      <Pill key={s} active={wrapperBorder.side === s} onClick={() => setWrapperBorder((st) => ({ ...st, side: s }))}>
+                        {BORDER_SIDE_LABEL[s]}
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  <ControlRow label="Stroke">
+                    {BORDER_STROKES.map((n) => (
+                      <Pill key={n} active={wrapperBorder.stroke === n} onClick={() => setWrapperBorder((st) => ({ ...st, stroke: n }))}>
+                        {n}px
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  <ControlRow label="Color">
+                    {ACCENT_COLORS.map((c) => (
+                      <button
+                        key={c}
+                        title={c}
+                        onClick={() => setWrapperBorder((st) => ({ ...st, color: c }))}
+                        className={cn(
+                          "h-5 w-5 rounded border-2 transition-all",
+                          COLOR_SWATCH[c],
+                          wrapperBorder.color === c ? "border-foreground scale-110" : "border-transparent",
+                        )}
+                      />
+                    ))}
+                  </ControlRow>
+                </div>
+              )}
+            </div>
+
+            {/* Body Border */}
+            <div className="p-3 space-y-3">
+              <Pill active={bodyBorder.enabled} onClick={() => setBodyBorder((s) => ({ ...s, enabled: !s.enabled }))}>
+                {bodyBorder.enabled ? "✓ " : ""}Body Border
+              </Pill>
+              {bodyBorder.enabled && (
+                <div className="space-y-2">
+                  <ControlRow label="Side">
+                    {BORDER_SIDES.map((s) => (
+                      <Pill key={s} active={bodyBorder.side === s} onClick={() => setBodyBorder((st) => ({ ...st, side: s }))}>
+                        {BORDER_SIDE_LABEL[s]}
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  <ControlRow label="Stroke">
+                    {BORDER_STROKES.map((n) => (
+                      <Pill key={n} active={bodyBorder.stroke === n} onClick={() => setBodyBorder((st) => ({ ...st, stroke: n }))}>
+                        {n}px
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  <ControlRow label="Color">
+                    {ACCENT_COLORS.map((c) => (
+                      <button
+                        key={c}
+                        title={c}
+                        onClick={() => setBodyBorder((st) => ({ ...st, color: c }))}
+                        className={cn(
+                          "h-5 w-5 rounded border-2 transition-all",
+                          COLOR_SWATCH[c],
+                          bodyBorder.color === c ? "border-foreground scale-110" : "border-transparent",
+                        )}
+                      />
+                    ))}
+                  </ControlRow>
+                </div>
+              )}
+            </div>
+
+            {/* Body Background */}
+            <div className="p-3 space-y-3">
+              <Pill active={bodyBg.enabled} onClick={() => setBodyBg((s) => ({ ...s, enabled: !s.enabled }))}>
+                {bodyBg.enabled ? "✓ " : ""}Body Background
+              </Pill>
+              {bodyBg.enabled && (
+                <div className="space-y-2">
+                  <ControlRow label="Style">
+                    {BG_STYLES.map((s) => (
+                      <Pill key={s} active={bodyBg.style === s} onClick={() => setBodyBg((st) => ({ ...st, style: s }))}>
+                        {s}
+                      </Pill>
+                    ))}
+                  </ControlRow>
+                  {bodyBg.style === "linear" && (
+                    <ControlRow label="Side">
+                      {BORDER_SIDES.map((s) => (
+                        <Pill key={s} active={bodyBg.side === s} onClick={() => setBodyBg((st) => ({ ...st, side: s }))}>
+                          {BORDER_SIDE_LABEL[s]}
+                        </Pill>
+                      ))}
+                    </ControlRow>
+                  )}
+                  <ControlRow label="Color">
+                    {ACCENT_COLORS.map((c) => (
+                      <button
+                        key={c}
+                        title={c}
+                        onClick={() => setBodyBg((st) => ({ ...st, color: c }))}
+                        className={cn(
+                          "h-5 w-5 rounded border-2 transition-all",
+                          COLOR_SWATCH[c],
+                          bodyBg.color === c ? "border-foreground scale-110" : "border-transparent",
+                        )}
+                      />
+                    ))}
+                  </ControlRow>
+                  {bodyBg.style !== "solid" && (
+                    <ControlRow label="To">
+                      <div className="flex flex-wrap gap-1">
+                        {BG_TOS.map((t) => (
+                          <button
+                            key={t}
+                            onClick={() => setBodyBg((st) => ({ ...st, to: t }))}
+                            className={cn(
+                              "flex h-5 items-center rounded border-2 px-1 text-[9px] font-medium transition-all",
+                              t === "transparent" && "bg-transparent text-muted-foreground",
+                              t === "white" && "bg-white text-black",
+                              t === "black" && "bg-black text-white",
+                              t !== "transparent" && t !== "white" && t !== "black" &&
+                                cn(COLOR_SWATCH[t as AccentColor], "text-white"),
+                              bodyBg.to === t ? "border-foreground scale-110" : "border-transparent",
+                            )}
+                          >
+                            {t}
+                          </button>
+                        ))}
+                      </div>
+                    </ControlRow>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Live preview */}
+          <div className="flex-1 min-w-0 p-4">
+            <PlaygroundTable wrapperBorder={wrapperBorder} bodyBorder={bodyBorder} bodyBg={bodyBg} />
+          </div>
+        </div>
+      )}
+
+      {activeTab === "code" && (
+        <div className="p-4">
+          <CodeBlock label="Generated code" code={generateCode(wrapperBorder, bodyBorder, bodyBg)} />
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -281,6 +574,32 @@ export function TableDocContent() {
             </ComponentPreview>
           </div>
 
+          {/* all / purple / stroke 2 */}
+          <div className="space-y-1.5">
+            <p className="text-xs text-muted-foreground font-medium">
+              All sides · purple · stroke 2
+            </p>
+            <ComponentPreview
+              align="start"
+              code={`<TableWrapper border={{ side: "all", stroke: 2, color: "purple" }}>
+  ...
+</TableWrapper>`}
+            >
+              <div className="w-full">
+                <TableWrapper border={{ side: "all", stroke: 2, color: "purple" }}>
+                  <Table>
+                    <TableHeader>
+                      <SampleHeaders />
+                    </TableHeader>
+                    <TableBody>
+                      <SampleRows />
+                    </TableBody>
+                  </Table>
+                </TableWrapper>
+              </div>
+            </ComponentPreview>
+          </div>
+
           {/* Color palette grid */}
           <div className="space-y-1.5">
             <p className="text-xs text-muted-foreground font-medium">
@@ -429,17 +748,43 @@ export function TableDocContent() {
               </div>
             </ComponentPreview>
           </div>
+
+          {/* all / teal / stroke 2 */}
+          <div className="space-y-1.5">
+            <p className="text-xs text-muted-foreground font-medium">
+              All sides · teal · stroke 2
+            </p>
+            <ComponentPreview
+              align="start"
+              code={`<TableBody border={{ side: "all", stroke: 2, color: "teal" }}>
+  ...
+</TableBody>`}
+            >
+              <div className="w-full">
+                <TableWrapper>
+                  <Table>
+                    <TableHeader>
+                      <SampleHeaders />
+                    </TableHeader>
+                    <TableBody border={{ side: "all", stroke: 2, color: "teal" }}>
+                      <SampleRows />
+                    </TableBody>
+                  </Table>
+                </TableWrapper>
+              </div>
+            </ComponentPreview>
+          </div>
         </div>
 
         {/* ── TableBody — Background ── */}
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">
-            TableBody — Background Gradient
+            TableBody — Background
           </h3>
           <p className="text-xs text-muted-foreground">
-            The <code className="rounded bg-muted px-1 font-mono text-xs">bg</code> prop paints a gradient
+            The <code className="rounded bg-muted px-1 font-mono text-xs">bg</code> prop paints a background
             onto the <code className="rounded bg-muted px-1 font-mono text-xs">::before</code> panel. Configure{" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs">style</code> (gradient type),{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">style</code> (gradient type or solid),{" "}
             <code className="rounded bg-muted px-1 font-mono text-xs">side</code> (direction),{" "}
             <code className="rounded bg-muted px-1 font-mono text-xs">color</code>, and{" "}
             <code className="rounded bg-muted px-1 font-mono text-xs">to</code> (end stop).
@@ -515,6 +860,32 @@ export function TableDocContent() {
                       <SampleHeaders />
                     </TableHeader>
                     <TableBody bg={{ style: "radial", color: "purple" }}>
+                      <SampleRows />
+                    </TableBody>
+                  </Table>
+                </TableWrapper>
+              </div>
+            </ComponentPreview>
+          </div>
+
+          {/* solid / teal */}
+          <div className="space-y-1.5">
+            <p className="text-xs text-muted-foreground font-medium">
+              Solid · teal
+            </p>
+            <ComponentPreview
+              align="start"
+              code={`<TableBody bg={{ style: "solid", color: "teal" }}>
+  ...
+</TableBody>`}
+            >
+              <div className="w-full">
+                <TableWrapper>
+                  <Table>
+                    <TableHeader>
+                      <SampleHeaders />
+                    </TableHeader>
+                    <TableBody bg={{ style: "solid", color: "teal" }}>
                       <SampleRows />
                     </TableBody>
                   </Table>
@@ -681,6 +1052,58 @@ export function TableDocContent() {
               </div>
             </ComponentPreview>
           </div>
+
+          {/* all border + solid bg */}
+          <div className="space-y-1.5">
+            <p className="text-xs text-muted-foreground font-medium">
+              All sides border · amber + solid amber background
+            </p>
+            <ComponentPreview
+              align="start"
+              code={`<TableBody
+  border={{ side: "all", stroke: 2, color: "amber" }}
+  bg={{ style: "solid", color: "amber" }}
+>
+  ...
+</TableBody>`}
+            >
+              <div className="w-full">
+                <TableWrapper>
+                  <Table>
+                    <TableHeader>
+                      <SampleHeaders />
+                    </TableHeader>
+                    <TableBody
+                      border={{ side: "all", stroke: 2, color: "amber" }}
+                      bg={{ style: "solid", color: "amber" }}
+                    >
+                      <SampleRows />
+                    </TableBody>
+                  </Table>
+                </TableWrapper>
+              </div>
+            </ComponentPreview>
+          </div>
+        </div>
+
+        {/* ── Accent Styles Playground ── */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">
+            Accent Styles — Border &amp; Background
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            <code className="rounded bg-muted px-1 font-mono text-xs">TableWrapper</code>{" "}
+            accepts a{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">border</code>{" "}
+            prop.{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">TableBody</code>{" "}
+            accepts both{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">border</code>{" "}
+            and{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">bg</code>.
+            Toggle each option below and see the result live.
+          </p>
+          <TableAccentPlayground />
         </div>
       </div>
 
@@ -718,7 +1141,7 @@ export function TableDocContent() {
           <PropsTable
             props={[
               { name: "border", type: "BorderConfig", description: "Optional accent border applied to the ::before panel element." },
-              { name: "bg", type: "BgConfig", description: "Optional gradient background on the ::before panel element. Removes the solid bg-background when set." },
+              { name: "bg", type: "BgConfig", description: "Optional background on the ::before panel element. Removes the solid bg-background when set." },
             ]}
           />
         </div>
@@ -728,7 +1151,7 @@ export function TableDocContent() {
           <h3 className="text-sm font-medium text-foreground">BorderConfig</h3>
           <PropsTable
             props={[
-              { name: "side", type: "'t' | 'l' | 'r' | 'b'", default: "'t'", description: "Which side the border appears on. t = top, l = left, r = right, b = bottom." },
+              { name: "side", type: "'t' | 'l' | 'r' | 'b' | 'all'", default: "'t'", description: "Which side the border appears on. t = top, l = left, r = right, b = bottom, all = all sides." },
               { name: "stroke", type: "1 | 2 | 3", default: "3", description: "Border thickness. 1 = 1px, 2 = 2px, 3 = 3px." },
               { name: "color", type: "'blue' | 'amber' | 'purple' | 'red' | 'teal' | 'orange' | 'indigo' | 'slate'", default: "'orange'", description: "Accent color of the border at 60% opacity." },
             ]}
@@ -740,10 +1163,10 @@ export function TableDocContent() {
           <h3 className="text-sm font-medium text-foreground">BgConfig</h3>
           <PropsTable
             props={[
-              { name: "style", type: "'linear' | 'radial' | 'conic'", default: "'linear'", description: "CSS gradient type." },
-              { name: "side", type: "'t' | 'l' | 'r' | 'b'", default: "'b'", description: "Gradient direction (only meaningful for linear). t = top, b = bottom, l = left, r = right." },
-              { name: "color", type: "'blue' | 'amber' | 'purple' | 'red' | 'teal' | 'orange' | 'indigo' | 'slate'", default: "'orange'", description: "Start color of the gradient at 7% opacity." },
-              { name: "to", type: "'transparent' | 'white' | 'black' | 'blue' | 'amber' | 'purple' | 'red' | 'teal' | 'orange' | 'indigo' | 'slate'", default: "'transparent'", description: "End stop color. Accent colors resolve to 500/60 opacity." },
+              { name: "style", type: "'linear' | 'radial' | 'conic' | 'solid'", default: "'linear'", description: "Background type. solid applies a flat color; linear/radial/conic apply a gradient." },
+              { name: "side", type: "'t' | 'l' | 'r' | 'b' | 'all'", default: "'b'", description: "Gradient direction (only meaningful for linear). t = top, b = bottom, l = left, r = right." },
+              { name: "color", type: "'blue' | 'amber' | 'purple' | 'red' | 'teal' | 'orange' | 'indigo' | 'slate'", default: "'orange'", description: "Start color of the gradient at 7% opacity (or the solid fill color)." },
+              { name: "to", type: "'transparent' | 'white' | 'black' | AccentColor", default: "'transparent'", description: "End stop color for gradients. Accent colors resolve to 500/60 opacity. Ignored when style is solid." },
             ]}
           />
         </div>

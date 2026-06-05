@@ -264,7 +264,7 @@ These components are absent and should be considered for the library:
 | Gap | Detail |
 |---|---|
 | **No Storybook or isolated preview** | Cannot develop a component in isolation; must always run the full app |
-| **No usage guidelines** | No "when to use Card vs MainSection vs PageWrapper" documentation |
+| **No usage guidelines** | No "when to use Card vs PageWrapper" documentation |
 | **No migration notes** | No `CHANGELOG.md` for tracking breaking changes as library evolves |
 | **Spacing/sizing scale undocumented** | No documentation of which spacing values are canonical |
 | **No accessibility matrix** | No documented WCAG targets or list of known a11y gaps |
