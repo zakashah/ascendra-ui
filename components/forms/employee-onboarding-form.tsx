@@ -5,9 +5,61 @@ import { Controller, useForm } from "react-hook-form";
 import { LuShieldCheck } from "react-icons/lu";
 import { z } from "zod";
 
-import { BackLink, Card, CardFooter, CardFooterIcon, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, CardPanelField, CardPanelItem, Checkbox, Combobox, ComboboxCollection, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList, DatePicker, Field, FieldGrid, FieldGroup, FieldHint, FieldLabel, FieldLegend, FieldSet, Input, InputGroup, InputGroupAddon, InputGroupInput, InputGroupText, MainContent, PageContent, PageHeader, PageHeaderGroup, PageMain, PageSubtitle, PageTitle, PageWrapper, RadioGroup, RadioGroupItem, Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue, SimpleAlert, Switch, WizardNavigator, WizardProvider, type WizardStep, WizardSteps } from "@/ascendra-ui";
-
-
+import {
+  BackLink,
+  Card,
+  CardFooter,
+  CardFooterIcon,
+  CardHeader,
+  CardHeaderSubtitle,
+  CardHeaderTitle,
+  CardPanel,
+  CardPanelField,
+  CardPanelItem,
+  Checkbox,
+  Combobox,
+  ComboboxCollection,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+  DatePicker,
+  Field,
+  FieldGrid,
+  FieldGroup,
+  FieldHint,
+  FieldLabel,
+  FieldLegend,
+  FieldSet,
+  Input,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+  MainContent,
+  PageContent,
+  PageHeader,
+  PageHeaderGroup,
+  PageMain,
+  PageSubtitle,
+  PageTitle,
+  PageWrapper,
+  RadioGroup,
+  RadioGroupItem,
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  SimpleAlert,
+  Switch,
+  WizardNavigator,
+  WizardProvider,
+  type WizardStep,
+  WizardSteps,
+} from "@/ascendra-ui";
 
 // ─── Schema ────────────────────────────────────────────────────────────────────
 
@@ -234,10 +286,22 @@ export default function EmployeeOnboardingForm() {
   const enroll401k = watch("enroll401k");
 
   const WIZARD_STEPS: WizardStep[] = [
-    { label: "Personal Information", onNext: () => trigger(STEP_FIELDS[0]) },
-    { label: "Employment Details", onNext: () => trigger(STEP_FIELDS[1]) },
-    { label: "Compensation & Benefits", onNext: () => trigger(STEP_FIELDS[2]) },
-    { label: "IT & System Access" },
+    {
+      label: "Personal Information",
+      description: "Identity & address",
+      onNext: () => trigger(STEP_FIELDS[0]),
+    },
+    {
+      label: "Employment Details",
+      description: "Role & contract",
+      onNext: () => trigger(STEP_FIELDS[1]),
+    },
+    {
+      label: "Compensation & Benefits",
+      description: "Salary & perks",
+      onNext: () => trigger(STEP_FIELDS[2]),
+    },
+    { label: "IT & System Access", description: "Hardware & permissions" },
   ];
 
   async function handleSave(): Promise<boolean> {
@@ -262,11 +326,11 @@ export default function EmployeeOnboardingForm() {
               </PageSubtitle>
             </PageHeaderGroup>
           </PageHeader>
-          <WizardSteps />
           <PageMain>
             <PageWrapper>
               <PageContent>
                 <MainContent>
+                  <WizardSteps />
                   {/* ── Step 1: Personal Information ──────────────────────── */}
                   <Card step={0}>
                     <CardHeader>

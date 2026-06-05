@@ -17,6 +17,7 @@ export interface StepperStep {
 export interface StepperProps {
   steps: StepperStep[];
   currentStep?: number;
+  onStepClick?: (index: number) => void;
   className?: string;
 }
 
@@ -70,7 +71,7 @@ function StepConnector({ filled }: { filled: boolean }) {
 
 // ─── Stepper ─────────────────────────────────────────────────────────────────
 
-export function Stepper({ steps, currentStep, className }: StepperProps) {
+export function Stepper({ steps, currentStep, onStepClick, className }: StepperProps) {
   const resolved: StepperStep[] = steps.map((step, i) => {
     if (step.status) return step;
     if (currentStep === undefined) return { ...step, status: "pending" };
@@ -84,11 +85,18 @@ export function Stepper({ steps, currentStep, className }: StepperProps) {
       {resolved.map((step, i) => {
         const status = step.status ?? "pending";
         const isLast = i === steps.length - 1;
+        const clickable = !!onStepClick && status === "completed";
 
         return (
           <React.Fragment key={i}>
             {/* Step */}
-            <div className="flex flex-col items-center gap-1.5">
+            <div
+              className={cn(
+                "flex flex-col items-center gap-1.5",
+                clickable && "cursor-pointer",
+              )}
+              onClick={clickable ? () => onStepClick(i) : undefined}
+            >
               <StepIndicator index={i} status={status} />
               <div className="flex flex-col items-center gap-0.5 text-center">
                 <span
@@ -98,6 +106,7 @@ export function Stepper({ steps, currentStep, className }: StepperProps) {
                     status === "completed" && "text-foreground",
                     status === "error" && "text-destructive",
                     status === "pending" && "text-muted-foreground",
+                    clickable && "hover:text-primary transition-colors",
                   )}
                 >
                   {step.label}

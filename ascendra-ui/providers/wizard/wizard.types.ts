@@ -1,5 +1,6 @@
 export type WizardStep = {
   label: string;
+  description?: string;
   onNext?: () => Promise<boolean>;
 };
 
