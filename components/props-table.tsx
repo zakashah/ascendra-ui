@@ -16,8 +16,8 @@ export function PropsTable({ props, className }: Props) {
   }
 
   return (
-    <div className={cn("overflow-hidden rounded-lg border", className)}>
-      <table className="w-full text-xs">
+    <div className={cn("overflow-x-auto rounded-lg border", className)}>
+      <table className="w-full min-w-150 text-xs">
         <thead>
           <tr className="border-b bg-muted/50">
             <th className="px-4 py-2.5 text-left font-medium text-muted-foreground">

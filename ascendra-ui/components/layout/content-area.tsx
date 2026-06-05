@@ -6,7 +6,7 @@ export function ContentArea({
   ...props
 }: React.ComponentProps<'section'>) {
   return (
-    <section data-slot="content-area" className={cn('flex-1', className)} {...props}>
+    <section data-slot="content-area" className={cn('flex-1 min-w-0', className)} {...props}>
       {children}
     </section>
   );
