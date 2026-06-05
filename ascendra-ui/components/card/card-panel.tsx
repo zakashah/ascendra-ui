@@ -8,7 +8,7 @@ import {
   type BgConfig,
 } from "@/ascendra-ui/components/ui/accent-styles";
 import { useCardContext } from "@/ascendra-ui/components/card/card";
-import { useWizardContextSafe } from "@/ascendra-ui/providers/wizard/wizard.hook";
+import { useStepperContextSafe } from "@/ascendra-ui/providers/stepper/stepper.hook";
 
 export function CardPanel({
   collapsed,
@@ -23,7 +23,7 @@ export function CardPanel({
   bg?: BgConfig;
 }) {
   const { collapseable, collapsed: contextCollapsed, step } = useCardContext();
-  const wizard = useWizardContextSafe();
+  const wizard = useStepperContextSafe();
 
   const isCollapsed =
     step !== undefined && wizard !== null

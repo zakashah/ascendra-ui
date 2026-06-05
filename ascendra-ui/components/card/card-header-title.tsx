@@ -2,7 +2,7 @@
 
 import { cn } from "@/ascendra-ui/shadcn";
 import { useCardContext } from "@/ascendra-ui/components/card/card";
-import { useWizardContextSafe } from "@/ascendra-ui/providers/wizard/wizard.hook";
+import { useStepperContextSafe } from "@/ascendra-ui/providers/stepper/stepper.hook";
 
 type CardHeaderTitleProps = React.ComponentProps<"label">;
 
@@ -12,7 +12,7 @@ export function CardHeaderTitle({
   ...props
 }: CardHeaderTitleProps) {
   const { step } = useCardContext();
-  const wizard = useWizardContextSafe();
+  const wizard = useStepperContextSafe();
   const isCompleted =
     step !== undefined && wizard !== null && step < wizard.currentStep;
 

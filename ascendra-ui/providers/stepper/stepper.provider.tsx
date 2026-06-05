@@ -1,11 +1,11 @@
 "use client";
 
 import { createContext, useState } from "react";
-import type { WizardContextValue, WizardProviderProps } from "./wizard.types";
+import type { StepperContextValue, StepperProviderProps } from "./stepper.types";
 
-export const WizardContext = createContext<WizardContextValue | null>(null);
+export const StepperContext = createContext<StepperContextValue | null>(null);
 
-export function WizardProvider({ steps, onSubmit, children }: WizardProviderProps) {
+export function StepperProvider({ steps, onSubmit, children }: StepperProviderProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const lastStep = steps.length - 1;
@@ -36,10 +36,10 @@ export function WizardProvider({ steps, onSubmit, children }: WizardProviderProp
   }
 
   return (
-    <WizardContext.Provider
+    <StepperContext.Provider
       value={{ steps, currentStep, goToStep, handleNext, handlePrevious, isSubmitting }}
     >
       {children}
-    </WizardContext.Provider>
+    </StepperContext.Provider>
   );
 }

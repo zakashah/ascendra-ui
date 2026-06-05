@@ -147,9 +147,8 @@ export * from './components/util/copy-text';
 export * from './components/util/scroll-to-top';
 export * from './components/util/theme-toggle';
 
-// Wizard
-export * from './components/wizard/wizard-navigator';
-export * from './components/wizard/wizard-steps';
+// Stepper
+export * from './components/stepper/stepper-navigator';
 
 // Forms
 export * from './components/forms/back-link';
@@ -166,6 +165,6 @@ export * from './providers/data-table-query/data-table-with-query.provider';
 export * from './providers/query/query.provider';
 export * from './providers/tabs/tabs.provider';
 export * from './providers/tabs/tabs.types';
-export * from './providers/wizard/wizard.types';
-export * from './providers/wizard/wizard.hook';
-export * from './providers/wizard/wizard.provider';
+export * from './providers/stepper/stepper.types';
+export * from './providers/stepper/stepper.hook';
+export * from './providers/stepper/stepper.provider';

@@ -2,13 +2,13 @@
 
 import { cn } from "@/ascendra-ui/shadcn";
 import { useCardContext } from "@/ascendra-ui/components/card/card";
-import { useWizardContextSafe } from "@/ascendra-ui/providers/wizard/wizard.hook";
+import { useStepperContextSafe } from "@/ascendra-ui/providers/stepper/stepper.hook";
 
 type CardFooterProps = React.ComponentProps<"footer">;
 
 export function CardFooter({ className, children, ...props }: CardFooterProps) {
   const { step } = useCardContext();
-  const wizard = useWizardContextSafe();
+  const wizard = useStepperContextSafe();
 
   if (step !== undefined && wizard !== null && wizard.currentStep !== step) {
     return null;

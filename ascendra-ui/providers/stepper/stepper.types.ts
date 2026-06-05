@@ -1,11 +1,11 @@
-export type WizardStep = {
+export type StepperStep = {
   label: string;
   description?: string;
   onNext?: () => Promise<boolean>;
 };
 
-export type WizardContextValue = {
-  steps: WizardStep[];
+export type StepperContextValue = {
+  steps: StepperStep[];
   currentStep: number;
   goToStep: (i: number) => void;
   handleNext: () => Promise<void>;
@@ -13,8 +13,8 @@ export type WizardContextValue = {
   isSubmitting: boolean;
 };
 
-export type WizardProviderProps = {
-  steps: WizardStep[];
+export type StepperProviderProps = {
+  steps: StepperStep[];
   onSubmit: () => Promise<boolean>;
   children: React.ReactNode;
 };

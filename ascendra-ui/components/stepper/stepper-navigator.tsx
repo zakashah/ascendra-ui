@@ -1,16 +1,16 @@
 "use client";
 
 import { Button } from "@/ascendra-ui/components/ui/button";
-import { useWizardContext } from "@/ascendra-ui/providers/wizard/wizard.hook";
+import { useStepperContext } from "@/ascendra-ui/providers/stepper/stepper.hook";
 
-export function WizardNavigator() {
+export function StepperNavigator() {
   const { steps, currentStep, handlePrevious, handleNext, isSubmitting } =
-    useWizardContext();
+    useStepperContext();
   const isLastStep = currentStep === steps.length - 1;
 
   return (
     <div
-      data-slot="wizard-navigator"
+      data-slot="stepper-navigator"
       className="flex items-center justify-between pt-2"
     >
       <Button

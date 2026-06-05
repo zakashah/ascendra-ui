@@ -1744,7 +1744,7 @@ export function CardDocContent() {
                 name: "step",
                 type: "number",
                 description:
-                  "Wizard step index — integrates with WizardProvider.",
+                  "Stepper step index — integrates with StepperProvider.",
               },
               {
                 name: "border",

@@ -598,7 +598,7 @@ export const registry: Record<string, ComponentMeta> = {
       { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg'", default: "'md'", description: 'ProgressBar — bar height.' },
       { name: 'color', type: "'default' | 'success' | 'warning' | 'destructive' | 'info'", default: "'default'", description: 'ProgressBar — fill color.' },
       { name: 'indeterminate', type: 'boolean', default: 'false', description: 'ProgressBar — looping animation when progress is unknown.' },
-      { name: 'steps', type: 'StepperStep[]', description: 'Stepper — array of step objects with label, optional description, and optional status.' },
+      { name: 'steps', type: 'StepperItem[]', description: 'Stepper — array of step objects with label, optional description, and optional status.' },
       { name: 'currentStep', type: 'number', description: 'Stepper — active step index. Drives completed/active/pending status automatically.' },
     ],
   },

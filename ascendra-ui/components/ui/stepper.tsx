@@ -3,19 +3,20 @@
 import * as React from "react";
 import { Check, X } from "lucide-react";
 import { cn } from "@/ascendra-ui/shadcn";
+import { useStepperContextSafe } from "@/ascendra-ui/providers/stepper/stepper.hook";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export type StepStatus = "pending" | "active" | "completed" | "error";
 
-export interface StepperStep {
+export interface StepperItem {
   label: string;
   description?: string;
   status?: StepStatus;
 }
 
 export interface StepperProps {
-  steps: StepperStep[];
+  steps?: StepperItem[];
   currentStep?: number;
   onStepClick?: (index: number) => void;
   className?: string;
@@ -71,8 +72,14 @@ function StepConnector({ filled }: { filled: boolean }) {
 
 // ─── Stepper ─────────────────────────────────────────────────────────────────
 
-export function Stepper({ steps, currentStep, onStepClick, className }: StepperProps) {
-  const resolved: StepperStep[] = steps.map((step, i) => {
+export function Stepper({ steps: stepsProp, currentStep: currentStepProp, onStepClick, className }: StepperProps) {
+  const ctx = useStepperContextSafe();
+
+  const steps: StepperItem[] = stepsProp ?? ctx?.steps.map(({ label, description }) => ({ label, description })) ?? [];
+  const currentStep = currentStepProp ?? ctx?.currentStep;
+  const handleStepClick = onStepClick ?? (ctx ? (i: number) => { if (i < (ctx.currentStep)) ctx.goToStep(i); } : undefined);
+
+  const resolved: StepperItem[] = steps.map((step, i) => {
     if (step.status) return step;
     if (currentStep === undefined) return { ...step, status: "pending" };
     if (i < currentStep) return { ...step, status: "completed" };
@@ -85,7 +92,7 @@ export function Stepper({ steps, currentStep, onStepClick, className }: StepperP
       {resolved.map((step, i) => {
         const status = step.status ?? "pending";
         const isLast = i === steps.length - 1;
-        const clickable = !!onStepClick && status === "completed";
+        const clickable = !!handleStepClick && status === "completed";
 
         return (
           <React.Fragment key={i}>
@@ -95,7 +102,7 @@ export function Stepper({ steps, currentStep, onStepClick, className }: StepperP
                 "flex flex-col items-center gap-1.5",
                 clickable && "cursor-pointer",
               )}
-              onClick={clickable ? () => onStepClick(i) : undefined}
+              onClick={clickable ? () => handleStepClick(i) : undefined}
             >
               <StepIndicator index={i} status={status} />
               <div className="flex flex-col items-center gap-0.5 text-center">

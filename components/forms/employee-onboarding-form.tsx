@@ -55,10 +55,10 @@ import {
   SelectValue,
   SimpleAlert,
   Switch,
-  WizardNavigator,
-  WizardProvider,
-  type WizardStep,
-  WizardSteps,
+  Stepper,
+  StepperNavigator,
+  StepperProvider,
+  type StepperStep,
 } from "@/ascendra-ui";
 
 // ─── Schema ────────────────────────────────────────────────────────────────────
@@ -285,7 +285,7 @@ export default function EmployeeOnboardingForm() {
   const accessLevel = watch("accessLevel");
   const enroll401k = watch("enroll401k");
 
-  const WIZARD_STEPS: WizardStep[] = [
+  const WIZARD_STEPS: StepperStep[] = [
     {
       label: "Personal Information",
       description: "Identity & address",
@@ -315,7 +315,7 @@ export default function EmployeeOnboardingForm() {
   return (
     <div className="app-container mt-8 pb-24 lg:mt-10 lg:pb-28">
       <div className="mx-auto flex w-full max-w-3xl flex-col">
-        <WizardProvider steps={WIZARD_STEPS} onSubmit={handleSave}>
+        <StepperProvider steps={WIZARD_STEPS} onSubmit={handleSave}>
           <BackLink href="/showcase/forms">Forms Gallery</BackLink>
           <PageHeader>
             <PageHeaderGroup>
@@ -330,7 +330,7 @@ export default function EmployeeOnboardingForm() {
             <PageWrapper hideDivider>
               <PageContent>
                 <MainContent>
-                  <WizardSteps />
+                  <Stepper />
                   {/* ── Step 1: Personal Information ──────────────────────── */}
                   <Card step={0}>
                     <CardHeader>
@@ -1556,12 +1556,12 @@ export default function EmployeeOnboardingForm() {
                     </CardFooter>
                   </Card>
 
-                  <WizardNavigator />
+                  <StepperNavigator />
                 </MainContent>
               </PageContent>
             </PageWrapper>
           </PageMain>
-        </WizardProvider>
+        </StepperProvider>
       </div>
     </div>
   );

@@ -5,17 +5,17 @@ import { ComponentPreview } from "../component-preview";
 import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
 import { ProgressBar, Stepper } from "@/ascendra-ui";
-import type { StepperStep } from "@/ascendra-ui";
+import type { StepperItem } from "@/ascendra-ui";
 import { Button } from "@/ascendra-ui";
 
-const ONBOARDING_STEPS: StepperStep[] = [
+const ONBOARDING_STEPS: StepperItem[] = [
   { label: "Account", description: "Create login" },
   { label: "Profile", description: "Personal info" },
   { label: "Team", description: "Invite members" },
   { label: "Done", description: "All set!" },
 ];
 
-const CHECKOUT_STEPS: StepperStep[] = [
+const CHECKOUT_STEPS: StepperItem[] = [
   { label: "Cart" },
   { label: "Shipping" },
   { label: "Payment" },
@@ -219,7 +219,7 @@ export function ProgressDocContent() {
           <h3 className="text-sm font-medium text-foreground">Stepper</h3>
           <PropsTable
             props={[
-              { name: "steps", type: "StepperStep[]", description: "Array of step objects with label, optional description, and optional status." },
+              { name: "steps", type: "StepperItem[]", description: "Array of step objects with label, optional description, and optional status." },
               { name: "currentStep", type: "number", description: "Active step index. Drives completed/active/pending status automatically." },
               { name: "className", type: "string", description: "Additional CSS classes." },
             ]}
