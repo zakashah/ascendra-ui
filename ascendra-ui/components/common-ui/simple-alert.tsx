@@ -25,6 +25,8 @@ const alertVariants = cva(
           'text-positive bg-[var(--color-green-700)]/4 ring-[var(--color-green-700)]/12 dark:bg-[var(--color-green-700)]/12 dark:ring-[var(--color-green-700)]/24',
         warning:
           'text-warning bg-[var(--color-orange-700)]/4 ring-[var(--color-orange-700)]/12 dark:bg-[var(--color-orange-700)]/12 dark:ring-[var(--color-orange-700)]/24',
+        primary:
+          'text-primary bg-primary/4 ring-primary/12 dark:bg-primary/12 dark:ring-primary/24',
       },
     },
     defaultVariants: {
@@ -48,6 +50,7 @@ const alertIconVariants = cva(
         destructive: 'text-negative',
         success:     'text-positive',
         warning:     'text-warning',
+        primary:     'text-primary',
       },
     },
     defaultVariants: {

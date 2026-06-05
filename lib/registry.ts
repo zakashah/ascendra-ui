@@ -8,7 +8,7 @@ export const registry: Record<string, ComponentMeta> = {
     importPath: '@/ascendra-ui',
     importNames: ['SimpleBadge'],
     props: [
-      { name: 'variant', type: "'default' | 'secondary' | 'orange' | 'green' | 'blue' | 'red' | 'amber'", default: "'default'", description: 'Color variant of the badge.' },
+      { name: 'variant', type: "'default' | 'secondary' | 'orange' | 'green' | 'blue' | 'red' | 'amber' | 'violet' | 'warning' | 'positive' | 'info'", default: "'default'", description: 'Color variant of the badge.' },
       { name: 'asChild', type: 'boolean', default: 'false', description: 'Render as a child element using Radix Slot.' },
       { name: 'className', type: 'string', description: 'Additional CSS classes.' },
     ],
@@ -44,7 +44,7 @@ export const registry: Record<string, ComponentMeta> = {
     importPath: '@/ascendra-ui',
     importNames: ['SimpleAlert', 'AlertIcon'],
     props: [
-      { name: 'variant', type: "'default' | 'secondary' | 'destructive' | 'success' | 'warning'", default: "'default'", description: 'Alert severity variant.' },
+      { name: 'variant', type: "'default' | 'secondary' | 'destructive' | 'success' | 'warning' | 'primary'", default: "'default'", description: 'Alert severity variant.' },
       { name: 'icon', type: 'React.ComponentType<{ className?: string; strokeWidth?: number }>', description: 'Icon component to display (defaults to InfoIcon).' },
     ],
   },

@@ -41,6 +41,22 @@ const badgeVariants = cva(
         /* Amber / Caution */
         amber:
           'text-[var(--color-amber-700)] dark:text-[var(--color-amber-400)] bg-gradient-to-t from-black/[.02] bg-[var(--color-amber-700)]/4 ring-[var(--color-amber-700)]/16 dark:bg-[var(--color-amber-700)]/24',
+
+        /* Violet */
+        violet:
+          'text-violet-700 dark:text-violet-400 bg-gradient-to-t from-black/[.02] bg-violet-700/4 ring-violet-700/16 dark:bg-violet-700/24',
+
+        /* Warning (semantic alias — orange token) */
+        warning:
+          'text-warning bg-gradient-to-t from-black/[.02] bg-warning/4 ring-warning/16 dark:bg-warning/24',
+
+        /* Positive (semantic alias — green token) */
+        positive:
+          'text-positive bg-gradient-to-t from-black/[.02] bg-positive/4 ring-positive/16 dark:bg-positive/24',
+
+        /* Info (semantic alias — blue token) */
+        info:
+          'text-info bg-gradient-to-t from-black/[.02] bg-info/4 ring-info/16 dark:bg-info/24',
       },
     },
     defaultVariants: {

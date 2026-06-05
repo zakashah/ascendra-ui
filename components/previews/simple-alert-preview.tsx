@@ -26,8 +26,8 @@ export function SimpleAlertDocContent() {
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Variants</h3>
           <p className="text-xs text-muted-foreground">
-            Five severity variants: default, secondary, destructive, success,
-            and warning.
+            Six severity variants: default, secondary, destructive, success,
+            warning, and primary.
           </p>
           <ComponentPreview
             align="start"
@@ -35,7 +35,8 @@ export function SimpleAlertDocContent() {
 <SimpleAlert variant="secondary">This is a secondary note.</SimpleAlert>
 <SimpleAlert variant="destructive">This action cannot be undone.</SimpleAlert>
 <SimpleAlert variant="success">Your changes have been saved.</SimpleAlert>
-<SimpleAlert variant="warning">Payment is overdue by 3 days.</SimpleAlert>`}
+<SimpleAlert variant="warning">Payment is overdue by 3 days.</SimpleAlert>
+<SimpleAlert variant="primary">This is a primary alert.</SimpleAlert>`}
           >
             <div className="flex w-full flex-col gap-3">
               <SimpleAlert variant="default">
@@ -52,6 +53,9 @@ export function SimpleAlertDocContent() {
               </SimpleAlert>
               <SimpleAlert variant="warning">
                 Payment is overdue by 3 days.
+              </SimpleAlert>
+              <SimpleAlert variant="primary">
+                This is a primary alert.
               </SimpleAlert>
             </div>
           </ComponentPreview>

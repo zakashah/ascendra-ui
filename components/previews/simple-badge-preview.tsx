@@ -29,7 +29,7 @@ export function SimpleBadgeDocContent() {
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Variants</h3>
           <p className="text-xs text-muted-foreground">
-            Seven semantic color variants matching the project&apos;s color
+            Eleven semantic color variants matching the project&apos;s color
             system.
           </p>
           <ComponentPreview
@@ -39,7 +39,11 @@ export function SimpleBadgeDocContent() {
 <SimpleBadge variant="blue">Blue</SimpleBadge>
 <SimpleBadge variant="orange">Orange</SimpleBadge>
 <SimpleBadge variant="amber">Amber</SimpleBadge>
-<SimpleBadge variant="red">Red</SimpleBadge>`}
+<SimpleBadge variant="red">Red</SimpleBadge>
+<SimpleBadge variant="violet">Violet</SimpleBadge>
+<SimpleBadge variant="warning">Warning</SimpleBadge>
+<SimpleBadge variant="positive">Positive</SimpleBadge>
+<SimpleBadge variant="info">Info</SimpleBadge>`}
           >
             <SimpleBadge variant="default">Default</SimpleBadge>
             <SimpleBadge variant="secondary">Secondary</SimpleBadge>
@@ -48,6 +52,10 @@ export function SimpleBadgeDocContent() {
             <SimpleBadge variant="orange">Orange</SimpleBadge>
             <SimpleBadge variant="amber">Amber</SimpleBadge>
             <SimpleBadge variant="red">Red</SimpleBadge>
+            <SimpleBadge variant="violet">Violet</SimpleBadge>
+            <SimpleBadge variant="warning">Warning</SimpleBadge>
+            <SimpleBadge variant="positive">Positive</SimpleBadge>
+            <SimpleBadge variant="info">Info</SimpleBadge>
           </ComponentPreview>
         </div>
 
