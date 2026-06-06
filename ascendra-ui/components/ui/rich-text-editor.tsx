@@ -50,7 +50,7 @@ function ToolbarButton({
       onClick={onClick}
       className={cn(
         "inline-flex size-7 items-center justify-center rounded transition-colors outline-none",
-        "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1",
+        "focus-visible:ring-2 focus-visible:ring-primary",
         "disabled:cursor-not-allowed disabled:opacity-40",
         active
           ? "bg-primary/15 text-primary hover:bg-primary/20"
@@ -70,7 +70,7 @@ export function RichTextEditor({
   placeholder = "Write something…",
   readOnly = false,
   minHeight = 120,
-  maxHeight = 120,
+  maxHeight = 136,
   className,
 }: RichTextEditorProps) {
   const [activeMarks, setActiveMarks] = React.useState({
@@ -110,7 +110,9 @@ export function RichTextEditor({
         link: editor.isActive("link"),
       });
     editor.on("transaction", sync);
-    return () => { editor.off("transaction", sync); };
+    return () => {
+      editor.off("transaction", sync);
+    };
   }, [editor]);
 
   function handleLink() {
@@ -137,7 +139,9 @@ export function RichTextEditor({
         "ring-1 ring-(--color-umbra)/12 dark:ring-(--color-gray-1000)/88 dark:ring-inset",
         "shadow-[0_2px_2px_-1px_rgba(0,0,0,0.06),0_4px_4px_-2px_rgba(0,0,0,0.04)]",
         "dark:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24)]",
-        "focus-within:outline-2 focus-within:outline-primary focus-within:outline-offset-1",
+        "[&:focus-within:not(:has(*:focus-visible))]:shadow-[0_0_0_3px_rgba(0,0,0,0.08),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.04)] [&:focus-within:not(:has(*:focus-visible))]:ring-1 [&:focus-within:not(:has(*:focus-visible))]:ring-(--color-umbra)/12",
+        "dark:[&:focus-within:not(:has(*:focus-visible))]:shadow-[0_0_0_3px_rgba(61,61,74,0.4),0_4px_4px_-1px_rgba(0,0,0,0.08),0_4px_4px_-2px_rgba(0,0,0,0.16)] dark:[&:focus-within:not(:has(*:focus-visible))]:ring-black/88",
+        "has-focus-visible:outline-2 has-focus-visible:outline-primary has-focus-visible:outline-offset-1",
         "bg-white dark:bg-secondary",
         readOnly &&
           "bg-gray-100 dark:bg-white/5 ring-gray-300 dark:ring-white/10 shadow-none",
@@ -222,11 +226,13 @@ export function RichTextEditor({
           "[&_.tiptap_.is-editor-empty:first-child::before]:pointer-events-none",
           "[&_.tiptap_.is-editor-empty:first-child::before]:text-muted-foreground",
         )}
-        style={{
-          "--rte-min-height": `${minHeight}px`,
-          minHeight: `${minHeight}px`,
-          maxHeight: `${maxHeight}px`,
-        } as React.CSSProperties}
+        style={
+          {
+            "--rte-min-height": `${minHeight}px`,
+            minHeight: `${minHeight}px`,
+            maxHeight: `${maxHeight}px`,
+          } as React.CSSProperties
+        }
       />
     </div>
   );
