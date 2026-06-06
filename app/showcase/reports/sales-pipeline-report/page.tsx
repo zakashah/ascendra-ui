@@ -206,7 +206,7 @@ export default function SalesPipelineReportPage() {
             subtitle="Quota attainment YTD — all values in $000s"
           />
           <TableWrapper>
-            <Table horizontal vertical>
+            <Table horizontal vertical scrollable>
               <TableHeader>
                 <TableHeaderRow>
                   <TableHead>Rep</TableHead>

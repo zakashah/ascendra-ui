@@ -164,7 +164,8 @@ function fmtVariance(fy24: number | string | null | undefined, fy23: number | st
 
 function StatementTable({ rows }: { rows: StatRow[] }) {
   return (
-    <div className="w-full text-sm">
+    <div className="overflow-x-auto">
+    <div className="min-w-130 w-full text-sm">
       {/* Header row */}
       <div className="mb-1 grid grid-cols-[1fr_auto_auto_auto_auto] gap-x-4 border-b pb-2 text-[0.6875rem] uppercase tracking-wide text-muted-foreground">
         <span>Line Item</span>
@@ -217,6 +218,7 @@ function StatementTable({ rows }: { rows: StatRow[] }) {
           </div>
         );
       })}
+    </div>
     </div>
   );
 }

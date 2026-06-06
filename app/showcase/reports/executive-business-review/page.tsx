@@ -231,7 +231,7 @@ export default function ExecutiveBusinessReviewPage() {
             subtitle="Revenue by business unit for H1 2024 — in millions USD"
           />
           <TableWrapper>
-            <Table horizontal vertical>
+            <Table horizontal vertical scrollable>
               <TableHeader>
                 <TableHeaderRow>
                   <TableHead>Division</TableHead>

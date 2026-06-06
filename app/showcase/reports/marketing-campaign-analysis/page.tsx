@@ -323,7 +323,7 @@ export default function MarketingCampaignAnalysisPage() {
             subtitle="Spend, revenue, ROAS, and CPC by campaign — sorted by ROAS descending"
           />
           <TableWrapper>
-            <Table horizontal vertical>
+            <Table horizontal vertical scrollable>
               <TableHeader>
                 <TableHeaderRow>
                   <TableHead>Campaign</TableHead>

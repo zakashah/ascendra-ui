@@ -245,7 +245,7 @@ export default function SupplyChainOpsReportPage() {
             subtitle="Color-coded by threshold — Green ≥ target · Amber approaching · Red below threshold"
           />
           <TableWrapper>
-            <Table horizontal vertical>
+            <Table horizontal vertical scrollable>
               <TableHeader>
                 <TableHeaderRow>
                   <TableHead>Supplier</TableHead>
@@ -332,7 +332,7 @@ export default function SupplyChainOpsReportPage() {
             subtitle="Orders flagged as Critical or At Risk — requiring immediate attention"
           />
           <TableWrapper>
-            <Table horizontal vertical>
+            <Table horizontal vertical scrollable>
               <TableHeader>
                 <TableHeaderRow>
                   <TableHead>Order ID</TableHead>

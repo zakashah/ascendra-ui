@@ -364,7 +364,7 @@ export default function ProjectStatusReportPage() {
         <div>
           <SectionHeading title="Risk Register" subtitle="Active risks as of report date" />
           <TableWrapper>
-            <Table horizontal vertical>
+            <Table horizontal vertical scrollable>
               <TableHeader>
                 <TableHeaderRow>
                   <TableHead>Risk Description</TableHead>

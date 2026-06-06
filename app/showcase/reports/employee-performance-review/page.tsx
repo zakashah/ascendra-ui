@@ -358,7 +358,7 @@ export default function EmployeePerformanceReviewPage() {
         <div>
           <SectionHeading title="Goal Achievement" />
           <TableWrapper>
-            <Table horizontal vertical>
+            <Table horizontal vertical scrollable>
               <TableHeader>
                 <TableHeaderRow>
                   <TableHead>Goal</TableHead>
@@ -432,7 +432,7 @@ export default function EmployeePerformanceReviewPage() {
         <div>
           <SectionHeading title="Development Plan 2024" />
           <TableWrapper>
-            <Table horizontal vertical>
+            <Table horizontal vertical scrollable>
               <TableHeader>
                 <TableHeaderRow>
                   <TableHead>Skill / Gap</TableHead>

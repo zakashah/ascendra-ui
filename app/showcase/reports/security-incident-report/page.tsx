@@ -248,7 +248,7 @@ export default function SecurityIncidentReportPage() {
         <div>
           <SectionHeading title="Affected Systems" />
           <TableWrapper>
-            <Table horizontal vertical>
+            <Table horizontal vertical scrollable>
               <TableHeader>
                 <TableHeaderRow>
                   <TableHead>System</TableHead>
@@ -281,7 +281,7 @@ export default function SecurityIncidentReportPage() {
         <div>
           <SectionHeading title="Remediation Actions" />
           <TableWrapper>
-            <Table horizontal vertical>
+            <Table horizontal vertical scrollable>
               <TableHeader>
                 <TableHeaderRow>
                   <TableHead>Action</TableHead>

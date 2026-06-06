@@ -153,7 +153,7 @@ export default function PatientHealthSummaryPage() {
         <div>
           <SectionHeading title="Active Medications" />
           <TableWrapper>
-            <Table horizontal vertical>
+            <Table horizontal vertical scrollable>
               <TableHeader>
                 <TableHeaderRow>
                   <TableHead>Medication</TableHead>
@@ -185,7 +185,7 @@ export default function PatientHealthSummaryPage() {
             Specimens drawn {patient.visitDate} · Processed at Ascendra Regional Laboratory
           </p>
           <TableWrapper>
-            <Table horizontal vertical>
+            <Table horizontal vertical scrollable>
               <TableHeader>
                 <TableHeaderRow>
                   <TableHead>Test</TableHead>

@@ -426,7 +426,7 @@ export default function EsgSustainabilityReportPage() {
               <p className="mt-0.5 text-xs text-muted-foreground">FY2023 actuals vs. industry benchmark thresholds</p>
             </div>
             <TableWrapper>
-              <Table horizontal vertical>
+              <Table horizontal vertical scrollable>
                 <TableHeader>
                   <TableHeaderRow>
                     <TableHead>Metric</TableHead>
@@ -490,7 +490,7 @@ export default function EsgSustainabilityReportPage() {
               <p className="mt-0.5 text-xs text-muted-foreground">78% independent · 43% women · Average tenure 4.1 years</p>
             </div>
             <TableWrapper>
-              <Table horizontal vertical>
+              <Table horizontal vertical scrollable>
                 <TableHeader>
                   <TableHeaderRow>
                     <TableHead>Member</TableHead>
