@@ -49,8 +49,8 @@ function ToolbarButton({
       disabled={disabled}
       onClick={onClick}
       className={cn(
-        "inline-flex size-7 items-center justify-center rounded-lg transition-colors outline-none",
-        "focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-1",
+        "inline-flex size-7 items-center justify-center rounded transition-colors outline-none",
+        "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1",
         "disabled:cursor-not-allowed disabled:opacity-40",
         active
           ? "bg-primary/15 text-primary hover:bg-primary/20"
