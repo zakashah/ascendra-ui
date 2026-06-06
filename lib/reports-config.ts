@@ -64,7 +64,7 @@ export const reportsConfig: ReportMeta[] = [
       'Monthly sales performance report with pipeline stage funnel, rep quota attainment rankings with inline progress bars, bookings vs. target chart, and deal size distribution.',
     keyMetrics: ['Pipeline Value', 'Deals Won', 'Avg. Deal Size', 'Win Rate'],
     elements: ['Funnel visualization', 'Rep ranking table', 'Inline progress bars', 'Composed chart', 'Bar chart'],
-    status: 'coming-soon',
+    status: 'available',
   },
   {
     slug: 'marketing-campaign-analysis',
@@ -103,7 +103,7 @@ export const reportsConfig: ReportMeta[] = [
       'Annual employee review document with a prominent overall rating, competency radar chart, goal achievement table with status badges, peer feedback text blocks, a development plan, and a sign-off section.',
     keyMetrics: ['Overall Rating', 'Goals Achieved', '360° Score', 'Tenure'],
     elements: ['Radar chart', 'Rating display', 'Goal table', 'Feedback text blocks', 'Development plan', 'Sign-off area'],
-    status: 'coming-soon',
+    status: 'available',
   },
   {
     slug: 'security-incident-report',
@@ -116,7 +116,7 @@ export const reportsConfig: ReportMeta[] = [
       'Formal post-incident report documenting a security event — TLP classification banner, severity badge, incident timeline, affected systems table, impact assessment, and remediation action tracker.',
     keyMetrics: ['Severity Level', 'Systems Affected', 'Records at Risk', 'Time to Containment'],
     elements: ['TLP classification', 'Severity badge', 'Vertical timeline', 'Affected systems table', 'Remediation tracker', 'Bar chart'],
-    status: 'coming-soon',
+    status: 'available',
   },
   {
     slug: 'esg-sustainability-report',
