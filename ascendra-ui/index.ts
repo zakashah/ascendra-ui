@@ -7,6 +7,7 @@ export * from './components/common-ui/pagination-button';
 export * from './components/common-ui/pro-badge';
 export * from './components/common-ui/row-action-button';
 export * from './components/common-ui/simple-alert';
+export * from './components/common-ui/rating';
 export * from './components/common-ui/simple-badge';
 export * from './components/common-ui/status-dot';
 export * from './components/common-ui/toast';

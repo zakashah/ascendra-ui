@@ -293,10 +293,8 @@ export default function EmployeePerformanceReviewPage() {
               <Stars rating={overallRating} />
             </div>
             <div className="flex flex-col gap-2">
-              <span className="inline-flex items-center rounded-md bg-indigo-500/10 px-3 py-1.5 text-sm font-semibold text-indigo-700 ring-1 ring-indigo-500/20 dark:text-indigo-400">
-                {tier}
-              </span>
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+              <SimpleBadge variant="violet" className="px-2 py-1 text-xs">{tier}</SimpleBadge>
+              <div className="flex items-center gap-4 text-xs text-muted-foreground">
                 <span>
                   Goals achieved:{" "}
                   <span className="font-semibold text-foreground">

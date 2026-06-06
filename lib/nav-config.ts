@@ -63,6 +63,7 @@ export const navConfig: NavCategory[] = [
   {
     title: 'Feedback & Status',
     items: [
+      { name: 'Rating', slug: 'feedback/rating' },
       { name: 'Simple Badge', slug: 'feedback/simple-badge' },
       { name: 'Bubble Badge', slug: 'feedback/bubble-badge' },
       { name: 'Status Dot', slug: 'feedback/status-dot' },

@@ -4,6 +4,7 @@
 // That's the only file you need to touch (besides registry.ts + nav-config.ts).
 
 import { ButtonDocContent } from "@/components/previews/button-preview";
+import { RatingDocContent } from "@/components/previews/rating-preview";
 import { SimpleBadgeDocContent } from "@/components/previews/simple-badge-preview";
 import { BubbleBadgeDocContent } from "@/components/previews/bubble-badge-preview";
 import { StatusDotDocContent } from "@/components/previews/status-dot-preview";
@@ -58,6 +59,7 @@ export type DocComponent = React.ComponentType;
 
 export const docComponents: Partial<Record<string, DocComponent>> = {
   button: ButtonDocContent,
+  rating: RatingDocContent,
   "simple-badge": SimpleBadgeDocContent,
   "bubble-badge": BubbleBadgeDocContent,
   "status-dot": StatusDotDocContent,

@@ -1,6 +1,24 @@
 import { ComponentMeta } from './types';
 
 export const registry: Record<string, ComponentMeta> = {
+  'rating': {
+    slug: 'rating',
+    name: 'Rating',
+    description: 'Star rating display and input with half-star precision, multiple sizes, and semantic color variants.',
+    importPath: '@/ascendra-ui',
+    importNames: ['Rating'],
+    props: [
+      { name: 'rating', type: 'number', description: 'Current rating value (0–max).' },
+      { name: 'max', type: 'number', default: '5', description: 'Total number of stars.' },
+      { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", default: "'md'", description: 'Star size.' },
+      { name: 'color', type: "'default' | 'amber' | 'orange' | 'red' | 'green' | 'blue' | 'violet'", default: "'default'", description: 'Fill color of active stars.' },
+      { name: 'precision', type: "'full' | 'half'", default: "'half'", description: 'Whether to render half-star fills for fractional ratings.' },
+      { name: 'showValue', type: 'boolean', default: 'false', description: 'Show numeric value label next to the stars.' },
+      { name: 'onChange', type: '(value: number) => void', description: 'When provided, enables click-to-rate interaction.' },
+      { name: 'readOnly', type: 'boolean', default: 'false', description: 'Disables interaction even when onChange is present.' },
+    ],
+  },
+
   'simple-badge': {
     slug: 'simple-badge',
     name: 'Simple Badge',
