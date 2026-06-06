@@ -23,6 +23,11 @@ import {
   TableHeaderRow,
   TableRow,
   TableWrapper,
+  ReportDocumentFooter,
+  ReportDocumentFooterLine,
+  ReportDocumentFooterLineLeft,
+  ReportDocumentFooterLineRight,
+  ReportDocumentFooterNote,
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
@@ -602,25 +607,25 @@ export default function EsgSustainabilityReportPage() {
         </div>
 
         {/* ── Footer ───────────────────────────────────────────────────────── */}
-        <div className="flex flex-col gap-2 border-t pt-6 text-xs text-muted-foreground">
-          <p>
+        <ReportDocumentFooter>
+          <ReportDocumentFooterNote>
             This report has been prepared in accordance with the GRI Standards (Core option), the
             Task Force on Climate-related Financial Disclosures (TCFD) framework, and aligns with
             the United Nations Sustainable Development Goals. Data covers the period 1 January –
             31 December 2023 unless otherwise stated. Independent assurance provided by
             Ascendra Audit LLP.
-          </p>
-          <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-            <span className="font-medium text-foreground/60">Ascendra Holdings Ltd.</span>
-            <div className="flex items-center gap-4 text-muted-foreground/60">
+          </ReportDocumentFooterNote>
+          <ReportDocumentFooterLine>
+            <ReportDocumentFooterLineLeft>Ascendra Holdings Ltd.</ReportDocumentFooterLineLeft>
+            <ReportDocumentFooterLineRight>
               <span>FY2023 ESG Report</span>
               <span>·</span>
               <span>GRI · TCFD · UN SDGs</span>
               <span>·</span>
               <span>March 15, 2024</span>
-            </div>
-          </div>
-        </div>
+            </ReportDocumentFooterLineRight>
+          </ReportDocumentFooterLine>
+        </ReportDocumentFooter>
 
       </ReportDocumentWrapper>
     </>

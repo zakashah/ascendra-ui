@@ -19,6 +19,10 @@ import {
   TableHeaderRow,
   TableRow,
   TableWrapper,
+  ReportDocumentFooter,
+  ReportDocumentFooterLine,
+  ReportDocumentFooterLineLeft,
+  ReportDocumentFooterLineRight,
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
@@ -513,23 +517,23 @@ export default function SecurityIncidentReportPage() {
         </div>
 
         {/* ── TLP Footer ───────────────────────────────────────────────────── */}
-        <div className="flex flex-col gap-3 border-t pt-6 text-xs text-muted-foreground">
+        <ReportDocumentFooter>
           <div className="flex items-center justify-center rounded border border-amber-400/40 bg-amber-50/40 py-2 text-[0.6875rem] font-bold uppercase tracking-widest text-amber-700 dark:border-amber-700/40 dark:bg-amber-950/20 dark:text-amber-400">
             TLP:AMBER — DO NOT SHARE BEYOND AUTHORISED RECIPIENTS
           </div>
-          <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-            <span className="font-medium text-foreground/60">
+          <ReportDocumentFooterLine>
+            <ReportDocumentFooterLineLeft>
               Ascendra Security Operations Centre
-            </span>
-            <div className="flex items-center gap-4 text-muted-foreground/60">
+            </ReportDocumentFooterLineLeft>
+            <ReportDocumentFooterLineRight>
               <span>{incident.id}</span>
               <span>·</span>
               <span>{incident.reportDate}</span>
               <span>·</span>
               <span>{incident.classification}</span>
-            </div>
-          </div>
-        </div>
+            </ReportDocumentFooterLineRight>
+          </ReportDocumentFooterLine>
+        </ReportDocumentFooter>
       </ReportDocumentWrapper>
     </>
   );

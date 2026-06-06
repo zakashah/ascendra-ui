@@ -23,6 +23,10 @@ import {
   TableHeaderRow,
   TableRow,
   TableWrapper,
+  ReportDocumentFooter,
+  ReportDocumentFooterLine,
+  ReportDocumentFooterLineLeft,
+  ReportDocumentFooterLineRight,
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
@@ -317,16 +321,18 @@ export default function ExecutiveBusinessReviewPage() {
         </div>
 
         {/* ── Report Footer ─────────────────────────────────────────────────── */}
-        <div className="flex flex-wrap items-center justify-between gap-2 border-t pt-6 text-xs text-muted-foreground">
-          <span className="font-medium text-foreground/60">Ascendra Holdings Ltd. — Board of Directors</span>
-          <div className="flex items-center gap-4 text-muted-foreground/60">
-            <span>H1 FY2024 Executive Review</span>
-            <span>·</span>
-            <span>Board Confidential</span>
-            <span>·</span>
-            <span>July 12, 2024</span>
-          </div>
-        </div>
+        <ReportDocumentFooter>
+          <ReportDocumentFooterLine>
+            <ReportDocumentFooterLineLeft>Ascendra Holdings Ltd. — Board of Directors</ReportDocumentFooterLineLeft>
+            <ReportDocumentFooterLineRight>
+              <span>H1 FY2024 Executive Review</span>
+              <span>·</span>
+              <span>Board Confidential</span>
+              <span>·</span>
+              <span>July 12, 2024</span>
+            </ReportDocumentFooterLineRight>
+          </ReportDocumentFooterLine>
+        </ReportDocumentFooter>
 
       </ReportDocumentWrapper>
     </>

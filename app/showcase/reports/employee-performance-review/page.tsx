@@ -23,6 +23,11 @@ import {
   TableHeaderRow,
   TableRow,
   TableWrapper,
+  ReportDocumentFooter,
+  ReportDocumentFooterLine,
+  ReportDocumentFooterLineLeft,
+  ReportDocumentFooterLineRight,
+  ReportDocumentFooterNote,
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
@@ -504,26 +509,26 @@ export default function EmployeePerformanceReviewPage() {
         </div>
 
         {/* ── Footer ───────────────────────────────────────────────────────── */}
-        <div className="flex flex-col gap-2 border-t pt-6 text-xs text-muted-foreground">
-          <p>
+        <ReportDocumentFooter>
+          <ReportDocumentFooterNote>
             This document is a confidential personnel record. It is intended
             solely for the named employee, their direct manager, and authorised
             HR personnel. Unauthorised disclosure is prohibited under
             Ascendra&apos;s employee privacy policy.
-          </p>
-          <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-            <span className="font-medium text-foreground/60">
+          </ReportDocumentFooterNote>
+          <ReportDocumentFooterLine>
+            <ReportDocumentFooterLineLeft>
               Ascendra — People & Talent
-            </span>
-            <div className="flex items-center gap-4 text-muted-foreground/60">
+            </ReportDocumentFooterLineLeft>
+            <ReportDocumentFooterLineRight>
               <span>{employee.employeeId}</span>
               <span>·</span>
               <span>{employee.reviewPeriod}</span>
               <span>·</span>
               <span>Confidential HR</span>
-            </div>
-          </div>
-        </div>
+            </ReportDocumentFooterLineRight>
+          </ReportDocumentFooterLine>
+        </ReportDocumentFooter>
       </ReportDocumentWrapper>
     </>
   );

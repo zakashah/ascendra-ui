@@ -755,12 +755,12 @@ export default function AnnualFinancialStatementPage() {
           <ReportSectionHeader>
             <CardHeaderTitle>Notes to Financial Statements</CardHeaderTitle>
           </ReportSectionHeader>
-          <div className="flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground">
-            <div>
-              <p className="mb-1 font-medium text-foreground">
+          <div className="flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground">{/* <ReportNotes /> */}
+            <div>{/* <ReportNote /> */}
+              <p className="mb-1 font-medium text-foreground">{/* <ReportNoteHeader /> */}
                 1. Basis of Preparation
               </p>
-              <p>
+              <p>{/* <ReportNoteText /> */}
                 These consolidated financial statements have been prepared in
                 accordance with Generally Accepted Accounting Principles (GAAP)
                 on a going-concern basis. All amounts are presented in thousands

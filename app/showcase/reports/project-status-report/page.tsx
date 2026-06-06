@@ -23,6 +23,10 @@ import {
   TableHeaderRow,
   TableRow,
   TableWrapper,
+  ReportDocumentFooter,
+  ReportDocumentFooterLine,
+  ReportDocumentFooterLineLeft,
+  ReportDocumentFooterLineRight,
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
@@ -421,16 +425,18 @@ export default function ProjectStatusReportPage() {
         </div>
 
         {/* ── Report Footer ─────────────────────────────────────────────────── */}
-        <div className="flex flex-wrap items-center justify-between gap-2 border-t pt-6 text-xs text-muted-foreground">
-          <span className="font-medium text-foreground/60">{project.name}</span>
-          <div className="flex items-center gap-4 text-muted-foreground/60">
-            <span>{project.period}</span>
-            <span>·</span>
-            <span>PM: {project.pm}</span>
-            <span>·</span>
-            <span>Internal Use Only</span>
-          </div>
-        </div>
+        <ReportDocumentFooter>
+          <ReportDocumentFooterLine>
+            <ReportDocumentFooterLineLeft>{project.name}</ReportDocumentFooterLineLeft>
+            <ReportDocumentFooterLineRight>
+              <span>{project.period}</span>
+              <span>·</span>
+              <span>PM: {project.pm}</span>
+              <span>·</span>
+              <span>Internal Use Only</span>
+            </ReportDocumentFooterLineRight>
+          </ReportDocumentFooterLine>
+        </ReportDocumentFooter>
 
       </ReportDocumentWrapper>
     </>
