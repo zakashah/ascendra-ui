@@ -14,6 +14,7 @@ import {
   ReportSubTitle,
   ReportTitle,
   ReportTitleHeader,
+  SimpleAlert,
   SimpleBadge,
   Table,
   TableBody,
@@ -202,27 +203,6 @@ function ProgressBar({
   );
 }
 
-function SectionBanner({
-  label,
-  title,
-  subtitle,
-  accent,
-}: {
-  label: string;
-  title: string;
-  subtitle: string;
-  accent: string;
-}) {
-  return (
-    <div className={`overflow-hidden rounded-xl border ${accent}`}>
-      <div className="p-5">
-        <p className="text-[0.6875rem] font-bold uppercase tracking-widest opacity-70">{label}</p>
-        <h2 className="mt-0.5 text-lg font-bold tracking-tight">{title}</h2>
-        <p className="mt-0.5 text-sm opacity-70">{subtitle}</p>
-      </div>
-    </div>
-  );
-}
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
@@ -270,12 +250,11 @@ export default function EsgSustainabilityReportPage() {
         {/* ══════════════════════════════════════════════════════════════════ */}
 
         <div className="flex flex-col gap-6">
-          <SectionBanner
-            label="Environmental"
-            title="Climate & Resource Management"
-            subtitle="Scope 1, 2 & 3 emissions, energy mix, and 2030 target progress"
-            accent="border-green-200 bg-green-50/40 text-green-900 dark:border-green-800/40 dark:bg-green-950/20 dark:text-green-100"
-          />
+          <SimpleAlert variant="success" icon={false} className="flex-col p-5">
+            <p className="text-xs font-bold uppercase tracking-widest opacity-70">Environmental</p>
+            <h2 className="mt-0.5 text-base font-bold tracking-tight">Climate &amp; Resource Management</h2>
+            <p className="mt-0.5 text-xs opacity-70">Scope 1, 2 &amp; 3 emissions, energy mix, and 2030 target progress</p>
+          </SimpleAlert>
 
           {/* Emissions trend */}
           <Card>
@@ -387,12 +366,11 @@ export default function EsgSustainabilityReportPage() {
         {/* ══════════════════════════════════════════════════════════════════ */}
 
         <div className="flex flex-col gap-6">
-          <SectionBanner
-            label="Social"
-            title="People, Safety & Community"
-            subtitle="Workforce diversity, safety performance, and community investment"
-            accent="border-blue-200 bg-blue-50/40 text-blue-900 dark:border-blue-800/40 dark:bg-blue-950/20 dark:text-blue-100"
-          />
+          <SimpleAlert variant="default" icon={false} className="flex-col p-5">
+            <p className="text-xs font-bold uppercase tracking-widest opacity-70">Social</p>
+            <h2 className="mt-0.5 text-base font-bold tracking-tight">People, Safety &amp; Community</h2>
+            <p className="mt-0.5 text-xs opacity-70">Workforce diversity, safety performance, and community investment</p>
+          </SimpleAlert>
 
           {/* Diversity by level */}
           <Card>
@@ -483,12 +461,11 @@ export default function EsgSustainabilityReportPage() {
         {/* ══════════════════════════════════════════════════════════════════ */}
 
         <div className="flex flex-col gap-6">
-          <SectionBanner
-            label="Governance"
-            title="Board, Ethics & Compliance"
-            subtitle="Board composition, policy compliance indicators, and audit findings summary"
-            accent="border-purple-200 bg-purple-50/40 text-purple-900 dark:border-purple-800/40 dark:bg-purple-950/20 dark:text-purple-100"
-          />
+          <SimpleAlert variant="primary" icon={false} className="flex-col p-5">
+            <p className="text-xs font-bold uppercase tracking-widest opacity-70">Governance</p>
+            <h2 className="mt-0.5 text-base font-bold tracking-tight">Board, Ethics &amp; Compliance</h2>
+            <p className="mt-0.5 text-xs opacity-70">Board composition, policy compliance indicators, and audit findings summary</p>
+          </SimpleAlert>
 
           {/* Board composition */}
           <div>
