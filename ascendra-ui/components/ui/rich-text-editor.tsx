@@ -23,6 +23,7 @@ export interface RichTextEditorProps {
   placeholder?: string;
   readOnly?: boolean;
   minHeight?: number;
+  maxHeight?: number;
   className?: string;
 }
 
@@ -69,6 +70,7 @@ export function RichTextEditor({
   placeholder = "Write something…",
   readOnly = false,
   minHeight = 120,
+  maxHeight = 120,
   className,
 }: RichTextEditorProps) {
   const [activeMarks, setActiveMarks] = React.useState({
@@ -208,7 +210,7 @@ export function RichTextEditor({
       <EditorContent
         editor={editor}
         className={cn(
-          "px-3 py-2 text-sm text-foreground outline-none",
+          "px-3 py-2 text-sm text-foreground outline-none overflow-y-auto",
           "[&_.tiptap]:outline-none [&_.tiptap]:min-h-[var(--rte-min-height)]",
           "[&_.tiptap_p]:my-0 [&_.tiptap_p+p]:mt-1.5",
           "[&_.tiptap_ul]:my-1 [&_.tiptap_ul]:pl-5 [&_.tiptap_ul]:list-disc",
@@ -220,7 +222,11 @@ export function RichTextEditor({
           "[&_.tiptap_.is-editor-empty:first-child::before]:pointer-events-none",
           "[&_.tiptap_.is-editor-empty:first-child::before]:text-muted-foreground",
         )}
-        style={{ "--rte-min-height": `${minHeight}px` } as React.CSSProperties}
+        style={{
+          "--rte-min-height": `${minHeight}px`,
+          minHeight: `${minHeight}px`,
+          maxHeight: `${maxHeight}px`,
+        } as React.CSSProperties}
       />
     </div>
   );

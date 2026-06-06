@@ -16,17 +16,34 @@ function ControlledExample() {
 
   return (
     <div className="flex flex-col gap-4">
-      <RichTextEditor value={html} onChange={setHtml} placeholder="Write your notes…" />
+      <RichTextEditor
+        value={html}
+        onChange={setHtml}
+        placeholder="Write your notes…"
+      />
       <div className="flex items-center gap-2">
-        <Button variant="primary" size="sm" onClick={() => setSubmitted(true)}>Submit</Button>
-        <Button variant="ghost" size="sm" onClick={() => { setHtml(""); setSubmitted(false); }}>Clear</Button>
+        <Button variant="primary" size="sm" onClick={() => setSubmitted(true)}>
+          Submit
+        </Button>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => {
+            setHtml("");
+            setSubmitted(false);
+          }}
+        >
+          Clear
+        </Button>
       </div>
       {submitted && (
         <div className="rounded-lg border bg-muted/30 px-4 py-3">
           <p className="mb-1 text-[0.6875rem] font-medium uppercase tracking-wider text-muted-foreground">
             HTML output
           </p>
-          <code className="break-all font-mono text-xs text-foreground">{html}</code>
+          <code className="break-all font-mono text-xs text-foreground">
+            {html}
+          </code>
         </div>
       )}
     </div>
@@ -51,10 +68,15 @@ export function RichTextEditorDocContent() {
         <SectionHeader>Examples</SectionHeader>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Pre-populated content</h3>
+          <h3 className="text-sm font-medium text-foreground">
+            Pre-populated content
+          </h3>
           <p className="text-xs text-muted-foreground">
             Pass an HTML string as the initial{" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs">value</code>.
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              value
+            </code>
+            .
           </p>
           <ComponentPreview
             align="start"
@@ -72,8 +94,11 @@ export function RichTextEditorDocContent() {
           <h3 className="text-sm font-medium text-foreground">Read-only</h3>
           <p className="text-xs text-muted-foreground">
             Pass{" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs">readOnly</code>{" "}
-            to hide the toolbar and disable editing. Matches the disabled input styling.
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              readOnly
+            </code>{" "}
+            to hide the toolbar and disable editing. Matches the disabled input
+            styling.
           </p>
           <ComponentPreview
             align="start"
@@ -86,10 +111,14 @@ export function RichTextEditorDocContent() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Custom min-height</h3>
+          <h3 className="text-sm font-medium text-foreground">
+            Custom min-height
+          </h3>
           <p className="text-xs text-muted-foreground">
             Set{" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs">minHeight</code>{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              minHeight
+            </code>{" "}
             (in px) to expand the writing surface for longer-form content.
           </p>
           <ComponentPreview
@@ -97,7 +126,10 @@ export function RichTextEditorDocContent() {
             code={`<RichTextEditor placeholder="Detailed description…" minHeight={240} />`}
           >
             <div className="w-full">
-              <RichTextEditor placeholder="Write a detailed description…" minHeight={240} />
+              <RichTextEditor
+                placeholder="Write a detailed description…"
+                minHeight={240}
+              />
             </div>
           </ComponentPreview>
         </div>
@@ -106,7 +138,9 @@ export function RichTextEditorDocContent() {
           <h3 className="text-sm font-medium text-foreground">Inside Field</h3>
           <p className="text-xs text-muted-foreground">
             Drops into a{" "}
-            <code className="rounded bg-muted px-1 font-mono text-xs">Field</code>{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              Field
+            </code>{" "}
             wrapper like any other input.
           </p>
           <ComponentPreview
@@ -124,17 +158,26 @@ export function RichTextEditorDocContent() {
                 <FieldHint description="Supports bold, italic, and lists" />
               </Field>
               <Field>
-                <FieldLabel>Release notes <span className="text-destructive">*</span></FieldLabel>
-                <RichTextEditor placeholder="What changed in this release?" minHeight={160} />
+                <FieldLabel>
+                  Release notes <span className="text-destructive">*</span>
+                </FieldLabel>
+                <RichTextEditor
+                  placeholder="What changed in this release?"
+                  minHeight={160}
+                />
               </Field>
             </div>
           </ComponentPreview>
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">Controlled — with HTML output</h3>
+          <h3 className="text-sm font-medium text-foreground">
+            Controlled — with HTML output
+          </h3>
           <p className="text-xs text-muted-foreground">
-            <code className="rounded bg-muted px-1 font-mono text-xs">onChange</code>{" "}
+            <code className="rounded bg-muted px-1 font-mono text-xs">
+              onChange
+            </code>{" "}
             fires with the full HTML string on every keystroke.
           </p>
           <ComponentPreview
@@ -150,9 +193,11 @@ export function RichTextEditorDocContent() {
         </div>
 
         <div className="rounded-lg border bg-muted/30 p-5 text-xs leading-relaxed text-muted-foreground">
-          <p className="mb-2 font-medium text-foreground">Usage with react-hook-form</p>
+          <p className="mb-2 font-medium text-foreground">
+            Usage with react-hook-form
+          </p>
           <pre className="overflow-x-auto rounded bg-muted p-3 font-mono text-[0.6875rem] leading-relaxed">
-{`const { control } = useForm<{ body: string }>();
+            {`const { control } = useForm<{ body: string }>();
 
 <Controller
   control={control}
@@ -172,12 +217,39 @@ export function RichTextEditorDocContent() {
         <SectionHeader>Props</SectionHeader>
         <PropsTable
           props={[
-            { name: "value", type: "string", description: "Controlled HTML content." },
-            { name: "onChange", type: "(html: string) => void", description: "Called with full HTML on every change." },
-            { name: "placeholder", type: "string", default: "'Write something…'", description: "Placeholder text shown in the empty editor." },
-            { name: "readOnly", type: "boolean", default: "false", description: "Hides toolbar and disables editing." },
-            { name: "minHeight", type: "number", default: "120", description: "Min height of the editor area in px." },
-            { name: "className", type: "string", description: "Additional CSS classes on the container." },
+            {
+              name: "value",
+              type: "string",
+              description: "Controlled HTML content.",
+            },
+            {
+              name: "onChange",
+              type: "(html: string) => void",
+              description: "Called with full HTML on every change.",
+            },
+            {
+              name: "placeholder",
+              type: "string",
+              default: "'Write something…'",
+              description: "Placeholder text shown in the empty editor.",
+            },
+            {
+              name: "readOnly",
+              type: "boolean",
+              default: "false",
+              description: "Hides toolbar and disables editing.",
+            },
+            {
+              name: "minHeight",
+              type: "number",
+              default: "120",
+              description: "Min height of the editor area in px.",
+            },
+            {
+              name: "className",
+              type: "string",
+              description: "Additional CSS classes on the container.",
+            },
           ]}
         />
       </div>
