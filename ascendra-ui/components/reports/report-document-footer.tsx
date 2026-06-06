@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/ascendra-ui/shadcn";
 
 export function ReportDocumentFooter({

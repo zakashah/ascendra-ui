@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/ascendra-ui/shadcn";
 
 export function ReportTitle({
@@ -10,7 +12,7 @@ export function ReportTitle({
       data-slot="report-title"
       className={cn(
         "text-[0.6875rem] font-semibold uppercase tracking-widest text-muted-foreground",
-        className
+        className,
       )}
       {...props}
     >

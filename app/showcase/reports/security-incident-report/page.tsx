@@ -287,7 +287,7 @@ export default function SecurityIncidentReportPage() {
                 </ReportHeaderBodyWrap>
                 <SimpleBadge variant={"red"}>{incident.severity}</SimpleBadge>
               </ReportHeaderBody>
-              <ReportHeaderFooter className="grid grid-cols-2 gap-x-8 gap-y-2 sm:grid-cols-4">
+              <ReportHeaderFooter stacked className="sm:grid-cols-4">
                 {[
                   { label: "Detected", value: incident.detected },
                   { label: "Contained", value: incident.contained },
@@ -301,7 +301,7 @@ export default function SecurityIncidentReportPage() {
                     value: "≈ 12,400 customer records",
                   },
                 ].map((f) => (
-                  <ReportHeaderField key={f.label} label={f.label} stack>
+                  <ReportHeaderField key={f.label} label={f.label}>
                     {f.value}
                   </ReportHeaderField>
                 ))}

@@ -258,7 +258,7 @@ export default function EmployeePerformanceReviewPage() {
                 </ReportHeaderBodyWrap>
                 <SimpleBadge variant={"violet"}>Confidential HR</SimpleBadge>
               </ReportHeaderBody>
-              <ReportHeaderFooter className="grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3">
+              <ReportHeaderFooter stacked className="gap-y-4">
                 {[
                   { label: "Employee ID", value: employee.employeeId },
                   { label: "Manager", value: employee.manager },
@@ -267,7 +267,7 @@ export default function EmployeePerformanceReviewPage() {
                   { label: "Review Period", value: employee.reviewPeriod },
                   { label: "Department", value: employee.department },
                 ].map((f) => (
-                  <ReportHeaderField key={f.label} label={f.label} stack>
+                  <ReportHeaderField key={f.label} label={f.label}>
                     {f.value}
                   </ReportHeaderField>
                 ))}
