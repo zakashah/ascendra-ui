@@ -34,10 +34,10 @@ import {
   ReportDocumentFooterLine,
   ReportDocumentFooterLineLeft,
   ReportDocumentFooterLineRight,
+  ReportDocumentWrapper,
+  ReportHeaderBodyWrap,
+  ReportSectionHeader,
 } from "@/ascendra-ui";
-import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
-import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
-import { ReportSectionHeader } from "@/ascendra-ui/components/reports/report-section-header";
 import {
   ChartContainer,
   ChartTooltip,

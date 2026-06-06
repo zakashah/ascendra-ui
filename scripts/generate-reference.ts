@@ -16,14 +16,14 @@
 
 import { writeFileSync } from "fs";
 import { join } from "path";
-import { registry } from "../lib/registry";
-import { navConfig } from "../lib/nav-config";
-import { formsConfig } from "../lib/forms-config";
-import { dialogsConfig } from "../lib/dialogs-config";
-import { sheetsConfig } from "../lib/sheets-config";
-import { drawersConfig } from "../lib/drawers-config";
 import { dashboardsConfig } from "../lib/dashboards-config";
-import type { PropDef, NavCategory, NavItem, LayoutCell } from "../lib/types";
+import { dialogsConfig } from "../lib/dialogs-config";
+import { drawersConfig } from "../lib/drawers-config";
+import { formsConfig } from "../lib/forms-config";
+import { navConfig } from "../lib/nav-config";
+import { registry } from "../lib/registry";
+import { sheetsConfig } from "../lib/sheets-config";
+import type { LayoutCell, PropDef } from "../lib/types";
 
 // ── Slug resolution ────────────────────────────────────────────────────────────
 // navConfig uses prefixed slugs like 'feedback/simple-badge'.

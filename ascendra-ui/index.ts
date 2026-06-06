@@ -156,6 +156,8 @@ export * from './components/forms/back-link';
 
 // Reports
 export * from './components/reports/report-document-footer';
+export * from './components/reports/report-document-wraper';
+export * from './components/reports/report-header-body-wrap';
 export * from './components/reports/report-header-field';
 export * from './components/reports/report-header-content';
 export * from './components/reports/report-header-body';
@@ -164,6 +166,8 @@ export * from './components/reports/report-title-header';
 export * from './components/reports/report-subtitle';
 export * from './components/reports/report-header-footer';
 export * from './components/reports/report-notes';
+export * from './components/reports/report-section-header';
+export * from './components/reports/report-summary';
 
 // Hooks
 export * from './hooks/use-is-small-screen';

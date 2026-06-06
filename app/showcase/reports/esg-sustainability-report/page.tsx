@@ -29,9 +29,9 @@ import {
   ReportDocumentFooterLineLeft,
   ReportDocumentFooterLineRight,
   ReportDocumentFooterNote,
+  ReportDocumentWrapper,
+  ReportHeaderBodyWrap,
 } from "@/ascendra-ui";
-import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
-import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
 import {
   ChartContainer,
   ChartTooltip,
