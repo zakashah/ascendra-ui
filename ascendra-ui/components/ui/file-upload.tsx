@@ -125,9 +125,9 @@ function FileUploadDropzone({
         onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") inputRef.current?.click(); }}
         className={cn(
           "relative flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border border-dashed p-8 text-center transition-all duration-150 outline-none",
-          "bg-white dark:bg-secondary",
+          "bg-white dark:bg-transparent",
           // Idle
-          !isDragover && !isSuccess && !isError && "border-border/60 hover:border-foreground/30 hover:bg-muted/30 focus-visible:border-primary",
+          !isDragover && !isSuccess && !isError && "border-border dark:border-foreground/15 hover:border-foreground/40 dark:hover:border-foreground/30 hover:bg-muted/30 focus-visible:border-primary",
           // Dragover
           isDragover && "border-primary bg-primary/5 scale-[1.01]",
           // Success
