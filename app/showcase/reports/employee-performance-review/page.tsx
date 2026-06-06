@@ -22,12 +22,7 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/ascendra-ui/shadcn";
-import {
-  PolarAngleAxis,
-  PolarGrid,
-  Radar,
-  RadarChart,
-} from "recharts";
+import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
 
 // ─── Employee data ─────────────────────────────────────────────────────────────
 
@@ -49,12 +44,12 @@ const goalsSummary = { achieved: 8, total: 10, score: 4.0 };
 // ─── Competencies ─────────────────────────────────────────────────────────────
 
 const competencies = [
-  { subject: "Leadership",       score: 4.0, fullMark: 5 },
-  { subject: "Technical",        score: 4.5, fullMark: 5 },
-  { subject: "Collaboration",    score: 4.8, fullMark: 5 },
-  { subject: "Communication",    score: 4.2, fullMark: 5 },
-  { subject: "Initiative",       score: 4.6, fullMark: 5 },
-  { subject: "Delivery",         score: 4.1, fullMark: 5 },
+  { subject: "Leadership", score: 4.0, fullMark: 5 },
+  { subject: "Technical", score: 4.5, fullMark: 5 },
+  { subject: "Collaboration", score: 4.8, fullMark: 5 },
+  { subject: "Communication", score: 4.2, fullMark: 5 },
+  { subject: "Initiative", score: 4.6, fullMark: 5 },
+  { subject: "Delivery", score: 4.1, fullMark: 5 },
 ];
 
 const radarConfig: ChartConfig = {
@@ -72,31 +67,114 @@ const goals: {
   status: GoalStatus;
   weight: number;
 }[] = [
-  { name: "Launch mobile app v2.0",          target: "Q3 2023 release",       result: "Released Aug 2023",   status: "Achieved",  weight: 20 },
-  { name: "Improve NPS score",               target: "NPS ≥ 45",              result: "NPS 52 achieved",     status: "Achieved",  weight: 15 },
-  { name: "Roadmap alignment with sales",    target: "Monthly sync cadence",  result: "100% sync adherence", status: "Achieved",  weight: 10 },
-  { name: "Reduce time-to-market",           target: "≤ 6 weeks per feature", result: "5.8 wks avg",         status: "Achieved",  weight: 15 },
-  { name: "Customer advisory board",         target: "3 sessions / yr",       result: "3 sessions held",     status: "Achieved",  weight: 10 },
-  { name: "Cross-team collaboration index",  target: "Score ≥ 4.2",           result: "Score 4.5",           status: "Achieved",  weight: 10 },
-  { name: "Documentation overhaul",          target: "100% coverage",         result: "82% complete",        status: "Partial",   weight: 10 },
-  { name: "Data analytics integration",      target: "Q4 delivery",           result: "Slipped to Q1 2024",  status: "Partial",   weight: 5  },
-  { name: "Hire 2 associate PMs",            target: "Dec 2023",              result: "1 hired; 1 ongoing",  status: "Partial",   weight: 3  },
-  { name: "Competitive analysis refresh",    target: "Bi-annual cadence",     result: "Only 1 completed",    status: "Not Met",   weight: 2  },
+  {
+    name: "Launch mobile app v2.0",
+    target: "Q3 2023 release",
+    result: "Released Aug 2023",
+    status: "Achieved",
+    weight: 20,
+  },
+  {
+    name: "Improve NPS score",
+    target: "NPS ≥ 45",
+    result: "NPS 52 achieved",
+    status: "Achieved",
+    weight: 15,
+  },
+  {
+    name: "Roadmap alignment with sales",
+    target: "Monthly sync cadence",
+    result: "100% sync adherence",
+    status: "Achieved",
+    weight: 10,
+  },
+  {
+    name: "Reduce time-to-market",
+    target: "≤ 6 weeks per feature",
+    result: "5.8 wks avg",
+    status: "Achieved",
+    weight: 15,
+  },
+  {
+    name: "Customer advisory board",
+    target: "3 sessions / yr",
+    result: "3 sessions held",
+    status: "Achieved",
+    weight: 10,
+  },
+  {
+    name: "Cross-team collaboration index",
+    target: "Score ≥ 4.2",
+    result: "Score 4.5",
+    status: "Achieved",
+    weight: 10,
+  },
+  {
+    name: "Documentation overhaul",
+    target: "100% coverage",
+    result: "82% complete",
+    status: "Partial",
+    weight: 10,
+  },
+  {
+    name: "Data analytics integration",
+    target: "Q4 delivery",
+    result: "Slipped to Q1 2024",
+    status: "Partial",
+    weight: 5,
+  },
+  {
+    name: "Hire 2 associate PMs",
+    target: "Dec 2023",
+    result: "1 hired; 1 ongoing",
+    status: "Partial",
+    weight: 3,
+  },
+  {
+    name: "Competitive analysis refresh",
+    target: "Bi-annual cadence",
+    result: "Only 1 completed",
+    status: "Not Met",
+    weight: 2,
+  },
 ];
 
 const goalStatusCls: Record<GoalStatus, string> = {
-  "Achieved": "bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/20 dark:text-emerald-400 dark:ring-emerald-500/30",
-  "Partial":  "bg-amber-500/10 text-amber-700 ring-1 ring-amber-500/20 dark:text-amber-400 dark:ring-amber-500/30",
-  "Not Met":  "bg-rose-500/10 text-rose-700 ring-1 ring-rose-500/20 dark:text-rose-400 dark:ring-rose-500/30",
+  Achieved:
+    "bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/20 dark:text-emerald-400 dark:ring-emerald-500/30",
+  Partial:
+    "bg-amber-500/10 text-amber-700 ring-1 ring-amber-500/20 dark:text-amber-400 dark:ring-amber-500/30",
+  "Not Met":
+    "bg-rose-500/10 text-rose-700 ring-1 ring-rose-500/20 dark:text-rose-400 dark:ring-rose-500/30",
 };
 
 // ─── Development plan ─────────────────────────────────────────────────────────
 
 const devPlan = [
-  { skill: "Executive presence",      action: "Enroll in leadership communication programme", timeline: "Q1 2024", support: "L&D budget" },
-  { skill: "Data-driven roadmapping", action: "Complete advanced analytics course",           timeline: "Q1 2024", support: "Online learning" },
-  { skill: "People management",       action: "Shadow VP of Product in hiring process",       timeline: "Q2 2024", support: "Manager sponsorship" },
-  { skill: "OKR facilitation",        action: "Lead next cycle OKR workshop for squad",       timeline: "Q2 2024", support: "No external cost" },
+  {
+    skill: "Executive presence",
+    action: "Enroll in leadership communication programme",
+    timeline: "Q1 2024",
+    support: "L&D budget",
+  },
+  {
+    skill: "Data-driven roadmapping",
+    action: "Complete advanced analytics course",
+    timeline: "Q1 2024",
+    support: "Online learning",
+  },
+  {
+    skill: "People management",
+    action: "Shadow VP of Product in hiring process",
+    timeline: "Q2 2024",
+    support: "Manager sponsorship",
+  },
+  {
+    skill: "OKR facilitation",
+    action: "Lead next cycle OKR workshop for squad",
+    timeline: "Q2 2024",
+    support: "No external cost",
+  },
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -114,7 +192,11 @@ function Stars({ rating }: { rating: number }) {
                 <defs>
                   <linearGradient id={`half-${s}`}>
                     <stop offset="50%" stopColor="var(--chart-1)" />
-                    <stop offset="50%" stopColor="currentColor" stopOpacity={0.15} />
+                    <stop
+                      offset="50%"
+                      stopColor="currentColor"
+                      stopOpacity={0.15}
+                    />
                   </linearGradient>
                 </defs>
                 <path
@@ -153,8 +235,7 @@ export default function EmployeePerformanceReviewPage() {
     <>
       <BackLink href="/showcase/reports">Report Gallery</BackLink>
 
-      <div className="mx-auto w-full max-w-3xl flex flex-col gap-10">
-
+      <div className="flex flex-col gap-10">
         {/* ── Employee header ──────────────────────────────────────────────── */}
         <div className="overflow-hidden rounded-xl border">
           <div className="h-1 w-full bg-indigo-500" />
@@ -177,15 +258,17 @@ export default function EmployeePerformanceReviewPage() {
             </div>
             <div className="mt-4 grid grid-cols-2 gap-x-8 gap-y-2 border-t pt-4 text-sm sm:grid-cols-4">
               {[
-                { label: "Employee ID",     value: employee.employeeId    },
-                { label: "Manager",         value: employee.manager       },
-                { label: "Start Date",      value: employee.startDate     },
-                { label: "Tenure",          value: employee.tenure        },
-                { label: "Review Period",   value: employee.reviewPeriod  },
-                { label: "Department",      value: employee.department    },
+                { label: "Employee ID", value: employee.employeeId },
+                { label: "Manager", value: employee.manager },
+                { label: "Start Date", value: employee.startDate },
+                { label: "Tenure", value: employee.tenure },
+                { label: "Review Period", value: employee.reviewPeriod },
+                { label: "Department", value: employee.department },
               ].map((f) => (
                 <div key={f.label} className="flex flex-col gap-0.5 py-1">
-                  <span className="text-[0.6875rem] text-muted-foreground">{f.label}</span>
+                  <span className="text-[0.6875rem] text-muted-foreground">
+                    {f.label}
+                  </span>
                   <span className="font-medium text-foreground">{f.value}</span>
                 </div>
               ))}
@@ -200,7 +283,9 @@ export default function EmployeePerformanceReviewPage() {
             <div className="flex flex-col items-center gap-2">
               <p className="text-6xl font-black tracking-tight text-foreground">
                 {overallRating.toFixed(1)}
-                <span className="text-2xl font-medium text-muted-foreground">/5</span>
+                <span className="text-2xl font-medium text-muted-foreground">
+                  /5
+                </span>
               </p>
               <Stars rating={overallRating} />
             </div>
@@ -209,9 +294,19 @@ export default function EmployeePerformanceReviewPage() {
                 {tier}
               </span>
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                <span>Goals achieved: <span className="font-semibold text-foreground">{goalsSummary.achieved}/{goalsSummary.total}</span></span>
+                <span>
+                  Goals achieved:{" "}
+                  <span className="font-semibold text-foreground">
+                    {goalsSummary.achieved}/{goalsSummary.total}
+                  </span>
+                </span>
                 <span>·</span>
-                <span>360° score: <span className="font-semibold text-foreground">{goalsSummary.score.toFixed(1)}/5</span></span>
+                <span>
+                  360° score:{" "}
+                  <span className="font-semibold text-foreground">
+                    {goalsSummary.score.toFixed(1)}/5
+                  </span>
+                </span>
               </div>
             </div>
           </div>
@@ -221,16 +316,19 @@ export default function EmployeePerformanceReviewPage() {
         <Card>
           <CardHeader>
             <CardHeaderTitle>Competency Assessment</CardHeaderTitle>
-            <CardHeaderSubtitle>Six core competencies rated on a 5-point scale by manager and peers</CardHeaderSubtitle>
+            <CardHeaderSubtitle>
+              Six core competencies rated on a 5-point scale by manager and
+              peers
+            </CardHeaderSubtitle>
           </CardHeader>
           <CardPanel>
             <div className="flex justify-center p-6">
-              <ChartContainer config={radarConfig} className="h-72 w-full max-w-xs">
+              <ChartContainer
+                config={radarConfig}
+                className="h-72 w-full max-w-xs"
+              >
                 <RadarChart data={competencies}>
-                  <PolarGrid
-                    stroke="var(--border)"
-                    strokeOpacity={0.6}
-                  />
+                  <PolarGrid stroke="var(--border)" strokeOpacity={0.6} />
                   <PolarAngleAxis
                     dataKey="subject"
                     tick={{ fontSize: 11, fill: "var(--muted-foreground)" }}
@@ -274,10 +372,16 @@ export default function EmployeePerformanceReviewPage() {
                 {goals.map((g) => (
                   <TableRow key={g.name}>
                     <TableCell className="font-medium">{g.name}</TableCell>
-                    <TableCell className="text-xs text-muted-foreground">{g.target}</TableCell>
-                    <TableCell className="text-xs text-muted-foreground">{g.result}</TableCell>
+                    <TableCell className="text-xs text-muted-foreground">
+                      {g.target}
+                    </TableCell>
+                    <TableCell className="text-xs text-muted-foreground">
+                      {g.result}
+                    </TableCell>
                     <TableCell>
-                      <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium capitalize ${goalStatusCls[g.status]}`}>
+                      <span
+                        className={`inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium capitalize ${goalStatusCls[g.status]}`}
+                      >
                         {g.status}
                       </span>
                     </TableCell>
@@ -298,25 +402,27 @@ export default function EmployeePerformanceReviewPage() {
             {[
               {
                 theme: "Strategic Thinking",
-                quote: "Amara consistently brings a clear product vision to planning sessions. She is one of the best at translating ambiguous business goals into actionable roadmap items. Multiple stakeholders noted her ability to pre-empt downstream blockers before they surface.",
+                quote:
+                  "Amara consistently brings a clear product vision to planning sessions. She is one of the best at translating ambiguous business goals into actionable roadmap items. Multiple stakeholders noted her ability to pre-empt downstream blockers before they surface.",
               },
               {
                 theme: "Cross-Team Collaboration",
-                quote: "Feedback across engineering, design, and marketing was overwhelmingly positive. Amara is described as a 'go-to connector' who proactively closes communication gaps between teams. Two peers highlighted her monthly stakeholder digests as particularly valuable.",
+                quote:
+                  "Feedback across engineering, design, and marketing was overwhelmingly positive. Amara is described as a 'go-to connector' who proactively closes communication gaps between teams. Two peers highlighted her monthly stakeholder digests as particularly valuable.",
               },
               {
                 theme: "Development Areas",
-                quote: "A recurring theme across reviewers is the opportunity to delegate more intentionally — Amara sometimes retains ownership of tasks that could develop junior colleagues. This is noted as a growth area rather than a deficiency, and aligns with her own self-assessment.",
+                quote:
+                  "A recurring theme across reviewers is the opportunity to delegate more intentionally — Amara sometimes retains ownership of tasks that could develop junior colleagues. This is noted as a growth area rather than a deficiency, and aligns with her own self-assessment.",
               },
             ].map((f) => (
-              <div
-                key={f.theme}
-                className="rounded-lg border bg-muted/20 p-4"
-              >
+              <div key={f.theme} className="rounded-lg border bg-muted/20 p-4">
                 <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   {f.theme}
                 </p>
-                <p className="text-sm leading-relaxed text-foreground">{f.quote}</p>
+                <p className="text-sm leading-relaxed text-foreground">
+                  {f.quote}
+                </p>
               </div>
             ))}
           </div>
@@ -339,9 +445,15 @@ export default function EmployeePerformanceReviewPage() {
                 {devPlan.map((d) => (
                   <TableRow key={d.skill}>
                     <TableCell className="font-medium">{d.skill}</TableCell>
-                    <TableCell className="text-sm text-muted-foreground">{d.action}</TableCell>
-                    <TableCell className="text-sm text-muted-foreground">{d.timeline}</TableCell>
-                    <TableCell className="text-sm text-muted-foreground">{d.support}</TableCell>
+                    <TableCell className="text-sm text-muted-foreground">
+                      {d.action}
+                    </TableCell>
+                    <TableCell className="text-sm text-muted-foreground">
+                      {d.timeline}
+                    </TableCell>
+                    <TableCell className="text-sm text-muted-foreground">
+                      {d.support}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -354,10 +466,17 @@ export default function EmployeePerformanceReviewPage() {
           <SectionHeading title="Sign-off" />
           <div className="grid gap-6 sm:grid-cols-2">
             {[
-              { role: "Manager",  name: employee.manager, title: "Head of Product" },
-              { role: "Employee", name: employee.name,    title: employee.role      },
+              {
+                role: "Manager",
+                name: employee.manager,
+                title: "Head of Product",
+              },
+              { role: "Employee", name: employee.name, title: employee.role },
             ].map((s) => (
-              <div key={s.role} className="flex flex-col gap-4 rounded-lg border p-5">
+              <div
+                key={s.role}
+                className="flex flex-col gap-4 rounded-lg border p-5"
+              >
                 <div>
                   <p className="text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
                     {s.role}
@@ -367,11 +486,15 @@ export default function EmployeePerformanceReviewPage() {
                 </div>
                 <div className="flex flex-col gap-3 pt-2">
                   <div>
-                    <p className="mb-1 text-[0.6875rem] text-muted-foreground">Signature</p>
+                    <p className="mb-1 text-[0.6875rem] text-muted-foreground">
+                      Signature
+                    </p>
                     <div className="h-8 w-full border-b border-dashed" />
                   </div>
                   <div>
-                    <p className="mb-1 text-[0.6875rem] text-muted-foreground">Date</p>
+                    <p className="mb-1 text-[0.6875rem] text-muted-foreground">
+                      Date
+                    </p>
                     <div className="h-8 w-32 border-b border-dashed" />
                   </div>
                 </div>
@@ -383,12 +506,15 @@ export default function EmployeePerformanceReviewPage() {
         {/* ── Footer ───────────────────────────────────────────────────────── */}
         <div className="flex flex-col gap-2 border-t pt-6 text-xs text-muted-foreground">
           <p>
-            This document is a confidential personnel record. It is intended solely for the named
-            employee, their direct manager, and authorised HR personnel. Unauthorised disclosure is
-            prohibited under Ascendra&apos;s employee privacy policy.
+            This document is a confidential personnel record. It is intended
+            solely for the named employee, their direct manager, and authorised
+            HR personnel. Unauthorised disclosure is prohibited under
+            Ascendra&apos;s employee privacy policy.
           </p>
           <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-            <span className="font-medium text-foreground/60">Ascendra — People & Talent</span>
+            <span className="font-medium text-foreground/60">
+              Ascendra — People & Talent
+            </span>
             <div className="flex items-center gap-4 text-muted-foreground/60">
               <span>{employee.employeeId}</span>
               <span>·</span>
@@ -398,7 +524,6 @@ export default function EmployeePerformanceReviewPage() {
             </div>
           </div>
         </div>
-
       </div>
     </>
   );

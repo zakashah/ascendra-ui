@@ -77,7 +77,7 @@ export const reportsConfig: ReportMeta[] = [
       'Post-campaign report for a multi-channel digital marketing campaign — channel ROAS comparison, conversion funnel with drop-off annotations, audience breakdown donut, and campaign ROI summary table.',
     keyMetrics: ['Total Impressions', 'Conversions', 'Blended ROAS', 'Cost per Conversion'],
     elements: ['Grouped bar chart', 'Conversion funnel', 'Donut chart', 'ROI summary table', 'Drop-off annotations'],
-    status: 'coming-soon',
+    status: 'available',
   },
   {
     slug: 'supply-chain-ops-report',
@@ -90,7 +90,7 @@ export const reportsConfig: ReportMeta[] = [
       'Monthly supply chain report with inventory level trends by category, supplier performance scorecard (color-coded by threshold), regional shipment breakdown, and a critical open orders table.',
     keyMetrics: ['On-time Delivery', 'Inventory Value', 'Stockout Events', 'Avg. Lead Time'],
     elements: ['Multi-series area chart', 'Supplier scorecard', 'Colored table cells', 'Horizontal bar chart', 'Critical orders table'],
-    status: 'coming-soon',
+    status: 'available',
   },
   {
     slug: 'employee-performance-review',
@@ -129,6 +129,6 @@ export const reportsConfig: ReportMeta[] = [
       'Annual ESG progress report with three color-themed sections (Environmental, Social, Governance), emissions trend, energy mix donut, diversity charts, board composition, ESG score gauge, and an industry benchmark radar.',
     keyMetrics: ['Carbon Emissions', 'Renewable Energy %', 'Workforce Diversity', 'Board Independence'],
     elements: ['3-section color themes', 'Progress bars to targets', 'Area chart', 'Donut chart', 'Radar chart', 'SDG alignment grid'],
-    status: 'coming-soon',
+    status: 'available',
   },
 ];
