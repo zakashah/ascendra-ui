@@ -50,26 +50,27 @@ import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 // ─── Project meta ──────────────────────────────────────────────────────────────
 
 const project = {
-  name:   "Ascendra Platform — Cloud Migration",
+  name: "Ascendra Platform — Cloud Migration",
   client: "Ascendra Holdings Ltd.",
-  pm:     "Cameron Walsh",
+  pm: "Cameron Walsh",
   period: "Week 24 · June 3 – 7, 2024",
   deadline: "August 5, 2024",
 };
 
 const rag = {
-  status:  "AMBER" as const,
-  label:   "On Track with Concerns",
-  summary: "Infrastructure environment setup is 8 days behind schedule. All other workstreams on track and budget remains within tolerance.",
+  status: "AMBER" as const,
+  label: "On Track with Concerns",
+  summary:
+    "Infrastructure environment setup is 8 days behind schedule. All other workstreams on track and budget remains within tolerance.",
 };
 
 // ─── KPIs ─────────────────────────────────────────────────────────────────────
 
 const kpis = [
-  { label: "% Complete",        value: "62%"     },
-  { label: "Days to Deadline",  value: "41"      },
-  { label: "Budget Consumed",   value: "58%"     },
-  { label: "Open Risks",        value: "3"       },
+  { label: "% Complete", value: "62%" },
+  { label: "Days to Deadline", value: "41" },
+  { label: "Budget Consumed", value: "58%" },
+  { label: "Open Risks", value: "3" },
 ];
 
 // ─── Milestones ────────────────────────────────────────────────────────────────
@@ -77,23 +78,23 @@ const kpis = [
 type MilestoneState = "complete" | "in-progress" | "upcoming";
 
 const milestones: { label: string; date: string; state: MilestoneState }[] = [
-  { label: "Project Kickoff",    date: "Apr 1",  state: "complete"    },
-  { label: "Infra Design",       date: "Apr 29", state: "complete"    },
-  { label: "Dev Env Setup",      date: "May 20", state: "complete"    },
-  { label: "Data Migration",     date: "Jun 28", state: "in-progress" },
-  { label: "UAT Testing",        date: "Jul 19", state: "upcoming"    },
-  { label: "Go Live",            date: "Aug 5",  state: "upcoming"    },
+  { label: "Project Kickoff", date: "Apr 1", state: "complete" },
+  { label: "Infra Design", date: "Apr 29", state: "complete" },
+  { label: "Dev Env Setup", date: "May 20", state: "complete" },
+  { label: "Data Migration", date: "Jun 28", state: "in-progress" },
+  { label: "UAT Testing", date: "Jul 19", state: "upcoming" },
+  { label: "Go Live", date: "Aug 5", state: "upcoming" },
 ];
 
 // ─── Budget data ───────────────────────────────────────────────────────────────
 
 const budgetData = [
-  { phase: "Discovery",     budget: 48,  actual: 46  },
-  { phase: "Infra",         budget: 120, actual: 128 },
-  { phase: "Development",   budget: 240, actual: 218 },
-  { phase: "Data Migration",budget: 96,  actual: 72  },
-  { phase: "Testing",       budget: 72,  actual: 0   },
-  { phase: "Deployment",    budget: 24,  actual: 0   },
+  { phase: "Discovery", budget: 48, actual: 46 },
+  { phase: "Infra", budget: 120, actual: 128 },
+  { phase: "Development", budget: 240, actual: 218 },
+  { phase: "Data Migration", budget: 96, actual: 72 },
+  { phase: "Testing", budget: 72, actual: 0 },
+  { phase: "Deployment", budget: 24, actual: 0 },
 ];
 
 const budgetConfig: ChartConfig = {
@@ -116,63 +117,75 @@ const risks: {
 }[] = [
   {
     description: "Infrastructure vendor delay extends project timeline",
-    probability: "Medium", impact: "High",
-    owner: "J. Torres", due: "Jun 14", status: "Escalated",
+    probability: "Medium",
+    impact: "High",
+    owner: "J. Torres",
+    due: "Jun 14",
+    status: "Escalated",
   },
   {
     description: "Data quality issues in legacy system requiring remediation",
-    probability: "High", impact: "Medium",
-    owner: "M. Patel", due: "Jun 21", status: "Monitoring",
+    probability: "High",
+    impact: "Medium",
+    owner: "M. Patel",
+    due: "Jun 21",
+    status: "Monitoring",
   },
   {
     description: "Key backend developer on extended leave",
-    probability: "Low", impact: "High",
-    owner: "C. Walsh", due: "Jul 1", status: "Mitigated",
+    probability: "Low",
+    impact: "High",
+    owner: "C. Walsh",
+    due: "Jul 1",
+    status: "Mitigated",
   },
 ];
 
 // ─── Team ─────────────────────────────────────────────────────────────────────
 
 const team = [
-  { name: "Cameron Walsh",  role: "Project Manager",       allocation: "100%" },
-  { name: "Juan Torres",    role: "Lead Architect",         allocation: "80%"  },
-  { name: "Amy Kim",        role: "Senior Backend Engineer",allocation: "100%" },
-  { name: "Bruno Reyes",    role: "Backend Engineer",       allocation: "100%" },
-  { name: "Maya Patel",     role: "Data Engineer",          allocation: "60%"  },
-  { name: "Sam Nguyen",     role: "QA Lead",                allocation: "40%"  },
+  { name: "Cameron Walsh", role: "Project Manager", allocation: "100%" },
+  { name: "Juan Torres", role: "Lead Architect", allocation: "80%" },
+  { name: "Amy Kim", role: "Senior Backend Engineer", allocation: "100%" },
+  { name: "Bruno Reyes", role: "Backend Engineer", allocation: "100%" },
+  { name: "Maya Patel", role: "Data Engineer", allocation: "60%" },
+  { name: "Sam Nguyen", role: "QA Lead", allocation: "40%" },
 ];
 
 // ─── Styling helpers ───────────────────────────────────────────────────────────
 
 const riskStatusVariant: Record<RiskStatus, "red" | "amber" | "green"> = {
-  Escalated:  "red",
+  Escalated: "red",
   Monitoring: "amber",
-  Mitigated:  "green",
+  Mitigated: "green",
 };
 
 const riskLevelCls: Record<RiskSeverity, string> = {
-  High:   "text-rose-600 dark:text-rose-400 font-semibold",
+  High: "text-rose-600 dark:text-rose-400 font-semibold",
   Medium: "text-amber-600 dark:text-amber-400 font-semibold",
-  Low:    "text-sky-600 dark:text-sky-400 font-semibold",
+  Low: "text-sky-600 dark:text-sky-400 font-semibold",
 };
 
 // ─── Milestone timeline ────────────────────────────────────────────────────────
 
 function MilestoneTimeline() {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto no-scrollbar">
       <div className="relative flex min-w-[560px] items-start">
         {/* Track line */}
         <div className="absolute left-[calc(100%/12)] right-[calc(100%/12)] top-3 h-0.5 bg-border" />
         {/* Completed fill — approx 3/5 done */}
         <div
           className="absolute top-3 h-0.5 bg-primary"
-          style={{ left: "calc(100% / 12)", width: "calc((100% - 100%/6) * 0.55)" }}
+          style={{
+            left: "calc(100% / 12)",
+            width: "calc((100% - 100%/6) * 0.55)",
+          }}
         />
 
         {milestones.map((m, i) => {
           const isFirst = i === 0;
-          const isLast  = i === milestones.length - 1;
+          const isLast = i === milestones.length - 1;
           return (
             <div
               key={m.label}
@@ -185,13 +198,23 @@ function MilestoneTimeline() {
                   m.state === "complete"
                     ? "h-6 w-6 border-primary bg-primary"
                     : m.state === "in-progress"
-                    ? "h-6 w-6 border-primary bg-background"
-                    : "h-6 w-6 border-border bg-background",
+                      ? "h-6 w-6 border-primary bg-background"
+                      : "h-6 w-6 border-border bg-background",
                 ].join(" ")}
               >
                 {m.state === "complete" && (
-                  <svg className="size-3 text-primary-foreground" viewBox="0 0 12 12" fill="none">
-                    <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg
+                    className="size-3 text-primary-foreground"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                  >
+                    <path
+                      d="M2 6l3 3 5-5"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 )}
                 {m.state === "in-progress" && (
@@ -200,20 +223,30 @@ function MilestoneTimeline() {
               </div>
 
               {/* Labels */}
-              <div className={`mt-3 flex flex-col gap-0.5 ${isFirst ? "items-start" : isLast ? "items-end" : "items-center text-center"}`}>
+              <div
+                className={`mt-3 flex flex-col gap-0.5 ${isFirst ? "items-start" : isLast ? "items-end" : "items-center text-center"}`}
+              >
                 <span className="text-[0.6875rem] font-medium leading-snug text-foreground">
                   {m.label}
                 </span>
-                <span className="text-[0.625rem] text-muted-foreground">{m.date}</span>
+                <span className="text-[0.625rem] text-muted-foreground">
+                  {m.date}
+                </span>
                 <span
                   className={[
                     "text-[0.625rem] font-medium",
-                    m.state === "complete"    ? "text-emerald-600 dark:text-emerald-400" :
-                    m.state === "in-progress" ? "text-blue-600 dark:text-blue-400"       :
-                    "text-muted-foreground/40",
+                    m.state === "complete"
+                      ? "text-emerald-600 dark:text-emerald-400"
+                      : m.state === "in-progress"
+                        ? "text-blue-600 dark:text-blue-400"
+                        : "text-muted-foreground/40",
                   ].join(" ")}
                 >
-                  {m.state === "complete" ? "Complete" : m.state === "in-progress" ? "In Progress" : "Upcoming"}
+                  {m.state === "complete"
+                    ? "Complete"
+                    : m.state === "in-progress"
+                      ? "In Progress"
+                      : "Upcoming"}
                 </span>
               </div>
             </div>
@@ -224,7 +257,6 @@ function MilestoneTimeline() {
   );
 }
 
-
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default function ProjectStatusReportPage() {
@@ -233,7 +265,6 @@ export default function ProjectStatusReportPage() {
       <BackLink href="/showcase/reports">Report Gallery</BackLink>
 
       <ReportDocumentWrapper>
-
         {/* ── Document Header ──────────────────────────────────────────────── */}
         <Card>
           <CardPanel border={{ color: "blue" }}>
@@ -247,9 +278,15 @@ export default function ProjectStatusReportPage() {
                 <SimpleBadge variant={"blue"}>Weekly Update</SimpleBadge>
               </ReportHeaderBody>
               <ReportHeaderFooter>
-                <ReportHeaderField label="Client">{project.client}</ReportHeaderField>
-                <ReportHeaderField label="Project Manager">{project.pm}</ReportHeaderField>
-                <ReportHeaderField label="Go-Live Target">{project.deadline}</ReportHeaderField>
+                <ReportHeaderField label="Client">
+                  {project.client}
+                </ReportHeaderField>
+                <ReportHeaderField label="Project Manager">
+                  {project.pm}
+                </ReportHeaderField>
+                <ReportHeaderField label="Go-Live Target">
+                  {project.deadline}
+                </ReportHeaderField>
               </ReportHeaderFooter>
             </ReportHeaderContent>
           </CardPanel>
@@ -289,7 +326,9 @@ export default function ProjectStatusReportPage() {
         <div>
           <ReportSectionHeader>
             <CardHeaderTitle>Milestone Timeline</CardHeaderTitle>
-            <CardHeaderSubtitle>Six project phases — complete, in progress, and upcoming</CardHeaderSubtitle>
+            <CardHeaderSubtitle>
+              Six project phases — complete, in progress, and upcoming
+            </CardHeaderSubtitle>
           </ReportSectionHeader>
           <MilestoneTimeline />
         </div>
@@ -335,23 +374,42 @@ export default function ProjectStatusReportPage() {
                     content={
                       <ChartTooltipContent
                         formatter={(v, k) => [
-                          v === 0 ? "Not started" : `$${Number(v).toLocaleString()}K`,
-                          budgetConfig[k as keyof typeof budgetConfig]?.label ?? k,
+                          v === 0
+                            ? "Not started"
+                            : `$${Number(v).toLocaleString()}K`,
+                          budgetConfig[k as keyof typeof budgetConfig]?.label ??
+                            k,
                         ]}
                       />
                     }
                   />
-                  <Bar dataKey="budget" fill="var(--chart-2)" fillOpacity={0.5} radius={[3, 3, 0, 0]} />
-                  <Bar dataKey="actual"  fill="var(--chart-1)" fillOpacity={0.85} radius={[3, 3, 0, 0]} />
+                  <Bar
+                    dataKey="budget"
+                    fill="var(--chart-2)"
+                    fillOpacity={0.5}
+                    radius={[3, 3, 0, 0]}
+                  />
+                  <Bar
+                    dataKey="actual"
+                    fill="var(--chart-1)"
+                    fillOpacity={0.85}
+                    radius={[3, 3, 0, 0]}
+                  />
                 </BarChart>
               </ChartContainer>
               <div className="mt-3 flex gap-4 text-xs text-muted-foreground">
                 <div className="flex items-center gap-1.5">
-                  <span className="h-2 w-3 rounded-[2px]" style={{ background: "var(--chart-1)" }} />
+                  <span
+                    className="h-2 w-3 rounded-[2px]"
+                    style={{ background: "var(--chart-1)" }}
+                  />
                   Actual
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="h-2 w-3 rounded-[2px]" style={{ background: "var(--chart-2)", opacity: 0.55 }} />
+                  <span
+                    className="h-2 w-3 rounded-[2px]"
+                    style={{ background: "var(--chart-2)", opacity: 0.55 }}
+                  />
                   Budget
                 </div>
               </div>
@@ -363,7 +421,9 @@ export default function ProjectStatusReportPage() {
         <div>
           <ReportSectionHeader>
             <CardHeaderTitle>Risk Register</CardHeaderTitle>
-            <CardHeaderSubtitle>Active risks as of report date</CardHeaderSubtitle>
+            <CardHeaderSubtitle>
+              Active risks as of report date
+            </CardHeaderSubtitle>
           </ReportSectionHeader>
           <TableWrapper>
             <Table horizontal vertical scrollable>
@@ -380,11 +440,21 @@ export default function ProjectStatusReportPage() {
               <TableBody border={{}} bg={{}}>
                 {risks.map((r, i) => (
                   <TableRow key={i}>
-                    <TableCell className="font-medium">{r.description}</TableCell>
-                    <TableCell className={riskLevelCls[r.probability]}>{r.probability}</TableCell>
-                    <TableCell className={riskLevelCls[r.impact]}>{r.impact}</TableCell>
-                    <TableCell className="text-muted-foreground">{r.owner}</TableCell>
-                    <TableCell className="text-muted-foreground tabular-nums">{r.due}</TableCell>
+                    <TableCell className="font-medium">
+                      {r.description}
+                    </TableCell>
+                    <TableCell className={riskLevelCls[r.probability]}>
+                      {r.probability}
+                    </TableCell>
+                    <TableCell className={riskLevelCls[r.impact]}>
+                      {r.impact}
+                    </TableCell>
+                    <TableCell className="text-muted-foreground">
+                      {r.owner}
+                    </TableCell>
+                    <TableCell className="text-muted-foreground tabular-nums">
+                      {r.due}
+                    </TableCell>
                     <TableCell>
                       <SimpleBadge variant={riskStatusVariant[r.status]}>
                         {r.status}
@@ -404,13 +474,21 @@ export default function ProjectStatusReportPage() {
           </ReportSectionHeader>
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((t) => (
-              <Item key={t.name} variant="outline" className="bg-muted/20 px-4 py-3">
+              <Item
+                key={t.name}
+                variant="outline"
+                className="bg-muted/20 px-4 py-3"
+              >
                 <ItemContent>
                   <ItemTitle>{t.name}</ItemTitle>
-                  <ItemDescription className="text-xs">{t.role}</ItemDescription>
+                  <ItemDescription className="text-xs">
+                    {t.role}
+                  </ItemDescription>
                 </ItemContent>
                 <ItemActions>
-                  <span className="text-sm font-semibold text-muted-foreground">{t.allocation}</span>
+                  <span className="text-sm font-semibold text-muted-foreground">
+                    {t.allocation}
+                  </span>
                 </ItemActions>
               </Item>
             ))}
@@ -420,7 +498,9 @@ export default function ProjectStatusReportPage() {
         {/* ── Report Footer ─────────────────────────────────────────────────── */}
         <ReportDocumentFooter>
           <ReportDocumentFooterLine>
-            <ReportDocumentFooterLineLeft>{project.name}</ReportDocumentFooterLineLeft>
+            <ReportDocumentFooterLineLeft>
+              {project.name}
+            </ReportDocumentFooterLineLeft>
             <ReportDocumentFooterLineRight>
               <span>{project.period}</span>
               <span>·</span>
@@ -430,7 +510,6 @@ export default function ProjectStatusReportPage() {
             </ReportDocumentFooterLineRight>
           </ReportDocumentFooterLine>
         </ReportDocumentFooter>
-
       </ReportDocumentWrapper>
       <ReportPdfExportButton fileName="project-status-report" />
     </>

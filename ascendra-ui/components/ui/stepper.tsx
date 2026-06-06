@@ -37,8 +37,7 @@ function StepIndicator({
         "relative z-10 flex size-7 shrink-0 items-center justify-center rounded-full border-2 text-xs font-semibold transition-colors duration-200",
         status === "completed" &&
           "border-primary bg-primary text-primary-foreground",
-        status === "active" &&
-          "border-primary bg-background text-primary",
+        status === "active" && "border-primary bg-background text-primary",
         status === "error" &&
           "border-destructive bg-destructive text-destructive-foreground",
         status === "pending" &&
@@ -72,12 +71,26 @@ function StepConnector({ filled }: { filled: boolean }) {
 
 // ─── Stepper ─────────────────────────────────────────────────────────────────
 
-export function Stepper({ steps: stepsProp, currentStep: currentStepProp, onStepClick, className }: StepperProps) {
+export function Stepper({
+  steps: stepsProp,
+  currentStep: currentStepProp,
+  onStepClick,
+  className,
+}: StepperProps) {
   const ctx = useStepperContextSafe();
 
-  const steps: StepperItem[] = stepsProp ?? ctx?.steps.map(({ label, description }) => ({ label, description })) ?? [];
+  const steps: StepperItem[] =
+    stepsProp ??
+    ctx?.steps.map(({ label, description }) => ({ label, description })) ??
+    [];
   const currentStep = currentStepProp ?? ctx?.currentStep;
-  const handleStepClick = onStepClick ?? (ctx ? (i: number) => { if (i < (ctx.currentStep)) ctx.goToStep(i); } : undefined);
+  const handleStepClick =
+    onStepClick ??
+    (ctx
+      ? (i: number) => {
+          if (i < ctx.currentStep) ctx.goToStep(i);
+        }
+      : undefined);
 
   const resolved: StepperItem[] = steps.map((step, i) => {
     if (step.status) return step;
@@ -88,51 +101,54 @@ export function Stepper({ steps: stepsProp, currentStep: currentStepProp, onStep
   });
 
   return (
-    <div data-slot="stepper" className={cn("flex w-full items-start", className)}>
-      {resolved.map((step, i) => {
-        const status = step.status ?? "pending";
-        const isLast = i === steps.length - 1;
-        const clickable = !!handleStepClick && status === "completed";
+    <div
+      data-slot="stepper"
+      className={cn("w-full overflow-x-auto no-scrollbar", className)}
+    >
+      <div className="flex min-w-max items-start">
+        {resolved.map((step, i) => {
+          const status = step.status ?? "pending";
+          const isLast = i === steps.length - 1;
+          const clickable = !!handleStepClick && status === "completed";
 
-        return (
-          <React.Fragment key={i}>
-            {/* Step */}
-            <div
-              className={cn(
-                "flex flex-col items-center gap-1.5",
-                clickable && "cursor-pointer",
-              )}
-              onClick={clickable ? () => handleStepClick(i) : undefined}
-            >
-              <StepIndicator index={i} status={status} />
-              <div className="flex flex-col items-center gap-0.5 text-center">
-                <span
-                  className={cn(
-                    "text-xs font-medium leading-snug whitespace-nowrap",
-                    status === "active" && "text-foreground",
-                    status === "completed" && "text-foreground",
-                    status === "error" && "text-destructive",
-                    status === "pending" && "text-muted-foreground",
-                    clickable && "hover:text-primary transition-colors",
-                  )}
-                >
-                  {step.label}
-                </span>
-                {step.description && (
-                  <span className="text-[0.6875rem] text-muted-foreground">
-                    {step.description}
-                  </span>
+          return (
+            <React.Fragment key={i}>
+              {/* Step */}
+              <div
+                className={cn(
+                  "flex flex-col items-center gap-1.5",
+                  clickable && "cursor-pointer",
                 )}
+                onClick={clickable ? () => handleStepClick(i) : undefined}
+              >
+                <StepIndicator index={i} status={status} />
+                <div className="flex flex-col items-center gap-0.5 text-center">
+                  <span
+                    className={cn(
+                      "text-xs font-medium leading-snug whitespace-nowrap",
+                      status === "active" && "text-foreground",
+                      status === "completed" && "text-foreground",
+                      status === "error" && "text-destructive",
+                      status === "pending" && "text-muted-foreground",
+                      clickable && "hover:text-primary transition-colors",
+                    )}
+                  >
+                    {step.label}
+                  </span>
+                  {step.description && (
+                    <span className="text-[0.6875rem] text-muted-foreground">
+                      {step.description}
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
 
-            {/* Connector */}
-            {!isLast && (
-              <StepConnector filled={status === "completed"} />
-            )}
-          </React.Fragment>
-        );
-      })}
+              {/* Connector */}
+              {!isLast && <StepConnector filled={status === "completed"} />}
+            </React.Fragment>
+          );
+        })}
+      </div>
     </div>
   );
 }
