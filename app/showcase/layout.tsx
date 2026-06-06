@@ -3,14 +3,11 @@
 import { ReactNode } from "react";
 
 import {
-  Button,
   ContentArea,
   Header,
   HeaderActions,
-  HeaderChevron,
   HeaderLink,
   HeaderLinks,
-  HeaderSlash,
   MainContainer,
   NameAvatar,
   Nav,
@@ -29,15 +26,12 @@ import {
   SideBarOverlay,
   SideBarToggle,
   SimpleBadge,
-  StatusDot,
   ThemeToggle,
 } from "@/ascendra-ui";
 import { SidebarSearch } from "@/components/sidebar-search";
-import { Avatar, AvatarImage } from "@/ascendra-ui/shadcn";
 import {
   LuBookOpen,
   LuCalendar,
-  LuCircleArrowUp,
   LuLayers,
   LuPanelLeft,
   LuPanelRight,
@@ -65,49 +59,28 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       <SideBarOverlay />
       <Header>
         <HeaderLinks>
-          <HeaderLink href="#">
-            <Avatar size="sm" className="shrink-0">
-              <AvatarImage src="/images/home.png" className="rounded-sm" />
-            </Avatar>
-            <span className="truncate">Personal Workspace</span>
-            <SimpleBadge variant="secondary">Hobby</SimpleBadge>
+          <HeaderLink href="/showcase/getting-started/overview">
+            <LuLayers className="shrink-0 text-primary" />
+            <span className="truncate font-medium">Ascendra UI</span>
+            <SimpleBadge variant="secondary">Beta</SimpleBadge>
           </HeaderLink>
-          <HeaderChevron />
-          <HeaderSlash />
-          <HeaderLink href="#">
-            <span className="truncate">Front Row</span>
-          </HeaderLink>
-          <HeaderChevron />
-          <HeaderSlash />
-          <HeaderLink href="#">
-            <StatusDot />
-            <span className="truncate">Development</span>
-          </HeaderLink>
-          <HeaderChevron />
         </HeaderLinks>
         <HeaderActions>
-          <SimpleBadge>
-            <LuCircleArrowUp />
-            Upgrades
-          </SimpleBadge>
-          <Button variant="secondary" size="sm" className="h-6">
-            Invite
-          </Button>
           <ThemeToggle />
           <NameAvatar href="#" name="burhan shah" />
         </HeaderActions>
       </Header>
       <Nav>
-        <NavLink href="#">Overview</NavLink>
-        <NavLink href="#">Users</NavLink>
-        <NavLink href="#" exact>
-          Organizatioins
+        <NavLink href="/showcase/getting-started/overview">
+          Getting Started
         </NavLink>
-        <NavLink href="#">
-          Billing
-          <NavLinkBadge>Beta</NavLinkBadge>
+        <NavLink href="/showcase/feedback/simple-badge">Components</NavLink>
+        <NavLink href="/showcase/dashboards">Samples</NavLink>
+        <NavLink href="/showcase/nav/header">
+          Navigation
+          <NavLinkBadge>New</NavLinkBadge>
         </NavLink>
-        <NavLink href="#">Configure</NavLink>
+        <NavLink href="/showcase/layout-guide">Layout Guide</NavLink>
       </Nav>
       <MainContainer>
         <SideBarToggle />

@@ -70,6 +70,8 @@ export function RichTextEditor({
   minHeight = 120,
   className,
 }: RichTextEditorProps) {
+  const [, forceUpdate] = React.useReducer((x: number) => x + 1, 0);
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -84,6 +86,7 @@ export function RichTextEditor({
     onUpdate: ({ editor }) => {
       onChange?.(editor.getHTML());
     },
+    onSelectionUpdate: () => forceUpdate(),
   });
 
   function handleLink() {

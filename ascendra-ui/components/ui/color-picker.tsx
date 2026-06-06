@@ -206,7 +206,7 @@ export function ColorPicker({
           sideOffset={6}
           align="start"
           className={cn(
-            "z-50 w-56 rounded-lg p-3 outline-none",
+            "z-200 w-56 rounded-lg p-3 outline-none",
             "bg-secondary text-foreground ring-1 ring-foreground/10",
             "shadow-[0_16px_36px_-6px_rgba(0,0,0,0.07),0_6px_16px_-2px_rgba(0,0,0,0.2)]",
             "data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2",
