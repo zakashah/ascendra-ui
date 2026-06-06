@@ -3,6 +3,8 @@ export type PropDef = {
   type: string;
   default?: string;
   description: string;
+  /** Which sub-component this prop belongs to, e.g. "SelectContent". Shown in the props table. */
+  component?: string;
 };
 
 export type ComponentMeta = {
@@ -12,6 +14,8 @@ export type ComponentMeta = {
   importPath: string;
   importNames: string[];
   props?: PropDef[];
+  /** Short JSX snippets that show how to use the component. Rendered as code blocks in the reference. */
+  examples?: string[];
 };
 
 export type NavItem = {
