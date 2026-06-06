@@ -22,6 +22,7 @@ import { drawersConfig } from "../lib/drawers-config";
 import { formsConfig } from "../lib/forms-config";
 import { navConfig } from "../lib/nav-config";
 import { registry } from "../lib/registry";
+import { reportsConfig } from "../lib/reports-config";
 import { sheetsConfig } from "../lib/sheets-config";
 import type { LayoutCell, PropDef } from "../lib/types";
 
@@ -152,6 +153,7 @@ const SAMPLE_CATEGORIES = new Set([
   "Sample Sheets",
   "Sample Drawers",
   "Sample Dashboards",
+  "Sample Reports",
   "Sample Forms",
   "Charts",
 ]);
@@ -159,13 +161,14 @@ const SAMPLE_CATEGORIES = new Set([
 // Known nav items that are gallery/guide pages with no registry entry (not drift).
 const KNOWN_NON_REGISTRY_SLUGS = new Set([
   "", "design-tokens", "guidelines", "accessibility",
-  "dialogs", "sheets", "drawers", "dashboards", "forms", "charts",
+  "dialogs", "sheets", "drawers", "dashboards", "forms", "reports", "charts",
   "data-table-lab", "layout-guide",
   ...formsConfig.map((f) => `forms/${f.slug}`),
   ...dialogsConfig.map((d) => `dialogs/${d.slug}`),
   ...sheetsConfig.map((s) => `sheets/${s.slug}`),
   ...drawersConfig.map((d) => `drawers/${d.slug}`),
   ...dashboardsConfig.map((d) => `dashboards/${d.slug}`),
+  ...reportsConfig.map((r) => `reports/${r.slug}`),
   "charts/line", "charts/area", "charts/bar", "charts/pie", "charts/radial",
   "charts/radar", "charts/scatter", "charts/composed", "charts/treemap",
   "charts/histogram", "charts/candlestick",
@@ -191,7 +194,8 @@ const lines: string[] = [
   `**Dialogs:** ${dialogsConfig.length}  `,
   `**Sheets:** ${sheetsConfig.length}  `,
   `**Drawers:** ${drawersConfig.length}  `,
-  `**Dashboards:** ${dashboardsConfig.length}`,
+  `**Dashboards:** ${dashboardsConfig.length}  `,
+  `**Reports:** ${reportsConfig.length}`,
   "",
   "### Primitive components by category",
   "",
@@ -426,6 +430,41 @@ for (const d of dashboardsConfig) {
     `- **Chart types:** ${d.chartTypes.join(", ")}`,
     "",
     layoutGrid(d.layout),
+    "---",
+    "",
+  );
+}
+
+// ── Reports ───────────────────────────────────────────────────────────────────
+
+lines.push(
+  "### Reports",
+  "",
+  `${reportsConfig.length} document-style reports covering finance, HR, clinical, operational, performance, and compliance domains. Each has its own showcase page.`,
+  "",
+  "| Name | Domain | Type | Complexity | Layout |",
+  "|---|---|---|---|---|",
+  ...reportsConfig.map(
+    (r) => `| [${r.name}](/showcase/reports/${r.slug}) | ${r.domain} | ${r.reportType} | ${r.complexity} | ${r.layout} |`
+  ),
+  "",
+);
+
+for (const r of reportsConfig) {
+  lines.push(
+    `#### ${r.name}`,
+    "",
+    r.description,
+    "",
+    `- **Slug:** \`${r.slug}\``,
+    `- **Showcase:** [/showcase/reports/${r.slug}](/showcase/reports/${r.slug})`,
+    `- **Domain:** ${r.domain}`,
+    `- **Report type:** ${r.reportType}`,
+    `- **Complexity:** ${r.complexity}`,
+    `- **Layout:** ${r.layout}`,
+    `- **Key metrics:** ${r.keyMetrics.join(", ")}`,
+    `- **Elements:** ${r.elements.join(", ")}`,
+    "",
     "---",
     "",
   );

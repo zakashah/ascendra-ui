@@ -7,18 +7,19 @@
 
 ## Overview
 
-**Primitive components:** 50  
+**Primitive components:** 51  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
 **Drawers:** 8  
-**Dashboards:** 10
+**Dashboards:** 10  
+**Reports:** 10
 
 ### Primitive components by category
 
 | Category | Components |
 |---|---|
-| Feedback & Status | Simple Badge, Bubble Badge, Status Dot, Simple Alert, Pro Badge, Unsaved Changes Bar, Progress & Stepper, Skeleton, Toast |
+| Feedback & Status | Rating, Simple Badge, Bubble Badge, Status Dot, Simple Alert, Pro Badge, Unsaved Changes Bar, Progress & Stepper, Skeleton, Toast |
 | Forms & Inputs | Button, Input, Input Group, Checkbox, Radio Group, Switch, Select, Field, Table Lookup, Combobox, File Upload, Rich Text Editor, Color Picker |
 | Navigation | Anchor, Nav Link, Header, Nav |
 | Overlays | Dialog, Sheet, Dropdown Menu, Tooltip, Command Palette |
@@ -112,7 +113,7 @@ Compact alert notification box with semantic severity variants and an optional i
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `'default' \| 'secondary' \| 'destructive' \| 'success' \| 'warning' \| 'primary'` | `'default'` | Alert severity variant. |
+| `variant` | `'default' \| 'secondary' \| 'destructive' \| 'success' \| 'warning' \| 'amber' \| 'primary'` | `'default'` | Alert severity variant. |
 | `icon` | `React.ComponentType<{ className?: string; strokeWidth?: number }>` | — | Icon component to display (defaults to InfoIcon). |
 
 **Used in**
@@ -217,6 +218,28 @@ Animated loading placeholder. Includes preset compositions for text blocks, user
 | `className` | `string` | — | Skeleton — additional CSS classes to set size and shape. |
 | `lines` | `number` | `3` | SkeletonText — number of text lines. |
 | `rows` | `number` | `5` | SkeletonTable — number of data rows. |
+
+---
+
+#### Rating
+
+Star rating display and input with half-star precision, multiple sizes, and semantic color variants.
+
+- **Import:** `import { Rating } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/feedback/rating](/showcase/feedback/rating)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `rating` | `number` | — | Current rating value (0–max). |
+| `max` | `number` | `5` | Total number of stars. |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Star size. |
+| `color` | `'default' \| 'amber' \| 'orange' \| 'red' \| 'green' \| 'blue' \| 'violet'` | `'default'` | Fill color of active stars. |
+| `precision` | `'full' \| 'half'` | `'half'` | Whether to render half-star fills for fractional ratings. |
+| `showValue` | `boolean` | `false` | Show numeric value label next to the stars. |
+| `onChange` | `(value: number) => void` | — | When provided, enables click-to-rate interaction. |
+| `readOnly` | `boolean` | `false` | Disables interaction even when onChange is present. |
 
 ---
 
@@ -1713,5 +1736,172 @@ Portfolio valuation, yield analysis, occupancy, and individual property performa
 - Row 1: `chart[7]` Portfolio by Type  ·  `chart[5]` Geographic Allocation
 - Row 2: `chart[8]` Rental Income & Yield  ·  `chart[4]` Properties by Value
 - Row 3: `chart[5]` Price vs Area  ·  `table[7]` Properties
+
+---
+
+### Reports
+
+10 document-style reports covering finance, HR, clinical, operational, performance, and compliance domains. Each has its own showcase page.
+
+| Name | Domain | Type | Complexity | Layout |
+|---|---|---|---|---|
+| [Annual Financial Statement](/showcase/reports/annual-financial-statement) | Finance / Accounting | Financial | Complex | Document |
+| [Executive Business Review](/showcase/reports/executive-business-review) | Corporate / C-Suite | Executive | Simple | Wide |
+| [Patient Health Summary](/showcase/reports/patient-health-summary) | Healthcare / Clinical | Clinical | Medium | Document |
+| [Project Status Report](/showcase/reports/project-status-report) | Project Management | Operational | Simple | Mixed |
+| [Sales Pipeline Report](/showcase/reports/sales-pipeline-report) | Sales / CRM | Performance | Medium | Wide |
+| [Marketing Campaign Analysis](/showcase/reports/marketing-campaign-analysis) | Marketing / Growth | Performance | Medium | Wide |
+| [Supply Chain Operations Report](/showcase/reports/supply-chain-ops-report) | Operations / Logistics | Operational | Complex | Wide |
+| [Employee Performance Review](/showcase/reports/employee-performance-review) | Human Resources | Performance | Simple | Document |
+| [Cybersecurity Incident Report](/showcase/reports/security-incident-report) | IT / Security | Compliance | Medium | Document |
+| [ESG Sustainability Report](/showcase/reports/esg-sustainability-report) | Corporate / ESG | Compliance | Complex | Mixed |
+
+#### Annual Financial Statement
+
+Year-end financial statement for a mid-size company — income statement, balance sheet, and cash flow summary in a formal document layout with section dividers, accounting-style tables, and prior-year comparisons.
+
+- **Slug:** `annual-financial-statement`
+- **Showcase:** [/showcase/reports/annual-financial-statement](/showcase/reports/annual-financial-statement)
+- **Domain:** Finance / Accounting
+- **Report type:** Financial
+- **Complexity:** Complex
+- **Layout:** Document
+- **Key metrics:** Total Revenue, Net Income, Total Assets, Operating Cash Flow
+- **Elements:** Accounting tables, Variance columns, Branded header, Document footer, Bar chart, Section dividers
+
+---
+
+#### Executive Business Review
+
+CEO-level quarterly business review with large headline KPIs, a revenue trend chart, division performance summary table, and a written executive highlights section — designed for board presentation.
+
+- **Slug:** `executive-business-review`
+- **Showcase:** [/showcase/reports/executive-business-review](/showcase/reports/executive-business-review)
+- **Domain:** Corporate / C-Suite
+- **Report type:** Executive
+- **Complexity:** Simple
+- **Layout:** Wide
+- **Key metrics:** Total Revenue, Gross Profit, EBITDA, Cash Position
+- **Elements:** Large KPI tiles, Bar chart, Summary table, Highlights text, Branded header, Board footer
+
+---
+
+#### Patient Health Summary
+
+Clinical visit summary for a patient portal or physician handoff. Shows vital signs, active medications, recent lab results with reference ranges, and structured visit notes — no charts, entirely tables and text.
+
+- **Slug:** `patient-health-summary`
+- **Showcase:** [/showcase/reports/patient-health-summary](/showcase/reports/patient-health-summary)
+- **Domain:** Healthcare / Clinical
+- **Report type:** Clinical
+- **Complexity:** Medium
+- **Layout:** Document
+- **Key metrics:** Age, BMI, Blood Pressure, Last Visit Date
+- **Elements:** Patient info strip, Vital signs grid, Medications table, Lab results w/ status, Clinical notes, No charts
+
+---
+
+#### Project Status Report
+
+Weekly project health report with a RAG traffic-light banner, milestone timeline, budget vs. actual chart, and a risk register — giving a PM and stakeholders a single-page view of delivery status.
+
+- **Slug:** `project-status-report`
+- **Showcase:** [/showcase/reports/project-status-report](/showcase/reports/project-status-report)
+- **Domain:** Project Management
+- **Report type:** Operational
+- **Complexity:** Simple
+- **Layout:** Mixed
+- **Key metrics:** % Complete, Days to Deadline, Budget Consumed, Open Risks
+- **Elements:** RAG status banner, Milestone timeline, Paired bar chart, Risk register table, Progress indicators
+
+---
+
+#### Sales Pipeline Report
+
+Monthly sales performance report with pipeline stage funnel, rep quota attainment rankings with inline progress bars, bookings vs. target chart, and deal size distribution.
+
+- **Slug:** `sales-pipeline-report`
+- **Showcase:** [/showcase/reports/sales-pipeline-report](/showcase/reports/sales-pipeline-report)
+- **Domain:** Sales / CRM
+- **Report type:** Performance
+- **Complexity:** Medium
+- **Layout:** Wide
+- **Key metrics:** Pipeline Value, Deals Won, Avg. Deal Size, Win Rate
+- **Elements:** Funnel visualization, Rep ranking table, Inline progress bars, Composed chart, Bar chart
+
+---
+
+#### Marketing Campaign Analysis
+
+Post-campaign report for a multi-channel digital marketing campaign — channel ROAS comparison, conversion funnel with drop-off annotations, audience breakdown donut, and campaign ROI summary table.
+
+- **Slug:** `marketing-campaign-analysis`
+- **Showcase:** [/showcase/reports/marketing-campaign-analysis](/showcase/reports/marketing-campaign-analysis)
+- **Domain:** Marketing / Growth
+- **Report type:** Performance
+- **Complexity:** Medium
+- **Layout:** Wide
+- **Key metrics:** Total Impressions, Conversions, Blended ROAS, Cost per Conversion
+- **Elements:** Grouped bar chart, Conversion funnel, Donut chart, ROI summary table, Drop-off annotations
+
+---
+
+#### Supply Chain Operations Report
+
+Monthly supply chain report with inventory level trends by category, supplier performance scorecard (color-coded by threshold), regional shipment breakdown, and a critical open orders table.
+
+- **Slug:** `supply-chain-ops-report`
+- **Showcase:** [/showcase/reports/supply-chain-ops-report](/showcase/reports/supply-chain-ops-report)
+- **Domain:** Operations / Logistics
+- **Report type:** Operational
+- **Complexity:** Complex
+- **Layout:** Wide
+- **Key metrics:** On-time Delivery, Inventory Value, Stockout Events, Avg. Lead Time
+- **Elements:** Multi-series area chart, Supplier scorecard, Colored table cells, Horizontal bar chart, Critical orders table
+
+---
+
+#### Employee Performance Review
+
+Annual employee review document with a prominent overall rating, competency radar chart, goal achievement table with status badges, peer feedback text blocks, a development plan, and a sign-off section.
+
+- **Slug:** `employee-performance-review`
+- **Showcase:** [/showcase/reports/employee-performance-review](/showcase/reports/employee-performance-review)
+- **Domain:** Human Resources
+- **Report type:** Performance
+- **Complexity:** Simple
+- **Layout:** Document
+- **Key metrics:** Overall Rating, Goals Achieved, 360° Score, Tenure
+- **Elements:** Radar chart, Rating display, Goal table, Feedback text blocks, Development plan, Sign-off area
+
+---
+
+#### Cybersecurity Incident Report
+
+Formal post-incident report documenting a security event — TLP classification banner, severity badge, incident timeline, affected systems table, impact assessment, and remediation action tracker.
+
+- **Slug:** `security-incident-report`
+- **Showcase:** [/showcase/reports/security-incident-report](/showcase/reports/security-incident-report)
+- **Domain:** IT / Security
+- **Report type:** Compliance
+- **Complexity:** Medium
+- **Layout:** Document
+- **Key metrics:** Severity Level, Systems Affected, Records at Risk, Time to Containment
+- **Elements:** TLP classification, Severity badge, Vertical timeline, Affected systems table, Remediation tracker, Bar chart
+
+---
+
+#### ESG Sustainability Report
+
+Annual ESG progress report with three color-themed sections (Environmental, Social, Governance), emissions trend, energy mix donut, diversity charts, board composition, ESG score gauge, and an industry benchmark radar.
+
+- **Slug:** `esg-sustainability-report`
+- **Showcase:** [/showcase/reports/esg-sustainability-report](/showcase/reports/esg-sustainability-report)
+- **Domain:** Corporate / ESG
+- **Report type:** Compliance
+- **Complexity:** Complex
+- **Layout:** Mixed
+- **Key metrics:** Carbon Emissions, Renewable Energy %, Workforce Diversity, Board Independence
+- **Elements:** 3-section color themes, Progress bars to targets, Area chart, Donut chart, Radar chart, SDG alignment grid
 
 ---
