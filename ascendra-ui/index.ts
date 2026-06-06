@@ -154,7 +154,14 @@ export * from './components/stepper/stepper-navigator';
 export * from './components/forms/back-link';
 
 // Reports
+export * from './components/reports/report-document-footer';
 export * from './components/reports/report-header-field';
+export * from './components/reports/report-header-content';
+export * from './components/reports/report-header-body';
+export * from './components/reports/report-title';
+export * from './components/reports/report-title-header';
+export * from './components/reports/report-subtitle';
+export * from './components/reports/report-header-footer';
 
 // Hooks
 export * from './hooks/use-is-small-screen';
