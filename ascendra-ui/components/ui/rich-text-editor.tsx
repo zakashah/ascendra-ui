@@ -49,10 +49,11 @@ function ToolbarButton({
       onClick={onClick}
       className={cn(
         "inline-flex size-7 items-center justify-center rounded-lg transition-colors outline-none",
-        "text-muted-foreground hover:bg-muted hover:text-foreground",
         "focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-1",
         "disabled:cursor-not-allowed disabled:opacity-40",
-        active && "bg-muted/80 text-foreground shadow-[inset_0_1px_2px_rgba(0,0,0,0.08)]",
+        active
+          ? "bg-primary/15 text-primary hover:bg-primary/20"
+          : "text-muted-foreground hover:bg-muted hover:text-foreground",
       )}
     >
       {children}
@@ -70,7 +71,14 @@ export function RichTextEditor({
   minHeight = 120,
   className,
 }: RichTextEditorProps) {
-  const [, forceUpdate] = React.useReducer((x: number) => x + 1, 0);
+  const [activeMarks, setActiveMarks] = React.useState({
+    bold: false,
+    italic: false,
+    strike: false,
+    bulletList: false,
+    orderedList: false,
+    link: false,
+  });
 
   const editor = useEditor({
     extensions: [
@@ -86,8 +94,22 @@ export function RichTextEditor({
     onUpdate: ({ editor }) => {
       onChange?.(editor.getHTML());
     },
-    onSelectionUpdate: () => forceUpdate(),
   });
+
+  React.useEffect(() => {
+    if (!editor) return;
+    const sync = () =>
+      setActiveMarks({
+        bold: editor.isActive("bold"),
+        italic: editor.isActive("italic"),
+        strike: editor.isActive("strike"),
+        bulletList: editor.isActive("bulletList"),
+        orderedList: editor.isActive("orderedList"),
+        link: editor.isActive("link"),
+      });
+    editor.on("transaction", sync);
+    return () => { editor.off("transaction", sync); };
+  }, [editor]);
 
   function handleLink() {
     if (!editor) return;
@@ -97,7 +119,12 @@ export function RichTextEditor({
     if (url === "") {
       editor.chain().focus().extendMarkRange("link").unsetLink().run();
     } else {
-      editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+      editor
+        .chain()
+        .focus()
+        .extendMarkRange("link")
+        .setLink({ href: url })
+        .run();
     }
   }
 
@@ -110,7 +137,8 @@ export function RichTextEditor({
         "dark:shadow-[0_2px_2px_-1px_rgba(0,0,0,0.16),0_4px_4px_-2px_rgba(0,0,0,0.24)]",
         "focus-within:outline-2 focus-within:outline-primary focus-within:outline-offset-1",
         "bg-white dark:bg-secondary",
-        readOnly && "bg-gray-100 dark:bg-white/5 ring-gray-300 dark:ring-white/10 shadow-none",
+        readOnly &&
+          "bg-gray-100 dark:bg-white/5 ring-gray-300 dark:ring-white/10 shadow-none",
         className,
       )}
     >
@@ -120,7 +148,7 @@ export function RichTextEditor({
           {/* Text format group */}
           <ToolbarButton
             title="Bold"
-            active={editor?.isActive("bold")}
+            active={activeMarks.bold}
             onClick={() => editor?.chain().focus().toggleBold().run()}
             disabled={!editor?.can().toggleBold()}
           >
@@ -128,7 +156,7 @@ export function RichTextEditor({
           </ToolbarButton>
           <ToolbarButton
             title="Italic"
-            active={editor?.isActive("italic")}
+            active={activeMarks.italic}
             onClick={() => editor?.chain().focus().toggleItalic().run()}
             disabled={!editor?.can().toggleItalic()}
           >
@@ -136,7 +164,7 @@ export function RichTextEditor({
           </ToolbarButton>
           <ToolbarButton
             title="Strikethrough"
-            active={editor?.isActive("strike")}
+            active={activeMarks.strike}
             onClick={() => editor?.chain().focus().toggleStrike().run()}
             disabled={!editor?.can().toggleStrike()}
           >
@@ -149,14 +177,14 @@ export function RichTextEditor({
           {/* List group */}
           <ToolbarButton
             title="Bulleted list"
-            active={editor?.isActive("bulletList")}
+            active={activeMarks.bulletList}
             onClick={() => editor?.chain().focus().toggleBulletList().run()}
           >
             <List className="size-3.5" />
           </ToolbarButton>
           <ToolbarButton
             title="Numbered list"
-            active={editor?.isActive("orderedList")}
+            active={activeMarks.orderedList}
             onClick={() => editor?.chain().focus().toggleOrderedList().run()}
           >
             <ListOrdered className="size-3.5" />
@@ -168,7 +196,7 @@ export function RichTextEditor({
           {/* Link */}
           <ToolbarButton
             title="Link"
-            active={editor?.isActive("link")}
+            active={activeMarks.link}
             onClick={handleLink}
           >
             <Link2 className="size-3.5" />
