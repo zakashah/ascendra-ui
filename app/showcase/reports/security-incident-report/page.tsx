@@ -28,6 +28,7 @@ import {
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
 import { ReportSectionHeader } from "@/ascendra-ui/components/reports/report-section-header";
+import { ReportSummary } from "@/ascendra-ui/components/reports/report-summary";
 
 // ─── Incident data ─────────────────────────────────────────────────────────────
 
@@ -310,7 +311,7 @@ export default function SecurityIncidentReportPage() {
           <ReportSectionHeader>
             <CardHeaderTitle>Executive Summary</CardHeaderTitle>
           </ReportSectionHeader>
-          <div className="flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
+          <ReportSummary>
             <p>
               On 14 August 2024 at 02:17 UTC, the Security Operations Centre
               detected anomalous activity originating from a production service
@@ -341,7 +342,7 @@ export default function SecurityIncidentReportPage() {
               remediation actions have been identified, of which two are in
               progress and one is already complete.
             </p>
-          </div>
+          </ReportSummary>
         </div>
 
         {/* ── Incident Timeline ────────────────────────────────────────────── */}
