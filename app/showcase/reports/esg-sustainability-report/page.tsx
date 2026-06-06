@@ -7,6 +7,14 @@ import {
   CardHeaderSubtitle,
   CardHeaderTitle,
   CardPanel,
+  ReportHeaderBody,
+  ReportHeaderContent,
+  ReportHeaderField,
+  ReportHeaderFooter,
+  ReportSubTitle,
+  ReportTitle,
+  ReportTitleHeader,
+  SimpleBadge,
   Table,
   TableBody,
   TableCell,
@@ -16,6 +24,8 @@ import {
   TableRow,
   TableWrapper,
 } from "@/ascendra-ui";
+import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
+import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
 import {
   ChartContainer,
   ChartTooltip,
@@ -215,36 +225,28 @@ export default function EsgSustainabilityReportPage() {
   return (
     <>
       <BackLink href="/showcase/reports">Report Gallery</BackLink>
-
-      <div className="flex flex-col gap-12">
-
-        {/* ── Report Header ────────────────────────────────────────────────── */}
-        <div className="overflow-hidden rounded-xl border">
-          <div className="h-1.5 w-full" style={{ background: "linear-gradient(to right, #22c55e 33%, #3b82f6 66%, #a855f7 100%)" }} />
-          <div className="p-6">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <p className="text-[0.6875rem] font-semibold uppercase tracking-widest text-muted-foreground">
-                  ESG Sustainability Report
-                </p>
-                <h1 className="mt-1 text-2xl font-bold tracking-tight text-foreground">
-                  Ascendra Holdings Ltd. — FY2023
-                </h1>
-                <p className="mt-0.5 text-sm text-muted-foreground">
-                  Environmental, Social & Governance Progress Report
-                </p>
-              </div>
-              <span className="inline-flex items-center rounded border border-green-200 bg-green-50 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-green-700 dark:border-green-800/60 dark:bg-green-950/40 dark:text-green-400">
-                Public Disclosure
-              </span>
-            </div>
-            <div className="mt-4 flex flex-wrap gap-6 border-t pt-3 text-xs text-muted-foreground">
-              <span><span className="font-medium text-foreground">Reporting Period:</span> January – December 2023</span>
-              <span><span className="font-medium text-foreground">Published:</span> March 15, 2024</span>
-              <span><span className="font-medium text-foreground">Framework:</span> GRI Standards · TCFD · UN SDGs</span>
-            </div>
-          </div>
-        </div>
+      <ReportDocumentWrapper className="gap-12">
+        {/* ── Document Header ──────────────────────────────────────────────── */}
+        <Card>
+          <CardPanel>
+            <div className="h-1.5 w-full rounded-t-lg" style={{ background: "linear-gradient(to right, #22c55e 33%, #3b82f6 66%, #a855f7 100%)" }} />
+            <ReportHeaderContent>
+              <ReportHeaderBody>
+                <ReportHeaderBodyWrap>
+                  <ReportTitle>ESG Sustainability Report</ReportTitle>
+                  <ReportTitleHeader>Ascendra Holdings Ltd. — FY2023</ReportTitleHeader>
+                  <ReportSubTitle>Environmental, Social &amp; Governance Progress Report</ReportSubTitle>
+                </ReportHeaderBodyWrap>
+                <SimpleBadge variant={"green"}>Public Disclosure</SimpleBadge>
+              </ReportHeaderBody>
+              <ReportHeaderFooter>
+                <ReportHeaderField label="Reporting Period">January – December 2023</ReportHeaderField>
+                <ReportHeaderField label="Published">March 15, 2024</ReportHeaderField>
+                <ReportHeaderField label="Framework">GRI Standards · TCFD · UN SDGs</ReportHeaderField>
+              </ReportHeaderFooter>
+            </ReportHeaderContent>
+          </CardPanel>
+        </Card>
 
         {/* ── Year Highlights ──────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -620,7 +622,7 @@ export default function EsgSustainabilityReportPage() {
           </div>
         </div>
 
-      </div>
+      </ReportDocumentWrapper>
     </>
   );
 }

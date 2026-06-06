@@ -7,6 +7,14 @@ import {
   CardHeaderSubtitle,
   CardHeaderTitle,
   CardPanel,
+  ReportHeaderBody,
+  ReportHeaderContent,
+  ReportHeaderField,
+  ReportHeaderFooter,
+  ReportSubTitle,
+  ReportTitle,
+  ReportTitleHeader,
+  SimpleBadge,
   Table,
   TableBody,
   TableCell,
@@ -16,6 +24,8 @@ import {
   TableRow,
   TableWrapper,
 } from "@/ascendra-ui";
+import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
+import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
 import {
   ChartContainer,
   ChartTooltip,
@@ -24,7 +34,6 @@ import {
 } from "@/ascendra-ui/shadcn";
 import {
   Bar,
-  BarChart,
   CartesianGrid,
   ComposedChart,
   Line,
@@ -149,35 +158,28 @@ export default function SalesPipelineReportPage() {
     <>
       <BackLink href="/showcase/reports">Report Gallery</BackLink>
 
-      <div className="flex flex-col gap-10">
+      <ReportDocumentWrapper>
 
-        {/* ── Report Header ────────────────────────────────────────────────── */}
-        <div className="overflow-hidden rounded-xl border">
-          <div className="h-1 w-full bg-orange-500" />
-          <div className="p-6">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <p className="text-[0.6875rem] font-semibold uppercase tracking-widest text-muted-foreground">
-                  Sales Pipeline Report
-                </p>
-                <h1 className="mt-1 text-2xl font-bold tracking-tight text-foreground">
-                  Ascendra Sales — YTD Performance
-                </h1>
-                <p className="mt-0.5 text-sm text-muted-foreground">
-                  Year-to-date · January – August 2024
-                </p>
-              </div>
-              <span className="inline-flex items-center rounded border border-orange-200 bg-orange-50 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-orange-700 dark:border-orange-800/60 dark:bg-orange-950/40 dark:text-orange-400">
-                Sales Confidential
-              </span>
-            </div>
-            <div className="mt-4 flex flex-wrap gap-6 border-t pt-3 text-xs text-muted-foreground">
-              <span><span className="font-medium text-foreground">Prepared by:</span> Revenue Operations</span>
-              <span><span className="font-medium text-foreground">Report Date:</span> September 2, 2024</span>
-              <span><span className="font-medium text-foreground">Period:</span> Jan 1 – Aug 31, 2024</span>
-            </div>
-          </div>
-        </div>
+        {/* ── Document Header ──────────────────────────────────────────────── */}
+        <Card>
+          <CardPanel border={{ color: "orange" }}>
+            <ReportHeaderContent>
+              <ReportHeaderBody>
+                <ReportHeaderBodyWrap>
+                  <ReportTitle>Sales Pipeline Report</ReportTitle>
+                  <ReportTitleHeader>Ascendra Sales — YTD Performance</ReportTitleHeader>
+                  <ReportSubTitle>Year-to-date · January – August 2024</ReportSubTitle>
+                </ReportHeaderBodyWrap>
+                <SimpleBadge variant={"orange"}>Sales Confidential</SimpleBadge>
+              </ReportHeaderBody>
+              <ReportHeaderFooter>
+                <ReportHeaderField label="Prepared by">Revenue Operations</ReportHeaderField>
+                <ReportHeaderField label="Report Date">September 2, 2024</ReportHeaderField>
+                <ReportHeaderField label="Period">Jan 1 – Aug 31, 2024</ReportHeaderField>
+              </ReportHeaderFooter>
+            </ReportHeaderContent>
+          </CardPanel>
+        </Card>
 
         {/* ── KPIs ─────────────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -350,7 +352,7 @@ export default function SalesPipelineReportPage() {
           </div>
         </div>
 
-      </div>
+      </ReportDocumentWrapper>
     </>
   );
 }

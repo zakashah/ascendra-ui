@@ -7,6 +7,14 @@ import {
   CardHeaderSubtitle,
   CardHeaderTitle,
   CardPanel,
+  ReportHeaderBody,
+  ReportHeaderContent,
+  ReportHeaderField,
+  ReportHeaderFooter,
+  ReportSubTitle,
+  ReportTitle,
+  ReportTitleHeader,
+  SimpleBadge,
   Table,
   TableBody,
   TableCell,
@@ -16,6 +24,8 @@ import {
   TableRow,
   TableWrapper,
 } from "@/ascendra-ui";
+import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
+import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
 import {
   ChartContainer,
   ChartTooltip,
@@ -235,46 +245,36 @@ export default function EmployeePerformanceReviewPage() {
     <>
       <BackLink href="/showcase/reports">Report Gallery</BackLink>
 
-      <div className="flex flex-col gap-10">
-        {/* ── Employee header ──────────────────────────────────────────────── */}
-        <div className="overflow-hidden rounded-xl border">
-          <div className="h-1 w-full bg-indigo-500" />
-          <div className="p-6">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <p className="text-[0.6875rem] font-semibold uppercase tracking-widest text-muted-foreground">
-                  Annual Performance Review
-                </p>
-                <h1 className="mt-1 text-2xl font-bold tracking-tight text-foreground">
-                  {employee.name}
-                </h1>
-                <p className="mt-0.5 text-sm text-muted-foreground">
-                  {employee.role} · {employee.department}
-                </p>
-              </div>
-              <span className="inline-flex items-center rounded border border-indigo-200 bg-indigo-50 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-indigo-700 dark:border-indigo-800/60 dark:bg-indigo-950/40 dark:text-indigo-400">
-                Confidential HR
-              </span>
-            </div>
-            <div className="mt-4 grid grid-cols-2 gap-x-8 gap-y-2 border-t pt-4 text-sm sm:grid-cols-4">
-              {[
-                { label: "Employee ID", value: employee.employeeId },
-                { label: "Manager", value: employee.manager },
-                { label: "Start Date", value: employee.startDate },
-                { label: "Tenure", value: employee.tenure },
-                { label: "Review Period", value: employee.reviewPeriod },
-                { label: "Department", value: employee.department },
-              ].map((f) => (
-                <div key={f.label} className="flex flex-col gap-0.5 py-1">
-                  <span className="text-[0.6875rem] text-muted-foreground">
-                    {f.label}
-                  </span>
-                  <span className="font-medium text-foreground">{f.value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+      <ReportDocumentWrapper>
+        {/* ── Document Header ──────────────────────────────────────────────── */}
+        <Card>
+          <CardPanel border={{ color: "indigo" }}>
+            <ReportHeaderContent>
+              <ReportHeaderBody>
+                <ReportHeaderBodyWrap>
+                  <ReportTitle>Annual Performance Review</ReportTitle>
+                  <ReportTitleHeader>{employee.name}</ReportTitleHeader>
+                  <ReportSubTitle>{employee.role} · {employee.department}</ReportSubTitle>
+                </ReportHeaderBodyWrap>
+                <SimpleBadge variant={"violet"}>Confidential HR</SimpleBadge>
+              </ReportHeaderBody>
+              <ReportHeaderFooter className="grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3">
+                {[
+                  { label: "Employee ID", value: employee.employeeId },
+                  { label: "Manager", value: employee.manager },
+                  { label: "Start Date", value: employee.startDate },
+                  { label: "Tenure", value: employee.tenure },
+                  { label: "Review Period", value: employee.reviewPeriod },
+                  { label: "Department", value: employee.department },
+                ].map((f) => (
+                  <ReportHeaderField key={f.label} label={f.label} stack>
+                    {f.value}
+                  </ReportHeaderField>
+                ))}
+              </ReportHeaderFooter>
+            </ReportHeaderContent>
+          </CardPanel>
+        </Card>
 
         {/* ── Overall Rating ───────────────────────────────────────────────── */}
         <div>
@@ -524,7 +524,7 @@ export default function EmployeePerformanceReviewPage() {
             </div>
           </div>
         </div>
-      </div>
+      </ReportDocumentWrapper>
     </>
   );
 }

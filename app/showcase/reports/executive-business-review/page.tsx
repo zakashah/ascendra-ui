@@ -7,6 +7,14 @@ import {
   CardHeaderSubtitle,
   CardHeaderTitle,
   CardPanel,
+  ReportHeaderBody,
+  ReportHeaderContent,
+  ReportHeaderField,
+  ReportHeaderFooter,
+  ReportSubTitle,
+  ReportTitle,
+  ReportTitleHeader,
+  SimpleBadge,
   Table,
   TableBody,
   TableCell,
@@ -16,6 +24,8 @@ import {
   TableRow,
   TableWrapper,
 } from "@/ascendra-ui";
+import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
+import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
 import {
   ChartContainer,
   ChartTooltip,
@@ -86,44 +96,28 @@ export default function ExecutiveBusinessReviewPage() {
     <>
       <BackLink href="/showcase/reports">Report Gallery</BackLink>
 
-      <div className="flex flex-col gap-10">
+      <ReportDocumentWrapper>
 
-        {/* ── Branded header (dark) ────────────────────────────────────────── */}
-        <div className="overflow-hidden rounded-xl bg-slate-900">
-          <div className="h-1 w-full bg-slate-600" />
-          <div className="p-8">
-            <div className="flex flex-wrap items-start justify-between gap-4">
-              <div>
-                <p className="text-[0.6875rem] font-semibold uppercase tracking-widest text-slate-400">
-                  Executive Business Review
-                </p>
-                <h1 className="mt-1.5 text-3xl font-bold tracking-tight text-white">
-                  Ascendra Holdings Ltd.
-                </h1>
-                <p className="mt-1 text-sm text-slate-400">
-                  First Half 2024 · January – June 2024
-                </p>
-              </div>
-              <span className="inline-flex items-center rounded border border-slate-600 bg-slate-800 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-slate-300">
-                Board Confidential
-              </span>
-            </div>
-            <div className="mt-5 flex flex-wrap gap-6 border-t border-slate-700/60 pt-4 text-xs text-slate-400">
-              <span>
-                <span className="font-medium text-slate-200">Prepared for:</span>{" "}
-                Board of Directors
-              </span>
-              <span>
-                <span className="font-medium text-slate-200">Report Date:</span>{" "}
-                July 12, 2024
-              </span>
-              <span>
-                <span className="font-medium text-slate-200">Prepared by:</span>{" "}
-                Office of the CFO
-              </span>
-            </div>
-          </div>
-        </div>
+        {/* ── Document Header ──────────────────────────────────────────────── */}
+        <Card>
+          <CardPanel border={{ color: "slate" }}>
+            <ReportHeaderContent className="bg-slate-900 dark:bg-slate-900">
+              <ReportHeaderBody>
+                <ReportHeaderBodyWrap>
+                  <ReportTitle className="text-slate-400">Executive Business Review</ReportTitle>
+                  <ReportTitleHeader className="text-white">Ascendra Holdings Ltd.</ReportTitleHeader>
+                  <ReportSubTitle className="text-slate-400">First Half 2024 · January – June 2024</ReportSubTitle>
+                </ReportHeaderBodyWrap>
+                <SimpleBadge variant={"secondary"}>Board Confidential</SimpleBadge>
+              </ReportHeaderBody>
+              <ReportHeaderFooter className="border-slate-700/60 text-slate-400 [&_span:first-child]:text-slate-200">
+                <ReportHeaderField label="Prepared for">Board of Directors</ReportHeaderField>
+                <ReportHeaderField label="Report Date">July 12, 2024</ReportHeaderField>
+                <ReportHeaderField label="Prepared by">Office of the CFO</ReportHeaderField>
+              </ReportHeaderFooter>
+            </ReportHeaderContent>
+          </CardPanel>
+        </Card>
 
         {/* ── H1 KPIs (oversized) ──────────────────────────────────────────── */}
         <div>
@@ -334,7 +328,7 @@ export default function ExecutiveBusinessReviewPage() {
           </div>
         </div>
 
-      </div>
+      </ReportDocumentWrapper>
     </>
   );
 }

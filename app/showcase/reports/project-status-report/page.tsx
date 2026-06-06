@@ -7,6 +7,13 @@ import {
   CardHeaderSubtitle,
   CardHeaderTitle,
   CardPanel,
+  ReportHeaderBody,
+  ReportHeaderContent,
+  ReportHeaderField,
+  ReportHeaderFooter,
+  ReportSubTitle,
+  ReportTitle,
+  ReportTitleHeader,
   SimpleBadge,
   Table,
   TableBody,
@@ -17,6 +24,8 @@ import {
   TableRow,
   TableWrapper,
 } from "@/ascendra-ui";
+import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
+import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
 import {
   ChartContainer,
   ChartTooltip,
@@ -220,33 +229,28 @@ export default function ProjectStatusReportPage() {
     <>
       <BackLink href="/showcase/reports">Report Gallery</BackLink>
 
-      <div className="flex flex-col gap-10">
+      <ReportDocumentWrapper>
 
-        {/* ── Report Header ────────────────────────────────────────────────── */}
-        <div className="overflow-hidden rounded-xl border">
-          <div className="h-1 w-full bg-blue-500" />
-          <div className="p-6">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <p className="text-[0.6875rem] font-semibold uppercase tracking-widest text-muted-foreground">
-                  Project Status Report
-                </p>
-                <h1 className="mt-1 text-2xl font-bold tracking-tight text-foreground">
-                  {project.name}
-                </h1>
-                <p className="mt-0.5 text-sm text-muted-foreground">{project.period}</p>
-              </div>
-              <span className="inline-flex items-center rounded border border-blue-200 bg-blue-50 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-blue-700 dark:border-blue-800/60 dark:bg-blue-950/40 dark:text-blue-400">
-                Weekly Update
-              </span>
-            </div>
-            <div className="mt-4 flex flex-wrap gap-6 border-t pt-4 text-xs text-muted-foreground">
-              <span><span className="font-medium text-foreground">Client:</span> {project.client}</span>
-              <span><span className="font-medium text-foreground">Project Manager:</span> {project.pm}</span>
-              <span><span className="font-medium text-foreground">Go-Live Target:</span> {project.deadline}</span>
-            </div>
-          </div>
-        </div>
+        {/* ── Document Header ──────────────────────────────────────────────── */}
+        <Card>
+          <CardPanel border={{ color: "blue" }}>
+            <ReportHeaderContent>
+              <ReportHeaderBody>
+                <ReportHeaderBodyWrap>
+                  <ReportTitle>Project Status Report</ReportTitle>
+                  <ReportTitleHeader>{project.name}</ReportTitleHeader>
+                  <ReportSubTitle>{project.period}</ReportSubTitle>
+                </ReportHeaderBodyWrap>
+                <SimpleBadge variant={"blue"}>Weekly Update</SimpleBadge>
+              </ReportHeaderBody>
+              <ReportHeaderFooter>
+                <ReportHeaderField label="Client">{project.client}</ReportHeaderField>
+                <ReportHeaderField label="Project Manager">{project.pm}</ReportHeaderField>
+                <ReportHeaderField label="Go-Live Target">{project.deadline}</ReportHeaderField>
+              </ReportHeaderFooter>
+            </ReportHeaderContent>
+          </CardPanel>
+        </Card>
 
         {/* ── RAG Status Banner ────────────────────────────────────────────── */}
         <div className="rounded-xl border border-amber-200/60 bg-amber-50/60 p-5 dark:border-amber-800/30 dark:bg-amber-950/20">
@@ -428,7 +432,7 @@ export default function ProjectStatusReportPage() {
           </div>
         </div>
 
-      </div>
+      </ReportDocumentWrapper>
     </>
   );
 }

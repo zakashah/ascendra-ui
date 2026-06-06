@@ -1,5 +1,14 @@
 import {
   BackLink,
+  Card,
+  CardPanel,
+  ReportHeaderBody,
+  ReportHeaderContent,
+  ReportHeaderField,
+  ReportHeaderFooter,
+  ReportTitle,
+  ReportTitleHeader,
+  SimpleBadge,
   Table,
   TableBody,
   TableCell,
@@ -9,6 +18,8 @@ import {
   TableRow,
   TableWrapper,
 } from "@/ascendra-ui";
+import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
+import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
 
 // ─── Patient data ──────────────────────────────────────────────────────────────
 
@@ -85,46 +96,38 @@ export default function PatientHealthSummaryPage() {
     <>
       <BackLink href="/showcase/reports">Report Gallery</BackLink>
 
-      <div className="flex flex-col gap-10">
+      <ReportDocumentWrapper>
 
-        {/* ── Clinical header ──────────────────────────────────────────────── */}
-        <div className="overflow-hidden rounded-xl border">
-          <div className="h-1 w-full bg-teal-500" />
-          <div className="p-6">
-            <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <p className="text-[0.6875rem] font-semibold uppercase tracking-widest text-muted-foreground">
-                  Patient Health Summary
-                </p>
-                <h1 className="mt-1 text-2xl font-bold tracking-tight text-foreground">
-                  {patient.name}
-                </h1>
-              </div>
-              <span className="inline-flex items-center rounded border border-teal-200 bg-teal-50 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-teal-700 dark:border-teal-800/60 dark:bg-teal-950/40 dark:text-teal-400">
-                Visit Summary
-              </span>
-            </div>
-
-            {/* Patient info grid */}
-            <div className="grid grid-cols-2 gap-x-8 gap-y-2 border-t pt-4 text-sm sm:grid-cols-4">
-              {[
-                { label: "Date of Birth", value: patient.dob },
-                { label: "Age", value: `${patient.age} years` },
-                { label: "MRN", value: patient.mrn },
-                { label: "Physician", value: patient.physician },
-                { label: "Specialty", value: patient.specialty },
-                { label: "Insurance", value: patient.insurance },
-                { label: "Visit Date", value: patient.visitDate },
-                { label: "Next Appointment", value: patient.nextVisit },
-              ].map((f) => (
-                <div key={f.label} className="flex flex-col gap-0.5 py-1">
-                  <span className="text-[0.6875rem] text-muted-foreground">{f.label}</span>
-                  <span className="font-medium text-foreground">{f.value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        {/* ── Document Header ──────────────────────────────────────────────── */}
+        <Card>
+          <CardPanel border={{ color: "teal" }}>
+            <ReportHeaderContent>
+              <ReportHeaderBody>
+                <ReportHeaderBodyWrap>
+                  <ReportTitle>Patient Health Summary</ReportTitle>
+                  <ReportTitleHeader>{patient.name}</ReportTitleHeader>
+                </ReportHeaderBodyWrap>
+                <SimpleBadge variant={"info"}>Visit Summary</SimpleBadge>
+              </ReportHeaderBody>
+              <ReportHeaderFooter className="grid grid-cols-2 gap-x-8 gap-y-2 sm:grid-cols-4">
+                {[
+                  { label: "Date of Birth", value: patient.dob },
+                  { label: "Age", value: `${patient.age} years` },
+                  { label: "MRN", value: patient.mrn },
+                  { label: "Physician", value: patient.physician },
+                  { label: "Specialty", value: patient.specialty },
+                  { label: "Insurance", value: patient.insurance },
+                  { label: "Visit Date", value: patient.visitDate },
+                  { label: "Next Appointment", value: patient.nextVisit },
+                ].map((f) => (
+                  <ReportHeaderField key={f.label} label={f.label} stack>
+                    {f.value}
+                  </ReportHeaderField>
+                ))}
+              </ReportHeaderFooter>
+            </ReportHeaderContent>
+          </CardPanel>
+        </Card>
 
         {/* ── Vital Signs ──────────────────────────────────────────────────── */}
         <div>
@@ -279,7 +282,7 @@ export default function PatientHealthSummaryPage() {
           </div>
         </div>
 
-      </div>
+      </ReportDocumentWrapper>
     </>
   );
 }

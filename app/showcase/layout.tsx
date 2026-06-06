@@ -208,7 +208,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                       Supply Chain Operations
                     </SideBarMenuItem>
                     <SideBarMenuItem path="/showcase/reports/employee-performance-review">
-                      Employee Performance Review
+                      Employee Performance
                     </SideBarMenuItem>
                     <SideBarMenuItem path="/showcase/reports/security-incident-report">
                       Security Incident Report

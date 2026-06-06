@@ -7,6 +7,14 @@ import {
   CardHeaderSubtitle,
   CardHeaderTitle,
   CardPanel,
+  ReportHeaderBody,
+  ReportHeaderContent,
+  ReportHeaderField,
+  ReportHeaderFooter,
+  ReportSubTitle,
+  ReportTitle,
+  ReportTitleHeader,
+  SimpleBadge,
   Table,
   TableBody,
   TableCell,
@@ -16,6 +24,8 @@ import {
   TableRow,
   TableWrapper,
 } from "@/ascendra-ui";
+import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
+import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
 import {
   ChartContainer,
   ChartTooltip,
@@ -141,35 +151,28 @@ export default function SupplyChainOpsReportPage() {
     <>
       <BackLink href="/showcase/reports">Report Gallery</BackLink>
 
-      <div className="flex flex-col gap-10">
+      <ReportDocumentWrapper>
 
-        {/* ── Report Header ────────────────────────────────────────────────── */}
-        <div className="overflow-hidden rounded-xl border">
-          <div className="h-1 w-full bg-amber-500" />
-          <div className="p-6">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <p className="text-[0.6875rem] font-semibold uppercase tracking-widest text-muted-foreground">
-                  Supply Chain Operations Report
-                </p>
-                <h1 className="mt-1 text-2xl font-bold tracking-tight text-foreground">
-                  Ascendra Manufacturing — August 2024
-                </h1>
-                <p className="mt-0.5 text-sm text-muted-foreground">
-                  Monthly operations review · Reporting period: August 2024
-                </p>
-              </div>
-              <span className="inline-flex items-center rounded border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-amber-700 dark:border-amber-800/60 dark:bg-amber-950/40 dark:text-amber-400">
-                Operations Internal
-              </span>
-            </div>
-            <div className="mt-4 flex flex-wrap gap-6 border-t pt-3 text-xs text-muted-foreground">
-              <span><span className="font-medium text-foreground">Prepared by:</span> Supply Chain COE</span>
-              <span><span className="font-medium text-foreground">Report Date:</span> September 3, 2024</span>
-              <span><span className="font-medium text-foreground">Reviewed by:</span> VP Operations</span>
-            </div>
-          </div>
-        </div>
+        {/* ── Document Header ──────────────────────────────────────────────── */}
+        <Card>
+          <CardPanel border={{ color: "amber" }}>
+            <ReportHeaderContent>
+              <ReportHeaderBody>
+                <ReportHeaderBodyWrap>
+                  <ReportTitle>Supply Chain Operations Report</ReportTitle>
+                  <ReportTitleHeader>Ascendra Manufacturing — August 2024</ReportTitleHeader>
+                  <ReportSubTitle>Monthly operations review · Reporting period: August 2024</ReportSubTitle>
+                </ReportHeaderBodyWrap>
+                <SimpleBadge variant={"amber"}>Operations Internal</SimpleBadge>
+              </ReportHeaderBody>
+              <ReportHeaderFooter>
+                <ReportHeaderField label="Prepared by">Supply Chain COE</ReportHeaderField>
+                <ReportHeaderField label="Report Date">September 3, 2024</ReportHeaderField>
+                <ReportHeaderField label="Reviewed by">VP Operations</ReportHeaderField>
+              </ReportHeaderFooter>
+            </ReportHeaderContent>
+          </CardPanel>
+        </Card>
 
         {/* ── KPIs ─────────────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -386,7 +389,7 @@ export default function SupplyChainOpsReportPage() {
           </div>
         </div>
 
-      </div>
+      </ReportDocumentWrapper>
     </>
   );
 }

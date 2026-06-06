@@ -2,6 +2,15 @@
 
 import {
   BackLink,
+  Card,
+  CardPanel,
+  ReportHeaderBody,
+  ReportHeaderContent,
+  ReportHeaderField,
+  ReportHeaderFooter,
+  ReportTitle,
+  ReportTitleHeader,
+  SimpleBadge,
   Table,
   TableBody,
   TableCell,
@@ -11,12 +20,14 @@ import {
   TableRow,
   TableWrapper,
 } from "@/ascendra-ui";
+import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
+import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
 
 // ─── Incident data ─────────────────────────────────────────────────────────────
 
 const incident = {
   id: "INC-2024-0847",
-  title: "Unauthorised Access via Compromised Service Account",
+  title: "Unauthorised Access via Compromised Account",
   severity: "Critical",
   classification: "TLP:AMBER",
   detected: "14 Aug 2024, 02:17 UTC",
@@ -36,22 +47,88 @@ const timeline: {
   type: EventType;
   description: string;
 }[] = [
-  { time: "02:17",  type: "Detection",   description: "SIEM alert fired on anomalous API call volume from service account svc-data-pipeline-prod." },
-  { time: "02:24",  type: "Detection",   description: "SOC analyst confirmed alert as true positive. Unusual geographic origin (Eastern Europe) for service account." },
-  { time: "02:31",  type: "Action",      description: "Service account access revoked. Authentication token immediately invalidated." },
-  { time: "02:45",  type: "Escalation",  description: "Incident escalated to Tier 2 SOC and notified the CISO via on-call pager." },
-  { time: "03:10",  type: "Action",      description: "Forensic snapshot taken of affected pipeline host. Network isolation applied to three downstream systems." },
-  { time: "03:42",  type: "Action",      description: "Threat hunting initiated across all service accounts. No additional compromise indicators found." },
-  { time: "04:15",  type: "Escalation",  description: "Legal and DPO notified as records potentially at risk. 72-hour GDPR notification window started." },
-  { time: "05:00",  type: "Action",      description: "Password rotation completed for all service accounts in the affected domain. MFA enforced." },
-  { time: "06:39",  type: "Resolved",    description: "Full containment confirmed. No further evidence of active attacker presence. Monitoring elevated to 24 h watch." },
+  {
+    time: "02:17",
+    type: "Detection",
+    description:
+      "SIEM alert fired on anomalous API call volume from service account svc-data-pipeline-prod.",
+  },
+  {
+    time: "02:24",
+    type: "Detection",
+    description:
+      "SOC analyst confirmed alert as true positive. Unusual geographic origin (Eastern Europe) for service account.",
+  },
+  {
+    time: "02:31",
+    type: "Action",
+    description:
+      "Service account access revoked. Authentication token immediately invalidated.",
+  },
+  {
+    time: "02:45",
+    type: "Escalation",
+    description:
+      "Incident escalated to Tier 2 SOC and notified the CISO via on-call pager.",
+  },
+  {
+    time: "03:10",
+    type: "Action",
+    description:
+      "Forensic snapshot taken of affected pipeline host. Network isolation applied to three downstream systems.",
+  },
+  {
+    time: "03:42",
+    type: "Action",
+    description:
+      "Threat hunting initiated across all service accounts. No additional compromise indicators found.",
+  },
+  {
+    time: "04:15",
+    type: "Escalation",
+    description:
+      "Legal and DPO notified as records potentially at risk. 72-hour GDPR notification window started.",
+  },
+  {
+    time: "05:00",
+    type: "Action",
+    description:
+      "Password rotation completed for all service accounts in the affected domain. MFA enforced.",
+  },
+  {
+    time: "06:39",
+    type: "Resolved",
+    description:
+      "Full containment confirmed. No further evidence of active attacker presence. Monitoring elevated to 24 h watch.",
+  },
 ];
 
-const eventTypeCls: Record<EventType, { dot: string; label: string; badge: string }> = {
-  Detection:  { dot: "bg-amber-500",   label: "Detection",   badge: "bg-amber-500/10 text-amber-700 ring-amber-500/20 dark:text-amber-400" },
-  Action:     { dot: "bg-blue-500",    label: "Action",      badge: "bg-blue-500/10 text-blue-700 ring-blue-500/20 dark:text-blue-400" },
-  Escalation: { dot: "bg-rose-500",    label: "Escalation",  badge: "bg-rose-500/10 text-rose-700 ring-rose-500/20 dark:text-rose-400" },
-  Resolved:   { dot: "bg-emerald-500", label: "Resolved",    badge: "bg-emerald-500/10 text-emerald-700 ring-emerald-500/20 dark:text-emerald-400" },
+const eventTypeCls: Record<
+  EventType,
+  { dot: string; label: string; badge: string }
+> = {
+  Detection: {
+    dot: "bg-amber-500",
+    label: "Detection",
+    badge:
+      "bg-amber-500/10 text-amber-700 ring-amber-500/20 dark:text-amber-400",
+  },
+  Action: {
+    dot: "bg-blue-500",
+    label: "Action",
+    badge: "bg-blue-500/10 text-blue-700 ring-blue-500/20 dark:text-blue-400",
+  },
+  Escalation: {
+    dot: "bg-rose-500",
+    label: "Escalation",
+    badge: "bg-rose-500/10 text-rose-700 ring-rose-500/20 dark:text-rose-400",
+  },
+  Resolved: {
+    dot: "bg-emerald-500",
+    label: "Resolved",
+    badge:
+      "bg-emerald-500/10 text-emerald-700 ring-emerald-500/20 dark:text-emerald-400",
+  },
 };
 
 // ─── Affected systems ─────────────────────────────────────────────────────────
@@ -65,15 +142,36 @@ const systems: {
   sensitivity: string;
   status: SystemStatus;
 }[] = [
-  { system: "svc-data-pipeline-prod",   role: "ETL orchestration service",    exposure: "API credential theft",     sensitivity: "High",     status: "Isolated"     },
-  { system: "db-customer-analytics-01", role: "Customer analytics store",     exposure: "Read access via svc acct", sensitivity: "Critical", status: "Under Review" },
-  { system: "storage-export-bucket",    role: "Temporary data export store",  exposure: "File enumeration",         sensitivity: "High",     status: "Restored"     },
+  {
+    system: "svc-data-pipeline-prod",
+    role: "ETL orchestration service",
+    exposure: "API credential theft",
+    sensitivity: "High",
+    status: "Isolated",
+  },
+  {
+    system: "db-customer-analytics-01",
+    role: "Customer analytics store",
+    exposure: "Read access via svc acct",
+    sensitivity: "Critical",
+    status: "Under Review",
+  },
+  {
+    system: "storage-export-bucket",
+    role: "Temporary data export store",
+    exposure: "File enumeration",
+    sensitivity: "High",
+    status: "Restored",
+  },
 ];
 
 const systemStatusCls: Record<SystemStatus, string> = {
-  "Isolated":     "bg-rose-500/10 text-rose-700 ring-1 ring-rose-500/20 dark:text-rose-400",
-  "Restored":     "bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/20 dark:text-emerald-400",
-  "Under Review": "bg-amber-500/10 text-amber-700 ring-1 ring-amber-500/20 dark:text-amber-400",
+  Isolated:
+    "bg-rose-500/10 text-rose-700 ring-1 ring-rose-500/20 dark:text-rose-400",
+  Restored:
+    "bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/20 dark:text-emerald-400",
+  "Under Review":
+    "bg-amber-500/10 text-amber-700 ring-1 ring-amber-500/20 dark:text-amber-400",
 };
 
 // ─── Remediation ──────────────────────────────────────────────────────────────
@@ -87,24 +185,62 @@ const remediations: {
   due: string;
   status: ActionStatus;
 }[] = [
-  { action: "Rotate all service account credentials",                     owner: "IAM Team",     priority: "Critical", due: "14 Aug",  status: "Completed"   },
-  { action: "Enforce MFA on all service-to-service auth",                 owner: "Platform Eng", priority: "Critical", due: "21 Aug",  status: "In Progress" },
-  { action: "Implement just-in-time (JIT) access for pipeline accounts",  owner: "Platform Eng", priority: "High",     due: "30 Aug",  status: "Planned"     },
-  { action: "Conduct full access review for all data pipeline accounts",   owner: "IAM Team",     priority: "High",     due: "28 Aug",  status: "In Progress" },
-  { action: "Tune SIEM rules to reduce detection time",                   owner: "SOC",          priority: "Medium",   due: "15 Sep",  status: "Planned"     },
-  { action: "Mandatory security awareness refresher for DevOps team",     owner: "L&D / SOC",    priority: "Medium",   due: "30 Sep",  status: "Planned"     },
+  {
+    action: "Rotate all service account credentials",
+    owner: "IAM Team",
+    priority: "Critical",
+    due: "14 Aug",
+    status: "Completed",
+  },
+  {
+    action: "Enforce MFA on all service-to-service auth",
+    owner: "Platform Eng",
+    priority: "Critical",
+    due: "21 Aug",
+    status: "In Progress",
+  },
+  {
+    action: "Implement just-in-time (JIT) access for pipeline accounts",
+    owner: "Platform Eng",
+    priority: "High",
+    due: "30 Aug",
+    status: "Planned",
+  },
+  {
+    action: "Conduct full access review for all data pipeline accounts",
+    owner: "IAM Team",
+    priority: "High",
+    due: "28 Aug",
+    status: "In Progress",
+  },
+  {
+    action: "Tune SIEM rules to reduce detection time",
+    owner: "SOC",
+    priority: "Medium",
+    due: "15 Sep",
+    status: "Planned",
+  },
+  {
+    action: "Mandatory security awareness refresher for DevOps team",
+    owner: "L&D / SOC",
+    priority: "Medium",
+    due: "30 Sep",
+    status: "Planned",
+  },
 ];
 
 const actionStatusCls: Record<ActionStatus, string> = {
-  "Completed":   "bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/20 dark:text-emerald-400",
-  "In Progress": "bg-blue-500/10 text-blue-700 ring-1 ring-blue-500/20 dark:text-blue-400",
-  "Planned":     "bg-muted text-muted-foreground ring-1 ring-border",
+  Completed:
+    "bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/20 dark:text-emerald-400",
+  "In Progress":
+    "bg-blue-500/10 text-blue-700 ring-1 ring-blue-500/20 dark:text-blue-400",
+  Planned: "bg-muted text-muted-foreground ring-1 ring-border",
 };
 
 const priorityCls = {
   Critical: "text-rose-600 dark:text-rose-400 font-semibold",
-  High:     "text-amber-600 dark:text-amber-400 font-medium",
-  Medium:   "text-muted-foreground",
+  High: "text-amber-600 dark:text-amber-400 font-medium",
+  Medium: "text-muted-foreground",
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -126,8 +262,7 @@ export default function SecurityIncidentReportPage() {
     <>
       <BackLink href="/showcase/reports">Report Gallery</BackLink>
 
-      <div className="mx-auto w-full max-w-4xl flex flex-col gap-10">
-
+      <ReportDocumentWrapper className="mx-auto max-w-4xl">
         {/* ── TLP Banner ───────────────────────────────────────────────────── */}
         <div className="flex items-center justify-between rounded-lg border border-amber-400/60 bg-amber-50/60 px-4 py-2 dark:border-amber-600/40 dark:bg-amber-950/30">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-amber-700 dark:text-amber-400">
@@ -139,73 +274,75 @@ export default function SecurityIncidentReportPage() {
           </span>
         </div>
 
-        {/* ── Incident Header ──────────────────────────────────────────────── */}
-        <div className="overflow-hidden rounded-xl border">
-          <div className="h-1 w-full bg-rose-600" />
-          <div className="p-6">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
-                <p className="text-[0.6875rem] font-semibold uppercase tracking-widest text-muted-foreground">
-                  Post-Incident Report · {incident.id}
-                </p>
-                <h1 className="mt-1 text-xl font-bold tracking-tight text-foreground">
-                  {incident.title}
-                </h1>
-              </div>
-              {/* CRITICAL badge */}
-              <div className="flex items-center gap-1.5 rounded-md border border-rose-500/40 bg-rose-500/10 px-3 py-1.5">
-                <span className="h-2 w-2 rounded-full bg-rose-500 shadow-[0_0_6px_rgba(244,63,94,0.6)]" />
-                <span className="text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">
-                  {incident.severity}
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-4 grid grid-cols-2 gap-x-8 gap-y-2 border-t pt-4 text-sm sm:grid-cols-4">
-              {[
-                { label: "Detected",          value: incident.detected          },
-                { label: "Contained",         value: incident.contained         },
-                { label: "Time to Contain",   value: incident.containmentTime   },
-                { label: "Classification",    value: incident.classification    },
-                { label: "Report Date",       value: incident.reportDate        },
-                { label: "Prepared By",       value: incident.preparedBy        },
-                { label: "Reviewed By",       value: incident.reviewedBy        },
-                { label: "Records at Risk",   value: "≈ 12,400 customer records" },
-              ].map((f) => (
-                <div key={f.label} className="flex flex-col gap-0.5 py-1">
-                  <span className="text-[0.6875rem] text-muted-foreground">{f.label}</span>
-                  <span className="font-medium text-foreground">{f.value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        {/* ── Document Header ──────────────────────────────────────────────── */}
+        <Card>
+          <CardPanel border={{ color: "red" }}>
+            <ReportHeaderContent>
+              <ReportHeaderBody>
+                <ReportHeaderBodyWrap>
+                  <ReportTitle>
+                    Post-Incident Report · {incident.id}
+                  </ReportTitle>
+                  <ReportTitleHeader>{incident.title}</ReportTitleHeader>
+                </ReportHeaderBodyWrap>
+                <SimpleBadge variant={"red"}>{incident.severity}</SimpleBadge>
+              </ReportHeaderBody>
+              <ReportHeaderFooter className="grid grid-cols-2 gap-x-8 gap-y-2 sm:grid-cols-4">
+                {[
+                  { label: "Detected", value: incident.detected },
+                  { label: "Contained", value: incident.contained },
+                  { label: "Time to Contain", value: incident.containmentTime },
+                  { label: "Classification", value: incident.classification },
+                  { label: "Report Date", value: incident.reportDate },
+                  { label: "Prepared By", value: incident.preparedBy },
+                  { label: "Reviewed By", value: incident.reviewedBy },
+                  {
+                    label: "Records at Risk",
+                    value: "≈ 12,400 customer records",
+                  },
+                ].map((f) => (
+                  <ReportHeaderField key={f.label} label={f.label} stack>
+                    {f.value}
+                  </ReportHeaderField>
+                ))}
+              </ReportHeaderFooter>
+            </ReportHeaderContent>
+          </CardPanel>
+        </Card>
 
         {/* ── Executive Summary ────────────────────────────────────────────── */}
         <div>
           <SectionHeading title="Executive Summary" />
           <div className="flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
             <p>
-              On 14 August 2024 at 02:17 UTC, the Security Operations Centre detected anomalous
-              activity originating from a production service account (<span className="font-mono text-foreground">svc-data-pipeline-prod</span>).
-              Investigation confirmed that the account credentials had been compromised through an
-              undisclosed vector, enabling an external actor to authenticate to internal API
-              endpoints and access data stored in the customer analytics database and a temporary
-              export storage bucket.
+              On 14 August 2024 at 02:17 UTC, the Security Operations Centre
+              detected anomalous activity originating from a production service
+              account (
+              <span className="font-mono text-foreground">
+                svc-data-pipeline-prod
+              </span>
+              ). Investigation confirmed that the account credentials had been
+              compromised through an undisclosed vector, enabling an external
+              actor to authenticate to internal API endpoints and access data
+              stored in the customer analytics database and a temporary export
+              storage bucket.
             </p>
             <p>
-              The account was revoked within 14 minutes of initial detection. Full containment
-              was achieved within 4 hours and 22 minutes. Approximately 12,400 customer records
-              were accessible during the exposure window; forensic analysis indicates partial
-              enumeration of file names in the export bucket with no evidence of successful
-              exfiltration of the analytics database at this time. Investigations are ongoing.
+              The account was revoked within 14 minutes of initial detection.
+              Full containment was achieved within 4 hours and 22 minutes.
+              Approximately 12,400 customer records were accessible during the
+              exposure window; forensic analysis indicates partial enumeration
+              of file names in the export bucket with no evidence of successful
+              exfiltration of the analytics database at this time.
+              Investigations are ongoing.
             </p>
             <p>
-              The Data Protection Officer has been notified. Under GDPR Article 33, the supervisory
-              authority must be notified within 72 hours of becoming aware of the breach where there
-              is a likely risk to individuals. A formal notification is being prepared. Six
-              remediation actions have been identified, of which two are in progress and one is
-              already complete.
+              The Data Protection Officer has been notified. Under GDPR Article
+              33, the supervisory authority must be notified within 72 hours of
+              becoming aware of the breach where there is a likely risk to
+              individuals. A formal notification is being prepared. Six
+              remediation actions have been identified, of which two are in
+              progress and one is already complete.
             </p>
           </div>
         </div>
@@ -221,7 +358,9 @@ export default function SecurityIncidentReportPage() {
                 <div key={i} className="flex gap-4">
                   {/* Track + dot */}
                   <div className="flex flex-col items-center">
-                    <div className={`mt-1.5 h-3 w-3 shrink-0 rounded-full ${cls.dot} ring-2 ring-background`} />
+                    <div
+                      className={`mt-1.5 h-3 w-3 shrink-0 rounded-full ${cls.dot} ring-2 ring-background`}
+                    />
                     {!isLast && <div className="mt-1 w-px flex-1 bg-border" />}
                   </div>
                   {/* Content */}
@@ -236,7 +375,9 @@ export default function SecurityIncidentReportPage() {
                         {cls.label}
                       </span>
                     </div>
-                    <p className="text-sm leading-relaxed text-muted-foreground">{e.description}</p>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {e.description}
+                    </p>
                   </div>
                 </div>
               );
@@ -261,12 +402,22 @@ export default function SecurityIncidentReportPage() {
               <TableBody border={{}} bg={{}}>
                 {systems.map((s) => (
                   <TableRow key={s.system}>
-                    <TableCell className="font-mono text-xs font-medium text-foreground">{s.system}</TableCell>
-                    <TableCell className="text-sm text-muted-foreground">{s.role}</TableCell>
-                    <TableCell className="text-sm text-muted-foreground">{s.exposure}</TableCell>
-                    <TableCell className="text-sm font-medium text-foreground">{s.sensitivity}</TableCell>
+                    <TableCell className="font-mono text-xs font-medium text-foreground">
+                      {s.system}
+                    </TableCell>
+                    <TableCell className="text-sm text-muted-foreground">
+                      {s.role}
+                    </TableCell>
+                    <TableCell className="text-sm text-muted-foreground">
+                      {s.exposure}
+                    </TableCell>
+                    <TableCell className="text-sm font-medium text-foreground">
+                      {s.sensitivity}
+                    </TableCell>
                     <TableCell>
-                      <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium ${systemStatusCls[s.status]}`}>
+                      <span
+                        className={`inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium ${systemStatusCls[s.status]}`}
+                      >
                         {s.status}
                       </span>
                     </TableCell>
@@ -294,12 +445,22 @@ export default function SecurityIncidentReportPage() {
               <TableBody border={{}} bg={{}}>
                 {remediations.map((r) => (
                   <TableRow key={r.action}>
-                    <TableCell className="font-medium text-sm">{r.action}</TableCell>
-                    <TableCell className="text-sm text-muted-foreground">{r.owner}</TableCell>
-                    <TableCell className={`text-sm ${priorityCls[r.priority]}`}>{r.priority}</TableCell>
-                    <TableCell className="text-sm text-muted-foreground">{r.due}</TableCell>
+                    <TableCell className="font-medium text-sm">
+                      {r.action}
+                    </TableCell>
+                    <TableCell className="text-sm text-muted-foreground">
+                      {r.owner}
+                    </TableCell>
+                    <TableCell className={`text-sm ${priorityCls[r.priority]}`}>
+                      {r.priority}
+                    </TableCell>
+                    <TableCell className="text-sm text-muted-foreground">
+                      {r.due}
+                    </TableCell>
                     <TableCell>
-                      <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium ${actionStatusCls[r.status]}`}>
+                      <span
+                        className={`inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium ${actionStatusCls[r.status]}`}
+                      >
                         {r.status}
                       </span>
                     </TableCell>
@@ -341,7 +502,9 @@ export default function SecurityIncidentReportPage() {
                   {item.n}
                 </span>
                 <p className="text-muted-foreground">
-                  <span className="font-semibold text-foreground">{item.heading} — </span>
+                  <span className="font-semibold text-foreground">
+                    {item.heading} —{" "}
+                  </span>
                   {item.body}
                 </p>
               </li>
@@ -355,7 +518,9 @@ export default function SecurityIncidentReportPage() {
             TLP:AMBER — DO NOT SHARE BEYOND AUTHORISED RECIPIENTS
           </div>
           <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-            <span className="font-medium text-foreground/60">Ascendra Security Operations Centre</span>
+            <span className="font-medium text-foreground/60">
+              Ascendra Security Operations Centre
+            </span>
             <div className="flex items-center gap-4 text-muted-foreground/60">
               <span>{incident.id}</span>
               <span>·</span>
@@ -365,8 +530,7 @@ export default function SecurityIncidentReportPage() {
             </div>
           </div>
         </div>
-
-      </div>
+      </ReportDocumentWrapper>
     </>
   );
 }
