@@ -363,7 +363,7 @@ export default function ExecutiveBusinessReviewPage() {
                   "Enterprise segment delivered strongest growth at +22.1% year-over-year.",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
                     {item}
                   </li>
                 ))}
@@ -383,7 +383,7 @@ export default function ExecutiveBusinessReviewPage() {
                   "H2 investment plan prioritises Asia-Pacific and product-led growth in SMB.",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
                     {item}
                   </li>
                 ))}

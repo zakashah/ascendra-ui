@@ -162,6 +162,7 @@ export * from './components/reports/report-title';
 export * from './components/reports/report-title-header';
 export * from './components/reports/report-subtitle';
 export * from './components/reports/report-header-footer';
+export * from './components/reports/report-notes';
 
 // Hooks
 export * from './hooks/use-is-small-screen';

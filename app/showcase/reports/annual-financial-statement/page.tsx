@@ -19,6 +19,10 @@ import {
   ReportSubTitle,
   ReportHeaderFooter,
   ReportHeaderField,
+  ReportNotes,
+  ReportNote,
+  ReportNoteHeader,
+  ReportNoteText,
   SimpleBadge,
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
@@ -737,43 +741,37 @@ export default function AnnualFinancialStatementPage() {
           <ReportSectionHeader>
             <CardHeaderTitle>Notes to Financial Statements</CardHeaderTitle>
           </ReportSectionHeader>
-          <div className="flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground">{/* <ReportNotes /> */}
-            <div>{/* <ReportNote /> */}
-              <p className="mb-1 font-medium text-foreground">{/* <ReportNoteHeader /> */}
-                1. Basis of Preparation
-              </p>
-              <p>{/* <ReportNoteText /> */}
+          <ReportNotes>
+            <ReportNote>
+              <ReportNoteHeader>1. Basis of Preparation</ReportNoteHeader>
+              <ReportNoteText>
                 These consolidated financial statements have been prepared in
                 accordance with Generally Accepted Accounting Principles (GAAP)
                 on a going-concern basis. All amounts are presented in thousands
                 of United States Dollars (USD) unless otherwise indicated.
-              </p>
-            </div>
-            <div>
-              <p className="mb-1 font-medium text-foreground">
-                2. Revenue Recognition
-              </p>
-              <p>
+              </ReportNoteText>
+            </ReportNote>
+            <ReportNote>
+              <ReportNoteHeader>2. Revenue Recognition</ReportNoteHeader>
+              <ReportNoteText>
                 Product revenue is recognized at the point of delivery when
                 control transfers to the customer. Service revenue is recognized
                 over the term of the service agreement in accordance with ASC
                 606. Deferred revenue relating to multi-year contracts is
                 included in current and non-current liabilities as appropriate.
-              </p>
-            </div>
-            <div>
-              <p className="mb-1 font-medium text-foreground">
-                3. Significant Accounting Policies
-              </p>
-              <p>
+              </ReportNoteText>
+            </ReportNote>
+            <ReportNote>
+              <ReportNoteHeader>3. Significant Accounting Policies</ReportNoteHeader>
+              <ReportNoteText>
                 Property, plant and equipment are carried at cost less
                 accumulated depreciation. Depreciation is calculated on a
                 straight-line basis over estimated useful lives ranging from 3
                 to 15 years. Goodwill is tested annually for impairment. No
                 impairment was recognized in FY 2024 or FY 2023.
-              </p>
-            </div>
-          </div>
+              </ReportNoteText>
+            </ReportNote>
+          </ReportNotes>
         </div>
 
         {/* ── Document Footer ──────────────────────────────────────────────── */}
