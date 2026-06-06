@@ -1,0 +1,340 @@
+"use client";
+
+import {
+  BackLink,
+  Card,
+  CardHeader,
+  CardHeaderSubtitle,
+  CardHeaderTitle,
+  CardPanel,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableHeaderRow,
+  TableRow,
+  TableWrapper,
+} from "@/ascendra-ui";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  type ChartConfig,
+} from "@/ascendra-ui/shadcn";
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import { LuTrendingDown, LuTrendingUp } from "react-icons/lu";
+
+// ─── KPIs ─────────────────────────────────────────────────────────────────────
+
+const kpis = [
+  { label: "H1 Revenue",    value: "$142.4M", delta: "+18.2%", py: "$120.5M", up: true  },
+  { label: "Gross Profit",  value: "$58.6M",  delta: "+21.4%", py: "$48.3M",  up: true  },
+  { label: "EBITDA",        value: "$28.1M",  delta: "+24.8%", py: "$22.5M",  up: true  },
+  { label: "Cash Position", value: "$44.2M",  delta: "+22.8%", py: "$36.0M",  up: true  },
+] as const;
+
+// ─── Monthly revenue ($M) ──────────────────────────────────────────────────────
+
+const monthlyData = [
+  { month: "Jan", fy2024: 21.4, fy2023: 18.2 },
+  { month: "Feb", fy2024: 20.8, fy2023: 17.8 },
+  { month: "Mar", fy2024: 23.6, fy2023: 19.8 },
+  { month: "Apr", fy2024: 22.9, fy2023: 19.5 },
+  { month: "May", fy2024: 24.8, fy2023: 21.4 },
+  { month: "Jun", fy2024: 28.9, fy2023: 23.8 },
+];
+
+const revChartConfig: ChartConfig = {
+  fy2024: { label: "H1 2024", color: "var(--chart-1)" },
+  fy2023: { label: "H1 2023", color: "var(--chart-2)" },
+};
+
+// ─── Division performance ──────────────────────────────────────────────────────
+
+const divisions = [
+  { name: "North America",      revenue: 68.4, pct: 48.0, vsTarget: +4.2,  vsLY: +21.3 },
+  { name: "Europe",             revenue: 32.8, pct: 23.0, vsTarget: +1.8,  vsLY: +14.6 },
+  { name: "Asia-Pacific",       revenue: 22.4, pct: 15.7, vsTarget: -2.1,  vsLY: +18.9 },
+  { name: "Enterprise Accounts",revenue: 13.2, pct:  9.3, vsTarget: +6.4,  vsLY: +22.1 },
+  { name: "SMB & Other",        revenue:  5.6, pct:  3.9, vsTarget: -4.8,  vsLY:  +8.4 },
+];
+
+// ─── Helpers ───────────────────────────────────────────────────────────────────
+
+function pctCls(v: number) {
+  return v >= 0
+    ? "text-emerald-600 dark:text-emerald-400"
+    : "text-rose-600 dark:text-rose-400";
+}
+
+// ─── Section heading ───────────────────────────────────────────────────────────
+
+function SectionHeading({ title, subtitle }: { title: string; subtitle?: string }) {
+  return (
+    <div className="mb-6 border-b pb-3">
+      <h2 className="text-base font-semibold text-foreground">{title}</h2>
+      {subtitle && <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>}
+    </div>
+  );
+}
+
+// ─── Page ──────────────────────────────────────────────────────────────────────
+
+export default function ExecutiveBusinessReviewPage() {
+  return (
+    <>
+      <BackLink href="/showcase/reports">Report Gallery</BackLink>
+
+      <div className="flex flex-col gap-10">
+
+        {/* ── Branded header (dark) ────────────────────────────────────────── */}
+        <div className="overflow-hidden rounded-xl bg-slate-900">
+          <div className="h-1 w-full bg-slate-600" />
+          <div className="p-8">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <p className="text-[0.6875rem] font-semibold uppercase tracking-widest text-slate-400">
+                  Executive Business Review
+                </p>
+                <h1 className="mt-1.5 text-3xl font-bold tracking-tight text-white">
+                  Ascendra Holdings Ltd.
+                </h1>
+                <p className="mt-1 text-sm text-slate-400">
+                  First Half 2024 · January – June 2024
+                </p>
+              </div>
+              <span className="inline-flex items-center rounded border border-slate-600 bg-slate-800 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-slate-300">
+                Board Confidential
+              </span>
+            </div>
+            <div className="mt-5 flex flex-wrap gap-6 border-t border-slate-700/60 pt-4 text-xs text-slate-400">
+              <span>
+                <span className="font-medium text-slate-200">Prepared for:</span>{" "}
+                Board of Directors
+              </span>
+              <span>
+                <span className="font-medium text-slate-200">Report Date:</span>{" "}
+                July 12, 2024
+              </span>
+              <span>
+                <span className="font-medium text-slate-200">Prepared by:</span>{" "}
+                Office of the CFO
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* ── H1 KPIs (oversized) ──────────────────────────────────────────── */}
+        <div>
+          <SectionHeading
+            title="H1 2024 Performance Highlights"
+            subtitle="Key metrics for the six months ended June 30, 2024 vs. prior year"
+          />
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+            {kpis.map((k) => (
+              <div key={k.label} className="flex flex-col gap-1.5">
+                <p className="text-xs text-muted-foreground">{k.label}</p>
+                <p className="text-4xl font-bold tracking-tight text-foreground">
+                  {k.value}
+                </p>
+                <div className="flex flex-wrap items-center gap-2 text-xs">
+                  <span className={`flex items-center gap-0.5 font-semibold ${k.up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}>
+                    {k.up ? <LuTrendingUp className="size-3" /> : <LuTrendingDown className="size-3" />}
+                    {k.delta}
+                  </span>
+                  <span className="text-muted-foreground">vs {k.py}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Monthly Revenue Chart ────────────────────────────────────────── */}
+        <Card>
+          <CardHeader>
+            <CardHeaderTitle>Monthly Revenue — H1 2024 vs H1 2023</CardHeaderTitle>
+            <CardHeaderSubtitle>Total revenue by month · in millions USD</CardHeaderSubtitle>
+          </CardHeader>
+          <CardPanel>
+            <div className="p-6">
+              <ChartContainer config={revChartConfig} className="h-56 w-full">
+                <BarChart
+                  data={monthlyData}
+                  margin={{ top: 4, right: 16, left: 0, bottom: 0 }}
+                  barCategoryGap="28%"
+                  barGap={4}
+                >
+                  <CartesianGrid
+                    vertical={false}
+                    stroke="var(--border)"
+                    strokeOpacity={0.6}
+                    strokeWidth={0.5}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    dy={6}
+                  />
+                  <YAxis
+                    tickLine={false}
+                    axisLine={false}
+                    tick={{ fontSize: 11 }}
+                    tickFormatter={(v: number) => `$${v}M`}
+                    width={40}
+                    domain={[0, 35]}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={(v, k) => [
+                          `$${Number(v).toFixed(1)}M`,
+                          revChartConfig[k as keyof typeof revChartConfig]?.label ?? k,
+                        ]}
+                      />
+                    }
+                  />
+                  <Bar
+                    dataKey="fy2024"
+                    fill="var(--chart-1)"
+                    fillOpacity={0.85}
+                    radius={[3, 3, 0, 0]}
+                  />
+                  <Bar
+                    dataKey="fy2023"
+                    fill="var(--chart-2)"
+                    fillOpacity={0.6}
+                    radius={[3, 3, 0, 0]}
+                  />
+                </BarChart>
+              </ChartContainer>
+              <div className="mt-3 flex gap-4 text-xs text-muted-foreground">
+                <div className="flex items-center gap-1.5">
+                  <span className="h-2 w-3 rounded-[2px]" style={{ background: "var(--chart-1)" }} />
+                  H1 2024
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="h-2 w-3 rounded-[2px]" style={{ background: "var(--chart-2)", opacity: 0.65 }} />
+                  H1 2023
+                </div>
+              </div>
+            </div>
+          </CardPanel>
+        </Card>
+
+        {/* ── Division Performance ─────────────────────────────────────────── */}
+        <div>
+          <SectionHeading
+            title="Division Performance"
+            subtitle="Revenue by business unit for H1 2024 — in millions USD"
+          />
+          <TableWrapper>
+            <Table horizontal vertical>
+              <TableHeader>
+                <TableHeaderRow>
+                  <TableHead>Division</TableHead>
+                  <TableHead className="text-right">Revenue</TableHead>
+                  <TableHead className="text-right">% of Total</TableHead>
+                  <TableHead className="text-right">vs. Target</TableHead>
+                  <TableHead className="text-right">vs. Prior Year</TableHead>
+                </TableHeaderRow>
+              </TableHeader>
+              <TableBody border={{}} bg={{}}>
+                {divisions.map((d) => (
+                  <TableRow key={d.name}>
+                    <TableCell className="font-medium">{d.name}</TableCell>
+                    <TableCell className="text-right font-mono tabular-nums">
+                      ${d.revenue.toFixed(1)}M
+                    </TableCell>
+                    <TableCell className="text-right text-muted-foreground tabular-nums">
+                      {d.pct.toFixed(1)}%
+                    </TableCell>
+                    <TableCell className={`text-right font-mono font-medium tabular-nums ${pctCls(d.vsTarget)}`}>
+                      {d.vsTarget >= 0 ? "+" : ""}{d.vsTarget.toFixed(1)}%
+                    </TableCell>
+                    <TableCell className={`text-right font-mono font-medium tabular-nums ${pctCls(d.vsLY)}`}>
+                      {d.vsLY >= 0 ? "+" : ""}{d.vsLY.toFixed(1)}%
+                    </TableCell>
+                  </TableRow>
+                ))}
+                {/* Total row */}
+                <TableRow>
+                  <TableCell className="font-bold">Total</TableCell>
+                  <TableCell className="text-right font-mono font-bold tabular-nums">$142.4M</TableCell>
+                  <TableCell className="text-right font-bold tabular-nums">100.0%</TableCell>
+                  <TableCell className="text-right font-mono font-bold tabular-nums text-emerald-600 dark:text-emerald-400">
+                    +2.8%
+                  </TableCell>
+                  <TableCell className="text-right font-mono font-bold tabular-nums text-emerald-600 dark:text-emerald-400">
+                    +18.2%
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableWrapper>
+        </div>
+
+        {/* ── Executive Highlights ─────────────────────────────────────────── */}
+        <div>
+          <SectionHeading title="Executive Highlights" />
+          <div className="grid gap-5 sm:grid-cols-2">
+            {/* Achievements */}
+            <div className="rounded-lg border border-emerald-200/60 bg-emerald-50/40 p-5 dark:border-emerald-800/30 dark:bg-emerald-950/20">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
+                Achievements
+              </p>
+              <ul className="flex flex-col gap-2.5 text-sm text-foreground">
+                {[
+                  "H1 revenue exceeded board guidance by 2.8%, led by a strong close in June.",
+                  "North America exceeded its quarterly target for the sixth consecutive quarter.",
+                  "Cash position improved by $8.2M quarter-on-quarter, ahead of year-end target.",
+                  "Enterprise segment delivered strongest growth at +22.1% year-over-year.",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Focus areas */}
+            <div className="rounded-lg border border-amber-200/60 bg-amber-50/40 p-5 dark:border-amber-800/30 dark:bg-amber-950/20">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-400">
+                Focus Areas
+              </p>
+              <ul className="flex flex-col gap-2.5 text-sm text-foreground">
+                {[
+                  "Asia-Pacific finished 2.1% below target; recovery plan activated with updated go-to-market approach.",
+                  "SMB segment faces continued pricing headwinds — full pricing review underway, results expected Q3.",
+                  "Integration of Q4 2023 acquisition on track; $2.4M in synergies realized year-to-date.",
+                  "H2 investment plan prioritises Asia-Pacific and product-led growth in SMB.",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Report Footer ─────────────────────────────────────────────────── */}
+        <div className="flex flex-wrap items-center justify-between gap-2 border-t pt-6 text-xs text-muted-foreground">
+          <span className="font-medium text-foreground/60">Ascendra Holdings Ltd. — Board of Directors</span>
+          <div className="flex items-center gap-4 text-muted-foreground/60">
+            <span>H1 FY2024 Executive Review</span>
+            <span>·</span>
+            <span>Board Confidential</span>
+            <span>·</span>
+            <span>July 12, 2024</span>
+          </div>
+        </div>
+
+      </div>
+    </>
+  );
+}

@@ -73,6 +73,24 @@ export type DrawerMeta = {
   components: string[];
 };
 
+export type ReportComplexity = 'Simple' | 'Medium' | 'Complex';
+export type ReportLayout = 'Document' | 'Wide' | 'Mixed';
+export type ReportType = 'Executive' | 'Financial' | 'Operational' | 'Performance' | 'Clinical' | 'Compliance';
+export type ReportStatus = 'available' | 'coming-soon';
+
+export type ReportMeta = {
+  slug: string;
+  name: string;
+  domain: string;
+  complexity: ReportComplexity;
+  layout: ReportLayout;
+  reportType: ReportType;
+  description: string;
+  keyMetrics: [string, string, string, string];
+  elements: string[];
+  status: ReportStatus;
+};
+
 export type LayoutCellHeight = 'sm' | 'md' | 'lg' | 'xl';
 
 export type LayoutCell = {

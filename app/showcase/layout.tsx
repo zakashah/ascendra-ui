@@ -32,6 +32,7 @@ import { SidebarSearch } from "@/components/sidebar-search";
 import {
   LuBookOpen,
   LuCalendar,
+  LuFileText,
   LuLayers,
   LuPanelLeft,
   LuPanelRight,
@@ -174,6 +175,46 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     </SideBarMenuItem>
                     <SideBarMenuItem path="/showcase/dashboards/real-estate">
                       Real Estate
+                    </SideBarMenuItem>
+                  </SideBarMenuContent>
+                </SideBarMenu>
+                <SideBarMenu basePath="/showcase/reports">
+                  <SideBarMenuHeader icon={LuFileText}>
+                    Sample Reports
+                  </SideBarMenuHeader>
+                  <SideBarMenuContent>
+                    <SideBarMenuItem path="/showcase/reports">
+                      Report Gallery
+                    </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/reports/annual-financial-statement">
+                      Annual Financial Statement
+                    </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/reports/executive-business-review">
+                      Executive Business Review
+                    </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/reports/patient-health-summary">
+                      Patient Health Summary
+                    </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/reports/project-status-report">
+                      Project Status Report
+                    </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/reports/sales-pipeline-report">
+                      Sales Pipeline Report
+                    </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/reports/marketing-campaign-analysis">
+                      Marketing Campaign Analysis
+                    </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/reports/supply-chain-ops-report">
+                      Supply Chain Operations
+                    </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/reports/employee-performance-review">
+                      Employee Performance Review
+                    </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/reports/security-incident-report">
+                      Security Incident Report
+                    </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/reports/esg-sustainability-report">
+                      ESG Sustainability Report
                     </SideBarMenuItem>
                   </SideBarMenuContent>
                 </SideBarMenu>
