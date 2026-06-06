@@ -2,6 +2,7 @@
 
 import {
   BackLink,
+  ReportPdfExportButton,
   Card,
   CardHeader,
   CardHeaderSubtitle,
@@ -539,7 +540,6 @@ function StatementTable({ rows }: { rows: StatRow[] }) {
   );
 }
 
-
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default function AnnualFinancialStatementPage() {
@@ -762,7 +762,9 @@ export default function AnnualFinancialStatementPage() {
               </ReportNoteText>
             </ReportNote>
             <ReportNote>
-              <ReportNoteHeader>3. Significant Accounting Policies</ReportNoteHeader>
+              <ReportNoteHeader>
+                3. Significant Accounting Policies
+              </ReportNoteHeader>
               <ReportNoteText>
                 Property, plant and equipment are carried at cost less
                 accumulated depreciation. Depreciation is calculated on a
@@ -797,6 +799,7 @@ export default function AnnualFinancialStatementPage() {
           </ReportDocumentFooterLine>
         </ReportDocumentFooter>
       </ReportDocumentWrapper>
+      <ReportPdfExportButton fileName="annual-financial-statement" />
     </>
   );
 }

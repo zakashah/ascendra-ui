@@ -168,6 +168,7 @@ export * from './components/reports/report-header-footer';
 export * from './components/reports/report-notes';
 export * from './components/reports/report-section-header';
 export * from './components/reports/report-summary';
+export * from './components/reports/report-pdf-export-button';
 
 // Hooks
 export * from './hooks/use-is-small-screen';

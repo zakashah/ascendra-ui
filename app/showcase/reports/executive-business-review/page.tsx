@@ -2,6 +2,7 @@
 
 import {
   BackLink,
+  ReportPdfExportButton,
   Card,
   CardHeader,
   CardHeaderSubtitle,
@@ -409,6 +410,7 @@ export default function ExecutiveBusinessReviewPage() {
           </ReportDocumentFooterLine>
         </ReportDocumentFooter>
       </ReportDocumentWrapper>
+      <ReportPdfExportButton fileName="executive-business-review" />
     </>
   );
 }

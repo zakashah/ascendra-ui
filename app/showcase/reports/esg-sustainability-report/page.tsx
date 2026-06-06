@@ -2,6 +2,7 @@
 
 import {
   BackLink,
+  ReportPdfExportButton,
   Card,
   CardHeader,
   CardHeaderSubtitle,
@@ -210,7 +211,7 @@ export default function EsgSustainabilityReportPage() {
   return (
     <>
       <BackLink href="/showcase/reports">Report Gallery</BackLink>
-      <ReportDocumentWrapper className="gap-12">
+      <ReportDocumentWrapper>
         {/* ── Document Header ──────────────────────────────────────────────── */}
         <Card>
           <CardPanel>
@@ -607,6 +608,7 @@ export default function EsgSustainabilityReportPage() {
         </ReportDocumentFooter>
 
       </ReportDocumentWrapper>
+      <ReportPdfExportButton fileName="esg-sustainability-report" />
     </>
   );
 }

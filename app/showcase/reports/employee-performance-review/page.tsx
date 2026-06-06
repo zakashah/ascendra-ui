@@ -2,6 +2,7 @@
 
 import {
   BackLink,
+  ReportPdfExportButton,
   Card,
   CardHeader,
   CardHeaderSubtitle,
@@ -475,6 +476,7 @@ export default function EmployeePerformanceReviewPage() {
           </ReportDocumentFooterLine>
         </ReportDocumentFooter>
       </ReportDocumentWrapper>
+      <ReportPdfExportButton fileName="employee-performance-review" />
     </>
   );
 }

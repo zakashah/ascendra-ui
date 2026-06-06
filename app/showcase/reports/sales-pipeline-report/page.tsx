@@ -2,6 +2,7 @@
 
 import {
   BackLink,
+  ReportPdfExportButton,
   Card,
   CardHeader,
   CardHeaderSubtitle,
@@ -356,6 +357,7 @@ export default function SalesPipelineReportPage() {
         </ReportDocumentFooter>
 
       </ReportDocumentWrapper>
+      <ReportPdfExportButton fileName="sales-pipeline-report" />
     </>
   );
 }

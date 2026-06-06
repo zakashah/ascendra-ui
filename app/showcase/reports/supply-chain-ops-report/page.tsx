@@ -2,6 +2,7 @@
 
 import {
   BackLink,
+  ReportPdfExportButton,
   Card,
   CardHeader,
   CardHeaderSubtitle,
@@ -387,6 +388,7 @@ export default function SupplyChainOpsReportPage() {
         </ReportDocumentFooter>
 
       </ReportDocumentWrapper>
+      <ReportPdfExportButton fileName="supply-chain-ops-report" />
     </>
   );
 }

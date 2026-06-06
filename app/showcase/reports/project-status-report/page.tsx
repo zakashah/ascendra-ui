@@ -2,6 +2,7 @@
 
 import {
   BackLink,
+  ReportPdfExportButton,
   Card,
   CardHeader,
   CardHeaderSubtitle,
@@ -431,6 +432,7 @@ export default function ProjectStatusReportPage() {
         </ReportDocumentFooter>
 
       </ReportDocumentWrapper>
+      <ReportPdfExportButton fileName="project-status-report" />
     </>
   );
 }

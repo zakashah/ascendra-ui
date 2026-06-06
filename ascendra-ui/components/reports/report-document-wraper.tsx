@@ -9,6 +9,7 @@ export function ReportDocumentWrapper({
 }: React.ComponentProps<"div">) {
   return (
     <div
+      id="report-content"
       data-slot="report-document-wrapper"
       className={cn("flex flex-col gap-10", className)}
       {...props}

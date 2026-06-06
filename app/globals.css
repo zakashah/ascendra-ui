@@ -471,6 +471,31 @@ th {
   scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
 }
 
+/* ── Print / PDF export ─────────────────────────────────────────────────────── */
+@media print {
+  /* Force background colors and images to print */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Hide all app chrome — selectors use the data-slot attributes on each component */
+  [data-slot="header"],
+  [data-slot="nav"],
+  [data-slot="side-bar"],
+  [data-slot="side-bar-toggle"],
+  [data-slot="side-bar-overlay"],
+  .no-print {
+    display: none !important;
+  }
+
+  /* Remove top spacing added for the header/nav rows */
+  [data-slot="main-container"] {
+    margin-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+}
+
 /* Hide scrollbar but keep scroll functionality */
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */

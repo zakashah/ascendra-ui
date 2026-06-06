@@ -2,6 +2,7 @@
 
 import {
   BackLink,
+  ReportPdfExportButton,
   Card,
   CardHeader,
   CardHeaderSubtitle,
@@ -394,6 +395,7 @@ export default function MarketingCampaignAnalysisPage() {
         </ReportDocumentFooter>
 
       </ReportDocumentWrapper>
+      <ReportPdfExportButton fileName="marketing-campaign-analysis" />
     </>
   );
 }

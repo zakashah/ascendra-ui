@@ -2,6 +2,7 @@
 
 import {
   BackLink,
+  ReportPdfExportButton,
   Card,
   CardHeaderTitle,
   CardPanel,
@@ -253,7 +254,7 @@ export default function SecurityIncidentReportPage() {
     <>
       <BackLink href="/showcase/reports">Report Gallery</BackLink>
 
-      <ReportDocumentWrapper className="mx-auto max-w-4xl">
+      <ReportDocumentWrapper>
         {/* ── TLP Banner ───────────────────────────────────────────────────── */}
         <SimpleAlert variant="warning" icon={false} className="justify-between px-4">
           <div className="flex items-center gap-2 font-bold uppercase tracking-widest">
@@ -524,6 +525,7 @@ export default function SecurityIncidentReportPage() {
           </ReportDocumentFooterLine>
         </ReportDocumentFooter>
       </ReportDocumentWrapper>
+      <ReportPdfExportButton fileName="security-incident-report" />
     </>
   );
 }
