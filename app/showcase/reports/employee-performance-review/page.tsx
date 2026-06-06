@@ -7,6 +7,9 @@ import {
   CardHeaderSubtitle,
   CardHeaderTitle,
   CardPanel,
+  Item,
+  ItemDescription,
+  ItemTitle,
   ReportHeaderBody,
   ReportHeaderContent,
   ReportHeaderField,
@@ -234,7 +237,6 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
-
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default function EmployeePerformanceReviewPage() {
@@ -251,7 +253,9 @@ export default function EmployeePerformanceReviewPage() {
                 <ReportHeaderBodyWrap>
                   <ReportTitle>Annual Performance Review</ReportTitle>
                   <ReportTitleHeader>{employee.name}</ReportTitleHeader>
-                  <ReportSubTitle>{employee.role} · {employee.department}</ReportSubTitle>
+                  <ReportSubTitle>
+                    {employee.role} · {employee.department}
+                  </ReportSubTitle>
                 </ReportHeaderBodyWrap>
                 <SimpleBadge variant={"violet"}>Confidential HR</SimpleBadge>
               </ReportHeaderBody>
@@ -419,14 +423,12 @@ export default function EmployeePerformanceReviewPage() {
                   "A recurring theme across reviewers is the opportunity to delegate more intentionally — Amara sometimes retains ownership of tasks that could develop junior colleagues. This is noted as a growth area rather than a deficiency, and aligns with her own self-assessment.",
               },
             ].map((f) => (
-              <div key={f.theme} className="rounded-lg border bg-muted/20 p-4">
-                <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              <Item key={f.theme} variant="outline">
+                <ItemTitle className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   {f.theme}
-                </p>
-                <p className="text-sm leading-relaxed text-foreground">
-                  {f.quote}
-                </p>
-              </div>
+                </ItemTitle>
+                <ItemDescription>{f.quote}</ItemDescription>
+              </Item>
             ))}
           </div>
         </div>
@@ -480,9 +482,10 @@ export default function EmployeePerformanceReviewPage() {
               },
               { role: "Employee", name: employee.name, title: employee.role },
             ].map((s) => (
-              <div
+              <Item
                 key={s.role}
-                className="flex flex-col gap-4 rounded-lg border p-5"
+                variant="outline"
+                className="p-5 flex-col items-start gap-4"
               >
                 <div>
                   <p className="text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
@@ -505,7 +508,7 @@ export default function EmployeePerformanceReviewPage() {
                     <div className="h-8 w-32 border-b border-dashed" />
                   </div>
                 </div>
-              </div>
+              </Item>
             ))}
           </div>
         </div>

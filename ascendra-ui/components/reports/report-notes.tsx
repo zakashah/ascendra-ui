@@ -11,7 +11,7 @@ export function ReportNotes({
     <div
       data-slot="report-notes"
       className={cn(
-        "flex flex-col gap-4 text-sm leading-relaxed text-muted-foreground",
+        "flex flex-col gap-5 text-sm leading-relaxed text-muted-foreground",
         className,
       )}
       {...props}

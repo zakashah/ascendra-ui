@@ -27,6 +27,7 @@ import {
   ReportDocumentFooterLine,
   ReportDocumentFooterLineLeft,
   ReportDocumentFooterLineRight,
+  SimpleAlert,
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
@@ -351,11 +352,11 @@ export default function ExecutiveBusinessReviewPage() {
           </ReportSectionHeader>
           <div className="grid gap-5 sm:grid-cols-2">
             {/* Achievements */}
-            <div className="rounded-lg border border-emerald-200/60 bg-emerald-50/40 p-5 dark:border-emerald-800/30 dark:bg-emerald-950/20">
-              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400">
+            <SimpleAlert variant="success" icon={false} className="flex-col items-start gap-3 p-5">
+              <p className="text-xs font-semibold uppercase tracking-wide">
                 Achievements
               </p>
-              <ul className="flex flex-col gap-2.5 text-sm text-foreground">
+              <ul className="flex flex-col gap-2.5 text-sm">
                 {[
                   "H1 revenue exceeded board guidance by 2.8%, led by a strong close in June.",
                   "North America exceeded its quarterly target for the sixth consecutive quarter.",
@@ -363,19 +364,19 @@ export default function ExecutiveBusinessReviewPage() {
                   "Enterprise segment delivered strongest growth at +22.1% year-over-year.",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-60" />
                     {item}
                   </li>
                 ))}
               </ul>
-            </div>
+            </SimpleAlert>
 
             {/* Focus areas */}
-            <div className="rounded-lg border border-amber-200/60 bg-amber-50/40 p-5 dark:border-amber-800/30 dark:bg-amber-950/20">
-              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-400">
+            <SimpleAlert variant="warning" icon={false} className="flex-col items-start gap-3 p-5">
+              <p className="text-xs font-semibold uppercase tracking-wide">
                 Focus Areas
               </p>
-              <ul className="flex flex-col gap-2.5 text-sm text-foreground">
+              <ul className="flex flex-col gap-2.5 text-sm">
                 {[
                   "Asia-Pacific finished 2.1% below target; recovery plan activated with updated go-to-market approach.",
                   "SMB segment faces continued pricing headwinds — full pricing review underway, results expected Q3.",
@@ -383,12 +384,12 @@ export default function ExecutiveBusinessReviewPage() {
                   "H2 investment plan prioritises Asia-Pacific and product-led growth in SMB.",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-60" />
                     {item}
                   </li>
                 ))}
               </ul>
-            </div>
+            </SimpleAlert>
           </div>
         </div>
 

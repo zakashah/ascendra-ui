@@ -68,16 +68,18 @@ export function SimpleAlert({
   icon: Icon = InfoIcon,
   children,
   ...props
-}: SimpleAlertProps & { icon?: IconType }) {
+}: SimpleAlertProps & { icon?: IconType | false }) {
   return (
     <div
       data-slot="simple-alert"
       className={cn(alertVariants({ variant }), className)}
       {...props}
     >
-      <span className={cn(alertIconVariants({ variant }))}>
-        <Icon className="size-3" strokeWidth={2.5} />
-      </span>
+      {Icon !== false && (
+        <span className={cn(alertIconVariants({ variant }))}>
+          <Icon className="size-3" strokeWidth={2.5} />
+        </span>
+      )}
       {children}
     </div>
   );

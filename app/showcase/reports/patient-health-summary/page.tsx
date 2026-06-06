@@ -28,6 +28,12 @@ import {
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
 import { ReportSectionHeader } from "@/ascendra-ui/components/reports/report-section-header";
+import {
+  ReportNote,
+  ReportNoteHeader,
+  ReportNotes,
+  ReportNoteText,
+} from "@/ascendra-ui/components/reports/report-notes";
 
 // ─── Patient data ──────────────────────────────────────────────────────────────
 
@@ -304,20 +310,18 @@ export default function PatientHealthSummaryPage() {
           <ReportSectionHeader>
             <CardHeaderTitle>Clinical Notes</CardHeaderTitle>
           </ReportSectionHeader>
-          <div className="flex flex-col gap-5 text-sm leading-relaxed">
-            <div>
-              <p className="mb-1 font-semibold text-foreground">
-                Reason for Visit
-              </p>
-              <p className="text-muted-foreground">
+          <ReportNotes>
+            <ReportNote>
+              <ReportNoteHeader>Reason for Visit</ReportNoteHeader>
+              <ReportNoteText>
                 Routine follow-up for management of Type 2 Diabetes Mellitus and
                 hypertension. Patient attends every 3 months for monitoring and
                 medication review.
-              </p>
-            </div>
-            <div>
-              <p className="mb-1 font-semibold text-foreground">Findings</p>
-              <p className="text-muted-foreground">
+              </ReportNoteText>
+            </ReportNote>
+            <ReportNote>
+              <ReportNoteHeader>Findings</ReportNoteHeader>
+              <ReportNoteText>
                 Patient reports good compliance with all prescribed medications.
                 HbA1c at 6.8% remains within the controlled target range (&lt;
                 7.0%). Fasting glucose slightly elevated at 112 mg/dL; patient
@@ -327,13 +331,11 @@ export default function PatientHealthSummaryPage() {
                 physical activity. All lipid panels within normal reference
                 ranges, consistent with statin therapy response. No signs of
                 renal deterioration (eGFR 78 mL/min). No new symptoms reported.
-              </p>
-            </div>
-            <div>
-              <p className="mb-1 font-semibold text-foreground">
-                Assessment & Plan
-              </p>
-              <ul className="flex flex-col gap-1.5 text-muted-foreground">
+              </ReportNoteText>
+            </ReportNote>
+            <ReportNote>
+              <ReportNoteHeader>Assessment & Plan</ReportNoteHeader>
+              <ul className="flex flex-col gap-1.5">
                 {[
                   "Continue Lisinopril 10 mg and Atorvastatin 20 mg — no dose adjustment required at this time.",
                   "Continue Metformin 500 mg BD; reinforce dietary advice regarding carbohydrate management.",
@@ -348,8 +350,8 @@ export default function PatientHealthSummaryPage() {
                   </li>
                 ))}
               </ul>
-            </div>
-          </div>
+            </ReportNote>
+          </ReportNotes>
         </div>
 
         {/* ── Facility Footer ──────────────────────────────────────────────── */}

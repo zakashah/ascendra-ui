@@ -7,6 +7,11 @@ import {
   CardHeaderSubtitle,
   CardHeaderTitle,
   CardPanel,
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemTitle,
   ReportHeaderBody,
   ReportHeaderContent,
   ReportHeaderField,
@@ -404,18 +409,15 @@ export default function ProjectStatusReportPage() {
           </ReportSectionHeader>
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((t) => (
-              <div
-                key={t.name}
-                className="flex items-center justify-between gap-3 rounded-lg border bg-muted/20 px-4 py-3"
-              >
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-sm font-medium text-foreground">{t.name}</span>
-                  <span className="text-xs text-muted-foreground">{t.role}</span>
-                </div>
-                <span className="shrink-0 text-sm font-semibold text-muted-foreground">
-                  {t.allocation}
-                </span>
-              </div>
+              <Item key={t.name} variant="outline" className="bg-muted/20 px-4 py-3">
+                <ItemContent>
+                  <ItemTitle>{t.name}</ItemTitle>
+                  <ItemDescription className="text-xs">{t.role}</ItemDescription>
+                </ItemContent>
+                <ItemActions>
+                  <span className="text-sm font-semibold text-muted-foreground">{t.allocation}</span>
+                </ItemActions>
+              </Item>
             ))}
           </div>
         </div>
