@@ -172,6 +172,58 @@ export function RatingDocContent() {
           </ComponentPreview>
         </div>
 
+        {/* Stacked layout */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Stacked layout</h3>
+          <p className="text-xs text-muted-foreground">
+            <code className="rounded bg-muted px-1 font-mono text-xs">layout=&quot;stacked&quot;</code>{" "}
+            places a large numeric value above the stars — useful for scorecards,
+            performance reviews, and any prominent rating display.
+          </p>
+          <ComponentPreview
+            code={`<Rating rating={4.2} layout="stacked" showValue size="xl" />
+<Rating rating={4.2} layout="stacked" showValue size="lg" color="amber" />
+<Rating rating={4.2} layout="stacked" showValue size="md" color="violet" />`}
+          >
+            <div className="flex flex-wrap items-end gap-10">
+              <Rating rating={4.2} layout="stacked" showValue size="xl" />
+              <Rating rating={4.2} layout="stacked" showValue size="lg" color="amber" />
+              <Rating rating={4.2} layout="stacked" showValue size="md" color="violet" />
+            </div>
+          </ComponentPreview>
+        </div>
+
+        {/* Stacked — multiple metrics */}
+        <div className="space-y-3">
+          <h3 className="text-sm font-medium text-foreground">Stacked — metric group</h3>
+          <p className="text-xs text-muted-foreground">
+            A natural fit for side-by-side metric summaries in dashboards and reports.
+          </p>
+          <ComponentPreview
+            align="start"
+            code={`{metrics.map(m => (
+  <div key={m.label} className="flex flex-col items-center gap-1">
+    <Rating rating={m.score} layout="stacked" showValue size="lg" color={m.color} />
+    <span className="text-xs text-muted-foreground">{m.label}</span>
+  </div>
+))}`}
+          >
+            <div className="flex flex-wrap gap-8">
+              {[
+                { label: "Overall", score: 4.2, color: "default" as const },
+                { label: "Quality", score: 4.7, color: "green" as const },
+                { label: "Speed", score: 3.8, color: "amber" as const },
+                { label: "Support", score: 4.0, color: "blue" as const },
+              ].map((m) => (
+                <div key={m.label} className="flex flex-col items-center gap-1">
+                  <Rating rating={m.score} layout="stacked" showValue size="lg" color={m.color} />
+                  <span className="text-xs text-muted-foreground">{m.label}</span>
+                </div>
+              ))}
+            </div>
+          </ComponentPreview>
+        </div>
+
         {/* Custom max */}
         <div className="space-y-3">
           <h3 className="text-sm font-medium text-foreground">Custom max</h3>
