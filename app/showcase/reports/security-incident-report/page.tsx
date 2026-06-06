@@ -3,6 +3,8 @@
 import {
   BackLink,
   Card,
+  CardHeaderSubtitle,
+  CardHeaderTitle,
   CardPanel,
   ReportHeaderBody,
   ReportHeaderContent,
@@ -26,6 +28,7 @@ import {
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
+import { ReportSectionHeader } from "@/ascendra-ui/components/reports/report-section-header";
 
 // ─── Incident data ─────────────────────────────────────────────────────────────
 
@@ -247,17 +250,6 @@ const priorityCls = {
   Medium: "text-muted-foreground",
 };
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
-function SectionHeading({ title }: { title: string }) {
-  return (
-    <div className="mb-4 border-b pb-2.5">
-      <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-        {title}
-      </h2>
-    </div>
-  );
-}
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
@@ -316,7 +308,9 @@ export default function SecurityIncidentReportPage() {
 
         {/* ── Executive Summary ────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Executive Summary" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Executive Summary</CardHeaderTitle>
+          </ReportSectionHeader>
           <div className="flex flex-col gap-3 text-sm leading-relaxed text-muted-foreground">
             <p>
               On 14 August 2024 at 02:17 UTC, the Security Operations Centre
@@ -353,7 +347,9 @@ export default function SecurityIncidentReportPage() {
 
         {/* ── Incident Timeline ────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Incident Timeline (UTC, 14 Aug 2024)" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Incident Timeline (UTC, 14 Aug 2024)</CardHeaderTitle>
+          </ReportSectionHeader>
           <div className="flex flex-col">
             {timeline.map((e, i) => {
               const cls = eventTypeCls[e.type];
@@ -391,7 +387,9 @@ export default function SecurityIncidentReportPage() {
 
         {/* ── Affected Systems ─────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Affected Systems" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Affected Systems</CardHeaderTitle>
+          </ReportSectionHeader>
           <TableWrapper>
             <Table horizontal vertical scrollable>
               <TableHeader>
@@ -434,7 +432,9 @@ export default function SecurityIncidentReportPage() {
 
         {/* ── Remediation ──────────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Remediation Actions" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Remediation Actions</CardHeaderTitle>
+          </ReportSectionHeader>
           <TableWrapper>
             <Table horizontal vertical scrollable>
               <TableHeader>
@@ -477,7 +477,9 @@ export default function SecurityIncidentReportPage() {
 
         {/* ── Lessons Learned ──────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Lessons Learned & Recommendations" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Lessons Learned & Recommendations</CardHeaderTitle>
+          </ReportSectionHeader>
           <ol className="flex flex-col gap-4 list-none">
             {[
               {

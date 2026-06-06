@@ -30,6 +30,7 @@ import {
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
+import { ReportSectionHeader } from "@/ascendra-ui/components/reports/report-section-header";
 import {
   ChartContainer,
   ChartTooltip,
@@ -103,14 +104,6 @@ function attainPct(attained: number, quota: number) {
   return Math.round((attained / quota) * 100);
 }
 
-function SectionHeading({ title, subtitle }: { title: string; subtitle?: string }) {
-  return (
-    <div className="mb-5 border-b pb-3">
-      <h2 className="text-base font-semibold text-foreground">{title}</h2>
-      {subtitle && <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>}
-    </div>
-  );
-}
 
 // ─── Pipeline Funnel ─────────────────────────────────────────────────────────
 
@@ -198,19 +191,19 @@ export default function SalesPipelineReportPage() {
 
         {/* ── Pipeline Funnel ──────────────────────────────────────────────── */}
         <div>
-          <SectionHeading
-            title="Pipeline by Stage"
-            subtitle="Active deals count and estimated value descending through conversion stages"
-          />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Pipeline by Stage</CardHeaderTitle>
+            <CardHeaderSubtitle>Active deals count and estimated value descending through conversion stages</CardHeaderSubtitle>
+          </ReportSectionHeader>
           <PipelineFunnel />
         </div>
 
         {/* ── Rep Performance ──────────────────────────────────────────────── */}
         <div>
-          <SectionHeading
-            title="Sales Rep Performance"
-            subtitle="Quota attainment YTD — all values in $000s"
-          />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Sales Rep Performance</CardHeaderTitle>
+            <CardHeaderSubtitle>Quota attainment YTD — all values in $000s</CardHeaderSubtitle>
+          </ReportSectionHeader>
           <TableWrapper>
             <Table horizontal vertical scrollable>
               <TableHeader>

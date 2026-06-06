@@ -31,6 +31,7 @@ import {
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
+import { ReportSectionHeader } from "@/ascendra-ui/components/reports/report-section-header";
 import {
   ChartContainer,
   ChartTooltip,
@@ -233,15 +234,6 @@ function Stars({ rating }: { rating: number }) {
   );
 }
 
-function SectionHeading({ title }: { title: string }) {
-  return (
-    <div className="mb-4 border-b pb-2.5">
-      <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-        {title}
-      </h2>
-    </div>
-  );
-}
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
@@ -283,7 +275,9 @@ export default function EmployeePerformanceReviewPage() {
 
         {/* ── Overall Rating ───────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Overall Rating" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Overall Rating</CardHeaderTitle>
+          </ReportSectionHeader>
           <div className="flex flex-wrap items-center gap-8">
             <div className="flex flex-col items-center gap-2">
               <p className="text-6xl font-black tracking-tight text-foreground">
@@ -361,7 +355,9 @@ export default function EmployeePerformanceReviewPage() {
 
         {/* ── Goal Achievement ─────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Goal Achievement" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Goal Achievement</CardHeaderTitle>
+          </ReportSectionHeader>
           <TableWrapper>
             <Table horizontal vertical scrollable>
               <TableHeader>
@@ -402,7 +398,9 @@ export default function EmployeePerformanceReviewPage() {
 
         {/* ── 360° Feedback ─────────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Peer & 360° Feedback Summary" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Peer & 360° Feedback Summary</CardHeaderTitle>
+          </ReportSectionHeader>
           <div className="flex flex-col gap-4">
             {[
               {
@@ -435,7 +433,9 @@ export default function EmployeePerformanceReviewPage() {
 
         {/* ── Development Plan ─────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Development Plan 2024" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Development Plan 2024</CardHeaderTitle>
+          </ReportSectionHeader>
           <TableWrapper>
             <Table horizontal vertical scrollable>
               <TableHeader>
@@ -468,7 +468,9 @@ export default function EmployeePerformanceReviewPage() {
 
         {/* ── Sign-off ─────────────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Sign-off" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Sign-off</CardHeaderTitle>
+          </ReportSectionHeader>
           <div className="grid gap-6 sm:grid-cols-2">
             {[
               {

@@ -30,6 +30,7 @@ import {
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
+import { ReportSectionHeader } from "@/ascendra-ui/components/reports/report-section-header";
 import {
   ChartContainer,
   ChartTooltip,
@@ -215,16 +216,6 @@ function MilestoneTimeline() {
   );
 }
 
-// ─── Section heading ───────────────────────────────────────────────────────────
-
-function SectionHeading({ title, subtitle }: { title: string; subtitle?: string }) {
-  return (
-    <div className="mb-4 border-b pb-3">
-      <h2 className="text-base font-semibold text-foreground">{title}</h2>
-      {subtitle && <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>}
-    </div>
-  );
-}
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
@@ -296,10 +287,10 @@ export default function ProjectStatusReportPage() {
 
         {/* ── Milestone Timeline ───────────────────────────────────────────── */}
         <div>
-          <SectionHeading
-            title="Milestone Timeline"
-            subtitle="Six project phases — complete, in progress, and upcoming"
-          />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Milestone Timeline</CardHeaderTitle>
+            <CardHeaderSubtitle>Six project phases — complete, in progress, and upcoming</CardHeaderSubtitle>
+          </ReportSectionHeader>
           <MilestoneTimeline />
         </div>
 
@@ -370,7 +361,10 @@ export default function ProjectStatusReportPage() {
 
         {/* ── Risk Register ────────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Risk Register" subtitle="Active risks as of report date" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Risk Register</CardHeaderTitle>
+            <CardHeaderSubtitle>Active risks as of report date</CardHeaderSubtitle>
+          </ReportSectionHeader>
           <TableWrapper>
             <Table horizontal vertical scrollable>
               <TableHeader>
@@ -405,7 +399,9 @@ export default function ProjectStatusReportPage() {
 
         {/* ── Team Allocation ──────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Team Allocation" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Team Allocation</CardHeaderTitle>
+          </ReportSectionHeader>
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((t) => (
               <div

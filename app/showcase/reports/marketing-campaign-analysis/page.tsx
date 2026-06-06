@@ -30,6 +30,7 @@ import {
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
+import { ReportSectionHeader } from "@/ascendra-ui/components/reports/report-section-header";
 import {
   ChartContainer,
   ChartTooltip,
@@ -127,14 +128,6 @@ function fmtK(n: number) {
     : String(n);
 }
 
-function SectionHeading({ title, subtitle }: { title: string; subtitle?: string }) {
-  return (
-    <div className="mb-5 border-b pb-3">
-      <h2 className="text-base font-semibold text-foreground">{title}</h2>
-      {subtitle && <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>}
-    </div>
-  );
-}
 
 // ─── Conversion Funnel ────────────────────────────────────────────────────────
 
@@ -325,10 +318,10 @@ export default function MarketingCampaignAnalysisPage() {
 
         {/* ── Campaign ROI Table ───────────────────────────────────────────── */}
         <div>
-          <SectionHeading
-            title="Campaign ROI Summary"
-            subtitle="Spend, revenue, ROAS, and CPC by campaign — sorted by ROAS descending"
-          />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Campaign ROI Summary</CardHeaderTitle>
+            <CardHeaderSubtitle>Spend, revenue, ROAS, and CPC by campaign — sorted by ROAS descending</CardHeaderSubtitle>
+          </ReportSectionHeader>
           <TableWrapper>
             <Table horizontal vertical scrollable>
               <TableHeader>

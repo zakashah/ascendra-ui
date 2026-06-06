@@ -1,6 +1,7 @@
 import {
   BackLink,
   Card,
+  CardHeaderTitle,
   CardPanel,
   ReportHeaderBody,
   ReportHeaderContent,
@@ -22,9 +23,11 @@ import {
   ReportDocumentFooterLineLeft,
   ReportDocumentFooterLineRight,
   ReportDocumentFooterNote,
+  CardHeaderSubtitle,
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
+import { ReportSectionHeader } from "@/ascendra-ui/components/reports/report-section-header";
 
 // ─── Patient data ──────────────────────────────────────────────────────────────
 
@@ -149,17 +152,6 @@ const vitalStatusCls: Record<string, string> = {
     "bg-amber-500/10 text-amber-700 ring-amber-500/20 dark:text-amber-400 dark:ring-amber-500/30",
 };
 
-// ─── Section heading ───────────────────────────────────────────────────────────
-
-function SectionHeading({ title }: { title: string }) {
-  return (
-    <div className="mb-4 border-b pb-2.5">
-      <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-        {title}
-      </h2>
-    </div>
-  );
-}
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
@@ -202,7 +194,9 @@ export default function PatientHealthSummaryPage() {
 
         {/* ── Vital Signs ──────────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Vital Signs" />
+          <ReportSectionHeader >
+            <CardHeaderTitle>Vital Signs</CardHeaderTitle>
+          </ReportSectionHeader>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {vitals.map((v) => (
               <div
@@ -227,7 +221,9 @@ export default function PatientHealthSummaryPage() {
 
         {/* ── Active Medications ───────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Active Medications" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Active Medications</CardHeaderTitle>
+          </ReportSectionHeader>
           <TableWrapper>
             <Table horizontal vertical scrollable>
               <TableHeader>
@@ -264,11 +260,11 @@ export default function PatientHealthSummaryPage() {
 
         {/* ── Lab Results ──────────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Recent Lab Results" />
-          <p className="mb-3 text-xs text-muted-foreground">
-            Specimens drawn {patient.visitDate} · Processed at Ascendra Regional
-            Laboratory
-          </p>
+          <ReportSectionHeader>
+            <CardHeaderTitle>Recent Lab Results</CardHeaderTitle>
+            <CardHeaderSubtitle>Specimens drawn {patient.visitDate} · Processed at Ascendra Regional
+            Laboratory</CardHeaderSubtitle>
+          </ReportSectionHeader>
           <TableWrapper>
             <Table horizontal vertical scrollable>
               <TableHeader>
@@ -305,7 +301,9 @@ export default function PatientHealthSummaryPage() {
 
         {/* ── Clinical Notes ───────────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Clinical Notes" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Clinical Notes</CardHeaderTitle>
+          </ReportSectionHeader>
           <div className="flex flex-col gap-5 text-sm leading-relaxed">
             <div>
               <p className="mb-1 font-semibold text-foreground">

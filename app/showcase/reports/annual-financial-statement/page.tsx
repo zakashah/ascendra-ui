@@ -535,24 +535,6 @@ function StatementTable({ rows }: { rows: StatRow[] }) {
   );
 }
 
-// ─── Section heading ───────────────────────────────────────────────────────────
-
-function SectionHeading({
-  title,
-  subtitle,
-}: {
-  title: string;
-  subtitle?: string;
-}) {
-  return (
-    <div className="mb-4 border-b pb-3">
-      <h2 className="text-base font-semibold text-foreground">{title}</h2>
-      {subtitle && (
-        <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>
-      )}
-    </div>
-  );
-}
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 

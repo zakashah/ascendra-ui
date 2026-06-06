@@ -30,6 +30,7 @@ import {
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
+import { ReportSectionHeader } from "@/ascendra-ui/components/reports/report-section-header";
 import {
   ChartContainer,
   ChartTooltip,
@@ -42,10 +43,28 @@ import { LuTrendingDown, LuTrendingUp } from "react-icons/lu";
 // ─── KPIs ─────────────────────────────────────────────────────────────────────
 
 const kpis = [
-  { label: "H1 Revenue",    value: "$142.4M", delta: "+18.2%", py: "$120.5M", up: true  },
-  { label: "Gross Profit",  value: "$58.6M",  delta: "+21.4%", py: "$48.3M",  up: true  },
-  { label: "EBITDA",        value: "$28.1M",  delta: "+24.8%", py: "$22.5M",  up: true  },
-  { label: "Cash Position", value: "$44.2M",  delta: "+22.8%", py: "$36.0M",  up: true  },
+  {
+    label: "H1 Revenue",
+    value: "$142.4M",
+    delta: "+18.2%",
+    py: "$120.5M",
+    up: true,
+  },
+  {
+    label: "Gross Profit",
+    value: "$58.6M",
+    delta: "+21.4%",
+    py: "$48.3M",
+    up: true,
+  },
+  { label: "EBITDA", value: "$28.1M", delta: "+24.8%", py: "$22.5M", up: true },
+  {
+    label: "Cash Position",
+    value: "$44.2M",
+    delta: "+22.8%",
+    py: "$36.0M",
+    up: true,
+  },
 ] as const;
 
 // ─── Monthly revenue ($M) ──────────────────────────────────────────────────────
@@ -67,11 +86,29 @@ const revChartConfig: ChartConfig = {
 // ─── Division performance ──────────────────────────────────────────────────────
 
 const divisions = [
-  { name: "North America",      revenue: 68.4, pct: 48.0, vsTarget: +4.2,  vsLY: +21.3 },
-  { name: "Europe",             revenue: 32.8, pct: 23.0, vsTarget: +1.8,  vsLY: +14.6 },
-  { name: "Asia-Pacific",       revenue: 22.4, pct: 15.7, vsTarget: -2.1,  vsLY: +18.9 },
-  { name: "Enterprise Accounts",revenue: 13.2, pct:  9.3, vsTarget: +6.4,  vsLY: +22.1 },
-  { name: "SMB & Other",        revenue:  5.6, pct:  3.9, vsTarget: -4.8,  vsLY:  +8.4 },
+  {
+    name: "North America",
+    revenue: 68.4,
+    pct: 48.0,
+    vsTarget: +4.2,
+    vsLY: +21.3,
+  },
+  { name: "Europe", revenue: 32.8, pct: 23.0, vsTarget: +1.8, vsLY: +14.6 },
+  {
+    name: "Asia-Pacific",
+    revenue: 22.4,
+    pct: 15.7,
+    vsTarget: -2.1,
+    vsLY: +18.9,
+  },
+  {
+    name: "Enterprise Accounts",
+    revenue: 13.2,
+    pct: 9.3,
+    vsTarget: +6.4,
+    vsLY: +22.1,
+  },
+  { name: "SMB & Other", revenue: 5.6, pct: 3.9, vsTarget: -4.8, vsLY: +8.4 },
 ];
 
 // ─── Helpers ───────────────────────────────────────────────────────────────────
@@ -82,17 +119,6 @@ function pctCls(v: number) {
     : "text-rose-600 dark:text-rose-400";
 }
 
-// ─── Section heading ───────────────────────────────────────────────────────────
-
-function SectionHeading({ title, subtitle }: { title: string; subtitle?: string }) {
-  return (
-    <div className="mb-6 border-b pb-3">
-      <h2 className="text-base font-semibold text-foreground">{title}</h2>
-      {subtitle && <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>}
-    </div>
-  );
-}
-
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default function ExecutiveBusinessReviewPage() {
@@ -101,23 +127,36 @@ export default function ExecutiveBusinessReviewPage() {
       <BackLink href="/showcase/reports">Report Gallery</BackLink>
 
       <ReportDocumentWrapper>
-
         {/* ── Document Header ──────────────────────────────────────────────── */}
         <Card>
           <CardPanel border={{ color: "slate" }}>
             <ReportHeaderContent className="bg-slate-900 dark:bg-slate-900">
               <ReportHeaderBody>
                 <ReportHeaderBodyWrap>
-                  <ReportTitle className="text-slate-400">Executive Business Review</ReportTitle>
-                  <ReportTitleHeader className="text-white">Ascendra Holdings Ltd.</ReportTitleHeader>
-                  <ReportSubTitle className="text-slate-400">First Half 2024 · January – June 2024</ReportSubTitle>
+                  <ReportTitle className="text-slate-400">
+                    Executive Business Review
+                  </ReportTitle>
+                  <ReportTitleHeader className="text-white">
+                    Ascendra Holdings Ltd.
+                  </ReportTitleHeader>
+                  <ReportSubTitle className="text-slate-400">
+                    First Half 2024 · January – June 2024
+                  </ReportSubTitle>
                 </ReportHeaderBodyWrap>
-                <SimpleBadge variant={"secondary"}>Board Confidential</SimpleBadge>
+                <SimpleBadge variant={"secondary"}>
+                  Board Confidential
+                </SimpleBadge>
               </ReportHeaderBody>
               <ReportHeaderFooter className="border-slate-700/60 text-slate-400 [&_span:first-child]:text-slate-200">
-                <ReportHeaderField label="Prepared for">Board of Directors</ReportHeaderField>
-                <ReportHeaderField label="Report Date">July 12, 2024</ReportHeaderField>
-                <ReportHeaderField label="Prepared by">Office of the CFO</ReportHeaderField>
+                <ReportHeaderField label="Prepared for">
+                  Board of Directors
+                </ReportHeaderField>
+                <ReportHeaderField label="Report Date">
+                  July 12, 2024
+                </ReportHeaderField>
+                <ReportHeaderField label="Prepared by">
+                  Office of the CFO
+                </ReportHeaderField>
               </ReportHeaderFooter>
             </ReportHeaderContent>
           </CardPanel>
@@ -125,10 +164,12 @@ export default function ExecutiveBusinessReviewPage() {
 
         {/* ── H1 KPIs (oversized) ──────────────────────────────────────────── */}
         <div>
-          <SectionHeading
-            title="H1 2024 Performance Highlights"
-            subtitle="Key metrics for the six months ended June 30, 2024 vs. prior year"
-          />
+          <ReportSectionHeader>
+            <CardHeaderTitle>H1 2024 Performance Highlights</CardHeaderTitle>
+            <CardHeaderSubtitle>
+              Key metrics for the six months ended June 30, 2024 vs. prior year
+            </CardHeaderSubtitle>
+          </ReportSectionHeader>
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
             {kpis.map((k) => (
               <div key={k.label} className="flex flex-col gap-1.5">
@@ -137,8 +178,14 @@ export default function ExecutiveBusinessReviewPage() {
                   {k.value}
                 </p>
                 <div className="flex flex-wrap items-center gap-2 text-xs">
-                  <span className={`flex items-center gap-0.5 font-semibold ${k.up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}>
-                    {k.up ? <LuTrendingUp className="size-3" /> : <LuTrendingDown className="size-3" />}
+                  <span
+                    className={`flex items-center gap-0.5 font-semibold ${k.up ? "text-emerald-600 dark:text-emerald-400" : "text-rose-600 dark:text-rose-400"}`}
+                  >
+                    {k.up ? (
+                      <LuTrendingUp className="size-3" />
+                    ) : (
+                      <LuTrendingDown className="size-3" />
+                    )}
                     {k.delta}
                   </span>
                   <span className="text-muted-foreground">vs {k.py}</span>
@@ -151,8 +198,12 @@ export default function ExecutiveBusinessReviewPage() {
         {/* ── Monthly Revenue Chart ────────────────────────────────────────── */}
         <Card>
           <CardHeader>
-            <CardHeaderTitle>Monthly Revenue — H1 2024 vs H1 2023</CardHeaderTitle>
-            <CardHeaderSubtitle>Total revenue by month · in millions USD</CardHeaderSubtitle>
+            <CardHeaderTitle>
+              Monthly Revenue — H1 2024 vs H1 2023
+            </CardHeaderTitle>
+            <CardHeaderSubtitle>
+              Total revenue by month · in millions USD
+            </CardHeaderSubtitle>
           </CardHeader>
           <CardPanel>
             <div className="p-6">
@@ -189,7 +240,8 @@ export default function ExecutiveBusinessReviewPage() {
                       <ChartTooltipContent
                         formatter={(v, k) => [
                           `$${Number(v).toFixed(1)}M`,
-                          revChartConfig[k as keyof typeof revChartConfig]?.label ?? k,
+                          revChartConfig[k as keyof typeof revChartConfig]
+                            ?.label ?? k,
                         ]}
                       />
                     }
@@ -210,11 +262,17 @@ export default function ExecutiveBusinessReviewPage() {
               </ChartContainer>
               <div className="mt-3 flex gap-4 text-xs text-muted-foreground">
                 <div className="flex items-center gap-1.5">
-                  <span className="h-2 w-3 rounded-[2px]" style={{ background: "var(--chart-1)" }} />
+                  <span
+                    className="h-2 w-3 rounded-[2px]"
+                    style={{ background: "var(--chart-1)" }}
+                  />
                   H1 2024
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="h-2 w-3 rounded-[2px]" style={{ background: "var(--chart-2)", opacity: 0.65 }} />
+                  <span
+                    className="h-2 w-3 rounded-[2px]"
+                    style={{ background: "var(--chart-2)", opacity: 0.65 }}
+                  />
                   H1 2023
                 </div>
               </div>
@@ -224,10 +282,12 @@ export default function ExecutiveBusinessReviewPage() {
 
         {/* ── Division Performance ─────────────────────────────────────────── */}
         <div>
-          <SectionHeading
-            title="Division Performance"
-            subtitle="Revenue by business unit for H1 2024 — in millions USD"
-          />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Division Performance</CardHeaderTitle>
+            <CardHeaderSubtitle>
+              Revenue by business unit for H1 2024 — in millions USD
+            </CardHeaderSubtitle>
+          </ReportSectionHeader>
           <TableWrapper>
             <Table horizontal vertical scrollable>
               <TableHeader>
@@ -249,19 +309,29 @@ export default function ExecutiveBusinessReviewPage() {
                     <TableCell className="text-right text-muted-foreground tabular-nums">
                       {d.pct.toFixed(1)}%
                     </TableCell>
-                    <TableCell className={`text-right font-mono font-medium tabular-nums ${pctCls(d.vsTarget)}`}>
-                      {d.vsTarget >= 0 ? "+" : ""}{d.vsTarget.toFixed(1)}%
+                    <TableCell
+                      className={`text-right font-mono font-medium tabular-nums ${pctCls(d.vsTarget)}`}
+                    >
+                      {d.vsTarget >= 0 ? "+" : ""}
+                      {d.vsTarget.toFixed(1)}%
                     </TableCell>
-                    <TableCell className={`text-right font-mono font-medium tabular-nums ${pctCls(d.vsLY)}`}>
-                      {d.vsLY >= 0 ? "+" : ""}{d.vsLY.toFixed(1)}%
+                    <TableCell
+                      className={`text-right font-mono font-medium tabular-nums ${pctCls(d.vsLY)}`}
+                    >
+                      {d.vsLY >= 0 ? "+" : ""}
+                      {d.vsLY.toFixed(1)}%
                     </TableCell>
                   </TableRow>
                 ))}
                 {/* Total row */}
                 <TableRow>
                   <TableCell className="font-bold">Total</TableCell>
-                  <TableCell className="text-right font-mono font-bold tabular-nums">$142.4M</TableCell>
-                  <TableCell className="text-right font-bold tabular-nums">100.0%</TableCell>
+                  <TableCell className="text-right font-mono font-bold tabular-nums">
+                    $142.4M
+                  </TableCell>
+                  <TableCell className="text-right font-bold tabular-nums">
+                    100.0%
+                  </TableCell>
                   <TableCell className="text-right font-mono font-bold tabular-nums text-emerald-600 dark:text-emerald-400">
                     +2.8%
                   </TableCell>
@@ -276,7 +346,9 @@ export default function ExecutiveBusinessReviewPage() {
 
         {/* ── Executive Highlights ─────────────────────────────────────────── */}
         <div>
-          <SectionHeading title="Executive Highlights" />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Executive Highlights</CardHeaderTitle>
+          </ReportSectionHeader>
           <div className="grid gap-5 sm:grid-cols-2">
             {/* Achievements */}
             <div className="rounded-lg border border-emerald-200/60 bg-emerald-50/40 p-5 dark:border-emerald-800/30 dark:bg-emerald-950/20">
@@ -323,7 +395,9 @@ export default function ExecutiveBusinessReviewPage() {
         {/* ── Report Footer ─────────────────────────────────────────────────── */}
         <ReportDocumentFooter>
           <ReportDocumentFooterLine>
-            <ReportDocumentFooterLineLeft>Ascendra Holdings Ltd. — Board of Directors</ReportDocumentFooterLineLeft>
+            <ReportDocumentFooterLineLeft>
+              Ascendra Holdings Ltd. — Board of Directors
+            </ReportDocumentFooterLineLeft>
             <ReportDocumentFooterLineRight>
               <span>H1 FY2024 Executive Review</span>
               <span>·</span>
@@ -333,7 +407,6 @@ export default function ExecutiveBusinessReviewPage() {
             </ReportDocumentFooterLineRight>
           </ReportDocumentFooterLine>
         </ReportDocumentFooter>
-
       </ReportDocumentWrapper>
     </>
   );

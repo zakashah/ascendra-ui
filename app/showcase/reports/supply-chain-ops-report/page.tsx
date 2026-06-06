@@ -30,6 +30,7 @@ import {
 } from "@/ascendra-ui";
 import { ReportDocumentWrapper } from "@/ascendra-ui/components/reports/report-document-wraper";
 import { ReportHeaderBodyWrap } from "@/ascendra-ui/components/reports/report-header-body-wrap";
+import { ReportSectionHeader } from "@/ascendra-ui/components/reports/report-section-header";
 import {
   ChartContainer,
   ChartTooltip,
@@ -137,16 +138,6 @@ const orderStatusCls: Record<OrderStatus, string> = {
   "On Track":"bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/20 dark:text-emerald-400",
 };
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
-function SectionHeading({ title, subtitle }: { title: string; subtitle?: string }) {
-  return (
-    <div className="mb-5 border-b pb-3">
-      <h2 className="text-base font-semibold text-foreground">{title}</h2>
-      {subtitle && <p className="mt-0.5 text-xs text-muted-foreground">{subtitle}</p>}
-    </div>
-  );
-}
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
@@ -247,10 +238,10 @@ export default function SupplyChainOpsReportPage() {
 
         {/* ── Supplier Scorecard ───────────────────────────────────────────── */}
         <div>
-          <SectionHeading
-            title="Supplier Performance Scorecard"
-            subtitle="Color-coded by threshold — Green ≥ target · Amber approaching · Red below threshold"
-          />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Supplier Performance Scorecard</CardHeaderTitle>
+            <CardHeaderSubtitle>Color-coded by threshold — Green ≥ target · Amber approaching · Red below threshold</CardHeaderSubtitle>
+          </ReportSectionHeader>
           <TableWrapper>
             <Table horizontal vertical scrollable>
               <TableHeader>
@@ -334,10 +325,10 @@ export default function SupplyChainOpsReportPage() {
 
         {/* ── Critical Open Orders ─────────────────────────────────────────── */}
         <div>
-          <SectionHeading
-            title="Critical Open Orders"
-            subtitle="Orders flagged as Critical or At Risk — requiring immediate attention"
-          />
+          <ReportSectionHeader>
+            <CardHeaderTitle>Critical Open Orders</CardHeaderTitle>
+            <CardHeaderSubtitle>Orders flagged as Critical or At Risk — requiring immediate attention</CardHeaderSubtitle>
+          </ReportSectionHeader>
           <TableWrapper>
             <Table horizontal vertical scrollable>
               <TableHeader>
