@@ -153,6 +153,9 @@ export * from './components/stepper/stepper-navigator';
 // Forms
 export * from './components/forms/back-link';
 
+// Reports
+export * from './components/reports/report-header-field';
+
 // Hooks
 export * from './hooks/use-is-small-screen';
 

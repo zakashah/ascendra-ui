@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { LuArrowLeft } from "react-icons/lu";
-import { Card, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel } from "@/ascendra-ui";
+import { BackLink, Card, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel } from "@/ascendra-ui";
 import {
   ChartContainer,
   ChartTooltip,
@@ -239,14 +237,7 @@ function SectionHeading({ title, subtitle }: { title: string; subtitle?: string 
 export default function AnnualFinancialStatementPage() {
   return (
     <>
-      {/* Back */}
-      <Link
-        href="/showcase/reports"
-        className="text-muted-foreground hover:text-foreground mb-10 flex w-fit items-center gap-1.5 text-xs transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm"
-      >
-        <LuArrowLeft className="size-3 stroke-2" />
-        Report Gallery
-      </Link>
+      <BackLink href="/showcase/reports">Report Gallery</BackLink>
 
       {/* Document wrapper */}
       <div className="flex flex-col gap-10">
