@@ -63,7 +63,6 @@ export const navConfig: NavCategory[] = [
   {
     title: 'Feedback & Status',
     items: [
-      { name: 'Rating', slug: 'feedback/rating' },
       { name: 'Simple Badge', slug: 'feedback/simple-badge' },
       { name: 'Bubble Badge', slug: 'feedback/bubble-badge' },
       { name: 'Status Dot', slug: 'feedback/status-dot' },
@@ -73,6 +72,7 @@ export const navConfig: NavCategory[] = [
       { name: 'Unsaved Changes Bar', slug: 'feedback/unsaved-changes-bar' },
       { name: 'Progress & Stepper', slug: 'feedback/progress' },
       { name: 'Skeleton', slug: 'feedback/skeleton' },
+      { name: 'Rating', slug: 'feedback/rating' },
     ],
   },
   {
