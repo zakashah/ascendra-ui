@@ -40,8 +40,26 @@ const labelSizeMap = {
   xl: 'text-base',
 } as const;
 
+// Stacked layout: big number above stars
+const stackedNumSizeMap = {
+  xs: 'text-2xl',
+  sm: 'text-3xl',
+  md: 'text-4xl',
+  lg: 'text-5xl',
+  xl: 'text-6xl',
+} as const;
+
+const stackedDenomSizeMap = {
+  xs: 'text-sm',
+  sm: 'text-base',
+  md: 'text-lg',
+  lg: 'text-xl',
+  xl: 'text-2xl',
+} as const;
+
 export type RatingColor = keyof typeof colorFillMap;
 export type RatingSize = keyof typeof starSizeMap;
+export type RatingLayout = 'inline' | 'stacked';
 
 export interface RatingProps
   extends Omit<React.ComponentProps<'div'>, 'onChange'> {
@@ -55,8 +73,10 @@ export interface RatingProps
   color?: RatingColor;
   /** Whether to render half-star fills for fractional ratings. */
   precision?: 'full' | 'half';
-  /** Show numeric value label next to the stars. */
+  /** Show numeric value label. inline: beside stars; stacked: large number above stars. */
   showValue?: boolean;
+  /** Visual layout. 'inline' (default) places value + stars in a row; 'stacked' places a large value above the stars. */
+  layout?: RatingLayout;
   /** When provided, enables click-to-rate interaction. */
   onChange?: (value: number) => void;
   /** Disables interaction even when onChange is present. */
@@ -70,6 +90,7 @@ export function Rating({
   color = 'default',
   precision = 'half',
   showValue = false,
+  layout = 'inline',
   onChange,
   readOnly = false,
   className,
@@ -83,6 +104,83 @@ export function Rating({
   const displayRating = hovered ?? rating;
   const fillColor = colorFillMap[color];
 
+  const stars = Array.from({ length: max }, (_, i) => {
+    const starNum = i + 1;
+    const filled = displayRating >= starNum;
+    const half =
+      precision === 'half' && !filled && displayRating >= starNum - 0.5;
+    const gradId = `${uid}-half-${starNum}`;
+
+    return (
+      <svg
+        key={starNum}
+        viewBox="0 0 20 20"
+        className={cn(
+          starSizeMap[size],
+          isInteractive && 'cursor-pointer transition-transform active:scale-95',
+        )}
+        role={isInteractive ? 'radio' : undefined}
+        aria-checked={isInteractive ? displayRating >= starNum : undefined}
+        aria-label={isInteractive ? `${starNum} star${starNum !== 1 ? 's' : ''}` : undefined}
+        tabIndex={isInteractive ? 0 : undefined}
+        onMouseEnter={() => isInteractive && setHovered(starNum)}
+        onClick={() => isInteractive && onChange(starNum)}
+        onKeyDown={
+          isInteractive
+            ? (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onChange(starNum);
+                }
+              }
+            : undefined
+        }
+      >
+        {half && (
+          <defs>
+            <linearGradient id={gradId}>
+              <stop offset="50%" stopColor={fillColor} />
+              <stop offset="50%" stopColor="currentColor" stopOpacity={0.15} />
+            </linearGradient>
+          </defs>
+        )}
+        <path
+          fill={half ? `url(#${gradId})` : filled ? fillColor : 'currentColor'}
+          fillOpacity={filled || half ? 1 : 0.15}
+          d={STAR_PATH}
+        />
+      </svg>
+    );
+  });
+
+  if (layout === 'stacked') {
+    return (
+      <div
+        data-slot="rating"
+        data-size={size}
+        data-color={color}
+        data-layout="stacked"
+        role={isInteractive ? 'radiogroup' : 'img'}
+        aria-label={`Rating: ${rating} out of ${max}`}
+        className={cn('flex flex-col items-center gap-2', className)}
+        onMouseLeave={() => isInteractive && setHovered(null)}
+        {...props}
+      >
+        {showValue && (
+          <p className={cn(stackedNumSizeMap[size], 'font-black tracking-tight text-foreground')}>
+            {rating.toFixed(1)}
+            <span className={cn(stackedDenomSizeMap[size], 'font-medium text-muted-foreground')}>
+              /{max}
+            </span>
+          </p>
+        )}
+        <div className={cn('flex items-center', gapMap[size])}>
+          {stars}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       data-slot="rating"
@@ -95,54 +193,7 @@ export function Rating({
       onMouseLeave={() => isInteractive && setHovered(null)}
       {...props}
     >
-      {Array.from({ length: max }, (_, i) => {
-        const starNum = i + 1;
-        const filled = displayRating >= starNum;
-        const half =
-          precision === 'half' && !filled && displayRating >= starNum - 0.5;
-        const gradId = `${uid}-half-${starNum}`;
-
-        return (
-          <svg
-            key={starNum}
-            viewBox="0 0 20 20"
-            className={cn(
-              starSizeMap[size],
-              isInteractive && 'cursor-pointer transition-transform active:scale-95',
-            )}
-            role={isInteractive ? 'radio' : undefined}
-            aria-checked={isInteractive ? displayRating >= starNum : undefined}
-            aria-label={isInteractive ? `${starNum} star${starNum !== 1 ? 's' : ''}` : undefined}
-            tabIndex={isInteractive ? 0 : undefined}
-            onMouseEnter={() => isInteractive && setHovered(starNum)}
-            onClick={() => isInteractive && onChange(starNum)}
-            onKeyDown={
-              isInteractive
-                ? (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      onChange(starNum);
-                    }
-                  }
-                : undefined
-            }
-          >
-            {half && (
-              <defs>
-                <linearGradient id={gradId}>
-                  <stop offset="50%" stopColor={fillColor} />
-                  <stop offset="50%" stopColor="currentColor" stopOpacity={0.15} />
-                </linearGradient>
-              </defs>
-            )}
-            <path
-              fill={half ? `url(#${gradId})` : filled ? fillColor : 'currentColor'}
-              fillOpacity={filled || half ? 1 : 0.15}
-              d={STAR_PATH}
-            />
-          </svg>
-        );
-      })}
+      {stars}
 
       {showValue && (
         <span className={cn('ml-1 tabular-nums text-muted-foreground', labelSizeMap[size])}>

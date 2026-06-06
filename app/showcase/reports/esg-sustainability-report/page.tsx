@@ -236,12 +236,16 @@ export default function EsgSustainabilityReportPage() {
         {/* ── Year Highlights ──────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
           {kpis.map((k) => (
-            <div key={k.label} className="rounded-lg border bg-card p-5">
-              <p className="text-xs text-muted-foreground">{k.label}</p>
-              <p className="mt-1.5 text-2xl font-bold tracking-tight text-foreground">{k.value}</p>
-              <p className="mt-0.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">{k.delta}</p>
-              <p className="mt-0.5 text-[0.6875rem] text-muted-foreground/70">{k.toward}</p>
-            </div>
+            <Card key={k.label}>
+              <CardPanel>
+                <div className="flex h-full flex-col p-5">
+                  <p className="text-xs text-muted-foreground">{k.label}</p>
+                  <p className="mt-1.5 text-2xl font-bold tracking-tight text-foreground">{k.value}</p>
+                  <p className="mt-auto text-xs font-semibold text-emerald-600 dark:text-emerald-400 pt-2">{k.delta}</p>
+                  <p className="mt-0.5 text-[0.6875rem] text-muted-foreground/70">{k.toward}</p>
+                </div>
+              </CardPanel>
+            </Card>
           ))}
         </div>
 
@@ -427,11 +431,9 @@ export default function EsgSustainabilityReportPage() {
                       <TableCell className="text-right font-mono font-semibold tabular-nums text-foreground">{s.value}</TableCell>
                       <TableCell className="text-right tabular-nums text-muted-foreground">{s.benchmark}</TableCell>
                       <TableCell>
-                        <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium ${
-                          s.status === "Good" ? "bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/20 dark:text-emerald-400" : "bg-muted text-muted-foreground ring-1 ring-border"
-                        }`}>
+                        <SimpleBadge variant={s.status === "Good" ? "green" : "secondary"}>
                           {s.status}
-                        </span>
+                        </SimpleBadge>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -447,11 +449,15 @@ export default function EsgSustainabilityReportPage() {
               { label: "Volunteering Hours",      value: "8,400", sub: "+18% vs FY2022" },
               { label: "Education Partnerships",  value: "14",    sub: "Active programmes" },
             ].map((s) => (
-              <div key={s.label} className="rounded-lg border bg-blue-50/30 p-5 dark:bg-blue-950/10">
-                <p className="text-xs text-muted-foreground">{s.label}</p>
-                <p className="mt-1.5 text-2xl font-bold tracking-tight text-foreground">{s.value}</p>
-                <p className="mt-0.5 text-xs text-muted-foreground">{s.sub}</p>
-              </div>
+              <Card key={s.label}>
+                <CardPanel>
+                  <div className="p-5">
+                    <p className="text-xs text-muted-foreground">{s.label}</p>
+                    <p className="mt-1.5 text-2xl font-bold tracking-tight text-foreground">{s.value}</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">{s.sub}</p>
+                  </div>
+                </CardPanel>
+              </Card>
             ))}
           </div>
         </div>
@@ -490,13 +496,9 @@ export default function EsgSustainabilityReportPage() {
                       <TableCell className="font-medium">{b.member}</TableCell>
                       <TableCell className="text-sm text-muted-foreground">{b.role}</TableCell>
                       <TableCell>
-                        <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium ring-1 ring-inset ${
-                          b.independent
-                            ? "bg-emerald-500/10 text-emerald-700 ring-emerald-500/20 dark:text-emerald-400"
-                            : "bg-muted text-muted-foreground ring-border"
-                        }`}>
+                        <SimpleBadge variant={b.independent ? "green" : "secondary"}>
                           {b.independent ? "Yes" : "No"}
-                        </span>
+                        </SimpleBadge>
                       </TableCell>
                       <TableCell className="text-sm text-muted-foreground">{b.tenure}</TableCell>
                       <TableCell className="text-sm text-muted-foreground">{b.committees}</TableCell>
@@ -515,17 +517,17 @@ export default function EsgSustainabilityReportPage() {
               { label: "Data Privacy Compliance (GDPR)",     value: "96.8%", status: "Compliant" },
               { label: "Audit Findings Resolved",            value: "87.5%", status: "In Progress" },
             ].map((p) => (
-              <div key={p.label} className="rounded-lg border bg-purple-50/30 p-4 dark:bg-purple-950/10">
-                <p className="text-[0.6875rem] text-muted-foreground">{p.label}</p>
-                <p className="mt-1.5 text-xl font-bold tracking-tight text-foreground">{p.value}</p>
-                <span className={`mt-1.5 inline-flex items-center rounded-full px-2 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wide ring-1 ring-inset ${
-                  p.status === "Compliant"
-                    ? "bg-emerald-500/10 text-emerald-700 ring-emerald-500/20 dark:text-emerald-400"
-                    : "bg-amber-500/10 text-amber-700 ring-amber-500/20 dark:text-amber-400"
-                }`}>
-                  {p.status}
-                </span>
-              </div>
+              <Card key={p.label}>
+                <CardPanel>
+                  <div className="flex h-full flex-col p-4">
+                    <p className="text-[0.6875rem] text-muted-foreground mb-2">{p.label}</p>
+                    <p className="mt-auto text-xl font-bold tracking-tight text-foreground mb-2">{p.value}</p>
+                    <SimpleBadge className="self-start" variant={p.status === "Compliant" ? "green" : "amber"}>
+                      {p.status}
+                    </SimpleBadge>
+                  </div>
+                </CardPanel>
+              </Card>
             ))}
           </div>
         </div>

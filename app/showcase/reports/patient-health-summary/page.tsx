@@ -137,26 +137,8 @@ const labs: {
   { test: "eGFR", result: "78 mL/min", range: "> 60 mL/min", status: "normal" },
 ];
 
-// ─── Status styling ────────────────────────────────────────────────────────────
 
-const statusCls: Record<
-  LabStatus | "normal" | "borderline" | "abnormal",
-  string
-> = {
-  normal:
-    "bg-emerald-500/10 text-emerald-700 ring-emerald-500/20 dark:text-emerald-400 dark:ring-emerald-500/30",
-  borderline:
-    "bg-amber-500/10 text-amber-700 ring-amber-500/20 dark:text-amber-400 dark:ring-amber-500/30",
-  abnormal:
-    "bg-rose-500/10 text-rose-700 ring-rose-500/20 dark:text-rose-400 dark:ring-rose-500/30",
-};
 
-const vitalStatusCls: Record<string, string> = {
-  normal:
-    "bg-emerald-500/10 text-emerald-700 ring-emerald-500/20 dark:text-emerald-400 dark:ring-emerald-500/30",
-  borderline:
-    "bg-amber-500/10 text-amber-700 ring-amber-500/20 dark:text-amber-400 dark:ring-amber-500/30",
-};
 
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
@@ -205,22 +187,21 @@ export default function PatientHealthSummaryPage() {
           </ReportSectionHeader>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {vitals.map((v) => (
-              <div
-                key={v.label}
-                className="flex flex-col gap-2 rounded-lg border bg-muted/20 p-4"
-              >
-                <span className="text-[0.6875rem] text-muted-foreground">
-                  {v.label}
-                </span>
-                <span className="text-xl font-bold leading-tight tracking-tight text-foreground">
-                  {v.value}
-                </span>
-                <span
-                  className={`inline-flex w-fit items-center rounded-full px-2 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wide ring-1 ring-inset ${vitalStatusCls[v.status] ?? ""}`}
-                >
-                  {v.status === "normal" ? "Normal" : "Borderline"}
-                </span>
-              </div>
+              <Card key={v.label}>
+                <CardPanel>
+                  <div className="flex h-full flex-col gap-2 p-4">
+                    <span className="text-[0.6875rem] text-muted-foreground">
+                      {v.label}
+                    </span>
+                    <span className="text-xl font-bold leading-tight tracking-tight text-foreground">
+                      {v.value}
+                    </span>
+                    <SimpleBadge className="mt-auto self-start" variant={v.status === "normal" ? "green" : "amber"}>
+                      {v.status === "normal" ? "Normal" : "Borderline"}
+                    </SimpleBadge>
+                  </div>
+                </CardPanel>
+              </Card>
             ))}
           </div>
         </div>
@@ -292,11 +273,9 @@ export default function PatientHealthSummaryPage() {
                       {l.range}
                     </TableCell>
                     <TableCell>
-                      <span
-                        className={`inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium ring-1 ring-inset capitalize ${statusCls[l.status]}`}
-                      >
+                      <SimpleBadge variant={l.status === "normal" ? "green" : l.status === "borderline" ? "amber" : "red"}>
                         {l.status}
-                      </span>
+                      </SimpleBadge>
                     </TableCell>
                   </TableRow>
                 ))}

@@ -17,6 +17,7 @@ import {
   ReportSubTitle,
   ReportTitle,
   ReportTitleHeader,
+  Rating,
   SimpleBadge,
   Table,
   TableBody,
@@ -158,15 +159,6 @@ const goals: {
   },
 ];
 
-const goalStatusCls: Record<GoalStatus, string> = {
-  Achieved:
-    "bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/20 dark:text-emerald-400 dark:ring-emerald-500/30",
-  Partial:
-    "bg-amber-500/10 text-amber-700 ring-1 ring-amber-500/20 dark:text-amber-400 dark:ring-amber-500/30",
-  "Not Met":
-    "bg-rose-500/10 text-rose-700 ring-1 ring-rose-500/20 dark:text-rose-400 dark:ring-rose-500/30",
-};
-
 // ─── Development plan ─────────────────────────────────────────────────────────
 
 const devPlan = [
@@ -196,46 +188,6 @@ const devPlan = [
   },
 ];
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
-
-function Stars({ rating }: { rating: number }) {
-  return (
-    <div className="flex items-center gap-0.5">
-      {[1, 2, 3, 4, 5].map((s) => {
-        const filled = rating >= s;
-        const half = !filled && rating >= s - 0.5;
-        return (
-          <svg key={s} viewBox="0 0 20 20" className="h-5 w-5">
-            {half ? (
-              <>
-                <defs>
-                  <linearGradient id={`half-${s}`}>
-                    <stop offset="50%" stopColor="var(--chart-1)" />
-                    <stop
-                      offset="50%"
-                      stopColor="currentColor"
-                      stopOpacity={0.15}
-                    />
-                  </linearGradient>
-                </defs>
-                <path
-                  fill={`url(#half-${s})`}
-                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                />
-              </>
-            ) : (
-              <path
-                fill={filled ? "var(--chart-1)" : "currentColor"}
-                fillOpacity={filled ? 1 : 0.15}
-                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-              />
-            )}
-          </svg>
-        );
-      })}
-    </div>
-  );
-}
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 
@@ -283,15 +235,7 @@ export default function EmployeePerformanceReviewPage() {
             <CardHeaderTitle>Overall Rating</CardHeaderTitle>
           </ReportSectionHeader>
           <div className="flex flex-wrap items-center gap-8">
-            <div className="flex flex-col items-center gap-2">
-              <p className="text-6xl font-black tracking-tight text-foreground">
-                {overallRating.toFixed(1)}
-                <span className="text-2xl font-medium text-muted-foreground">
-                  /5
-                </span>
-              </p>
-              <Stars rating={overallRating} />
-            </div>
+            <Rating rating={overallRating} size="md" layout="stacked" showValue readOnly />
             <div className="flex flex-col gap-2">
               <SimpleBadge variant="violet" className="px-2 py-1 text-xs">{tier}</SimpleBadge>
               <div className="flex items-center gap-4 text-xs text-muted-foreground">
@@ -382,11 +326,9 @@ export default function EmployeePerformanceReviewPage() {
                       {g.result}
                     </TableCell>
                     <TableCell>
-                      <span
-                        className={`inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium capitalize ${goalStatusCls[g.status]}`}
-                      >
+                      <SimpleBadge variant={g.status === "Achieved" ? "green" : g.status === "Partial" ? "amber" : "red"}>
                         {g.status}
-                      </span>
+                      </SimpleBadge>
                     </TableCell>
                     <TableCell className="text-right tabular-nums text-muted-foreground">
                       {g.weight}%
