@@ -8,10 +8,12 @@ import {
   ReportHeaderBody,
   ReportHeaderContent,
   ReportHeaderField,
+  StatusDot,
   ReportHeaderFooter,
   ReportTitle,
   ReportTitleHeader,
   SimpleBadge,
+  SimpleAlert,
   Table,
   TableBody,
   TableCell,
@@ -112,29 +114,27 @@ const timeline: {
 
 const eventTypeCls: Record<
   EventType,
-  { dot: string; label: string; badge: string }
+  { dot: "amber" | "sky" | "rose" | "emerald"; label: string; badge: "amber" | "blue" | "red" | "green" }
 > = {
   Detection: {
-    dot: "bg-amber-500",
+    dot: "amber",
     label: "Detection",
-    badge:
-      "bg-amber-500/10 text-amber-700 ring-amber-500/20 dark:text-amber-400",
+    badge: "amber",
   },
   Action: {
-    dot: "bg-blue-500",
+    dot: "sky",
     label: "Action",
-    badge: "bg-blue-500/10 text-blue-700 ring-blue-500/20 dark:text-blue-400",
+    badge: "blue",
   },
   Escalation: {
-    dot: "bg-rose-500",
+    dot: "rose",
     label: "Escalation",
-    badge: "bg-rose-500/10 text-rose-700 ring-rose-500/20 dark:text-rose-400",
+    badge: "red",
   },
   Resolved: {
-    dot: "bg-emerald-500",
+    dot: "emerald",
     label: "Resolved",
-    badge:
-      "bg-emerald-500/10 text-emerald-700 ring-emerald-500/20 dark:text-emerald-400",
+    badge: "green",
   },
 };
 
@@ -172,13 +172,10 @@ const systems: {
   },
 ];
 
-const systemStatusCls: Record<SystemStatus, string> = {
-  Isolated:
-    "bg-rose-500/10 text-rose-700 ring-1 ring-rose-500/20 dark:text-rose-400",
-  Restored:
-    "bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/20 dark:text-emerald-400",
-  "Under Review":
-    "bg-amber-500/10 text-amber-700 ring-1 ring-amber-500/20 dark:text-amber-400",
+const systemStatusCls: Record<SystemStatus, "red" | "green" | "amber"> = {
+  Isolated: "red",
+  Restored: "green",
+  "Under Review": "amber",
 };
 
 // ─── Remediation ──────────────────────────────────────────────────────────────
@@ -236,12 +233,10 @@ const remediations: {
   },
 ];
 
-const actionStatusCls: Record<ActionStatus, string> = {
-  Completed:
-    "bg-emerald-500/10 text-emerald-700 ring-1 ring-emerald-500/20 dark:text-emerald-400",
-  "In Progress":
-    "bg-blue-500/10 text-blue-700 ring-1 ring-blue-500/20 dark:text-blue-400",
-  Planned: "bg-muted text-muted-foreground ring-1 ring-border",
+const actionStatusCls: Record<ActionStatus, "green" | "blue" | "secondary"> = {
+  Completed: "green",
+  "In Progress": "blue",
+  Planned: "secondary",
 };
 
 const priorityCls = {
@@ -260,15 +255,15 @@ export default function SecurityIncidentReportPage() {
 
       <ReportDocumentWrapper className="mx-auto max-w-4xl">
         {/* ── TLP Banner ───────────────────────────────────────────────────── */}
-        <div className="flex items-center justify-between rounded-lg border border-amber-400/60 bg-amber-50/60 px-4 py-2 dark:border-amber-600/40 dark:bg-amber-950/30">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-amber-700 dark:text-amber-400">
-            <span className="h-2 w-2 rounded-full bg-amber-500" />
+        <SimpleAlert variant="warning" icon={false} className="justify-between px-4">
+          <div className="flex items-center gap-2 font-bold uppercase tracking-widest">
+            <StatusDot variant="amber" />
             TLP:AMBER — Restricted Distribution
           </div>
-          <span className="text-[0.6875rem] text-amber-700/70 dark:text-amber-500/70">
+          <span className="opacity-70">
             Share only with authorised stakeholders on a need-to-know basis
           </span>
-        </div>
+        </SimpleAlert>
 
         {/* ── Document Header ──────────────────────────────────────────────── */}
         <Card>
@@ -358,9 +353,7 @@ export default function SecurityIncidentReportPage() {
                 <div key={i} className="flex gap-4">
                   {/* Track + dot */}
                   <div className="flex flex-col items-center">
-                    <div
-                      className={`mt-1.5 h-3 w-3 shrink-0 rounded-full ${cls.dot} ring-2 ring-background`}
-                    />
+                    <StatusDot variant={cls.dot} className="mt-1.5" />
                     {!isLast && <div className="mt-1 w-px flex-1 bg-border" />}
                   </div>
                   {/* Content */}
@@ -369,11 +362,9 @@ export default function SecurityIncidentReportPage() {
                       <span className="font-mono text-xs font-semibold text-foreground">
                         {e.time}
                       </span>
-                      <span
-                        className={`inline-flex items-center rounded-full px-2 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wide ring-1 ring-inset ${cls.badge}`}
-                      >
+                      <SimpleBadge variant={cls.badge}>
                         {cls.label}
-                      </span>
+                      </SimpleBadge>
                     </div>
                     <p className="text-sm leading-relaxed text-muted-foreground">
                       {e.description}
@@ -417,11 +408,9 @@ export default function SecurityIncidentReportPage() {
                       {s.sensitivity}
                     </TableCell>
                     <TableCell>
-                      <span
-                        className={`inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium ${systemStatusCls[s.status]}`}
-                      >
+                      <SimpleBadge variant={systemStatusCls[s.status]}>
                         {s.status}
-                      </span>
+                      </SimpleBadge>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -462,11 +451,9 @@ export default function SecurityIncidentReportPage() {
                       {r.due}
                     </TableCell>
                     <TableCell>
-                      <span
-                        className={`inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium ${actionStatusCls[r.status]}`}
-                      >
+                      <SimpleBadge variant={actionStatusCls[r.status]}>
                         {r.status}
-                      </span>
+                      </SimpleBadge>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -520,9 +507,9 @@ export default function SecurityIncidentReportPage() {
 
         {/* ── TLP Footer ───────────────────────────────────────────────────── */}
         <ReportDocumentFooter>
-          <div className="flex items-center justify-center rounded border border-amber-400/40 bg-amber-50/40 py-2 text-[0.6875rem] font-bold uppercase tracking-widest text-amber-700 dark:border-amber-700/40 dark:bg-amber-950/20 dark:text-amber-400">
+          <SimpleAlert variant="destructive" icon={false} className="justify-center font-bold uppercase tracking-widest">
             TLP:AMBER — DO NOT SHARE BEYOND AUTHORISED RECIPIENTS
-          </div>
+          </SimpleAlert>
           <ReportDocumentFooterLine>
             <ReportDocumentFooterLineLeft>
               Ascendra Security Operations Centre

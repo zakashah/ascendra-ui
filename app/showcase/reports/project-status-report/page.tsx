@@ -19,7 +19,9 @@ import {
   ReportSubTitle,
   ReportTitle,
   ReportTitleHeader,
+  SimpleAlert,
   SimpleBadge,
+  StatusDot,
   Table,
   TableBody,
   TableCell,
@@ -253,26 +255,18 @@ export default function ProjectStatusReportPage() {
         </Card>
 
         {/* ── RAG Status Banner ────────────────────────────────────────────── */}
-        <div className="rounded-xl border border-amber-200/60 bg-amber-50/60 p-5 dark:border-amber-800/30 dark:bg-amber-950/20">
-          <div className="flex items-start gap-4">
-            <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-500">
-              <div className="h-3 w-3 rounded-full bg-white" />
+        <SimpleAlert variant="amber" icon={false} className="gap-3 p-4">
+          <StatusDot variant="amber" className="mt-1 size-5 shrink-0" />
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold uppercase tracking-widest">
+                {rag.status}
+              </span>
+              <span className="text-sm font-semibold">— {rag.label}</span>
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-bold uppercase tracking-widest text-amber-700 dark:text-amber-400">
-                  {rag.status}
-                </span>
-                <span className="text-sm font-semibold text-amber-700 dark:text-amber-400">
-                  — {rag.label}
-                </span>
-              </div>
-              <p className="mt-1 text-sm text-amber-600/90 dark:text-amber-500/90">
-                {rag.summary}
-              </p>
-            </div>
+            <p className="mt-1 text-sm opacity-80">{rag.summary}</p>
           </div>
-        </div>
+        </SimpleAlert>
 
         {/* ── KPIs ─────────────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">

@@ -62,7 +62,7 @@ export const registry: Record<string, ComponentMeta> = {
     importPath: '@/ascendra-ui',
     importNames: ['SimpleAlert', 'AlertIcon'],
     props: [
-      { name: 'variant', type: "'default' | 'secondary' | 'destructive' | 'success' | 'warning' | 'primary'", default: "'default'", description: 'Alert severity variant.' },
+      { name: 'variant', type: "'default' | 'secondary' | 'destructive' | 'success' | 'warning' | 'amber' | 'primary'", default: "'default'", description: 'Alert severity variant.' },
       { name: 'icon', type: 'React.ComponentType<{ className?: string; strokeWidth?: number }>', description: 'Icon component to display (defaults to InfoIcon).' },
     ],
   },
