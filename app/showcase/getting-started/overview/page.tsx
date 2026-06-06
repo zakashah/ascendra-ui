@@ -86,18 +86,18 @@ export default function ShowcasePage() {
         {categories.map((category) => (
           <div
             key={category.title}
-            className="flex flex-col gap-3 rounded-lg border bg-background p-5 transition-all hover:border-primary/30 hover:shadow-sm"
+            className="flex flex-col gap-3 rounded-lg border bg-background p-5 transition-all hover:border-foreground/20 hover:shadow-sm"
           >
             <Link
               href={`/showcase/${category.items[0].slug}`}
-              className="group flex items-center justify-between rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className="group flex items-center justify-between rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <div className="flex items-center gap-2.5">
                 {(() => {
                   const Icon = categoryIcons[category.title] ?? Settings;
                   return <Icon className="h-4 w-4 text-muted-foreground" />;
                 })()}
-                <span className="text-sm font-medium text-foreground transition-colors group-hover:text-primary">
+                <span className="text-sm font-medium text-foreground transition-colors group-hover:text-foreground/70">
                   {category.title}
                 </span>
               </div>
@@ -114,7 +114,7 @@ export default function ShowcasePage() {
                       ? "/showcase/overview"
                       : `/showcase/${item.slug}`
                   }
-                  className="rounded-sm bg-muted px-1.5 py-0.5 text-[0.6875rem] text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  className="rounded-sm bg-muted px-1.5 py-0.5 text-[0.6875rem] text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   {item.name}
                 </Link>
