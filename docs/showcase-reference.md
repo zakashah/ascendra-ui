@@ -1,8 +1,8 @@
-<!-- ascendra-ui-version: 1.0.5 -->
-<!-- ascendra-ui-commit: cd3c833f7884b24c030b9babe4abeac77a9e7a3b -->
+<!-- ascendra-ui-version: 1.0.6 -->
+<!-- ascendra-ui-commit: 0d649edd728c462da245d73b366221667ece1d65 -->
 # Ascendra UI — Showcase Reference
 
-> Auto-generated on 2026-06-07 · ascendra-ui v1.0.5
+> Auto-generated on 2026-06-07 · ascendra-ui v1.0.6
 > Run `npm run docs:generate` after any config or showcase change.
 > For the component API reference (props, imports, types) see `docs/ui-reference.md`.
 
@@ -27,14 +27,14 @@ For the technical API (props, import paths, TypeScript types) see `docs/ui-refer
 
 | Stat | Count |
 |---|---|
-| Primitive components | 52 |
+| Primitive components | 57 |
 | Composite form patterns | 10 |
 | Dialog patterns | 12 |
 | Sheet patterns | 10 |
 | Drawer patterns | 8 |
 | Dashboard demos | 10 |
 | Report demos | 10 |
-| Showcase pages total | 95 |
+| Showcase pages total | 100 |
 
 ---
 
@@ -307,6 +307,25 @@ Nav > NavLink[]           ← tab-style section switcher
 - [`/showcase/overlay/dropdown-menu`](/showcase/overlay/dropdown-menu) — **Dropdown Menu**: Full-featured dropdown with items, separators, checkboxes, radio groups, and sub-menus.
 - [`/showcase/overlay/tooltips`](/showcase/overlay/tooltips) — **Tooltip**: Floating label that appears on hover or focus. Wraps Radix UI Tooltip with TooltipProvider, all four placements, and rich content support.
 - [`/showcase/overlay/command-palette`](/showcase/overlay/command-palette) — **Command Palette**: Keyboard-first command palette dialog built on shadcn Command + Dialog. Groups commands with icons and shortcuts. Registers ⌘K/Ctrl+K via useCommandPalette hook.
+
+### Reports
+
+**Components:** Report Header · Report Document · Report Content
+
+**Showcase pages:**
+
+- [`/showcase/report-ui/report-header`](/showcase/report-ui/report-header) — **Report Header**: Composable report title zone. Combines an eyebrow label, bold heading, subtitle, and a metadata footer that renders as an inline row or a multi-column stacked grid for dense field sets.
+- [`/showcase/report-ui/report-document`](/showcase/report-ui/report-document) — **Report Document**: Document shell and structural dividers. ReportDocumentWrapper is the root element targeted by the PDF export (id="report-content"). ReportSectionHeader separates content zones. ReportDocumentFooter anchors legal notices and attribution.
+- [`/showcase/report-ui/report-content`](/showcase/report-ui/report-content) — **Report Content**: In-body text blocks for executive summaries, analyst notes, and methodology disclosures. ReportPdfExportButton captures the report document and downloads it as a paginated A4 PDF.
+
+### Charts
+
+**Components:** Chart Legend · Chart Target Legend
+
+**Showcase pages:**
+
+- [`/showcase/charts/chart-legend`](/showcase/charts/chart-legend) — **Chart Legend**: Inline legend item pairing a colored swatch with a label, and a group wrapper that controls alignment. Use beneath any chart to identify series, segments, or categories.
+- [`/showcase/charts/chart-target-legend`](/showcase/charts/chart-target-legend) — **Chart Target Legend**: Inline legend item pairing a thin horizontal bar swatch (16×2px md, 24×2px lg) with a label, used to identify target or goal lines on a chart. Shares the same color tokens as ChartLegend.
 
 ### Tables & Data
 
@@ -696,7 +715,7 @@ Domains covered: Finance / Accounting, Corporate / C-Suite, Healthcare / Clinica
 
 ## Showcase Navigation Map
 
-The showcase has 95 pages organized into 17 categories.
+The showcase has 100 pages organized into 18 categories.
 All routes are prefixed with `/showcase`.
 
 | Category | Pages |
@@ -712,7 +731,8 @@ All routes are prefixed with `/showcase`.
 | **Date & Time** | [`date/calendar`](/showcase/date/calendar), [`date/date-picker`](/showcase/date/date-picker), [`date/date-range-picker`](/showcase/date/date-range-picker) |
 | **Navigation** | [`nav/anchor`](/showcase/nav/anchor), [`nav/nav`](/showcase/nav/nav), [`nav/nav-link`](/showcase/nav/nav-link), [`nav/header`](/showcase/nav/header) |
 | **Overlays** | [`overlay/dialog`](/showcase/overlay/dialog), [`overlay/sheet`](/showcase/overlay/sheet), [`overlay/dropdown-menu`](/showcase/overlay/dropdown-menu), [`overlay/tooltips`](/showcase/overlay/tooltips), [`overlay/command-palette`](/showcase/overlay/command-palette) |
-| **Charts** | [`charts`](/showcase/charts), [`charts/line`](/showcase/charts/line), [`charts/area`](/showcase/charts/area), [`charts/bar`](/showcase/charts/bar), [`charts/pie`](/showcase/charts/pie), [`charts/radial`](/showcase/charts/radial), [`charts/radar`](/showcase/charts/radar), [`charts/scatter`](/showcase/charts/scatter), [`charts/composed`](/showcase/charts/composed), [`charts/treemap`](/showcase/charts/treemap), [`charts/histogram`](/showcase/charts/histogram), [`charts/candlestick`](/showcase/charts/candlestick) |
+| **Reports** | [`report-ui/report-header`](/showcase/report-ui/report-header), [`report-ui/report-document`](/showcase/report-ui/report-document), [`report-ui/report-content`](/showcase/report-ui/report-content) |
+| **Charts** | [`charts`](/showcase/charts), [`charts/line`](/showcase/charts/line), [`charts/area`](/showcase/charts/area), [`charts/bar`](/showcase/charts/bar), [`charts/pie`](/showcase/charts/pie), [`charts/radial`](/showcase/charts/radial), [`charts/radar`](/showcase/charts/radar), [`charts/scatter`](/showcase/charts/scatter), [`charts/composed`](/showcase/charts/composed), [`charts/treemap`](/showcase/charts/treemap), [`charts/histogram`](/showcase/charts/histogram), [`charts/candlestick`](/showcase/charts/candlestick), [`charts/chart-legend`](/showcase/charts/chart-legend), [`charts/chart-target-legend`](/showcase/charts/chart-target-legend) |
 | **Tables & Data** | [`data-table/table`](/showcase/data-table/table), [`data-table/empty`](/showcase/data-table/empty), [`data-table`](/showcase/data-table), [`data-table-lab`](/showcase/data-table-lab) |
 | **Layout** | [`layout-guide`](/showcase/layout-guide), [`layout/card`](/showcase/layout/card), [`layout/page-header`](/showcase/layout/page-header), [`layout/page-bar`](/showcase/layout/page-bar), [`layout/aside-content`](/showcase/layout/aside-content), [`layout/item`](/showcase/layout/item) |
 | **Tabs** | [`tabs`](/showcase/tabs) |
@@ -792,8 +812,8 @@ Never import from sub-paths like `@/ascendra-ui/components/button` — always us
 
 ## Versioning
 
-This reference was generated for **ascendra-ui v1.0.5**.
-Commit: `cd3c833f7884b24c030b9babe4abeac77a9e7a3b`
+This reference was generated for **ascendra-ui v1.0.6**.
+Commit: `0d649edd728c462da245d73b366221667ece1d65`
 
 Run `npm run docs:generate` to regenerate after any change.
 Run `npm run release` to cut a new version.

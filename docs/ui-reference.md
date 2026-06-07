@@ -1,15 +1,15 @@
-<!-- ascendra-ui-version: 1.0.5 -->
-<!-- ascendra-ui-commit: cd3c833f7884b24c030b9babe4abeac77a9e7a3b -->
+<!-- ascendra-ui-version: 1.0.6 -->
+<!-- ascendra-ui-commit: 0d649edd728c462da245d73b366221667ece1d65 -->
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-06-07 · ascendra-ui v1.0.5
+> Auto-generated on 2026-06-07 · ascendra-ui v1.0.6
 > Run `npm run docs:generate` after any registry or config change.
 
 ---
 
 ## Overview
 
-**Primitive components:** 52  
+**Primitive components:** 57  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
@@ -21,6 +21,8 @@
 
 | Category | Components |
 |---|---|
+| Reports | Report Header, Report Document, Report Content |
+| Charts | Chart Legend, Chart Target Legend |
 | Feedback & Status | Rating, Color Tile, Simple Badge, Bubble Badge, Status Dot, Simple Alert, Pro Badge, Unsaved Changes Bar, Progress & Stepper, Skeleton, Toast |
 | Forms & Inputs | Button, Input, Input Group, Checkbox, Radio Group, Switch, Select, Field, Table Lookup, Combobox, File Upload, Rich Text Editor, Color Picker |
 | Navigation | Anchor, Nav Link, Header, Nav |
@@ -787,6 +789,74 @@ Keyboard-first command palette dialog built on shadcn Command + Dialog. Groups c
 | `groups` | `CommandPaletteGroup[]` | — | Array of grouped command items. |
 | `placeholder` | `string` | `'Search commands…'` | Search input placeholder. |
 | `emptyMessage` | `string` | `'No results found.'` | Message shown when no items match. |
+
+---
+
+### Reports
+
+#### Report Header
+
+Composable report title zone. Combines an eyebrow label, bold heading, subtitle, and a metadata footer that renders as an inline row or a multi-column stacked grid for dense field sets.
+
+- **Import:** `import { ReportHeaderContent, ReportHeaderBody, ReportHeaderBodyWrap, ReportTitle, ReportTitleHeader, ReportSubTitle, ReportHeaderFooter, ReportHeaderField } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/report-ui/report-header](/showcase/report-ui/report-header)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `className (ReportHeaderContent)` | `string` | — | Override the default p-8 pb-6 padding on the header container. |
+| `className (ReportHeaderBody)` | `string` | — | Override the flex row that positions the title group and any right-side content (logo, badge). |
+| `className (ReportHeaderBodyWrap)` | `string` | — | Override the wrapper around ReportTitle, ReportTitleHeader, and ReportSubTitle. |
+| `className (ReportTitle)` | `string` | — | Override the uppercase tracking-widest eyebrow label styles. |
+| `className (ReportTitleHeader)` | `string` | — | Override the text-3xl font-bold h1 heading styles. |
+| `className (ReportSubTitle)` | `string` | — | Override the mt-1 text-sm text-muted-foreground subtitle styles. |
+| `stacked (ReportHeaderFooter)` | `boolean` | `false` | When true, renders fields as a responsive 2–3 column grid instead of an inline flex row. Use when there are 5 or more metadata fields. |
+| `className (ReportHeaderFooter)` | `string` | — | Override the metadata bar container. Default is mt-5 border-t pt-4 text-xs with flex or grid layout. |
+| `label (ReportHeaderField)` | `string` | — | Field label. Displayed inline as "Label: value" in row mode, or above the value in stacked mode. |
+| `className (ReportHeaderField)` | `string` | — | Override individual field styles. |
+
+---
+
+#### Report Document
+
+Document shell and structural dividers. ReportDocumentWrapper is the root element targeted by the PDF export (id="report-content"). ReportSectionHeader separates content zones. ReportDocumentFooter anchors legal notices and attribution.
+
+- **Import:** `import { ReportDocumentWrapper, ReportSectionHeader, ReportDocumentFooter, ReportDocumentFooterNote, ReportDocumentFooterLine, ReportDocumentFooterLineLeft, ReportDocumentFooterLineRight } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/report-ui/report-document](/showcase/report-ui/report-document)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `className (ReportDocumentWrapper)` | `string` | — | Override the flex flex-col gap-10 root container. Note: id="report-content" is hardcoded — the PDF export button targets this id. |
+| `className (ReportSectionHeader)` | `string` | — | Override the pb-3 border-b mb-4 section divider. Children are rendered inside — typically a heading or heading + badge. |
+| `className (ReportDocumentFooter)` | `string` | — | Override the border-t pt-6 text-xs text-muted-foreground footer container. |
+| `className (ReportDocumentFooterNote)` | `string` | — | Override individual disclaimer or note paragraph styles. |
+| `className (ReportDocumentFooterLine)` | `string` | — | Override the flex row that holds attribution text and metadata chips. |
+| `className (ReportDocumentFooterLineLeft)` | `string` | — | Override the left-side organization/author label styles. |
+| `className (ReportDocumentFooterLineRight)` | `string` | — | Override the right-side metadata group (version, classification, date). |
+
+---
+
+#### Report Content
+
+In-body text blocks for executive summaries, analyst notes, and methodology disclosures. ReportPdfExportButton captures the report document and downloads it as a paginated A4 PDF.
+
+- **Import:** `import { ReportSummary, ReportNotes, ReportNote, ReportNoteHeader, ReportNoteText, ReportPdfExportButton } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/report-ui/report-content](/showcase/report-ui/report-content)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `className (ReportSummary)` | `string` | — | Override the flex-col gap-3 text-sm leading-relaxed text-muted-foreground summary wrapper. |
+| `className (ReportNotes)` | `string` | — | Override the flex-col gap-5 notes container. |
+| `className (ReportNote)` | `string` | — | Override an individual note block wrapper. |
+| `className (ReportNoteHeader)` | `string` | — | Override the mb-1 font-medium text-foreground note title paragraph. |
+| `className (ReportNoteText)` | `string` | — | Override the note body paragraph. |
+| `fileName (ReportPdfExportButton)` | `string` | — | PDF filename without the .pdf extension. Required. |
+| `title (ReportPdfExportButton)` | `string` | `'Export PDF'` | Button label shown when idle. |
 
 ---
 
