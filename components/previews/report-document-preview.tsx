@@ -5,6 +5,7 @@ import { SectionHeader } from "../section-header";
 import { PropsTable } from "../props-table";
 import {
   Card,
+  CardPanel,
   ReportDocumentWrapper,
   ReportDocumentFooter,
   ReportDocumentFooterNote,
@@ -32,7 +33,7 @@ export function ReportDocumentDocContent() {
       {/* Hero — full document shell */}
       <ComponentPreview
         code={`import {
-  Card,
+  Card, CardPanel,
   ReportDocumentWrapper,
   ReportHeaderContent, ReportHeaderBody, ReportHeaderBodyWrap,
   ReportTitle, ReportTitleHeader, ReportSubTitle,
@@ -43,20 +44,22 @@ export function ReportDocumentDocContent() {
 } from "@/ascendra-ui";
 
 <ReportDocumentWrapper>
-  <Card className="overflow-hidden">
-    <ReportHeaderContent>
-      <ReportHeaderBody>
-        <ReportHeaderBodyWrap>
-          <ReportTitle>Annual Financial Report</ReportTitle>
-          <ReportTitleHeader>Ascendra Holdings Ltd.</ReportTitleHeader>
-          <ReportSubTitle>Fiscal Year ended December 31, 2024</ReportSubTitle>
-        </ReportHeaderBodyWrap>
-      </ReportHeaderBody>
-      <ReportHeaderFooter>
-        <ReportHeaderField label="Prepared by">Finance Team</ReportHeaderField>
-        <ReportHeaderField label="Report Date">January 15, 2025</ReportHeaderField>
-      </ReportHeaderFooter>
-    </ReportHeaderContent>
+  <Card>
+    <CardPanel border={{ color: "teal" }}>
+      <ReportHeaderContent>
+        <ReportHeaderBody>
+          <ReportHeaderBodyWrap>
+            <ReportTitle>Annual Financial Report</ReportTitle>
+            <ReportTitleHeader>Ascendra Holdings Ltd.</ReportTitleHeader>
+            <ReportSubTitle>Fiscal Year ended December 31, 2024</ReportSubTitle>
+          </ReportHeaderBodyWrap>
+        </ReportHeaderBody>
+        <ReportHeaderFooter>
+          <ReportHeaderField label="Prepared by">Finance Team</ReportHeaderField>
+          <ReportHeaderField label="Report Date">January 15, 2025</ReportHeaderField>
+        </ReportHeaderFooter>
+      </ReportHeaderContent>
+    </CardPanel>
   </Card>
 
   {/* … report sections … */}
@@ -79,7 +82,8 @@ export function ReportDocumentDocContent() {
 </ReportDocumentWrapper>`}
       >
         <div className="w-full space-y-6">
-          <Card className="overflow-hidden w-full">
+          <Card className="w-full">
+            <CardPanel border={{ color: "teal" }}>
             <ReportHeaderContent>
               <ReportHeaderBody>
                 <ReportHeaderBodyWrap>
@@ -93,6 +97,7 @@ export function ReportDocumentDocContent() {
                 <ReportHeaderField label="Report Date">January 15, 2025</ReportHeaderField>
               </ReportHeaderFooter>
             </ReportHeaderContent>
+            </CardPanel>
           </Card>
 
           <ReportSectionHeader>
@@ -265,8 +270,10 @@ export function ReportDocumentDocContent() {
           <ComponentPreview
             code={`<ReportDocumentWrapper>
   {/* Report header card */}
-  <Card className="overflow-hidden">
-    {/* ReportHeaderContent … */}
+  <Card>
+    <CardPanel border={{ color: "teal" }}>
+      {/* ReportHeaderContent … */}
+    </CardPanel>
   </Card>
 
   {/* Each section — gap-10 is applied automatically */}
@@ -280,20 +287,22 @@ export function ReportDocumentDocContent() {
 </ReportDocumentWrapper>`}
           >
             <ReportDocumentWrapper className="w-full">
-              <Card className="overflow-hidden w-full">
-                <ReportHeaderContent>
-                  <ReportHeaderBody>
-                    <ReportHeaderBodyWrap>
-                      <ReportTitle>Supply Chain Operations</ReportTitle>
-                      <ReportTitleHeader>Ascendra Logistics — Q3 2024</ReportTitleHeader>
-                      <ReportSubTitle>July – September 2024</ReportSubTitle>
-                    </ReportHeaderBodyWrap>
-                  </ReportHeaderBody>
-                  <ReportHeaderFooter>
-                    <ReportHeaderField label="Prepared by">Ops Analytics</ReportHeaderField>
-                    <ReportHeaderField label="Report Date">October 10, 2024</ReportHeaderField>
-                  </ReportHeaderFooter>
-                </ReportHeaderContent>
+              <Card className="w-full">
+                <CardPanel border={{ color: "teal" }}>
+                  <ReportHeaderContent>
+                    <ReportHeaderBody>
+                      <ReportHeaderBodyWrap>
+                        <ReportTitle>Supply Chain Operations</ReportTitle>
+                        <ReportTitleHeader>Ascendra Logistics — Q3 2024</ReportTitleHeader>
+                        <ReportSubTitle>July – September 2024</ReportSubTitle>
+                      </ReportHeaderBodyWrap>
+                    </ReportHeaderBody>
+                    <ReportHeaderFooter>
+                      <ReportHeaderField label="Prepared by">Ops Analytics</ReportHeaderField>
+                      <ReportHeaderField label="Report Date">October 10, 2024</ReportHeaderField>
+                    </ReportHeaderFooter>
+                  </ReportHeaderContent>
+                </CardPanel>
               </Card>
 
               <div>
