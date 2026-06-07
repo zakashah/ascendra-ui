@@ -1,6 +1,6 @@
 "use client";
 
-import { BackLink, Card, CardFooter, CardFooterIcon, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, DashboardContent, PageHeader, PageHeaderAction, PageHeaderGroup, PageSubtitle, PageTitle, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
+import { BackLink, Card, CardFooter, CardFooterIcon, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, ChartLegend, ChartLegendGroup, DashboardContent, PageHeader, PageHeaderAction, PageHeaderGroup, PageSubtitle, PageTitle, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
 import {
   ChartContainer,
   ChartTooltip,
@@ -53,10 +53,10 @@ const portfolioTypeData = [
 // ─── Geographic Allocation (Pie / Donut) ─────────────────────────────────────
 
 const geoData = [
-  { name: "City Centre", value: 38, fill: "var(--chart-1)" },
-  { name: "Suburban", value: 31, fill: "var(--chart-2)" },
-  { name: "Commuter Belt", value: 21, fill: "var(--chart-3)" },
-  { name: "Regional", value: 10, fill: "var(--chart-4)" },
+  { name: "City Centre",   value: 38, fill: "var(--chart-1)", variant: "chart-1" as const },
+  { name: "Suburban",      value: 31, fill: "var(--chart-2)", variant: "chart-2" as const },
+  { name: "Commuter Belt", value: 21, fill: "var(--chart-3)", variant: "chart-3" as const },
+  { name: "Regional",      value: 10, fill: "var(--chart-4)", variant: "chart-4" as const },
 ];
 
 // ─── Rental Income & Yield (Composed: Bar + Line) ────────────────────────────
@@ -124,6 +124,14 @@ const TYPE_COLORS: Record<string, string> = {
   Retail: "var(--chart-4)",
   "Mixed-use": "var(--chart-1)",
 };
+
+const TYPE_VARIANTS = {
+  Apartment:  "chart-1",
+  House:      "chart-2",
+  Office:     "chart-3",
+  Retail:     "chart-4",
+  "Mixed-use":"chart-1",
+} as const;
 
 // ─── Properties table ─────────────────────────────────────────────────────────
 
@@ -458,15 +466,7 @@ export default function RealEstatePage() {
                           key={d.name}
                           className="flex items-center justify-between gap-2 text-xs"
                         >
-                          <div className="flex items-center gap-1.5">
-                            <span
-                              className="h-2 w-2 shrink-0 rounded-[2px]"
-                              style={{ background: d.fill }}
-                            />
-                            <span className="text-muted-foreground">
-                              {d.name}
-                            </span>
-                          </div>
+                          <ChartLegend variant={d.variant} shape="square">{d.name}</ChartLegend>
                           <span className="font-medium tabular-nums">
                             {d.value}%
                           </span>
@@ -739,20 +739,13 @@ export default function RealEstatePage() {
                       </ScatterChart>
                     </ChartContainer>
                   </div>
-                  <div className="mt-3 flex flex-wrap gap-3">
-                    {Object.entries(TYPE_COLORS).map(([type, color]) => (
-                      <div
-                        key={type}
-                        className="flex items-center gap-1.5 text-xs text-muted-foreground"
-                      >
-                        <span
-                          className="h-2 w-2 shrink-0 rounded-full"
-                          style={{ background: color }}
-                        />
+                  <ChartLegendGroup align="left" className="mt-3">
+                    {(Object.keys(TYPE_VARIANTS) as (keyof typeof TYPE_VARIANTS)[]).map((type) => (
+                      <ChartLegend key={type} variant={TYPE_VARIANTS[type]} shape="round">
                         {type}
-                      </div>
+                      </ChartLegend>
                     ))}
-                  </div>
+                  </ChartLegendGroup>
                 </div>
               </CardPanel>
             </Card>

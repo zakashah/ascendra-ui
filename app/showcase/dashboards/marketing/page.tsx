@@ -1,6 +1,6 @@
 "use client";
 
-import { BackLink, Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, DashboardContent, PageHeader, PageHeaderAction, PageHeaderGroup, PageSubtitle, PageTitle, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
+import { BackLink, Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, ChartLegend, DashboardContent, PageHeader, PageHeaderAction, PageHeaderGroup, PageSubtitle, PageTitle, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
 import {
   ChartContainer,
   ChartTooltip,
@@ -188,12 +188,12 @@ const trafficConfig: ChartConfig = {
 // ─── Spend Allocation ─────────────────────────────────────────────────────────
 
 const spendAllocationData = [
-  { name: "Paid Search", value: 35, fill: "var(--chart-1)" },
-  { name: "Paid Social", value: 28, fill: "var(--chart-2)" },
-  { name: "Display", value: 12, fill: "var(--chart-3)" },
-  { name: "Affiliate", value: 10, fill: "var(--chart-4)" },
-  { name: "Email", value: 8, fill: "var(--chart-1)" },
-  { name: "Influencer", value: 7, fill: "var(--chart-2)" },
+  { name: "Paid Search", value: 35, fill: "var(--chart-1)", variant: "chart-1" as const },
+  { name: "Paid Social", value: 28, fill: "var(--chart-2)", variant: "chart-2" as const },
+  { name: "Display",     value: 12, fill: "var(--chart-3)", variant: "chart-3" as const },
+  { name: "Affiliate",   value: 10, fill: "var(--chart-4)", variant: "chart-4" as const },
+  { name: "Email",       value: 8,  fill: "var(--chart-1)", variant: "chart-1" as const },
+  { name: "Influencer",  value: 7,  fill: "var(--chart-2)", variant: "chart-2" as const },
 ];
 
 const TOTAL_SPEND = 128000;
@@ -223,10 +223,10 @@ const spendRevConfig: ChartConfig = {
 // ─── Campaign Status ──────────────────────────────────────────────────────────
 
 const campaignStatuses = [
-  { status: "Active", count: 5, fill: "var(--chart-2)" },
-  { status: "Paused", count: 2, fill: "var(--chart-4)" },
-  { status: "Completed", count: 1, fill: "var(--chart-1)" },
-  { status: "Draft", count: 3, fill: "var(--border)" },
+  { status: "Active",    count: 5, fill: "var(--chart-2)", variant: "chart-2" as const },
+  { status: "Paused",    count: 2, fill: "var(--chart-4)", variant: "chart-4" as const },
+  { status: "Completed", count: 1, fill: "var(--chart-1)", variant: "chart-1" as const },
+  { status: "Draft",     count: 3, fill: "var(--border)" },
 ];
 
 const BUDGET_TOTAL = 128000;
@@ -649,15 +649,7 @@ export default function MarketingPage() {
                           key={d.name}
                           className="flex items-center justify-between gap-2 text-xs"
                         >
-                          <div className="flex items-center gap-1.5">
-                            <span
-                              className="h-2 w-2 shrink-0 rounded-[2px]"
-                              style={{ background: d.fill }}
-                            />
-                            <span className="text-muted-foreground">
-                              {d.name}
-                            </span>
-                          </div>
+                          <ChartLegend variant={d.variant} shape="square">{d.name}</ChartLegend>
                           <div className="flex items-center gap-2 tabular-nums">
                             <span className="text-muted-foreground/60">
                               {d.value}%
@@ -786,20 +778,19 @@ export default function MarketingPage() {
                   <p className="mb-4 text-sm font-medium">Campaign Status</p>
 
                   <div className="flex flex-col gap-3">
-                    {campaignStatuses.map(({ status, count, fill }) => (
+                    {campaignStatuses.map(({ status, count, fill, variant }) => (
                       <div
                         key={status}
                         className="flex items-center justify-between text-xs"
                       >
-                        <div className="flex items-center gap-2">
-                          <span
-                            className="h-2 w-2 shrink-0 rounded-full"
-                            style={{ background: fill }}
-                          />
-                          <span className="text-muted-foreground">
+                        {variant ? (
+                          <ChartLegend variant={variant} shape="round">{status}</ChartLegend>
+                        ) : (
+                          <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                            <span className="h-2 w-2 shrink-0 rounded-full" style={{ background: fill }} />
                             {status}
-                          </span>
-                        </div>
+                          </div>
+                        )}
                         <span className="font-medium tabular-nums">
                           {count}
                         </span>

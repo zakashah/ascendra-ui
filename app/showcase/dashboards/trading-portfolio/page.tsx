@@ -1,6 +1,32 @@
 "use client";
 
-import { BackLink, Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, DashboardContent, PageHeader, PageHeaderAction, PageHeaderGroup, PageSubtitle, PageTitle, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
+import {
+  BackLink,
+  Card,
+  CardFooter,
+  CardHeader,
+  CardHeaderSubtitle,
+  CardHeaderTitle,
+  CardPanel,
+  ChartLegend,
+  ChartLegendGroup,
+  ChartTargetLegend,
+  DashboardContent,
+  PageHeader,
+  PageHeaderAction,
+  PageHeaderGroup,
+  PageSubtitle,
+  PageTitle,
+  SimpleBadge,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableHeaderRow,
+  TableRow,
+  TableWrapper,
+} from "@/ascendra-ui";
 import {
   ChartContainer,
   ChartTooltip,
@@ -10,10 +36,7 @@ import {
 import { ChartSeriesLegend } from "@/components/charts/chart-series-legend";
 import { makeTooltipFormatter } from "@/components/charts/make-tooltip-formatter";
 import { useState } from "react";
-import {
-  LuTrendingDown,
-  LuTrendingUp,
-} from "react-icons/lu";
+import { LuTrendingDown, LuTrendingUp } from "react-icons/lu";
 import {
   Bar,
   BarChart,
@@ -468,29 +491,21 @@ export default function TradingPortfolioPage() {
                       />
                     </ComposedChart>
                   </ChartContainer>
-                  <div className="mt-3 flex items-center justify-center gap-6 text-xs text-muted-foreground">
-                    <div className="flex items-center gap-1.5">
-                      <span
-                        className="h-3 w-3 rounded-sm shrink-0"
-                        style={{ background: GREEN }}
-                      />
+                  <ChartLegendGroup className="mt-3">
+                    <ChartLegend variant="chart-2" shape="round">
                       Bullish close
-                    </div>
-                    <div className="flex items-center gap-1.5">
+                    </ChartLegend>
+                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       <span
-                        className="h-3 w-3 rounded-sm shrink-0"
+                        className="h-2 w-2 shrink-0 rounded-full"
                         style={{ background: BEAR }}
                       />
                       Bearish close
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <span
-                        className="h-px w-6 shrink-0 rounded-full"
-                        style={{ background: "var(--chart-4)" }}
-                      />
+                    <ChartTargetLegend variant="chart-4">
                       20-day MA
-                    </div>
-                  </div>
+                    </ChartTargetLegend>
+                  </ChartLegendGroup>
                 </div>
               </CardPanel>
             </Card>

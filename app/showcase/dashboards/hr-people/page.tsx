@@ -1,6 +1,6 @@
 "use client";
 
-import { BackLink, Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, DashboardContent, PageHeader, PageHeaderAction, PageHeaderGroup, PageSubtitle, PageTitle, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
+import { BackLink, Card, CardFooter, CardHeader, CardHeaderSubtitle, CardHeaderTitle, CardPanel, ChartLegend, DashboardContent, PageHeader, PageHeaderAction, PageHeaderGroup, PageSubtitle, PageTitle, SimpleBadge, Table, TableBody, TableCell, TableHead, TableHeader, TableHeaderRow, TableRow, TableWrapper } from "@/ascendra-ui";
 import {
   ChartContainer,
   ChartTooltip,
@@ -65,12 +65,12 @@ const hiringConfig: ChartConfig = {
 // ─── Seniority Mix ────────────────────────────────────────────────────────────
 
 const seniorityData = [
-  { name: "IC-1",        value: 399,  fill: "var(--chart-1)" },
-  { name: "IC-2",        value: 797,  fill: "var(--chart-2)" },
-  { name: "IC-3",        value: 626,  fill: "var(--chart-3)" },
-  { name: "Senior",      value: 512,  fill: "var(--chart-4)" },
-  { name: "Staff+",      value: 285,  fill: "var(--chart-1)" },
-  { name: "Management",  value: 228,  fill: "var(--chart-2)" },
+  { name: "IC-1",       value: 399, fill: "var(--chart-1)", variant: "chart-1" as const },
+  { name: "IC-2",       value: 797, fill: "var(--chart-2)", variant: "chart-2" as const },
+  { name: "IC-3",       value: 626, fill: "var(--chart-3)", variant: "chart-3" as const },
+  { name: "Senior",     value: 512, fill: "var(--chart-4)", variant: "chart-4" as const },
+  { name: "Staff+",     value: 285, fill: "var(--chart-1)", variant: "chart-1" as const },
+  { name: "Management", value: 228, fill: "var(--chart-2)", variant: "chart-2" as const },
 ];
 
 const totalHC = seniorityData.reduce((s, d) => s + d.value, 0);
@@ -275,10 +275,7 @@ export default function HrPeoplePage() {
                   <div className="mt-3 flex flex-col gap-1.5">
                     {seniorityData.map((d) => (
                       <div key={d.name} className="flex items-center justify-between gap-2 text-xs">
-                        <div className="flex items-center gap-1.5">
-                          <span className="h-2 w-2 shrink-0 rounded-[2px]" style={{ background: d.fill }} />
-                          <span className="text-muted-foreground">{d.name}</span>
-                        </div>
+                        <ChartLegend variant={d.variant} shape="square">{d.name}</ChartLegend>
                         <div className="flex items-center gap-2 tabular-nums">
                           <span className="text-muted-foreground/60">{((d.value / totalHC) * 100).toFixed(0)}%</span>
                           <span className="font-medium">{d.value.toLocaleString()}</span>
