@@ -35,6 +35,8 @@ import {
   ColorTile,
   ColorTileTitle,
   ColorTileSubTitle,
+  ChartLegend,
+  ChartLegendGroup,
 } from "@/ascendra-ui";
 import {
   ChartContainer,
@@ -300,14 +302,13 @@ export default function EsgSustainabilityReportPage() {
                     <Area dataKey="scope3" stroke="var(--chart-3)" fill="url(#esg-grad-scope3)" strokeWidth={2} dot={false} />
                   </AreaChart>
                 </ChartContainer>
-                <div className="mt-3 flex gap-4 text-xs text-muted-foreground">
-                  {(["scope1","scope2","scope3"] as const).map((k,i) => (
-                    <div key={k} className="flex items-center gap-1.5">
-                      <span className="h-2 w-3 rounded-[2px]" style={{ background: `var(--chart-${i+1})` }} />
+                <ChartLegendGroup align="left" className="mt-3">
+                  {(["scope1", "scope2", "scope3"] as const).map((k, i) => (
+                    <ChartLegend key={k} variant={(['chart-1', 'chart-2', 'chart-3'] as const)[i]} shape="square">
                       {emissionsConfig[k].label}
-                    </div>
+                    </ChartLegend>
                   ))}
-                </div>
+                </ChartLegendGroup>
               </div>
             </CardPanel>
           </Card>
@@ -333,14 +334,13 @@ export default function EsgSustainabilityReportPage() {
                       <ChartTooltip content={<ChartTooltipContent formatter={(v) => [`${v}%`, "Share"]} />} />
                     </PieChart>
                   </ChartContainer>
-                  <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5">
-                    {energyMix.map((e) => (
-                      <div key={e.name} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                        <span className="h-2 w-2 rounded-full" style={{ background: e.color }} />
+                  <ChartLegendGroup>
+                    {energyMix.map((e, i) => (
+                      <ChartLegend key={e.name} variant={(['chart-1', 'chart-2', 'chart-3', 'chart-4', 'chart-5'] as const)[i]} shape="round">
                         {e.name} · {e.value}%
-                      </div>
+                      </ChartLegend>
                     ))}
-                  </div>
+                  </ChartLegendGroup>
                 </div>
               </CardPanel>
             </Card>
@@ -404,10 +404,10 @@ export default function EsgSustainabilityReportPage() {
                     <Bar dataKey="men"   fill="var(--chart-2)" fillOpacity={0.5}  radius={[0, 3, 3, 0]} stackId="a" />
                   </BarChart>
                 </ChartContainer>
-                <div className="mt-3 flex gap-4 text-xs text-muted-foreground">
-                  <div className="flex items-center gap-1.5"><span className="h-2 w-3 rounded-[2px]" style={{ background: "var(--chart-1)" }} />Women</div>
-                  <div className="flex items-center gap-1.5"><span className="h-2 w-3 rounded-[2px]" style={{ background: "var(--chart-2)", opacity: 0.55 }} />Men</div>
-                </div>
+                <ChartLegendGroup align="left" className="mt-3">
+                  <ChartLegend variant="chart-1" shape="square">Women</ChartLegend>
+                  <ChartLegend variant="chart-2" shape="square">Men</ChartLegend>
+                </ChartLegendGroup>
               </div>
             </CardPanel>
           </Card>
@@ -560,10 +560,10 @@ export default function EsgSustainabilityReportPage() {
                   </RadarChart>
                 </ChartContainer>
               </div>
-              <div className="flex justify-center gap-5 pb-4 text-xs text-muted-foreground">
-                <div className="flex items-center gap-1.5"><span className="h-2 w-3 rounded-[2px]" style={{ background: "var(--chart-1)" }} />Ascendra</div>
-                <div className="flex items-center gap-1.5"><span className="h-2 w-3 rounded-[2px]" style={{ background: "var(--chart-3)", opacity: 0.6 }} />Industry Avg.</div>
-              </div>
+              <ChartLegendGroup className="pb-4">
+                <ChartLegend variant="chart-1" shape="square">Ascendra</ChartLegend>
+                <ChartLegend variant="chart-3" shape="square">Industry Avg.</ChartLegend>
+              </ChartLegendGroup>
             </CardPanel>
           </Card>
 

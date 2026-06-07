@@ -31,6 +31,8 @@ import {
   ReportDocumentWrapper,
   ReportHeaderBodyWrap,
   ReportSectionHeader,
+  ChartLegend,
+  ChartLegendGroup,
 } from "@/ascendra-ui";
 import {
   ChartContainer,
@@ -308,14 +310,13 @@ export default function MarketingCampaignAnalysisPage() {
                     />
                   </PieChart>
                 </ChartContainer>
-                <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5">
-                  {audience.map((a) => (
-                    <div key={a.name} className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                      <span className="h-2 w-2 rounded-full" style={{ background: a.color }} />
+                <ChartLegendGroup>
+                  {audience.map((a, i) => (
+                    <ChartLegend key={a.name} variant={(['chart-1', 'chart-2', 'chart-3', 'chart-4', 'chart-5'] as const)[i]} shape="round">
                       {a.name} · {a.value}%
-                    </div>
+                    </ChartLegend>
                   ))}
-                </div>
+                </ChartLegendGroup>
               </div>
             </CardPanel>
           </Card>

@@ -38,6 +38,8 @@ import {
   ReportDocumentWrapper,
   ReportHeaderBodyWrap,
   ReportSectionHeader,
+  ChartLegend,
+  ChartLegendGroup,
 } from "@/ascendra-ui";
 import {
   ChartContainer,
@@ -397,22 +399,10 @@ export default function ProjectStatusReportPage() {
                   />
                 </BarChart>
               </ChartContainer>
-              <div className="mt-3 flex gap-4 text-xs text-muted-foreground">
-                <div className="flex items-center gap-1.5">
-                  <span
-                    className="h-2 w-3 rounded-[2px]"
-                    style={{ background: "var(--chart-1)" }}
-                  />
-                  Actual
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span
-                    className="h-2 w-3 rounded-[2px]"
-                    style={{ background: "var(--chart-2)", opacity: 0.55 }}
-                  />
-                  Budget
-                </div>
-              </div>
+              <ChartLegendGroup align="left" className="mt-3">
+                <ChartLegend variant="chart-1" shape="square">Actual</ChartLegend>
+                <ChartLegend variant="chart-2" shape="square">Budget</ChartLegend>
+              </ChartLegendGroup>
             </div>
           </CardPanel>
         </Card>

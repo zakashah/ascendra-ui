@@ -31,6 +31,8 @@ import {
   ReportDocumentWrapper,
   ReportHeaderBodyWrap,
   ReportSectionHeader,
+  ChartLegend,
+  ChartLegendGroup,
 } from "@/ascendra-ui";
 import {
   ChartContainer,
@@ -225,14 +227,13 @@ export default function SupplyChainOpsReportPage() {
                   <Area dataKey="finished"     stroke="var(--chart-3)" fill="url(#grad-finished)"     strokeWidth={2} dot={false} />
                 </AreaChart>
               </ChartContainer>
-              <div className="mt-3 flex gap-4 text-xs text-muted-foreground">
+              <ChartLegendGroup align="left" className="mt-3">
                 {(["rawMaterials", "wip", "finished"] as const).map((key, i) => (
-                  <div key={key} className="flex items-center gap-1.5">
-                    <span className="h-2 w-3 rounded-[2px]" style={{ background: `var(--chart-${i + 1})` }} />
+                  <ChartLegend key={key} variant={(['chart-1', 'chart-2', 'chart-3'] as const)[i]} shape="square">
                     {inventoryConfig[key].label}
-                  </div>
+                  </ChartLegend>
                 ))}
-              </div>
+              </ChartLegendGroup>
             </div>
           </CardPanel>
         </Card>
