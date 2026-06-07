@@ -102,20 +102,29 @@ async function main() {
     return null;
   })();
 
+  // Only show versions newer than current in interactive mode
+  const newerTags = tags.filter((t) => isGreater(t, `v${currentVersion}`));
+
   let targetVersion;
   if (versionArg) {
     targetVersion = versionArg.replace(/^v/, "");
     rl.close();
   } else {
-    console.log(`\nCurrent version: v${currentVersion}`);
-    console.log("Available versions:");
-    tags.forEach((t) => {
-      const label = isGreater(t, `v${currentVersion}`) ? t : `${t} (current or older)`;
-      console.log(`  ${label}`);
-    });
-    const answer = (await ask("\nUpgrade to version (e.g. 1.2.0): ")).trim();
+    if (newerTags.length === 0) {
+      console.log(`\nYou're already on the latest version (v${currentVersion}). Nothing to do.\n`);
+      rl.close();
+      process.exit(0);
+    }
+
+    const latestTag = newerTags[0]; // sorted newest-first
+    console.log(`\nCurrent version:  v${currentVersion}`);
+    console.log(`Latest available: ${latestTag}`);
+    if (newerTags.length > 1) {
+      console.log("Other updates:   ", newerTags.slice(1).join("  "));
+    }
+    const answer = (await ask(`\nUpgrade to version [${latestTag}]: `)).trim();
     rl.close();
-    targetVersion = answer.replace(/^v/, "");
+    targetVersion = (answer || latestTag).replace(/^v/, "");
   }
 
   const tag = `v${targetVersion}`;
@@ -131,19 +140,11 @@ async function main() {
   }
 
   if (!isGreater(tag, `v${currentVersion}`)) {
-    const proceed = await (async () => {
-      const r = readline.createInterface({ input: process.stdin, output: process.stdout });
-      return new Promise((resolve) => {
-        r.question(
-          `\nWarning: ${tag} is older than current v${currentVersion}. Downgrade? [y/N]: `,
-          (a) => { r.close(); resolve(a.trim().toLowerCase()); }
-        );
-      });
-    })();
-    if (proceed !== "y") {
-      console.log("Aborted.");
-      process.exit(0);
-    }
+    console.error(
+      `Error: v${targetVersion} is older than current v${currentVersion}.\n` +
+      "Downgrading is not supported. If you need a specific version use --version explicitly and restore from git."
+    );
+    process.exit(1);
   }
 
   console.log(`\nUpgrading ascendra-ui: v${currentVersion} → v${targetVersion}\n`);

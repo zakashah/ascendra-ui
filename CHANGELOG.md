@@ -36,6 +36,13 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.0.3] — Improved upgrade prompt
+
+### Changed
+- `scripts/upgrade.js` — interactive upgrade now only shows versions newer than the current one; exits immediately with "already on latest" when no updates are available. The prompt pre-fills the latest version so pressing Enter accepts it without typing. Passing an older version via `--version` now errors instead of offering a downgrade.
+
+---
+
 ## [1.0.2] — Fix ascendra-ui/ not committed in consumer projects
 
 ### Fixed
