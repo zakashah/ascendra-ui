@@ -5,6 +5,7 @@
 
 import { ButtonDocContent } from "@/components/previews/button-preview";
 import { RatingDocContent } from "@/components/previews/rating-preview";
+import { ColorTileDocContent } from "@/components/previews/color-tile-preview";
 import { SimpleBadgeDocContent } from "@/components/previews/simple-badge-preview";
 import { BubbleBadgeDocContent } from "@/components/previews/bubble-badge-preview";
 import { StatusDotDocContent } from "@/components/previews/status-dot-preview";
@@ -60,6 +61,7 @@ export type DocComponent = React.ComponentType;
 export const docComponents: Partial<Record<string, DocComponent>> = {
   button: ButtonDocContent,
   rating: RatingDocContent,
+  "color-tile": ColorTileDocContent,
   "simple-badge": SimpleBadgeDocContent,
   "bubble-badge": BubbleBadgeDocContent,
   "status-dot": StatusDotDocContent,

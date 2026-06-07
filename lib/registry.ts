@@ -19,6 +19,20 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'color-tile': {
+    slug: 'color-tile',
+    name: 'Color Tile',
+    description: 'Solid-color classification tile with a label and optional sublabel. Ideal for category grids, SDG alignments, priority indicators, and status tiles.',
+    importPath: '@/ascendra-ui',
+    importNames: ['ColorTile', 'ColorTileTitle', 'ColorTileSubTitle'],
+    props: [
+      { name: 'variant (ColorTile)', type: "'primary' | 'gray' | 'green' | 'emerald' | 'blue' | 'sky' | 'orange' | 'amber' | 'yellow' | 'red' | 'rose' | 'violet' | 'pink' | 'indigo' | 'teal' | 'cyan'", default: "'primary'", description: 'Solid background color of the tile.' },
+      { name: 'className (ColorTile)', type: 'string', description: 'Additional CSS classes — use to control width, height, or padding.' },
+      { name: 'className (ColorTileTitle)', type: 'string', description: 'Override the default text-xs font-bold opacity-80 styles.' },
+      { name: 'className (ColorTileSubTitle)', type: 'string', description: 'Override the default text-[0.6rem] font-semibold leading-tight styles.' },
+    ],
+  },
+
   'simple-badge': {
     slug: 'simple-badge',
     name: 'Simple Badge',
