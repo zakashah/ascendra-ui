@@ -19,6 +19,8 @@
  *   # Showcase developer: test init without cloning (run from inside showcase root)
  *   node create-project.js /tmp/test-project --local
  *
+ * Note: uses SSH (git@github.com:...) by default — requires SSH key auth for the private repo.
+ *
  * What gets created in <project-name>/:
  *   ascendra-ui/          — full component library (gitignored + hidden in VSCode)
  *   app/                  — root layout + getting-started page + sandbox
@@ -145,7 +147,7 @@ async function main() {
     console.log(`\nUsing local source: ${sourceDir}`);
   } else {
     // Remote mode: clone from source URL (default is hardcoded; can be overridden via positional arg)
-    const DEFAULT_SOURCE = "https://github.com/zakashah/ascendra-ui-showcase";
+    const DEFAULT_SOURCE = "git@github.com:zakashah/ascendra-ui-showcase.git";
     sourceUrl = sourceUrlArg || DEFAULT_SOURCE;
 
     // Resolve target version

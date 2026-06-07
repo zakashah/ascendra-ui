@@ -104,11 +104,19 @@ Consumer projects are bootstrapped from `create-project.js`. The user **never cl
 
 ### Step 1 — get the script
 
+`create-project.js` lives at the root of this repo. You can reference it directly without cloning the whole showcase:
+
 ```bash
-curl -O https://raw.githubusercontent.com/zakashah/ascendra-ui-showcase/main/create-project.js
+# Option A — run it in-place from the showcase directory
+cd /path/to/ascendra-ui-showcase
+node create-project.js /path/to/my-app
+
+# Option B — copy it once to a shared location and run from anywhere
+cp /path/to/ascendra-ui-showcase/create-project.js ~/create-ascendra-project.js
+node ~/create-ascendra-project.js my-app
 ```
 
-Or share `create-project.js` directly.
+> If the repo is public you can also download it with `curl -O https://raw.githubusercontent.com/zakashah/ascendra-ui-showcase/main/create-project.js`, but copying from a local clone is more reliable.
 
 ### Step 2 — create the project
 
