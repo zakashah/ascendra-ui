@@ -105,7 +105,7 @@ Consumer projects are bootstrapped from `create-project.js`. The user **never cl
 ### Step 1 — get the script
 
 ```bash
-curl -O https://raw.githubusercontent.com/YOUR_ORG/ascendra-ui-showcase/main/create-project.js
+curl -O https://raw.githubusercontent.com/zakashah/ascendra-ui-showcase/main/create-project.js
 ```
 
 Or share `create-project.js` directly.
@@ -113,18 +113,18 @@ Or share `create-project.js` directly.
 ### Step 2 — create the project
 
 ```bash
-node create-project.js my-app https://github.com/YOUR_ORG/ascendra-ui-showcase
+node create-project.js my-app
 ```
 
-This will:
-- Clone the latest tagged release of this repo to a temp directory (deleted afterwards)
+The source repo URL is built into the script — no need to pass it. This will:
+- Clone the latest tagged release to a temp directory (deleted afterwards)
 - Create `./my-app/` with the full consumer project structure
 - Never expose showcase pages or internal scripts
 
 You can target a specific version:
 
 ```bash
-node create-project.js my-app https://github.com/YOUR_ORG/ascendra-ui-showcase --version 1.2.0
+node create-project.js my-app --version 1.2.0
 ```
 
 ### What the consumer project contains
@@ -275,6 +275,8 @@ Showcase developers can test the `create-project.js` init flow without cloning:
 ```bash
 # From the showcase root:
 node create-project.js /tmp/test-my-project --local
+# or via npm script:
+npm run project:init -- /tmp/test-my-project
 ```
 
 The `--local` flag uses the current directory as source (no clone). Useful for verifying the consumer project structure after changes to `ascendra-ui/template/`.

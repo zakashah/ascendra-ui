@@ -36,6 +36,14 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.0.1] — Simplified project creation
+
+### Changed
+- `create-project.js` — source repo URL (`https://github.com/zakashah/ascendra-ui-showcase`) is now hardcoded as the default; consumers run `node create-project.js my-app` with no URL argument required. A custom URL can still be passed as a positional argument to override.
+- `README.md` — updated create-project command examples and added `npm run project:init` to the developer local testing section.
+
+---
+
 ## [1.0.0] — Initial release
 
 ### Component Library (`ascendra-ui/`)

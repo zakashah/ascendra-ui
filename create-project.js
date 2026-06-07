@@ -3,22 +3,21 @@
  * Create a new Ascendra UI consumer project.
  *
  * Usage:
- *   node create-project.js <project-name> [source-url] [options]
+ *   node create-project.js <project-name> [options]
  *
  * Options:
  *   --version 1.2.0   Use a specific tagged version (default: latest tag)
  *   --local           Dev mode: use the current directory as source, skip clone
  *
  * Examples:
- *   # End-user: create a project from a remote showcase repo
- *   node create-project.js my-app https://github.com/org/ascendra-ui-showcase
+ *   # End-user: create a project (source URL is built-in)
+ *   node create-project.js my-app
  *
  *   # Specific version
- *   node create-project.js my-app https://github.com/org/ascendra-ui-showcase --version 1.2.0
+ *   node create-project.js my-app --version 1.2.0
  *
  *   # Showcase developer: test init without cloning (run from inside showcase root)
  *   node create-project.js /tmp/test-project --local
- *   npm run project:init -- /tmp/test-project
  *
  * What gets created in <project-name>/:
  *   ascendra-ui/          — full component library (gitignored + hidden in VSCode)
@@ -145,18 +144,9 @@ async function main() {
     }
     console.log(`\nUsing local source: ${sourceDir}`);
   } else {
-    // Remote mode: clone from source URL
-    if (!sourceUrlArg) {
-      sourceUrlArg = (
-        await ask("Ascendra UI showcase repo URL (git remote): ")
-      ).trim();
-      if (!sourceUrlArg) {
-        console.error("Error: source URL cannot be empty.");
-        rl.close();
-        process.exit(1);
-      }
-    }
-    sourceUrl = sourceUrlArg;
+    // Remote mode: clone from source URL (default is hardcoded; can be overridden via positional arg)
+    const DEFAULT_SOURCE = "https://github.com/zakashah/ascendra-ui-showcase";
+    sourceUrl = sourceUrlArg || DEFAULT_SOURCE;
 
     // Resolve target version
     let targetTag;
