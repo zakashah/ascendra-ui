@@ -56,6 +56,9 @@ import { RichTextEditorDocContent } from "@/components/previews/rich-text-editor
 import { ColorPickerDocContent } from "@/components/previews/color-picker-preview";
 import { ToastDocContent } from "@/components/previews/toast-preview";
 import { ChartLegendDocContent } from "@/components/previews/chart-legend-preview";
+import { ReportHeaderDocContent } from "@/components/previews/report-header-preview";
+import { ReportDocumentDocContent } from "@/components/previews/report-document-preview";
+import { ReportContentDocContent } from "@/components/previews/report-content-preview";
 
 export type DocComponent = React.ComponentType;
 
@@ -113,4 +116,7 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   "color-picker": ColorPickerDocContent,
   toasts: ToastDocContent,
   "chart-legend": ChartLegendDocContent,
+  "report-header": ReportHeaderDocContent,
+  "report-document": ReportDocumentDocContent,
+  "report-content": ReportContentDocContent,
 };

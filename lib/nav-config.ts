@@ -122,6 +122,14 @@ export const navConfig: NavCategory[] = [
     ],
   },
   {
+    title: 'Reports',
+    items: [
+      { name: 'Report Header', slug: 'report-ui/report-header' },
+      { name: 'Report Document', slug: 'report-ui/report-document' },
+      { name: 'Report Content', slug: 'report-ui/report-content' },
+    ],
+  },
+  {
     title: 'Charts',
     items: [
       { name: 'Chart Gallery', slug: 'charts' },

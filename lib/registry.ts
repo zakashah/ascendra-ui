@@ -1,6 +1,60 @@
 import { ComponentMeta } from './types';
 
 export const registry: Record<string, ComponentMeta> = {
+  'report-header': {
+    slug: 'report-header',
+    name: 'Report Header',
+    description: 'Composable report title zone. Combines an eyebrow label, bold heading, subtitle, and a metadata footer that renders as an inline row or a multi-column stacked grid for dense field sets.',
+    importPath: '@/ascendra-ui',
+    importNames: ['ReportHeaderContent', 'ReportHeaderBody', 'ReportHeaderBodyWrap', 'ReportTitle', 'ReportTitleHeader', 'ReportSubTitle', 'ReportHeaderFooter', 'ReportHeaderField'],
+    props: [
+      { name: 'className (ReportHeaderContent)', type: 'string', description: 'Override the default p-8 pb-6 padding on the header container.' },
+      { name: 'className (ReportHeaderBody)', type: 'string', description: 'Override the flex row that positions the title group and any right-side content (logo, badge).' },
+      { name: 'className (ReportHeaderBodyWrap)', type: 'string', description: 'Override the wrapper around ReportTitle, ReportTitleHeader, and ReportSubTitle.' },
+      { name: 'className (ReportTitle)', type: 'string', description: 'Override the uppercase tracking-widest eyebrow label styles.' },
+      { name: 'className (ReportTitleHeader)', type: 'string', description: 'Override the text-3xl font-bold h1 heading styles.' },
+      { name: 'className (ReportSubTitle)', type: 'string', description: 'Override the mt-1 text-sm text-muted-foreground subtitle styles.' },
+      { name: 'stacked (ReportHeaderFooter)', type: 'boolean', default: 'false', description: 'When true, renders fields as a responsive 2–3 column grid instead of an inline flex row. Use when there are 5 or more metadata fields.' },
+      { name: 'className (ReportHeaderFooter)', type: 'string', description: 'Override the metadata bar container. Default is mt-5 border-t pt-4 text-xs with flex or grid layout.' },
+      { name: 'label (ReportHeaderField)', type: 'string', description: 'Field label. Displayed inline as "Label: value" in row mode, or above the value in stacked mode.' },
+      { name: 'className (ReportHeaderField)', type: 'string', description: 'Override individual field styles.' },
+    ],
+  },
+
+  'report-document': {
+    slug: 'report-document',
+    name: 'Report Document',
+    description: 'Document shell and structural dividers. ReportDocumentWrapper is the root element targeted by the PDF export (id="report-content"). ReportSectionHeader separates content zones. ReportDocumentFooter anchors legal notices and attribution.',
+    importPath: '@/ascendra-ui',
+    importNames: ['ReportDocumentWrapper', 'ReportSectionHeader', 'ReportDocumentFooter', 'ReportDocumentFooterNote', 'ReportDocumentFooterLine', 'ReportDocumentFooterLineLeft', 'ReportDocumentFooterLineRight'],
+    props: [
+      { name: 'className (ReportDocumentWrapper)', type: 'string', description: 'Override the flex flex-col gap-10 root container. Note: id="report-content" is hardcoded — the PDF export button targets this id.' },
+      { name: 'className (ReportSectionHeader)', type: 'string', description: 'Override the pb-3 border-b mb-4 section divider. Children are rendered inside — typically a heading or heading + badge.' },
+      { name: 'className (ReportDocumentFooter)', type: 'string', description: 'Override the border-t pt-6 text-xs text-muted-foreground footer container.' },
+      { name: 'className (ReportDocumentFooterNote)', type: 'string', description: 'Override individual disclaimer or note paragraph styles.' },
+      { name: 'className (ReportDocumentFooterLine)', type: 'string', description: 'Override the flex row that holds attribution text and metadata chips.' },
+      { name: 'className (ReportDocumentFooterLineLeft)', type: 'string', description: 'Override the left-side organization/author label styles.' },
+      { name: 'className (ReportDocumentFooterLineRight)', type: 'string', description: 'Override the right-side metadata group (version, classification, date).' },
+    ],
+  },
+
+  'report-content': {
+    slug: 'report-content',
+    name: 'Report Content',
+    description: 'In-body text blocks for executive summaries, analyst notes, and methodology disclosures. ReportPdfExportButton captures the report document and downloads it as a paginated A4 PDF.',
+    importPath: '@/ascendra-ui',
+    importNames: ['ReportSummary', 'ReportNotes', 'ReportNote', 'ReportNoteHeader', 'ReportNoteText', 'ReportPdfExportButton'],
+    props: [
+      { name: 'className (ReportSummary)', type: 'string', description: 'Override the flex-col gap-3 text-sm leading-relaxed text-muted-foreground summary wrapper.' },
+      { name: 'className (ReportNotes)', type: 'string', description: 'Override the flex-col gap-5 notes container.' },
+      { name: 'className (ReportNote)', type: 'string', description: 'Override an individual note block wrapper.' },
+      { name: 'className (ReportNoteHeader)', type: 'string', description: 'Override the mb-1 font-medium text-foreground note title paragraph.' },
+      { name: 'className (ReportNoteText)', type: 'string', description: 'Override the note body paragraph.' },
+      { name: 'fileName (ReportPdfExportButton)', type: 'string', description: 'PDF filename without the .pdf extension. Required.' },
+      { name: 'title (ReportPdfExportButton)', type: 'string', default: "'Export PDF'", description: 'Button label shown when idle.' },
+    ],
+  },
+
   'chart-legend': {
     slug: 'chart-legend',
     name: 'Chart Legend',

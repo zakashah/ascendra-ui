@@ -36,6 +36,7 @@ import {
   LuLayers,
   LuPanelLeft,
   LuPanelRight,
+  LuScrollText,
 } from "react-icons/lu";
 import {
   MdDashboardCustomize,
@@ -403,6 +404,22 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     </SideBarMenuItem>
                     <SideBarMenuItem path="/showcase/overlay/command-palette">
                       Command Palette
+                    </SideBarMenuItem>
+                  </SideBarMenuContent>
+                </SideBarMenu>
+                <SideBarMenu basePath="/showcase/report-ui">
+                  <SideBarMenuHeader icon={LuScrollText}>
+                    Reports
+                  </SideBarMenuHeader>
+                  <SideBarMenuContent>
+                    <SideBarMenuItem path="/showcase/report-ui/report-header">
+                      Report Header
+                    </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/report-ui/report-document">
+                      Report Document
+                    </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/report-ui/report-content">
+                      Report Content
                     </SideBarMenuItem>
                   </SideBarMenuContent>
                 </SideBarMenu>
