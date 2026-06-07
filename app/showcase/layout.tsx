@@ -447,6 +447,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     <SideBarMenuItem path="/showcase/charts/candlestick">
                       Candlestick
                     </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/charts/chart-legend">
+                      Chart Legend
+                    </SideBarMenuItem>
                   </SideBarMenuContent>
                 </SideBarMenu>
                 <SideBarMenu basePath="/showcase/data-table">

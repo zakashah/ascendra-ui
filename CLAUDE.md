@@ -21,7 +21,7 @@ The `ascendra-ui/` folder is what consumer projects install. The showcase (`app/
 
 | Task | Files |
 |---|---|
-| New component | `ascendra-ui/components/{cat}/{slug}.tsx` → `ascendra-ui/index.ts` → `lib/registry.ts` → `lib/nav-config.ts` → `lib/doc-components.ts` → `components/previews/{slug}-preview.tsx` |
+| New component | `ascendra-ui/components/{cat}/{slug}.tsx` → `ascendra-ui/index.ts` → `lib/registry.ts` → `lib/nav-config.ts` → `app/showcase/layout.tsx` → `lib/doc-components.ts` → `components/previews/{slug}-preview.tsx` |
 | Update component (props/API change) | `ascendra-ui/components/{cat}/{slug}.tsx` + `lib/registry.ts` + `components/previews/{slug}-preview.tsx` |
 | Update preview only | `components/previews/{slug}-preview.tsx` (+ `lib/registry.ts` if props docs need fixing) |
 | New gallery category | `lib/{type}-config.ts` → `app/showcase/{type}/page.tsx` → `components/{type}/` → `lib/nav-config.ts` |
@@ -116,7 +116,7 @@ Keep exports alphabetical within each category comment block.
 
 ---
 
-## Showcase Layer — 4 Mandatory Touchpoints for Any New Component
+## Showcase Layer — 5 Mandatory Touchpoints for Any New Component
 
 ### 1. `lib/registry.ts`
 
@@ -171,7 +171,19 @@ Add `{ name: 'My Component', slug: 'feedback/my-component' }` to the right categ
 
 The slug must be `{category-slug}/{component-slug}` — this becomes the route `/showcase/{category-slug}/{component-slug}` automatically via the catch-all route. No `page.tsx` needed.
 
-### 3. `lib/doc-components.ts`
+### 3. `app/showcase/layout.tsx`
+
+Add a `SideBarMenuItem` inside the matching `SideBarMenu` block in the sidebar. Each category has its own `SideBarMenu` — find it by `basePath` or the menu header text and append the new item:
+
+```tsx
+<SideBarMenuItem path="/showcase/{category-slug}/{component-slug}">
+  My Component
+</SideBarMenuItem>
+```
+
+Do not create a new `SideBarMenu` block — add to the existing one for the category.
+
+### 4. `lib/doc-components.ts`
 
 ```ts
 import { MyComponentDocContent } from "@/components/previews/my-component-preview";
@@ -182,7 +194,7 @@ export const docComponents = {
 };
 ```
 
-### 4. `components/previews/{slug}-preview.tsx`
+### 5. `components/previews/{slug}-preview.tsx`
 
 ```tsx
 "use client";

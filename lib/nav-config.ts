@@ -125,7 +125,6 @@ export const navConfig: NavCategory[] = [
     title: 'Charts',
     items: [
       { name: 'Chart Gallery', slug: 'charts' },
-      { name: 'Chart Legend', slug: 'charts/chart-legend' },
       { name: 'Line Charts', slug: 'charts/line' },
       { name: 'Area Charts', slug: 'charts/area' },
       { name: 'Bar Charts', slug: 'charts/bar' },
@@ -137,6 +136,7 @@ export const navConfig: NavCategory[] = [
       { name: 'Treemap', slug: 'charts/treemap' },
       { name: 'Histogram', slug: 'charts/histogram' },
       { name: 'Candlestick', slug: 'charts/candlestick' },
+      { name: 'Chart Legend', slug: 'charts/chart-legend' },
     ],
   },
   {
