@@ -36,6 +36,14 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.0.5] — Add ColorTile component
+
+### Added
+- `ColorTile`, `ColorTileTitle`, `ColorTileSubTitle` — new composable classification tile component with 16 solid-color variants. Accepts any children for maximum flexibility (no hard-coded `label`/`sublabel` props). Useful for SDG grids, priority indicators, phase strips, and risk severity tiles.
+- Showcase preview page at `/showcase/feedback/color-tile` with six example sections: all variants, title-only, SDG alignment grid, project phase indicators, risk classification, ESG pillar tags, and custom children.
+
+---
+
 ## [1.0.4] — Ship favicon to consumer projects
 
 ### Fixed
