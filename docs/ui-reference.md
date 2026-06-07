@@ -1,15 +1,15 @@
-<!-- ascendra-ui-version: 1.0.4 -->
-<!-- ascendra-ui-commit: e6ea9cb224c7cc53d69a670eb01f99d649bbcd5e -->
+<!-- ascendra-ui-version: 1.0.5 -->
+<!-- ascendra-ui-commit: cd3c833f7884b24c030b9babe4abeac77a9e7a3b -->
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-06-07 · ascendra-ui v1.0.4
+> Auto-generated on 2026-06-07 · ascendra-ui v1.0.5
 > Run `npm run docs:generate` after any registry or config change.
 
 ---
 
 ## Overview
 
-**Primitive components:** 51  
+**Primitive components:** 52  
 **Composite forms:** 10  
 **Dialogs:** 12  
 **Sheets:** 10  
@@ -21,7 +21,7 @@
 
 | Category | Components |
 |---|---|
-| Feedback & Status | Rating, Simple Badge, Bubble Badge, Status Dot, Simple Alert, Pro Badge, Unsaved Changes Bar, Progress & Stepper, Skeleton, Toast |
+| Feedback & Status | Rating, Color Tile, Simple Badge, Bubble Badge, Status Dot, Simple Alert, Pro Badge, Unsaved Changes Bar, Progress & Stepper, Skeleton, Toast |
 | Forms & Inputs | Button, Input, Input Group, Checkbox, Radio Group, Switch, Select, Field, Table Lookup, Combobox, File Upload, Rich Text Editor, Color Picker |
 | Navigation | Anchor, Nav Link, Header, Nav |
 | Overlays | Dialog, Sheet, Dropdown Menu, Tooltip, Command Palette |
@@ -40,6 +40,24 @@
 > The **Used in** section shows which composite patterns reference each component — use it to find real-world examples.
 
 ### Feedback & Status
+
+#### Color Tile
+
+Solid-color classification tile with a label and optional sublabel. Ideal for category grids, SDG alignments, priority indicators, and status tiles.
+
+- **Import:** `import { ColorTile, ColorTileTitle, ColorTileSubTitle } from "@/ascendra-ui"`
+- **Showcase:** [/showcase/feedback/color-tile](/showcase/feedback/color-tile)
+
+**Props**
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant (ColorTile)` | `'primary' \| 'gray' \| 'green' \| 'emerald' \| 'blue' \| 'sky' \| 'orange' \| 'amber' \| 'yellow' \| 'red' \| 'rose' \| 'violet' \| 'pink' \| 'indigo' \| 'teal' \| 'cyan'` | `'primary'` | Solid background color of the tile. |
+| `className (ColorTile)` | `string` | — | Additional CSS classes — use to control width, height, or padding. |
+| `className (ColorTileTitle)` | `string` | — | Override the default text-xs font-bold opacity-80 styles. |
+| `className (ColorTileSubTitle)` | `string` | — | Override the default text-[0.6rem] font-semibold leading-tight styles. |
+
+---
 
 #### Simple Badge
 

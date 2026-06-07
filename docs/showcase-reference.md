@@ -1,8 +1,8 @@
-<!-- ascendra-ui-version: 1.0.4 -->
-<!-- ascendra-ui-commit: e6ea9cb224c7cc53d69a670eb01f99d649bbcd5e -->
+<!-- ascendra-ui-version: 1.0.5 -->
+<!-- ascendra-ui-commit: cd3c833f7884b24c030b9babe4abeac77a9e7a3b -->
 # Ascendra UI — Showcase Reference
 
-> Auto-generated on 2026-06-07 · ascendra-ui v1.0.4
+> Auto-generated on 2026-06-07 · ascendra-ui v1.0.5
 > Run `npm run docs:generate` after any config or showcase change.
 > For the component API reference (props, imports, types) see `docs/ui-reference.md`.
 
@@ -27,14 +27,14 @@ For the technical API (props, import paths, TypeScript types) see `docs/ui-refer
 
 | Stat | Count |
 |---|---|
-| Primitive components | 51 |
+| Primitive components | 52 |
 | Composite form patterns | 10 |
 | Dialog patterns | 12 |
 | Sheet patterns | 10 |
 | Drawer patterns | 8 |
 | Dashboard demos | 10 |
 | Report demos | 10 |
-| Showcase pages total | 94 |
+| Showcase pages total | 95 |
 
 ---
 
@@ -239,10 +239,11 @@ Nav > NavLink[]           ← tab-style section switcher
 
 ### Feedback & Status
 
-**Components:** Simple Badge · Bubble Badge · Status Dot · Simple Alert · Toast · Pro Badge · Unsaved Changes Bar · Progress & Stepper · Skeleton · Rating
+**Components:** Color Tile · Simple Badge · Bubble Badge · Status Dot · Simple Alert · Toast · Pro Badge · Unsaved Changes Bar · Progress & Stepper · Skeleton · Rating
 
 **Showcase pages:**
 
+- [`/showcase/feedback/color-tile`](/showcase/feedback/color-tile) — **Color Tile**: Solid-color classification tile with a label and optional sublabel. Ideal for category grids, SDG alignments, priority indicators, and status tiles.
 - [`/showcase/feedback/simple-badge`](/showcase/feedback/simple-badge) — **Simple Badge**: Small inline status badge for labeling content with semantic color variants.
 - [`/showcase/feedback/bubble-badge`](/showcase/feedback/bubble-badge) — **Bubble Badge**: Gradient pill badges with inset highlight, available in multiple sizes and colors.
 - [`/showcase/feedback/status-dot`](/showcase/feedback/status-dot) — **Status Dot**: Tiny status indicator dot with a halo shadow ring, available in semantic colors.
@@ -695,7 +696,7 @@ Domains covered: Finance / Accounting, Corporate / C-Suite, Healthcare / Clinica
 
 ## Showcase Navigation Map
 
-The showcase has 94 pages organized into 17 categories.
+The showcase has 95 pages organized into 17 categories.
 All routes are prefixed with `/showcase`.
 
 | Category | Pages |
@@ -706,7 +707,7 @@ All routes are prefixed with `/showcase`.
 | **Sample Drawers** | [`drawers`](/showcase/drawers) |
 | **Sample Dashboards** | [`dashboards`](/showcase/dashboards), [`dashboards/saas-revenue`](/showcase/dashboards/saas-revenue), [`dashboards/ecommerce-ops`](/showcase/dashboards/ecommerce-ops), [`dashboards/marketing`](/showcase/dashboards/marketing), [`dashboards/financial-pnl`](/showcase/dashboards/financial-pnl), [`dashboards/trading-portfolio`](/showcase/dashboards/trading-portfolio), [`dashboards/healthcare`](/showcase/dashboards/healthcare), [`dashboards/hr-people`](/showcase/dashboards/hr-people), [`dashboards/devops`](/showcase/dashboards/devops), [`dashboards/supply-chain`](/showcase/dashboards/supply-chain), [`dashboards/real-estate`](/showcase/dashboards/real-estate) |
 | **Sample Forms** | [`forms`](/showcase/forms), [`forms/contact-inquiry`](/showcase/forms/contact-inquiry), [`forms/user-profile`](/showcase/forms/user-profile), [`forms/support-ticket`](/showcase/forms/support-ticket), [`forms/appointment-booking`](/showcase/forms/appointment-booking), [`forms/job-application`](/showcase/forms/job-application), [`forms/financial-transaction`](/showcase/forms/financial-transaction), [`forms/create-product`](/showcase/forms/create-product), [`forms/project-kickoff`](/showcase/forms/project-kickoff), [`forms/search-filter`](/showcase/forms/search-filter), [`forms/employee-onboarding`](/showcase/forms/employee-onboarding) |
-| **Feedback & Status** | [`feedback/simple-badge`](/showcase/feedback/simple-badge), [`feedback/bubble-badge`](/showcase/feedback/bubble-badge), [`feedback/status-dot`](/showcase/feedback/status-dot), [`feedback/simple-alert`](/showcase/feedback/simple-alert), [`feedback/toasts`](/showcase/feedback/toasts), [`feedback/pro-badge`](/showcase/feedback/pro-badge), [`feedback/unsaved-changes-bar`](/showcase/feedback/unsaved-changes-bar), [`feedback/progress`](/showcase/feedback/progress), [`feedback/skeleton`](/showcase/feedback/skeleton), [`feedback/rating`](/showcase/feedback/rating) |
+| **Feedback & Status** | [`feedback/color-tile`](/showcase/feedback/color-tile), [`feedback/simple-badge`](/showcase/feedback/simple-badge), [`feedback/bubble-badge`](/showcase/feedback/bubble-badge), [`feedback/status-dot`](/showcase/feedback/status-dot), [`feedback/simple-alert`](/showcase/feedback/simple-alert), [`feedback/toasts`](/showcase/feedback/toasts), [`feedback/pro-badge`](/showcase/feedback/pro-badge), [`feedback/unsaved-changes-bar`](/showcase/feedback/unsaved-changes-bar), [`feedback/progress`](/showcase/feedback/progress), [`feedback/skeleton`](/showcase/feedback/skeleton), [`feedback/rating`](/showcase/feedback/rating) |
 | **Forms & Inputs** | [`inputs/button`](/showcase/inputs/button), [`inputs/input`](/showcase/inputs/input), [`inputs/input-group`](/showcase/inputs/input-group), [`inputs/checkbox`](/showcase/inputs/checkbox), [`inputs/radio-group`](/showcase/inputs/radio-group), [`inputs/switch`](/showcase/inputs/switch), [`inputs/select`](/showcase/inputs/select), [`inputs/field`](/showcase/inputs/field), [`inputs/combobox`](/showcase/inputs/combobox), [`inputs/table-lookup`](/showcase/inputs/table-lookup), [`inputs/file-upload`](/showcase/inputs/file-upload), [`inputs/rich-text-editor`](/showcase/inputs/rich-text-editor), [`inputs/color-picker`](/showcase/inputs/color-picker) |
 | **Date & Time** | [`date/calendar`](/showcase/date/calendar), [`date/date-picker`](/showcase/date/date-picker), [`date/date-range-picker`](/showcase/date/date-range-picker) |
 | **Navigation** | [`nav/anchor`](/showcase/nav/anchor), [`nav/nav`](/showcase/nav/nav), [`nav/nav-link`](/showcase/nav/nav-link), [`nav/header`](/showcase/nav/header) |
@@ -791,8 +792,8 @@ Never import from sub-paths like `@/ascendra-ui/components/button` — always us
 
 ## Versioning
 
-This reference was generated for **ascendra-ui v1.0.4**.
-Commit: `e6ea9cb224c7cc53d69a670eb01f99d649bbcd5e`
+This reference was generated for **ascendra-ui v1.0.5**.
+Commit: `cd3c833f7884b24c030b9babe4abeac77a9e7a3b`
 
 Run `npm run docs:generate` to regenerate after any change.
 Run `npm run release` to cut a new version.
