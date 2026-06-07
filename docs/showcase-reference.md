@@ -1,5 +1,5 @@
 <!-- ascendra-ui-version: 1.0.0 -->
-<!-- ascendra-ui-commit: 92f63a064708be1387c957a99163f7c08dad43a7 -->
+<!-- ascendra-ui-commit: 629be3819ca4960e78aefbd6612d0272f9698511 -->
 # Ascendra UI — Showcase Reference
 
 > Auto-generated on 2026-06-07 · ascendra-ui v1.0.0
@@ -792,7 +792,7 @@ Never import from sub-paths like `@/ascendra-ui/components/button` — always us
 ## Versioning
 
 This reference was generated for **ascendra-ui v1.0.0**.
-Commit: `92f63a064708be1387c957a99163f7c08dad43a7`
+Commit: `629be3819ca4960e78aefbd6612d0272f9698511`
 
 Run `npm run docs:generate` to regenerate after any change.
 Run `npm run release` to cut a new version.
