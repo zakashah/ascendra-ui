@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "upgrade": "node scripts/upgrade.js",
-    "docs:generate": "npx tsx scripts/generate-reference.ts",
+    "docs:generate": "npx tsx scripts/generate-ui-reference.ts",
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {

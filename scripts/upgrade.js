@@ -44,8 +44,14 @@ function main() {
       fs.copyFileSync(changelogSrc, path.join(ROOT, "CHANGELOG.md"));
     }
 
-    console.log("\n✓ ascendra-ui/ updated to latest");
-    console.log("  Run npm run docs:generate to regenerate docs if needed.\n");
+    // Sync version from ascendra-ui into showcase ascendra.json
+    const srcConfig = JSON.parse(fs.readFileSync(path.join(tmpDir, "ascendra.json"), "utf8"));
+    const showcaseConfig = JSON.parse(fs.readFileSync(path.join(ROOT, "ascendra.json"), "utf8"));
+    showcaseConfig.version = srcConfig.version;
+    fs.writeFileSync(path.join(ROOT, "ascendra.json"), JSON.stringify(showcaseConfig, null, 2) + "\n");
+
+    console.log(`\n✓ ascendra-ui/ updated to v${srcConfig.version}`);
+    console.log("  Run npm run docs:generate to regenerate docs.\n");
   } finally {
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
