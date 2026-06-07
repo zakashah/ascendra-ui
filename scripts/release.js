@@ -88,17 +88,23 @@ async function main() {
     process.exit(1);
   }
 
-  if (!isGreater(newVersion, currentVersion)) {
-    console.error(`Error: v${newVersion} is not greater than current v${currentVersion}.`);
-    rl.close();
-    process.exit(1);
-  }
-
-  const existingTags = capture("git tag").split("\n");
+  // Check tag existence first — distinguishes "same version, already tagged"
+  // from "same version set manually but not yet tagged" (valid bootstrap case)
+  const existingTags = capture("git tag").split("\n").filter(Boolean);
   if (existingTags.includes(`v${newVersion}`)) {
     console.error(`Error: tag v${newVersion} already exists.`);
     rl.close();
     process.exit(1);
+  }
+
+  if (!isGreater(newVersion, currentVersion)) {
+    if (newVersion === currentVersion) {
+      console.log(`Note: tagging current version v${newVersion} (no tag exists yet).`);
+    } else {
+      console.error(`Error: v${newVersion} is not greater than current v${currentVersion}.`);
+      rl.close();
+      process.exit(1);
+    }
   }
 
   // Validate / prompt CHANGELOG
