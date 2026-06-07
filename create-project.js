@@ -329,14 +329,11 @@ yarn-error.log*
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
-
-# Ascendra UI — managed by scripts/upgrade.js, do not edit manually
-ascendra-ui/
 `;
   fs.writeFileSync(path.join(destDir, ".gitignore"), gitignore);
   console.log("  ✓ Created .gitignore");
 
-  // 11. Write .vscode/settings.json (hides ascendra-ui/ from file explorer)
+  // 11. Write .vscode/settings.json (hides ascendra-ui/ from file explorer — it IS tracked in git, just visually tucked away)
   const vscodeDir = path.join(destDir, ".vscode");
   fs.mkdirSync(vscodeDir, { recursive: true });
   const vscodeSettings = {

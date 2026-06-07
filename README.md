@@ -139,7 +139,7 @@ node create-project.js my-app --version 1.2.0
 
 ```
 my-app/
-├── ascendra-ui/           # Full component library (gitignored + hidden in VSCode)
+├── ascendra-ui/           # Full component library (committed to git, hidden in VSCode)
 ├── app/
 │   ├── layout.tsx         # Root layout — ThemeProvider, QueryProvider, Toaster
 │   ├── globals.css        # Design token CSS (Tailwind v4)
@@ -171,7 +171,7 @@ cd my-app
 npm run dev       # already ran npm install during create-project
 ```
 
-> `ascendra-ui/` is gitignored and hidden from the VSCode file explorer. You import components from `@/ascendra-ui`.
+> `ascendra-ui/` is hidden from the VSCode file explorer (via `.vscode/settings.json`) but **is committed to git** — your CI/CD and deployments need it. You import components from `@/ascendra-ui`.
 
 ---
 
@@ -329,7 +329,7 @@ The `@/ascendra-ui` alias resolves to `ascendra-ui/index.ts` via `tsconfig.json`
 
 ## Notes
 
-- **Do not edit `ascendra-ui/` in a consumer project.** It is gitignored and will be overwritten on the next `npm run upgrade`. Put your own components in `components/`.
+- **Do not edit `ascendra-ui/` in a consumer project.** It will be overwritten on the next `npm run upgrade`. Put your own components in `components/`. It is hidden in VSCode for this reason but is committed to git normally.
 - **`ascendra.json` is the version lock file.** It records the version, commit hash, source URL, and managed dependency list. Do not edit it manually.
 - **Breaking changes** are marked in CHANGELOG.md. Review them before upgrading across major versions.
 - **The `docs/` folder is safe to commit.** It is updated on every upgrade and contains the reference for both developers and AI tools.

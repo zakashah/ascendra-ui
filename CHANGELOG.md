@@ -36,6 +36,15 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.0.2] — Fix ascendra-ui/ not committed in consumer projects
+
+### Fixed
+- `create-project.js` — removed `ascendra-ui/` from the generated consumer `.gitignore`. The folder is now committed to the consumer's git repo, which is required for CI/CD and production deployments. It remains hidden in the VSCode file explorer via `.vscode/settings.json` to prevent accidental edits, but is fully tracked in source control.
+- `README.md` — corrected documentation to clarify that `ascendra-ui/` is committed to git (not gitignored), and updated the consumer project structure diagram accordingly.
+- `create-project.js` — default source URL changed to SSH (`git@github.com:zakashah/ascendra-ui-showcase.git`) to avoid HTTPS credential prompts on private repos.
+
+---
+
 ## [1.0.1] — Simplified project creation
 
 ### Changed
