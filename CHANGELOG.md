@@ -36,6 +36,19 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.0.6] — Add ChartLegend, ChartTargetLegend, and report component showcases
+
+### Added
+- `ChartLegend`, `ChartLegendGroup` — colored swatch legend item and group wrapper for identifying chart series, segments, and categories. Supports 8 chart color tokens (`chart-1` through `chart-8`), round or square swatch shapes, and xs–lg sizes. Use `ChartLegendGroup` to wrap multiple items with left/center/right alignment.
+- `ChartTargetLegend`, `ChartTargetLegendGroup` — thin horizontal bar (2px tall) legend item for identifying target or goal reference lines on a chart. Shares the same 8 color tokens as `ChartLegend`; bar width is md (16px) or lg (24px).
+- Showcase preview pages at `/showcase/charts/chart-legend` and `/showcase/charts/chart-target-legend` with all variant examples and real-world dashboard legend patterns.
+- Showcase preview pages for the report structural components at `/showcase/report-ui/report-header`, `/showcase/report-ui/report-document`, and `/showcase/report-ui/report-content` — documenting the 20+ composable report primitives (`ReportHeaderContent`, `ReportSectionHeader`, `ReportPdfExportButton`, etc.) already shipped in v1.0.0.
+
+### Changed
+- Dashboard pages (HR People, Marketing, Real Estate, Trading Portfolio) and report pages (ESG Sustainability, Annual Financial Statement, Executive Business Review, Marketing Campaign Analysis, Project Status, Sales Pipeline, Supply Chain Ops) now use `ChartLegend` and `ChartTargetLegend` in place of bespoke inline legend markup.
+
+---
+
 ## [1.0.5] — Add ColorTile component
 
 ### Added
