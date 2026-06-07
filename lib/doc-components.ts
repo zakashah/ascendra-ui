@@ -56,6 +56,7 @@ import { RichTextEditorDocContent } from "@/components/previews/rich-text-editor
 import { ColorPickerDocContent } from "@/components/previews/color-picker-preview";
 import { ToastDocContent } from "@/components/previews/toast-preview";
 import { ChartLegendDocContent } from "@/components/previews/chart-legend-preview";
+import { ChartTargetLegendDocContent } from "@/components/previews/chart-target-legend-preview";
 import { ReportHeaderDocContent } from "@/components/previews/report-header-preview";
 import { ReportDocumentDocContent } from "@/components/previews/report-document-preview";
 import { ReportContentDocContent } from "@/components/previews/report-content-preview";
@@ -116,6 +117,7 @@ export const docComponents: Partial<Record<string, DocComponent>> = {
   "color-picker": ColorPickerDocContent,
   toasts: ToastDocContent,
   "chart-legend": ChartLegendDocContent,
+  "chart-target-legend": ChartTargetLegendDocContent,
   "report-header": ReportHeaderDocContent,
   "report-document": ReportDocumentDocContent,
   "report-content": ReportContentDocContent,

@@ -145,6 +145,7 @@ export const navConfig: NavCategory[] = [
       { name: 'Histogram', slug: 'charts/histogram' },
       { name: 'Candlestick', slug: 'charts/candlestick' },
       { name: 'Chart Legend', slug: 'charts/chart-legend' },
+      { name: 'Chart Target Legend', slug: 'charts/chart-target-legend' },
     ],
   },
   {

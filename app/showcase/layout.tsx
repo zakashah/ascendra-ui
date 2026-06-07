@@ -467,6 +467,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     <SideBarMenuItem path="/showcase/charts/chart-legend">
                       Chart Legend
                     </SideBarMenuItem>
+                    <SideBarMenuItem path="/showcase/charts/chart-target-legend">
+                      Chart Target Legend
+                    </SideBarMenuItem>
                   </SideBarMenuContent>
                 </SideBarMenu>
                 <SideBarMenu basePath="/showcase/data-table">

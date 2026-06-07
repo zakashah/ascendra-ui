@@ -173,6 +173,7 @@ export * from './components/reports/report-pdf-export-button';
 
 // Charts
 export * from './components/charts/chart-legend';
+export * from './components/charts/chart-target-legend';
 
 // Hooks
 export * from './hooks/use-is-small-screen';

@@ -71,6 +71,21 @@ export const registry: Record<string, ComponentMeta> = {
     ],
   },
 
+  'chart-target-legend': {
+    slug: 'chart-target-legend',
+    name: 'Chart Target Legend',
+    description: 'Inline legend item pairing a thin horizontal bar swatch (16×2px md, 24×2px lg) with a label, used to identify target or goal lines on a chart. Shares the same color tokens as ChartLegend.',
+    importPath: '@/ascendra-ui',
+    importNames: ['ChartTargetLegend', 'ChartTargetLegendGroup'],
+    props: [
+      { name: 'variant (ChartTargetLegend)', type: "'chart-1' | 'chart-2' | 'chart-3' | 'chart-4' | 'chart-5' | 'chart-6' | 'chart-7' | 'chart-8'", default: "'chart-1'", description: 'Chart color token applied to the bar swatch. Maps to the CSS variables --chart-1 through --chart-8.' },
+      { name: 'size (ChartTargetLegend)', type: "'md' | 'lg'", default: "'md'", description: "Bar width: md=16px, lg=24px. Height is always 2px. Also adjusts the gap between bar and label." },
+      { name: 'className (ChartTargetLegend)', type: 'string', description: 'Additional CSS classes on the legend item wrapper.' },
+      { name: 'align (ChartTargetLegendGroup)', type: "'left' | 'center' | 'right'", default: "'center'", description: 'Horizontal alignment of the legend items within the group.' },
+      { name: 'className (ChartTargetLegendGroup)', type: 'string', description: 'Additional CSS classes on the group wrapper.' },
+    ],
+  },
+
   'rating': {
     slug: 'rating',
     name: 'Rating',
