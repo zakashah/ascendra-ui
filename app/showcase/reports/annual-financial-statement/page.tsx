@@ -28,6 +28,8 @@ import {
   ReportDocumentWrapper,
   ReportHeaderBodyWrap,
   ReportSectionHeader,
+  ChartLegend,
+  ChartLegendGroup,
 } from "@/ascendra-ui";
 import {
   ChartContainer,
@@ -692,23 +694,10 @@ export default function AnnualFinancialStatementPage() {
                     />
                   </BarChart>
                 </ChartContainer>
-                {/* Inline legend */}
-                <div className="mt-3 flex gap-4 text-xs text-muted-foreground">
-                  <div className="flex items-center gap-1.5">
-                    <span
-                      className="h-2 w-3 rounded-[2px]"
-                      style={{ background: "var(--chart-1)" }}
-                    />
-                    FY 2024
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span
-                      className="h-2 w-3 rounded-[2px]"
-                      style={{ background: "var(--chart-2)", opacity: 0.7 }}
-                    />
-                    FY 2023
-                  </div>
-                </div>
+                <ChartLegendGroup align="left" className="mt-3">
+                  <ChartLegend variant="chart-1" shape="square">FY 2024</ChartLegend>
+                  <ChartLegend variant="chart-2" shape="square">FY 2023</ChartLegend>
+                </ChartLegendGroup>
               </div>
             </CardPanel>
           </Card>
