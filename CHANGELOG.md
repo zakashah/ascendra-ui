@@ -36,6 +36,13 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.0.4] — Ship favicon to consumer projects
+
+### Fixed
+- `ascendra-ui/template/app/favicon.ico` — favicon was missing from the template; new projects created with `create-project.js` and existing projects upgraded with `npm run upgrade` now receive the favicon correctly.
+
+---
+
 ## [1.0.3] — Improved upgrade prompt
 
 ### Changed
