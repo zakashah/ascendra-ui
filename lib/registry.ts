@@ -1,6 +1,22 @@
 import { ComponentMeta } from './types';
 
 export const registry: Record<string, ComponentMeta> = {
+  'chart-legend': {
+    slug: 'chart-legend',
+    name: 'Chart Legend',
+    description: 'Inline legend item pairing a colored swatch with a label, and a group wrapper that controls alignment. Use beneath any chart to identify series, segments, or categories.',
+    importPath: '@/ascendra-ui',
+    importNames: ['ChartLegend', 'ChartLegendGroup'],
+    props: [
+      { name: 'variant (ChartLegend)', type: "'chart-1' | 'chart-2' | 'chart-3' | 'chart-4' | 'chart-5' | 'chart-6' | 'chart-7' | 'chart-8'", default: "'chart-1'", description: 'Chart color token applied to the swatch. Maps to the CSS variables --chart-1 through --chart-8.' },
+      { name: 'shape (ChartLegend)', type: "'round' | 'square'", default: "'round'", description: "Shape of the color swatch. Use 'round' for line/pie charts and 'square' for bar/area charts." },
+      { name: 'size (ChartLegend)', type: "'xs' | 'sm' | 'md' | 'lg'", default: "'sm'", description: 'Swatch size: xs=4px, sm=8px, md=12px, lg=16px. Also adjusts the gap between swatch and label.' },
+      { name: 'className (ChartLegend)', type: 'string', description: 'Additional CSS classes on the legend item wrapper.' },
+      { name: 'align (ChartLegendGroup)', type: "'left' | 'center' | 'right'", default: "'center'", description: 'Horizontal alignment of the legend items within the group.' },
+      { name: 'className (ChartLegendGroup)', type: 'string', description: 'Additional CSS classes on the group wrapper.' },
+    ],
+  },
+
   'rating': {
     slug: 'rating',
     name: 'Rating',

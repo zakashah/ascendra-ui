@@ -32,6 +32,9 @@ import {
   ReportDocumentFooterNote,
   ReportDocumentWrapper,
   ReportHeaderBodyWrap,
+  ColorTile,
+  ColorTileTitle,
+  ColorTileSubTitle,
 } from "@/ascendra-ui";
 import {
   ChartContainer,
@@ -156,16 +159,16 @@ const benchmarkConfig: ChartConfig = {
 
 // ─── SDG alignment ───────────────────────────────────────────────────────────
 
-const sdgs = [
-  { num: "SDG 3",  label: "Good Health",       color: "bg-green-500"  },
-  { num: "SDG 5",  label: "Gender Equality",   color: "bg-orange-500" },
-  { num: "SDG 7",  label: "Clean Energy",      color: "bg-yellow-500" },
-  { num: "SDG 8",  label: "Decent Work",       color: "bg-rose-600"   },
-  { num: "SDG 10", label: "Reduced Inequality",color: "bg-pink-600"   },
-  { num: "SDG 12", label: "Responsible Cons.", color: "bg-amber-600"  },
-  { num: "SDG 13", label: "Climate Action",    color: "bg-emerald-600"},
-  { num: "SDG 16", label: "Strong Institutions",color:"bg-blue-700"   },
-  { num: "SDG 17", label: "Partnerships",      color: "bg-blue-500"   },
+const sdgs: { num: string; label: string; variant: React.ComponentProps<typeof ColorTile>['variant'] }[] = [
+  { num: "SDG 3",  label: "Good Health",        variant: "green"   },
+  { num: "SDG 5",  label: "Gender Equality",    variant: "orange"  },
+  { num: "SDG 7",  label: "Clean Energy",       variant: "yellow"  },
+  { num: "SDG 8",  label: "Decent Work",        variant: "rose"    },
+  { num: "SDG 10", label: "Reduced Inequality", variant: "pink"    },
+  { num: "SDG 12", label: "Responsible Cons.",  variant: "amber"   },
+  { num: "SDG 13", label: "Climate Action",     variant: "emerald" },
+  { num: "SDG 16", label: "Strong Institutions",variant: "blue"    },
+  { num: "SDG 17", label: "Partnerships",       variant: "sky"     },
 ];
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -573,13 +576,10 @@ export default function EsgSustainabilityReportPage() {
             <CardPanel>
               <div className="grid grid-cols-3 gap-3 p-6">
                 {sdgs.map((s) => (
-                  <div
-                    key={s.num}
-                    className={`flex flex-col items-center justify-center gap-1 rounded-lg p-3 ${s.color} text-white`}
-                  >
-                    <span className="text-xs font-bold opacity-80">{s.num}</span>
-                    <span className="text-center text-[0.6rem] font-semibold leading-tight">{s.label}</span>
-                  </div>
+                  <ColorTile key={s.num} variant={s.variant}>
+                    <ColorTileTitle>{s.num}</ColorTileTitle>
+                    <ColorTileSubTitle>{s.label}</ColorTileSubTitle>
+                  </ColorTile>
                 ))}
               </div>
             </CardPanel>

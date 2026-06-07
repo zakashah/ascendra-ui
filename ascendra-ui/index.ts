@@ -171,6 +171,9 @@ export * from './components/reports/report-section-header';
 export * from './components/reports/report-summary';
 export * from './components/reports/report-pdf-export-button';
 
+// Charts
+export * from './components/charts/chart-legend';
+
 // Hooks
 export * from './hooks/use-is-small-screen';
 
