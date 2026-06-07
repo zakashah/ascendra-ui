@@ -1,6 +1,7 @@
-# Ascendra UI — Component Reference
+<!-- ascendra-ui-version: 1.0.0 -->
+# Ascendra UI — UI Reference
 
-> Auto-generated on 2026-06-06 from `lib/registry.ts` and all pattern config files.
+> Auto-generated on 2026-06-07 · ascendra-ui v1.0.0
 > Run `npm run docs:generate` after any registry or config change.
 
 ---
