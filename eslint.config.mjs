@@ -26,7 +26,11 @@ const eslintConfig = defineConfig([
   },
   // Node.js CJS scripts — allow require()
   {
-    files: ["scripts/**/*.js"],
+    files: [
+      "scripts/**/*.js",
+      "create-project.js",
+      "ascendra-ui/template/scripts/**/*.js",
+    ],
     rules: {
       "@typescript-eslint/no-require-imports": "off",
     },

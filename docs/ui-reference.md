@@ -1,4 +1,5 @@
 <!-- ascendra-ui-version: 1.0.0 -->
+<!-- ascendra-ui-commit: 92f63a064708be1387c957a99163f7c08dad43a7 -->
 # Ascendra UI — UI Reference
 
 > Auto-generated on 2026-06-07 · ascendra-ui v1.0.0

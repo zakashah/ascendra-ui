@@ -1,14 +1,14 @@
 {
   "name": "ascendra-ui-showcase",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "upgrade": "node scripts/upgrade.js",
-    "docs:generate": "npx tsx scripts/generate-ui-reference.ts",
+    "docs:generate": "npx tsx scripts/generate-ui-reference.ts && npx tsx scripts/generate-showcase-reference.ts",
+    "release": "node scripts/release.js",
     "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
