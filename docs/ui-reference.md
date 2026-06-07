@@ -1,8 +1,8 @@
-<!-- ascendra-ui-version: 1.0.1 -->
-<!-- ascendra-ui-commit: 1a9731a753d962e238ade724b208118b0e99211b -->
+<!-- ascendra-ui-version: 1.0.2 -->
+<!-- ascendra-ui-commit: 8e893179f0e429a5715d1cbe19f4888f0352dedb -->
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-06-07 · ascendra-ui v1.0.1
+> Auto-generated on 2026-06-07 · ascendra-ui v1.0.2
 > Run `npm run docs:generate` after any registry or config change.
 
 ---
