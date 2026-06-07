@@ -179,11 +179,13 @@ const KNOWN_NON_REGISTRY_SLUGS = new Set([
 const today = new Date().toISOString().slice(0, 10);
 const componentCount = Object.keys(registry).length;
 
-const ascendraConfig = JSON.parse(readFileSync(join(process.cwd(), "ascendra.json"), "utf8")) as { version: string };
+const ascendraConfig = JSON.parse(readFileSync(join(process.cwd(), "ascendra.json"), "utf8")) as { version: string; commit?: string };
 const uiVersion = ascendraConfig.version;
+const uiCommit = ascendraConfig.commit ?? "unknown";
 
 const lines: string[] = [
   `<!-- ascendra-ui-version: ${uiVersion} -->`,
+  `<!-- ascendra-ui-commit: ${uiCommit} -->`,
   "# Ascendra UI — UI Reference",
   "",
   `> Auto-generated on ${today} · ascendra-ui v${uiVersion}`,
