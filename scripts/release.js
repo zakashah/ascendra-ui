@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Release tool — for use only inside ascendra-ui-showcase.
+ * Release tool — for use only inside ascendra-ui.
  * Run: npm run release
  *
  * Flow:
@@ -51,8 +51,8 @@ function isGreater(a, b) {
 async function main() {
   // Guard: correct repo
   const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, "package.json"), "utf8"));
-  if (pkg.name !== "ascendra-ui-showcase") {
-    console.error("Error: release.js must only be run inside ascendra-ui-showcase.");
+  if (pkg.name !== "ascendra-ui") {
+    console.error("Error: release.js must only be run inside ascendra-ui.");
     process.exit(1);
   }
 

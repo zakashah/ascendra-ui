@@ -20,7 +20,7 @@ Consumer projects are bootstrapped from a tagged release of this repo using `cre
 ## Repository structure
 
 ```
-ascendra-ui-showcase/
+ascendra-ui/
 ├── ascendra-ui/               # The component library (source of truth)
 │   ├── index.ts               # Public barrel export — import from "@/ascendra-ui"
 │   ├── components/            # All UI components
@@ -75,8 +75,8 @@ ascendra-ui-showcase/
 ## Running the showcase locally
 
 ```bash
-git clone <this-repo> ascendra-ui-showcase
-cd ascendra-ui-showcase
+git clone <this-repo> ascendra-ui
+cd ascendra-ui
 npm install
 npm run dev
 ```
@@ -108,15 +108,15 @@ Consumer projects are bootstrapped from `create-project.js`. The user **never cl
 
 ```bash
 # Option A — run it in-place from the showcase directory
-cd /path/to/ascendra-ui-showcase
+cd /path/to/ascendra-ui
 node create-project.js /path/to/my-app
 
 # Option B — copy it once to a shared location and run from anywhere
-cp /path/to/ascendra-ui-showcase/create-project.js ~/create-ascendra-project.js
+cp /path/to/ascendra-ui/create-project.js ~/create-ascendra-project.js
 node ~/create-ascendra-project.js my-app
 ```
 
-> If the repo is public you can also download it with `curl -O https://raw.githubusercontent.com/zakashah/ascendra-ui-showcase/main/create-project.js`, but copying from a local clone is more reliable.
+> If the repo is public you can also download it with `curl -O https://raw.githubusercontent.com/zakashah/ascendra-ui/main/create-project.js`, but copying from a local clone is more reliable.
 
 ### Step 2 — create the project
 

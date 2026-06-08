@@ -36,6 +36,17 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.0.7] — Rename repository from ascendra-ui-showcase to ascendra-ui
+
+### Changed
+- Repository renamed from `ascendra-ui-showcase` to `ascendra-ui` on GitHub and locally.
+- `package.json` and `package-lock.json` `name` field updated to `ascendra-ui`.
+- `scripts/release.js` — name guard updated to match new package name.
+- `create-project.js` — `--local` name guard, default GitHub clone URL, and log messages updated to `ascendra-ui`.
+- `README.md` and `CHANGELOG.md` updated to reflect the new repository name throughout.
+
+---
+
 ## [1.0.6] — Add ChartLegend, ChartTargetLegend, and report component showcases
 
 ### Added
@@ -76,14 +87,14 @@ npm run upgrade -- --version 1.2.0
 ### Fixed
 - `create-project.js` — removed `ascendra-ui/` from the generated consumer `.gitignore`. The folder is now committed to the consumer's git repo, which is required for CI/CD and production deployments. It remains hidden in the VSCode file explorer via `.vscode/settings.json` to prevent accidental edits, but is fully tracked in source control.
 - `README.md` — corrected documentation to clarify that `ascendra-ui/` is committed to git (not gitignored), and updated the consumer project structure diagram accordingly.
-- `create-project.js` — default source URL changed to SSH (`git@github.com:zakashah/ascendra-ui-showcase.git`) to avoid HTTPS credential prompts on private repos.
+- `create-project.js` — default source URL changed to SSH (`git@github.com:zakashah/ascendra-ui.git`) to avoid HTTPS credential prompts on private repos.
 
 ---
 
 ## [1.0.1] — Simplified project creation
 
 ### Changed
-- `create-project.js` — source repo URL (`https://github.com/zakashah/ascendra-ui-showcase`) is now hardcoded as the default; consumers run `node create-project.js my-app` with no URL argument required. A custom URL can still be passed as a positional argument to override.
+- `create-project.js` — source repo URL (`https://github.com/zakashah/ascendra-ui`) is now hardcoded as the default; consumers run `node create-project.js my-app` with no URL argument required. A custom URL can still be passed as a positional argument to override.
 - `README.md` — updated create-project command examples and added `npm run project:init` to the developer local testing section.
 
 ---

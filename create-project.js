@@ -123,12 +123,12 @@ async function main() {
   let tmpDir = null;
 
   if (isLocal) {
-    // Dev mode: use current directory (must be inside ascendra-ui-showcase)
+    // Dev mode: use current directory (must be inside ascendra-ui)
     sourceDir = process.cwd();
     try {
       const pkg = JSON.parse(fs.readFileSync(path.join(sourceDir, "package.json"), "utf8"));
-      if (pkg.name !== "ascendra-ui-showcase") {
-        console.error("Error: --local must be run from inside the ascendra-ui-showcase repo root.");
+      if (pkg.name !== "ascendra-ui") {
+        console.error("Error: --local must be run from inside the ascendra-ui repo root.");
         rl.close();
         process.exit(1);
       }
@@ -147,7 +147,7 @@ async function main() {
     console.log(`\nUsing local source: ${sourceDir}`);
   } else {
     // Remote mode: clone from source URL (default is hardcoded; can be overridden via positional arg)
-    const DEFAULT_SOURCE = "git@github.com:zakashah/ascendra-ui-showcase.git";
+    const DEFAULT_SOURCE = "git@github.com:zakashah/ascendra-ui.git";
     sourceUrl = sourceUrlArg || DEFAULT_SOURCE;
 
     // Resolve target version
@@ -185,7 +185,7 @@ async function main() {
     const cloneCmd = targetTag
       ? `git clone --depth 1 --branch ${targetTag} "${sourceUrl}" "${tmpDir}"`
       : `git clone --depth 1 "${sourceUrl}" "${tmpDir}"`;
-    console.log(`\nCloning ascendra-ui-showcase${targetTag ? ` @ ${targetTag}` : ""}...`);
+    console.log(`\nCloning ascendra-ui${targetTag ? ` @ ${targetTag}` : ""}...`);
     execSync(cloneCmd, { stdio: "inherit" });
     sourceDir = tmpDir;
   }
