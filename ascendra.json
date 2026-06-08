@@ -1,6 +1,6 @@
 {
-  "version": "1.0.9",
-  "commit": "52056ff51b564a042c01b46d95d299c51df59e66",
+  "version": "1.0.10",
+  "commit": "0d1c0edb02286ea990e748cf5f53ef922c283983",
   "dependencies": {
     "@base-ui/react": "^1.2.0",
     "@hookform/resolvers": "^5.2.2",
