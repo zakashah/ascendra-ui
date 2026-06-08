@@ -36,6 +36,20 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.0.11] — Add Claude Code skills for showcase and consumer projects
+
+### Added
+- `.claude/skills/` — 3 showcase skills: `/create-component` (full 9-step component workflow), `/release` (pre-flight checks + release script), `/verify-docs` (docs regeneration + registry audit).
+- `ascendra-ui/template/.claude/skills/` — 9 consumer skills shipped with every new/upgraded consumer project: `/create-page`, `/create-form`, `/create-table`, `/create-dashboard`, `/create-report`, `/create-chart`, `/create-dialog`, `/create-sheet`, `/create-component`.
+- `ascendra-ui/template/CLAUDE.md` — new "Available Skills" section documenting all 9 consumer skills.
+- `CLAUDE.md` (showcase) — new "Available Skills" section documenting the 3 showcase skills.
+
+### Changed
+- `create-project.js` — copies `.claude/skills/` to new consumer projects on init.
+- `ascendra-ui/template/scripts/upgrade.js` — updates each managed skill file individually on upgrade; never removes consumer-added custom skills.
+
+---
+
 ## [1.0.10] — Improve consumer CLAUDE.md based on verification testing
 
 ### Changed
