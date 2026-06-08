@@ -12,6 +12,7 @@
  *   docs/                 — reference docs
  *   CHANGELOG.md
  *   CLAUDE.md             — managed Claude Code instructions (self-updating)
+ *   .claude/skills/       — 9 managed Claude Code skills (self-updating, never removes custom skills)
  *   scripts/upgrade.js    — self-updating
  *   ascendra.json         — version, commit hash, and managed dependency list
  *
@@ -247,6 +248,24 @@ async function main() {
       console.log("  ✓ Updated CLAUDE.md");
     }
 
+    // ── Update managed .claude/skills/ ───────────────────────────────────────────
+    const managedSkills = [
+      "create-page.md", "create-form.md", "create-table.md",
+      "create-dashboard.md", "create-report.md", "create-chart.md",
+      "create-dialog.md", "create-sheet.md", "create-component.md",
+    ];
+    const skillsSrc = path.join(tmpDir, "ascendra-ui", "template", ".claude", "skills");
+    const skillsDest = path.join(ROOT, ".claude", "skills");
+    if (fs.existsSync(skillsSrc)) {
+      fs.mkdirSync(skillsDest, { recursive: true });
+      let count = 0;
+      for (const skill of managedSkills) {
+        const src = path.join(skillsSrc, skill);
+        if (fs.existsSync(src)) { fs.copyFileSync(src, path.join(skillsDest, skill)); count++; }
+      }
+      if (count > 0) console.log(`  ✓ Updated ${count} managed skills in .claude/skills/`);
+    }
+
     // ── Sync dependencies ─────────────────────────────────────────────────────────
     const newSrcConfig = JSON.parse(
       fs.readFileSync(path.join(tmpDir, "ascendra.json"), "utf8")
@@ -293,10 +312,16 @@ async function main() {
 
   // Commit the upgrade
   try {
+    const managedSkillsForAdd = [
+      "create-page.md", "create-form.md", "create-table.md",
+      "create-dashboard.md", "create-report.md", "create-chart.md",
+      "create-dialog.md", "create-sheet.md", "create-component.md",
+    ];
     run(
       "git add ascendra-ui/ docs/ CHANGELOG.md CLAUDE.md ascendra.json app/layout.tsx app/globals.css " +
       "\"app/(app)/layout.tsx\" \"app/(app)/page.tsx\" \"app/(app)/sandbox/page.tsx\" " +
-      "scripts/upgrade.js package-lock.json",
+      "scripts/upgrade.js package-lock.json " +
+      managedSkillsForAdd.map(s => `".claude/skills/${s}"`).join(" "),
       { stdio: "inherit" }
     );
     run(`git commit -m "chore: upgrade ascendra-ui v${currentVersion} → v${targetVersion}"`, { stdio: "inherit" });

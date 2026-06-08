@@ -29,6 +29,7 @@
  *   docs/                 — ui-reference.md + showcase-reference.md
  *   CHANGELOG.md
  *   CLAUDE.md             — Claude Code instructions (managed, updated on upgrade)
+ *   .claude/skills/       — 9 managed Claude Code skills (managed, updated on upgrade)
  *   next.config.ts, tsconfig.json, postcss.config.mjs, eslint.config.mjs
  *   components/, hooks/, lib/, providers/, utils/   — empty with .gitkeep
  *   package.json          — consumer scripts + all ascendra-ui dependencies
@@ -289,6 +290,17 @@ async function main() {
   if (fs.existsSync(claudeSrc)) {
     fs.copyFileSync(claudeSrc, path.join(destDir, "CLAUDE.md"));
     console.log("  ✓ Copied CLAUDE.md");
+  }
+
+  // 7c. Copy .claude/skills/ (managed Claude Code skills)
+  const skillsTemplateSrc = path.join(sourceDir, "ascendra-ui", "template", ".claude", "skills");
+  const claudeDest = path.join(destDir, ".claude", "skills");
+  if (fs.existsSync(skillsTemplateSrc)) {
+    fs.mkdirSync(claudeDest, { recursive: true });
+    for (const entry of fs.readdirSync(skillsTemplateSrc)) {
+      fs.copyFileSync(path.join(skillsTemplateSrc, entry), path.join(claudeDest, entry));
+    }
+    console.log("  ✓ Copied .claude/skills/ (9 managed Claude Code skills)");
   }
 
   // 8. Create empty placeholder folders

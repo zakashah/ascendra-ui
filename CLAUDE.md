@@ -394,6 +394,16 @@ git push && git push --tags
 
 ---
 
+## Available Skills
+
+| Skill | What it does |
+|---|---|
+| `/create-component` | Full 9-step new component workflow (file → index.ts → registry → nav-config → layout → doc-components → preview → docs:generate) |
+| `/release` | Pre-flight checks + release script + push with tags |
+| `/verify-docs` | Runs docs:generate, audits registry completeness and nav/preview alignment |
+
+---
+
 ## Docs
 
 `docs/ui-reference.md` and `docs/showcase-reference.md` are **auto-generated** by the release script. They are the consumer-facing artifact.

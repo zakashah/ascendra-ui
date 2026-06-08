@@ -139,6 +139,24 @@ See `docs/showcase-reference.md` → DataTable System for full wiring documentat
 
 ---
 
+## Available Skills
+
+Type these in Claude Code to scaffold common patterns. Each skill reads the docs first and asks targeted questions before generating complete, working code.
+
+| Skill | Generates |
+|---|---|
+| `/create-page` | New route in `app/(app)/` with correct layout variant |
+| `/create-form` | Full form: zod schema + react-hook-form + all field components |
+| `/create-table` | DataTable with the right provider (server or static) |
+| `/create-dashboard` | Dashboard page with stats, charts, and optional table |
+| `/create-report` | Report structure with sections and PDF export |
+| `/create-chart` | Standalone chart with ChartContainer and chartConfig |
+| `/create-dialog` | Modal dialog with optional form and footer actions |
+| `/create-sheet` | Side-panel sheet with detail view or form |
+| `/create-component` | CVA component following library conventions |
+
+---
+
 ## Custom Component Conventions
 
 When building components in `components/`, follow the same conventions as the library:
