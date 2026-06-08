@@ -36,6 +36,15 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.0.10] — Improve consumer CLAUDE.md based on verification testing
+
+### Changed
+- `ascendra-ui/template/CLAUDE.md` — two improvements identified from Q&A verification:
+  - **Tech stack table** — added `jspdf + html-to-image`, `fuse.js`, `tiptap`, and `date-fns` as explicit entries so Claude does not suggest installing packages that are already present.
+  - **DataTable section** — replaced the single-sentence DataTable note with a clear two-provider decision table (`DataTableWithQueryProvider` for server data, `DataTableProvider` for client-side static data) so the choice is answerable from memory without grepping the docs.
+
+---
+
 ## [1.0.9] — Fix CLAUDE.md delivery for existing consumers upgrading from pre-1.0.8
 
 ### Fixed
