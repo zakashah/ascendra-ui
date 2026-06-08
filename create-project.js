@@ -28,6 +28,7 @@
  *   scripts/changelog.js  — view CHANGELOG entries
  *   docs/                 — ui-reference.md + showcase-reference.md
  *   CHANGELOG.md
+ *   CLAUDE.md             — Claude Code instructions (managed, updated on upgrade)
  *   next.config.ts, tsconfig.json, postcss.config.mjs, eslint.config.mjs
  *   components/, hooks/, lib/, providers/, utils/   — empty with .gitkeep
  *   package.json          — consumer scripts + all ascendra-ui dependencies

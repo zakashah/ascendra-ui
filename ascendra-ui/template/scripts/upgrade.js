@@ -11,6 +11,7 @@
  *   app/layout.tsx + app/globals.css + app/(app)/layout.tsx — managed shell files
  *   docs/                 — reference docs
  *   CHANGELOG.md
+ *   CLAUDE.md             — managed Claude Code instructions (self-updating)
  *   scripts/upgrade.js    — self-updating
  *   ascendra.json         — version, commit hash, and managed dependency list
  *
