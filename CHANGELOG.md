@@ -36,6 +36,13 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.0.12] — Fix skill delivery for consumers upgrading from pre-1.0.11
+
+### Fixed
+- `ascendra-ui/template/scripts/upgrade.js` — updated doc comment header to list `.claude/skills/` as a managed output. Existing consumers who upgraded to v1.0.11 did not receive `.claude/skills/` due to a bootstrapping issue (the old upgrade.js ran the v1.0.11 upgrade before the new skills copy logic was in place). Upgrading to v1.0.12 will deliver all 9 managed skills correctly.
+
+---
+
 ## [1.0.11] — Add Claude Code skills for showcase and consumer projects
 
 ### Added
