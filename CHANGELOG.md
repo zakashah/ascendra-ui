@@ -36,6 +36,14 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.0.9] — Fix CLAUDE.md delivery for existing consumers upgrading from pre-1.0.8
+
+### Fixed
+- `ascendra-ui/template/scripts/upgrade.js` — updated doc comment header to list `CLAUDE.md` as a managed file. Existing consumers who upgraded to v1.0.8 did not receive `CLAUDE.md` due to a bootstrapping issue (the old upgrade.js ran the v1.0.8 upgrade before the new copy logic was in place). Upgrading to v1.0.9 will deliver `CLAUDE.md` correctly.
+- `create-project.js` — updated doc comment header to list `CLAUDE.md` in the "What gets created" section.
+
+---
+
 ## [1.0.8] — Consumer CLAUDE.md, documentation overhaul, CLAUDE.md gaps filled
 
 ### Added
