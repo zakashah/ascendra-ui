@@ -45,6 +45,22 @@ export const navConfig: NavCategory[] = [
     ],
   },
   {
+    title: 'Sample Reports',
+    items: [
+      { name: 'Report Gallery',                slug: 'reports' },
+      { name: 'Annual Financial Statement',    slug: 'reports/annual-financial-statement' },
+      { name: 'Executive Business Review',     slug: 'reports/executive-business-review' },
+      { name: 'Patient Health Summary',        slug: 'reports/patient-health-summary' },
+      { name: 'Project Status Report',         slug: 'reports/project-status-report' },
+      { name: 'Sales Pipeline Report',         slug: 'reports/sales-pipeline-report' },
+      { name: 'Marketing Campaign Analysis',   slug: 'reports/marketing-campaign-analysis' },
+      { name: 'Supply Chain Operations',       slug: 'reports/supply-chain-ops-report' },
+      { name: 'Employee Performance',          slug: 'reports/employee-performance-review' },
+      { name: 'Security Incident Report',      slug: 'reports/security-incident-report' },
+      { name: 'ESG Sustainability Report',     slug: 'reports/esg-sustainability-report' },
+    ],
+  },
+  {
     title: 'Sample Forms',
     items: [
       { name: 'Forms Gallery', slug: 'forms' },
