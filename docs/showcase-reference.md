@@ -1108,6 +1108,374 @@ RIGHT:  stroke="var(--border)"
 
 ---
 
+## DataTable System
+
+The DataTable is a full-featured, server-aware data grid composed of a provider layer (state + React Query) and a compound component layer. Do not confuse it with the simple `Table` system — use `DataTable` when you need search, sort, filter, column management, row selection, or server-side queries.
+
+### Provider Choice
+
+| Provider | When to use |
+|---|---|
+| `DataTableProvider` | You already have data in scope (from server component, SWR, or local state). Table handles search/sort/filter/pagination internally. |
+| `DataTableWithQueryProvider` | Data comes from the server via named queries. Adds `QueryBar`, `QueryParamPanel`, and React Query fetching on top of `DataTableProvider`. |
+
+### Column Definitions — ColumnDef\<T\>
+
+```ts
+const COLUMNS: ColumnDef<Invoice>[] = [
+  { key: 'invoiceNumber', label: 'Invoice #', freeze: true },         // always visible
+  { key: 'clientName',    label: 'Client',    freeze: true, filter: true },
+  { key: 'amount',        label: 'Amount',    type: 'number' },
+  { key: 'dueDate',       label: 'Due Date',  type: 'date' },
+  { key: 'status',        label: 'Status',    sortable: false, filter: true },
+  { key: 'issuedAt',      label: 'Issued',    type: 'date', active: false }, // hidden by default
+];
+```
+
+| Prop | Type | Default | Meaning |
+|---|---|---|---|
+| `key` | `keyof T` | — | Maps to a field on your data object |
+| `label` | `string` | — | Display name in headers, dropdowns, column manager |
+| `type` | `'string' \| 'number' \| 'date'` | `'string'` | Sort comparison logic |
+| `sortable` | `boolean` | `true` | Sort on header click; appears in sort dropdown |
+| `filter` | `boolean` | `false` | Makes column available in filter picker |
+| `active` | `boolean` | `true` | Visible by default; user can toggle off |
+| `freeze` | `boolean` | `false` | Always visible; user cannot hide it |
+| `locked` | `boolean` | `false` | Always visible and cannot be reordered |
+
+### Template — Static Data Table
+
+Use when data is already in scope (fetched externally or passed from a server component).
+
+```tsx
+import {
+  DataTableProvider, DataTable, DataTableBar, DataTableBarContent, DataTableBarAction,
+  DataTableBody, DataTableCell, DataTableFoot, DataTableHead, DataTableHeader,
+  DataTableHeaderRow, DataTableRow, DataTableRowAction, DataTableEditRowAction,
+  DataTableDeleteRowAction, DataTableSearchInput, DataTableColumnManager,
+  DataTableSortDropdown, DataTableFilterDropdown, DataTableFilterBar, DataTableWrapper,
+  DataTableLoadingBody, DataTableEmptyBody, SimpleBadge, Button, type ColumnDef,
+} from '@/ascendra-ui';
+
+const COLUMNS: ColumnDef<User>[] = [
+  { key: 'name',   label: 'Name' },
+  { key: 'email',  label: 'Email' },
+  { key: 'status', label: 'Status', filter: true, sortable: false },
+];
+
+export function UsersTable({ data, isLoading }: { data: User[]; isLoading: boolean }) {
+  return (
+    <DataTableProvider
+      columns={COLUMNS}
+      data={data}
+      isLoading={isLoading}
+      getRowId={(row) => String(row.id)}
+    >
+      <DataTableBar>
+        <DataTableBarContent>
+          <DataTableSearchInput />
+          <DataTableColumnManager />
+          <DataTableSortDropdown />
+          <DataTableFilterDropdown />
+        </DataTableBarContent>
+        <DataTableBarAction>
+          <Button size="sm">+ Add User</Button>
+        </DataTableBarAction>
+      </DataTableBar>
+      <DataTableFilterBar />
+      <DataTableWrapper>
+        <DataTable scrollable horizontal height={400}>
+          <DataTableHeader>
+            <DataTableHeaderRow>
+              <DataTableHead column="name" />
+              <DataTableHead column="email" />
+              <DataTableHead column="status" />
+            </DataTableHeaderRow>
+          </DataTableHeader>
+          <DataTableBody>
+            {(row: User) => (
+              <DataTableRow key={row.id}>
+                <DataTableCell column="name">{row.name}</DataTableCell>
+                <DataTableCell column="email">{row.email}</DataTableCell>
+                <DataTableCell column="status">
+                  <SimpleBadge variant="green">{row.status}</SimpleBadge>
+                </DataTableCell>
+                <DataTableRowAction onAction={(id) => handleAction(id, row)}>
+                  <DataTableEditRowAction />
+                  <DataTableDeleteRowAction />
+                </DataTableRowAction>
+              </DataTableRow>
+            )}
+          </DataTableBody>
+        </DataTable>
+        <DataTableLoadingBody />
+        <DataTableEmptyBody title="No users yet" />
+        <DataTableFoot />
+      </DataTableWrapper>
+    </DataTableProvider>
+  );
+}
+```
+
+### Service Function Contract — QueryFn\<T\>
+
+The query layer requires fetch functions that match the `QueryFn<T>` signature. Define one service function per query and collect them in a `QueryFunctionMap`. The library does not dictate your HTTP client — use `axios`, `fetch`, or any other.
+
+```ts
+// services/invoices.service.ts
+import type { QueryFn, QueryFunctionMap, QueryParamValues } from '@/ascendra-ui';
+import type { Invoice } from '@/types';
+import { http } from '@/lib/http-client'; // your own HTTP client
+
+// Every QueryFn must return { data: T[], totalBatches: number }
+// params — confirmed field values from QueryParamPanel (empty {} for 'query' group)
+// batch  — current page number (1-indexed); use as your API page param
+export const fetchAllInvoices: QueryFn<Invoice> = async (_params, batch) => {
+  const res = await http.get('/api/invoices', { params: { page: batch, limit: 20 } });
+  return { data: res.data.items, totalBatches: res.data.meta.totalPages };
+};
+
+export const fetchInvoicesByStatus: QueryFn<Invoice> = async (params, batch) => {
+  const res = await http.get('/api/invoices', {
+    params: { statuses: params.statuses, page: batch, limit: 20 },
+  });
+  return { data: res.data.items, totalBatches: res.data.meta.totalPages };
+};
+
+// Keys must match QueryDef ids exactly
+export const INVOICE_QUERY_FUNCTIONS: QueryFunctionMap<Invoice> = {
+  'all-invoices':  fetchAllInvoices,
+  'by-status':     fetchInvoicesByStatus,
+};
+```
+
+**Cursor-based pagination:** If your API uses cursors and has no page count, return `totalBatches: 1` and handle navigation externally.
+
+**React Query cache key:** The provider uses `['data-table', queryId, confirmedParams, batch]` as the query key — invalidate this key from outside if you need to force a refetch.
+
+### QueryDef — Defining Queries
+
+```ts
+// invoices.queries.ts
+import type { QueryDef } from '@/ascendra-ui';
+
+export const QUERIES: QueryDef[] = [
+  // group: 'query' — runs immediately on selection; no params
+  {
+    id: 'all-invoices',
+    title: 'All Invoices',
+    description: 'Returns every invoice without filters',
+    group: 'query',
+  },
+
+  // group: 'filter' — shows QueryParamPanel before fetching;
+  //   user fills fields and clicks 'Run Query'
+  {
+    id: 'by-status',
+    title: 'By Status',
+    description: 'Filter invoices by payment status',
+    group: 'filter',
+    columns: { sm: 1, md: 2 },   // param form grid layout
+    params: [
+      {
+        name: 'statuses',
+        label: 'Status',
+        type: 'multiselect',
+        required: true,
+        mandatory: true,           // shows red 'Mandatory' badge
+        options: [
+          { value: 'Paid',    label: 'Paid'    },
+          { value: 'Pending', label: 'Pending' },
+          { value: 'Overdue', label: 'Overdue' },
+        ],
+      },
+      // Section break — visual divider in the param form
+      { _type: 'section', title: 'Date Range', showTitle: true },
+      {
+        name: 'issueDateRange',
+        label: 'Issue Date Range',
+        type: 'daterange',
+        optional: true,
+        span: 'full',
+      },
+    ],
+    queryOptions: { staleTime: 30_000 },  // React Query cache options
+  },
+];
+```
+
+**Query groups:**
+
+| Group | Behaviour |
+|---|---|
+| `'query'` | Fetches immediately when selected; no params required |
+| `'filter'` | Shows `QueryParamPanel`; fetch starts only after user clicks "Run Query" |
+| `'user-query'` | Reserved — managed automatically when a user saves a filter query; never define manually |
+
+**FieldDef `type` values and the input rendered:**
+
+| `type` | Input rendered |
+|---|---|
+| `'text'` | Text input with optional min/maxLength |
+| `'number'` | Numeric input with optional min/max |
+| `'select'` | Single-select dropdown |
+| `'multiselect'` | Multi-select dropdown with chips |
+| `'date'` | Single date picker |
+| `'daterange'` | Two-month date range picker |
+| `'radio'` | Radio group |
+| `'checkbox'` | Single boolean checkbox |
+
+**Span control:** Set `span: 1`, `span: 2`, or `span: 'full'` on any `FieldDef` to control its width in the param form grid.
+
+### Dynamic Field Options — FieldOptionsMap
+
+Override static `options` in a `FieldDef` at runtime. Use when options come from an API or depend on another field's value.
+
+```ts
+import type { FieldOptionsMap } from '@/ascendra-ui';
+
+export const FIELD_OPTIONS: FieldOptionsMap = {
+  // Static override — e.g. options fetched from your API on page mount
+  'by-status': {
+    statuses: serverFetchedStatuses, // SelectOption[] loaded from API
+  },
+
+  // Reactive resolver — options change based on another field's current value
+  'by-client': {
+    paymentStatus: (values) => {
+      const base = [{ value: 'Paid', label: 'Paid' }, { value: 'Pending', label: 'Pending' }];
+      // Narrow options when a specific grade is selected
+      if (values.gradeLevel === 'class-12') return base;
+      return [...base, { value: 'Overdue', label: 'Overdue' }];
+    },
+  },
+};
+```
+
+### Template — Query-Driven DataTable
+
+Full wiring for a server-queried table with selection, bulk actions, and persistence.
+
+```tsx
+"use client";
+import {
+  DataTableWithQueryProvider, DataTable, DataTableBar, DataTableBarContent, DataTableBarAction,
+  DataTableBody, DataTableCell, DataTableFoot,
+  DataTableCheckboxHead, DataTableCheckboxCell,
+  DataTableHead, DataTableHeadAction, DataTableBulkDeleteHeadAction,
+  DataTableHeader, DataTableHeaderRow, DataTableHighlight, DataTableRow,
+  DataTableRowAction, DataTableEditRowAction, DataTableDeleteRowAction,
+  DataTableSearchInput, DataTableColumnManager, DataTableSortDropdown,
+  DataTableFilterDropdown, DataTableFilterBar, DataTableWrapper,
+  DataTableLoadingBody, DataTableEmptyBody, DataTableErrorBody,
+  QueryBar, QueryParamPanel, SimpleBadge, Button, type ColumnDef,
+} from '@/ascendra-ui';
+import { QUERIES, INVOICE_QUERY_FUNCTIONS, FIELD_OPTIONS } from './invoices.queries';
+import { formatAmount } from '@/ascendra-ui/utils/common.util';
+
+const COLUMNS: ColumnDef<Invoice>[] = [
+  { key: 'invoiceNumber', label: 'Invoice #', freeze: true },
+  { key: 'clientName',    label: 'Client',    freeze: true, filter: true },
+  { key: 'amount',        label: 'Amount',    type: 'number' },
+  { key: 'status',        label: 'Status',    sortable: false, filter: true },
+];
+
+export default function InvoicesPage() {
+  return (
+    <DataTableWithQueryProvider
+      queries={QUERIES}
+      queryFunctions={INVOICE_QUERY_FUNCTIONS}
+      fieldOptions={FIELD_OPTIONS}
+      columns={COLUMNS}
+      getRowId={(row) => String(row.id)}
+      tableId="invoices-table"  // persists active query + params to localStorage
+    >
+      {/* QueryBar — query picker dropdown */}
+      <QueryBar />
+      {/* QueryParamPanel — param form for 'filter' group queries; auto-hides after submit */}
+      <QueryParamPanel />
+      <DataTableBar>
+        <DataTableBarContent>
+          <DataTableSearchInput />
+          <DataTableColumnManager />
+          <DataTableSortDropdown />
+          <DataTableFilterDropdown />
+        </DataTableBarContent>
+        <DataTableBarAction>
+          <Button size="sm">+ New Invoice</Button>
+        </DataTableBarAction>
+      </DataTableBar>
+      <DataTableFilterBar />
+      {/* DataTableWrapper hides table while QueryParamPanel is open */}
+      <DataTableWrapper>
+        <DataTable scrollable horizontal height={500}>
+          <DataTableHeader>
+            <DataTableHeaderRow>
+              <DataTableCheckboxHead />
+              <DataTableHead column="invoiceNumber" />
+              <DataTableHead column="clientName" />
+              <DataTableHead column="amount" />
+              <DataTableHead column="status" />
+              <DataTableHeadAction
+                onAction={(id, selectedRowIds) => {
+                  if (id === 'bulk-delete') deleteInvoices(selectedRowIds);
+                }}
+              >
+                <DataTableBulkDeleteHeadAction />
+              </DataTableHeadAction>
+            </DataTableHeaderRow>
+          </DataTableHeader>
+          <DataTableBody>
+            {(row: Invoice) => (
+              <DataTableRow key={row.id}>
+                <DataTableCheckboxCell rowId={String(row.id)} />
+                <DataTableCell column="invoiceNumber">
+                  <DataTableHighlight text={row.invoiceNumber} item={row} itemKey="invoiceNumber" />
+                </DataTableCell>
+                <DataTableCell column="clientName">
+                  <DataTableHighlight text={row.clientName} item={row} itemKey="clientName" />
+                </DataTableCell>
+                <DataTableCell column="amount">
+                  <DataTableHighlight text={formatAmount(row.amount)} item={row} itemKey="amount" />
+                </DataTableCell>
+                <DataTableCell column="status">
+                  <SimpleBadge variant="green">{row.status}</SimpleBadge>
+                </DataTableCell>
+                <DataTableRowAction onAction={(id) => handleRowAction(id, row)}>
+                  <DataTableEditRowAction />
+                  <DataTableDeleteRowAction />
+                </DataTableRowAction>
+              </DataTableRow>
+            )}
+          </DataTableBody>
+        </DataTable>
+        <DataTableLoadingBody />
+        <DataTableErrorBody />
+        <DataTableEmptyBody />
+        <DataTableFoot />
+      </DataTableWrapper>
+    </DataTableWithQueryProvider>
+  );
+}
+```
+
+### tableId — Persistence
+
+Pass `tableId` (a stable unique string per table, e.g. `"invoices-table"`) to persist the user's last active query and confirmed params to `localStorage`. On the next page visit the last-run query is restored automatically. Omit `tableId` to disable persistence.
+
+### Key Gotchas
+
+| Gotcha | What to do instead |
+|---|---|
+| Wrapping `DataTableCell` in a fragment, `React.memo`, or custom component | Pass cells as **direct children** of `DataTableRow` — wrapping hides the `column` prop and the cell is silently dropped |
+| Adding `DataTableCheckboxCell` without `getRowId` | Always pass `getRowId` to the provider when using checkbox components — without it they render nothing |
+| Rendering the raw `data` prop in a custom body | Use `pagedData` from `useDataTableData()` — `data` bypasses search / filter / sort / pagination |
+| Placing `DataTableFoot` or `DataTableErrorBody` outside `DataTableWrapper` | All state-display siblings (`LoadingBody`, `ErrorBody`, `EmptyBody`, `Foot`) must be **inside** `DataTableWrapper` |
+| Defining `group: 'user-query'` in your `QueryDef` array | `'user-query'` is reserved; the system manages these automatically when users save filter queries |
+| Passing a transformed/copied row to `DataTableHighlight item={}` | Pass the **original row object** — fuzzy match ranges are keyed by object reference in a WeakMap |
+
+---
+
 ## Composite Patterns
 
 > Composite patterns are full-page or full-panel implementations that combine multiple
@@ -1510,6 +1878,30 @@ Always follow these rules when building pages with Ascendra UI:
 - Use `UnsavedChangesBar` for any form that can be saved (`isDirty`, `onSave`, `onReset`)
 - Import all components from `@/ascendra-ui` — see **Import Paths** below for the shadcn exceptions
 - Use the code templates in **Structural Code Templates** as the starting point for each page type
+- Always check `docs/ui-reference.md` for an existing component before building custom UI. If a needed pattern is missing, implement it minimally and add `{/* TODO: ascendra-ui candidate — [ComponentName] — [why it's reusable] */}` above the custom code
+
+### Design System Gap Flagging
+
+When the library lacks a needed pattern, implement it minimally with Tailwind and mark it so the team can incorporate it into `@/ascendra-ui`:
+
+```tsx
+{/* TODO: ascendra-ui candidate — StatusTimeline — sequence of status change events with icons; reusable across all record detail sheets */}
+<div className="flex flex-col gap-3">
+  {events.map((e) => (
+    <div key={e.id} className="flex items-start gap-3 text-sm">
+      <span className="mt-0.5 size-2 shrink-0 rounded-full bg-current" />
+      <div>
+        <p className="font-medium">{e.label}</p>
+        <p className="text-muted-foreground">{e.date}</p>
+      </div>
+    </div>
+  ))}
+</div>
+```
+
+Comment format: `TODO: ascendra-ui candidate — [ComponentName] — [reason it is reusable across pages]`
+
+Run `grep -r "ascendra-ui candidate" .` to collect all flagged gaps at any time.
 
 ### Common Mistakes to Avoid
 
@@ -1551,6 +1943,20 @@ Use the code templates in the **Structural Code Templates** section of this docu
 - Components named `DataTable*` belong to the advanced table with built-in state
 - Components named `Table*` belong to the simple table without built-in state
 - Compound component families share a prefix: `Sheet`, `SheetContent`, `SheetHeader`, `SheetTitle`, etc.
+
+### Tech Stack Assumptions
+
+All code templates in this document assume the following stack. If your project differs, adapt accordingly.
+
+| Dependency | Why it's assumed |
+|---|---|
+| **Next.js App Router** | `"use client"` directive, `<Link>` routing, and `PageHeader`/`PageMain` shell conventions are App Router patterns |
+| **TypeScript** | All templates use TypeScript — `z.infer<>`, `type ChartConfig`, typed form values, component prop types |
+| **react-hook-form** | Form templates use `useForm`, `Controller`, `register`, `formState` from `react-hook-form` |
+| **zod + @hookform/resolvers/zod** | Schema validation in form templates uses `z.object()` + `zodResolver` |
+| **react-icons/lu** | All icon usage in templates uses Lucide React icons via `react-icons/lu` (`LuTrendingUp`, `LuSearch`, etc.) |
+| **Recharts** | All chart primitives (`AreaChart`, `BarChart`, `CartesianGrid`, etc.) come from `recharts` |
+| **@tanstack/react-query** | `DataTableQueryProvider` uses `useQuery` internally — wrap your app root in `QueryClientProvider` |
 
 ### Import Paths
 
