@@ -36,6 +36,19 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.0.8] — Consumer CLAUDE.md, documentation overhaul, CLAUDE.md gaps filled
+
+### Added
+- `ascendra-ui/template/CLAUDE.md` — new managed file shipped to consumer projects. Covers: reference docs as first line of action, full tech stack table, annotated project structure, import rules with code examples, page building guidance, custom component conventions, gap flagging pattern, and Dos/Don'ts.
+- `create-project.js` — copies `CLAUDE.md` to new consumer projects on init.
+- `ascendra-ui/template/scripts/upgrade.js` — copies updated `CLAUDE.md` on every upgrade; included in the auto-commit.
+
+### Changed
+- `CLAUDE.md` (showcase repo) — added Tech Stack table, File & Folder Conventions section (shipped-vs-showcase split, file naming conventions, provider folder structure, hook placement decision tree), `npm run docs:generate` reminders, Registry description quality guidelines, and Imports block in Dos and Don'ts.
+- `docs/showcase-reference.md` — added Design System Gap Flagging section, Tech Stack Assumptions table (including `@tanstack/react-query`), and full DataTable System documentation (9 subsections: provider choice, column definitions, static template, QueryFn contract, QueryDef definitions, dynamic field options, query-driven template, tableId persistence, key gotchas).
+
+---
+
 ## [1.0.7] — Rename repository from ascendra-ui-showcase to ascendra-ui
 
 ### Changed
