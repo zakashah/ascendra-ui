@@ -17,11 +17,31 @@ The `ascendra-ui/` folder is what consumer projects install. The showcase (`app/
 
 ---
 
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js App Router — `"use client"` on interactive components, server components by default |
+| Language | TypeScript — all files; no `.js` exceptions |
+| Styling | Tailwind CSS + CVA (`class-variance-authority`) for variant-driven components |
+| Base primitives | shadcn/ui — lives in `ascendra-ui/shadcn/`; **never edit these files** |
+| Icons | `react-icons/lu` (Lucide) — always this library; never `heroicons`, `lucide-react` directly, or any other icon set |
+| Forms | `react-hook-form` + `zod` + `@hookform/resolvers/zod` |
+| Data fetching | `@tanstack/react-query` — used inside `DataTableQueryProvider` and in showcase pages |
+| HTTP client | `axios` — pre-configured in `ascendra-ui/lib/api/client.ts` with auth + error interceptors |
+| Charts | `recharts` — always via `ChartContainer` from `@/ascendra-ui/shadcn` |
+| Dark mode | `next-themes` — `ThemeProvider` wraps the app; all tokens auto-adapt |
+| Auth (shipped) | `next-auth` — `getSession()` used in the API client interceptor |
+
+**Do not add new npm packages** without explicit discussion. The library surface is intentionally narrow — check `ascendra-ui/shadcn/` and existing utilities before reaching for a new dependency.
+
+---
+
 ## Quick Reference — Files to Touch
 
 | Task | Files |
 |---|---|
-| New component | `ascendra-ui/components/{cat}/{slug}.tsx` → `ascendra-ui/index.ts` → `lib/registry.ts` → `lib/nav-config.ts` → `app/showcase/layout.tsx` → `lib/doc-components.ts` → `components/previews/{slug}-preview.tsx` |
+| New component | `ascendra-ui/components/{cat}/{slug}.tsx` → `ascendra-ui/index.ts` → `lib/registry.ts` → `lib/nav-config.ts` → `app/showcase/layout.tsx` → `lib/doc-components.ts` → `components/previews/{slug}-preview.tsx` → **`npm run docs:generate`** |
 | Update component (props/API change) | `ascendra-ui/components/{cat}/{slug}.tsx` + `lib/registry.ts` + `components/previews/{slug}-preview.tsx` |
 | Update preview only | `components/previews/{slug}-preview.tsx` (+ `lib/registry.ts` if props docs need fixing) |
 | New gallery category | `lib/{type}-config.ts` → `app/showcase/{type}/page.tsx` → `components/{type}/` → `lib/nav-config.ts` |
@@ -113,6 +133,71 @@ export * from './components/common-ui/my-component';
 ```
 
 Keep exports alphabetical within each category comment block.
+
+---
+
+## File & Folder Conventions
+
+### The core rule
+
+> **Reusable by a consumer project → `ascendra-ui/`** (it ships with the package)  
+> **Showcase-only → root-level folders** (stays in this repo)
+
+Every folder inside `ascendra-ui/` is part of the package consumers install. Root-level folders (`app/`, `components/`, `lib/`, `hooks/`, `scripts/`) are showcase infrastructure and never ship.
+
+### `ascendra-ui/` — shipped folders
+
+| Folder | Purpose | Put here when… |
+|---|---|---|
+| `components/` | All visual components (see directory map above) | Building any reusable UI primitive |
+| `hooks/` | Standalone reusable React hooks | Hook is useful outside this project with no context dependency (e.g. `useIsSmallScreen`) |
+| `providers/` | Context providers + state systems | Provider is consumed by components or by consumer pages |
+| `lib/api/` | Axios HTTP client + response/error types | Anything touching the API client or its error/response types |
+| `utils/` | Pure stateless utility functions | No UI, no React — `formatDate`, `formatAmount`, `sleep` |
+| `preferences/` | localStorage preference management | Persisting user state across sessions (column visibility, query state) |
+| `shadcn/` | shadcn primitives | **Never touch** — extend via `components/ui/` only |
+| `template/` | Files shipped as app scaffolding | Scripts and config that consumer projects receive on install |
+
+### Root-level — showcase only
+
+| Folder | Purpose |
+|---|---|
+| `app/` | Next.js showcase pages and layouts |
+| `components/previews/` | Component doc/preview pages |
+| `lib/` | Showcase config files — `registry.ts`, `nav-config.ts`, `*-config.ts` |
+| `hooks/` | Showcase-specific hooks (mock data, UI-only state — not reusable by consumers) |
+| `scripts/` | Doc generation scripts |
+
+### File naming conventions
+
+| File type | Convention | Example |
+|---|---|---|
+| Component | `{name}.tsx` (kebab-case) | `simple-badge.tsx` |
+| Hook (standalone, in `ascendra-ui/hooks/`) | `use-{name}.ts` | `use-is-small-screen.ts` |
+| Hook (inside a provider folder) | `use-{name}.hook.ts` | `use-sort.hook.ts` |
+| Provider | `{name}.provider.tsx` | `data-table.provider.tsx` |
+| Types file | `{name}.types.ts` | `data-table.types.ts` |
+| Utility file | `{name}.util.ts` | `common.util.ts` |
+| Preference storage | `{name}.storage.ts` | `preferences.storage.ts` |
+
+### Provider folder structure
+
+Each provider system gets its own subfolder under `ascendra-ui/providers/`:
+
+```
+ascendra-ui/providers/{name}/
+  {name}.provider.tsx     ← React context + Provider component
+  {name}.types.ts         ← all TypeScript types and interfaces for this provider
+  use-{name}.hook.ts      ← hook(s) for consuming the context
+```
+
+Example: `ascendra-ui/providers/data-table/` contains `data-table.provider.tsx`, `data-table.types.ts`, `use-sort.hook.ts`, `use-filter.hook.ts`, `use-pagination.hook.ts`, etc.
+
+### Hook placement decision
+
+- **`ascendra-ui/hooks/`** — standalone, no context dependency. Works in any React project without provider setup (e.g. `useIsSmallScreen`). Export via `ascendra-ui/index.ts`.
+- **Provider subfolder** — hooks that call `useContext` for a specific provider. Must be used inside that provider's tree (e.g. `useDataTableSort` only works inside `DataTableProvider`). Export via `ascendra-ui/index.ts` alongside the provider.
+- **Root `hooks/`** — showcase-only. Uses mock data, showcase state, or is too demo-specific to ship (e.g. `useMockInvoiceList`). Never export from `ascendra-ui/index.ts`.
 
 ---
 
@@ -316,6 +401,17 @@ git push && git push --tags
 - Generated from: `lib/registry.ts` + `lib/*-config.ts` files
 - Never edit by hand — overwritten on every release
 - Keep `lib/registry.ts` accurate — it is the source of truth for the docs
+- **Run `npm run docs:generate`** after any change to `lib/registry.ts`, `lib/nav-config.ts`, or any `lib/*-config.ts` file — do not wait for release
+
+### Registry description quality
+
+The `description` field in `lib/registry.ts` is the only description consumer AI ever sees for a component. Make it specific enough to answer: *when should I reach for this vs. an alternative?*
+
+**Bad:** `'A card component for displaying content.'`
+
+**Good:** `'Settings-style card with a collapsible panel system. Use for grouping related form fields (Personal Info, Notifications, Danger Zone sections). Not a generic content card — for analytics KPI tiles use raw divs inside DashboardContent.'`
+
+The description should cover: what the component is, its primary use case, and at least one thing it is **not** for.
 
 ---
 
@@ -338,6 +434,13 @@ git push && git push --tags
 - **Don't** create a `page.tsx` for single-component showcases — the catch-all handles them
 - **Don't** duplicate layout infrastructure — use `MainSection`, `PageHeader`, etc. directly
 - **Don't** put showcase-only display logic inside `ascendra-ui/` components
+
+### Imports
+- **Do** import all `ascendra-ui` components from `@/ascendra-ui`
+- **Do** import `Drawer*`, `Tooltip*`, `ChartContainer`, `ChartTooltip`, `ChartTooltipContent`, `type ChartConfig` from `@/ascendra-ui/shadcn` — these are the shadcn exceptions
+- **Do** import chart primitives (`AreaChart`, `BarChart`, `CartesianGrid`, etc.) from `recharts`
+- **Do** import icons from `react-icons/lu` — always Lucide, always this package
+- **Don't** use relative imports like `../../components/button` — always use path aliases
 
 ### Registry
 - **Do** list every named export in `importNames`
