@@ -61,6 +61,10 @@ Everything below is pre-installed and pre-configured. **Do not add packages** wi
 | **next-auth** | Session management; `getSession()` is used inside the axios client interceptor |
 | **react-icons/lu** | Lucide icons — always this package, never `lucide-react` directly or heroicons |
 | **sonner** | Toasts — `<Toaster />` already in root layout; call `toast()` to trigger |
+| **jspdf + html-to-image** | PDF generation and DOM-to-image capture — already installed; no need to add a PDF library |
+| **fuse.js** | Client-side fuzzy search — already installed |
+| **tiptap** | Rich text editor (`@tiptap/react`, starter-kit, extensions) — already installed |
+| **date-fns** | Date formatting and arithmetic — already installed; use before reaching for moment/dayjs |
 
 ---
 
@@ -125,7 +129,11 @@ import { MyComponent } from "../../components/my-component"; // ✗
 
 **Forms:** All forms use `react-hook-form` + `zod`. See `docs/showcase-reference.md` → Form Templates for complete copy-paste patterns.
 
-**DataTable:** For query-driven tables with filtering, sorting, pagination, and saved queries, use `DataTableWithQueryProvider`. See `docs/showcase-reference.md` → DataTable System for full wiring documentation.
+**DataTable:** Two providers — choose based on data source:
+- `DataTableWithQueryProvider` — data comes from the server via named queries; includes `QueryBar`, `QueryParamPanel`, React Query fetching, and saved-query persistence. Use this for any table that hits an API.
+- `DataTableProvider` — you supply data directly as a prop; handles sorting, filtering, pagination client-side only. Use for static or already-loaded data sets.
+
+See `docs/showcase-reference.md` → DataTable System for full wiring documentation.
 
 **Charts:** Wrap all charts in `<ChartContainer config={chartConfig}>` from `@/ascendra-ui/shadcn`. See `docs/showcase-reference.md` → Chart Patterns.
 
