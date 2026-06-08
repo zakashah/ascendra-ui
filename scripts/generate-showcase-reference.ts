@@ -25,6 +25,7 @@ import { navConfig } from "../lib/nav-config";
 import { registry } from "../lib/registry";
 import { reportsConfig } from "../lib/reports-config";
 import { sheetsConfig } from "../lib/sheets-config";
+import type { LayoutCell } from "../lib/types";
 
 const ascendraConfig = JSON.parse(
   readFileSync(join(process.cwd(), "ascendra.json"), "utf8")
@@ -35,6 +36,16 @@ const today = new Date().toISOString().slice(0, 10);
 
 function esc(s: string) {
   return s.replace(/\|/g, "\\|");
+}
+
+function layoutGrid(layout: LayoutCell[][]): string {
+  const rows = layout.map((row, i) => {
+    const cells = row.map(
+      (cell) => `\`${cell.type}[${cell.cols}]\` ${cell.title}${cell.height ? ` _(${cell.height})_` : ""}`
+    );
+    return `- Row ${i + 1}: ${cells.join("  ·  ")}`;
+  });
+  return ["**Layout** (12-column grid)", "", ...rows].join("\n") + "\n";
 }
 
 // ── Count helpers ──────────────────────────────────────────────────────────────
@@ -1192,31 +1203,6 @@ const lines: string[] = [
   "",
   "---",
   "",
-  "## Primitive Components by Category",
-  "",
-  ...navConfig
-    .filter((cat) => categoryComponents.has(cat.title))
-    .map((cat) => {
-      const names = categoryComponents.get(cat.title)!;
-      return [
-        `### ${cat.title}`,
-        "",
-        `**Components:** ${names.join(" · ")}`,
-        "",
-        "**Showcase pages:**",
-        "",
-        ...cat.items.map((item) => {
-          const bare = item.slug.split("/").pop()!;
-          const meta = registry[item.slug] ?? registry[bare];
-          if (!meta) return "";
-          return `- [\`/showcase/${item.slug}\`](/showcase/${item.slug}) — **${item.name}**: ${meta.description}`;
-        }).filter(Boolean),
-        "",
-      ].join("\n");
-    }),
-  "",
-  "---",
-  "",
   "## Composite Patterns",
   "",
   "> Composite patterns are full-page or full-panel implementations that combine multiple",
@@ -1248,22 +1234,6 @@ const lines: string[] = [
       `| **${esc(f.name)}** | [\`/showcase/forms/${f.slug}\`](/showcase/forms/${f.slug}) | ${f.domain} | ${f.complexity} | ${esc(f.layout)} | ${f.hasEditMode ? "Yes" : "No"} |`
   ),
   "",
-  "#### Form Pattern Details",
-  "",
-  ...formsConfig.map((f) =>
-    [
-      `##### ${f.name}`,
-      "",
-      `_Route:_ \`/showcase/forms/${f.slug}\`  `,
-      `_Domain:_ ${f.domain} · _Complexity:_ ${f.complexity}  `,
-      `_Layout:_ ${f.layout}${f.hasEditMode ? "  \n_Edit mode:_ Ships with a read-only view and an Edit toggle" : ""}`,
-      "",
-      f.description,
-      "",
-      `_Components used:_ ${f.components.join(", ")}`,
-      "",
-    ].join("\n")
-  ),
   "---",
   "",
   "### Dialogs",
@@ -1381,6 +1351,19 @@ const lines: string[] = [
       `| **${esc(d.name)}** | [\`/showcase/dashboards/${d.slug}\`](/showcase/dashboards/${d.slug}) | ${d.domain} | ${d.kpis.join(", ")} | ${d.chartTypes.join(", ")} |`
   ),
   "",
+  "#### Dashboard Layout Breakdowns",
+  "",
+  ...dashboardsConfig.flatMap((d) => [
+    `##### ${d.name}`,
+    "",
+    d.description,
+    "",
+    `- **Domain:** ${d.domain}`,
+    `- **KPIs:** ${d.kpis.join(", ")}`,
+    `- **Chart types:** ${d.chartTypes.join(", ")}`,
+    "",
+    layoutGrid(d.layout),
+  ]),
   "---",
   "",
   "### Reports",
@@ -1420,41 +1403,37 @@ const lines: string[] = [
   "",
   "---",
   "",
-  "## Showcase Navigation Map",
+  "## Showcase Gallery Entry Points",
   "",
-  `The showcase has ${showcasePageCount} pages organized into ${navConfig.length} categories.`,
-  "All routes are prefixed with \`/showcase\`.",
+  `The showcase has ${showcasePageCount} pages total. These are the primary gallery landing pages. Primitive component pages follow the pattern \`/showcase/{category}/{slug}\` — see \`docs/ui-reference.md\` for individual component showcase links.`,
   "",
-  "| Category | Pages |",
+  "| Section | Route |",
   "|---|---|",
-  ...navConfig.map(
-    (cat) =>
-      `| **${cat.title}** | ${cat.items.map((i) => `[\`${i.slug || "/"}\`](/showcase/${i.slug})`).join(", ")} |`
-  ),
+  "| Sample Forms | [`/showcase/forms`](/showcase/forms) |",
+  "| Sample Dialogs | [`/showcase/dialogs`](/showcase/dialogs) |",
+  "| Sample Sheets | [`/showcase/sheets`](/showcase/sheets) |",
+  "| Sample Drawers | [`/showcase/drawers`](/showcase/drawers) |",
+  "| Sample Dashboards | [`/showcase/dashboards`](/showcase/dashboards) |",
+  "| Sample Reports | [`/showcase/reports`](/showcase/reports) |",
+  "| Charts gallery | [`/showcase/charts`](/showcase/charts) |",
+  "| Layout guide | [`/showcase/layout-guide`](/showcase/layout-guide) |",
+  "| Data Table lab | [`/showcase/data-table-lab`](/showcase/data-table-lab) |",
   "",
   "---",
   "",
-  "## AI Developer Guide",
+  "## Page Building Rules",
   "",
-  "> Use this section to write effective prompts for AI models working with this codebase.",
+  "### Core Rules",
   "",
-  "### How to Ask an AI to Build a New Page",
+  "Always follow these rules when building pages with Ascendra UI:",
   "",
-  "Include the following context in your prompt:",
-  "",
-  "```",
-  "I am working in a Next.js project that uses Ascendra UI.",
-  "All components are imported from @/ascendra-ui (or @/ascendra-ui/shadcn for Tooltip).",
-  "See docs/ui-reference.md for full props and docs/showcase-reference.md for patterns.",
-  "",
-  "Build [describe the page]. Requirements:",
-  "- Use the standard page shell: PageHeader + PageMain + PageWrapper + PageContent + MainContent",
-  "- Wrap all inputs in Field with FieldLabel and FieldError",
-  "- Use Card + CardPanel + CardPanelItem for settings sections",
-  "- Use SimpleBadge for status labels (not custom spans)",
-  "- Use UnsavedChangesBar for forms (isDirty, onSave, onReset)",
-  "- Follow the layout guide in docs/showcase-reference.md",
-  "```",
+  "- Use the standard page shell: `PageHeader` + `PageMain` + `PageWrapper` + `PageContent` + `MainContent`",
+  "- Always wrap inputs in `Field > FieldLabel + FieldContent > [control] + FieldError`",
+  "- Always use `Card > CardPanel > CardPanelItem` for settings sections",
+  "- Use `SimpleBadge` for status labels — not custom `<span>` elements with color classes",
+  "- Use `UnsavedChangesBar` for any form that can be saved (`isDirty`, `onSave`, `onReset`)",
+  "- Import all components from `@/ascendra-ui` — see **Import Paths** below for the shadcn exceptions",
+  "- Use the code templates in **Structural Code Templates** as the starting point for each page type",
   "",
   "### Common Mistakes to Avoid",
   "",

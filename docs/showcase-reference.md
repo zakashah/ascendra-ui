@@ -1108,152 +1108,6 @@ RIGHT:  stroke="var(--border)"
 
 ---
 
-## Primitive Components by Category
-
-### Feedback & Status
-
-**Components:** Color Tile · Simple Badge · Bubble Badge · Status Dot · Simple Alert · Toast · Pro Badge · Unsaved Changes Bar · Progress & Stepper · Skeleton · Rating
-
-**Showcase pages:**
-
-- [`/showcase/feedback/color-tile`](/showcase/feedback/color-tile) — **Color Tile**: Solid-color classification tile with a label and optional sublabel. Ideal for category grids, SDG alignments, priority indicators, and status tiles.
-- [`/showcase/feedback/simple-badge`](/showcase/feedback/simple-badge) — **Simple Badge**: Small inline status badge for labeling content with semantic color variants.
-- [`/showcase/feedback/bubble-badge`](/showcase/feedback/bubble-badge) — **Bubble Badge**: Gradient pill badges with inset highlight, available in multiple sizes and colors.
-- [`/showcase/feedback/status-dot`](/showcase/feedback/status-dot) — **Status Dot**: Tiny status indicator dot with a halo shadow ring, available in semantic colors.
-- [`/showcase/feedback/simple-alert`](/showcase/feedback/simple-alert) — **Simple Alert**: Compact alert notification box with semantic severity variants and an optional icon.
-- [`/showcase/feedback/toasts`](/showcase/feedback/toasts) — **Toast**: Lightweight, accessible toast notifications powered by Sonner. Mount <Toaster /> once in the root layout and call toast() from anywhere.
-- [`/showcase/feedback/pro-badge`](/showcase/feedback/pro-badge) — **Pro Badge**: Premium feature indicator with a blue-purple gradient treatment.
-- [`/showcase/feedback/unsaved-changes-bar`](/showcase/feedback/unsaved-changes-bar) — **Unsaved Changes Bar**: Fixed bottom bar that surfaces when a form has unsaved changes, with save/reset actions and status states.
-- [`/showcase/feedback/progress`](/showcase/feedback/progress) — **Progress & Stepper**: ProgressBar wraps Radix Progress with size and color variants plus an indeterminate animation. Stepper is a fully custom horizontal step indicator with four statuses.
-- [`/showcase/feedback/skeleton`](/showcase/feedback/skeleton) — **Skeleton**: Animated loading placeholder. Includes preset compositions for text blocks, user rows, stat tiles, cards, and table rows — built on shadcn skeleton.
-- [`/showcase/feedback/rating`](/showcase/feedback/rating) — **Rating**: Star rating display and input with half-star precision, multiple sizes, and semantic color variants.
-
-### Forms & Inputs
-
-**Components:** Button · Input · Input Group · Checkbox · Radio Group · Switch · Select · Field · Combobox · Table Lookup · File Upload · Rich Text Editor · Color Picker
-
-**Showcase pages:**
-
-- [`/showcase/inputs/button`](/showcase/inputs/button) — **Button**: Primary CTA button with a 4-layer shadow and gloss system, available in multiple variants and sizes.
-- [`/showcase/inputs/input`](/showcase/inputs/input) — **Input**: Text input with smart focus: shadow ring for pointer interactions, outline for keyboard navigation.
-- [`/showcase/inputs/input-group`](/showcase/inputs/input-group) — **Input Group**: Composite input system with prefix/suffix text, icon addons, and button addons.
-- [`/showcase/inputs/checkbox`](/showcase/inputs/checkbox) — **Checkbox**: Custom checkbox with gradient overlay and shadow ring on the checked state.
-- [`/showcase/inputs/radio-group`](/showcase/inputs/radio-group) — **Radio Group**: Custom radio group with glow and gloss effects on the selected item.
-- [`/showcase/inputs/switch`](/showcase/inputs/switch) — **Switch**: Toggle switch with a gradient overlay on the active track.
-- [`/showcase/inputs/select`](/showcase/inputs/select) — **Select**: Custom select dropdown with scroll buttons and size variants.
-- [`/showcase/inputs/field`](/showcase/inputs/field) — **Field**: Compound form field wrapper with label, description, error display, and orientation variants.
-- [`/showcase/inputs/combobox`](/showcase/inputs/combobox) — **Combobox**: Searchable dropdown with single and multi-select (chips) modes, built on Base UI.
-- [`/showcase/inputs/table-lookup`](/showcase/inputs/table-lookup) — **Table Lookup**: Table-based lookup field for large datasets — supports single and multi-select with chips, async search, and configurable multi-column display.
-- [`/showcase/inputs/file-upload`](/showcase/inputs/file-upload) — **File Upload**: Fully custom file upload with three variants (dropzone, button, inline) and five controlled states (idle, dragover, uploading, success, error). Includes drag-and-drop, type validation, size limits, and a progress bar.
-- [`/showcase/inputs/rich-text-editor`](/showcase/inputs/rich-text-editor) — **Rich Text Editor**: Tiptap-based rich text editor with a 6-action toolbar (bold, italic, strike, bullet list, numbered list, link). Controlled value/onChange API compatible with react-hook-form. Matches input ring and shadow tokens.
-- [`/showcase/inputs/color-picker`](/showcase/inputs/color-picker) — **Color Picker**: Fully custom color picker using Radix DropdownMenu as the floating shell — the same token-aligned popover as all other dropdowns. Supports HSL sliders, hex input, and a configurable preset grid.
-
-### Date & Time
-
-**Components:** Calendar · Date Picker · Date Range Picker
-
-**Showcase pages:**
-
-- [`/showcase/date/calendar`](/showcase/date/calendar) — **Calendar**: Full-featured calendar built on react-day-picker. Supports single, multiple, and range selection with optional month/year dropdowns.
-- [`/showcase/date/date-picker`](/showcase/date/date-picker) — **Date Picker**: Popover-based single date picker with a trigger button and an embedded Calendar.
-- [`/showcase/date/date-range-picker`](/showcase/date/date-range-picker) — **Date Range Picker**: Popover-based date range picker with configurable month count and an embedded range Calendar.
-
-### Navigation
-
-**Components:** Anchor · Nav · Nav Link · Header
-
-**Showcase pages:**
-
-- [`/showcase/nav/anchor`](/showcase/nav/anchor) — **Anchor**: Styled link component with semantic color variants and keyboard focus states.
-- [`/showcase/nav/nav`](/showcase/nav/nav) — **Nav**: Sticky horizontal navigation bar with muted background and horizontally scrollable content area.
-- [`/showcase/nav/nav-link`](/showcase/nav/nav-link) — **Nav Link**: Navigation link with an active underline indicator driven by the current pathname.
-- [`/showcase/nav/header`](/showcase/nav/header) — **Header**: Top navigation header with breadcrumb links, slash separators, chevrons, and action slots.
-
-### Overlays
-
-**Components:** Dialog · Sheet · Dropdown Menu · Tooltip · Command Palette
-
-**Showcase pages:**
-
-- [`/showcase/overlay/dialog`](/showcase/overlay/dialog) — **Dialog**: Modal dialog with header, body, and footer slots. Centered overlay with max-w-sm default.
-- [`/showcase/overlay/sheet`](/showcase/overlay/sheet) — **Sheet**: Slide-out drawer panel that opens from any edge of the screen.
-- [`/showcase/overlay/dropdown-menu`](/showcase/overlay/dropdown-menu) — **Dropdown Menu**: Full-featured dropdown with items, separators, checkboxes, radio groups, and sub-menus.
-- [`/showcase/overlay/tooltips`](/showcase/overlay/tooltips) — **Tooltip**: Floating label that appears on hover or focus. Wraps Radix UI Tooltip with TooltipProvider, all four placements, and rich content support.
-- [`/showcase/overlay/command-palette`](/showcase/overlay/command-palette) — **Command Palette**: Keyboard-first command palette dialog built on shadcn Command + Dialog. Groups commands with icons and shortcuts. Registers ⌘K/Ctrl+K via useCommandPalette hook.
-
-### Reports
-
-**Components:** Report Header · Report Document · Report Content
-
-**Showcase pages:**
-
-- [`/showcase/report-ui/report-header`](/showcase/report-ui/report-header) — **Report Header**: Composable report title zone. Combines an eyebrow label, bold heading, subtitle, and a metadata footer that renders as an inline row or a multi-column stacked grid for dense field sets.
-- [`/showcase/report-ui/report-document`](/showcase/report-ui/report-document) — **Report Document**: Document shell and structural dividers. ReportDocumentWrapper is the root element targeted by the PDF export (id="report-content"). ReportSectionHeader separates content zones. ReportDocumentFooter anchors legal notices and attribution.
-- [`/showcase/report-ui/report-content`](/showcase/report-ui/report-content) — **Report Content**: In-body text blocks for executive summaries, analyst notes, and methodology disclosures. ReportPdfExportButton captures the report document and downloads it as a paginated A4 PDF.
-
-### Charts
-
-**Components:** Chart Legend · Chart Target Legend
-
-**Showcase pages:**
-
-- [`/showcase/charts/chart-legend`](/showcase/charts/chart-legend) — **Chart Legend**: Inline legend item pairing a colored swatch with a label, and a group wrapper that controls alignment. Use beneath any chart to identify series, segments, or categories.
-- [`/showcase/charts/chart-target-legend`](/showcase/charts/chart-target-legend) — **Chart Target Legend**: Inline legend item pairing a thin horizontal bar swatch (16×2px md, 24×2px lg) with a label, used to identify target or goal lines on a chart. Shares the same color tokens as ChartLegend.
-
-### Tables & Data
-
-**Components:** Table · Empty State · Data Table
-
-**Showcase pages:**
-
-- [`/showcase/data-table/table`](/showcase/data-table/table) — **Table**: Data table with header, body, footer, scrollable container, and optional accent border and gradient background.
-- [`/showcase/data-table/empty`](/showcase/data-table/empty) — **Empty State**: Placeholder for empty content areas with optional icon media and call-to-action.
-- [`/showcase/data-table`](/showcase/data-table) — **Data Table**: Feature-rich data table with built-in search, filtering, sorting, column management, and pagination — composed via DataTableProvider and QueryProvider.
-
-### Layout
-
-**Components:** Card · Page Header · Page Bar · Aside Content · Item
-
-**Showcase pages:**
-
-- [`/showcase/layout/card`](/showcase/layout/card) — **Card**: Settings-style card with header, collapsible panel, panel items, field, crown badge, and footer. Supports accent border and gradient background on the panel.
-- [`/showcase/layout/page-header`](/showcase/layout/page-header) — **Page Header**: Page-level header with title, subtitle, and an action slot. Composes PageHeaderGroup, PageTitle, PageSubtitle, and PageHeaderAction.
-- [`/showcase/layout/page-bar`](/showcase/layout/page-bar) — **Page Bar**: Horizontal toolbar for search, filters, and primary actions above page content.
-- [`/showcase/layout/aside-content`](/showcase/layout/aside-content) — **Aside Content**: Aside panel with optional dimmed state and gradient mask for overflow content on mobile.
-- [`/showcase/layout/item`](/showcase/layout/item) — **Item**: Flexible list item with media, title, description, actions, header, and footer slots. Supports outline and muted variants.
-
-### Tabs
-
-**Components:** Tabs
-
-**Showcase pages:**
-
-- [`/showcase/tabs`](/showcase/tabs) — **Tabs**: Tabbed navigation with dirty-state dot indicator and disabled tab support.
-
-### Sidebar
-
-**Components:** Sidebar Menu
-
-**Showcase pages:**
-
-- [`/showcase/sidebar-menu`](/showcase/sidebar-menu) — **Sidebar Menu**: Expandable sidebar navigation with grouped menu sets, icon headers, and active link detection.
-
-### Utilities
-
-**Components:** Copy Text · Name Avatar · Theme Toggle · Pagination Button · Row Action Button · Scroll To Top
-
-**Showcase pages:**
-
-- [`/showcase/util/copy-text`](/showcase/util/copy-text) — **Copy Text**: Inline copy-to-clipboard trigger with icon feedback and an optional tooltip confirmation.
-- [`/showcase/util/name-avatar`](/showcase/util/name-avatar) — **Name Avatar**: Auto-generated avatar from name initials with a deterministic background color derived from the name.
-- [`/showcase/util/theme-toggle`](/showcase/util/theme-toggle) — **Theme Toggle**: Dark/light mode toggle button powered by next-themes.
-- [`/showcase/util/pagination-button`](/showcase/util/pagination-button) — **Pagination Button**: Small bordered navigation button for pagination controls.
-- [`/showcase/util/row-action-button`](/showcase/util/row-action-button) — **Row Action Button**: Icon button for table row actions — hidden by default, visible on row hover.
-- [`/showcase/util/scroll-to-top`](/showcase/util/scroll-to-top) — **Scroll To Top**: Behavior-only component that scrolls the window to the top on every route change and disables browser scroll restoration.
-
-
----
-
 ## Composite Patterns
 
 > Composite patterns are full-page or full-panel implementations that combine multiple
@@ -1290,110 +1144,6 @@ The following primitives appear across all form patterns: Input, Select, Field, 
 | **Project Kickoff** | [`/showcase/forms/project-kickoff`](/showcase/forms/project-kickoff) | Project Management | Complex | 3 sections, mixed 1-column and 2-column grids | No |
 | **Search & Filter Panel** | [`/showcase/forms/search-filter`](/showcase/forms/search-filter) | Universal Utility | Simple | Compact sidebar panel, single column | No |
 | **Employee Onboarding Stepper** | [`/showcase/forms/employee-onboarding`](/showcase/forms/employee-onboarding) | HR / Enterprise | Complex | 4-step stepper with step indicator and per-step sections | No |
-
-#### Form Pattern Details
-
-##### Contact & Inquiry
-
-_Route:_ `/showcase/forms/contact-inquiry`  
-_Domain:_ General / Marketing · _Complexity:_ Simple  
-_Layout:_ Single column, vertical
-
-A clean single-section contact form covering the most common lead-capture and general inquiry scenarios.
-
-_Components used:_ Input, Select, Field, Button, UnsavedChangesBar
-
-##### User Profile Settings
-
-_Route:_ `/showcase/forms/user-profile`  
-_Domain:_ SaaS / Product · _Complexity:_ Medium  
-_Layout:_ 2 sections, mixed vertical & horizontal fields  
-_Edit mode:_ Ships with a read-only view and an Edit toggle
-
-Account settings split into Personal Info and Preferences sections — a staple pattern for any SaaS product.
-
-_Components used:_ Input, Select, Switch, Combobox, Field, FieldGroup, UnsavedChangesBar
-
-##### Support Ticket
-
-_Route:_ `/showcase/forms/support-ticket`  
-_Domain:_ IT / SaaS · _Complexity:_ Medium  
-_Layout:_ Single column with conditional section reveal
-
-Issue reporting form with priority radio, dynamic conditional fields revealed by a Switch, and an inline alert guiding the user.
-
-_Components used:_ Input, Select, RadioGroup, Combobox, Checkbox, Switch, SimpleAlert, Field, UnsavedChangesBar
-
-##### Appointment Booking
-
-_Route:_ `/showcase/forms/appointment-booking`  
-_Domain:_ Healthcare / Services · _Complexity:_ Medium  
-_Layout:_ 3 sections, step-like visual flow
-
-Three-stage booking flow: pick a service → choose a date & time slot → confirm patient details.
-
-_Components used:_ RadioGroup, DatePicker, Combobox, Input, SimpleBadge, SimpleAlert, Field, FieldGroup, UnsavedChangesBar
-
-##### Job Application
-
-_Route:_ `/showcase/forms/job-application`  
-_Domain:_ HR / Recruitment · _Complexity:_ Medium  
-_Layout:_ 3 sections, single column with 2-column grid rows
-
-Multi-section application form covering personal details, position preferences, and portfolio links — common in career portals.
-
-_Components used:_ Input, InputGroup, Select, Combobox, DatePicker, Checkbox, Field, FieldGroup, UnsavedChangesBar
-
-##### Financial Transaction
-
-_Route:_ `/showcase/forms/financial-transaction`  
-_Domain:_ Finance / Banking · _Complexity:_ Medium  
-_Layout:_ 2 sections, horizontal-label compact layout
-
-Compact transaction entry with account lookup, currency-prefixed amount, and a recurring schedule section — typical in accounting or banking UIs.
-
-_Components used:_ Input, InputGroup, Select, RadioGroup, DatePicker, DateRangePicker, TableLookup, Field, FieldGroup, UnsavedChangesBar
-
-##### Create Product Listing
-
-_Route:_ `/showcase/forms/create-product`  
-_Domain:_ E-Commerce · _Complexity:_ Complex  
-_Layout:_ 3 sections, mixed 1-column and 2-column grid  
-_Edit mode:_ Ships with a read-only view and an Edit toggle
-
-Product creation form spanning basic info, pricing & inventory, and shipping — representative of e-commerce admin backends.
-
-_Components used:_ Input, InputGroup, Select, Combobox, Switch, Checkbox, SimpleAlert, Field, FieldGroup, UnsavedChangesBar
-
-##### Project Kickoff
-
-_Route:_ `/showcase/forms/project-kickoff`  
-_Domain:_ Project Management · _Complexity:_ Complex  
-_Layout:_ 3 sections, mixed 1-column and 2-column grids
-
-Project creation spanning basics, team composition, and timeline & budget — covering project management tool patterns.
-
-_Components used:_ Input, InputGroup, Select, Combobox, Checkbox, DateRangePicker, Field, FieldGroup, SimpleAlert, UnsavedChangesBar
-
-##### Search & Filter Panel
-
-_Route:_ `/showcase/forms/search-filter`  
-_Domain:_ Universal Utility · _Complexity:_ Simple  
-_Layout:_ Compact sidebar panel, single column
-
-Sidebar-style filter panel with date range, multi-select categories, status checkboxes, and a quick-search input — universal across list and report views.
-
-_Components used:_ Input, DateRangePicker, Checkbox, Combobox, RadioGroup, Field, FieldGroup, Button
-
-##### Employee Onboarding Stepper
-
-_Route:_ `/showcase/forms/employee-onboarding`  
-_Domain:_ HR / Enterprise · _Complexity:_ Complex  
-_Layout:_ 4-step stepper with step indicator and per-step sections
-
-Four-step stepper covering personal info, employment details, compensation, and IT access — the broadest coverage of the component library in one form.
-
-_Components used:_ Input, InputGroup, Select, Combobox, RadioGroup, Checkbox, Switch, DatePicker, TableLookup, SimpleAlert, Field, FieldGroup, UnsavedChangesBar
 
 ---
 
@@ -1541,6 +1291,149 @@ KPI tiles always use `Card > CardPanel > CardPanelItem` with a metric value, lab
 | **Supply Chain** | [`/showcase/dashboards/supply-chain`](/showcase/dashboards/supply-chain) | Operations / Logistics | On-time Delivery, Inventory Fill Rate, Inventory Turns, Avg. Lead Time | composed, bar, treemap, radar |
 | **Real Estate Portfolio** | [`/showcase/dashboards/real-estate`](/showcase/dashboards/real-estate) | Property Investment | Portfolio Value, Avg. Gross Yield, Occupancy Rate, Monthly Income | treemap, pie, composed, bar, scatter |
 
+#### Dashboard Layout Breakdowns
+
+##### SaaS Revenue & Growth
+
+Monthly recurring revenue, plan-tier breakdown, churn, and net revenue retention — the core metrics for a SaaS growth review.
+
+- **Domain:** SaaS / Startup
+- **KPIs:** Monthly Recurring Revenue, Annual Run Rate, Churn Rate, Net Revenue Retention
+- **Chart types:** composed, pie, area, radial, bar
+
+**Layout** (12-column grid)
+
+- Row 1: `chart[8]` MRR & Growth Rate  ·  `chart[4]` Plan Mix
+- Row 2: `chart[8]` Revenue by Tier  ·  `chart[4]` NRR Gauge
+- Row 3: `table[7]` Top Accounts  ·  `chart[5]` Churn by Cohort
+
+##### E-commerce Operations
+
+Order volume, GMV, category performance, and return rates — the ops view for a mid-size online retailer.
+
+- **Domain:** Retail / E-commerce
+- **KPIs:** Gross Merchandise Value, Orders Placed, Avg. Order Value, Return Rate
+- **Chart types:** line, bar, treemap, histogram
+
+**Layout** (12-column grid)
+
+- Row 1: `chart[12]` Daily Orders
+- Row 2: `chart[6]` Orders by Category  ·  `chart[6]` GMV by Category
+- Row 3: `chart[5]` Order Value Distribution  ·  `table[7]` Top Products
+
+##### Marketing Performance
+
+Channel ROAS, traffic mix, and spend efficiency — the CMO view for a performance-marketing team running multi-channel campaigns.
+
+- **Domain:** Marketing / Growth
+- **KPIs:** Attributed Revenue, Blended ROAS, Customer Acq. Cost, Avg. CTR
+- **Chart types:** bar, radar, area, pie, composed
+
+**Layout** (12-column grid)
+
+- Row 1: `chart[5]` Channel ROAS  ·  `chart[7]` Channel Scorecard
+- Row 2: `chart[8]` Traffic by Source  ·  `chart[4]` Spend Allocation
+- Row 3: `chart[8]` Spend vs Revenue  ·  `chart[4]` Status Summary
+- Row 4: `table[12]` Active Campaigns
+
+##### Financial P&L
+
+Revenue, cost breakdown, EBITDA margin trajectory, and budget attainment — the board-ready financial view for a growth-stage company.
+
+- **Domain:** Finance / CFO
+- **KPIs:** Total Revenue, EBITDA, Monthly Burn Rate, Cash Runway
+- **Chart types:** composed, radial, area, bar
+
+**Layout** (12-column grid)
+
+- Row 1: `chart[7]` Costs & EBITDA Margin  ·  `chart[5]` Budget Attainment
+- Row 2: `chart[12]` Revenue vs Expenses
+- Row 3: `chart[6]` Cash Flow Waterfall  ·  `table[6]` P&L Summary
+
+##### Trading & Portfolio
+
+Price action, volume, return distribution, and risk/return positioning — a complete view for an equity portfolio manager.
+
+- **Domain:** Finance / Trading
+- **KPIs:** Portfolio Value, Day P&L, Beta, Sharpe Ratio
+- **Chart types:** candlestick, histogram, scatter, composed
+
+**Layout** (12-column grid)
+
+- Row 1: `chart[12]` Price Action _(xl)_
+- Row 2: `chart[4]` Return Distribution  ·  `chart[4]` Risk vs Return  ·  `chart[4]` Price + Volume
+- Row 3: `table[12]` Positions
+
+##### Healthcare Analytics
+
+Patient flow, bed occupancy, department performance, and outcome rates — the clinical director's operational view of a hospital.
+
+- **Domain:** Healthcare / Clinical
+- **KPIs:** Active Patients, Avg. Wait Time, Bed Occupancy, Recovery Rate
+- **Chart types:** line, radial, bar, radar, histogram
+
+**Layout** (12-column grid)
+
+- Row 1: `chart[8]` Admissions Trend  ·  `chart[4]` Bed Occupancy
+- Row 2: `chart[6]` Conditions by Department  ·  `chart[6]` Department Scorecard
+- Row 3: `chart[5]` Patient Age Distribution  ·  `table[7]` Recent Cases
+
+##### HR & People Analytics
+
+Headcount movement, attrition drivers, salary distribution, and performance spread — the CHRO's workforce view.
+
+- **Domain:** People Operations
+- **KPIs:** Total Headcount, Attrition Rate, Avg. Time to Hire, eNPS Score
+- **Chart types:** line, pie, bar, scatter
+
+**Layout** (12-column grid)
+
+- Row 1: `chart[7]` Hiring vs Attrition  ·  `chart[5]` Seniority Mix
+- Row 2: `chart[12]` Headcount by Department
+- Row 3: `chart[6]` Tenure vs Performance  ·  `table[6]` Recent Hires
+
+##### DevOps Monitoring
+
+Latency, throughput, error rates by service, and deployment frequency — the reliability dashboard for an engineering team.
+
+- **Domain:** Engineering / SRE
+- **KPIs:** Uptime (30d), P99 Latency, Error Rate, Deploy Frequency
+- **Chart types:** area, line, bar, composed, radial
+
+**Layout** (12-column grid)
+
+- Row 1: `chart[12]` Request Volume
+- Row 2: `chart[6]` P99 Latency  ·  `chart[6]` Errors by Service
+- Row 3: `chart[8]` Error Rate & Throughput  ·  `chart[4]` SLA Uptime
+
+##### Supply Chain
+
+Inventory flow, supplier concentration, regional shipments, and delivery performance — the operations director's supply view.
+
+- **Domain:** Operations / Logistics
+- **KPIs:** On-time Delivery, Inventory Fill Rate, Inventory Turns, Avg. Lead Time
+- **Chart types:** composed, bar, treemap, radar
+
+**Layout** (12-column grid)
+
+- Row 1: `chart[7]` Inventory Flow  ·  `chart[5]` Shipments by Region
+- Row 2: `chart[12]` Supplier Spend Share
+- Row 3: `chart[5]` Supplier Scorecard  ·  `table[7]` Open Orders
+
+##### Real Estate Portfolio
+
+Portfolio valuation, yield analysis, occupancy, and individual property performance — the asset manager's property view.
+
+- **Domain:** Property Investment
+- **KPIs:** Portfolio Value, Avg. Gross Yield, Occupancy Rate, Monthly Income
+- **Chart types:** treemap, pie, composed, bar, scatter
+
+**Layout** (12-column grid)
+
+- Row 1: `chart[7]` Portfolio by Type  ·  `chart[5]` Geographic Allocation
+- Row 2: `chart[8]` Rental Income & Yield  ·  `chart[4]` Properties by Value
+- Row 3: `chart[5]` Price vs Area  ·  `table[7]` Properties
+
 ---
 
 ### Reports
@@ -1586,56 +1479,37 @@ Domains covered: Finance / Accounting, Corporate / C-Suite, Healthcare / Clinica
 
 ---
 
-## Showcase Navigation Map
+## Showcase Gallery Entry Points
 
-The showcase has 111 pages organized into 19 categories.
-All routes are prefixed with `/showcase`.
+The showcase has 111 pages total. These are the primary gallery landing pages. Primitive component pages follow the pattern `/showcase/{category}/{slug}` — see `docs/ui-reference.md` for individual component showcase links.
 
-| Category | Pages |
+| Section | Route |
 |---|---|
-| **Getting Started** | [`/`](/showcase/), [`design-tokens`](/showcase/design-tokens), [`guidelines`](/showcase/guidelines), [`accessibility`](/showcase/accessibility) |
-| **Sample Dialogs** | [`dialogs`](/showcase/dialogs) |
-| **Sample Sheets** | [`sheets`](/showcase/sheets) |
-| **Sample Drawers** | [`drawers`](/showcase/drawers) |
-| **Sample Dashboards** | [`dashboards`](/showcase/dashboards), [`dashboards/saas-revenue`](/showcase/dashboards/saas-revenue), [`dashboards/ecommerce-ops`](/showcase/dashboards/ecommerce-ops), [`dashboards/marketing`](/showcase/dashboards/marketing), [`dashboards/financial-pnl`](/showcase/dashboards/financial-pnl), [`dashboards/trading-portfolio`](/showcase/dashboards/trading-portfolio), [`dashboards/healthcare`](/showcase/dashboards/healthcare), [`dashboards/hr-people`](/showcase/dashboards/hr-people), [`dashboards/devops`](/showcase/dashboards/devops), [`dashboards/supply-chain`](/showcase/dashboards/supply-chain), [`dashboards/real-estate`](/showcase/dashboards/real-estate) |
-| **Sample Reports** | [`reports`](/showcase/reports), [`reports/annual-financial-statement`](/showcase/reports/annual-financial-statement), [`reports/executive-business-review`](/showcase/reports/executive-business-review), [`reports/patient-health-summary`](/showcase/reports/patient-health-summary), [`reports/project-status-report`](/showcase/reports/project-status-report), [`reports/sales-pipeline-report`](/showcase/reports/sales-pipeline-report), [`reports/marketing-campaign-analysis`](/showcase/reports/marketing-campaign-analysis), [`reports/supply-chain-ops-report`](/showcase/reports/supply-chain-ops-report), [`reports/employee-performance-review`](/showcase/reports/employee-performance-review), [`reports/security-incident-report`](/showcase/reports/security-incident-report), [`reports/esg-sustainability-report`](/showcase/reports/esg-sustainability-report) |
-| **Sample Forms** | [`forms`](/showcase/forms), [`forms/contact-inquiry`](/showcase/forms/contact-inquiry), [`forms/user-profile`](/showcase/forms/user-profile), [`forms/support-ticket`](/showcase/forms/support-ticket), [`forms/appointment-booking`](/showcase/forms/appointment-booking), [`forms/job-application`](/showcase/forms/job-application), [`forms/financial-transaction`](/showcase/forms/financial-transaction), [`forms/create-product`](/showcase/forms/create-product), [`forms/project-kickoff`](/showcase/forms/project-kickoff), [`forms/search-filter`](/showcase/forms/search-filter), [`forms/employee-onboarding`](/showcase/forms/employee-onboarding) |
-| **Feedback & Status** | [`feedback/color-tile`](/showcase/feedback/color-tile), [`feedback/simple-badge`](/showcase/feedback/simple-badge), [`feedback/bubble-badge`](/showcase/feedback/bubble-badge), [`feedback/status-dot`](/showcase/feedback/status-dot), [`feedback/simple-alert`](/showcase/feedback/simple-alert), [`feedback/toasts`](/showcase/feedback/toasts), [`feedback/pro-badge`](/showcase/feedback/pro-badge), [`feedback/unsaved-changes-bar`](/showcase/feedback/unsaved-changes-bar), [`feedback/progress`](/showcase/feedback/progress), [`feedback/skeleton`](/showcase/feedback/skeleton), [`feedback/rating`](/showcase/feedback/rating) |
-| **Forms & Inputs** | [`inputs/button`](/showcase/inputs/button), [`inputs/input`](/showcase/inputs/input), [`inputs/input-group`](/showcase/inputs/input-group), [`inputs/checkbox`](/showcase/inputs/checkbox), [`inputs/radio-group`](/showcase/inputs/radio-group), [`inputs/switch`](/showcase/inputs/switch), [`inputs/select`](/showcase/inputs/select), [`inputs/field`](/showcase/inputs/field), [`inputs/combobox`](/showcase/inputs/combobox), [`inputs/table-lookup`](/showcase/inputs/table-lookup), [`inputs/file-upload`](/showcase/inputs/file-upload), [`inputs/rich-text-editor`](/showcase/inputs/rich-text-editor), [`inputs/color-picker`](/showcase/inputs/color-picker) |
-| **Date & Time** | [`date/calendar`](/showcase/date/calendar), [`date/date-picker`](/showcase/date/date-picker), [`date/date-range-picker`](/showcase/date/date-range-picker) |
-| **Navigation** | [`nav/anchor`](/showcase/nav/anchor), [`nav/nav`](/showcase/nav/nav), [`nav/nav-link`](/showcase/nav/nav-link), [`nav/header`](/showcase/nav/header) |
-| **Overlays** | [`overlay/dialog`](/showcase/overlay/dialog), [`overlay/sheet`](/showcase/overlay/sheet), [`overlay/dropdown-menu`](/showcase/overlay/dropdown-menu), [`overlay/tooltips`](/showcase/overlay/tooltips), [`overlay/command-palette`](/showcase/overlay/command-palette) |
-| **Reports** | [`report-ui/report-header`](/showcase/report-ui/report-header), [`report-ui/report-document`](/showcase/report-ui/report-document), [`report-ui/report-content`](/showcase/report-ui/report-content) |
-| **Charts** | [`charts`](/showcase/charts), [`charts/line`](/showcase/charts/line), [`charts/area`](/showcase/charts/area), [`charts/bar`](/showcase/charts/bar), [`charts/pie`](/showcase/charts/pie), [`charts/radial`](/showcase/charts/radial), [`charts/radar`](/showcase/charts/radar), [`charts/scatter`](/showcase/charts/scatter), [`charts/composed`](/showcase/charts/composed), [`charts/treemap`](/showcase/charts/treemap), [`charts/histogram`](/showcase/charts/histogram), [`charts/candlestick`](/showcase/charts/candlestick), [`charts/chart-legend`](/showcase/charts/chart-legend), [`charts/chart-target-legend`](/showcase/charts/chart-target-legend) |
-| **Tables & Data** | [`data-table/table`](/showcase/data-table/table), [`data-table/empty`](/showcase/data-table/empty), [`data-table`](/showcase/data-table), [`data-table-lab`](/showcase/data-table-lab) |
-| **Layout** | [`layout-guide`](/showcase/layout-guide), [`layout/card`](/showcase/layout/card), [`layout/page-header`](/showcase/layout/page-header), [`layout/page-bar`](/showcase/layout/page-bar), [`layout/aside-content`](/showcase/layout/aside-content), [`layout/item`](/showcase/layout/item) |
-| **Tabs** | [`tabs`](/showcase/tabs) |
-| **Sidebar** | [`sidebar-menu`](/showcase/sidebar-menu) |
-| **Utilities** | [`util/copy-text`](/showcase/util/copy-text), [`util/name-avatar`](/showcase/util/name-avatar), [`util/theme-toggle`](/showcase/util/theme-toggle), [`util/pagination-button`](/showcase/util/pagination-button), [`util/row-action-button`](/showcase/util/row-action-button), [`util/scroll-to-top`](/showcase/util/scroll-to-top) |
+| Sample Forms | [`/showcase/forms`](/showcase/forms) |
+| Sample Dialogs | [`/showcase/dialogs`](/showcase/dialogs) |
+| Sample Sheets | [`/showcase/sheets`](/showcase/sheets) |
+| Sample Drawers | [`/showcase/drawers`](/showcase/drawers) |
+| Sample Dashboards | [`/showcase/dashboards`](/showcase/dashboards) |
+| Sample Reports | [`/showcase/reports`](/showcase/reports) |
+| Charts gallery | [`/showcase/charts`](/showcase/charts) |
+| Layout guide | [`/showcase/layout-guide`](/showcase/layout-guide) |
+| Data Table lab | [`/showcase/data-table-lab`](/showcase/data-table-lab) |
 
 ---
 
-## AI Developer Guide
+## Page Building Rules
 
-> Use this section to write effective prompts for AI models working with this codebase.
+### Core Rules
 
-### How to Ask an AI to Build a New Page
+Always follow these rules when building pages with Ascendra UI:
 
-Include the following context in your prompt:
-
-```
-I am working in a Next.js project that uses Ascendra UI.
-All components are imported from @/ascendra-ui (or @/ascendra-ui/shadcn for Tooltip).
-See docs/ui-reference.md for full props and docs/showcase-reference.md for patterns.
-
-Build [describe the page]. Requirements:
-- Use the standard page shell: PageHeader + PageMain + PageWrapper + PageContent + MainContent
-- Wrap all inputs in Field with FieldLabel and FieldError
-- Use Card + CardPanel + CardPanelItem for settings sections
-- Use SimpleBadge for status labels (not custom spans)
-- Use UnsavedChangesBar for forms (isDirty, onSave, onReset)
-- Follow the layout guide in docs/showcase-reference.md
-```
+- Use the standard page shell: `PageHeader` + `PageMain` + `PageWrapper` + `PageContent` + `MainContent`
+- Always wrap inputs in `Field > FieldLabel + FieldContent > [control] + FieldError`
+- Always use `Card > CardPanel > CardPanelItem` for settings sections
+- Use `SimpleBadge` for status labels — not custom `<span>` elements with color classes
+- Use `UnsavedChangesBar` for any form that can be saved (`isDirty`, `onSave`, `onReset`)
+- Import all components from `@/ascendra-ui` — see **Import Paths** below for the shadcn exceptions
+- Use the code templates in **Structural Code Templates** as the starting point for each page type
 
 ### Common Mistakes to Avoid
 

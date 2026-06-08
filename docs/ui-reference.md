@@ -39,7 +39,6 @@
 ## Part 1 — Primitive Components
 
 > These are the individual building blocks. Import from `@/ascendra-ui` (or `@/ascendra-ui/shadcn` where noted).
-> The **Used in** section shows which composite patterns reference each component — use it to find real-world examples.
 
 ### Feedback & Status
 
@@ -76,12 +75,6 @@ Small inline status badge for labeling content with semantic color variants.
 | `asChild` | `boolean` | `false` | Render as a child element using Radix Slot. |
 | `className` | `string` | — | Additional CSS classes. |
 
-**Used in**
-
-- _Forms:_ [Appointment Booking](/showcase/forms/appointment-booking)
-- _Sheets:_ [Employee Profile](/showcase/sheets), [Order Details](/showcase/sheets), [Support Ticket](/showcase/sheets), [Customer Profile](/showcase/sheets), [Invoice Preview](/showcase/sheets), [Project Overview](/showcase/sheets), [Audit Log Entry](/showcase/sheets), [Product Details](/showcase/sheets), [Account Settings](/showcase/sheets)
-- _Drawers:_ [Smart Filter](/showcase/drawers)
-
 ---
 
 #### Bubble Badge
@@ -98,10 +91,6 @@ Gradient pill badges with inset highlight, available in multiple sizes and color
 | `size` | `'sm' \| 'md' \| 'lg'` | `'sm'` | Size of the badge. |
 | `color` | `'gray' \| 'blue' \| 'green' \| 'red' \| 'amber' \| 'orange' \| 'violet' \| 'warning' \| 'positive' \| 'info'` | `'gray'` | Color variant. |
 
-**Used in**
-
-- _Drawers:_ [Notification Center](/showcase/drawers)
-
 ---
 
 #### Status Dot
@@ -116,11 +105,6 @@ Tiny status indicator dot with a halo shadow ring, available in semantic colors.
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `variant` | `'orange' \| 'emerald' \| 'sky' \| 'violet' \| 'rose' \| 'amber' \| 'red' \| 'primary' \| 'gray' \| 'warning' \| 'positive' \| 'info'` | `'gray'` | Color variant. |
-
-**Used in**
-
-- _Sheets:_ [Support Ticket](/showcase/sheets), [Customer Profile](/showcase/sheets), [Project Overview](/showcase/sheets), [Product Details](/showcase/sheets)
-- _Drawers:_ [Event Preview](/showcase/drawers), [Notification Center](/showcase/drawers)
 
 ---
 
@@ -137,13 +121,6 @@ Compact alert notification box with semantic severity variants and an optional i
 |---|---|---|---|
 | `variant` | `'default' \| 'secondary' \| 'destructive' \| 'success' \| 'warning' \| 'amber' \| 'primary'` | `'default'` | Alert severity variant. |
 | `icon` | `React.ComponentType<{ className?: string; strokeWidth?: number }>` | — | Icon component to display (defaults to InfoIcon). |
-
-**Used in**
-
-- _Forms:_ [Support Ticket](/showcase/forms/support-ticket), [Appointment Booking](/showcase/forms/appointment-booking), [Create Product Listing](/showcase/forms/create-product), [Project Kickoff](/showcase/forms/project-kickoff), [Employee Onboarding Stepper](/showcase/forms/employee-onboarding)
-- _Dialogs:_ [Payment Failed](/showcase/dialogs)
-- _Sheets:_ [Invoice Preview](/showcase/sheets), [Audit Log Entry](/showcase/sheets)
-- _Drawers:_ [Danger Zone](/showcase/drawers)
 
 ---
 
@@ -199,10 +176,6 @@ Fixed bottom bar that surfaces when a form has unsaved changes, with save/reset 
 | `saveLabel` | `string` | `'Save'` | Save button label. |
 | `resetLabel` | `string` | `'Reset'` | Reset button label. |
 | `className` | `string` | — | Extra classes on the outer wrapper — use to offset centering when a sidebar is present. |
-
-**Used in**
-
-- _Forms:_ [Contact & Inquiry](/showcase/forms/contact-inquiry), [User Profile Settings](/showcase/forms/user-profile), [Support Ticket](/showcase/forms/support-ticket), [Appointment Booking](/showcase/forms/appointment-booking), [Job Application](/showcase/forms/job-application), [Financial Transaction](/showcase/forms/financial-transaction), [Create Product Listing](/showcase/forms/create-product), [Project Kickoff](/showcase/forms/project-kickoff), [Employee Onboarding Stepper](/showcase/forms/employee-onboarding)
 
 ---
 
@@ -283,13 +256,6 @@ Primary CTA button with a 4-layer shadow and gloss system, available in multiple
 | `asChild` | `boolean` | `false` | Render as a child element using Radix Slot. |
 | `disabled` | `boolean` | `false` | Disables the button. |
 
-**Used in**
-
-- _Forms:_ [Contact & Inquiry](/showcase/forms/contact-inquiry), [Search & Filter Panel](/showcase/forms/search-filter)
-- _Dialogs:_ [Archive Project](/showcase/dialogs), [Transfer Ownership](/showcase/dialogs), [Delete Record](/showcase/dialogs), [Delete Account](/showcase/dialogs), [Rename Item](/showcase/dialogs), [Add Note](/showcase/dialogs), [Invite Member](/showcase/dialogs), [Change Password](/showcase/dialogs), [Session Expired](/showcase/dialogs), [Payment Failed](/showcase/dialogs), [Feature Announcement](/showcase/dialogs), [Upgrade Required](/showcase/dialogs)
-- _Sheets:_ [Order Details](/showcase/sheets), [Support Ticket](/showcase/sheets), [Notification Preferences](/showcase/sheets), [Customer Profile](/showcase/sheets), [Invoice Preview](/showcase/sheets), [Project Overview](/showcase/sheets), [Audit Log Entry](/showcase/sheets), [Product Details](/showcase/sheets), [Account Settings](/showcase/sheets)
-- _Drawers:_ [Quick Actions](/showcase/drawers), [Smart Filter](/showcase/drawers), [Share Sheet](/showcase/drawers), [Event Preview](/showcase/drawers), [Media Attachment](/showcase/drawers), [Assign Task](/showcase/drawers), [Notification Center](/showcase/drawers), [Danger Zone](/showcase/drawers)
-
 ---
 
 #### Input
@@ -307,12 +273,6 @@ Text input with smart focus: shadow ring for pointer interactions, outline for k
 | `disabled` | `boolean` | `false` | Disables the input. |
 | `placeholder` | `string` | — | Placeholder text. |
 
-**Used in**
-
-- _Forms:_ [Contact & Inquiry](/showcase/forms/contact-inquiry), [User Profile Settings](/showcase/forms/user-profile), [Support Ticket](/showcase/forms/support-ticket), [Appointment Booking](/showcase/forms/appointment-booking), [Job Application](/showcase/forms/job-application), [Financial Transaction](/showcase/forms/financial-transaction), [Create Product Listing](/showcase/forms/create-product), [Project Kickoff](/showcase/forms/project-kickoff), [Search & Filter Panel](/showcase/forms/search-filter), [Employee Onboarding Stepper](/showcase/forms/employee-onboarding)
-- _Dialogs:_ [Delete Account](/showcase/dialogs), [Rename Item](/showcase/dialogs), [Invite Member](/showcase/dialogs), [Change Password](/showcase/dialogs)
-- _Drawers:_ [Assign Task](/showcase/drawers), [Danger Zone](/showcase/drawers)
-
 ---
 
 #### Input Group
@@ -327,11 +287,6 @@ Composite input system with prefix/suffix text, icon addons, and button addons.
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `align` | `'inline-start' \| 'inline-end' \| 'block-start' \| 'block-end'` | — | Position of the addon relative to the input (on InputGroupAddon). |
-
-**Used in**
-
-- _Forms:_ [Job Application](/showcase/forms/job-application), [Financial Transaction](/showcase/forms/financial-transaction), [Create Product Listing](/showcase/forms/create-product), [Project Kickoff](/showcase/forms/project-kickoff), [Employee Onboarding Stepper](/showcase/forms/employee-onboarding)
-- _Dialogs:_ [Add Note](/showcase/dialogs)
 
 ---
 
@@ -350,11 +305,6 @@ Custom checkbox with gradient overlay and shadow ring on the checked state.
 | `defaultChecked` | `boolean` | — | Uncontrolled default checked state. |
 | `disabled` | `boolean` | `false` | Disables the checkbox. |
 | `onCheckedChange` | `(checked: boolean) => void` | — | Callback fired when the state changes. |
-
-**Used in**
-
-- _Forms:_ [Support Ticket](/showcase/forms/support-ticket), [Job Application](/showcase/forms/job-application), [Create Product Listing](/showcase/forms/create-product), [Project Kickoff](/showcase/forms/project-kickoff), [Search & Filter Panel](/showcase/forms/search-filter), [Employee Onboarding Stepper](/showcase/forms/employee-onboarding)
-- _Dialogs:_ [Transfer Ownership](/showcase/dialogs), [Upgrade Required](/showcase/dialogs)
 
 ---
 
@@ -375,10 +325,6 @@ Custom radio group with glow and gloss effects on the selected item.
 | `onValueChange` | `(value: string) => void` | — | Callback fired when selection changes. |
 | `wrapperClassName` | `string` | — | Additional classes for the item wrapper (on RadioGroupItem). |
 
-**Used in**
-
-- _Forms:_ [Support Ticket](/showcase/forms/support-ticket), [Appointment Booking](/showcase/forms/appointment-booking), [Financial Transaction](/showcase/forms/financial-transaction), [Search & Filter Panel](/showcase/forms/search-filter), [Employee Onboarding Stepper](/showcase/forms/employee-onboarding)
-
 ---
 
 #### Switch
@@ -397,12 +343,6 @@ Toggle switch with a gradient overlay on the active track.
 | `disabled` | `boolean` | `false` | Disables the switch. |
 | `onCheckedChange` | `(checked: boolean) => void` | — | Callback fired when toggled. |
 
-**Used in**
-
-- _Forms:_ [User Profile Settings](/showcase/forms/user-profile), [Support Ticket](/showcase/forms/support-ticket), [Create Product Listing](/showcase/forms/create-product), [Employee Onboarding Stepper](/showcase/forms/employee-onboarding)
-- _Sheets:_ [Employee Profile](/showcase/sheets), [Notification Preferences](/showcase/sheets), [Account Settings](/showcase/sheets)
-- _Drawers:_ [Smart Filter](/showcase/drawers)
-
 ---
 
 #### Select
@@ -418,11 +358,6 @@ Custom select dropdown with scroll buttons and size variants.
 |---|---|---|---|
 | `size` | `'sm' \| 'default'` | `'default'` | Size of the trigger (on SelectTrigger). |
 | `position` | `'popper' \| 'item-aligned'` | `'popper'` | Positioning strategy of the dropdown (on SelectContent). |
-
-**Used in**
-
-- _Forms:_ [Contact & Inquiry](/showcase/forms/contact-inquiry), [User Profile Settings](/showcase/forms/user-profile), [Support Ticket](/showcase/forms/support-ticket), [Job Application](/showcase/forms/job-application), [Financial Transaction](/showcase/forms/financial-transaction), [Create Product Listing](/showcase/forms/create-product), [Project Kickoff](/showcase/forms/project-kickoff), [Employee Onboarding Stepper](/showcase/forms/employee-onboarding)
-- _Dialogs:_ [Invite Member](/showcase/dialogs)
 
 ---
 
@@ -441,11 +376,6 @@ Compound form field wrapper with label, description, error display, and orientat
 | `variant` | `'legend' \| 'label'` | `'legend'` | Typography style for FieldLegend. |
 | `errors` | `Array<{ message?: string }>` | — | Array of error objects — deduplicates and displays messages (on FieldError). |
 
-**Used in**
-
-- _Forms:_ [Contact & Inquiry](/showcase/forms/contact-inquiry), [User Profile Settings](/showcase/forms/user-profile), [Support Ticket](/showcase/forms/support-ticket), [Appointment Booking](/showcase/forms/appointment-booking), [Job Application](/showcase/forms/job-application), [Financial Transaction](/showcase/forms/financial-transaction), [Create Product Listing](/showcase/forms/create-product), [Project Kickoff](/showcase/forms/project-kickoff), [Search & Filter Panel](/showcase/forms/search-filter), [Employee Onboarding Stepper](/showcase/forms/employee-onboarding)
-- _Dialogs:_ [Delete Account](/showcase/dialogs), [Rename Item](/showcase/dialogs), [Add Note](/showcase/dialogs), [Invite Member](/showcase/dialogs), [Change Password](/showcase/dialogs)
-
 ---
 
 #### Combobox
@@ -463,10 +393,6 @@ Searchable dropdown with single and multi-select (chips) modes, built on Base UI
 | `showClear` | `boolean` | `false` | Show the × clear button (on ComboboxInput). |
 | `showRemove` | `boolean` | `true` | Show the × remove button on each chip (on ComboboxChip). |
 | `disabled` | `boolean` | `false` | Disables the input (on ComboboxInput). |
-
-**Used in**
-
-- _Forms:_ [User Profile Settings](/showcase/forms/user-profile), [Support Ticket](/showcase/forms/support-ticket), [Appointment Booking](/showcase/forms/appointment-booking), [Job Application](/showcase/forms/job-application), [Create Product Listing](/showcase/forms/create-product), [Project Kickoff](/showcase/forms/project-kickoff), [Search & Filter Panel](/showcase/forms/search-filter), [Employee Onboarding Stepper](/showcase/forms/employee-onboarding)
 
 ---
 
@@ -491,10 +417,6 @@ Table-based lookup field for large datasets — supports single and multi-select
 | `placeholder` | `string` | — | Placeholder text shown when nothing is selected. |
 | `disabled` | `boolean` | `false` | Disables the trigger and prevents the popup from opening. |
 | `invalid` | `boolean` | `false` | Applies a destructive outline to the trigger to signal a validation error. |
-
-**Used in**
-
-- _Forms:_ [Financial Transaction](/showcase/forms/financial-transaction), [Employee Onboarding Stepper](/showcase/forms/employee-onboarding)
 
 ---
 
@@ -605,10 +527,6 @@ Popover-based single date picker with a trigger button and an embedded Calendar.
 | `toYear` | `number` | — | Enables year/month dropdown ending at this year. |
 | `captionLayout` | `CalendarProps['captionLayout']` | — | Caption style passed to the inner Calendar. |
 
-**Used in**
-
-- _Forms:_ [Appointment Booking](/showcase/forms/appointment-booking), [Job Application](/showcase/forms/job-application), [Financial Transaction](/showcase/forms/financial-transaction), [Employee Onboarding Stepper](/showcase/forms/employee-onboarding)
-
 ---
 
 #### Date Range Picker
@@ -630,10 +548,6 @@ Popover-based date range picker with configurable month count and an embedded ra
 | `invalid` | `boolean` | `false` | Applies destructive outline to the trigger. |
 | `fromYear` | `number` | — | Enables year/month dropdown starting from this year. |
 | `toYear` | `number` | — | Enables year/month dropdown ending at this year. |
-
-**Used in**
-
-- _Forms:_ [Financial Transaction](/showcase/forms/financial-transaction), [Project Kickoff](/showcase/forms/project-kickoff), [Search & Filter Panel](/showcase/forms/search-filter)
 
 ---
 
@@ -713,10 +627,6 @@ Modal dialog with header, body, and footer slots. Centered overlay with max-w-sm
 | `showCloseButton` | `boolean` | `false` | Show the × close button in the top-right corner (on DialogContent). |
 | `footer` | `ReactNode` | — | Footer content slot (on DialogContent). |
 
-**Used in**
-
-- _Dialogs:_ [Archive Project](/showcase/dialogs), [Transfer Ownership](/showcase/dialogs), [Delete Record](/showcase/dialogs), [Delete Account](/showcase/dialogs), [Rename Item](/showcase/dialogs), [Add Note](/showcase/dialogs), [Invite Member](/showcase/dialogs), [Change Password](/showcase/dialogs), [Session Expired](/showcase/dialogs), [Payment Failed](/showcase/dialogs), [Feature Announcement](/showcase/dialogs), [Upgrade Required](/showcase/dialogs)
-
 ---
 
 #### Sheet
@@ -732,10 +642,6 @@ Slide-out drawer panel that opens from any edge of the screen.
 |---|---|---|---|
 | `side` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Edge the sheet slides in from (on SheetContent). |
 | `showCloseButton` | `boolean` | `true` | Show the × close button (on SheetContent). |
-
-**Used in**
-
-- _Sheets:_ [Employee Profile](/showcase/sheets), [Order Details](/showcase/sheets), [Support Ticket](/showcase/sheets), [Notification Preferences](/showcase/sheets), [Customer Profile](/showcase/sheets), [Invoice Preview](/showcase/sheets), [Project Overview](/showcase/sheets), [Audit Log Entry](/showcase/sheets), [Product Details](/showcase/sheets), [Account Settings](/showcase/sheets)
 
 ---
 
@@ -1011,11 +917,6 @@ Flexible list item with media, title, description, actions, header, and footer s
 | `asChild` | `boolean` | `false` | Render as a child element using Radix Slot (on Item). |
 | `variant` | `'default' \| 'icon' \| 'image'` | `'default'` | Media display type (on ItemMedia). |
 
-**Used in**
-
-- _Sheets:_ [Employee Profile](/showcase/sheets), [Order Details](/showcase/sheets), [Support Ticket](/showcase/sheets), [Customer Profile](/showcase/sheets), [Invoice Preview](/showcase/sheets), [Project Overview](/showcase/sheets)
-- _Drawers:_ [Quick Actions](/showcase/drawers), [Smart Filter](/showcase/drawers), [Assign Task](/showcase/drawers)
-
 ---
 
 ### Tabs
@@ -1094,11 +995,6 @@ Auto-generated avatar from name initials with a deterministic background color d
 | `name` | `string` | — | Full name to generate initials from. |
 | `size` | `number` | `28` | Avatar size in pixels. |
 | `href` | `string` | — | Optional URL — wraps avatar in a link. |
-
-**Used in**
-
-- _Sheets:_ [Employee Profile](/showcase/sheets), [Support Ticket](/showcase/sheets), [Customer Profile](/showcase/sheets), [Project Overview](/showcase/sheets)
-- _Drawers:_ [Event Preview](/showcase/drawers), [Assign Task](/showcase/drawers)
 
 ---
 
@@ -1180,146 +1076,6 @@ _No custom props — accepts standard HTML attributes._
 | [Search & Filter Panel](/showcase/forms/search-filter) | Universal Utility | Simple | Compact sidebar panel, single column |
 | [Employee Onboarding Stepper](/showcase/forms/employee-onboarding) | HR / Enterprise | Complex | 4-step stepper with step indicator and per-step sections |
 
-#### Contact & Inquiry
-
-A clean single-section contact form covering the most common lead-capture and general inquiry scenarios.
-
-- **Slug:** `contact-inquiry`
-- **Showcase:** [/showcase/forms/contact-inquiry](/showcase/forms/contact-inquiry)
-- **Domain:** General / Marketing
-- **Complexity:** Simple
-- **Layout:** Single column, vertical
-- **Edit mode:** No
-- **Components used:** Input, Select, Field, Button, UnsavedChangesBar
-
----
-
-#### User Profile Settings
-
-Account settings split into Personal Info and Preferences sections — a staple pattern for any SaaS product.
-
-- **Slug:** `user-profile`
-- **Showcase:** [/showcase/forms/user-profile](/showcase/forms/user-profile)
-- **Domain:** SaaS / Product
-- **Complexity:** Medium
-- **Layout:** 2 sections, mixed vertical & horizontal fields
-- **Edit mode:** Yes — ships with a read-only view and an Edit toggle
-- **Components used:** Input, Select, Switch, Combobox, Field, FieldGroup, UnsavedChangesBar
-
----
-
-#### Support Ticket
-
-Issue reporting form with priority radio, dynamic conditional fields revealed by a Switch, and an inline alert guiding the user.
-
-- **Slug:** `support-ticket`
-- **Showcase:** [/showcase/forms/support-ticket](/showcase/forms/support-ticket)
-- **Domain:** IT / SaaS
-- **Complexity:** Medium
-- **Layout:** Single column with conditional section reveal
-- **Edit mode:** No
-- **Components used:** Input, Select, RadioGroup, Combobox, Checkbox, Switch, SimpleAlert, Field, UnsavedChangesBar
-
----
-
-#### Appointment Booking
-
-Three-stage booking flow: pick a service → choose a date & time slot → confirm patient details.
-
-- **Slug:** `appointment-booking`
-- **Showcase:** [/showcase/forms/appointment-booking](/showcase/forms/appointment-booking)
-- **Domain:** Healthcare / Services
-- **Complexity:** Medium
-- **Layout:** 3 sections, step-like visual flow
-- **Edit mode:** No
-- **Components used:** RadioGroup, DatePicker, Combobox, Input, SimpleBadge, SimpleAlert, Field, FieldGroup, UnsavedChangesBar
-
----
-
-#### Job Application
-
-Multi-section application form covering personal details, position preferences, and portfolio links — common in career portals.
-
-- **Slug:** `job-application`
-- **Showcase:** [/showcase/forms/job-application](/showcase/forms/job-application)
-- **Domain:** HR / Recruitment
-- **Complexity:** Medium
-- **Layout:** 3 sections, single column with 2-column grid rows
-- **Edit mode:** No
-- **Components used:** Input, InputGroup, Select, Combobox, DatePicker, Checkbox, Field, FieldGroup, UnsavedChangesBar
-
----
-
-#### Financial Transaction
-
-Compact transaction entry with account lookup, currency-prefixed amount, and a recurring schedule section — typical in accounting or banking UIs.
-
-- **Slug:** `financial-transaction`
-- **Showcase:** [/showcase/forms/financial-transaction](/showcase/forms/financial-transaction)
-- **Domain:** Finance / Banking
-- **Complexity:** Medium
-- **Layout:** 2 sections, horizontal-label compact layout
-- **Edit mode:** No
-- **Components used:** Input, InputGroup, Select, RadioGroup, DatePicker, DateRangePicker, TableLookup, Field, FieldGroup, UnsavedChangesBar
-
----
-
-#### Create Product Listing
-
-Product creation form spanning basic info, pricing & inventory, and shipping — representative of e-commerce admin backends.
-
-- **Slug:** `create-product`
-- **Showcase:** [/showcase/forms/create-product](/showcase/forms/create-product)
-- **Domain:** E-Commerce
-- **Complexity:** Complex
-- **Layout:** 3 sections, mixed 1-column and 2-column grid
-- **Edit mode:** Yes — ships with a read-only view and an Edit toggle
-- **Components used:** Input, InputGroup, Select, Combobox, Switch, Checkbox, SimpleAlert, Field, FieldGroup, UnsavedChangesBar
-
----
-
-#### Project Kickoff
-
-Project creation spanning basics, team composition, and timeline & budget — covering project management tool patterns.
-
-- **Slug:** `project-kickoff`
-- **Showcase:** [/showcase/forms/project-kickoff](/showcase/forms/project-kickoff)
-- **Domain:** Project Management
-- **Complexity:** Complex
-- **Layout:** 3 sections, mixed 1-column and 2-column grids
-- **Edit mode:** No
-- **Components used:** Input, InputGroup, Select, Combobox, Checkbox, DateRangePicker, Field, FieldGroup, SimpleAlert, UnsavedChangesBar
-
----
-
-#### Search & Filter Panel
-
-Sidebar-style filter panel with date range, multi-select categories, status checkboxes, and a quick-search input — universal across list and report views.
-
-- **Slug:** `search-filter`
-- **Showcase:** [/showcase/forms/search-filter](/showcase/forms/search-filter)
-- **Domain:** Universal Utility
-- **Complexity:** Simple
-- **Layout:** Compact sidebar panel, single column
-- **Edit mode:** No
-- **Components used:** Input, DateRangePicker, Checkbox, Combobox, RadioGroup, Field, FieldGroup, Button
-
----
-
-#### Employee Onboarding Stepper
-
-Four-step stepper covering personal info, employment details, compensation, and IT access — the broadest coverage of the component library in one form.
-
-- **Slug:** `employee-onboarding`
-- **Showcase:** [/showcase/forms/employee-onboarding](/showcase/forms/employee-onboarding)
-- **Domain:** HR / Enterprise
-- **Complexity:** Complex
-- **Layout:** 4-step stepper with step indicator and per-step sections
-- **Edit mode:** No
-- **Components used:** Input, InputGroup, Select, Combobox, RadioGroup, Checkbox, Switch, DatePicker, TableLookup, SimpleAlert, Field, FieldGroup, UnsavedChangesBar
-
----
-
 ### Dialogs
 
 12 dialog patterns grouped by intent type. All are rendered on the shared [Dialog Gallery](/showcase/dialogs) page.
@@ -1338,100 +1094,6 @@ Four-step stepper covering personal info, employment details, compensation, and 
 | Payment Failed | Alert | Dialog, SimpleAlert, Button |
 | Feature Announcement | Feature | Dialog, Button |
 | Upgrade Required | Feature | Dialog, Checkbox, Button |
-
-**Confirmation dialogs**
-
-##### Archive Project
-
-Confirms archiving a project with a bullet list of consequences before the user commits.
-
-- **Slug:** `archive-project`
-- **Components:** Dialog, Button
-
-##### Transfer Ownership
-
-High-stakes confirmation gated by a checkbox acknowledgement that must be checked before the CTA enables.
-
-- **Slug:** `transfer-ownership`
-- **Components:** Dialog, Checkbox, Button
-
-**Destructive dialogs**
-
-##### Delete Record
-
-Standard single-record delete with a brief consequence note and a destructive CTA.
-
-- **Slug:** `delete-record`
-- **Components:** Dialog, Button
-
-##### Delete Account
-
-Maximum-stakes delete gated by a typed confirmation — the user must type DELETE before the button unlocks.
-
-- **Slug:** `delete-account`
-- **Components:** Dialog, Input, Field, Button
-
-**Input dialogs**
-
-##### Rename Item
-
-Single-field rename with the current name pre-filled — the simplest possible input dialog.
-
-- **Slug:** `rename-item`
-- **Components:** Dialog, Input, Field, Button
-
-##### Add Note
-
-Textarea capture for a short note or comment visible to all team members.
-
-- **Slug:** `add-note`
-- **Components:** Dialog, InputGroup, Field, Button
-
-##### Invite Member
-
-Email input with a role selector — covers the common invite-to-team pattern.
-
-- **Slug:** `invite-member`
-- **Components:** Dialog, Input, Select, Field, Button
-
-##### Change Password
-
-Three-field password update covering current, new, and confirmation — the account security staple.
-
-- **Slug:** `change-password`
-- **Components:** Dialog, Input, Field, Button
-
-**Alert dialogs**
-
-##### Session Expired
-
-Header-only layout with no body — demonstrates the minimal header + footer structure.
-
-- **Slug:** `session-expired`
-- **Components:** Dialog, Button
-
-##### Payment Failed
-
-Billing error alert with two actionable next steps in the footer.
-
-- **Slug:** `payment-failed`
-- **Components:** Dialog, SimpleAlert, Button
-
-**Feature dialogs**
-
-##### Feature Announcement
-
-What's New style modal with a feature highlight list and a primary explore CTA.
-
-- **Slug:** `feature-announcement`
-- **Components:** Dialog, Button
-
-##### Upgrade Required
-
-Premium feature gate with a "don't show again" checkbox — the upsell dialog pattern.
-
-- **Slug:** `upgrade-required`
-- **Components:** Dialog, Checkbox, Button
 
 ---
 
@@ -1452,96 +1114,6 @@ Premium feature gate with a "don't show again" checkbox — the upsell dialog pa
 | Product Details | Preview | Catalog | Sheet, SimpleBadge, StatusDot, Button |
 | Account Settings | Settings | Platform | Sheet, Switch, SimpleBadge, Button |
 
-#### Employee Profile
-
-Full HR record with tabbed layout — employment details, contact info, bio, and work history. Includes an active/inactive status toggle.
-
-- **Slug:** `employee-profile`
-- **Type:** Detail
-- **Domain:** HR
-- **Components:** Sheet, SimpleBadge, NameAvatar, Switch, Item
-
-#### Order Details
-
-E-commerce order breakdown — order meta, line items with quantities and prices, shipping address, and a running total with tax.
-
-- **Slug:** `order-details`
-- **Type:** Detail
-- **Domain:** E-commerce
-- **Components:** Sheet, Item, SimpleBadge, Button
-
-#### Support Ticket
-
-Ticket detail with parallel meta fields followed by a chronological activity timeline — comments, status changes, and actor avatars.
-
-- **Slug:** `support-ticket`
-- **Type:** Activity
-- **Domain:** SaaS
-- **Components:** Sheet, Item, NameAvatar, StatusDot, SimpleBadge, Button
-
-#### Notification Preferences
-
-Grouped switch rows across Email, Push, and In-App channels — each with a label and supporting description.
-
-- **Slug:** `notification-preferences`
-- **Type:** Settings
-- **Domain:** SaaS
-- **Components:** Sheet, Switch, Button
-
-#### Customer Profile
-
-CRM snapshot — avatar + name hero, parallel contact and account fields (plan, ARR, seats, status), and a recent activity list.
-
-- **Slug:** `customer-profile`
-- **Type:** Preview
-- **Domain:** CRM
-- **Components:** Sheet, NameAvatar, SimpleBadge, StatusDot, Item, Button
-
-#### Invoice Preview
-
-Finance document at a glance — bill-to details, parallel invoice meta, line items, subtotal/tax/total summary, and an overdue alert.
-
-- **Slug:** `invoice-preview`
-- **Type:** Preview
-- **Domain:** Finance
-- **Components:** Sheet, Item, SimpleBadge, SimpleAlert, Button
-
-#### Project Overview
-
-PM record with tabbed layout — Overview shows key project meta and a milestone list with status dots; Members tab lists the team.
-
-- **Slug:** `project-overview`
-- **Type:** Detail
-- **Domain:** Project Management
-- **Components:** Sheet, NameAvatar, SimpleBadge, StatusDot, Item, Button
-
-#### Audit Log Entry
-
-System event detail — actor, resource, method, and timestamp in parallel key-value layout, a compliance alert, and a monospace payload block.
-
-- **Slug:** `audit-log-entry`
-- **Type:** Detail
-- **Domain:** System / Admin
-- **Components:** Sheet, SimpleBadge, SimpleAlert, Button
-
-#### Product Details
-
-Catalog item snapshot — image placeholder, parallel spec grid (category, price, stock, weight, battery life), vendor info, and tags.
-
-- **Slug:** `product-details`
-- **Type:** Preview
-- **Domain:** Catalog
-- **Components:** Sheet, SimpleBadge, StatusDot, Button
-
-#### Account Settings
-
-Privacy, security, and notification controls in grouped switch rows — includes a "Recommended" badge on the two-factor authentication toggle.
-
-- **Slug:** `account-settings`
-- **Type:** Settings
-- **Domain:** Platform
-- **Components:** Sheet, Switch, SimpleBadge, Button
-
 ---
 
 ### Drawers
@@ -1558,78 +1130,6 @@ Privacy, security, and notification controls in grouped switch rows — includes
 | Assign Task | Input | Project Management | Drawer, Input, NameAvatar, Item, Button |
 | Notification Center | Panel | SaaS | Drawer, BubbleBadge, StatusDot, Button |
 | Danger Zone | Action | Settings | Drawer, Input, SimpleAlert, Button |
-
-#### Quick Actions
-
-Touch-friendly action sheet with five entity operations — Rename, Duplicate, Share, Archive, and Delete — each as a full-width tappable row.
-
-- **Slug:** `quick-actions`
-- **Type:** Action
-- **Domain:** General
-- **Components:** Drawer, Item, Button
-
-#### Smart Filter
-
-Two snap points: partially open (40%) shows active filter summary with chips; fully open shows the complete filter form with switches and a category list.
-
-- **Slug:** `smart-filter`
-- **Type:** Panel
-- **Domain:** E-commerce
-- **Components:** Drawer, Switch, Item, SimpleBadge, Button
-
-#### Share Sheet
-
-Icon grid of share destinations — Copy Link, Email, Slack, Export PDF, Export CSV, and Open in Browser. Copy Link shows an inline "Copied!" confirmation.
-
-- **Slug:** `share-sheet`
-- **Type:** Action
-- **Domain:** General
-- **Components:** Drawer, Button
-
-#### Event Preview
-
-Two snap points: peeked (35%) shows event title, time, and location; expanded (85%) reveals the full description, attendee list, and action button.
-
-- **Slug:** `event-preview`
-- **Type:** Preview
-- **Domain:** Calendar
-- **Components:** Drawer, NameAvatar, StatusDot, Button
-
-#### Media Attachment
-
-File detail panel — image placeholder, then a parallel key-value grid covering filename, type, size, dimensions, uploader, and date added.
-
-- **Slug:** `media-attachment`
-- **Type:** Preview
-- **Domain:** File Management
-- **Components:** Drawer, Button
-
-#### Assign Task
-
-Search input followed by a scrollable team member list. Selection is highlighted with a checkmark. Confirm button stays disabled until a member is chosen.
-
-- **Slug:** `assign-task`
-- **Type:** Input
-- **Domain:** Project Management
-- **Components:** Drawer, Input, NameAvatar, Item, Button
-
-#### Notification Center
-
-Right-side panel listing recent notifications with unread dots. "Mark all read" clears the indicators. Demonstrates the drawer opening from the right edge.
-
-- **Slug:** `notification-center`
-- **Type:** Panel
-- **Domain:** SaaS
-- **Components:** Drawer, BubbleBadge, StatusDot, Button
-
-#### Danger Zone
-
-Mobile-optimized destructive confirmation — consequences list, typed verification input. Delete button unlocks only after the user types "DELETE".
-
-- **Slug:** `danger-zone`
-- **Type:** Action
-- **Domain:** Settings
-- **Components:** Drawer, Input, SimpleAlert, Button
 
 ---
 

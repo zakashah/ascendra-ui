@@ -46,26 +46,6 @@ function getCategoryTitle(regSlug: string): string {
   return "Uncategorised";
 }
 
-// ── "Used in" cross-reference index ───────────────────────────────────────────
-// Maps each component display-name (as listed in config `components` arrays)
-// to all the composite patterns that include it.
-type UsageSite = {
-  kind: "Form" | "Dialog" | "Sheet" | "Drawer";
-  name: string;
-  slug: string;
-};
-const usedIn = new Map<string, UsageSite[]>();
-
-function addUsage(componentName: string, site: UsageSite) {
-  if (!usedIn.has(componentName)) usedIn.set(componentName, []);
-  usedIn.get(componentName)!.push(site);
-}
-
-for (const f of formsConfig)   f.components.forEach((c) => addUsage(c, { kind: "Form",   name: f.name, slug: f.slug }));
-for (const d of dialogsConfig) d.components.forEach((c) => addUsage(c, { kind: "Dialog", name: d.name, slug: d.slug }));
-for (const s of sheetsConfig)  s.components.forEach((c) => addUsage(c, { kind: "Sheet",  name: s.name, slug: s.slug }));
-for (const d of drawersConfig) d.components.forEach((c) => addUsage(c, { kind: "Drawer", name: d.name, slug: d.slug }));
-
 // ── Overview grouping ──────────────────────────────────────────────────────────
 const grouped = new Map<string, string[]>();
 for (const [slug, meta] of Object.entries(registry)) {
@@ -93,41 +73,6 @@ function propsTable(props: PropDef[]): string {
     ].join(" | ")} |`;
   });
   return [...header, ...rows].join("\n") + "\n";
-}
-
-function usedInBlock(importNames: string[]): string {
-  const seen = new Set<string>();
-  const refs: UsageSite[] = [];
-  for (const name of importNames) {
-    for (const site of usedIn.get(name) ?? []) {
-      const key = `${site.kind}:${site.slug}`;
-      if (!seen.has(key)) { seen.add(key); refs.push(site); }
-    }
-  }
-  if (!refs.length) return "";
-
-  const kindPrefix: Record<string, string> = {
-    Form: "forms/", Dialog: "dialogs", Sheet: "sheets", Drawer: "drawers",
-  };
-  const byKind: Record<string, UsageSite[]> = {};
-  for (const ref of refs) {
-    if (!byKind[ref.kind]) byKind[ref.kind] = [];
-    byKind[ref.kind].push(ref);
-  }
-
-  const lines = ["**Used in**", ""];
-  for (const [kind, sites] of Object.entries(byKind)) {
-    // Forms and dashboards have individual pages; dialogs/sheets/drawers share a gallery.
-    const links = sites.map((s) =>
-      kind === "Form"
-        ? `[${s.name}](/showcase/forms/${s.slug})`
-        : `[${s.name}](/showcase/${kindPrefix[kind]})`
-    );
-    // Deduplicate gallery links (dialogs/sheets/drawers all point to the same page).
-    const unique = [...new Set(links)];
-    lines.push(`- _${kind}s:_ ${unique.join(", ")}`);
-  }
-  return lines.join("\n") + "\n";
 }
 
 function examplesBlock(examples?: string[]): string {
@@ -214,7 +159,6 @@ const lines: string[] = [
   "## Part 1 — Primitive Components",
   "",
   "> These are the individual building blocks. Import from `@/ascendra-ui` (or `@/ascendra-ui/shadcn` where noted).",
-  "> The **Used in** section shows which composite patterns reference each component — use it to find real-world examples.",
   "",
 ];
 
@@ -256,9 +200,6 @@ for (const category of navConfig) {
     const examples = examplesBlock(meta.examples);
     if (examples) lines.push(examples);
 
-    const usageBlock = usedInBlock(meta.importNames);
-    if (usageBlock) lines.push(usageBlock);
-
     lines.push("---", "");
   }
 }
@@ -290,25 +231,6 @@ lines.push(
   "",
 );
 
-for (const f of formsConfig) {
-  lines.push(
-    `#### ${f.name}`,
-    "",
-    f.description,
-    "",
-    `- **Slug:** \`${f.slug}\``,
-    `- **Showcase:** [/showcase/forms/${f.slug}](/showcase/forms/${f.slug})`,
-    `- **Domain:** ${f.domain}`,
-    `- **Complexity:** ${f.complexity}`,
-    `- **Layout:** ${f.layout}`,
-    `- **Edit mode:** ${f.hasEditMode ? "Yes — ships with a read-only view and an Edit toggle" : "No"}`,
-    `- **Components used:** ${f.components.join(", ")}`,
-    "",
-    "---",
-    "",
-  );
-}
-
 // ── Dialogs ───────────────────────────────────────────────────────────────────
 
 lines.push(
@@ -323,28 +245,6 @@ lines.push(
   ),
   "",
 );
-
-// Group by type for detailed subsections
-const dialogsByType = new Map<string, typeof dialogsConfig>();
-for (const d of dialogsConfig) {
-  if (!dialogsByType.has(d.type)) dialogsByType.set(d.type, []);
-  dialogsByType.get(d.type)!.push(d);
-}
-
-for (const [type, dialogs] of dialogsByType) {
-  lines.push(`**${type} dialogs**`, "");
-  for (const d of dialogs) {
-    lines.push(
-      `##### ${d.name}`,
-      "",
-      d.description,
-      "",
-      `- **Slug:** \`${d.slug}\``,
-      `- **Components:** ${d.components.join(", ")}`,
-      "",
-    );
-  }
-}
 
 lines.push("---", "");
 
@@ -363,20 +263,6 @@ lines.push(
   "",
 );
 
-for (const s of sheetsConfig) {
-  lines.push(
-    `#### ${s.name}`,
-    "",
-    s.description,
-    "",
-    `- **Slug:** \`${s.slug}\``,
-    `- **Type:** ${s.type}`,
-    `- **Domain:** ${s.domain}`,
-    `- **Components:** ${s.components.join(", ")}`,
-    "",
-  );
-}
-
 lines.push("---", "");
 
 // ── Drawers ───────────────────────────────────────────────────────────────────
@@ -393,20 +279,6 @@ lines.push(
   ),
   "",
 );
-
-for (const d of drawersConfig) {
-  lines.push(
-    `#### ${d.name}`,
-    "",
-    d.description,
-    "",
-    `- **Slug:** \`${d.slug}\``,
-    `- **Type:** ${d.type}`,
-    `- **Domain:** ${d.domain}`,
-    `- **Components:** ${d.components.join(", ")}`,
-    "",
-  );
-}
 
 lines.push("---", "");
 
