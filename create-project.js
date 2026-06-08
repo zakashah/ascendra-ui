@@ -283,6 +283,13 @@ async function main() {
     console.log("  ✓ Copied CHANGELOG.md");
   }
 
+  // 7b. Copy CLAUDE.md (Claude Code instructions for consumer projects)
+  const claudeSrc = path.join(sourceDir, "ascendra-ui", "template", "CLAUDE.md");
+  if (fs.existsSync(claudeSrc)) {
+    fs.copyFileSync(claudeSrc, path.join(destDir, "CLAUDE.md"));
+    console.log("  ✓ Copied CLAUDE.md");
+  }
+
   // 8. Create empty placeholder folders
   for (const dir of ["components", "hooks", "lib", "providers", "utils"]) {
     const dirPath = path.join(destDir, dir);

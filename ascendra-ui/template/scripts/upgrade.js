@@ -239,6 +239,13 @@ async function main() {
       console.log("  ✓ Updated scripts/upgrade.js");
     }
 
+    // ── Update CLAUDE.md ──────────────────────────────────────────────────────────
+    const newClaudeSrc = path.join(tmpDir, "ascendra-ui", "template", "CLAUDE.md");
+    if (fs.existsSync(newClaudeSrc)) {
+      fs.copyFileSync(newClaudeSrc, path.join(ROOT, "CLAUDE.md"));
+      console.log("  ✓ Updated CLAUDE.md");
+    }
+
     // ── Sync dependencies ─────────────────────────────────────────────────────────
     const newSrcConfig = JSON.parse(
       fs.readFileSync(path.join(tmpDir, "ascendra.json"), "utf8")
@@ -286,7 +293,7 @@ async function main() {
   // Commit the upgrade
   try {
     run(
-      "git add ascendra-ui/ docs/ CHANGELOG.md ascendra.json app/layout.tsx app/globals.css " +
+      "git add ascendra-ui/ docs/ CHANGELOG.md CLAUDE.md ascendra.json app/layout.tsx app/globals.css " +
       "\"app/(app)/layout.tsx\" \"app/(app)/page.tsx\" \"app/(app)/sandbox/page.tsx\" " +
       "scripts/upgrade.js package-lock.json",
       { stdio: "inherit" }
