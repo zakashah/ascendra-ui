@@ -36,6 +36,13 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.1.3] — Self-update guard in upgrade script
+
+### Changed
+- `scripts/upgrade.js` now detects if the upgrade script itself changed before doing anything else. If it did, it updates `scripts/upgrade.js` and exits with a clear message: **"The upgrade script changed — please re-run `npm run upgrade` to complete."** Re-running executes the new script, which applies all remaining changes correctly. This prevents silent failures when upgrade logic changes between versions.
+
+---
+
 ## [1.1.2] — Fix commands migration in upgrade script
 
 ### Fixed

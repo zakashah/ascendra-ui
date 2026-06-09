@@ -171,6 +171,23 @@ async function main() {
       // Non-critical
     }
 
+    // ── Self-update check — must run before anything else ────────────────────────
+    // If upgrade.js itself changed, update it and exit. The running process is the
+    // old script and cannot safely apply logic changes mid-run. Re-running picks up
+    // the new script and completes the upgrade correctly.
+    const newUpgradeSrc = path.join(tmpDir, "ascendra-ui", "template", "scripts", "upgrade.js");
+    if (fs.existsSync(newUpgradeSrc)) {
+      const currentContent = fs.readFileSync(path.join(ROOT, "scripts", "upgrade.js"), "utf8");
+      const newContent = fs.readFileSync(newUpgradeSrc, "utf8");
+      if (currentContent !== newContent) {
+        fs.copyFileSync(newUpgradeSrc, path.join(ROOT, "scripts", "upgrade.js"));
+        fs.rmSync(tmpDir, { recursive: true, force: true });
+        console.log("  ✓ scripts/upgrade.js was updated for this release.");
+        console.log("\n  The upgrade script changed — please re-run `npm run upgrade` to complete.\n");
+        process.exit(0);
+      }
+    }
+
     // ── Replace ascendra-ui/ component library ────────────────────────────────────
     const libSrc = path.join(tmpDir, "ascendra-ui");
     const libDest = path.join(ROOT, "ascendra-ui");
@@ -232,13 +249,6 @@ async function main() {
     if (fs.existsSync(changelogSrc)) {
       fs.copyFileSync(changelogSrc, path.join(ROOT, "CHANGELOG.md"));
       console.log("  ✓ Updated CHANGELOG.md");
-    }
-
-    // ── Self-update scripts/upgrade.js ────────────────────────────────────────────
-    const newUpgradeSrc = path.join(tmpDir, "ascendra-ui", "template", "scripts", "upgrade.js");
-    if (fs.existsSync(newUpgradeSrc)) {
-      fs.copyFileSync(newUpgradeSrc, path.join(ROOT, "scripts", "upgrade.js"));
-      console.log("  ✓ Updated scripts/upgrade.js");
     }
 
     // ── Update CLAUDE.md ──────────────────────────────────────────────────────────
