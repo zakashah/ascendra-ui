@@ -45,7 +45,7 @@ The `ascendra-ui/` folder is what consumer projects install. The showcase (`app/
 | Update component (props/API change) | `ascendra-ui/components/{cat}/{slug}.tsx` + `lib/registry.ts` + `components/previews/{slug}-preview.tsx` |
 | Update preview only | `components/previews/{slug}-preview.tsx` (+ `lib/registry.ts` if props docs need fixing) |
 | New gallery category | `lib/{type}-config.ts` → `app/showcase/{type}/page.tsx` → `components/{type}/` → `lib/nav-config.ts` |
-| Release | `CHANGELOG.md` → `npm run release` → `git push && git push --tags` |
+| Release | Merge feat branch to main → update `CHANGELOG.md` → `/release` skill → `git push && git push --tags` |
 
 ---
 
@@ -360,6 +360,52 @@ Add a **single** nav-config entry pointing to the gallery: `{ name: 'Sample {Typ
 
 ---
 
+## Branching Workflow
+
+All feature work happens on branches. Main is always releasable.
+
+### Branch naming
+
+| Prefix | Use for | Example |
+|---|---|---|
+| `feat/` | New components, galleries, consumer features | `feat/status-dot`, `feat/drawer-gallery` |
+| `fix/` | Bug fixes, broken previews, incorrect behavior | `fix/datatable-pagination-reset` |
+| `chore/` | Infra, scripts, config, dependency updates | `chore/upgrade-tanstack-query` |
+| `docs/` | CLAUDE.md, registry descriptions, non-generated doc edits | `docs/branching-guide` |
+
+### Workflow
+
+```bash
+git checkout -b feat/my-component   # start branch
+# ... do all the work, commit freely ...
+git checkout main
+git merge --squash feat/my-component
+git commit -m "feat: add MyComponent"
+git branch -d feat/my-component
+```
+
+Use **squash merge** — one clean commit per feature on main. Intermediate branch commits are preserved in branch history if you ever need them, but main stays readable.
+
+### Rules
+
+- Never commit directly to main for feature work (exception: trivial single-line typo fixes in doc files)
+- Always delete the branch after merging
+- Release only from main — the `/release` skill enforces this
+- Squash commit message should use conventional commit format: `feat:`, `fix:`, `chore:`, `docs:`
+
+### BACKLOG.md status markers
+
+Track work in `BACKLOG.md` using these markers:
+
+| Marker | Meaning |
+|---|---|
+| `[ ]` | Backlog — not yet started |
+| `[~]` | In progress — branch exists |
+| `[✓]` | Merged to main — not yet released (lives in **Unreleased** section) |
+| `[x]` | Shipped — stamped with version in **Completed** section |
+
+---
+
 ## Release Process
 
 ### Prerequisites (must be true before running release)
@@ -374,6 +420,16 @@ Add a **single** nav-config entry pointing to the gallery: `{ name: 'Sample {Typ
 - `MyComponent`, `MyComponentTitle` — what it is and why it's useful.
 - Showcase preview at `/showcase/feedback/my-component` with N example sections.
 ```
+
+### Versioning Rules
+
+| Bump | When to use |
+|---|---|
+| **patch** | Bug fixes; new props with default values; showcase/preview-only changes; script improvements; CLAUDE.md or skills updates. Consumer code requires no changes. |
+| **minor** | New components, hooks, providers, or utils added to `ascendra-ui/`; new optional props without defaults; new gallery pages; additive managed template file changes. No consumer migration needed. |
+| **major** | Removing or renaming component exports or props; breaking prop type changes; managed template restructuring that conflicts with consumer customizations; dependency major version bumps with consumer-facing API changes. Consumer must act after upgrading. |
+
+Tie-breaker: when in doubt between two levels, use the higher one. Any major release CHANGELOG entry must include a **Breaking** note explaining what consumers must do.
 
 ### Commands
 
@@ -458,8 +514,10 @@ The description should cover: what the component is, its primary use case, and a
 - **Don't** use relative paths in `importPath` — always `'@/ascendra-ui'`
 
 ### Release
+- **Do** work on a `feat/`, `fix/`, `chore/`, or `docs/` branch and squash-merge to main before releasing
 - **Do** add the CHANGELOG entry before running the script (script validates it exists)
 - **Do** commit all code before running release (script requires clean tree)
 - **Do** push with `--tags` — the version tag must reach the remote
+- **Don't** run `/release` from a feature branch — the skill blocks it
 - **Don't** edit `docs/` files by hand — they are always overwritten
 - **Don't** manually bump `package.json` or `ascendra.json` — the release script owns those fields
