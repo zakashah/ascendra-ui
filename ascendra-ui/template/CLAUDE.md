@@ -139,11 +139,11 @@ See `docs/showcase-reference.md` → DataTable System for full wiring documentat
 
 ---
 
-## Available Skills
+## Available Commands
 
-Type these in Claude Code to scaffold common patterns. Each skill reads the docs first and asks targeted questions before generating complete, working code.
+Type these in Claude Code to scaffold common patterns. Each command reads the docs first and asks targeted questions before generating complete, working code.
 
-| Skill | Generates |
+| Command | Generates |
 |---|---|
 | `/create-page` | New route in `app/(app)/` with correct layout variant |
 | `/create-form` | Full form: zod schema + react-hook-form + all field components |

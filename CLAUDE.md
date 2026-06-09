@@ -450,9 +450,9 @@ git push && git push --tags
 
 ---
 
-## Available Skills
+## Available Commands
 
-| Skill | What it does |
+| Command | What it does |
 |---|---|
 | `/create-component` | Full 9-step new component workflow (file → index.ts → registry → nav-config → layout → doc-components → preview → docs:generate) |
 | `/release` | Pre-flight checks + release script + push with tags |

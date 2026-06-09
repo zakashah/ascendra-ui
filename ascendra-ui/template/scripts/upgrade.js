@@ -266,6 +266,13 @@ async function main() {
       if (count > 0) console.log(`  ✓ Updated ${count} managed skills in .claude/commands/`);
     }
 
+    // Migration: remove legacy .claude/skills/ directory (renamed to .claude/commands/ in v1.1.1)
+    const oldSkillsDest = path.join(ROOT, ".claude", "skills");
+    if (fs.existsSync(oldSkillsDest)) {
+      fs.rmSync(oldSkillsDest, { recursive: true, force: true });
+      console.log("  ✓ Removed legacy .claude/skills/ (migrated to .claude/commands/)");
+    }
+
     // ── Sync dependencies ─────────────────────────────────────────────────────────
     const newSrcConfig = JSON.parse(
       fs.readFileSync(path.join(tmpDir, "ascendra.json"), "utf8")
@@ -317,6 +324,10 @@ async function main() {
       "create-dashboard.md", "create-report.md", "create-chart.md",
       "create-dialog.md", "create-sheet.md", "create-component.md",
     ];
+    // Stage removal of legacy .claude/skills/ if it was tracked
+    try {
+      run("git rm -rf --cached \".claude/skills/\" 2>/dev/null || true", { stdio: "pipe" });
+    } catch { /* not tracked, ignore */ }
     run(
       "git add ascendra-ui/ docs/ CHANGELOG.md CLAUDE.md ascendra.json app/layout.tsx app/globals.css " +
       "\"app/(app)/layout.tsx\" \"app/(app)/page.tsx\" \"app/(app)/sandbox/page.tsx\" " +

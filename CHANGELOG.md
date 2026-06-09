@@ -36,6 +36,14 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.1.2] — Fix commands migration in upgrade script
+
+### Fixed
+- `scripts/upgrade.js` now removes the legacy `.claude/skills/` directory during upgrade and stages its deletion via `git rm`. Consumers who upgraded to v1.1.1 and ended up without `.claude/commands/` will get it populated on the next upgrade.
+- Template `CLAUDE.md` "Available Skills" section renamed to "Available Commands" to match the new directory name.
+
+---
+
 ## [1.1.1] — Rename skills to commands
 
 ### Changed
