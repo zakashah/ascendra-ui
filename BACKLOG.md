@@ -15,8 +15,6 @@ Track planned and in-progress work here. Update status markers as work moves thr
 
 Items merged to main but not yet tagged in a release. These become the next CHANGELOG entry.
 
-- [✓] Template cleanup — `.ascendra-ui/` folder for managed files, ship-once consumer `README.md` + `CHANGELOG.md`, fix `create-project.js` stale `.claude/skills/` ref
-- [✓] Template starter files — improve `README.md` (lint command, remove dead link), `CHANGELOG.md` (usage guide), add `BACKLOG.md` template
 
 ---
 
@@ -68,3 +66,4 @@ Upgrade script, consumer template files, consumer CLAUDE.md, consumer skills.
 - [x] Claude Code skills (create-component, release, verify-docs) — v1.0.11
 - [x] Skill delivery fix for pre-1.0.11 consumers — v1.0.12
 - [x] Branching workflow, versioning rules, and backlog — v1.1.0
+- [x] Template cleanup + starter files — `.ascendra-ui/` folder, ship-once `README.md`, `CHANGELOG.md`, `BACKLOG.md` — v1.2.0
