@@ -4,17 +4,32 @@ description: Scaffold a new library component through all 9 mandatory touchpoint
 
 You are scaffolding a new component for the Ascendra UI library. Follow every step in order — do not skip any.
 
-**Step 1 — Gather requirements**
+**Step 1 — Analyze and propose spec**
 
-Ask the user:
-1. Component slug (kebab-case, e.g. `status-dot`)
-2. Component display name (PascalCase, e.g. `StatusDot`)
-3. Category directory: `common-ui`, `ui`, `layout`, `nav`, `card`, `data-table`, `date`, `tabs`, `side-bar`, `forms`, `util`, `stepper`, `reports`, `header`
-4. Nav category: `Feedback & Status`, `Forms & Inputs`, `Date & Time`, `Navigation`, `Overlays`, `Charts`, `Tables & Data`, `Layout`, `Tabs`, `Sidebar`, `Utilities`
-5. Variants needed (list them)
-6. Sub-components needed (e.g. `StatusDotLabel`) — yes/no and names
+Read the user's message and any selected code, TODO, or other context they've provided. From that, derive a proposed spec using your knowledge of the codebase conventions:
 
-Do not proceed until you have all answers.
+- **slug** — kebab-case, derived from the component name (e.g. `status-dot`)
+- **name** — PascalCase display name (e.g. `StatusDot`)
+- **category directory** — pick the best fit: `common-ui` (visual primitives), `ui` (shadcn-derived interactive), `layout` (page structure), `nav` (navigation), `card` (card containers), `data-table` (data grid pieces), `date` (date/time controls), `tabs` (tab variants), `side-bar` (sidebar), `forms` (form helpers), `util` (utility display), `stepper` (progress), `reports` (report display), `header` (header variants)
+- **nav category** — pick the best fit: `Feedback & Status` (badges, dots, alerts, progress), `Forms & Inputs` (interactive controls), `Date & Time` (date/time controls), `Navigation` (nav links/bars), `Overlays` (dialogs, sheets, dropdowns, tooltips), `Charts` (chart primitives), `Tables & Data` (tables, empty state), `Layout` (page-level layout, cards), `Tabs`, `Sidebar`, `Utilities` (toggles, avatars, pagination)
+- **variants** — infer from the description or defaults for the component type; if none are obvious, propose a sensible starting set
+- **sub-components** — infer from the description (e.g. a Card likely needs `CardHeader`, `CardContent`); default to none if not clear
+
+Present the full proposed spec in a single confirmation block, for example:
+
+```
+Proposed spec:
+  slug:           status-dot
+  name:           StatusDot
+  category:       common-ui
+  nav category:   Feedback & Status
+  variants:       default, success, warning, error
+  sub-components: StatusDotLabel
+```
+
+Ask: "Does this look right? Confirm or correct anything — then I'll proceed."
+
+Do not proceed to Step 2 until the user confirms.
 
 **Step 2 — Create the component file**
 

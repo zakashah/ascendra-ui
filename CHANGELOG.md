@@ -36,6 +36,14 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.1.1] — Rename skills to commands
+
+### Changed
+- `.claude/skills/` renamed to `.claude/commands/` — both in the root repo and in `ascendra-ui/template/`. Aligns with the current Claude Code commands format.
+- `scripts/upgrade.js` updated to write managed Claude Code commands to `.claude/commands/` instead of `.claude/skills/`.
+
+---
+
 ## [1.1.0] — Branching workflow, versioning rules, and backlog
 
 ### Added
