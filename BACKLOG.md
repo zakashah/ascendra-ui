@@ -45,6 +45,8 @@ Scripts, tooling, release process, Claude Code skills, CI setup.
 
 Upgrade script, consumer template files, consumer CLAUDE.md, consumer skills.
 
+- [~] Template cleanup — move managed files (`CHANGELOG.md`, `ascendra.json`) into `.ascendra-ui/` folder; ship consumer `README.md` and `CHANGELOG.md` once on create; fix stale `.claude/skills/` ref in `create-project.js`
+
 ---
 
 ## Completed

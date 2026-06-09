@@ -8,7 +8,7 @@
 
 This project is built on **Ascendra UI** — a full-stack Next.js design system. The `ascendra-ui/` folder is the component library. It is **managed**: never edit files inside it — `npm run upgrade` overwrites them entirely.
 
-Check `ascendra.json` for the current library version and the source repository URL.
+Check `.ascendra-ui/ascendra.json` for the current library version and the source repository URL.
 
 ---
 
@@ -88,7 +88,10 @@ docs/                     ← managed — do not edit by hand
   ui-reference.md         ← component API reference (auto-updated on upgrade)
   showcase-reference.md   ← page patterns and templates (auto-updated on upgrade)
 ascendra-ui/              ← managed — do not edit (overwritten on upgrade)
-ascendra.json             ← version manifest — do not edit by hand
+.ascendra-ui/             ← managed — do not edit
+  ascendra.json           ← version manifest (version, commit, source, deps)
+  CHANGELOG.md            ← ascendra-ui library release history
+CHANGELOG.md              ← your project changelog (yours to maintain)
 ```
 
 ---

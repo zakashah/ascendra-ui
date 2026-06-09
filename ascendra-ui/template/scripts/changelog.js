@@ -12,10 +12,10 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..");
-const changelogPath = path.join(ROOT, "CHANGELOG.md");
+const changelogPath = path.join(ROOT, ".ascendra-ui", "CHANGELOG.md");
 
 if (!fs.existsSync(changelogPath)) {
-  console.error("Error: CHANGELOG.md not found.");
+  console.error("Error: .ascendra-ui/CHANGELOG.md not found.");
   process.exit(1);
 }
 
@@ -40,7 +40,7 @@ const showNext = process.argv.includes("--next");
 
 let currentVersion = null;
 try {
-  const config = JSON.parse(fs.readFileSync(path.join(ROOT, "ascendra.json"), "utf8"));
+  const config = JSON.parse(fs.readFileSync(path.join(ROOT, ".ascendra-ui", "ascendra.json"), "utf8"));
   currentVersion = config.version;
 } catch {
   // Non-critical

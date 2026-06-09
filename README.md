@@ -159,9 +159,13 @@ my-app/
 ├── lib/                   # Your utilities (empty, .gitkeep)
 ├── providers/             # Your providers (empty, .gitkeep)
 ├── utils/                 # Your utilities (empty, .gitkeep)
-├── ascendra.json          # Tracks version, commit, source URL, managed deps
+├── .ascendra-ui/
+│   ├── ascendra.json      # Version manifest — version, commit, source URL, managed deps
+│   └── CHANGELOG.md       # ascendra-ui library release history (updated on upgrade)
+├── README.md              # Project README (yours to customise)
+├── CHANGELOG.md           # Project changelog (yours to maintain)
 ├── package.json           # consumer scripts + all ascendra-ui dependencies
-└── .gitignore             # ascendra-ui/ excluded
+└── .gitignore
 ```
 
 ### Step 3 — start developing
@@ -210,10 +214,10 @@ npm run upgrade -- --version 1.2.0
 2. Replaces `ascendra-ui/` with the new component library
 3. Updates managed app shell files: `app/layout.tsx`, `app/globals.css`, `app/(app)/layout.tsx`
 4. Updates `docs/ui-reference.md` and `docs/showcase-reference.md`
-5. Updates `CHANGELOG.md`
+5. Updates `.ascendra-ui/CHANGELOG.md` (library release history)
 6. Self-updates `scripts/upgrade.js` with the version from the new release
-7. **Syncs dependencies**: diffs `ascendra.json.dependencies` old vs new, runs `npm install` for anything added or version-bumped, warns about removed packages (never auto-removes)
-8. Updates `ascendra.json` (version, commit hash, dependency snapshot)
+7. **Syncs dependencies**: diffs `.ascendra-ui/ascendra.json` dependencies old vs new, runs `npm install` for anything added or version-bumped, warns about removed packages (never auto-removes)
+8. Updates `.ascendra-ui/ascendra.json` (version, commit hash, dependency snapshot)
 9. Commits: `chore: upgrade ascendra-ui vX.Y.Z → vA.B.C`
 
 > Your own files (`components/`, `hooks/`, `lib/`, etc.) and the `(app)` pages you created are never touched by the upgrade.
@@ -330,6 +334,6 @@ The `@/ascendra-ui` alias resolves to `ascendra-ui/index.ts` via `tsconfig.json`
 ## Notes
 
 - **Do not edit `ascendra-ui/` in a consumer project.** It will be overwritten on the next `npm run upgrade`. Put your own components in `components/`. It is hidden in VSCode for this reason but is committed to git normally.
-- **`ascendra.json` is the version lock file.** It records the version, commit hash, source URL, and managed dependency list. Do not edit it manually.
-- **Breaking changes** are marked in CHANGELOG.md. Review them before upgrading across major versions.
+- **`.ascendra-ui/ascendra.json` is the version lock file.** It records the version, commit hash, source URL, and managed dependency list. Do not edit it manually.
+- **Breaking changes** are marked in `.ascendra-ui/CHANGELOG.md`. Review them before upgrading across major versions. Run `npm run changelog` for a formatted view.
 - **The `docs/` folder is safe to commit.** It is updated on every upgrade and contains the reference for both developers and AI tools.

@@ -22,20 +22,23 @@
  * Note: uses SSH (git@github.com:...) by default — requires SSH key auth for the private repo.
  *
  * What gets created in <project-name>/:
- *   ascendra-ui/          — full component library (gitignored + hidden in VSCode)
- *   app/                  — root layout + getting-started page + sandbox
- *   scripts/upgrade.js    — upgrade to newer ascendra-ui versions
- *   scripts/changelog.js  — view CHANGELOG entries
- *   docs/                 — ui-reference.md + showcase-reference.md
- *   CHANGELOG.md
- *   CLAUDE.md             — Claude Code instructions (managed, updated on upgrade)
- *   .claude/skills/       — 9 managed Claude Code skills (managed, updated on upgrade)
+ *   ascendra-ui/              — full component library (hidden in VSCode, committed to git)
+ *   app/                      — root layout + getting-started page + sandbox
+ *   scripts/upgrade.js        — upgrade to newer ascendra-ui versions
+ *   scripts/changelog.js      — view CHANGELOG entries
+ *   docs/                     — ui-reference.md + showcase-reference.md
+ *   README.md                 — project README template (ship-once, not managed by upgrade)
+ *   CHANGELOG.md              — project changelog template (ship-once, not managed by upgrade)
+ *   CLAUDE.md                 — Claude Code instructions (managed, updated on upgrade)
+ *   .claude/commands/         — 9 managed Claude Code skills (managed, updated on upgrade)
+ *   .ascendra-ui/
+ *     ascendra.json           — version, commit, source URL, managed dependency list
+ *     CHANGELOG.md            — ascendra-ui library release history (managed by upgrade)
  *   next.config.ts, tsconfig.json, postcss.config.mjs, eslint.config.mjs
  *   components/, hooks/, lib/, providers/, utils/   — empty with .gitkeep
- *   package.json          — consumer scripts + all ascendra-ui dependencies
- *   ascendra.json         — version, commit, source URL, managed dependency list
- *   .gitignore            — excludes ascendra-ui/ and standard Next.js files
- *   .vscode/settings.json — hides ascendra-ui/ from file explorer
+ *   package.json              — consumer scripts + all ascendra-ui dependencies
+ *   .gitignore                — excludes standard Next.js files
+ *   .vscode/settings.json     — hides ascendra-ui/ from file explorer
  */
 
 const { execSync } = require("child_process");
@@ -278,29 +281,43 @@ async function main() {
     console.log("  ✓ Copied docs/");
   }
 
-  // 7. Copy CHANGELOG.md
-  const changelogSrc = path.join(sourceDir, "CHANGELOG.md");
-  if (fs.existsSync(changelogSrc)) {
-    fs.copyFileSync(changelogSrc, path.join(destDir, "CHANGELOG.md"));
-    console.log("  ✓ Copied CHANGELOG.md");
+  // 7. Create .ascendra-ui/ — managed library files
+  const ascendraDir = path.join(destDir, ".ascendra-ui");
+  fs.mkdirSync(ascendraDir, { recursive: true });
+
+  // Copy library CHANGELOG into .ascendra-ui/
+  const libChangelogSrc = path.join(sourceDir, "CHANGELOG.md");
+  if (fs.existsSync(libChangelogSrc)) {
+    fs.copyFileSync(libChangelogSrc, path.join(ascendraDir, "CHANGELOG.md"));
   }
 
-  // 7b. Copy CLAUDE.md (Claude Code instructions for consumer projects)
+  // 7b. Ship consumer README.md and CHANGELOG.md once (not managed by upgrade)
+  const templateReadmeSrc = path.join(sourceDir, "ascendra-ui", "template", "README.md");
+  if (fs.existsSync(templateReadmeSrc)) {
+    fs.copyFileSync(templateReadmeSrc, path.join(destDir, "README.md"));
+  }
+  const templateChangelogSrc = path.join(sourceDir, "ascendra-ui", "template", "CHANGELOG.md");
+  if (fs.existsSync(templateChangelogSrc)) {
+    fs.copyFileSync(templateChangelogSrc, path.join(destDir, "CHANGELOG.md"));
+  }
+  console.log("  ✓ Created .ascendra-ui/ (library changelog), README.md, CHANGELOG.md");
+
+  // 7c. Copy CLAUDE.md (Claude Code instructions for consumer projects)
   const claudeSrc = path.join(sourceDir, "ascendra-ui", "template", "CLAUDE.md");
   if (fs.existsSync(claudeSrc)) {
     fs.copyFileSync(claudeSrc, path.join(destDir, "CLAUDE.md"));
     console.log("  ✓ Copied CLAUDE.md");
   }
 
-  // 7c. Copy .claude/skills/ (managed Claude Code skills)
-  const skillsTemplateSrc = path.join(sourceDir, "ascendra-ui", "template", ".claude", "skills");
-  const claudeDest = path.join(destDir, ".claude", "skills");
-  if (fs.existsSync(skillsTemplateSrc)) {
-    fs.mkdirSync(claudeDest, { recursive: true });
-    for (const entry of fs.readdirSync(skillsTemplateSrc)) {
-      fs.copyFileSync(path.join(skillsTemplateSrc, entry), path.join(claudeDest, entry));
+  // 7d. Copy .claude/commands/ (managed Claude Code skills)
+  const commandsTemplateSrc = path.join(sourceDir, "ascendra-ui", "template", ".claude", "commands");
+  const commandsDest = path.join(destDir, ".claude", "commands");
+  if (fs.existsSync(commandsTemplateSrc)) {
+    fs.mkdirSync(commandsDest, { recursive: true });
+    for (const entry of fs.readdirSync(commandsTemplateSrc)) {
+      fs.copyFileSync(path.join(commandsTemplateSrc, entry), path.join(commandsDest, entry));
     }
-    console.log("  ✓ Copied .claude/skills/ (9 managed Claude Code skills)");
+    console.log("  ✓ Copied .claude/commands/ (9 managed Claude Code skills)");
   }
 
   // 8. Create empty placeholder folders
@@ -311,7 +328,7 @@ async function main() {
   }
   console.log("  ✓ Created empty folders: components/, hooks/, lib/, providers/, utils/");
 
-  // 9. Write ascendra.json for consumer
+  // 9. Write .ascendra-ui/ascendra.json for consumer
   const consumerConfig = {
     version,
     commit,
@@ -320,10 +337,10 @@ async function main() {
     devDependencies: srcPkg.devDependencies || {},
   };
   fs.writeFileSync(
-    path.join(destDir, "ascendra.json"),
+    path.join(destDir, ".ascendra-ui", "ascendra.json"),
     JSON.stringify(consumerConfig, null, 2) + "\n"
   );
-  console.log("  ✓ Created ascendra.json");
+  console.log("  ✓ Created .ascendra-ui/ascendra.json");
 
   // 10. Write .gitignore
   const gitignore = `# Dependencies
@@ -389,11 +406,12 @@ next-env.d.ts
   console.log(`\n✓ Project "${projectName}" ready at: ${destDir}`);
   console.log("\nNext steps:");
   console.log(`  cd ${path.relative(process.cwd(), destDir) || projectName}`);
-  console.log("  npm run dev                  — start development server");
-  console.log("  npm run upgrade              — upgrade ascendra-ui to a newer version");
-  console.log("  npm run changelog            — view release notes");
-  console.log("  docs/ui-reference.md         — component API reference");
-  console.log("  docs/showcase-reference.md   — design guide\n");
+  console.log("  npm run dev                       — start development server");
+  console.log("  npm run upgrade                   — upgrade ascendra-ui to a newer version");
+  console.log("  npm run changelog                 — view release notes");
+  console.log("  docs/ui-reference.md              — component API reference");
+  console.log("  docs/showcase-reference.md        — design guide");
+  console.log("  .ascendra-ui/ascendra.json        — version manifest\n");
 }
 
 main().catch((err) => {

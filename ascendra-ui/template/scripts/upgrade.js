@@ -7,14 +7,14 @@
  *   npm run upgrade -- --version 1.2.0   — upgrade to a specific version
  *
  * What this updates:
- *   ascendra-ui/          — component library
+ *   ascendra-ui/              — component library
  *   app/layout.tsx + app/globals.css + app/(app)/layout.tsx — managed shell files
- *   docs/                 — reference docs
- *   CHANGELOG.md
- *   CLAUDE.md             — managed Claude Code instructions (self-updating)
- *   .claude/commands/     — 9 managed Claude Code skills (self-updating, never removes custom skills)
- *   scripts/upgrade.js    — self-updating
- *   ascendra.json         — version, commit hash, and managed dependency list
+ *   docs/                     — reference docs
+ *   .ascendra-ui/CHANGELOG.md — ascendra-ui library release history
+ *   CLAUDE.md                 — managed Claude Code instructions (self-updating)
+ *   .claude/commands/         — 9 managed Claude Code skills (self-updating, never removes custom skills)
+ *   scripts/upgrade.js        — self-updating
+ *   .ascendra-ui/ascendra.json — version, commit hash, and managed dependency list
  *
  * New dependencies added in the target version are installed automatically.
  * Removed dependencies are flagged as warnings (never auto-removed).
@@ -59,7 +59,15 @@ function depDiff(oldDeps = {}, newDeps = {}) {
 }
 
 async function main() {
-  const configPath = path.join(ROOT, "ascendra.json");
+  // Migration: if ascendra.json is at root (pre-1.1.5), move it to .ascendra-ui/
+  const legacyConfigPath = path.join(ROOT, "ascendra.json");
+  const configPath = path.join(ROOT, ".ascendra-ui", "ascendra.json");
+  if (!fs.existsSync(configPath) && fs.existsSync(legacyConfigPath)) {
+    fs.mkdirSync(path.join(ROOT, ".ascendra-ui"), { recursive: true });
+    fs.renameSync(legacyConfigPath, configPath);
+    console.log("  ✓ Migrated ascendra.json → .ascendra-ui/ascendra.json");
+  }
+
   const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
 
   if (!config.source) {
@@ -244,11 +252,20 @@ async function main() {
       console.log("  ✓ Updated docs/");
     }
 
-    // ── Update CHANGELOG.md ───────────────────────────────────────────────────────
+    // ── Update .ascendra-ui/CHANGELOG.md ─────────────────────────────────────────
     const changelogSrc = path.join(tmpDir, "CHANGELOG.md");
     if (fs.existsSync(changelogSrc)) {
-      fs.copyFileSync(changelogSrc, path.join(ROOT, "CHANGELOG.md"));
-      console.log("  ✓ Updated CHANGELOG.md");
+      fs.mkdirSync(path.join(ROOT, ".ascendra-ui"), { recursive: true });
+      fs.copyFileSync(changelogSrc, path.join(ROOT, ".ascendra-ui", "CHANGELOG.md"));
+      // Migration: remove legacy CHANGELOG.md at root if it was the library changelog
+      const legacyChangelog = path.join(ROOT, "CHANGELOG.md");
+      if (fs.existsSync(legacyChangelog)) {
+        const content = fs.readFileSync(legacyChangelog, "utf8");
+        if (content.includes("## [") && content.includes("ascendra-ui")) {
+          fs.rmSync(legacyChangelog);
+        }
+      }
+      console.log("  ✓ Updated .ascendra-ui/CHANGELOG.md");
     }
 
     // ── Update CLAUDE.md ──────────────────────────────────────────────────────────
@@ -285,7 +302,7 @@ async function main() {
 
     // ── Sync dependencies ─────────────────────────────────────────────────────────
     const newSrcConfig = JSON.parse(
-      fs.readFileSync(path.join(tmpDir, "ascendra.json"), "utf8")
+      fs.readFileSync(path.join(tmpDir, "ascendra.json"), "utf8")  // source always has it at root
     );
     const newDeps = newSrcConfig.dependencies || {};
     const newDevDeps = newSrcConfig.devDependencies || {};
@@ -314,14 +331,14 @@ async function main() {
       console.log("  You can remove them with: npm uninstall <package>");
     }
 
-    // ── Update ascendra.json ───────────────────────────────────────────────────────
+    // ── Update .ascendra-ui/ascendra.json ─────────────────────────────────────────
     const srcCommit = run("git rev-parse HEAD", { cwd: tmpDir, stdio: "pipe" }).toString().trim();
     config.version = targetVersion;
     config.commit = srcCommit;
     config.dependencies = newDeps;
     config.devDependencies = newDevDeps;
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2) + "\n");
-    console.log("  ✓ Updated ascendra.json");
+    console.log("  ✓ Updated .ascendra-ui/ascendra.json");
 
   } finally {
     fs.rmSync(tmpDir, { recursive: true, force: true });
@@ -338,10 +355,15 @@ async function main() {
     try {
       run("git rm -rf --cached \".claude/skills/\" 2>/dev/null || true", { stdio: "pipe" });
     } catch { /* not tracked, ignore */ }
+    // Stage removal of legacy root CHANGELOG.md if it was migrated to .ascendra-ui/
+    try {
+      run("git rm --cached \"CHANGELOG.md\" 2>/dev/null || true", { stdio: "pipe" });
+    } catch { /* not tracked, ignore */ }
     run(
-      "git add ascendra-ui/ docs/ CHANGELOG.md CLAUDE.md ascendra.json app/layout.tsx app/globals.css " +
+      "git add ascendra-ui/ docs/ CLAUDE.md app/layout.tsx app/globals.css " +
       "\"app/(app)/layout.tsx\" \"app/(app)/page.tsx\" \"app/(app)/sandbox/page.tsx\" " +
       "scripts/upgrade.js package-lock.json " +
+      "\".ascendra-ui/ascendra.json\" \".ascendra-ui/CHANGELOG.md\" " +
       managedSkillsForAdd.map(s => `".claude/commands/${s}"`).join(" "),
       { stdio: "inherit" }
     );
@@ -351,7 +373,7 @@ async function main() {
   }
 
   console.log(`\n✓ Upgraded to v${targetVersion}`);
-  console.log("  Review Breaking changes in CHANGELOG.md and update your code accordingly.\n");
+  console.log("  Review breaking changes in .ascendra-ui/CHANGELOG.md or run `npm run changelog`.\n");
 }
 
 main().catch((err) => {
