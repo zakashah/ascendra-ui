@@ -183,7 +183,7 @@ async function main() {
         fs.copyFileSync(newUpgradeSrc, path.join(ROOT, "scripts", "upgrade.js"));
         fs.rmSync(tmpDir, { recursive: true, force: true });
         console.log("  ✓ scripts/upgrade.js was updated for this release.");
-        console.log("\n  The upgrade script changed — please re-run `npm run upgrade` to complete.\n");
+        console.log(`\n  The upgrade script changed in v${targetVersion} — please re-run \`npm run upgrade\` to complete the upgrade.\n`);
         process.exit(0);
       }
     }

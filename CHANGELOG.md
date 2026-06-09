@@ -36,6 +36,13 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.1.4] — Improve upgrade script re-run message
+
+### Changed
+- Re-run message now includes the target version number: `The upgrade script changed in vX.Y.Z — please re-run npm run upgrade to complete the upgrade.`
+
+---
+
 ## [1.1.3] — Self-update guard in upgrade script
 
 ### Changed
