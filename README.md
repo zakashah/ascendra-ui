@@ -164,6 +164,7 @@ my-app/
 │   └── CHANGELOG.md       # ascendra-ui library release history (updated on upgrade)
 ├── README.md              # Project README (yours to customise)
 ├── CHANGELOG.md           # Project changelog (yours to maintain)
+├── BACKLOG.md             # Project backlog (yours to maintain)
 ├── package.json           # consumer scripts + all ascendra-ui dependencies
 └── .gitignore
 ```

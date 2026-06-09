@@ -1,6 +1,6 @@
 # {project-name}
 
-A Next.js application built on [Ascendra UI](https://github.com/zakashah/ascendra-ui) — a full-stack design system with 50+ production-ready components.
+A Next.js application built on Ascendra UI — a full-stack design system with 50+ production-ready components.
 
 ---
 
@@ -68,6 +68,7 @@ ascendra-ui/              ← managed — do not edit (overwritten on upgrade)
 |---|---|
 | `npm run dev` | Start development server |
 | `npm run build` | Production build |
+| `npm run lint` | Run ESLint |
 | `npm run upgrade` | Upgrade ascendra-ui to a newer version |
 | `npm run changelog` | View ascendra-ui release notes |
 

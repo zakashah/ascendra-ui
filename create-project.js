@@ -29,6 +29,7 @@
  *   docs/                     — ui-reference.md + showcase-reference.md
  *   README.md                 — project README template (ship-once, not managed by upgrade)
  *   CHANGELOG.md              — project changelog template (ship-once, not managed by upgrade)
+ *   BACKLOG.md                — project backlog template (ship-once, not managed by upgrade)
  *   CLAUDE.md                 — Claude Code instructions (managed, updated on upgrade)
  *   .claude/commands/         — 9 managed Claude Code skills (managed, updated on upgrade)
  *   .ascendra-ui/
@@ -291,16 +292,12 @@ async function main() {
     fs.copyFileSync(libChangelogSrc, path.join(ascendraDir, "CHANGELOG.md"));
   }
 
-  // 7b. Ship consumer README.md and CHANGELOG.md once (not managed by upgrade)
-  const templateReadmeSrc = path.join(sourceDir, "ascendra-ui", "template", "README.md");
-  if (fs.existsSync(templateReadmeSrc)) {
-    fs.copyFileSync(templateReadmeSrc, path.join(destDir, "README.md"));
+  // 7b. Ship consumer README.md, CHANGELOG.md, BACKLOG.md once (not managed by upgrade)
+  for (const file of ["README.md", "CHANGELOG.md", "BACKLOG.md"]) {
+    const src = path.join(sourceDir, "ascendra-ui", "template", file);
+    if (fs.existsSync(src)) fs.copyFileSync(src, path.join(destDir, file));
   }
-  const templateChangelogSrc = path.join(sourceDir, "ascendra-ui", "template", "CHANGELOG.md");
-  if (fs.existsSync(templateChangelogSrc)) {
-    fs.copyFileSync(templateChangelogSrc, path.join(destDir, "CHANGELOG.md"));
-  }
-  console.log("  ✓ Created .ascendra-ui/ (library changelog), README.md, CHANGELOG.md");
+  console.log("  ✓ Created .ascendra-ui/ (library changelog), README.md, CHANGELOG.md, BACKLOG.md");
 
   // 7c. Copy CLAUDE.md (Claude Code instructions for consumer projects)
   const claudeSrc = path.join(sourceDir, "ascendra-ui", "template", "CLAUDE.md");

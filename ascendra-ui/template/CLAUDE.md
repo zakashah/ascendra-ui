@@ -92,6 +92,7 @@ ascendra-ui/              ← managed — do not edit (overwritten on upgrade)
   ascendra.json           ← version manifest (version, commit, source, deps)
   CHANGELOG.md            ← ascendra-ui library release history
 CHANGELOG.md              ← your project changelog (yours to maintain)
+BACKLOG.md                ← your project backlog (yours to maintain)
 ```
 
 ---
