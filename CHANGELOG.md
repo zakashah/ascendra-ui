@@ -36,6 +36,16 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.1.0] — Branching workflow, versioning rules, and backlog
+
+### Added
+- `BACKLOG.md` — structured backlog with Unreleased, category, and Completed sections. Item status markers (`[ ]` backlog, `[~]` in progress, `[✓]` merged/unreleased, `[x]` shipped) track work through the full lifecycle.
+- Branching workflow documented in `CLAUDE.md` — branch naming conventions (`feat/`, `fix/`, `chore/`, `docs/`), squash-merge workflow, and rules for working on main.
+- Versioning rules in `CLAUDE.md` and `/release` skill — clear patch/minor/major decision table tied to the consumer upgrade model.
+- `/release` skill updated with branch guard (blocks if not on `main`) and inline versioning guide at the bump-type step.
+
+---
+
 ## [1.0.12] — Fix skill delivery for consumers upgrading from pre-1.0.11
 
 ### Fixed
