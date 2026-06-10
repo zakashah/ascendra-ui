@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-> **Managed file** — updated automatically by `npm run upgrade`. For project-specific Claude instructions, create `.claude/instructions.md`; Claude Code reads both.
+> **This file is yours.** It was created when your project was bootstrapped from Ascendra UI and will not be overwritten by `npm run upgrade`. Claude Code reads it automatically — add project-specific conventions, API contracts, domain terminology, team preferences, and anything else Claude should know about your codebase here.
 
 ---
 
@@ -91,8 +91,10 @@ ascendra-ui/              ← managed — do not edit (overwritten on upgrade)
 .ascendra-ui/             ← managed — do not edit
   ascendra.json           ← version manifest (version, commit, source, deps)
   CHANGELOG.md            ← ascendra-ui library release history
-CHANGELOG.md              ← your project changelog (yours to maintain)
-BACKLOG.md                ← your project backlog (yours to maintain)
+CHANGELOG.md              ← your project changelog — update as you ship features
+BACKLOG.md                ← your project backlog — track planned and in-progress work
+CLAUDE.md                 ← this file — yours to update with project context
+README.md                 ← your project README — yours to update
 ```
 
 ---
@@ -143,6 +145,34 @@ See `docs/showcase-reference.md` → DataTable System for full wiring documentat
 
 ---
 
+## Branching Workflow
+
+All feature work happens on branches. Main should always be in a releasable state.
+
+| Prefix | Use for |
+|---|---|
+| `feat/` | New features, pages, components |
+| `fix/` | Bug fixes |
+| `chore/` | Infra, config, dependency updates |
+| `docs/` | Documentation and content changes |
+
+Use **squash merges** — one clean commit per feature on main. Use `/prepare-release` to handle the squash-merge and changelog drafting together.
+
+---
+
+## Release Workflow
+
+Use `/prepare-release` → `/release` to manage versioned releases.
+
+| Command | What it does |
+|---|---|
+| `/prepare-release` | Squash-merges your branch to main, collects commits since the last tag, proposes a semver bump, drafts `CHANGELOG.md` and `BACKLOG.md` entries, and commits — ready for `/release` |
+| `/release` | Pre-flight checks (branch, clean tree, type check), derives the version from the CHANGELOG top entry, stamps BACKLOG, bumps `package.json`, creates the release commit and tag — then prompts to push |
+
+The heading `## [x.y.z] — description` in `CHANGELOG.md` is the source of truth for the release version. Both commands show a preview at every step before making any irreversible change.
+
+---
+
 ## Available Commands
 
 Type these in Claude Code to scaffold common patterns. Each command reads the docs first and asks targeted questions before generating complete, working code.
@@ -158,6 +188,8 @@ Type these in Claude Code to scaffold common patterns. Each command reads the do
 | `/create-dialog` | Modal dialog with optional form and footer actions |
 | `/create-sheet` | Side-panel sheet with detail view or form |
 | `/create-component` | CVA component following library conventions |
+| `/prepare-release` | Squash-merge branch → draft CHANGELOG entry → commit |
+| `/release` | Pre-flight checks → bump version → create commit + tag → push |
 
 ---
 

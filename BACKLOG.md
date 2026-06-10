@@ -17,6 +17,7 @@ Add a **Category** label to each item: **Component**, **Docs**, **Infra**, **Sho
 
 Items at any stage — planned, in progress, or merged but not yet tagged. Add new work here when you start planning it.
 
+- [~] **Consumer** — template overhaul: `CLAUDE.md` and `README.md` are now user-owned (not overwritten on `npm run upgrade`); add `prepare-release` and `release` as two new managed skills shipped to consumers; improve template BACKLOG, CHANGELOG, CLAUDE.md, and README.md with branching workflow, release workflow, and semver guidance
 
 ---
 

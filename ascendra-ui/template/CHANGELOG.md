@@ -12,12 +12,30 @@ All notable changes to this project are documented here. Follow [Keep a Changelo
 - `Fixed` — bug fixes
 - `Removed` — removed features
 
-**Lifecycle:**
-1. As you work, add items under `## [Unreleased]` — one bullet per meaningful change
-2. When you cut a release, rename `[Unreleased]` to `[x.y.z] — short description` and add a fresh empty `[Unreleased]` above it
-3. Use semver: `patch` for bug fixes, `minor` for new features, `major` for breaking changes
+**Heading format** — must be exactly this pattern (the `/prepare-release` and `/release` commands parse it):
 
-> ascendra-ui library updates are tracked separately in `.ascendra-ui/CHANGELOG.md`. Run `npm run changelog` to view them.
+```
+## [x.y.z] — short description
+```
+
+**Lifecycle:**
+1. Work on a feature branch
+2. Run `/prepare-release` — it squash-merges your branch, collects commits since the last tag, proposes a bump level, and drafts this entry for you
+3. Review and approve the draft, then run `/release` to cut the tag
+
+You can also maintain this file manually: add items under `## [Unreleased]` as you work, then rename it to `## [x.y.z] — short description` when you cut a release.
+
+**Semver guide:**
+
+| Bump | When to use |
+|---|---|
+| `patch` | Bug fixes, refactors, copy/config changes — no new behaviour visible to users |
+| `minor` | New features, pages, or API endpoints — additive, no breaking changes |
+| `major` | Renamed routes, removed features, changed auth or data contracts — users or API clients must update |
+
+For a **major** bump, include a **Breaking** note in the entry explaining what callers must change.
+
+> Ascendra UI library updates are tracked separately in `.ascendra-ui/CHANGELOG.md`. Run `npm run changelog` to view them.
 
 ---
 
