@@ -42,7 +42,7 @@ export function DataTableSearchInput() {
       <InputGroupInput
         ref={inputRef}
         placeholder="Search..."
-        className="w-10"
+        className="w-65"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         onFocus={() => setSearchFocused(true)}

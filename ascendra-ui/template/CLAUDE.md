@@ -184,7 +184,6 @@ Type these in Claude Code to scaffold common patterns. Each command reads the do
 | `/create-table` | DataTable with the right provider (server or static) |
 | `/create-dashboard` | Dashboard page with stats, charts, and optional table |
 | `/create-report` | Report structure with sections and PDF export |
-| `/create-chart` | Standalone chart with ChartContainer and chartConfig |
 | `/create-dialog` | Modal dialog with optional form and footer actions |
 | `/create-sheet` | Side-panel sheet with detail view or form |
 | `/create-component` | CVA component following library conventions |

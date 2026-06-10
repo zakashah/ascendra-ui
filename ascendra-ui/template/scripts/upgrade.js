@@ -11,7 +11,7 @@
  *   app/layout.tsx + app/globals.css + app/(app)/layout.tsx — managed shell files
  *   docs/                     — reference docs
  *   .ascendra-ui/CHANGELOG.md — ascendra-ui library release history
- *   .claude/commands/         — 11 managed Claude Code skills (self-updating, never removes custom skills)
+ *   .claude/commands/         — 10 managed Claude Code skills (self-updating, never removes custom skills)
  *   scripts/upgrade.js        — self-updating
  *   .ascendra-ui/ascendra.json — version, commit hash, and managed dependency list
  *
@@ -270,7 +270,7 @@ async function main() {
     // ── Update managed .claude/commands/ ─────────────────────────────────────────
     const managedSkills = [
       "create-page.md", "create-form.md", "create-table.md",
-      "create-dashboard.md", "create-report.md", "create-chart.md",
+      "create-dashboard.md", "create-report.md",
       "create-dialog.md", "create-sheet.md", "create-component.md",
       "prepare-release.md", "release.md",
     ];
@@ -341,7 +341,7 @@ async function main() {
   try {
     const managedSkillsForAdd = [
       "create-page.md", "create-form.md", "create-table.md",
-      "create-dashboard.md", "create-report.md", "create-chart.md",
+      "create-dashboard.md", "create-report.md",
       "create-dialog.md", "create-sheet.md", "create-component.md",
     ];
     // Stage removal of legacy .claude/skills/ if it was tracked
