@@ -37,6 +37,19 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.4.0] — ASCENDRA.md file taxonomy and smart upgrade strategies
+
+### Added
+- `ASCENDRA.md` — new managed reference file shipped to all consumer projects. Documents every file's upgrade strategy (silent overwrite, warn-then-overwrite, check-then-skip, ship-once) so developers and AI assistants know what is safe to edit before touching any file. Auto-updated on `npm run upgrade`.
+
+### Changed
+- `upgrade.js` — enforce the full upgrade taxonomy: `app/(app)/page.tsx` is now ship-once (never overwritten, consumers own their home page); `app/(app)/sandbox/page.tsx` and `app/favicon.ico` are check-then-skip (upgrade stores a SHA at install time and skips the file once it detects customisation); `app/layout.tsx`, `app/globals.css`, and `app/(app)/layout.tsx` are warn-then-overwrite (upgrade prints a warning and shows where to find the diff). `templateHashes` map stored in `.ascendra-ui/ascendra.json` to support the skip logic.
+- `create-project.js` — ships `ASCENDRA.md` alongside `CLAUDE.md` on project creation; writes initial `templateHashes` into `ascendra.json`; `CLAUDE.md` reclassified as ship-once (upgrade no longer overwrites it).
+- Template command files (all 10) — added `<!-- managed: overwritten on npm run upgrade -->` header so consumers know to copy under a new name before customising.
+- `template/CLAUDE.md` — added `ASCENDRA.md` to the reference docs list; updated project structure diagram to reflect ship-once/skip labels for `page.tsx` and `sandbox`.
+
+---
+
 ## [1.3.1] — Consumer template skill overhaul + DataTableSearchInput fix
 
 ### Fixed

@@ -17,6 +17,7 @@ Add a **Category** label to each item: **Component**, **Docs**, **Infra**, **Sho
 
 Items at any stage — planned, in progress, or merged but not yet tagged. Add new work here when you start planning it.
 
+- [✓] **Consumer** — ship ASCENDRA.md managed file taxonomy to consumer projects; add warn/skip/ship-once upgrade strategies (hash-based check-then-skip for favicon and sandbox, ship-once for home page)
 - [ ] **Consumer** — `create-settings` skill: scaffold settings page pattern (narrow-centered, multi-section `Card` layout, `UnsavedChangesBar`, optional `Tabs` structure, optional danger zone) with Phase 0 requirements discovery and spec checkpoint
 - [ ] **Consumer** — `create-detail-page` skill: scaffold record detail/show page (`app/(app)/{entity}/[id]/page.tsx`) with `PageHeader`, back link, status badge, header action buttons, and sectioned/tabbed body; Phase 0 extracts entity, data source, sections, and header shape
 
