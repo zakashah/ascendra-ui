@@ -393,15 +393,24 @@ Use **squash merge** — one clean commit per feature on main. Intermediate bran
 - Release only from main — the `/release` skill enforces this
 - Squash commit message should use conventional commit format: `feat:`, `fix:`, `chore:`, `docs:`
 
-### BACKLOG.md status markers
+### BACKLOG.md structure and markers
 
-Track work in `BACKLOG.md` using these markers:
+`BACKLOG.md` has two sections: **Unreleased** and **Completed**. Every item lives in Unreleased its entire life — it only moves to Completed when it is stamped with a version at release time (done automatically by `/release`).
+
+Add a **Category** label to each item using one of: `Component`, `Docs`, `Infra`, `Showcase`, `Consumer`.
+
+```
+- [ ] **Component** — description of planned work
+- [~] **Infra** — work in progress on a branch
+- [✓] **Docs** — merged to main, not yet released
+- [x] **Infra** — shipped description — v1.2.1   ← Completed section
+```
 
 | Marker | Meaning |
 |---|---|
-| `[ ]` | Backlog — not yet started |
+| `[ ]` | Planned — not yet started |
 | `[~]` | In progress — branch exists |
-| `[✓]` | Merged to main — not yet released (lives in **Unreleased** section) |
+| `[✓]` | Merged to main — not yet released |
 | `[x]` | Shipped — stamped with version in **Completed** section |
 
 ---

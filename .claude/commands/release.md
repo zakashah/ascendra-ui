@@ -43,6 +43,16 @@ If the user wanted a different level, stop — they must fix the version in the 
 
 If the derived bump is **major**, verify the CHANGELOG entry contains a **Breaking** note explaining what consumers must do. Stop if it is missing.
 
+**Step 4.5 — Stamp BACKLOG**
+
+Read `BACKLOG.md`. Find every `[✓]` item in the Unreleased section.
+
+For each one: change `[✓]` to `[x]` and append ` — v{x.y.z}` to its description. Then move the line to the top of the Completed section (above the previous most-recent entry).
+
+If Unreleased has no `[✓]` items, skip this step.
+
+Do **not** commit this change. The release script runs `git add .` before its own commit, so the BACKLOG edit is automatically swept into the `"chore: release vX.Y.Z"` commit — the version stamp and the version bump land in the same commit.
+
 **Step 5 — Run release**
 
 Run `printf "{x.y.z}\n" | npm run release` — pass the exact version derived in Step 3, not a bump type. The script accepts explicit `x.y.z` and this guarantees it releases the same version the CHANGELOG documents.

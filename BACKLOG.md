@@ -4,47 +4,18 @@ Track planned and in-progress work here. Update status markers as work moves thr
 
 | Marker | Meaning                           |
 | ------ | --------------------------------- |
-| `[ ]`  | Backlog — not yet started         |
+| `[ ]`  | Planned — not yet started         |
 | `[~]`  | In progress — branch exists       |
 | `[✓]`  | Merged to main — not yet released |
-| `[x]`  | Shipped — see Completed section   |
+| `[x]`  | Shipped — stamped with version    |
+
+Add a **Category** label to each item: **Component**, **Docs**, **Infra**, **Showcase**, **Consumer**.
 
 ---
 
 ## Unreleased
 
-Items merged to main but not yet tagged in a release. These become the next CHANGELOG entry.
-
-
----
-
-## New Components
-
-Components not yet in the library that would ship inside `ascendra-ui/`.
-
----
-
-## Component Improvements
-
-Additions or changes to existing components — new variants, props, composability.
-
----
-
-## Showcase & Docs
-
-Preview gaps, new gallery pages, registry description improvements, non-generated doc changes.
-
----
-
-## Infrastructure
-
-Scripts, tooling, release process, Claude Code skills, CI setup.
-
----
-
-## Consumer Experience
-
-Upgrade script, consumer template files, consumer CLAUDE.md, consumer skills.
+Items at any stage — planned, in progress, or merged but not yet tagged. Add new work here when you start planning it.
 
 ---
 

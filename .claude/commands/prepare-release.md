@@ -63,7 +63,21 @@ Only include subsections that apply. For a **major** bump, a **Breaking** note e
 
 **Step 5 — Update BACKLOG.md**
 
-Move items covered by this release from `[~]` to `[✓]` in the **Unreleased** section.
+Open `BACKLOG.md` and work through two sub-tasks:
+
+**5a — Confirm tracked items**
+
+List every `[~]` item currently in the Unreleased section. For each one, ask the user: is this covered by the work in this release? Mark confirmed items `[✓]`; leave unfinished ones as `[~]`.
+
+If there are no `[~]` items, skip to 5b.
+
+**5b — Add unplanned changes**
+
+Compare the commits in `git log {tag}..HEAD --oneline` against the items now in Unreleased. Identify any commits not reflected by an existing BACKLOG item (planned or unplanned work that was never tracked).
+
+For each untracked commit, propose a new `[✓] **Category** — description` line using the appropriate Category label (`Component`, `Docs`, `Infra`, `Showcase`, `Consumer`). Present these to the user together and ask them to confirm which to add. Add confirmed ones to the Unreleased section. Skip declined ones.
+
+Do not edit the file yet — collect all changes for the review step.
 
 **Step 6 — Review with the user**
 
