@@ -10,7 +10,12 @@ Run `git status` and `git branch --show-current`.
 - If already on `main`, skip to Step 2.
 - If on any other branch name that is not `feat/`, `fix/`, `chore/`, or `docs/`, stop and ask the user how to proceed.
 
-If on a `feat/`, `fix/`, `chore/`, or `docs/` branch, present **CP-1** before doing anything.
+If on a `feat/`, `fix/`, `chore/`, or `docs/` branch, run the following before presenting CP-1:
+
+1. Run `npx tsc --noEmit`. If it fails, stop and tell the user to fix type errors on the branch before merging.
+2. Run `git log main..{branch} --oneline`. If the output is empty, stop — the branch has no commits ahead of main and there is nothing to squash-merge.
+
+Use the output of `git log main..{branch} --oneline` to draft the squash commit message before showing CP-1.
 
 ---
 **CHECKPOINT CP-1 — Squash-merge + branch delete**
@@ -18,7 +23,7 @@ What is about to happen: the branch will be squash-merged into main and then del
 
 Show the user:
 - Branch being merged: `{branch}`
-- Proposed squash-merge commit message: `{type}: {summary}` (conventional commit format matching the branch prefix — draft this from the branch name and its commits before showing)
+- Proposed squash-merge commit message: `{type}: {summary}` (conventional commit format matching the branch prefix — drafted from the `git log main..{branch} --oneline` output above, not just the branch name)
 - The exact commands that will run once approved:
   ```bash
   git checkout main
@@ -35,6 +40,24 @@ Wait for approval. Apply any commit message edits the user requests. Do not run 
 ---
 
 After approval, run the squash-merge commands.
+
+**Step 2 — Check for stacked unreleased entry**
+
+Before collecting commits, read `package.json` to get the current released version `{current}`. Then read `CHANGELOG.md` and find the first `## [x.y.z]` heading to get `{pending}`.
+
+If `{pending}` > `{current}`: there is already an unreleased CHANGELOG entry from a previous `/prepare-release` run. Stop immediately and tell the user:
+
+> There is already an unreleased CHANGELOG entry for `v{pending}` — `package.json` is still at `v{current}` because `/release` has not been run yet.
+>
+> Proceeding would draft a second unreleased entry on top of the first, which `/release` will reject (it requires the top entry to be exactly one semver step above `package.json`).
+>
+> **Option A — Release first (recommended):** Run `/release` to publish `v{pending}`, then re-run `/prepare-release` for the current changes.
+>
+> **Option B — Absorb manually:** Edit `CHANGELOG.md` to fold the current changes into the existing `v{pending}` entry (adjust the version bump level if needed), commit the edit, then run `/release`.
+
+Do not proceed with change collection or CHANGELOG drafting until the user resolves the conflict. Do not attempt to auto-merge or auto-amend entries — version bump intent requires human judgment.
+
+If no stacked entry exists (`{pending}` == `{current}`, or CHANGELOG has no `## [x.y.z]` heading yet), continue normally.
 
 **Step 2 — Collect changes since last release**
 
@@ -116,6 +139,8 @@ What is about to happen: the CHANGELOG entry will be written to `CHANGELOG.md`.
 
 Show the full drafted entry exactly as it will appear in the file.
 
+The heading **must** follow this exact format: `## [x.y.z] — short description` — the `/release` script parses this with a regex and will fail if the format differs (e.g. `## v1.2.3` or `## [1.2.3]:` are both wrong).
+
 Ask: "Does this accurately describe the release? Edit the wording or approve to continue to the BACKLOG step."
 
 Wait for approval. Apply any edits the user requests before moving on.
@@ -155,7 +180,7 @@ Wait for approval. Apply any edits the user requests before writing the file.
 
 ---
 
-After approval, write the changes to both `CHANGELOG.md` and `BACKLOG.md`.
+After approval, write `CHANGELOG.md` first, then `BACKLOG.md`. If the second write fails, `CHANGELOG.md` is already correct — do not revert it; re-apply only the BACKLOG changes.
 
 **Step 6 — Commit**
 

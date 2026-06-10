@@ -14,6 +14,10 @@ Do not proceed if not on main.
 
 Run `git status`. If not clean, stop and tell the user what to commit first.
 
+**Step 2.5 — Type check**
+
+Run `npx tsc --noEmit`. If it fails, stop and tell the user to fix type errors before cutting a release — a tagged release with broken types is harder to roll back than a failed pre-flight.
+
 **Step 3 — Derive version from CHANGELOG**
 
 The CHANGELOG is the source of truth for the new version.
@@ -52,18 +56,22 @@ If the user wants a different level, stop — they must edit the CHANGELOG versi
 
 **Step 4.5 — Preview BACKLOG stamp**
 
-Read `BACKLOG.md`. Find every `[✓]` item in the Unreleased section.
+Read `BACKLOG.md`. Find every `[✓]` item and every `[~]` item in the Unreleased section.
 
-If Unreleased has no `[✓]` items, skip this checkpoint and go to Step 5.
+If Unreleased has no `[✓]` items and no `[~]` items, skip this checkpoint and go to Step 5.
 
 ---
 **CHECKPOINT CP-R1 — BACKLOG stamp preview**
-What is about to happen: the following items will be stamped with the release version, marked `[x]`, and moved to the Completed section.
+What is about to happen: `[✓]` items will be stamped with the release version, marked `[x]`, and moved to the Completed section.
 
-List every `[✓]` item that will be changed, showing exactly how each line will look after stamping:
+List every `[✓]` item that will be stamped, showing exactly how each line will look:
 ```
 [x] **Category** — description — v{x.y.z}
 ```
+
+If there are any `[~]` items still in Unreleased, list them separately and ask: "These items are still marked in-progress — are any of them actually complete and should be included in this release? If so, tell me which ones and I'll promote them to `[✓]` before stamping."
+
+Wait for a response. Promote any items the user confirms are done, then re-show the full stamp list.
 
 Ask: "Do these items correctly represent what is shipping in this release? Approve to stamp them, or tell me what to correct."
 
@@ -71,7 +79,15 @@ Wait for approval. After approval, apply the edits to `BACKLOG.md`:
 - Change each `[✓]` to `[x]` and append ` — v{x.y.z}`
 - Move each stamped line to the top of the Completed section
 
-Do **not** commit this change — the release script runs `git add .` before its own commit, so the BACKLOG edit is swept into the `"chore: release vX.Y.Z"` commit automatically.
+Then commit the BACKLOG change:
+```bash
+git add BACKLOG.md
+git commit -m "chore: stamp BACKLOG for v{x.y.z}"
+```
+
+The release script guards against a dirty working tree, so the BACKLOG stamp must land in its own commit before the script runs. The stamp commit will sit one commit before the `chore: release v{x.y.z}` commit — both are captured by the version tag.
+
+**Recovery:** if the release script (Step 5) fails after this stamp commit, do NOT re-run `/release` immediately. First run `git reset HEAD~1` to undo the stamp commit, fix the underlying issue, then re-run `/release` from the start.
 
 ---
 
@@ -102,6 +118,13 @@ Wait for approval. Do not run the script until approved.
 
 After approval, run `printf "{x.y.z}\n" | npm run release`.
 
+Verify success before proceeding:
+```bash
+git log --oneline -3
+git tag | tail -3
+```
+Confirm `chore: release v{x.y.z}` appears as the latest commit and `v{x.y.z}` appears as a tag. If either is missing, do not push — investigate why the script did not complete.
+
 **Step 6 — Push**
 
 ---
@@ -120,6 +143,8 @@ Wait for approval. Do not push until approved.
 ---
 
 After approval, run `git push && git push --tags`.
+
+If `git push` fails because the remote has diverged, do NOT force-push. Run `git pull --rebase` and push again. If only `git push --tags` fails (the commit push succeeded), run it again in isolation — a tag push is idempotent and safe to retry.
 
 **Step 7 — Confirm**
 

@@ -64,6 +64,8 @@ Use these answers to determine:
 - **category directory**: `common-ui` for visual primitives, `ui` for interactive controls, or another category from the directory map
 - **whether sub-components are needed** and what they should be named
 
+Also check: does the component use color? If so, it must use semantic Tailwind tokens (`bg-primary`, `bg-muted`, `text-foreground`, `border`) not hardcoded color classes (`bg-gray-500`, `text-white`). Hardcoded colors break dark mode. Note any color token decisions in the internal spec.
+
 ### 0.5 — Variants and API details
 
 Ask: "What visual variants or states does it need? For example: `success / warning / error` for status, `sm / md / lg` for size. List what you know — I'll fill in sensible defaults for anything left open."
@@ -116,10 +118,25 @@ Create `ascendra-ui/components/{category}/{slug}.tsx`:
 - `data-slot="{slug}"` on the root element of every component and sub-component
 - Spread `...props` and accept `className` on every component and sub-component
 - No comments explaining what the code does
+- Use semantic Tailwind tokens for all colors — never hardcoded color classes
+
+After creating the file, run `npx tsc --noEmit`. If it fails, fix the type errors before continuing.
+
+---
+**CHECKPOINT — Component file review**
+What is about to happen: Steps 3–9 will modify 6 more files based on this component's API. Review the component before those files are touched.
+
+Show the user the full content of `ascendra-ui/components/{category}/{slug}.tsx`.
+
+Ask: "Does this look right — API, variants, sub-components, token usage? Approve to continue, or tell me what to change."
+
+Wait for approval. Do not proceed to Step 3 until approved.
+
+---
 
 ## Step 3 — Add barrel export
 
-Add to `ascendra-ui/index.ts` in alphabetical order within the appropriate category block:
+Read `ascendra-ui/index.ts` first to identify the correct category comment block and confirm no export for this slug already exists. Then add in alphabetical order within that block:
 `export * from './components/{category}/{slug}';`
 
 ## Step 4 — Add registry entry in `lib/registry.ts`
@@ -151,5 +168,7 @@ Import `{ComponentName}DocContent` from `@/components/previews/{slug}-preview` a
 ## Step 9 — Regenerate docs
 
 Run `npm run docs:generate`.
+
+If a dev server is running, open `/showcase/{nav-category-slug}/{slug}` in the browser and confirm the page renders without errors and the preview content displays correctly. If the server is not running, note the URL so the user can verify manually.
 
 Confirm all 9 steps are complete before reporting done.
