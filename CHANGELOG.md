@@ -37,6 +37,14 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.2.3] — Harden Claude Code skills
+
+### Changed
+- All four skills (`create-component`, `prepare-release`, `release`, `verify-docs`) hardened with 17 gap fixes: type-check gates, mid-flow review checkpoints, explicit file-read instructions, rollback/recovery guidance, and a stacked-release detector in `prepare-release` that blocks drafting a second unreleased CHANGELOG entry on top of an existing one.
+- `BACKLOG.md`: added category labels to all historical Completed entries.
+
+---
+
 ## [1.2.2] — Add approval checkpoints to release skills
 
 ### Changed

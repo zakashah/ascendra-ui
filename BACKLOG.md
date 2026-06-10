@@ -17,6 +17,8 @@ Add a **Category** label to each item: **Component**, **Docs**, **Infra**, **Sho
 
 Items at any stage — planned, in progress, or merged but not yet tagged. Add new work here when you start planning it.
 
+- [✓] **Infra** — harden all four Claude Code skills with 17 gap fixes and stacked-release guard
+
 ---
 
 ## Completed
