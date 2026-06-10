@@ -37,6 +37,22 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.2.1] — Release workflow hardening and skill improvements
+
+### Added
+
+- `/prepare-release` skill — squash-merges the feature branch to main, summarizes commits since the last tag, drafts the CHANGELOG entry and BACKLOG updates, and commits after approval.
+- Phase 0 requirements discovery in `/create-component` — validates the use case, checks for overlap with existing registry components, and confirms library fitness before scaffolding files.
+
+### Changed
+
+- `/release` now derives the new version from the CHANGELOG top entry and passes the exact `x.y.z` to the release script — the CHANGELOG is the source of truth, so bump/changelog mismatches are no longer possible.
+- Registry: completed `importNames` for the `sidebar-menu` entry (sidebar shell: `SideBar`, `useSideBar`, `SideBarHeader`, `SideBarMain`, `SideBarFooter`, `SideBarOverlay`, `SideBarToggle`) and the `data-table` entry (checkbox cells, error body, bars, head/row actions, and query components such as `QueryBar` and `BatchNavigator`).
+
+### Fixed
+
+- `scripts/release.js` no longer exits 0 silently when run with piped or non-interactive stdin and the CHANGELOG entry is missing — it now aborts with exit code 1 and a clear message, including when stdin ends before a prompt is answered.
+
 ## [1.2.0] — Consumer project starter files and .ascendra-ui/ folder
 
 ### Added
