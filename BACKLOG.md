@@ -17,12 +17,11 @@ Add a **Category** label to each item: **Component**, **Docs**, **Infra**, **Sho
 
 Items at any stage — planned, in progress, or merged but not yet tagged. Add new work here when you start planning it.
 
-- [✓] **Consumer** — template overhaul: `CLAUDE.md` and `README.md` are now user-owned (not overwritten on `npm run upgrade`); add `prepare-release` and `release` as two new managed skills shipped to consumers; improve template BACKLOG, CHANGELOG, CLAUDE.md, and README.md with branching workflow, release workflow, and semver guidance
-
 ---
 
 ## Completed
 
+- [x] **Consumer** — template overhaul: `CLAUDE.md` and `README.md` are now user-owned (not overwritten on `npm run upgrade`); add `prepare-release` and `release` as two new managed skills shipped to consumers; improve template BACKLOG, CHANGELOG, CLAUDE.md, and README.md with branching workflow, release workflow, and semver guidance — v1.3.0
 - [x] **Infra** — harden all four Claude Code skills with 17 gap fixes and stacked-release guard — v1.2.3
 - [x] **Infra** — add explicit approval checkpoints to prepare-release and release skills — v1.2.2
 - [x] **Consumer** — template cleanup + starter files — `.ascendra-ui/` folder, ship-once `README.md`, `CHANGELOG.md`, `BACKLOG.md` — v1.2.0
