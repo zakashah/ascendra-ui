@@ -1,8 +1,8 @@
-<!-- ascendra-ui-version: 1.2.0 -->
-<!-- ascendra-ui-commit: e87ff7e596e4817303971dc8a4fe26a2c5e63542 -->
+<!-- ascendra-ui-version: 1.2.1 -->
+<!-- ascendra-ui-commit: 6729d9003873f15cb5f34c42982fc461ba45509a -->
 # Ascendra UI — Showcase Reference
 
-> Auto-generated on 2026-06-10 · ascendra-ui v1.2.0
+> Auto-generated on 2026-06-10 · ascendra-ui v1.2.1
 > Run `npm run docs:generate` after any config or showcase change.
 > For the component API reference (props, imports, types) see `docs/ui-reference.md`.
 
@@ -1985,8 +1985,8 @@ Never import from sub-paths like `@/ascendra-ui/components/button` — always us
 
 ## Versioning
 
-This reference was generated for **ascendra-ui v1.2.0**.
-Commit: `e87ff7e596e4817303971dc8a4fe26a2c5e63542`
+This reference was generated for **ascendra-ui v1.2.1**.
+Commit: `6729d9003873f15cb5f34c42982fc461ba45509a`
 
 Run `npm run docs:generate` to regenerate after any change.
 Run `npm run release` to cut a new version.
