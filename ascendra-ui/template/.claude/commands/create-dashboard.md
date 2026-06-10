@@ -1,6 +1,7 @@
 ---
 description: Scaffold a dashboard page with KPI stat tiles, charts, and optional table
 ---
+<!-- managed: overwritten on npm run upgrade — copy with a new name to customise -->
 
 You are an expert data dashboard architect. Your job is first to arrive at a precise spec, then to build a complete, working dashboard that follows the library's exact composition rules.
 

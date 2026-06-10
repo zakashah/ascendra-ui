@@ -30,7 +30,7 @@
  *   README.md                 — project README template (ship-once, not managed by upgrade)
  *   CHANGELOG.md              — project changelog template (ship-once, not managed by upgrade)
  *   BACKLOG.md                — project backlog template (ship-once, not managed by upgrade)
- *   CLAUDE.md                 — Claude Code instructions (managed, updated on upgrade)
+ *   CLAUDE.md                 — Claude Code instructions (ship-once, not managed by upgrade)
  *   .claude/commands/         — 9 managed Claude Code skills (managed, updated on upgrade)
  *   .ascendra-ui/
  *     ascendra.json           — version, commit, source URL, managed dependency list
@@ -43,6 +43,7 @@
  */
 
 const { execSync } = require("child_process");
+const crypto = require("crypto");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
@@ -81,6 +82,10 @@ function isGreater(a, b) {
   return aM !== bM ? aM > bM : am !== bm ? am > bm : ap > bp;
 }
 
+
+function sha256File(filePath) {
+  return crypto.createHash("sha256").update(fs.readFileSync(filePath)).digest("hex");
+}
 
 function copyDirExcluding(src, dest, excludeNames = []) {
   fs.mkdirSync(dest, { recursive: true });
@@ -299,12 +304,16 @@ async function main() {
   }
   console.log("  ✓ Created .ascendra-ui/ (library changelog), README.md, CHANGELOG.md, BACKLOG.md");
 
-  // 7c. Copy CLAUDE.md (Claude Code instructions for consumer projects)
+  // 7c. Copy CLAUDE.md (ship-once) and ASCENDRA.md (managed reference)
   const claudeSrc = path.join(sourceDir, "ascendra-ui", "template", "CLAUDE.md");
   if (fs.existsSync(claudeSrc)) {
     fs.copyFileSync(claudeSrc, path.join(destDir, "CLAUDE.md"));
-    console.log("  ✓ Copied CLAUDE.md");
   }
+  const ascendraMdSrc = path.join(sourceDir, "ascendra-ui", "template", "ASCENDRA.md");
+  if (fs.existsSync(ascendraMdSrc)) {
+    fs.copyFileSync(ascendraMdSrc, path.join(destDir, "ASCENDRA.md"));
+  }
+  console.log("  ✓ Copied CLAUDE.md, ASCENDRA.md");
 
   // 7d. Copy .claude/commands/ (managed Claude Code skills)
   const commandsTemplateSrc = path.join(sourceDir, "ascendra-ui", "template", ".claude", "commands");
@@ -326,12 +335,19 @@ async function main() {
   console.log("  ✓ Created empty folders: components/, hooks/, lib/, providers/, utils/");
 
   // 9. Write .ascendra-ui/ascendra.json for consumer
+  const templateHashes = {};
+  const faviconSrc = path.join(sourceDir, "ascendra-ui", "template", "app", "favicon.ico");
+  if (fs.existsSync(faviconSrc)) templateHashes["app/favicon.ico"] = sha256File(faviconSrc);
+  const sandboxSrc2 = path.join(sourceDir, "ascendra-ui", "template", "app", "(app)", "sandbox", "page.tsx");
+  if (fs.existsSync(sandboxSrc2)) templateHashes["app/(app)/sandbox/page.tsx"] = sha256File(sandboxSrc2);
+
   const consumerConfig = {
     version,
     commit,
     source: sourceUrl,
     dependencies: srcPkg.dependencies || {},
     devDependencies: srcPkg.devDependencies || {},
+    templateHashes,
   };
   fs.writeFileSync(
     path.join(destDir, ".ascendra-ui", "ascendra.json"),

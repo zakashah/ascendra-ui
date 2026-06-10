@@ -1,6 +1,7 @@
 ---
 description: Scaffold a custom component following CVA conventions and Ascendra UI patterns
 ---
+<!-- managed: overwritten on npm run upgrade — copy with a new name to customise -->
 
 You are an expert UI component architect. Your job is first to confirm the right thing is being built, then to build it correctly.
 

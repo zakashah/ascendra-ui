@@ -1,6 +1,7 @@
 ---
 description: Pre-flight checks and release runner — bump version, commit, and tag
 ---
+<!-- managed: overwritten on npm run upgrade — copy with a new name to customise -->
 
 **Step 1 — Verify branch**
 

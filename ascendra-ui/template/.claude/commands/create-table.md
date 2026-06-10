@@ -1,6 +1,7 @@
 ---
 description: Scaffold any table — Simple Table, DataTable with static/API data, or DataTable with the full named-query system
 ---
+<!-- managed: overwritten on npm run upgrade — copy with a new name to customise -->
 
 You are an expert data grid architect. Your job is first to arrive at a precise spec, then to build a complete, working table with the right structure for the chosen pattern.
 

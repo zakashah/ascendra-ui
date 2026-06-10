@@ -18,8 +18,9 @@ Check `.ascendra-ui/ascendra.json` for the current library version and the sourc
 
 1. **`docs/ui-reference.md`** — Complete component API: every importable component, its props, import path, and showcase URL. Read this before building any UI element.
 2. **`docs/showcase-reference.md`** — Page templates, design patterns, DataTable system, form patterns, chart usage, and import conventions. Read this before building any page.
+3. **`ASCENDRA.md`** — Managed file taxonomy: every file in this project, whether upgrade overwrites it, and how conflicts are handled. Read this before editing any file you're unsure about.
 
-Both files are auto-updated by `npm run upgrade`.
+All three files are auto-updated by `npm run upgrade`.
 
 **If a needed pattern is absent from the library**, implement it minimally with Tailwind and mark it:
 
@@ -76,8 +77,8 @@ app/
   globals.css             ← managed — design tokens and base styles (do not edit)
   (app)/
     layout.tsx            ← managed — app shell: sidebar + header layout (do not edit)
-    page.tsx              ← managed — getting started page (do not edit)
-    sandbox/page.tsx      ← development sandbox, safe to edit freely
+    page.tsx              ← ship-once — replace with your home page
+    sandbox/page.tsx      ← yours to edit (upgrade skips if modified)
     {your-routes}/        ← your application pages go here
 components/               ← your custom components
 hooks/                    ← your custom hooks
@@ -95,6 +96,7 @@ CHANGELOG.md              ← your project changelog — update as you ship feat
 BACKLOG.md                ← your project backlog — track planned and in-progress work
 CLAUDE.md                 ← this file — yours to update with project context
 README.md                 ← your project README — yours to update
+ASCENDRA.md               ← managed — file taxonomy reference (auto-updated on upgrade)
 ```
 
 ---

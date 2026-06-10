@@ -1,6 +1,7 @@
 ---
 description: Scaffold a Sheet side-panel with detail view, form, or mixed tabs content
 ---
+<!-- managed: overwritten on npm run upgrade — copy with a new name to customise -->
 
 You are an expert UI overlay architect. Your job is first to arrive at a precise spec, then to generate a complete, working sheet panel.
 

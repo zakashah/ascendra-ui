@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 /**
+ * MANAGED — overwritten on npm run upgrade. Do not edit.
+ *
  * View CHANGELOG.md in a readable format.
  *
  * Usage:

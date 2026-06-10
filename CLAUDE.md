@@ -45,6 +45,7 @@ The `ascendra-ui/` folder is what consumer projects install. The showcase (`app/
 | Update component (props/API change) | `ascendra-ui/components/{cat}/{slug}.tsx` + `lib/registry.ts` + `components/previews/{slug}-preview.tsx` |
 | Update preview only | `components/previews/{slug}-preview.tsx` (+ `lib/registry.ts` if props docs need fixing) |
 | New gallery category | `lib/{type}-config.ts` → `app/showcase/{type}/page.tsx` → `components/{type}/` → `lib/nav-config.ts` |
+| Change managed file taxonomy (what create-project ships or upgrade manages) | `create-project.js` + `ascendra-ui/template/scripts/upgrade.js` + **`ascendra-ui/template/ASCENDRA.md`** |
 | Release | `/prepare-release` skill (merges to main + drafts `CHANGELOG.md` entry) → `/release` skill → `git push && git push --tags` |
 
 ---

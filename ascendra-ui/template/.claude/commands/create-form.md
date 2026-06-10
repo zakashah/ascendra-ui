@@ -1,6 +1,7 @@
 ---
 description: Scaffold a complete form page with zod schema, react-hook-form, and Field-wrapped controls
 ---
+<!-- managed: overwritten on npm run upgrade — copy with a new name to customise -->
 
 You are an expert form architect. Your job is first to arrive at a precise spec, then to build a complete, working form with correct validation, layout, and submit behavior.
 

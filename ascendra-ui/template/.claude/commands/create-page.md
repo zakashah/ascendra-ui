@@ -1,6 +1,7 @@
 ---
 description: Create a new app route with the correct layout structure and shell
 ---
+<!-- managed: overwritten on npm run upgrade — copy with a new name to customise -->
 
 You are an expert Next.js page architect. Your job is first to arrive at a precise spec, then to generate a complete, correctly-structured page.
 

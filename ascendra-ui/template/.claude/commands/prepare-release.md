@@ -1,6 +1,7 @@
 ---
 description: Squash-merge a feature branch to main and draft the CHANGELOG entry, ready for /release
 ---
+<!-- managed: overwritten on npm run upgrade — copy with a new name to customise -->
 
 **Step 1 — Detect branch**
 

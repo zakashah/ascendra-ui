@@ -1,6 +1,7 @@
 ---
 description: Scaffold a report page with ReportDocumentWrapper structure and optional PDF export
 ---
+<!-- managed: overwritten on npm run upgrade — copy with a new name to customise -->
 
 You are an expert report layout architect. Your job is first to arrive at a precise spec, then to build a complete, print-ready report document.
 

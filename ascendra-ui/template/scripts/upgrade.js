@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 /**
+ * MANAGED — overwritten on npm run upgrade. Do not edit.
+ *
  * Upgrade ascendra-ui to a newer version.
  *
  * Usage:
@@ -20,6 +22,7 @@
  */
 
 const { execSync } = require("child_process");
+const crypto = require("crypto");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
@@ -39,6 +42,37 @@ function isGreater(a, b) {
   const [aM, am, ap] = p(a);
   const [bM, bm, bp] = p(b);
   return aM !== bM ? aM > bM : am !== bm ? am > bm : ap > bp;
+}
+
+function sha256File(filePath) {
+  return crypto.createHash("sha256").update(fs.readFileSync(filePath)).digest("hex");
+}
+
+// Logs a warning if current text-file content differs from newContent, then caller overwrites.
+function warnIfModified(filePath, newContent) {
+  if (fs.existsSync(filePath)) {
+    const current = fs.readFileSync(filePath, "utf8");
+    if (current !== newContent) {
+      console.log(`  ⚠  ${path.relative(ROOT, filePath)} was modified — overwriting. Run \`git diff HEAD\` after upgrade to review.`);
+    }
+  }
+}
+
+// Compares current file SHA against the stored template hash.
+// Returns "updated" if overwritten/created, "skipped" if user-customized.
+function checkThenSkip(destPath, srcPath, storedHash) {
+  const newBuf = fs.readFileSync(srcPath);
+  if (fs.existsSync(destPath)) {
+    const currentHash = sha256File(destPath);
+    if (storedHash && currentHash !== storedHash) {
+      const rel = path.relative(ROOT, destPath);
+      console.log(`  ⊘  ${rel} skipped — customized (new template version available)`);
+      return "skipped";
+    }
+  }
+  fs.mkdirSync(path.dirname(destPath), { recursive: true });
+  fs.writeFileSync(destPath, newBuf);
+  return "updated";
 }
 
 function depDiff(oldDeps = {}, newDeps = {}) {
@@ -195,6 +229,18 @@ async function main() {
       }
     }
 
+    // Update changelog.js alongside upgrade.js — both are infrastructure, never user-owned
+    const newChangelogSrc = path.join(tmpDir, "ascendra-ui", "template", "scripts", "changelog.js");
+    if (fs.existsSync(newChangelogSrc)) {
+      fs.copyFileSync(newChangelogSrc, path.join(ROOT, "scripts", "changelog.js"));
+    }
+
+    // Update ASCENDRA.md — managed root reference, always reflects current file taxonomy
+    const newAscendraMdSrc = path.join(tmpDir, "ascendra-ui", "template", "ASCENDRA.md");
+    if (fs.existsSync(newAscendraMdSrc)) {
+      fs.copyFileSync(newAscendraMdSrc, path.join(ROOT, "ASCENDRA.md"));
+    }
+
     // ── Replace ascendra-ui/ component library ────────────────────────────────────
     const libSrc = path.join(tmpDir, "ascendra-ui");
     const libDest = path.join(ROOT, "ascendra-ui");
@@ -214,29 +260,44 @@ async function main() {
     const templateSrc = path.join(tmpDir, "ascendra-ui", "template", "app");
     if (fs.existsSync(templateSrc)) {
       const appDest = path.join(ROOT, "app");
+      const storedHashes = config.templateHashes || {};
+      if (!config.templateHashes) config.templateHashes = {};
 
-      for (const managed of ["layout.tsx", "globals.css", "favicon.ico"]) {
+      // Warn-then-overwrite: root layout and global styles
+      for (const managed of ["layout.tsx", "globals.css"]) {
         const src = path.join(templateSrc, managed);
-        if (fs.existsSync(src)) fs.copyFileSync(src, path.join(appDest, managed));
+        if (fs.existsSync(src)) {
+          warnIfModified(path.join(appDest, managed), fs.readFileSync(src, "utf8"));
+          fs.copyFileSync(src, path.join(appDest, managed));
+        }
+      }
+
+      // Check-then-skip: favicon (users replace with their brand asset)
+      const faviconSrc = path.join(templateSrc, "favicon.ico");
+      if (fs.existsSync(faviconSrc)) {
+        const result = checkThenSkip(path.join(appDest, "favicon.ico"), faviconSrc, storedHashes["app/favicon.ico"]);
+        if (result === "updated") config.templateHashes["app/favicon.ico"] = sha256File(path.join(appDest, "favicon.ico"));
       }
 
       const appShellSrc = path.join(templateSrc, "(app)");
       const appShellDest = path.join(appDest, "(app)");
       if (fs.existsSync(appShellSrc)) {
+        // Warn-then-overwrite: app shell layout
         const shellLayoutSrc = path.join(appShellSrc, "layout.tsx");
         if (fs.existsSync(shellLayoutSrc)) {
           fs.mkdirSync(appShellDest, { recursive: true });
+          warnIfModified(path.join(appShellDest, "layout.tsx"), fs.readFileSync(shellLayoutSrc, "utf8"));
           fs.copyFileSync(shellLayoutSrc, path.join(appShellDest, "layout.tsx"));
         }
-        const gettingStartedSrc = path.join(appShellSrc, "page.tsx");
-        if (fs.existsSync(gettingStartedSrc)) {
-          fs.copyFileSync(gettingStartedSrc, path.join(appShellDest, "page.tsx"));
-        }
+
+        // Ship-once: (app)/page.tsx — user owns their home page, never overwrite
+
+        // Check-then-skip: sandbox (users edit this freely)
         const sandboxSrc = path.join(appShellSrc, "sandbox", "page.tsx");
-        const sandboxDest = path.join(appShellDest, "sandbox");
         if (fs.existsSync(sandboxSrc)) {
-          fs.mkdirSync(sandboxDest, { recursive: true });
-          fs.copyFileSync(sandboxSrc, path.join(sandboxDest, "page.tsx"));
+          const sandboxDest = path.join(appShellDest, "sandbox", "page.tsx");
+          const result = checkThenSkip(sandboxDest, sandboxSrc, storedHashes["app/(app)/sandbox/page.tsx"]);
+          if (result === "updated") config.templateHashes["app/(app)/sandbox/page.tsx"] = sha256File(sandboxDest);
         }
       }
       console.log("  ✓ Updated app/layout.tsx, app/globals.css, app/(app)/layout.tsx");
@@ -352,14 +413,20 @@ async function main() {
     try {
       run("git rm --cached \"CHANGELOG.md\" 2>/dev/null || true", { stdio: "pipe" });
     } catch { /* not tracked, ignore */ }
-    run(
-      "git add ascendra-ui/ docs/ CLAUDE.md app/layout.tsx app/globals.css " +
-      "\"app/(app)/layout.tsx\" \"app/(app)/page.tsx\" \"app/(app)/sandbox/page.tsx\" " +
-      "scripts/upgrade.js package-lock.json " +
-      "\".ascendra-ui/ascendra.json\" \".ascendra-ui/CHANGELOG.md\" " +
-      managedSkillsForAdd.map(s => `".claude/commands/${s}"`).join(" "),
-      { stdio: "inherit" }
-    );
+    const filesToStage = [
+      "ascendra-ui/", "docs/", "CLAUDE.md", "ASCENDRA.md",
+      "app/layout.tsx", "app/globals.css",
+      "\"app/(app)/layout.tsx\"",
+      "scripts/upgrade.js", "scripts/changelog.js", "package-lock.json",
+      "\".ascendra-ui/ascendra.json\"", "\".ascendra-ui/CHANGELOG.md\"",
+      ...managedSkillsForAdd.map(s => `".claude/commands/${s}"`),
+    ];
+    // Only stage check-then-skip files if they exist (git add on missing path errors)
+    if (fs.existsSync(path.join(ROOT, "app", "favicon.ico")))
+      filesToStage.push("app/favicon.ico");
+    if (fs.existsSync(path.join(ROOT, "app", "(app)", "sandbox", "page.tsx")))
+      filesToStage.push("\"app/(app)/sandbox/page.tsx\"");
+    run(`git add ${filesToStage.join(" ")}`, { stdio: "inherit" });
     run(`git commit -m "chore: upgrade ascendra-ui v${currentVersion} → v${targetVersion}"`, { stdio: "inherit" });
   } catch {
     // No-op if nothing changed
