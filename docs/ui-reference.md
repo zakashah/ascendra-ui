@@ -2,7 +2,7 @@
 <!-- ascendra-ui-commit: e87ff7e596e4817303971dc8a4fe26a2c5e63542 -->
 # Ascendra UI — UI Reference
 
-> Auto-generated on 2026-06-09 · ascendra-ui v1.2.0
+> Auto-generated on 2026-06-10 · ascendra-ui v1.2.0
 > Run `npm run docs:generate` after any registry or config change.
 
 ---
@@ -816,7 +816,7 @@ Placeholder for empty content areas with optional icon media and call-to-action.
 
 Feature-rich data table with built-in search, filtering, sorting, column management, and pagination — composed via DataTableProvider and QueryProvider.
 
-- **Import:** `import { DataTable, DataTableHeader, DataTableHeaderRow, DataTableHead, DataTableBody, DataTableRow, DataTableCell, DataTableHighlight, DataTableWrapper, DataTableFoot, DataTableLoadingBody, DataTableEmptyBody, DataTableSearchInput, DataTableColumnManager, DataTableSortDropdown, DataTableFilterDropdown, DataTableFilterBar } from "@/ascendra-ui"`
+- **Import:** `import { DataTable, DataTableHeader, DataTableHeaderRow, DataTableHead, DataTableBody, DataTableRow, DataTableCell, DataTableHighlight, DataTableWrapper, DataTableFoot, DataTableLoadingBody, DataTableEmptyBody, DataTableSearchInput, DataTableColumnManager, DataTableSortDropdown, DataTableFilterDropdown, DataTableFilterBar, DataTableFilterItem, DataTableSortIcon, DataTableCheckboxCell, DataTableCheckboxHead, DataTableErrorBody, DataTableBar, DataTableBarAction, DataTableBarContent, DataTableHeadAction, DataTableHeadActionItem, DataTableExportHeadAction, DataTableRefreshHeadAction, DataTableManageColumnsHeadAction, DataTableBulkExportHeadAction, DataTableBulkDeleteHeadAction, DataTableRowAction, DataTableRowActionItem, DataTableEditRowAction, DataTableDuplicateRowAction, DataTableDeleteRowAction, DataTableViewRowAction, BatchNavigator, ManageQueriesDialog, QueryBar, QueryFieldRenderer, QueryParamPanel, SaveQueryDialog } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/data-table](/showcase/data-table)
 
 **Props**
@@ -946,7 +946,7 @@ Tabbed navigation with dirty-state dot indicator and disabled tab support.
 
 Expandable sidebar navigation with grouped menu sets, icon headers, and active link detection.
 
-- **Import:** `import { SideBarMenu, SideBarMenuHeader, SideBarMenuContent, SideBarMenuItem, SideBarMenuItemGroup, SideBarMenuSet, SideBarMenuSetTitle } from "@/ascendra-ui"`
+- **Import:** `import { SideBar, useSideBar, SideBarFooter, SideBarHeader, SideBarMain, SideBarOverlay, SideBarToggle, SideBarMenu, SideBarMenuHeader, SideBarMenuContent, SideBarMenuItem, SideBarMenuItemGroup, SideBarMenuSet, SideBarMenuSetTitle } from "@/ascendra-ui"`
 - **Showcase:** [/showcase/sidebar-menu](/showcase/sidebar-menu)
 
 **Props**

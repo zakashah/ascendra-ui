@@ -446,7 +446,10 @@ export const registry: Record<string, ComponentMeta> = {
     name: 'Sidebar Menu',
     description: 'Expandable sidebar navigation with grouped menu sets, icon headers, and active link detection.',
     importPath: '@/ascendra-ui',
-    importNames: ['SideBarMenu', 'SideBarMenuHeader', 'SideBarMenuContent', 'SideBarMenuItem', 'SideBarMenuItemGroup', 'SideBarMenuSet', 'SideBarMenuSetTitle'],
+    importNames: [
+      'SideBar', 'useSideBar', 'SideBarFooter', 'SideBarHeader', 'SideBarMain', 'SideBarOverlay', 'SideBarToggle',
+      'SideBarMenu', 'SideBarMenuHeader', 'SideBarMenuContent', 'SideBarMenuItem', 'SideBarMenuItemGroup', 'SideBarMenuSet', 'SideBarMenuSetTitle',
+    ],
     props: [
       { name: 'basePath', type: 'string', description: 'Base path used for active link detection (on SideBarMenu).' },
       { name: 'icon', type: 'IconType', description: 'Icon for the menu header (on SideBarMenuHeader).' },
@@ -661,7 +664,15 @@ export const registry: Record<string, ComponentMeta> = {
       'DataTableBody', 'DataTableRow', 'DataTableCell', 'DataTableHighlight',
       'DataTableWrapper', 'DataTableFoot', 'DataTableLoadingBody', 'DataTableEmptyBody',
       'DataTableSearchInput', 'DataTableColumnManager', 'DataTableSortDropdown',
-      'DataTableFilterDropdown', 'DataTableFilterBar',
+      'DataTableFilterDropdown', 'DataTableFilterBar', 'DataTableFilterItem',
+      'DataTableSortIcon', 'DataTableCheckboxCell', 'DataTableCheckboxHead',
+      'DataTableErrorBody', 'DataTableBar', 'DataTableBarAction', 'DataTableBarContent',
+      'DataTableHeadAction', 'DataTableHeadActionItem',
+      'DataTableExportHeadAction', 'DataTableRefreshHeadAction',
+      'DataTableManageColumnsHeadAction', 'DataTableBulkExportHeadAction', 'DataTableBulkDeleteHeadAction',
+      'DataTableRowAction', 'DataTableRowActionItem',
+      'DataTableEditRowAction', 'DataTableDuplicateRowAction', 'DataTableDeleteRowAction', 'DataTableViewRowAction',
+      'BatchNavigator', 'ManageQueriesDialog', 'QueryBar', 'QueryFieldRenderer', 'QueryParamPanel', 'SaveQueryDialog',
     ],
     props: [
       { name: 'key',          type: 'keyof T',                  description: 'Data property key for this column.' },

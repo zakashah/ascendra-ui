@@ -2,7 +2,7 @@
 <!-- ascendra-ui-commit: e87ff7e596e4817303971dc8a4fe26a2c5e63542 -->
 # Ascendra UI — Showcase Reference
 
-> Auto-generated on 2026-06-09 · ascendra-ui v1.2.0
+> Auto-generated on 2026-06-10 · ascendra-ui v1.2.0
 > Run `npm run docs:generate` after any config or showcase change.
 > For the component API reference (props, imports, types) see `docs/ui-reference.md`.
 
