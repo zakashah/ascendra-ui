@@ -37,6 +37,18 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.3.0] — Consumer template overhaul: user-owned files + release skills
+
+### Added
+- `/prepare-release` and `/release` Claude Code skills (`template/.claude/commands/prepare-release.md`, `release.md`) shipped to consumer projects via `npm run upgrade`. These guide consumers through squash-merge → CHANGELOG drafting → semver release with checkpoint prompts at every irreversible step.
+
+### Changed
+- `template/CLAUDE.md` is now user-owned — removed from the managed upgrade list so consumers can edit it freely without changes being overwritten. Added branching workflow guide, release workflow table, and `/prepare-release`/`/release` to the commands reference.
+- `template/README.md` is now user-owned — removed from the managed upgrade list. Added "About Ascendra UI" orientation section explaining library vs. application separation and the upgrade model.
+- `template/scripts/upgrade.js` — no longer overwrites `CLAUDE.md` on upgrade; adds `prepare-release.md` and `release.md` to the 11 managed skills (up from 9).
+
+---
+
 ## [1.2.3] — Harden Claude Code skills
 
 ### Changed
