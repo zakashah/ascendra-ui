@@ -37,6 +37,17 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.3.1] — Consumer template skill overhaul + DataTableSearchInput fix
+
+### Fixed
+- `DataTableSearchInput` — corrected collapsed width (`w-10` → `w-65`); the input was rendering as a very narrow strip before focus.
+
+### Changed
+- All 8 consumer template skills (`create-page`, `create-form`, `create-table`, `create-dashboard`, `create-report`, `create-dialog`, `create-sheet`, `create-component`) expanded from simple ask-then-generate stubs to full Phase 0 requirements discovery → spec checkpoint → generation workflows. Each skill now reads the relevant `docs/` sections before asking, batches questions to avoid one-at-a-time prompts, presents a derived spec for approval before generating any code, and runs `npx tsc --noEmit` on completion.
+- `create-table` additionally gains a three-branch scaffold: **Simple Table** (`Table`/`TableWrapper`, no provider), **DataTable API-simple** (`DataTableProvider` + single service function + `useQuery` hook — new recommended starting point), and **DataTable full query system** (`DataTableWithQueryProvider`). Adds an explicit toolbar control selection step and corrected cell rendering guidance (`row.field` directly, not `getValue()`).
+
+---
+
 ## [1.3.0] — Consumer template overhaul: user-owned files + release skills
 
 ### Added

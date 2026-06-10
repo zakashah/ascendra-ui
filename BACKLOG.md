@@ -17,6 +17,8 @@ Add a **Category** label to each item: **Component**, **Docs**, **Infra**, **Sho
 
 Items at any stage — planned, in progress, or merged but not yet tagged. Add new work here when you start planning it.
 
+- [✓] **Component** — fix DataTableSearchInput collapsed width (`w-10` → `w-65`)
+- [✓] **Consumer** — overhaul all 8 template skills (`create-page`, `create-form`, `create-table`, `create-dashboard`, `create-report`, `create-dialog`, `create-sheet`, `create-component`) with Phase 0 discovery + checkpoint workflows; `create-table` adds three-branch scaffold (Simple Table / DataTable API-simple / DataTable full query system)
 - [ ] **Consumer** — `create-settings` skill: scaffold settings page pattern (narrow-centered, multi-section `Card` layout, `UnsavedChangesBar`, optional `Tabs` structure, optional danger zone) with Phase 0 requirements discovery and spec checkpoint
 - [ ] **Consumer** — `create-detail-page` skill: scaffold record detail/show page (`app/(app)/{entity}/[id]/page.tsx`) with `PageHeader`, back link, status badge, header action buttons, and sectioned/tabbed body; Phase 0 extracts entity, data source, sections, and header shape
 
