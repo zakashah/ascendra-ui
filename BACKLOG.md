@@ -17,12 +17,11 @@ Add a **Category** label to each item: **Component**, **Docs**, **Infra**, **Sho
 
 Items at any stage — planned, in progress, or merged but not yet tagged. Add new work here when you start planning it.
 
-- [✓] **Infra** — add explicit approval checkpoints to prepare-release and release skills
-
 ---
 
 ## Completed
 
+- [x] **Infra** — add explicit approval checkpoints to prepare-release and release skills — v1.2.2
 - [x] Initial release — v1.0.0
 - [x] Simplified project creation — v1.0.1
 - [x] ascendra-ui/ commitment fix — v1.0.2
