@@ -17,7 +17,6 @@ Add a **Category** label to each item: **Component**, **Docs**, **Infra**, **Sho
 
 Items at any stage — planned, in progress, or merged but not yet tagged. Add new work here when you start planning it.
 
-- [✓] **Consumer** — ship ASCENDRA.md managed file taxonomy to consumer projects; add warn/skip/ship-once upgrade strategies (hash-based check-then-skip for favicon and sandbox, ship-once for home page)
 - [ ] **Consumer** — `create-settings` skill: scaffold settings page pattern (narrow-centered, multi-section `Card` layout, `UnsavedChangesBar`, optional `Tabs` structure, optional danger zone) with Phase 0 requirements discovery and spec checkpoint
 - [ ] **Consumer** — `create-detail-page` skill: scaffold record detail/show page (`app/(app)/{entity}/[id]/page.tsx`) with `PageHeader`, back link, status badge, header action buttons, and sectioned/tabbed body; Phase 0 extracts entity, data source, sections, and header shape
 
@@ -25,6 +24,7 @@ Items at any stage — planned, in progress, or merged but not yet tagged. Add n
 
 ## Completed
 
+- [x] **Consumer** — ship ASCENDRA.md managed file taxonomy to consumer projects; add warn/skip/ship-once upgrade strategies (hash-based check-then-skip for favicon and sandbox, ship-once for home page) — v1.4.0
 - [x] **Component** — fix DataTableSearchInput collapsed width (`w-10` → `w-65`) — v1.3.1
 - [x] **Consumer** — overhaul all 8 template skills (`create-page`, `create-form`, `create-table`, `create-dashboard`, `create-report`, `create-dialog`, `create-sheet`, `create-component`) with Phase 0 discovery + checkpoint workflows; `create-table` adds three-branch scaffold (Simple Table / DataTable API-simple / DataTable full query system) — v1.3.1
 - [x] **Consumer** — template overhaul: `CLAUDE.md` and `README.md` are now user-owned (not overwritten on `npm run upgrade`); add `prepare-release` and `release` as two new managed skills shipped to consumers; improve template BACKLOG, CHANGELOG, CLAUDE.md, and README.md with branching workflow, release workflow, and semver guidance — v1.3.0
