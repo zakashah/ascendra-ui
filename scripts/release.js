@@ -30,7 +30,13 @@ function capture(cmd) {
 }
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-const ask = (q) => new Promise((resolve) => rl.question(q, resolve));
+const ask = (q) =>
+  new Promise((resolve, reject) => {
+    rl.question(q, resolve);
+    rl.once("close", () =>
+      reject(new Error("Error: input ended before the prompt was answered. Aborting."))
+    );
+  });
 
 function bumpVersion(current, type) {
   const [major, minor, patch] = current.split(".").map(Number);
@@ -115,6 +121,10 @@ async function main() {
   if (!checkChangelog()) {
     console.log(`\nCHANGELOG.md has no entry for v${newVersion}.`);
     console.log(`Add a section like:\n\n## [${newVersion}] — <description>\n\n### Added\n- ...\n`);
+    if (!process.stdin.isTTY) {
+      console.error("Non-interactive input — cannot wait for a CHANGELOG fix. Aborting.");
+      process.exit(1);
+    }
     const answer = (await ask("Press Enter once updated, or type 'abort': ")).trim();
     if (answer.toLowerCase() === "abort") {
       rl.close();

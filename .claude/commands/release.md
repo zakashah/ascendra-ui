@@ -14,13 +14,24 @@ Do not proceed if not on main.
 
 Run `git status`. If not clean, stop and tell the user what to commit first.
 
-**Step 3 — Verify CHANGELOG**
+**Step 3 — Derive version from CHANGELOG**
 
-Read `CHANGELOG.md`. Confirm there is a new `## [x.y.z]` entry at the very top. If not, stop and tell the user to add it.
+The CHANGELOG is the source of truth for the new version.
 
-**Step 4 — Choose bump type**
+1. Read the first `## [x.y.z]` heading in `CHANGELOG.md` — this is the target version.
+2. Read the current version from `package.json`.
+3. Validate the target is **exactly one legal semver bump** above current:
+   - patch: `x.y.(z+1)` · minor: `x.(y+1).0` · major: `(x+1).0.0`
 
-Ask: "patch / minor / major?" and show this guide:
+If the top entry equals the current version, stop: there is no new entry — tell the user to run `/prepare-release` (or add an entry manually). If the target skips levels (e.g. 1.2.0 → 1.4.0) or is lower than current, stop and tell the user to fix the CHANGELOG entry.
+
+**Step 4 — Confirm bump**
+
+Tell the user the derived version and which bump level it implies, e.g.:
+
+> CHANGELOG top entry is `[1.2.1]` — a **patch** bump from 1.2.0. Proceed?
+
+Show this guide so they can sanity-check the level:
 
 | Bump | Use when |
 |---|---|
@@ -28,11 +39,13 @@ Ask: "patch / minor / major?" and show this guide:
 | `minor` | New components, hooks, providers, or utils; new optional props without defaults; new gallery pages; additive template changes — no consumer migration needed |
 | `major` | Removing/renaming exports or props; breaking prop type changes; template restructuring that breaks consumer customizations — consumer must act after upgrading |
 
-Tie-breaker: when in doubt, use the higher bump. For any major release, confirm the CHANGELOG entry includes a **Breaking** note explaining what consumers must do.
+If the user wanted a different level, stop — they must fix the version in the CHANGELOG entry first, then re-run /release. Do not pass a different bump than what the CHANGELOG says.
+
+If the derived bump is **major**, verify the CHANGELOG entry contains a **Breaking** note explaining what consumers must do. Stop if it is missing.
 
 **Step 5 — Run release**
 
-Run `printf "{type}\n" | npm run release`
+Run `printf "{x.y.z}\n" | npm run release` — pass the exact version derived in Step 3, not a bump type. The script accepts explicit `x.y.z` and this guarantees it releases the same version the CHANGELOG documents.
 
 **Step 6 — Push**
 

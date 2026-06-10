@@ -45,7 +45,7 @@ The `ascendra-ui/` folder is what consumer projects install. The showcase (`app/
 | Update component (props/API change) | `ascendra-ui/components/{cat}/{slug}.tsx` + `lib/registry.ts` + `components/previews/{slug}-preview.tsx` |
 | Update preview only | `components/previews/{slug}-preview.tsx` (+ `lib/registry.ts` if props docs need fixing) |
 | New gallery category | `lib/{type}-config.ts` → `app/showcase/{type}/page.tsx` → `components/{type}/` → `lib/nav-config.ts` |
-| Release | Merge feat branch to main → update `CHANGELOG.md` → `/release` skill → `git push && git push --tags` |
+| Release | `/prepare-release` skill (merges to main + drafts `CHANGELOG.md` entry) → `/release` skill → `git push && git push --tags` |
 
 ---
 
@@ -411,7 +411,7 @@ Track work in `BACKLOG.md` using these markers:
 ### Prerequisites (must be true before running release)
 
 1. All code changes are committed — working tree must be clean (`git status` shows nothing)
-2. `CHANGELOG.md` has a new entry at the very top (above the previous version):
+2. `CHANGELOG.md` has a new entry at the very top (above the previous version). The version in this entry is the **source of truth** — `/release` derives the new version from it and refuses to release anything else. Use `/prepare-release` to merge to main and draft this entry from the commits since the last tag:
 
 ```md
 ## [1.0.6] — Add MyComponent
@@ -434,12 +434,12 @@ Tie-breaker: when in doubt between two levels, use the higher one. Any major rel
 ### Commands
 
 ```bash
-printf "patch\n" | npm run release   # patch bump (1.0.5 → 1.0.6)
-printf "minor\n" | npm run release   # minor bump (1.0.5 → 1.1.0)
-printf "major\n" | npm run release   # major bump (1.0.5 → 2.0.0)
+printf "1.0.6\n" | npm run release   # release the exact version from the CHANGELOG top entry
 
 git push && git push --tags
 ```
+
+The script also accepts `patch` / `minor` / `major`, but always pass the explicit version from the CHANGELOG entry — it guarantees the released version matches what the CHANGELOG documents.
 
 ### What the script does automatically — do not do these manually
 
@@ -455,7 +455,8 @@ git push && git push --tags
 | Command | What it does |
 |---|---|
 | `/create-component` | Full 9-step new component workflow (file → index.ts → registry → nav-config → layout → doc-components → preview → docs:generate) |
-| `/release` | Pre-flight checks + release script + push with tags |
+| `/prepare-release` | Squash-merges feature branch to main, summarizes changes since the last tag, drafts the CHANGELOG entry + BACKLOG updates, commits after approval |
+| `/release` | Pre-flight checks (derives version from CHANGELOG top entry) + release script + push with tags |
 | `/verify-docs` | Runs docs:generate, audits registry completeness and nav/preview alignment |
 
 ---
