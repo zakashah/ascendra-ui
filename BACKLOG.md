@@ -17,8 +17,6 @@ Add a **Category** label to each item: **Component**, **Docs**, **Infra**, **Sho
 
 Items at any stage — planned, in progress, or merged but not yet tagged. Add new work here when you start planning it.
 
-- [✓] **Component** — fix DataTableSearchInput collapsed width (`w-10` → `w-65`)
-- [✓] **Consumer** — overhaul all 8 template skills (`create-page`, `create-form`, `create-table`, `create-dashboard`, `create-report`, `create-dialog`, `create-sheet`, `create-component`) with Phase 0 discovery + checkpoint workflows; `create-table` adds three-branch scaffold (Simple Table / DataTable API-simple / DataTable full query system)
 - [ ] **Consumer** — `create-settings` skill: scaffold settings page pattern (narrow-centered, multi-section `Card` layout, `UnsavedChangesBar`, optional `Tabs` structure, optional danger zone) with Phase 0 requirements discovery and spec checkpoint
 - [ ] **Consumer** — `create-detail-page` skill: scaffold record detail/show page (`app/(app)/{entity}/[id]/page.tsx`) with `PageHeader`, back link, status badge, header action buttons, and sectioned/tabbed body; Phase 0 extracts entity, data source, sections, and header shape
 
@@ -26,6 +24,8 @@ Items at any stage — planned, in progress, or merged but not yet tagged. Add n
 
 ## Completed
 
+- [x] **Component** — fix DataTableSearchInput collapsed width (`w-10` → `w-65`) — v1.3.1
+- [x] **Consumer** — overhaul all 8 template skills (`create-page`, `create-form`, `create-table`, `create-dashboard`, `create-report`, `create-dialog`, `create-sheet`, `create-component`) with Phase 0 discovery + checkpoint workflows; `create-table` adds three-branch scaffold (Simple Table / DataTable API-simple / DataTable full query system) — v1.3.1
 - [x] **Consumer** — template overhaul: `CLAUDE.md` and `README.md` are now user-owned (not overwritten on `npm run upgrade`); add `prepare-release` and `release` as two new managed skills shipped to consumers; improve template BACKLOG, CHANGELOG, CLAUDE.md, and README.md with branching workflow, release workflow, and semver guidance — v1.3.0
 - [x] **Infra** — harden all four Claude Code skills with 17 gap fixes and stacked-release guard — v1.2.3
 - [x] **Infra** — add explicit approval checkpoints to prepare-release and release skills — v1.2.2
