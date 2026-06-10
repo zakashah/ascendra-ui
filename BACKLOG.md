@@ -17,12 +17,12 @@ Add a **Category** label to each item: **Component**, **Docs**, **Infra**, **Sho
 
 Items at any stage — planned, in progress, or merged but not yet tagged. Add new work here when you start planning it.
 
-- [✓] **Infra** — harden all four Claude Code skills with 17 gap fixes and stacked-release guard
 
 ---
 
 ## Completed
 
+- [x] **Infra** — harden all four Claude Code skills with 17 gap fixes and stacked-release guard — v1.2.3
 - [x] **Infra** — add explicit approval checkpoints to prepare-release and release skills — v1.2.2
 - [x] **Consumer** — template cleanup + starter files — `.ascendra-ui/` folder, ship-once `README.md`, `CHANGELOG.md`, `BACKLOG.md` — v1.2.0
 - [x] **Docs** — branching workflow, versioning rules, and backlog — v1.1.0
