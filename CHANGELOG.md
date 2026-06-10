@@ -37,6 +37,12 @@ npm run upgrade -- --version 1.2.0
 
 ---
 
+## [1.2.2] — Add approval checkpoints to release skills
+
+### Changed
+- `/prepare-release` — each stage now pauses at an explicit checkpoint (CP-1 through CP-6) before taking any action, with a summary of what is about to happen and a required approval step.
+- `/release` — added checkpoints for bump confirmation, BACKLOG stamp preview, release script execution, and push, mirroring the same gate pattern.
+
 ## [1.2.1] — Release workflow hardening and skill improvements
 
 ### Added

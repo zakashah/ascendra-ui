@@ -17,6 +17,8 @@ Add a **Category** label to each item: **Component**, **Docs**, **Infra**, **Sho
 
 Items at any stage — planned, in progress, or merged but not yet tagged. Add new work here when you start planning it.
 
+- [✓] **Infra** — add explicit approval checkpoints to prepare-release and release skills
+
 ---
 
 ## Completed
