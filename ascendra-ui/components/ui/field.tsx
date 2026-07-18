@@ -4,7 +4,14 @@ import { useMemo } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { LuTriangleAlert } from "react-icons/lu";
 
-import { cn, Label, Separator, Tooltip, TooltipContent, TooltipTrigger } from "@/ascendra-ui/shadcn";
+import {
+  cn,
+  Label,
+  Separator,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/ascendra-ui/shadcn";
 import { SimpleBadge } from "@/ascendra-ui/components/common-ui/simple-badge";
 
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
@@ -24,15 +31,11 @@ function FieldGrid({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="field-grid"
-      className={cn(
-        "grid grid-cols-1 gap-5 sm:grid-cols-2",
-        className,
-      )}
+      className={cn("grid grid-cols-1 gap-5 sm:grid-cols-2", className)}
       {...props}
     />
   );
 }
-
 
 function FieldLegend({
   className,
@@ -294,7 +297,14 @@ function FieldError({
 
 function FieldHint({
   error,
-  description,
+  // Defaults to a non-breaking space — a plain " " collapses under normal
+  // HTML/CSS whitespace handling and does not reliably reserve line height;
+  // " " (the same character &nbsp; represents) does not collapse. Same
+  // convention FieldInfo above already uses for its own empty-state case.
+  // This default lets a bare <FieldHint /> — the dominant real usage across
+  // every form in this library — always reserve its row's height instead of
+  // collapsing to zero, matching what that usage already assumes is happening.
+  description = " ",
   mandatory,
   optional,
   help,
