@@ -28,6 +28,18 @@ export interface FileUploadProps {
   errorMessage?: string;
   onFiles?: (files: File[]) => void;
   className?: string;
+  // Dropzone variant, `state="success"` only: overrides the filename text
+  // that would otherwise be read from the locally-selected `File` object —
+  // needed when success reflects server-confirmed state on mount (no local
+  // File object exists yet, e.g. after a page reload). Falls back to the
+  // existing file-based text when omitted.
+  successLabel?: string;
+  // Dropzone variant, `state="success"` only: renders a "Download" action
+  // alongside "Upload another" — click stops propagation so it never also
+  // opens the file picker underneath. Always shown when `isSuccess`,
+  // regardless of `disabled` — viewing an already-uploaded document should
+  // stay possible even while new uploads are blocked.
+  onSuccessDownload?: () => void;
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -69,6 +81,8 @@ function FileUploadDropzone({
   errorMessage: controlledError,
   onFiles,
   className,
+  successLabel,
+  onSuccessDownload,
 }: Omit<FileUploadProps, "variant">) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [state, setState] = React.useState<FileUploadState>(controlledState ?? "idle");
@@ -89,7 +103,7 @@ function FileUploadDropzone({
     }
     setFiles(arr);
     setError(null);
-    setState("uploading");
+    setState("idle");
     onFiles?.(arr);
   }
 
@@ -113,7 +127,7 @@ function FileUploadDropzone({
   const isUploading = effectiveState === "uploading";
 
   return (
-    <div className={cn("flex flex-col gap-2", className)}>
+    <div className={cn("flex h-full flex-col gap-2", className)}>
       <div
         role="button"
         tabIndex={disabled ? -1 : 0}
@@ -124,7 +138,7 @@ function FileUploadDropzone({
         onClick={() => !disabled && inputRef.current?.click()}
         onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") inputRef.current?.click(); }}
         className={cn(
-          "relative flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border border-dashed p-8 text-center transition-all duration-150 outline-none",
+          "relative flex h-full cursor-pointer flex-col items-center justify-start gap-3 rounded-xl border border-dashed p-8 text-center transition-all duration-150 outline-none",
           "bg-white dark:bg-transparent",
           // Idle
           !isDragover && !isSuccess && !isError && "border-border dark:border-foreground/15 hover:border-foreground/40 dark:hover:border-foreground/30 hover:bg-muted/30 focus-visible:border-primary",
@@ -134,50 +148,65 @@ function FileUploadDropzone({
           isSuccess && "border-emerald-500/50 bg-emerald-500/5",
           // Error
           isError && "border-destructive/50 bg-destructive/5",
-          // Disabled
-          disabled && "cursor-not-allowed opacity-50",
+          // Disabled — cursor always reflects real clickability, regardless
+          // of state (CSS `cursor` is a normal overridable property, unlike
+          // `opacity`). Opacity dimming moves to a wrapper below scoped to
+          // just the icon/label — CSS opacity multiplies through descendants
+          // with no way for a child to opt back out, so it can't sit on this
+          // outer box without also fading Download, which must stay legible.
+          disabled && "cursor-not-allowed",
         )}
       >
-        {isSuccess ? (
-          <CheckCircle2 className="size-8 text-emerald-500" />
-        ) : isError ? (
-          <AlertCircle className="size-8 text-destructive" />
-        ) : (
-          <div className={cn(
-            "flex size-12 items-center justify-center rounded-lg ring-1 ring-inset transition-colors",
-            isDragover ? "ring-primary/40 bg-primary/10 text-primary" : "ring-border bg-gray-700/4 text-foreground",
-          )}>
-            <Upload className="size-5" />
-          </div>
-        )}
-
-        <div className="flex flex-col gap-1">
-          {isSuccess ? (
-            <>
-              <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
-                {files.length === 1 ? files[0].name : `${files.length} files uploaded`}
-              </p>
-              <p className="text-xs text-muted-foreground">Upload complete</p>
-            </>
-          ) : isError ? (
-            <>
-              <p className="text-sm font-medium text-destructive">Upload failed</p>
-              <p className="text-xs text-destructive/80">{effectiveError}</p>
-            </>
-          ) : isDragover ? (
-            <p className="text-sm font-medium text-primary">Drop to upload</p>
-          ) : (
-            <>
-              <p className="text-sm font-medium text-foreground">
-                <span className="text-primary">Click to browse</span> or drag and drop
-              </p>
-              <p className="text-xs text-muted-foreground">
-                {accept ? accept.split(",").join(", ") : "Any file type"}
-                {maxSize ? ` · max ${formatSize(maxSize)}` : ""}
-                {multiple ? " · multiple files allowed" : ""}
-              </p>
-            </>
+        <div
+          className={cn(
+            "flex flex-col items-center gap-3",
+            disabled && "opacity-50",
           )}
+        >
+          {isSuccess ? (
+            <CheckCircle2 className="size-8 text-emerald-500" />
+          ) : isError ? (
+            <AlertCircle className="size-8 text-destructive" />
+          ) : (
+            <div className={cn(
+              "flex size-12 items-center justify-center rounded-lg ring-1 ring-inset transition-colors",
+              isDragover ? "ring-primary/40 bg-primary/10 text-primary" : "ring-border bg-gray-700/4 text-foreground",
+            )}>
+              <Upload className="size-5" />
+            </div>
+          )}
+
+          <div className="flex flex-col gap-1">
+            {isSuccess ? (
+              <>
+                <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">
+                  {successLabel ??
+                    (files.length === 1
+                      ? files[0].name
+                      : `${files.length} files uploaded`)}
+                </p>
+                <p className="text-xs text-muted-foreground">Upload complete</p>
+              </>
+            ) : isError ? (
+              <>
+                <p className="text-sm font-medium text-destructive">Upload failed</p>
+                <p className="text-xs text-destructive/80">{effectiveError}</p>
+              </>
+            ) : isDragover ? (
+              <p className="text-sm font-medium text-primary">Drop to upload</p>
+            ) : (
+              <>
+                <p className="text-sm font-medium text-foreground">
+                  <span className="text-primary">Click to browse</span> or drag and drop
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  {accept ? accept.split(",").join(", ") : "Any file type"}
+                  {maxSize ? ` · max ${formatSize(maxSize)}` : ""}
+                  {multiple ? " · multiple files allowed" : ""}
+                </p>
+              </>
+            )}
+          </div>
         </div>
 
         {isUploading && (
@@ -189,11 +218,34 @@ function FileUploadDropzone({
           </div>
         )}
 
-        {(isSuccess || isError) && (
+        {isSuccess && onSuccessDownload && (
           <button
             type="button"
-            onClick={(e) => { e.stopPropagation(); handleReset(); }}
-            className="text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+            onClick={(e) => { e.stopPropagation(); onSuccessDownload(); }}
+            className="cursor-pointer text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+          >
+            Download
+          </button>
+        )}
+
+        {/* "Upload another"/"Try again" both re-open the file picker directly
+            rather than relying on handleReset() alone — a consumer that
+            passes a controlled `state` prop (e.g. always "success" while a
+            server-confirmed file exists) would otherwise make handleReset()
+            invisible, since effectiveState still reads from the controlled
+            prop on the very next render. Opening the picker works
+            unconditionally in both controlled and uncontrolled usage: a real
+            file selection always flows through onFiles, which is what
+            actually drives a controlled consumer's next state. */}
+        {((isSuccess && !disabled) || isError) && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleReset();
+              inputRef.current?.click();
+            }}
+            className="cursor-pointer text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
           >
             {isError ? "Try again" : "Upload another"}
           </button>
